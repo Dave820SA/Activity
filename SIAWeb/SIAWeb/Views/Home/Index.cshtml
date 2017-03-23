@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<SIABusinessLayer.SIAWebLinks>
+
+@{
     ViewBag.Title = "SIA WEB";
 }
 
@@ -16,13 +18,13 @@
                     <div id="panelBodyOne" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li><a href="http://pdapps-web-d02/patrolactivity/LoginActivityUsers.aspx" target="_blank">Patrol Activity</a></li>
-                                <li><a href="https://samweb/Gang/index.asp" target="_blank">Gang Unit Activity</a></li>
-                                <li><a href="http://pdapps-web-d02/SAFFE/Default.aspx" target="_blank">SAFFE Unit Activity</a></li>
-                                <li><a href="http://pdapps-web-d02/SAFFE/Default.aspx" target="_blank">K9 Unit Activity</a></li>
-                                <li><a href="http://pdapps-web-d02/trafficactivity/loginuser.aspx" target="_blank">Traffic Activity</a></li>
-                               
-
+                                @foreach (var item in Model)
+                                {
+                                    if (item.ID == 2)
+                                    {
+                                    <li><a href=" @item.WebAddress " target="_blank">@item.LinkName</a></li>
+                                    }
+                                }
                             </ul>
                         </div>
                     </div>
@@ -111,6 +113,15 @@
                     <div id="panelBodySix" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
+                                @foreach (var item in Model)
+                                {
+                                    if (item.ID == 5)
+                                    {
+                                    <li><a href=" @item.WebAddress " target="_blank">@item.LinkName</a></li>
+                                    }
+                                }
+                            </ul>
+                           @* <ul>
                                 <li><a href="https://sapdweb/General%20Manual%202010/SAPDGenMan/Index.htm" target="_blank">General Manual</a></li>
                                 <li><a href="https://sapdweb/Codes%20TOC.asp" target="_blank">Codes</a></li>
                                 <li><a href="https://sapdweb/Databases%20Systems%20TOC.asp" target="_blank">Database Systems</a></li>
@@ -119,7 +130,7 @@
                                 <li><a href="https://sapdweb/SAPD%20Info%20TOC.asp" target="_blank">SAPD Info</a></li>
                                 <li><a href="https://sapdweb/quality-SOPs.asp" target="_blank">SOP's</a></li>
                                 <li><a href="https://sapdweb/User%20Guides%20Manuals%20TOC.asp" target="_blank">User Guides/Manuals</a></li>
-                            </ul>
+                            </ul>*@
                         </div>
                     </div>
                 </div>
