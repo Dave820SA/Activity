@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+  
+    <link href="../../bootstrap/css/cyborg.css" rel="stylesheet"
+        type="text/css" />
+    @Scripts.Render("~/bundles/modernizr")
+   
+    @*@Styles.Render("~/Content/css")*@
+    
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>
+                Strategic Intelligence and Analytics</h1>
+            <p>
+                Bootstrap is a free, open-source and is the most popular HTML, CSS, and JavaScript
+                framework developed by twitter for creating responsive web applications.
+            </p>
+            <p>
+                <ul class="nav nav-pills">
+                    <li class="active"><a href="../Home/Index"><span class="glyphicon glyphicon-home"></span> Home </a>
+                    </li>
+                    <li><a href="../Contact/Index"><span class="glyphicon glyphicon-earphone"></span> Contact </a></li>
+                    <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><span
+                        class="glyphicon glyphicon-info-sign"></span> About <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Mission</a></li>
+                            <li><a href="#">Vision</a></li>
+                            <li><a href="#">Products</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </p>
+        </div>
+        @RenderBody()
+    </div>
+    
+    
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+    </script>
+    @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
+
+    @*@Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)*@
+      @RenderSection("scripts", required: false)
+</body>
+</html>

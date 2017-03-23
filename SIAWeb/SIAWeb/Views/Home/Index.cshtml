@@ -1,0 +1,137 @@
+﻿@{
+    ViewBag.Title = "SIA WEB";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div id="accordion" class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                            <a href="#panelBodyOne" data-toggle="collapse" data-parent="#accordion">Asia </a>
+                        </h4>
+                    </div>
+                    <div id="panelBodyOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>India</li>
+                                <li>China</li>
+                                <li>Japan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                            <a href="#panelBodyTwo" data-toggle="collapse" data-parent="#accordion">Europe </a>
+                        </h4>
+                    </div>
+                    <div id="panelBodyTwo" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>United Kingdom</li>
+                                <li>France</li>
+                                <li>Germany</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                        <span class="glyphicon glyphicon-menu-down"></span>
+                            <a href="#panelBodyThree" data-toggle="collapse" data-parent="#accordion">North America
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="panelBodyThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>USA</li>
+                                <li>Canada</li>
+                                <li>Mexico</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div id="accordion" class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                            <a href="#panelBodyFour" data-toggle="collapse" data-parent="#accordion">Asia </a>
+                        </h4>
+                    </div>
+                    <div id="panelBodyFour" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>India</li>
+                                <li>China</li>
+                                <li>Japan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                            <a href="#panelBodyFive" data-toggle="collapse" data-parent="#accordion">Europe </a>
+                        </h4>
+                    </div>
+                    <div id="panelBodyFive" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>United Kingdom</li>
+                                <li>France</li>
+                                <li>Germany</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <span class="glyphicon glyphicon-menu-down"></span>
+                            <a href="#panelBodySix" data-toggle="collapse" data-parent="#accordion">North America
+                            </a>
+                        </h4>
+                    </div>
+                    <div id="panelBodySix" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>USA</li>
+                                <li>Canada</li>
+                                <li>Mexico</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</div>
+ @section scripts
+{
+     <script type="text/javascript">
+         $(document).ready(function () {
+             $('.collapse').on('shown.bs.collapse', function () {
+                 $(this).parent().find('.glyphicon-menu-down')
+                                .removeClass('glyphicon-menu-down')
+                                .addClass('glyphicon-menu-up');
+             }).on('hidden.bs.collapse', function () {
+                 $(this).parent().find(".glyphicon-menu-up")
+                                .removeClass("glyphicon-menu-up")
+                                .addClass("glyphicon-menu-down");
+             });
+         });
+    </script>
+}
