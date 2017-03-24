@@ -9,9 +9,6 @@ namespace SIAWeb.Controllers
 {
     public class HomeController : Controller
     {
-        //
-        // GET: /Home/
-
         public ActionResult Index()
         {
             WebLinksBusinessLayer weblinkBusinessLayer = new WebLinksBusinessLayer();

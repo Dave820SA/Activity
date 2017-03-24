@@ -12,7 +12,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <span class="glyphicon glyphicon-menu-down"></span>
-                            <a href="#panelBodyOne" data-toggle="collapse" data-parent="#accordion"> Daily Activity Center </a>
+                            <a href="#panelBodyOne" data-toggle="collapse" title="Bootstrap tooltip" data-parent="#accordion"> Daily Activity Center </a>
                         </h4>
                     </div>
                     <div id="panelBodyOne" class="panel-collapse collapse">
@@ -22,7 +22,7 @@
                                 {
                                     if (item.ID == 2)
                                     {
-                                    <li><a href=" @item.WebAddress " target="_blank">@item.LinkName</a></li>
+                                    <li><a href=" @item.WebAddress " target="_blank">@item.LinkName </a></li>
                                     }
                                 }
                             </ul>
@@ -151,6 +151,13 @@
                  $(this).parent().find(".glyphicon-menu-up")
                                 .removeClass("glyphicon-menu-up")
                                 .addClass("glyphicon-menu-down");
+             });
+         });
+
+         $(document).ready(function () {
+             $('[data-toggle="collapse"]').tooltip({
+                 title: 'Tooltip from title option',
+                 placement: 'right'
              });
          });
     </script>
