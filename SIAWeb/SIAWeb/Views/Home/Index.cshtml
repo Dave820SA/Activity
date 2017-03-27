@@ -4,7 +4,7 @@
     ViewBag.Title = "SIA WEB";
 }
 
-<div class="container">
+    <div class="container">
     <div class="row">
         <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
             <div id="accordion" class="panel-group">
@@ -29,7 +29,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="panel panel-primary">
+               @* <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <span class="glyphicon glyphicon-menu-down"></span>
@@ -45,8 +45,8 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="panel panel-primary">
+                </div>*@
+                @*<div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                         <span class="glyphicon glyphicon-menu-down"></span>
@@ -63,12 +63,12 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>*@
             </div>
         </div>
         <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
             <div id="accordion" class="panel-group">
-                <div class="panel panel-primary">
+                @*<div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <span class="glyphicon glyphicon-menu-down"></span>
@@ -84,8 +84,8 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="panel panel-primary">
+                </div>*@
+                @*<div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <span class="glyphicon glyphicon-menu-down"></span>
@@ -101,7 +101,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div>*@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -121,16 +121,7 @@
                                     }
                                 }
                             </ul>
-                           @* <ul>
-                                <li><a href="https://sapdweb/General%20Manual%202010/SAPDGenMan/Index.htm" target="_blank">General Manual</a></li>
-                                <li><a href="https://sapdweb/Codes%20TOC.asp" target="_blank">Codes</a></li>
-                                <li><a href="https://sapdweb/Databases%20Systems%20TOC.asp" target="_blank">Database Systems</a></li>
-                                <li><a href="https://sapdweb/Directory%20TOC.asp" target="_blank">Directory</a></li>
-                                <li><a href="https://sapdweb/References%20Laws%20TOC.asp" target="_blank">References/Laws</a></li>
-                                <li><a href="https://sapdweb/SAPD%20Info%20TOC.asp" target="_blank">SAPD Info</a></li>
-                                <li><a href="https://sapdweb/quality-SOPs.asp" target="_blank">SOP's</a></li>
-                                <li><a href="https://sapdweb/User%20Guides%20Manuals%20TOC.asp" target="_blank">User Guides/Manuals</a></li>
-                            </ul>*@
+                          
                         </div>
                     </div>
                 </div>
@@ -139,10 +130,14 @@
     </div>
   
 </div>
+
+
+
  @section scripts
 {
      <script type="text/javascript">
          $(document).ready(function () {
+
              $('.collapse').on('shown.bs.collapse', function () {
                  $(this).parent().find('.glyphicon-menu-down')
                                 .removeClass('glyphicon-menu-down')
@@ -152,6 +147,7 @@
                                 .removeClass("glyphicon-menu-up")
                                 .addClass("glyphicon-menu-down");
              });
+
          });
 
          $(document).ready(function () {

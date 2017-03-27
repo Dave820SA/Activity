@@ -243,6 +243,7 @@
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\SIAWEB2.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SIABusinessLayer\SIABusinessLayer.csproj">
