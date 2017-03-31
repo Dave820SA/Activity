@@ -125,6 +125,8 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinkAddressController.cs" />
+    <Compile Include="Controllers\LinkCatController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -283,6 +285,20 @@
     <None Include="font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\SIAWEB2.pubxml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\LinkCat\Index.cshtml" />
+    <Content Include="Views\LinkCat\Details.cshtml" />
+    <Content Include="Views\LinkCat\Create.cshtml" />
+    <Content Include="Views\LinkCat\Edit.cshtml" />
+    <Content Include="Views\LinkCat\Delete.cshtml" />
+    <Content Include="Views\LinkAddress\Index.cshtml" />
+    <Content Include="Views\LinkAddress\Details.cshtml" />
+    <Content Include="Views\LinkAddress\Create.cshtml" />
+    <Content Include="Views\LinkAddress\Edit.cshtml" />
+    <Content Include="Views\LinkAddress\Delete.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\LinkCat\_ViewStart.cshtml" />
+    <Content Include="Views\LinkAddress\_ViewStart.cshtml" />
+    <Content Include="Views\Admin\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SIABusinessLayer\SIABusinessLayer.csproj">
@@ -292,6 +308,10 @@
     <ProjectReference Include="..\SIAUserBusinessLayer\SIAUserBusinessLayer.csproj">
       <Project>{EB198192-BD41-49C1-9F50-6D4E9157F329}</Project>
       <Name>SIAUserBusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIAWebLinksBusinessLayer\SIAWebLinksBusinessLayer.csproj">
+      <Project>{70250470-C2A5-4A25-B55B-9CC78D5AA12D}</Project>
+      <Name>SIAWebLinksBusinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

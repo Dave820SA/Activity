@@ -1,0 +1,93 @@
+﻿@model SIAWebLinksBusinessLayer.WebLinks
+
+@{
+   
+    ViewBag.Title = "Create";
+}
+
+<div style="padding-left: 60px">
+    <h4>
+        Create <small>New Link</small></h4>
+</div>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+  <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            @*<div class="col-xs-12 col-md-9 ">*@
+            <div class="col-lg-6 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
+                <fieldset class="scheduler-border">
+                    @*<legend class="scheduler-border">&nbsp; Create New Web Links &nbsp;&nbsp;</legend>*@
+                    <div class="form-group col-xs-11 col-md-8">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.WebCategoryID, "SIA_WebCategories")
+                        </div>
+                        <div class="editor-label">
+                            @Html.DropDownList("WebCategoryID", null, "Select Category", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.WebCategoryID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-label">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.WebLink, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-label">
+                            @Html.TextBoxFor(model => model.WebLink, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.WebLink, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <div class="checkbox-inline">
+                            @Html.CheckBoxFor(model => model.VisibleFlag, new { @class = "checkbox" })
+                            @Html.LabelFor(model => model.VisibleFlag, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field">
+                            @Html.ValidationMessageFor(model => model.VisibleFlag, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <input type="submit" class="btn btn-primary" value="Create" />
+                    </div>
+                    <p>
+                    </p>
+                </fieldset>
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+
+            </div>
+           @* <div class="col-xs-6 col-md-3 ">
+            </div>*@
+        </div>
+       
+    </div>
+    </form>
+       
+}
+    
+    
+@section Scripts {
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+    </script>
+           @* @Scripts.Render("~/bundles/jqueryval")*@
+
+}
+
+

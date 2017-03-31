@@ -1,33 +1,32 @@
 ﻿@model IEnumerable<SIABusinessLayer.SIAWebLinks>
-
 @{
     ViewBag.Title = "SIA WEB";
 }
+<div class="container">
+    <div style="padding-bottom: 10px">
+        @{
+            var userName = "Nothing";
 
-    <div class="container">
-    <div style="padding-bottom:10px">
+            foreach (var item in ViewData["TheUser"] as List<SIAWeb.Models.CurrentUser>)
+            {
+                userName = item.UserName;
+            }
 
-
-        @foreach (var item in ViewData["TheUser"] as List<SIAWeb.Models.CurrentUser>)
-        {
-            if (item != null)
+            if (userName != "Nothing")
             {
             <h4>
-                @item.UserName<small>, Welcome back </small>
+                @userName<small>, Welcom back </small>
             </h4>
             }
             else
             {
             <h4>
-                Welcome<small>, click to become a SIA Web user </small>
+                Welcome<small>, <a href="#">Click to become an SIA Web user</a> </small>
             </h4>
             }
-
+            
         }
         
-
-           
-         
     </div>
     <div class="row">
         <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
@@ -35,9 +34,9 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            @*<span class="fa fa-angle-double-down"></span>*@
-                            <i class="fa fa-angle-double-down"></i>
-                            <a href="#panelBodyOne" data-toggle="collapse" title="Bootstrap tooltip" data-parent="#accordion"> Daily Activity Center </a>
+                            <i class="fa fa-angle-double-down">
+                            </i><a href="#panelBodyOne" data-toggle="collapse"  data-parent="#accordion">
+                                Daily Activity Center </a>
                         </h4>
                     </div>
                     <div id="panelBodyOne" class="panel-collapse collapse">
@@ -54,24 +53,28 @@
                         </div>
                     </div>
                 </div>
-                @*<div class="panel panel-primary">
+                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                       
-                            <span class="glyphicon glyphicon-menu-down"></span>
-                            <a href="#panelBodyTwo" data-toggle="collapse" data-parent="#accordion">Europe </a>
+                            <i class="fa fa-angle-double-down">
+                            </i><a href="#panelBodyTwo" data-toggle="collapse"  data-parent="#accordion">
+                                Management Systems </a>
                         </h4>
                     </div>
                     <div id="panelBodyTwo" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>United Kingdom</li>
-                                <li>France</li>
-                                <li>Germany</li>
+                                @foreach (var item in Model)
+                                {
+                                    if (item.ID == 1)
+                                    {
+                                    <li><a href=" @item.WebAddress " target="_blank">@item.LinkName </a></li>
+                                    }
+                                }
                             </ul>
                         </div>
                     </div>
-                </div>*@
+                </div>
                 @*<div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
@@ -110,8 +113,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>*@
-                @*<div class="panel panel-primary">
+                </div>*@ @*<div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <span class="glyphicon glyphicon-menu-down"></span>
@@ -131,9 +133,8 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            @*<span class="fa fa-angle-double-down"></span>*@
-                            <i class="fa fa-angle-double-down"></i>
-                            <a href="#panelBodySix" data-toggle="collapse" data-parent="#accordion">SAPD Links
+                            @*<span class="fa fa-angle-double-down"></span>*@ <i class="fa fa-angle-double-down">
+                            </i><a href="#panelBodySix" data-toggle="collapse" data-parent="#accordion">SAPD Links
                             </a>
                         </h4>
                     </div>
@@ -148,40 +149,35 @@
                                     }
                                 }
                             </ul>
-                          
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-  
 </div>
-
-
-
- @section scripts
+@section scripts
 {
-     <script type="text/javascript">
-         $(document).ready(function () {
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-             $('.collapse').on('shown.bs.collapse', function () {
-                 $(this).parent().find('.fa-angle-double-down')
+            $('.collapse').on('shown.bs.collapse', function () {
+                $(this).parent().find('.fa-angle-double-down')
                                 .removeClass('fa-angle-double-down')
                                 .addClass('fa-angle-double-up');
-             }).on('hidden.bs.collapse', function () {
-                 $(this).parent().find(".fa-angle-double-up")
+            }).on('hidden.bs.collapse', function () {
+                $(this).parent().find(".fa-angle-double-up")
                                 .removeClass("fa-angle-double-up")
                                 .addClass("fa-angle-double-down");
-             });
+            });
 
-                  });
+        });
 
-         $(document).ready(function () {
-             $('[data-toggle="collapse"]').tooltip({
-                 title: 'Tooltip from title option',
-                 placement: 'right'
-             });
-         });
+//        $(document).ready(function () {
+//            $('[data-toggle="collapse"]').tooltip({
+//                title: 'Tooltip from title option',
+//                placement: 'right'
+//            });
+//        });
     </script>
 }

@@ -1,0 +1,56 @@
+﻿@model SIAWebLinksBusinessLayer.WebCategories
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div style="padding-left: 60px">
+    <h4>
+        Edit <small> Category</small></h4>
+</div>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <form>
+    <div class="Container">
+        <div class="row">
+            @*<div class="col-xs-12 col-md-9 ">*@
+            <div class="col-lg-6 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
+                <fieldset class="scheduler-border">
+                    @*<legend class="scheduler-border">&nbsp; Edit Category &nbsp;&nbsp;</legend>*@
+                    <hr />
+                    <div class="form-group col-xs-11 col-md-8">
+                        @Html.HiddenFor(model => model.WebCategoriesID)
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-label">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    </div>
+                    <p>
+                    </p>
+                </fieldset>
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>  
+}
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        });
+    </script>
+}
+

@@ -1,0 +1,50 @@
+﻿@model SIAWebLinksBusinessLayer.WebLinks
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>WebLinks</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SIA_WebCategories.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SIA_WebCategories.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.WebLink)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.WebLink)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VisibleFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VisibleFlag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NeedAuthorizationFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NeedAuthorizationFlag)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.WebLinkID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

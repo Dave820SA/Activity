@@ -1,0 +1,99 @@
+﻿@model SIAWebLinksBusinessLayer.WebLinks
+@{
+    ViewBag.Title = "Edit";
+}
+<div style="padding-left: 60px">
+    <h4>
+        Edit <small>Web Link</small></h4>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            @*<div class="col-xs-12 col-md-9 ">*@
+            <div class="col-lg-6 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
+                <fieldset class="scheduler-border">
+                 
+                    <div class="form-group col-xs-11 col-md-8">
+                        @Html.HiddenFor(model => model.WebLinkID)
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.WebCategoryID, "SIA_WebCategories", new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownList("WebCategoryID", null, "Select Category", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.WebCategoryID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-label">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.WebLink, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-label">
+                            @Html.TextBoxFor(model => model.WebLink, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.WebLink, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <div class="checkbox-inline">
+                            @Html.CheckBoxFor(model => model.VisibleFlag, new { @class = "checkbox" })
+                            @Html.LabelFor(model => model.VisibleFlag, new { @class = "control-label" })
+                        </div>
+                        <div class="editor-field">
+                            @Html.ValidationMessageFor(model => model.VisibleFlag, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <input type="submit" class="btn btn-primary" value="Submit" />
+                    </div>
+                    <p>
+                    </p>
+                </fieldset>
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    
+@section Scripts {
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+    </script>
+           @* @Scripts.Render("~/bundles/jqueryval")*@
+
+}
+}
+    
+@*<h2>Edit</h2>
+
+    <fieldset>
+        <legend>WebLinks</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NeedAuthorizationFlag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NeedAuthorizationFlag)
+            @Html.ValidationMessageFor(model => model.NeedAuthorizationFlag)
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+*@

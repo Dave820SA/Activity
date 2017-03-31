@@ -1,0 +1,66 @@
+﻿@model IEnumerable<SIAWebLinksBusinessLayer.WebLinks>
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<div style="padding-left:30px">
+    <h4>Web<small> Address</small> </h4>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 ">
+            <span class="h6">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span
+                class="h6">@Html.ActionLink("Admin", "Index", "Admin")</span> @*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+            <table class="table table-condensed table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SIA_WebCategories.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.WebLink)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VisibleFlag)
+                    </th>
+                    @*<th>
+            @Html.DisplayNameFor(model => model.NeedAuthorizationFlag)
+        </th>*@
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SIA_WebCategories.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.WebLink)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VisibleFlag)
+                        </td>
+                        @* <td>
+            @Html.DisplayFor(modelItem => item.NeedAuthorizationFlag)
+        </td>*@
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id=item.WebLinkID }) |
+                           @* @Html.ActionLink("Details", "Details", new { id=item.WebLinkID }) |*@
+                            @Html.ActionLink("Delete", "Delete", new { id=item.WebLinkID })
+                        </td>
+                    </tr>
+}
+            </table>
+        </div>
+    </div>
+</div>
