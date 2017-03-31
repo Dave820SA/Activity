@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIAWeb", "SIAWeb\SIAWeb.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIABusinessLayer", "SIABusinessLayer\SIABusinessLayer.csproj", "{0F704ACA-494C-4B99-A95F-EA27B5107509}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIAUserBusinessLayer", "SIAUserBusinessLayer\SIAUserBusinessLayer.csproj", "{EB198192-BD41-49C1-9F50-6D4E9157F329}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{0F704ACA-494C-4B99-A95F-EA27B5107509}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F704ACA-494C-4B99-A95F-EA27B5107509}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F704ACA-494C-4B99-A95F-EA27B5107509}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB198192-BD41-49C1-9F50-6D4E9157F329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB198192-BD41-49C1-9F50-6D4E9157F329}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB198192-BD41-49C1-9F50-6D4E9157F329}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB198192-BD41-49C1-9F50-6D4E9157F329}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

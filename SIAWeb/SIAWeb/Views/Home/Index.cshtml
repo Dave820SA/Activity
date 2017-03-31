@@ -5,6 +5,30 @@
 }
 
     <div class="container">
+    <div style="padding-bottom:10px">
+
+
+        @foreach (var item in ViewData["TheUser"] as List<SIAWeb.Models.CurrentUser>)
+        {
+            if (item != null)
+            {
+            <h4>
+                @item.UserName<small>, Welcome back </small>
+            </h4>
+            }
+            else
+            {
+            <h4>
+                Welcome<small>, click to become a SIA Web user </small>
+            </h4>
+            }
+
+        }
+        
+
+           
+         
+    </div>
     <div class="row">
         <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
             <div id="accordion" class="panel-group">

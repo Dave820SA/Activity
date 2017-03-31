@@ -122,11 +122,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -231,7 +233,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -281,11 +282,16 @@
     <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <None Include="font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\SIAWEB2.pubxml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SIABusinessLayer\SIABusinessLayer.csproj">
       <Project>{0F704ACA-494C-4B99-A95F-EA27B5107509}</Project>
       <Name>SIABusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SIAUserBusinessLayer\SIAUserBusinessLayer.csproj">
+      <Project>{EB198192-BD41-49C1-9F50-6D4E9157F329}</Project>
+      <Name>SIAUserBusinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
