@@ -14,20 +14,32 @@
 {
     @Html.ValidationSummary(true)
 
- <form>
+   @* <form>
+    <div class="Container">
+        <div class="form-group row">
+            <label class="col-2 col-form-label">
+                @Html.DisplayNameFor(model => model.SIA_WebCategories.Name):</label>
+            <div class="col-10">
+                <label class="control-label">@Html.DisplayFor(model => model.SIA_WebCategories.Name)</label>
+            </div>
+        </div>
+    </div>
+    </form>*@
+    
+    
+
+     <form>
     <div class="Container">
         <div class="row">
             <div class="col-lg-6 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
                 <fieldset class="scheduler-border">
                     <h5 class="text-danger">
                         Are you sure you want to delete this?</h5>
-                    <hr />
-                    <div class="form-group col-xs-11 col-md-8">
-                        <div class="display-label">
-                            @Html.DisplayNameFor(model => model.SIA_WebCategories.Name)
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.SIA_WebCategories.Name)
+                    
+                    <div class="form-group">
+                        <label class="display-label col-sm-3">@Html.DisplayNameFor(model => model.SIA_WebCategories.Name):</label>
+                        <div class="display-field col-sm-9">
+                            <label class="control-label col-sm-10">@Html.DisplayFor(model => model.SIA_WebCategories.Name)</label>
                         </div>
                     </div>
                     <div class="form-group col-xs-11 col-md-8">
@@ -47,14 +59,16 @@
                         </div>
                     </div>
                     <div class="form-group col-xs-11 col-md-8">
-                        <div class="display-label">
-                            @Html.DisplayNameFor(model => model.VisibleFlag)
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.VisibleFlag)
+                        <div class="checkbox-inline">
+                            @Html.DisplayFor(model => model.VisibleFlag, new { @class = "checkbox" })
+                            @Html.LabelFor(model => model.VisibleFlag, new { @class = "control-label" })
                         </div>
                     </div>
-                    
+                    <div class="form-group col-xs-11 col-md-8">
+                        <input type="submit" class="btn btn-danger" value="Delete" />
+                    </div>
+                    <p>
+                    </p>
                 </fieldset>
                 <div>
                     @Html.ActionLink("Back to List", "Index")
@@ -62,7 +76,7 @@
             </div>
         </div>
     </div>
-</form>
+    </form>
 }
 @section Scripts {
     <script type="text/javascript">
@@ -73,21 +87,3 @@
 }
 
 
-@*<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>WebLinks</legend>
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.NeedAuthorizationFlag)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.NeedAuthorizationFlag)
-    </div>
-</fieldset>
-@using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
-}*@

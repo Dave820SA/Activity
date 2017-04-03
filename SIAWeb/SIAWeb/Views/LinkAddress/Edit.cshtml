@@ -20,7 +20,7 @@
                     <div class="form-group col-xs-11 col-md-8">
                         @Html.HiddenFor(model => model.WebLinkID)
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.WebCategoryID, "SIA_WebCategories", new { @class = "control-label" })
+                            @Html.LabelFor(model => model.WebCategoryID,  new { @class = "control-label" })
                         </div>
                         <div class="editor-field">
                             @Html.DropDownList("WebCategoryID", null, "Select Category", new { @class = "form-control" })

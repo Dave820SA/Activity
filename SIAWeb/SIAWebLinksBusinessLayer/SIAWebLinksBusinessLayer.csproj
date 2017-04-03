@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
@@ -49,6 +50,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SIAWebLinksModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="WebLinksMetadata.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="SIAWebLinksModel.edmx">
