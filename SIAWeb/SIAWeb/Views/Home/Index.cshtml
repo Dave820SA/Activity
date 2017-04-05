@@ -4,27 +4,22 @@
 }
 <div class="container">
     <div style="padding-bottom: 10px">
+       
         @{
-            var userName = "Nothing";
+            string user = (string)System.Web.HttpContext.Current.Session["userName"];
 
-            foreach (var item in ViewData["TheUser"] as List<SIAWeb.Models.CurrentUser>)
-            {
-                userName = item.UserName;
-            }
-
-            if (userName != "Nothing")
+            if (@user != "Unknown")
             {
             <h4>
-                @userName<small>, Welcom back </small>
+                @user<small>, Welcome back </small>
             </h4>
             }
             else
             {
-            <h4>
+             <h4>
                 Welcome<small>, <a href="#">Click to become an SIA Web user</a> </small>
             </h4>
             }
-            
         }
         
     </div>

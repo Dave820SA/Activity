@@ -83,6 +83,36 @@ namespace SIAUserBusinessLayer
     
             return base.ExecuteFunction<spGetSIAWebUserInfo_Result>("spGetSIAWebUserInfo", pinParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="userID">No Metadata Documentation available.</param>
+        /// <param name="webSiteID">No Metadata Documentation available.</param>
+        public ObjectResult<global::System.String> spGetUserWebAppRole(Nullable<global::System.Int32> userID, Nullable<global::System.Int32> webSiteID)
+        {
+            ObjectParameter userIDParameter;
+            if (userID.HasValue)
+            {
+                userIDParameter = new ObjectParameter("UserID", userID);
+            }
+            else
+            {
+                userIDParameter = new ObjectParameter("UserID", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter webSiteIDParameter;
+            if (webSiteID.HasValue)
+            {
+                webSiteIDParameter = new ObjectParameter("WebSiteID", webSiteID);
+            }
+            else
+            {
+                webSiteIDParameter = new ObjectParameter("WebSiteID", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<global::System.String>("spGetUserWebAppRole", userIDParameter, webSiteIDParameter);
+        }
 
         #endregion
 

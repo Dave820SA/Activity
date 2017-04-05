@@ -11,6 +11,7 @@ namespace SIAWeb.Controllers
         //
         // GET: /Admin/
 
+        [AuthorizeUserAccessLevel(UserRole = "dd94223")]
         public ActionResult Index()
         {
             return View();

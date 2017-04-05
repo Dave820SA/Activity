@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using SIAUserBusinessLayer;
 
 namespace SIAWeb
 {
@@ -22,6 +23,47 @@ namespace SIAWeb
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        protected void Session_Start()
+        {
+            SessionUser(getUserPin());
+        }
+
+        private void SessionUser(string userPin)
+        {
+            HttpContext.Current.Session.Add("userName", "Unknown");
+            SIAUserEntities user = new SIAUserEntities();
+
+            var myUser = from u in user.spGetSIAWebUserInfo(userPin)
+                         select u;
+            foreach (var u in myUser)
+            {
+                HttpContext.Current.Session.Add("AppEntityID", u.AppEntityID.ToString());
+                HttpContext.Current.Session.Add("userPin", u.PIN.ToString());
+                HttpContext.Current.Session.Add("userSAP", u.SAP.ToString());
+                HttpContext.Current.Session.Add("userName", u.UserName.ToString());
+                HttpContext.Current.Session.Add("userDutyStatus", u.DutyStatus.ToString());
+                HttpContext.Current.Session.Add("userOffice", u.OfficeCode.ToString());
+            }
+        }
+
+           
+
+    private string getUserPin()
+        {
+            string userPin = HttpContext.Current.User.Identity.Name.ToString();
+            string result;
+            if (userPin.Length == 12)
+            {
+                result = userPin.Substring(userPin.Length - 7, 7);
+            }
+            else
+            {
+                result = userPin.Substring(userPin.Length - 6, 6);
+            }
+
+            return result;
         }
     }
 }
