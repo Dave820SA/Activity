@@ -10,11 +10,19 @@ namespace SIAWeb.Controllers
     {
         //
         // GET: /Admin/
-
-        [AuthorizeUserAccessLevel(UserRole = "dd94223")]
         public ActionResult Index()
         {
-            return View();
+            if ((string)System.Web.HttpContext.Current.Session["WebRole"] == "SuperUser")
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Contact");
+            }
+
+            
+            
         }
 
     }

@@ -35,21 +35,21 @@ namespace SIAWeb
             HttpContext.Current.Session.Add("userName", "Unknown");
             SIAUserEntities user = new SIAUserEntities();
 
-            var myUser = from u in user.spGetSIAWebUserInfo(userPin)
+            var myUser = from u in user.spGetSIAWebUserInfo(userPin, 1)
                          select u;
             foreach (var u in myUser)
             {
                 HttpContext.Current.Session.Add("AppEntityID", u.AppEntityID.ToString());
                 HttpContext.Current.Session.Add("userPin", u.PIN.ToString());
-                HttpContext.Current.Session.Add("userSAP", u.SAP.ToString());
+                //HttpContext.Current.Session.Add("userSAP", u.SAP.ToString());
                 HttpContext.Current.Session.Add("userName", u.UserName.ToString());
-                HttpContext.Current.Session.Add("userDutyStatus", u.DutyStatus.ToString());
-                HttpContext.Current.Session.Add("userOffice", u.OfficeCode.ToString());
+                HttpContext.Current.Session.Add("WebRole", u.WebRole.ToString());
+                //HttpContext.Current.Session.Add("userDutyStatus", u.DutyStatus.ToString());
+                //HttpContext.Current.Session.Add("userOffice", u.OfficeCode.ToString());
             }
         }
 
-           
-
+          
     private string getUserPin()
         {
             string userPin = HttpContext.Current.User.Identity.Name.ToString();

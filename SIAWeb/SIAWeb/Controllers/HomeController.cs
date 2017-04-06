@@ -13,7 +13,6 @@ namespace SIAWeb.Controllers
     {
         public ActionResult Index()
         {
-           
             WebLinksBusinessLayer weblinkBusinessLayer = new WebLinksBusinessLayer();
             List<SIAWebLinks> siaWebLinks = weblinkBusinessLayer.SIAWebLinks.ToList();
             return View(siaWebLinks);

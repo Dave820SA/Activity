@@ -17,17 +17,24 @@ namespace System.Web.Mvc
                 return false;
             }
 
-            string CurrentUserRole = "dd94223";
-            //string CurrentUserRole = (string)System.Web.HttpContext.Current.Session["userPin"];
-            if (this.UserRole.Contains(CurrentUserRole))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+        //    //string CurrentUserRole = "dd94223";
+           string CurrentUserRole = (string)System.Web.HttpContext.Current.Session["WebRole"];
+           if (this.UserRole.Contains(CurrentUserRole))
+           {
+               return true;
+           }
+           else
+           {
+               
+               return false;
+
+             
+           }
 
         }
+
+
+        
+
     }
 }
