@@ -123,7 +123,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LinkAddressController.cs" />
@@ -287,6 +286,7 @@
     <None Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
     <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <None Include="font-awesome-4.7.0\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\SIAWeb.pubxml" />
     <None Include="Properties\PublishProfiles\SIAWEB2.pubxml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\LinkCat\Index.cshtml" />

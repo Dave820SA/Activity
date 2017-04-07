@@ -6,44 +6,14 @@
     <edmx:StorageModels>
     <Schema Namespace="SIAUserModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SIAUserModelStoreContainer" />
-        <Function Name="spAddEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="FName" Type="varchar" Mode="In" />
-          <Parameter Name="LName" Type="varchar" Mode="In" />
-          <Parameter Name="Badge" Type="varchar" Mode="In" />
-          <Parameter Name="SAP" Type="varchar" Mode="In" />
-          <Parameter Name="Office" Type="int" Mode="In" />
-        </Function>
-        <Function Name="spDeleteEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="spGetAllEmployees" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetAllSIAWebLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="spGetSIAWebUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Pin" Type="varchar" Mode="In" />
           <Parameter Name="WebSiteID" Type="int" Mode="In" />
         </Function>
-        <Function Name="spGetSIAWebUserInfo2" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Pin" Type="varchar" Mode="In" />
-        </Function>
-        <Function Name="spGetUserWebAppRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserID" Type="int" Mode="In" />
-          <Parameter Name="WebSiteID" Type="int" Mode="In" />
-        </Function>
         <Function Name="spGetUserWebRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="UserID" Type="int" Mode="In" />
           <Parameter Name="WebSiteID" Type="int" Mode="In" />
-        </Function>
-        <Function Name="spSaveEmployee" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Id" Type="int" Mode="In" />
-          <Parameter Name="FName" Type="varchar" Mode="In" />
-          <Parameter Name="LName" Type="varchar" Mode="In" />
-          <Parameter Name="Badge" Type="varchar" Mode="In" />
-          <Parameter Name="SAP" Type="varchar" Mode="In" />
-          <Parameter Name="Office_Id" Type="int" Mode="In" />
-        </Function>
-        <Function Name="Test" ReturnType="varchar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="p1" Type="varchar" Mode="In" />
-          <Parameter Name="p2" Type="varchar" Mode="In" />
         </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -79,7 +49,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SIAUserModelStoreContainer" CdmEntityContainer="SIAUserEntities" >
-          <FunctionImportMapping FunctionImportName="spGetUserWebAppRole" FunctionName="SIAUserModel.Store.spGetUserWebAppRole" />
           <FunctionImportMapping FunctionImportName="spGetSIAWebUserInfo" FunctionName="SIAUserModel.Store.spGetSIAWebUserInfo">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SIAUserModel.spGetSIAWebUserInfo_Result1">
