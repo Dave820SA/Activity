@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SIABusinessLayer;
-using SIAUserBusinessLayer;
-using SIAWeb.Models;
+using SIAWebLinksBusinessLayer;
+//using SIAWeb.Models;
 
 namespace SIAWeb.Controllers
 {
@@ -13,8 +12,8 @@ namespace SIAWeb.Controllers
     {
         public ActionResult Index()
         {
-            WebLinksBusinessLayer weblinkBusinessLayer = new WebLinksBusinessLayer();
-            List<SIAWebLinks> siaWebLinks = weblinkBusinessLayer.SIAWebLinks.ToList();
+            WebLinksEntities db = new WebLinksEntities();
+            List<WebLinks> siaWebLinks = db.WebLinks.ToList();
             return View(siaWebLinks);
         }
 

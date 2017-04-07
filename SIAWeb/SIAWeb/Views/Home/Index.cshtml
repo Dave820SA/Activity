@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SIABusinessLayer.SIAWebLinks>
+﻿@*@model IEnumerable<SIABusinessLayer.SIAWebLinks>*@
+@model IEnumerable<SIAWebLinksBusinessLayer.WebLinks>
 @{
     ViewBag.Title = "SIA WEB";
 }
@@ -39,9 +40,10 @@
                             <ul>
                                 @foreach (var item in Model)
                                 {
-                                    if (item.ID == 2)
+                                    //if (item.ID == 2)
+                                    if (item.WebCategoryID == 2)
                                     {
-                                    <li><a href=" @item.WebAddress " target="_blank">@item.LinkName </a></li>
+                                    <li><a href=" @item.WebLink " target="_blank">@item.Name </a></li>
                                     }
                                 }
                             </ul>
@@ -61,9 +63,9 @@
                             <ul>
                                 @foreach (var item in Model)
                                 {
-                                    if (item.ID == 1)
+                                    if (item.WebCategoryID == 1)
                                     {
-                                    <li><a href=" @item.WebAddress " target="_blank">@item.LinkName </a></li>
+                                    <li><a href=" @item.WebLink " target="_blank">@item.Name </a></li>
                                     }
                                 }
                             </ul>
@@ -138,9 +140,9 @@
                             <ul>
                                 @foreach (var item in Model)
                                 {
-                                    if (item.ID == 5)
+                                    if (item.WebCategoryID == 5)
                                     {
-                                    <li><a href=" @item.WebAddress " target="_blank">@item.LinkName</a></li>
+                                    <li><a href=" @item.WebLink " target="_blank">@item.Name</a></li>
                                     }
                                 }
                             </ul>

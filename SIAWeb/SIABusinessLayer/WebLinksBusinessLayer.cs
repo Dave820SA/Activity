@@ -10,34 +10,34 @@ namespace SIABusinessLayer
 {
     public class WebLinksBusinessLayer
     {
-        public IEnumerable<SIAWebLinks> SIAWebLinks
-        {
-            get
-            {
-                string connectionString = ConfigurationManager.ConnectionStrings["SAPDActivityCS"].ConnectionString;
+        //public IEnumerable<SIAWebLinks> SIAWebLinks
+        //{
+            //get
+            //{
+            //    string connectionString = ConfigurationManager.ConnectionStrings["SAPDActivityCS"].ConnectionString;
 
-                List<SIAWebLinks> weblinks = new List<SIAWebLinks>();
+            //    List<SIAWebLinks> weblinks = new List<SIAWebLinks>();
 
-                using (SqlConnection con = new SqlConnection(connectionString))
-                {
-                    SqlCommand cmd = new SqlCommand("spGetAllSIAWebLinks", con);
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    con.Open();
-                    SqlDataReader rdr = cmd.ExecuteReader();
-                    while (rdr.Read())
-                    {
-                        SIAWebLinks weblink = new SIAWebLinks();
-                        weblink.ID = Convert.ToInt32(rdr["ID"]);
-                        weblink.LinkName = rdr["Name"].ToString();
-                        weblink.WebAddress = rdr["WebLink"].ToString();
+            //    using (SqlConnection con = new SqlConnection(connectionString))
+            //    {
+            //        SqlCommand cmd = new SqlCommand("spGetAllSIAWebLinks", con);
+            //        cmd.CommandType = CommandType.StoredProcedure;
+            //        con.Open();
+            //        SqlDataReader rdr = cmd.ExecuteReader();
+            //        while (rdr.Read())
+            //        {
+            //            SIAWebLinks weblink = new SIAWebLinks();
+            //            weblink.ID = Convert.ToInt32(rdr["ID"]);
+            //            weblink.LinkName = rdr["Name"].ToString();
+            //            weblink.WebAddress = rdr["WebLink"].ToString();
 
-                        weblinks.Add(weblink);
-                    }
-                }
+            //            weblinks.Add(weblink);
+            //        }
+            //    }
 
-                return weblinks;
-            }
-        }
+            //    return weblinks;
+            //}
+       // }
         
     }
 }

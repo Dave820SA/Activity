@@ -305,10 +305,6 @@
     <Content Include="Views\Admin\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SIABusinessLayer\SIABusinessLayer.csproj">
-      <Project>{0F704ACA-494C-4B99-A95F-EA27B5107509}</Project>
-      <Name>SIABusinessLayer</Name>
-    </ProjectReference>
     <ProjectReference Include="..\SIAUserBusinessLayer\SIAUserBusinessLayer.csproj">
       <Project>{EB198192-BD41-49C1-9F50-6D4E9157F329}</Project>
       <Name>SIAUserBusinessLayer</Name>

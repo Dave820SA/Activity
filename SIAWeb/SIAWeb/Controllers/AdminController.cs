@@ -12,14 +12,14 @@ namespace SIAWeb.Controllers
         // GET: /Admin/
         public ActionResult Index()
         {
-            if ((string)System.Web.HttpContext.Current.Session["WebRole"] == "SuperUser")
-            {
+            //if ((string)System.Web.HttpContext.Current.Session["WebRole"] == "SuperUser")
+            //{
                 return View();
-            }
-            else
-            {
-                return RedirectToAction("Index", "Contact");
-            }
+            //}
+            //else
+            //{
+            //    return RedirectToAction("Index", "Contact");
+            //}
 
             
             

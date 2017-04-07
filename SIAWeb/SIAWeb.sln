@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIAWeb", "SIAWeb\SIAWeb.csproj", "{30E53529-D590-46CE-AF05-E37E1F384D51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIABusinessLayer", "SIABusinessLayer\SIABusinessLayer.csproj", "{0F704ACA-494C-4B99-A95F-EA27B5107509}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIAUserBusinessLayer", "SIAUserBusinessLayer\SIAUserBusinessLayer.csproj", "{EB198192-BD41-49C1-9F50-6D4E9157F329}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SIAWebLinksBusinessLayer", "SIAWebLinksBusinessLayer\SIAWebLinksBusinessLayer.csproj", "{70250470-C2A5-4A25-B55B-9CC78D5AA12D}"
@@ -19,10 +17,6 @@ Global
 		{30E53529-D590-46CE-AF05-E37E1F384D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30E53529-D590-46CE-AF05-E37E1F384D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30E53529-D590-46CE-AF05-E37E1F384D51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0F704ACA-494C-4B99-A95F-EA27B5107509}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0F704ACA-494C-4B99-A95F-EA27B5107509}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0F704ACA-494C-4B99-A95F-EA27B5107509}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0F704ACA-494C-4B99-A95F-EA27B5107509}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB198192-BD41-49C1-9F50-6D4E9157F329}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EB198192-BD41-49C1-9F50-6D4E9157F329}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB198192-BD41-49C1-9F50-6D4E9157F329}.Release|Any CPU.ActiveCfg = Release|Any CPU
