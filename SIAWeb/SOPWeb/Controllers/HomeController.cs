@@ -15,16 +15,25 @@ namespace SOPWeb.Controllers
             return View();
         }
 
-        public ActionResult About()
+
+        public ActionResult Search()
         {
-            ViewBag.Message = "Your Administrator Page.";
+            ViewBag.Message = "Your Search Page.";
 
             return View();
         }
+       
 
         public ActionResult Contact()
         {
             ViewBag.Message = "SOP Contacts.";
+
+            return View();
+        }
+
+        public ActionResult Admin()
+        {
+            ViewBag.Message = "SOP Admin.";
 
             return View();
         }

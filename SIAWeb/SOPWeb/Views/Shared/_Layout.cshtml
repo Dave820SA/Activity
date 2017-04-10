@@ -1,63 +1,54 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-    <head>
-     <meta charset="utf-8"/>
-     <title>SIA WEB</title>
-     <meta http-equiv="X-UA-Compatible" content="IE=9" />
+<head>
+    <meta charset="utf-8" />
+    <title>SIA WEB</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=9" />
     <link href="~/favicon.ico" rel="Shortcut Icon" type="image/x-icon" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     @*<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">*@
-        <link href="../../font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     @Styles.Render("~/bootstrap/css/cyborg.css")
-   @* @Styles.Render("~/font-awesome-4.7.0/css/font-awesome.min.css")*@
+    @Styles.Render("~/font-awesome-4.7.0/css/font-awesome.min.css")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
-    </head>
-    <body>
-
+</head>
+<body>
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="jumbotron">
-                 <h1>
-                       @Html.ActionLink("Standard Operation Procedure Web", "Index", "Home")</h1>
+                    <h1>
+                        @Html.ActionLink("Standard Operation Procedure Web", "Index", "Home")</h1>
                     <p>
-                       The San Antonio Police Department’s SOP Web shall provide the Department’s members with quick access to department unit standard operating procedures to promote the safety of officers and citizens of the City of San Antonio.
+                        The San Antonio Police Department’s SOP Web provides the Department’s members with
+                        quick access to department unit standard operating procedures to promote the safety
+                        of officers and citizens of the City of San Antonio.
                     </p>
-                     <p>
+                    <p>
                         <ul class="nav nav-pills">
-                            <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span> 
-                                Home </a></li>
-                            <li><a href="~/Contact/Index"><i class="fa fa-phone"></i> Contact
+                            <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
                             </a></li>
-                            <li><a href="~/Admin/Index"><i class="fa fa-user-circle"></i> Admin
-                            </a></li>
-
-                           
+                            <li><a href="~/Home/Contact"><i class="fa fa-phone"></i>Contact </a></li>
+                            <li><a href="~/Home/Search"><i class="fa fa-phone"></i>Search </a></li>
+                            <li><a href="~/Home/Admin"><i class="fa fa-user-circle"></i>Admin </a></li>
                         </ul>
                     </p>
                 </div>
-
-         
                 @RenderBody()
                 <hr />
-           
             </div>
-      </div>
-   </div>
-
-        <footer>
+        </div>
+    </div>
+    <footer>
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p class="text-center">&copy; @DateTime.Now.Year - SIA Web - Created by: D.Davidson#1341 & John Riojas</p>
+                    <p class="text-center">&copy; @DateTime.Now.Year - Activity App - Created by: D.Davidson#1341 & John Riojas</p>
                 </div>
             </div>
         </footer>
-
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
-        @RenderSection("scripts", required: false)
-      
-    </body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
+    @RenderSection("scripts", required: false)
+</body>
 </html>

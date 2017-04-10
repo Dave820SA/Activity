@@ -1,0 +1,72 @@
+﻿@model IEnumerable<SOPBusinessLayer.DocHistory>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div style="padding-left:30px">
+    <h4>Web<small> Address</small> </h4>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 ">
+            <span class="h6">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span
+                class="h6">@Html.ActionLink("Admin", "Index", "Admin")</span> 
+            <table class="table table-condensed table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.SOP_SOP.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DocInfo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DocPath)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ModifiedDate)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SOP_SOP.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocInfo)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DocPath)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StartDate)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ModifiedDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id=item.DocHistoryID }) |
+                            @Html.ActionLink("Details", "Details", new { id=item.DocHistoryID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id=item.DocHistoryID })
+                        </td>
+                    </tr>
+}
+            </table>
+        </div>
+    </div>
+</div>
+

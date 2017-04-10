@@ -1,0 +1,84 @@
+﻿@model SOPBusinessLayer.DocHistory
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DocHistory</legend>
+
+        @Html.HiddenFor(model => model.DocHistoryID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SOPID, "SOP_SOP")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("SOPID", String.Empty)
+            @Html.ValidationMessageFor(model => model.SOPID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocInfo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DocInfo)
+            @Html.ValidationMessageFor(model => model.DocInfo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.DocPath)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.DocPath)
+            @Html.ValidationMessageFor(model => model.DocPath)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartDate)
+            @Html.ValidationMessageFor(model => model.StartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EndDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedDate)
+            @Html.ValidationMessageFor(model => model.ModifiedDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+    </script>
+           @* @Scripts.Render("~/bundles/jqueryval")*@
+
+}

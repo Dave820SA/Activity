@@ -124,7 +124,9 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\DocHistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SOPController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -238,7 +240,6 @@
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -287,10 +288,31 @@
     <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <None Include="font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="readme.txt" />
+    <Content Include="Views\Home\Search.cshtml" />
+    <Content Include="Views\Shared\_Alternate.cshtml" />
+    <Content Include="Views\SOP\Index.cshtml" />
+    <Content Include="Views\SOP\Details.cshtml" />
+    <Content Include="Views\SOP\Create.cshtml" />
+    <Content Include="Views\SOP\Edit.cshtml" />
+    <Content Include="Views\SOP\Delete.cshtml" />
+    <Content Include="Views\DocHist\Index.cshtml" />
+    <Content Include="Views\DocHist\Details.cshtml" />
+    <Content Include="Views\DocHist\Create.cshtml" />
+    <Content Include="Views\DocHist\Edit.cshtml" />
+    <Content Include="Views\DocHist\Delete.cshtml" />
+    <Content Include="Views\DocHist\_ViewStart.cshtml" />
+    <Content Include="Views\SOP\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SOPBusinessLayer\SOPBusinessLayer.csproj">
+      <Project>{D2A217D9-E4E4-40CE-805E-2F0F7ACFAFE9}</Project>
+      <Name>SOPBusinessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

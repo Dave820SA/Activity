@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SOPDocModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SOPDocModelStoreContainer">
+          <EntitySet Name="Office_Bureau" EntityType="SOPDocModel.Store.Office_Bureau" store:Type="Tables" Schema="dbo" Table="Office.Bureau" />
+          <EntitySet Name="SOP_DocHistory" EntityType="SOPDocModel.Store.SOP_DocHistory" store:Type="Tables" store:Schema="dbo" store:Name="SOP.DocHistory">
+            <DefiningQuery>SELECT 
+      [SOP_DocHistory].[DocHistoryID] AS [DocHistoryID], 
+      [SOP_DocHistory].[SOPID] AS [SOPID], 
+      [SOP_DocHistory].[DocInfo] AS [DocInfo], 
+      [SOP_DocHistory].[DocPath] AS [DocPath], 
+      [SOP_DocHistory].[StartDate] AS [StartDate], 
+      [SOP_DocHistory].[EndDate] AS [EndDate], 
+      [SOP_DocHistory].[ModifiedDate] AS [ModifiedDate]
+      FROM [dbo].[SOP.DocHistory] AS [SOP_DocHistory]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="SOP_SOP" EntityType="SOPDocModel.Store.SOP_SOP" store:Type="Tables" Schema="dbo" Table="SOP.SOP" />
+          <EntitySet Name="SOP_vCurrentDoc" EntityType="SOPDocModel.Store.SOP_vCurrentDoc" store:Type="Views" store:Schema="dbo" store:Name="SOP.vCurrentDoc">
+            <DefiningQuery>SELECT 
+      [SOP_vCurrentDoc].[ID] AS [ID], 
+      [SOP_vCurrentDoc].[Bureau] AS [Bureau], 
+      [SOP_vCurrentDoc].[SOP] AS [SOP], 
+      [SOP_vCurrentDoc].[SOPInfo] AS [SOPInfo], 
+      [SOP_vCurrentDoc].[StartDate] AS [StartDate]
+      FROM [dbo].[SOP.vCurrentDoc] AS [SOP_vCurrentDoc]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_SOP_DocHistory_SOP_SOP" Association="SOPDocModel.Store.FK_SOP_DocHistory_SOP_SOP">
+            <End Role="SOP_SOP" EntitySet="SOP_SOP" />
+            <End Role="SOP_DocHistory" EntitySet="SOP_DocHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOP_SOP_Office_Bureau" Association="SOPDocModel.Store.FK_SOP_SOP_Office_Bureau">
+            <End Role="Office_Bureau" EntitySet="Office_Bureau" />
+            <End Role="SOP_SOP" EntitySet="SOP_SOP" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Office_Bureau">
+          <Key>
+            <PropertyRef Name="BureauID" />
+          </Key>
+          <Property Name="BureauID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="NameCode" Type="varchar" MaxLength="10" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SAPDActivity.dbo.SOP.DocHistory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="SOP_DocHistory">
+          <Key>
+            <PropertyRef Name="DocHistoryID" />
+            
+            
+            
+          </Key>
+          <Property Name="DocHistoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SOPID" Type="int" Nullable="false" />
+          <Property Name="DocInfo" Type="varchar(max)" />
+          <Property Name="DocPath" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SOP_SOP">
+          <Key>
+            <PropertyRef Name="SOPID" />
+          </Key>
+          <Property Name="SOPID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="BureauID" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SAPDActivity.dbo.SOP.vCurrentDoc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="SOP_vCurrentDoc">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Bureau" />
+            <PropertyRef Name="SOP" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Bureau" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SOP" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SOPInfo" Type="varchar(max)" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_SOP_DocHistory_SOP_SOP">
+          <End Role="SOP_SOP" Type="SOPDocModel.Store.SOP_SOP" Multiplicity="1" />
+          <End Role="SOP_DocHistory" Type="SOPDocModel.Store.SOP_DocHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOP_SOP">
+              <PropertyRef Name="SOPID" />
+            </Principal>
+            <Dependent Role="SOP_DocHistory">
+              <PropertyRef Name="SOPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOP_SOP_Office_Bureau">
+          <End Role="Office_Bureau" Type="SOPDocModel.Store.Office_Bureau" Multiplicity="1" />
+          <End Role="SOP_SOP" Type="SOPDocModel.Store.SOP_SOP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Bureau">
+              <PropertyRef Name="BureauID" />
+            </Principal>
+            <Dependent Role="SOP_SOP">
+              <PropertyRef Name="BureauID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SOP_spInsertNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="SOP.spInsertNew" Schema="dbo">
+          <Parameter Name="SOPID" Type="int" Mode="In" />
+          <Parameter Name="DocInfo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="DocPath" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SOPDocModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SAPDActivityEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Bureaux" EntityType="SOPDocModel.Bureau" />
+          <EntitySet Name="DocHistories" EntityType="SOPDocModel.DocHistory" />
+          <EntitySet Name="SOPs" EntityType="SOPDocModel.SOP" />
+          <AssociationSet Name="FK_SOP_SOP_Office_Bureau" Association="SOPDocModel.FK_SOP_SOP_Office_Bureau">
+            <End Role="Office_Bureau" EntitySet="Bureaux" />
+            <End Role="SOP_SOP" EntitySet="SOPs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOP_DocHistory_SOP_SOP" Association="SOPDocModel.FK_SOP_DocHistory_SOP_SOP">
+            <End Role="SOP_SOP" EntitySet="SOPs" />
+            <End Role="SOP_DocHistory" EntitySet="DocHistories" />
+          </AssociationSet>
+          <EntitySet Name="SOP_vCurrentDoc" EntityType="SOPDocModel.SOP_vCurrentDoc" />
+          <FunctionImport Name="SOP_spInsertNew">
+            <Parameter Name="SOPID" Mode="In" Type="Int32" />
+            <Parameter Name="DocInfo" Mode="In" Type="String" />
+            <Parameter Name="DocPath" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Bureau">
+          <Key>
+            <PropertyRef Name="BureauID" />
+          </Key>
+          <Property Name="BureauID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="NameCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="ModifiedDate" Type="DateTime" />
+          <NavigationProperty Name="SOP_SOP" Relationship="SOPDocModel.FK_SOP_SOP_Office_Bureau" FromRole="Office_Bureau" ToRole="SOP_SOP" />
+        </EntityType>
+        <EntityType Name="DocHistory">
+          <Key>
+            <PropertyRef Name="DocHistoryID" />
+          </Key>
+          <Property Name="DocHistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SOPID" Type="Int32" Nullable="false" />
+          <Property Name="DocInfo" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DocPath" Type="String" Nullable="false" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" />
+          <Property Name="EndDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" />
+          <NavigationProperty Name="SOP_SOP" Relationship="SOPDocModel.FK_SOP_DocHistory_SOP_SOP" FromRole="SOP_DocHistory" ToRole="SOP_SOP" />
+        </EntityType>
+        <EntityType Name="SOP">
+          <Key>
+            <PropertyRef Name="SOPID" />
+          </Key>
+          <Property Name="SOPID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="BureauID" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Office_Bureau" Relationship="SOPDocModel.FK_SOP_SOP_Office_Bureau" FromRole="SOP_SOP" ToRole="Office_Bureau" />
+          <NavigationProperty Name="SOP_DocHistory" Relationship="SOPDocModel.FK_SOP_DocHistory_SOP_SOP" FromRole="SOP_SOP" ToRole="SOP_DocHistory" />
+        </EntityType>
+        <Association Name="FK_SOP_SOP_Office_Bureau">
+          <End Role="Office_Bureau" Type="SOPDocModel.Bureau" Multiplicity="1" />
+          <End Role="SOP_SOP" Type="SOPDocModel.SOP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Bureau">
+              <PropertyRef Name="BureauID" />
+            </Principal>
+            <Dependent Role="SOP_SOP">
+              <PropertyRef Name="BureauID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOP_DocHistory_SOP_SOP">
+          <End Role="SOP_SOP" Type="SOPDocModel.SOP" Multiplicity="1" />
+          <End Role="SOP_DocHistory" Type="SOPDocModel.DocHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOP_SOP">
+              <PropertyRef Name="SOPID" />
+            </Principal>
+            <Dependent Role="SOP_DocHistory">
+              <PropertyRef Name="SOPID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="SOP_vCurrentDoc">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="Bureau" />
+            <PropertyRef Name="SOP" />
+            <PropertyRef Name="StartDate" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Bureau" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SOP" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SOPInfo" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SOPDocModelStoreContainer" CdmEntityContainer="SAPDActivityEntities">
+          <EntitySetMapping Name="Bureaux">
+            <EntityTypeMapping TypeName="SOPDocModel.Bureau">
+              <MappingFragment StoreEntitySet="Office_Bureau">
+                <ScalarProperty Name="BureauID" ColumnName="BureauID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="NameCode" ColumnName="NameCode" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DocHistories">
+            <EntityTypeMapping TypeName="SOPDocModel.DocHistory">
+              <MappingFragment StoreEntitySet="SOP_DocHistory">
+                <ScalarProperty Name="DocHistoryID" ColumnName="DocHistoryID" />
+                <ScalarProperty Name="SOPID" ColumnName="SOPID" />
+                <ScalarProperty Name="DocInfo" ColumnName="DocInfo" />
+                <ScalarProperty Name="DocPath" ColumnName="DocPath" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SOPDocModel.DocHistory">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SOPDocModel.Store.SOP_spInsertNew">
+                  <ScalarProperty Name="StartDate" ParameterName="StartDate" />
+                  <ScalarProperty Name="DocPath" ParameterName="DocPath" />
+                  <ScalarProperty Name="DocInfo" ParameterName="DocInfo" />
+                  <ScalarProperty Name="SOPID" ParameterName="SOPID" />
+                </InsertFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOPs">
+            <EntityTypeMapping TypeName="SOPDocModel.SOP">
+              <MappingFragment StoreEntitySet="SOP_SOP">
+                <ScalarProperty Name="SOPID" ColumnName="SOPID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BureauID" ColumnName="BureauID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOP_vCurrentDoc">
+            <EntityTypeMapping TypeName="SOPDocModel.SOP_vCurrentDoc">
+              <MappingFragment StoreEntitySet="SOP_vCurrentDoc">
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="SOPInfo" ColumnName="SOPInfo" />
+                <ScalarProperty Name="SOP" ColumnName="SOP" />
+                <ScalarProperty Name="Bureau" ColumnName="Bureau" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SOP_spInsertNew" FunctionName="SOPDocModel.Store.SOP_spInsertNew">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="SOPDocEntities">
+        <EntityTypeShape EntityType="SOPDocModel.Bureau" Width="1.5" PointX="0.75" PointY="1.25" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOPDocModel.DocHistory" Width="1.5" PointX="5.25" PointY="1" Height="2.5571907552083326" IsExpanded="true" />
+        <EntityTypeShape EntityType="SOPDocModel.SOP" Width="1.5" PointX="3" PointY="1.125" Height="2.1725878906249996" IsExpanded="true" />
+        <AssociationConnector Association="SOPDocModel.FK_SOP_SOP_Office_Bureau" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.2401432291666667" />
+          <ConnectorPoint PointX="3" PointY="2.2401432291666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="SOPDocModel.FK_SOP_DocHistory_SOP_SOP" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.2112939453125" />
+          <ConnectorPoint PointX="5.25" PointY="2.2112939453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SOPDocModel.SOP_vCurrentDoc" Width="1.5" PointX="0.75" PointY="4.75" Height="1.9802864583333335" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

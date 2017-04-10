@@ -1,0 +1,57 @@
+﻿@model SOPBusinessLayer.DocHistory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>DocHistory</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.SOP_SOP.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.SOP_SOP.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocInfo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocInfo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocPath)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocPath)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.StartDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EndDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.DocHistoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

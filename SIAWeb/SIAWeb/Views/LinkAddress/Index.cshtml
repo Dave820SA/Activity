@@ -13,9 +13,7 @@
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
             <span class="h6">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span
-                class="h6">@Html.ActionLink("Admin", "Index", "Admin")</span> @*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+                class="h6">@Html.ActionLink("Admin", "Index", "Admin")</span> 
             <table class="table table-condensed table-hover">
                 <tr>
                     <th>
@@ -30,9 +28,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.VisibleFlag)
                     </th>
-                    @*<th>
-            @Html.DisplayNameFor(model => model.NeedAuthorizationFlag)
-        </th>*@
+                    
                     <th>
                     </th>
                 </tr>
@@ -50,9 +46,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.VisibleFlag)
                         </td>
-                        @* <td>
-            @Html.DisplayFor(modelItem => item.NeedAuthorizationFlag)
-        </td>*@
+                       
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id=item.WebLinkID }) |
                            @* @Html.ActionLink("Details", "Details", new { id=item.WebLinkID }) |*@
