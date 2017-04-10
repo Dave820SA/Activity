@@ -24,20 +24,16 @@
             <Parameter Name="UserID" Mode="In" Type="Int32" />
             <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="spGetSIAWebUserInfo" ReturnType="Collection(SIAUserModel.spGetSIAWebUserInfo_Result1)">
+          <FunctionImport Name="spGetSIAWebUserInfo">
+            <Parameter Name="Pin" Mode="In" Type="String" />
+            <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="WebUserInfo" ReturnType="Collection(SIAUserModel.spGetSIAWebUserInfo_Result)">
             <Parameter Name="Pin" Mode="In" Type="String" />
             <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="spGetSIAWebUserInfo_Result">
-          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
-          <Property Type="String" Name="PIN" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="SAP" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="111" />
-          <Property Type="String" Name="DutyStatus" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="OfficeCode" Nullable="false" MaxLength="10" />
-        </ComplexType>
-        <ComplexType Name="spGetSIAWebUserInfo_Result1">
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="String" Name="PIN" Nullable="true" MaxLength="8" />
           <Property Type="String" Name="UserName" Nullable="true" MaxLength="111" />
@@ -49,9 +45,9 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SIAUserModelStoreContainer" CdmEntityContainer="SIAUserEntities" >
-          <FunctionImportMapping FunctionImportName="spGetSIAWebUserInfo" FunctionName="SIAUserModel.Store.spGetSIAWebUserInfo">
+          <FunctionImportMapping FunctionImportName="WebUserInfo" FunctionName="SIAUserModel.Store.spGetSIAWebUserInfo">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="SIAUserModel.spGetSIAWebUserInfo_Result1">
+              <ComplexTypeMapping TypeName="SIAUserModel.spGetSIAWebUserInfo_Result">
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="PIN" ColumnName="PIN" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />

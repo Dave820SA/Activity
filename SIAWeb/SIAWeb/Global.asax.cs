@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
@@ -35,7 +33,8 @@ namespace SIAWeb
             HttpContext.Current.Session.Add("userName", "Unknown");
             SIAUserEntities user = new SIAUserEntities();
 
-            var myUser = from u in user.spGetSIAWebUserInfo(userPin, 1)
+            //var myUser = from u in user.spGetSIAWebUserInfo(userPin, 1)
+            var myUser = from u in user.WebUserInfo("dd94223", 1)
                          select u;
             foreach (var u in myUser)
             {

@@ -100,7 +100,7 @@ namespace SIAUserBusinessLayer
         /// </summary>
         /// <param name="pin">No Metadata Documentation available.</param>
         /// <param name="webSiteID">No Metadata Documentation available.</param>
-        public ObjectResult<spGetSIAWebUserInfo_Result1> spGetSIAWebUserInfo(global::System.String pin, Nullable<global::System.Int32> webSiteID)
+        public int spGetSIAWebUserInfo(global::System.String pin, Nullable<global::System.Int32> webSiteID)
         {
             ObjectParameter pinParameter;
             if (pin != null)
@@ -122,7 +122,37 @@ namespace SIAUserBusinessLayer
                 webSiteIDParameter = new ObjectParameter("WebSiteID", typeof(global::System.Int32));
             }
     
-            return base.ExecuteFunction<spGetSIAWebUserInfo_Result1>("spGetSIAWebUserInfo", pinParameter, webSiteIDParameter);
+            return base.ExecuteFunction("spGetSIAWebUserInfo", pinParameter, webSiteIDParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pin">No Metadata Documentation available.</param>
+        /// <param name="webSiteID">No Metadata Documentation available.</param>
+        public ObjectResult<spGetSIAWebUserInfo_Result> WebUserInfo(global::System.String pin, Nullable<global::System.Int32> webSiteID)
+        {
+            ObjectParameter pinParameter;
+            if (pin != null)
+            {
+                pinParameter = new ObjectParameter("Pin", pin);
+            }
+            else
+            {
+                pinParameter = new ObjectParameter("Pin", typeof(global::System.String));
+            }
+    
+            ObjectParameter webSiteIDParameter;
+            if (webSiteID.HasValue)
+            {
+                webSiteIDParameter = new ObjectParameter("WebSiteID", webSiteID);
+            }
+            else
+            {
+                webSiteIDParameter = new ObjectParameter("WebSiteID", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<spGetSIAWebUserInfo_Result>("WebUserInfo", pinParameter, webSiteIDParameter);
         }
 
         #endregion
@@ -147,188 +177,13 @@ namespace SIAUserBusinessLayer
         /// Create a new spGetSIAWebUserInfo_Result object.
         /// </summary>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
-        /// <param name="officeCode">Initial value of the OfficeCode property.</param>
-        public static spGetSIAWebUserInfo_Result CreatespGetSIAWebUserInfo_Result(global::System.Int32 appEntityID, global::System.String officeCode)
+        /// <param name="webRole">Initial value of the WebRole property.</param>
+        public static spGetSIAWebUserInfo_Result CreatespGetSIAWebUserInfo_Result(global::System.Int32 appEntityID, global::System.String webRole)
         {
             spGetSIAWebUserInfo_Result spGetSIAWebUserInfo_Result = new spGetSIAWebUserInfo_Result();
             spGetSIAWebUserInfo_Result.AppEntityID = appEntityID;
-            spGetSIAWebUserInfo_Result.OfficeCode = officeCode;
+            spGetSIAWebUserInfo_Result.WebRole = webRole;
             return spGetSIAWebUserInfo_Result;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 AppEntityID
-        {
-            get
-            {
-                return _AppEntityID;
-            }
-            set
-            {
-                OnAppEntityIDChanging(value);
-                ReportPropertyChanging("AppEntityID");
-                _AppEntityID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AppEntityID");
-                OnAppEntityIDChanged();
-            }
-        }
-        private global::System.Int32 _AppEntityID;
-        partial void OnAppEntityIDChanging(global::System.Int32 value);
-        partial void OnAppEntityIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String PIN
-        {
-            get
-            {
-                return _PIN;
-            }
-            set
-            {
-                OnPINChanging(value);
-                ReportPropertyChanging("PIN");
-                _PIN = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("PIN");
-                OnPINChanged();
-            }
-        }
-        private global::System.String _PIN;
-        partial void OnPINChanging(global::System.String value);
-        partial void OnPINChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String SAP
-        {
-            get
-            {
-                return _SAP;
-            }
-            set
-            {
-                OnSAPChanging(value);
-                ReportPropertyChanging("SAP");
-                _SAP = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("SAP");
-                OnSAPChanged();
-            }
-        }
-        private global::System.String _SAP;
-        partial void OnSAPChanging(global::System.String value);
-        partial void OnSAPChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String UserName
-        {
-            get
-            {
-                return _UserName;
-            }
-            set
-            {
-                OnUserNameChanging(value);
-                ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("UserName");
-                OnUserNameChanged();
-            }
-        }
-        private global::System.String _UserName;
-        partial void OnUserNameChanging(global::System.String value);
-        partial void OnUserNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String DutyStatus
-        {
-            get
-            {
-                return _DutyStatus;
-            }
-            set
-            {
-                OnDutyStatusChanging(value);
-                ReportPropertyChanging("DutyStatus");
-                _DutyStatus = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("DutyStatus");
-                OnDutyStatusChanged();
-            }
-        }
-        private global::System.String _DutyStatus;
-        partial void OnDutyStatusChanging(global::System.String value);
-        partial void OnDutyStatusChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String OfficeCode
-        {
-            get
-            {
-                return _OfficeCode;
-            }
-            set
-            {
-                OnOfficeCodeChanging(value);
-                ReportPropertyChanging("OfficeCode");
-                _OfficeCode = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("OfficeCode");
-                OnOfficeCodeChanged();
-            }
-        }
-        private global::System.String _OfficeCode;
-        partial void OnOfficeCodeChanging(global::System.String value);
-        partial void OnOfficeCodeChanged();
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmComplexTypeAttribute(NamespaceName="SIAUserModel", Name="spGetSIAWebUserInfo_Result1")]
-    [DataContractAttribute(IsReference=true)]
-    [Serializable()]
-    public partial class spGetSIAWebUserInfo_Result1 : ComplexObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new spGetSIAWebUserInfo_Result1 object.
-        /// </summary>
-        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
-        /// <param name="webRole">Initial value of the WebRole property.</param>
-        public static spGetSIAWebUserInfo_Result1 CreatespGetSIAWebUserInfo_Result1(global::System.Int32 appEntityID, global::System.String webRole)
-        {
-            spGetSIAWebUserInfo_Result1 spGetSIAWebUserInfo_Result1 = new spGetSIAWebUserInfo_Result1();
-            spGetSIAWebUserInfo_Result1.AppEntityID = appEntityID;
-            spGetSIAWebUserInfo_Result1.WebRole = webRole;
-            return spGetSIAWebUserInfo_Result1;
         }
 
         #endregion

@@ -1,33 +1,70 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "SOP Web";
 }
-@section featured {
-    <section class="featured">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>@ViewBag.Title.</h1>
-                <h2>@ViewBag.Message</h2>
-            </hgroup>
-            <p>
-                The San Antonio Police Department’s SOP Web shall provide the Department’s members with quick access to department unit standard operating procedures to promote the safety of officers and citizens of the City of San Antonio.
-            </p>
+@ViewBag.Message
+<div class="container">
+    
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
+            <div id="accordion" class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-angle-double-down">
+                            </i><a href="#panelBodyOne" data-toggle="collapse"  data-parent="#accordion">
+                                Chief Of Police </a>
+                        </h4>
+                    </div>
+                    <div id="panelBodyOne" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                <li>India</li>
+                                <li>China</li>
+                                <li>Japan</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </section>
+        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <span class="glyphicon glyphicon-menu-down"></span><a href="#panelBodyFour" data-toggle="collapse"
+                            data-parent="#accordion">Asia </a>
+                    </h4>
+                </div>
+                <div id="panelBodyFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                            <li>India</li>
+                            <li>China</li>
+                            <li>Japan</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('.collapse').on('shown.bs.collapse', function () {
+                $(this).parent().find('.fa-angle-double-down')
+                                .removeClass('fa-angle-double-down')
+                                .addClass('fa-angle-double-up');
+            }).on('hidden.bs.collapse', function () {
+                $(this).parent().find(".fa-angle-double-up")
+                                .removeClass("fa-angle-double-up")
+                                .addClass("fa-angle-double-down");
+            });
+
+        });
+
+    </script>
 }
-<h3>We suggest the following:</h3>
-<ol class="round">
-    <li class="one">
-        <h5>Getting Started</h5>
-        Use the power of the SOP Web search if you not sure witch standard operating procedures you are looking for.
-    </li>
-
-    <li class="two">
-        <h5>Jump stright to the SOP</h5>
-       Use the SOP list to open specific standard operating procedures.
-    </li>
-
-    <li class="three">
-        <h5>Administrator Page</h5>
-        The Administrators page gives the application administrators the ability to upload new SOP’s, change SOP categories and find past SOP’s.
-    </li>
-</ol>
