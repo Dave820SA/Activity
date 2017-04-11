@@ -6,14 +6,14 @@
 
 
 <div style="padding-left:30px">
-    <h4>Web<small> Address</small> </h4>
+    <h4>SOP<small> Current Documents</small> </h4>
 </div>
 
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
             <span class="h6">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span
-                class="h6">@Html.ActionLink("Admin", "Index", "Admin")</span> 
+                class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span> 
             <table class="table table-condensed table-hover">
                 <tr>
                     <th>
@@ -28,12 +28,12 @@
                     <th>
                         @Html.DisplayNameFor(model => model.StartDate)
                     </th>
-                    <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.EndDate)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.ModifiedDate)
-                    </th>
+                    </th>*@
                     <th>
                     </th>
                 </tr>
@@ -52,12 +52,12 @@
                             @Html.DisplayFor(modelItem => item.StartDate)
                         </td>
                        
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.EndDate)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id=item.DocHistoryID }) |
                             @Html.ActionLink("Details", "Details", new { id=item.DocHistoryID }) |

@@ -18,7 +18,8 @@ namespace SOPWeb.Controllers
 
         public ActionResult Index()
         {
-            var dochistories = db.DocHistories.Include("SOP_SOP");
+            //var dochistories = db.DocHistories.Include("SOP_SOP");
+            var dochistories = db.DocHistories.Where(d => d.EndDate == null).OrderByDescending(d => d.ModifiedDate);
             return View(dochistories.ToList());
         }
 
