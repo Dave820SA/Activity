@@ -203,6 +203,7 @@
     <Content Include="font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
     <Content Include="font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Male.png" />
     <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.7.1.js" />
     <Content Include="Scripts\jquery-1.7.1.min.js" />
@@ -312,6 +313,10 @@
     <ProjectReference Include="..\SOPBusinessLayer\SOPBusinessLayer.csproj">
       <Project>{D2A217D9-E4E4-40CE-805E-2F0F7ACFAFE9}</Project>
       <Name>SOPBusinessLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UserBusinessLayer\UserBusinessLayer.csproj">
+      <Project>{A6CC0DB3-58C7-4711-BB18-3AF06472115F}</Project>
+      <Name>UserBusinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

@@ -4,7 +4,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using SIAUserBusinessLayer;
+using UserBusinessLayer;
+using System.Web.Security;
 
 namespace SIAWeb
 {
@@ -30,21 +31,20 @@ namespace SIAWeb
 
         private void SessionUser(string userPin)
         {
-            HttpContext.Current.Session.Add("userName", "Unknown");
-            SIAUserEntities user = new SIAUserEntities();
+            //HttpContext.Current.Session.Add("userName", "Unknown");
+            UserLayerEntities user = new UserLayerEntities();
 
-            //var myUser = from u in user.spGetSIAWebUserInfo(userPin, 1)
-            var myUser = from u in user.WebUserInfo("dd94223", 1)
-                         select u;
+            var myUser = from u in user.spWebSiteUserInfo(userPin, 1)
+                     select u;
             foreach (var u in myUser)
             {
                 HttpContext.Current.Session.Add("AppEntityID", u.AppEntityID.ToString());
                 HttpContext.Current.Session.Add("userPin", u.PIN.ToString());
-                //HttpContext.Current.Session.Add("userSAP", u.SAP.ToString());
                 HttpContext.Current.Session.Add("userName", u.UserName.ToString());
                 HttpContext.Current.Session.Add("WebRole", u.WebRole.ToString());
-                //HttpContext.Current.Session.Add("userDutyStatus", u.DutyStatus.ToString());
-                //HttpContext.Current.Session.Add("userOffice", u.OfficeCode.ToString());
+
+                setAuthorized((string)System.Web.HttpContext.Current.Session["userName"],
+                    (string)System.Web.HttpContext.Current.Session["WebRole"]);
             }
         }
 
@@ -64,5 +64,16 @@ namespace SIAWeb
 
             return result;
         }
+
+   
+
+    private void setAuthorized(string userName, string userRole) 
+        {
+            if (userRole == "SuperUser" || userRole == "Admin")
+            {
+                FormsAuthentication.SetAuthCookie(userName, false);
+            }
+        }
+
     }
 }

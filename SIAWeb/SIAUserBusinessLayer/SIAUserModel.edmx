@@ -6,29 +6,20 @@
     <edmx:StorageModels>
     <Schema Namespace="SIAUserModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SIAUserModelStoreContainer" />
-        <Function Name="spGetAllSIAWebLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-        <Function Name="spGetSIAWebUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Pin" Type="varchar" Mode="In" />
-          <Parameter Name="WebSiteID" Type="int" Mode="In" />
-        </Function>
-        <Function Name="spGetUserWebRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="UserID" Type="int" Mode="In" />
-          <Parameter Name="WebSiteID" Type="int" Mode="In" />
-        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SIAUserModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="SIAUserEntities" annotation:LazyLoadingEnabled="true" >
-          <FunctionImport Name="spGetUserWebAppRole" ReturnType="Collection(String)">
-            <Parameter Name="UserID" Mode="In" Type="Int32" />
-            <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="spGetSIAWebUserInfo">
             <Parameter Name="Pin" Mode="In" Type="String" />
             <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="WebUserInfo" ReturnType="Collection(SIAUserModel.spGetSIAWebUserInfo_Result)">
+          <FunctionImport Name="WebUserInfo">
+            <Parameter Name="Pin" Mode="In" Type="String" />
+            <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGetSIAWebUserInfo_x" ReturnType="Collection(SIAUserModel.spGetSIAWebUserInfo_Result)">
             <Parameter Name="Pin" Mode="In" Type="String" />
             <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -45,16 +36,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SIAUserModelStoreContainer" CdmEntityContainer="SIAUserEntities" >
-          <FunctionImportMapping FunctionImportName="WebUserInfo" FunctionName="SIAUserModel.Store.spGetSIAWebUserInfo">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SIAUserModel.spGetSIAWebUserInfo_Result">
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
-                <ScalarProperty Name="PIN" ColumnName="PIN" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="WebRole" ColumnName="WebRole" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

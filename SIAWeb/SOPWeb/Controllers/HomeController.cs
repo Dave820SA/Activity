@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SOPBusinessLayer;
 
 namespace SOPWeb.Controllers
 {
@@ -10,9 +11,13 @@ namespace SOPWeb.Controllers
     {
         public ActionResult Index()
         {
+
+            SAPDActivityEntities db = new SAPDActivityEntities();
+            List<SOP_vCurrentDoc> sopCurrentDoc = db.SOP_vCurrentDoc.ToList();
+
             ViewBag.Message = "Welcome to the SOP Web App.";
 
-            return View();
+            return View(sopCurrentDoc);
         }
 
 

@@ -22,10 +22,12 @@
           <EntitySet Name="SOP_vCurrentDoc" EntityType="SOPDocModel.Store.SOP_vCurrentDoc" store:Type="Views" store:Schema="dbo" store:Name="SOP.vCurrentDoc">
             <DefiningQuery>SELECT 
       [SOP_vCurrentDoc].[ID] AS [ID], 
+      [SOP_vCurrentDoc].[BureauID] AS [BureauID], 
       [SOP_vCurrentDoc].[Bureau] AS [Bureau], 
       [SOP_vCurrentDoc].[SOP] AS [SOP], 
       [SOP_vCurrentDoc].[SOPInfo] AS [SOPInfo], 
-      [SOP_vCurrentDoc].[StartDate] AS [StartDate]
+      [SOP_vCurrentDoc].[StartDate] AS [StartDate], 
+      [SOP_vCurrentDoc].[DocPath] AS [DocPath]
       FROM [dbo].[SOP.vCurrentDoc] AS [SOP_vCurrentDoc]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_SOP_DocHistory_SOP_SOP" Association="SOPDocModel.Store.FK_SOP_DocHistory_SOP_SOP">
@@ -79,15 +81,19 @@
         <EntityType Name="SOP_vCurrentDoc">
           <Key>
             <PropertyRef Name="ID" />
+            <PropertyRef Name="BureauID" />
             <PropertyRef Name="Bureau" />
             <PropertyRef Name="SOP" />
             <PropertyRef Name="StartDate" />
+            <PropertyRef Name="DocPath" />
           </Key>
           <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="BureauID" Type="int" Nullable="false" />
           <Property Name="Bureau" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="SOP" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="SOPInfo" Type="varchar(max)" />
           <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="DocPath" Type="varchar" Nullable="false" MaxLength="500" />
         </EntityType>
         <Association Name="FK_SOP_DocHistory_SOP_SOP">
           <End Role="SOP_SOP" Type="SOPDocModel.Store.SOP_SOP" Multiplicity="1" />
@@ -207,12 +213,16 @@
             <PropertyRef Name="Bureau" />
             <PropertyRef Name="SOP" />
             <PropertyRef Name="StartDate" />
+            <PropertyRef Name="BureauID" />
+            <PropertyRef Name="DocPath" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Bureau" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="SOP" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="SOPInfo" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="Int32" Name="BureauID" Nullable="false" />
+          <Property Type="String" Name="DocPath" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -266,6 +276,8 @@
           <EntitySetMapping Name="SOP_vCurrentDoc">
             <EntityTypeMapping TypeName="SOPDocModel.SOP_vCurrentDoc">
               <MappingFragment StoreEntitySet="SOP_vCurrentDoc">
+                <ScalarProperty Name="DocPath" ColumnName="DocPath" />
+                <ScalarProperty Name="BureauID" ColumnName="BureauID" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="SOPInfo" ColumnName="SOPInfo" />
                 <ScalarProperty Name="SOP" ColumnName="SOP" />

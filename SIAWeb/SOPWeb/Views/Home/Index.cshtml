@@ -1,9 +1,30 @@
-﻿@{
+﻿@model IEnumerable<SOPBusinessLayer.SOP_vCurrentDoc>
+
+@{
     ViewBag.Title = "SOP Web";
 }
-@ViewBag.Message
+
 <div class="container">
-    
+    <div style="padding-bottom: 10px">
+       
+        @{
+            string user = (string)System.Web.HttpContext.Current.Session["userName"];
+
+            if (@user != "Unknown")
+            {
+            <h4>
+                @user<small>, Welcome back </small>
+            </h4>
+            }
+            else
+            {
+             <h4>
+                Welcome<small>, <a href="#">Click to become an SIA Web user</a> </small>
+            </h4>
+            }
+        }
+        
+    </div>
     <div class="row">
         <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
             <div id="accordion" class="panel-group">
@@ -18,9 +39,15 @@
                     <div id="panelBodyOne" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>India</li>
-                                <li>China</li>
-                                <li>Japan</li>
+                                @foreach (var item in Model)
+                                {
+                                    
+                                    if (item.BureauID == 1)
+                                    {
+                                    <li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>
+                                    @*<li><a href="D:\Reports.pdf" target="_blank">@item.SOP </a></li>*@
+                                    }
+                                }
                             </ul>
                         </div>
                     </div>
@@ -31,17 +58,79 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        <span class="glyphicon glyphicon-menu-down"></span><a href="#panelBodyFour" data-toggle="collapse"
-                            data-parent="#accordion">Asia </a>
+                       <i class="fa fa-angle-double-down">
+                            </i><a href="#panelBodyTwo" data-toggle="collapse"  data-parent="#accordion">
+                                Operations</a>
+                    </h4>
+                </div>
+                <div id="panelBodyTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <ul>
+                                @foreach (var item in Model)
+                                {
+
+                                    if (item.BureauID == 2)
+                                    {
+                                    <li><a href=" @item.SOP " target="_blank">@item.SOP </a></li>
+                                    }
+                                }
+                            </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
+            <div id="accordion" class="panel-group">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <i class="fa fa-angle-double-down">
+                            </i><a href="#panelBodyThree" data-toggle="collapse"  data-parent="#accordion">
+                                Operations Support </a>
+                        </h4>
+                    </div>
+                    <div id="panelBodyThree" class="panel-collapse collapse">
+                        <div class="panel-body">
+                            <ul>
+                                @foreach (var item in Model)
+                                {
+                                    
+                                    if (item.BureauID == 3)
+                                    {
+                                    <li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>
+                                    @*<li><a href="D:\Reports.pdf" target="_blank">@item.SOP </a></li>*@
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                       <i class="fa fa-angle-double-down">
+                            </i><a href="#panelBodyFour" data-toggle="collapse"  data-parent="#accordion">
+                                Administrative Services</a>
                     </h4>
                 </div>
                 <div id="panelBodyFour" class="panel-collapse collapse">
                     <div class="panel-body">
                         <ul>
-                            <li>India</li>
-                            <li>China</li>
-                            <li>Japan</li>
-                        </ul>
+                                @foreach (var item in Model)
+                                {
+
+                                    if (item.BureauID == 4)
+                                    {
+                                    <li><a href=" @item.SOP " target="_blank">@item.SOP </a></li>
+                                    }
+                                }
+                            </ul>
                     </div>
                 </div>
             </div>

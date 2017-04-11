@@ -858,13 +858,17 @@ namespace SOPBusinessLayer
         /// <param name="bureau">Initial value of the Bureau property.</param>
         /// <param name="sOP">Initial value of the SOP property.</param>
         /// <param name="startDate">Initial value of the StartDate property.</param>
-        public static SOP_vCurrentDoc CreateSOP_vCurrentDoc(global::System.Int32 id, global::System.String bureau, global::System.String sOP, global::System.DateTime startDate)
+        /// <param name="bureauID">Initial value of the BureauID property.</param>
+        /// <param name="docPath">Initial value of the DocPath property.</param>
+        public static SOP_vCurrentDoc CreateSOP_vCurrentDoc(global::System.Int32 id, global::System.String bureau, global::System.String sOP, global::System.DateTime startDate, global::System.Int32 bureauID, global::System.String docPath)
         {
             SOP_vCurrentDoc sOP_vCurrentDoc = new SOP_vCurrentDoc();
             sOP_vCurrentDoc.ID = id;
             sOP_vCurrentDoc.Bureau = bureau;
             sOP_vCurrentDoc.SOP = sOP;
             sOP_vCurrentDoc.StartDate = startDate;
+            sOP_vCurrentDoc.BureauID = bureauID;
+            sOP_vCurrentDoc.DocPath = docPath;
             return sOP_vCurrentDoc;
         }
 
@@ -1003,6 +1007,60 @@ namespace SOPBusinessLayer
         private global::System.DateTime _StartDate;
         partial void OnStartDateChanging(global::System.DateTime value);
         partial void OnStartDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BureauID
+        {
+            get
+            {
+                return _BureauID;
+            }
+            set
+            {
+                if (_BureauID != value)
+                {
+                    OnBureauIDChanging(value);
+                    ReportPropertyChanging("BureauID");
+                    _BureauID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("BureauID");
+                    OnBureauIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _BureauID;
+        partial void OnBureauIDChanging(global::System.Int32 value);
+        partial void OnBureauIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String DocPath
+        {
+            get
+            {
+                return _DocPath;
+            }
+            set
+            {
+                if (_DocPath != value)
+                {
+                    OnDocPathChanging(value);
+                    ReportPropertyChanging("DocPath");
+                    _DocPath = StructuralObject.SetValidValue(value, false);
+                    ReportPropertyChanged("DocPath");
+                    OnDocPathChanged();
+                }
+            }
+        }
+        private global::System.String _DocPath;
+        partial void OnDocPathChanging(global::System.String value);
+        partial void OnDocPathChanged();
 
         #endregion
 

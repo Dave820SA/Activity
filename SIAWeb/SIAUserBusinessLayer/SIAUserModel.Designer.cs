@@ -68,36 +68,6 @@ namespace SIAUserBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="userID">No Metadata Documentation available.</param>
-        /// <param name="webSiteID">No Metadata Documentation available.</param>
-        public ObjectResult<global::System.String> spGetUserWebAppRole(Nullable<global::System.Int32> userID, Nullable<global::System.Int32> webSiteID)
-        {
-            ObjectParameter userIDParameter;
-            if (userID.HasValue)
-            {
-                userIDParameter = new ObjectParameter("UserID", userID);
-            }
-            else
-            {
-                userIDParameter = new ObjectParameter("UserID", typeof(global::System.Int32));
-            }
-    
-            ObjectParameter webSiteIDParameter;
-            if (webSiteID.HasValue)
-            {
-                webSiteIDParameter = new ObjectParameter("WebSiteID", webSiteID);
-            }
-            else
-            {
-                webSiteIDParameter = new ObjectParameter("WebSiteID", typeof(global::System.Int32));
-            }
-    
-            return base.ExecuteFunction<global::System.String>("spGetUserWebAppRole", userIDParameter, webSiteIDParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="pin">No Metadata Documentation available.</param>
         /// <param name="webSiteID">No Metadata Documentation available.</param>
         public int spGetSIAWebUserInfo(global::System.String pin, Nullable<global::System.Int32> webSiteID)
@@ -130,7 +100,7 @@ namespace SIAUserBusinessLayer
         /// </summary>
         /// <param name="pin">No Metadata Documentation available.</param>
         /// <param name="webSiteID">No Metadata Documentation available.</param>
-        public ObjectResult<spGetSIAWebUserInfo_Result> WebUserInfo(global::System.String pin, Nullable<global::System.Int32> webSiteID)
+        public int WebUserInfo(global::System.String pin, Nullable<global::System.Int32> webSiteID)
         {
             ObjectParameter pinParameter;
             if (pin != null)
@@ -152,7 +122,37 @@ namespace SIAUserBusinessLayer
                 webSiteIDParameter = new ObjectParameter("WebSiteID", typeof(global::System.Int32));
             }
     
-            return base.ExecuteFunction<spGetSIAWebUserInfo_Result>("WebUserInfo", pinParameter, webSiteIDParameter);
+            return base.ExecuteFunction("WebUserInfo", pinParameter, webSiteIDParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pin">No Metadata Documentation available.</param>
+        /// <param name="webSiteID">No Metadata Documentation available.</param>
+        public ObjectResult<spGetSIAWebUserInfo_Result> spGetSIAWebUserInfo_x(global::System.String pin, Nullable<global::System.Int32> webSiteID)
+        {
+            ObjectParameter pinParameter;
+            if (pin != null)
+            {
+                pinParameter = new ObjectParameter("Pin", pin);
+            }
+            else
+            {
+                pinParameter = new ObjectParameter("Pin", typeof(global::System.String));
+            }
+    
+            ObjectParameter webSiteIDParameter;
+            if (webSiteID.HasValue)
+            {
+                webSiteIDParameter = new ObjectParameter("WebSiteID", webSiteID);
+            }
+            else
+            {
+                webSiteIDParameter = new ObjectParameter("WebSiteID", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<spGetSIAWebUserInfo_Result>("spGetSIAWebUserInfo_x", pinParameter, webSiteIDParameter);
         }
 
         #endregion
