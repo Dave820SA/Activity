@@ -5,13 +5,16 @@ using SIAWebLinksBusinessLayer;
 
 namespace SIAWeb.Controllers
 {
+    
     public class LinkAddressController : Controller
     {
+        
         private WebLinksEntities db = new WebLinksEntities();
 
         //
         // GET: /LinkAddress/
 
+        //[AuthorizeUserAccessLevel(UserRole = "Admin")]
         public ActionResult Index()
         {
             var weblinks = db.WebLinks.Include("SIA_WebCategories");
