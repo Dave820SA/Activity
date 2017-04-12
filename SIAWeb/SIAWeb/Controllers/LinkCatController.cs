@@ -9,13 +9,14 @@ using SIAWebLinksBusinessLayer;
 
 namespace SIAWeb.Controllers
 {
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
     public class LinkCatController : Controller
     {
         private WebLinksEntities db = new WebLinksEntities();
 
         //
         // GET: /LinkCat/
-
+        
         public ActionResult Index()
         {
             return View(db.WebCategories.ToList());

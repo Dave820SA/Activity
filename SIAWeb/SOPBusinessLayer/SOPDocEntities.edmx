@@ -73,7 +73,7 @@
           <Property Name="SOPID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="BureauID" Type="int" Nullable="false" />
-          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'SAPDActivity.dbo.SOP.vCurrentDoc' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -119,11 +119,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="SOP_spDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="SOP.spDelete" Schema="dbo">
+          <Parameter Name="DocHistoryID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SOP_spInsertNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="SOP.spInsertNew" Schema="dbo">
           <Parameter Name="SOPID" Type="int" Mode="In" />
           <Parameter Name="DocInfo" Type="varchar(max)" Mode="In" />
           <Parameter Name="DocPath" Type="varchar" Mode="In" />
           <Parameter Name="StartDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SOP_spUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="SOP.spUpdate" Schema="dbo">
+          <Parameter Name="SOPID" Type="int" Mode="In" />
+          <Parameter Name="DocInfo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="DocPath" Type="varchar" Mode="In" />
         </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -260,6 +268,14 @@
                   <ScalarProperty Name="DocInfo" ParameterName="DocInfo" />
                   <ScalarProperty Name="SOPID" ParameterName="SOPID" />
                 </InsertFunction>
+                <UpdateFunction FunctionName="SOPDocModel.Store.SOP_spUpdate">
+                  <ScalarProperty Name="DocPath" ParameterName="DocPath" Version="Current" />
+                  <ScalarProperty Name="DocInfo" ParameterName="DocInfo" Version="Current" />
+                  <ScalarProperty Name="SOPID" ParameterName="SOPID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="SOPDocModel.Store.SOP_spDelete">
+                  <ScalarProperty Name="DocHistoryID" ParameterName="DocHistoryID" />
+                </DeleteFunction>
               </ModificationFunctionMapping>
             </EntityTypeMapping>
           </EntitySetMapping>

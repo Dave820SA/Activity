@@ -4,18 +4,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace SIAWeb.Controllers
+namespace SOPWeb.Controllers
 {
-    public class AdminController : Controller
+    public class NonUserController : Controller
     {
+        //
+        // GET: /NonUser/
 
-
-        [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
         public ActionResult Index()
         {
-
             return View();
-
         }
 
     }

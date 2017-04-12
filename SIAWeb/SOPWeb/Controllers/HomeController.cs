@@ -36,6 +36,7 @@ namespace SOPWeb.Controllers
             return View();
         }
 
+        [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
         public ActionResult Admin()
         {
             ViewBag.Message = "SOP Admin.";

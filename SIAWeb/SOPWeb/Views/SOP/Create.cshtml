@@ -4,29 +4,68 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<div style="padding-left: 60px">
+    <h4>
+        Create <small>New SOP</small></h4>
+</div>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
+     <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
+                <fieldset class="scheduler-border">
+                    @*<legend class="scheduler-border">&nbsp; Create New Web Links &nbsp;&nbsp;</legend>*@
+                    <div class="form-group col-xs-11 col-md-8">
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Name)
+                        </div>
+                        <div class="editor-label">
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.Office_Bureau)
+                        </div>
+                        <div class="editor-label">
+                            @Html.DropDownList("BureauID", null, "Select Bureau", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Office_Bureau, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="editor-label">
+                            @Html.LabelFor(model => model.ModifiedDate)
+                        </div>
+                        <div class="editor-label">
+                            @Html.TextBoxFor(model => model.ModifiedDate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <input type="submit" class="btn btn-primary" value="Create" />
+                    </div>
+                    <p>
+                    </p>
+
+                </fieldset>
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    
+    
+ 
+    
+   @* <fieldset>
         <legend>SOP</legend>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Name)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Name)
-            @Html.ValidationMessageFor(model => model.Name)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.BureauID, "Office_Bureau")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("BureauID", String.Empty)
-            @Html.ValidationMessageFor(model => model.BureauID)
-        </div>
+        
 
         <div class="editor-label">
             @Html.LabelFor(model => model.ModifiedDate)
@@ -39,12 +78,18 @@
         <p>
             <input type="submit" value="Create" />
         </p>
-    </fieldset>
+    </fieldset>*@
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
+
+
+
+
+
+
+
+
 
 @section Scripts {
 

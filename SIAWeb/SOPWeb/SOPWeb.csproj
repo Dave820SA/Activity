@@ -124,8 +124,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Controllers\DocHistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\NonUserController.cs" />
     <Compile Include="Controllers\SOPController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -288,6 +290,7 @@
     <None Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
     <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <None Include="font-awesome-4.7.0\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\SOPWeb.pubxml" />
     <None Include="readme.txt" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Shared\_Alternate.cshtml" />
@@ -304,6 +307,7 @@
     <Content Include="Views\DocHist\_ViewStart.cshtml" />
     <Content Include="Views\SOP\_ViewStart.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\NonUser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

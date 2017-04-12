@@ -5,7 +5,7 @@ using SIAWebLinksBusinessLayer;
 
 namespace SIAWeb.Controllers
 {
-    
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
     public class LinkAddressController : Controller
     {
         
@@ -14,7 +14,7 @@ namespace SIAWeb.Controllers
         //
         // GET: /LinkAddress/
 
-        //[AuthorizeUserAccessLevel(UserRole = "Admin")]
+        
         public ActionResult Index()
         {
             var weblinks = db.WebLinks.Include("SIA_WebCategories");

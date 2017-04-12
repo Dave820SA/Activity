@@ -9,6 +9,7 @@ using SOPBusinessLayer;
 
 namespace SOPWeb.Controllers
 {
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
     public class DocHistController : Controller
     {
         private SAPDActivityEntities db = new SAPDActivityEntities();

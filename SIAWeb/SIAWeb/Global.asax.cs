@@ -31,11 +31,10 @@ namespace SIAWeb
 
         private void SessionUser(string userPin)
         {
-            //HttpContext.Current.Session.Add("userName", "dd94223");
             UserLayerEntities user = new UserLayerEntities();
 
-            var myUser = from u in user.spWebSiteUserInfo("dd94223", 1)
-            //var myUser = from u in user.spWebSiteUserInfo(userPin, 1)
+            //var myUser = from u in user.spWebSiteUserInfo("dd94223", 1)
+            var myUser = from u in user.spWebSiteUserInfo(userPin, 1)
                      select u;
             foreach (var u in myUser)
             {
@@ -43,13 +42,9 @@ namespace SIAWeb
                 HttpContext.Current.Session.Add("userPin", u.PIN.ToString());
                 HttpContext.Current.Session.Add("userName", u.UserName.ToString());
                 HttpContext.Current.Session.Add("WebRole", u.WebRole.ToString());
-
-                //setAuthorized((string)System.Web.HttpContext.Current.Session["userName"],
-                //    (string)System.Web.HttpContext.Current.Session["WebRole"]);
             }
         }
-
-          
+ 
     private string getUserPin()
         {
             string userPin = HttpContext.Current.User.Identity.Name.ToString();
@@ -65,16 +60,6 @@ namespace SIAWeb
 
             return result;
         }
-
-   
-
-    //private void setAuthorized(string userName, string userRole) 
-    //    {
-    //        if (userRole == "SuperUser" || userRole == "Admin")
-    //        {
-    //            FormsAuthentication.SetAuthCookie(userName, false);
-    //        }
-    //    }
 
     }
 }
