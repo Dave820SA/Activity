@@ -4,6 +4,8 @@
     ViewBag.Title = "Create";
 }
 
+
+
 <div style="padding-left: 60px">
     <h4>
         Create <small>New SOP</small></h4>
@@ -40,10 +42,7 @@
                             @Html.LabelFor(model => model.ModifiedDate)
                         </div>
                         <div class="editor-label">
-                            @*@Html.TextBoxFor(model => model.ModifiedDate, "{0:yyyy-MM-dd}", new { @class = "form-control", @type = "date"})*@
-                            @Html.TextBoxFor(model => model.ModifiedDate, new { @class = "form-control", @value = @DateTime.Now.ToString() })
-                           @* @Html.TextBoxFor(model => model.ModifiedDate, new { @class = "form-control" })*@
-                           @*@Html.TextBoxFor(model => model.ModifiedDate, new { @value = ViewBag.CurrentDate })*@
+                            @Html.TextBoxFor(model => model.ModifiedDate, new { @Value = @DateTime.Now.ToString(), @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
                         </div>
                     </div>

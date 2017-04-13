@@ -54,6 +54,9 @@ namespace SOPWeb.Controllers
         {
             if (ModelState.IsValid)
             {
+                //string myPath = dochistory.DocPath;
+                //string fileExtention = FilePathResult.ReferenceEquals(
+
                 db.DocHistories.AddObject(dochistory);
                 db.SaveChanges();
                 return RedirectToAction("Index");

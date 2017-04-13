@@ -4,71 +4,70 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
+@*@using (Html.BeginForm())*@
+ @using (Html.BeginForm("Create", "DocHist", FormMethod.Post, new { @encType = "multipart/Form-data" }))
+{
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>DocHistory</legend>
+  
+    <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
+                <fieldset class="scheduler-border">
+                    <div class="form-group col-xs-11 col-md-8">
+                        <strong style="font-size:1.2em">@Html.LabelFor(model => model.SOPID, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("SOPID", null, "Select SOP", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.SOPID, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.SOPID, "SOP_SOP")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("SOPID", String.Empty)
-            @Html.ValidationMessageFor(model => model.SOPID)
-        </div>
+                    <div class="form-group col-lg-11 col-xs-11 col-md-8 ">
+                        <strong style="font-size: 1.2em">@Html.LabelFor(model => model.DocPath, new { @class = "control-label" })</strong>
+                        @Html.TextBoxFor(model => model.DocPath, new { type = "file", single = "true", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DocPath, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DocInfo)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DocInfo)
-            @Html.ValidationMessageFor(model => model.DocInfo)
-        </div>
+                     @*<div class="form-group col-lg-11 col-xs-11 col-md-8 ">
+                        <strong style="font-size:1.2em">@Html.LabelFor(model => model.DocPath, new { @class = "control-label" })</strong>
+                        @Html.TextBoxFor(model => model.DocPath, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.DocPath, "", new { @class = "text-danger" })
+                     </div>*@
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DocPath)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DocPath)
-            @Html.ValidationMessageFor(model => model.DocPath)
-        </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <strong style="font-size:1.2em">@Html.LabelFor(model => model.DocInfo, new { @class = "control-label" })</strong>
+                        @Html.TextAreaFor(model => model.DocInfo, new { @class = "form-control", cols = "20", rows = "7" })
+                        @Html.ValidationMessageFor(model => model.DocInfo, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <strong style="font-size: 1.2em">@Html.LabelFor(model => model.StartDate, new { @class = "control-label" })</strong>
+                        @Html.TextBoxFor(model => model.StartDate, new {@Value = @DateTime.Now.ToShortDateString(), @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-11 col-md-8">
+                        <strong style="font-size: 1.2em">@Html.LabelFor(model => model.ModifiedDate, new { @class = "control-label" })</strong>
+                        @Html.TextBoxFor(model => model.ModifiedDate, new { @Value = @DateTime.Now.ToString(), @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.StartDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.StartDate)
-            @Html.ValidationMessageFor(model => model.StartDate)
-        </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EndDate)
+                    <div class="form-group col-xs-11 col-md-8">
+                        <input type="submit" class="btn btn-primary" value="Create" />
+                    </div>
+                    <p>
+                    </p>
+                </fieldset>
+                <div>
+                    @Html.ActionLink("Back to List", "Index")
+                </div>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EndDate)
-            @Html.ValidationMessageFor(model => model.EndDate)
-        </div>
+    </div>
+    </form>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.ModifiedDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.ModifiedDate)
-            @Html.ValidationMessageFor(model => model.ModifiedDate)
-        </div>
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
 

@@ -754,6 +754,8 @@ namespace SOPBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+
+
         public global::System.DateTime ModifiedDate
         {
             get
@@ -765,6 +767,7 @@ namespace SOPBusinessLayer
                 OnModifiedDateChanging(value);
                 ReportPropertyChanging("ModifiedDate");
                 _ModifiedDate = StructuralObject.SetValidValue(value);
+                //_ModifiedDate = StructuralObject.SetValidValue(DateTime.Now);
                 ReportPropertyChanged("ModifiedDate");
                 OnModifiedDateChanged();
             }
