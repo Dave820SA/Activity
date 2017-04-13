@@ -42,6 +42,7 @@ namespace SOPWeb.Controllers
         public ActionResult Create()
         {
             ViewBag.BureauID = new SelectList(db.Bureaux, "BureauID", "Name");
+            //ViewBag.CurrentDate = DateTime.Now.ToString();
             return View();
         }
 
