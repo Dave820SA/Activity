@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SOPBusinessLayer;
+using System.IO;
 
 namespace SOPWeb.Controllers
 {
@@ -36,25 +37,27 @@ namespace SOPWeb.Controllers
             return View(sop);
         }
 
+       
+
+
         //
         // GET: /SOP/Create
 
         public ActionResult Create()
         {
             ViewBag.BureauID = new SelectList(db.Bureaux, "BureauID", "Name");
-            //ViewBag.CurrentDate = DateTime.Now.ToString();
             return View();
         }
 
-        //
-        // POST: /SOP/Create
+        
+         //POST: /SOP/Create
 
         [HttpPost]
         public ActionResult Create(SOP sop)
         {
             if (ModelState.IsValid)
             {
-                db.SOPs.AddObject(sop);
+              
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

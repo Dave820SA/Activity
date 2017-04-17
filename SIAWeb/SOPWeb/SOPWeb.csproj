@@ -309,6 +309,7 @@
     <Content Include="Views\SOP\_ViewStart.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\NonUser\Index.cshtml" />
+    <Content Include="Views\DocHist\FileUpload.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

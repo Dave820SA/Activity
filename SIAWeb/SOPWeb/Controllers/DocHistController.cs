@@ -6,6 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SOPBusinessLayer;
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Configuration;
+//using SOPWeb.Models.SOPDocUpload;
 
 namespace SOPWeb.Controllers
 {
@@ -43,6 +47,13 @@ namespace SOPWeb.Controllers
         public ActionResult Create()
         {
             ViewBag.SOPID = new SelectList(db.SOPs, "SOPID", "Name");
+            
+            return View();
+        }
+
+
+        public ActionResult FileUpload()
+        {
             return View();
         }
 
@@ -50,13 +61,50 @@ namespace SOPWeb.Controllers
         // POST: /DocHist/Create
 
         [HttpPost]
+        public ActionResult FileUpload(HttpPostedFileBase file)
+        {
+            var path = "";
+            try
+            {
+                if (file.ContentLength > 0)
+               
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    string fileExtension = Path.GetExtension(fileName).ToString();
+
+                    fileName = fileName.Replace(" ", string.Empty);
+
+                    dynamic rgPattern = "[\\\\\\/:\\*\\?\"'<>|]";
+                    Regex objRegEx = new Regex(rgPattern);
+
+                    fileName = objRegEx.Replace(fileName, "");
+                    string filePath = System.Configuration.ConfigurationManager.AppSettings["SavePath"].ToString();
+
+                    path = Path.Combine(filePath, fileName);
+
+                    file.SaveAs(path);
+                    
+                }
+
+                //ViewBag.filePath = path;
+                //ViewBag.Message = "Upload successful";
+                //return RedirectToAction("Create", "DocHist");
+                return RedirectToAction("Create", "DocHist", new { value1 = path });
+            }
+            catch
+            {
+                ViewBag.Message = "Upload failed";
+                return RedirectToAction("Uploads");
+            }
+        }
+
+
+
+        [HttpPost]
         public ActionResult Create(DocHistory dochistory)
         {
             if (ModelState.IsValid)
             {
-                //string myPath = dochistory.DocPath;
-                //string fileExtention = FilePathResult.ReferenceEquals(
-
                 db.DocHistories.AddObject(dochistory);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,0 +1,26 @@
+﻿
+
+@{
+    ViewBag.Title = "FileUpload";
+    Layout = "~/Views/Shared/_Alternate.cshtml";
+}
+
+
+@using (Html.BeginForm("FileUpload", "DocHist", FormMethod.Post, new { @encType = "multipart/Form-data" }))
+ {
+    @Html.AntiForgeryToken()
+
+    <h2>FileUpload</h2>
+
+    <fieldset>
+        <legend>Upload a file</legend>
+        <div class="editor-field">
+            @Html.TextBox("file", "", new { type = "file" })
+        </div>
+       <div class="editor-field">
+            <input type="submit" value="Upload" />
+        </div>
+    </fieldset>
+}
+
+

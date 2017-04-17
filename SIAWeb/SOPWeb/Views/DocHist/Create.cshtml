@@ -4,8 +4,8 @@
     ViewBag.Title = "Create";
 }
 
-@*@using (Html.BeginForm())*@
- @using (Html.BeginForm("Create", "DocHist", FormMethod.Post, new { @encType = "multipart/Form-data" }))
+@using (Html.BeginForm())
+
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -24,7 +24,8 @@
 
                     <div class="form-group col-lg-11 col-xs-11 col-md-8 ">
                         <strong style="font-size: 1.2em">@Html.LabelFor(model => model.DocPath, new { @class = "control-label" })</strong>
-                        @Html.TextBoxFor(model => model.DocPath, new { type = "file", single = "true", @class = "form-control" })
+                        @*@Html.TextBoxFor(model => model.DocPath, new { type = "file", single = "true", @class = "form-control" })*@
+                        @Html.TextBoxFor(model => model.DocPath, new { Value = Request.QueryString["value1"], @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.DocPath, "", new { @class = "text-danger" })
                     </div>
 
