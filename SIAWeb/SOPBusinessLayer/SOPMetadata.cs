@@ -59,6 +59,7 @@ namespace SOPBusinessLayer
             public string SOP { get; set; }
 
             [Display(Name = "Efective On")]
+            [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
             public DateTime StartDate { get; set; }
 
         }
@@ -85,7 +86,11 @@ namespace SOPBusinessLayer
 
             [Required]
             [Display(Name = "Effect On")]
+            [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
             public DateTime StartDate { get; set; }
+
+            [Display(Name = "Modified Date")]
+            public DateTime ModifiedDate { get; set; }
             
         }
     }

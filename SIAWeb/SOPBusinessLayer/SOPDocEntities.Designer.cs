@@ -658,7 +658,7 @@ namespace SOPBusinessLayer
         /// <param name="sOPID">Initial value of the SOPID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="bureauID">Initial value of the BureauID property.</param>
-        ///<param name="modifiedDate">Initial value of the ModifiedDate property.</param>
+        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
         public static SOP CreateSOP(global::System.Int32 sOPID, global::System.String name, global::System.Int32 bureauID, global::System.DateTime modifiedDate)
         {
             SOP sOP = new SOP();
@@ -666,7 +666,6 @@ namespace SOPBusinessLayer
             sOP.Name = name;
             sOP.BureauID = bureauID;
             sOP.ModifiedDate = modifiedDate;
-            //sOP.ModifiedDate = System.DateTime.Now;
             return sOP;
         }
 
@@ -754,8 +753,6 @@ namespace SOPBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-
-
         public global::System.DateTime ModifiedDate
         {
             get
@@ -767,7 +764,6 @@ namespace SOPBusinessLayer
                 OnModifiedDateChanging(value);
                 ReportPropertyChanging("ModifiedDate");
                 _ModifiedDate = StructuralObject.SetValidValue(value);
-                //_ModifiedDate = StructuralObject.SetValidValue(DateTime.Now);
                 ReportPropertyChanged("ModifiedDate");
                 OnModifiedDateChanged();
             }

@@ -86,15 +86,12 @@ namespace SOPWeb.Controllers
                     
                 }
 
-                //ViewBag.filePath = path;
-                //ViewBag.Message = "Upload successful";
-                //return RedirectToAction("Create", "DocHist");
                 return RedirectToAction("Create", "DocHist", new { value1 = path });
             }
             catch
             {
                 ViewBag.Message = "Upload failed";
-                return RedirectToAction("Uploads");
+                return RedirectToAction("FileUpload", "DocHist");
             }
         }
 

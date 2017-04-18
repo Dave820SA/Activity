@@ -38,8 +38,6 @@ namespace SOPWeb.Controllers
         }
 
        
-
-
         //
         // GET: /SOP/Create
 
@@ -57,7 +55,7 @@ namespace SOPWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-              
+                db.SOPs.AddObject(sop);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

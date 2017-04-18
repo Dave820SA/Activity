@@ -60,7 +60,7 @@
                         </td>*@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id=item.DocHistoryID }) |
-                            @Html.ActionLink("Details", "Details", new { id=item.DocHistoryID }) |
+                           <strong >@Html.ActionLink("Details", "Details", new { id=item.DocHistoryID })</strong>  |
                             @Html.ActionLink("Delete", "Delete", new { id=item.DocHistoryID })
                         </td>
                     </tr>
