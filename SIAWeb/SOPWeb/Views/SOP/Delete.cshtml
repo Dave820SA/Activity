@@ -3,8 +3,64 @@
 @{
     ViewBag.Title = "Delete";
 }
+<div style="padding-left: 5px">
+    <h4>
+        Delete<small> SOP</small></h4>
+</div>
 
-<h2>Delete</h2>
+@using (Html.BeginForm()) {
+
+<form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset class="scheduler-border">
+                    <h5 class="text-danger">
+                        Are you sure you want to delete this SOP?</h5>
+                    <br />
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Name)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Name)</strong>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Office_Bureau.Name)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Office_Bureau.Name)</strong>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.ModifiedDate)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.ModifiedDate)</strong>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+
+                    </div>
+                </fieldset>
+                <div>
+                    <p>
+                        <input type="submit" class="btn btn-danger" value="Delete" />
+                        <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+@*<h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
@@ -30,10 +86,10 @@
     <div class="display-field">
         @Html.DisplayFor(model => model.ModifiedDate)
     </div>
-</fieldset>
-@using (Html.BeginForm()) {
-    <p>
+</fieldset>*@
+
+   @* <p>
         <input type="submit" value="Delete" /> |
         @Html.ActionLink("Back to List", "Index")
-    </p>
+    </p>*@
 }
