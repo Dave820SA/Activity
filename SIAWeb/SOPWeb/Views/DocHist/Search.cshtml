@@ -2,17 +2,18 @@
 @using PagedList.Mvc;
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
-@{
-    ViewBag.Title = "Index";
-}
 
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Alternate.cshtml";
+}
 <div class="row">
     <div class="col-md-6">
-        <strong style="font-size:1.8em; padding-left:10px">Current Documents</strong>
+        <strong style="font-size:1.8em; padding-left:10px">All Documents</strong>
     </div>
     <div class="col-md-6">
         
-        @using (Html.BeginForm("Index", "DocHist", FormMethod.Get))
+        @using (Html.BeginForm("Search", "DocHist", FormMethod.Get))
         {
             <strong style="font-size:1.2em;">Find by SOP or SOP Info:&nbsp; &nbsp;</strong>
             @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
@@ -20,25 +21,26 @@
         }
     </div>
 </div>
-
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            <span class="h6">@Html.ActionLink("Upload New", "FileUpload")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span
-                class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
+            &nbsp;&nbsp;<span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
             <table class="table table-condensed table-hover">
                 <tr>
                     <th>
-                        @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                        @Html.ActionLink("SOP", "Search", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
                         SOP Info
                     </th>
                     <th>
-                        Path
+                        @Html.ActionLink("Effective On", "Search", new { sortOrder = ViewBag.StartDateSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                        @Html.ActionLink("Effective On", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                        @Html.ActionLink("End Date", "Search", new { sortOrder = ViewBag.EndDateSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        Modified Date
                     </th>
                     <th>
                     </th>
@@ -52,22 +54,22 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.DocInfo)
                         </td>
-                        <td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.DocPath)
-                        </td>
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.StartDate)
                         </td>
-                        @*<td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.EndDate)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </td>*@
+                        </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.DocHistoryID }) | <strong>@Html.ActionLink("Details", "Details", new { id = item.DocHistoryID })</strong>
-                            |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.DocHistoryID })
+                            @* @Html.ActionLink("Edit", "Edit", new { id = item.DocHistoryID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.DocHistoryID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.DocHistoryID })*@
                         </td>
                     </tr>
                 }

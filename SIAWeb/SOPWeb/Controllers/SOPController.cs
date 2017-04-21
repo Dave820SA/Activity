@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using SOPBusinessLayer;
-using System.IO;
+using PagedList;
 
 namespace SOPWeb.Controllers
 {
@@ -18,10 +15,55 @@ namespace SOPWeb.Controllers
         //
         // GET: /SOP/
 
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var sops = db.SOPs.Include("Office_Bureau");
-            return View(sops.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sop_desc" : "";
+            ViewBag.BureauSortParm = String.IsNullOrEmpty(sortOrder) ? "bureau_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "LastUpdate" ? "date_desc" : "LastUpdate";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+            
+            var sop = from s in db.SOPs
+                           select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                sop = sop.Where(s => s.Name.Contains(searchString)
+                                       || s.Office_Bureau.Name.Contains(searchString));
+            }
+
+
+            switch (sortOrder)
+            {
+                case "sop_desc":
+                    sop = sop.OrderByDescending(s => s.Name);
+                    break;
+                case "bureau_desc":
+                    sop = sop.OrderByDescending(s => s.Office_Bureau.Name);
+                    break;
+                case "LastUpdate":
+                    sop = sop.OrderBy(s => s.ModifiedDate);
+                    break;
+                case "date_desc":
+                    sop = sop.OrderByDescending(s => s.ModifiedDate);
+                    break;
+                default:
+                    sop = sop.OrderBy(s => s.Name);
+                    break;
+            }
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            return View(sop.ToPagedList(pageNumber, pageSize));
         }
 
         //

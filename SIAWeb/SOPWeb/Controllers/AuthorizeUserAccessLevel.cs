@@ -20,14 +20,23 @@ namespace System.Web.Mvc
 
             string CurrentUserRole = (string)System.Web.HttpContext.Current.Session["WebRole"];
             //if (this.UserRole.Contains(CurrentUserRole))
-            if (this.UserRole.Contains(CurrentUserRole))
+            try
             {
-                return true;
+                if (this.UserRole.Contains(CurrentUserRole))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception)
             {
+
                 return false;
             }
+
         }
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)

@@ -35,8 +35,8 @@ namespace SOPWeb
             HttpContext.Current.Session.Add("userName", "Unknown");
             UserLayerEntities user = new UserLayerEntities();
 
-            var myUser = from u in user.spWebSiteUserInfo("PR93077", 2)
-            //var myUser = from u in user.spWebSiteUserInfo(userPin, 2)
+            //var myUser = from u in user.spWebSiteUserInfo("PR93077", 2)
+            var myUser = from u in user.spWebSiteUserInfo(userPin, 2)
                          select u;
             foreach (var u in myUser)
             {

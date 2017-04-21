@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using SOPBusinessLayer;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Configuration;
-//using SOPWeb.Models.SOPDocUpload;
 
 namespace SOPWeb.Controllers
 {
@@ -21,12 +18,107 @@ namespace SOPWeb.Controllers
         //
         // GET: /DocHist/
 
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            //var dochistories = db.DocHistories.Include("SOP_SOP");
-            var dochistories = db.DocHistories.Where(d => d.EndDate == null).OrderByDescending(d => d.ModifiedDate);
-            return View(dochistories.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sop_desc" : "";
+            ViewBag.DateSortParm = sortOrder == "LastUpdate" ? "date_desc" : "LastUpdate";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var sop = from s in db.DocHistories.Where(s => s.EndDate == null)
+                      select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                sop = sop.Where(s => s.SOP_SOP.Name.Contains(searchString)
+                                       || s.DocInfo.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "sop_desc":
+                    sop = sop.OrderByDescending(s => s.SOP_SOP.Name);
+                    break;
+                case "StartDate":
+                    sop = sop.OrderBy(s => s.StartDate);
+                    break;
+                case "date_desc":
+                    sop = sop.OrderByDescending(s => s.StartDate);
+                    break;
+                default:
+                    sop = sop.OrderBy(s => s.StartDate);
+                    break;
+            }
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            return View(sop.ToPagedList(pageNumber, pageSize));
         }
+
+
+        public ViewResult Search(string sortOrder, string currentFilter, string searchString, int? page)
+        {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sop_desc" : "";
+            ViewBag.StartDateSortParm = sortOrder == "StartDate" ? "date_desc" : "StartDate";
+            ViewBag.EndDateSortParm = sortOrder == "EndDate" ? "enddate_desc" : "EndDate";
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
+            var sop = from s in db.DocHistories
+                      select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                sop = sop.Where(s => s.SOP_SOP.Name.Contains(searchString)
+                                       || s.DocInfo.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "sop_desc":
+                    sop = sop.OrderByDescending(s => s.SOP_SOP.Name);
+                    break;
+                case "StartDate":
+                    sop = sop.OrderBy(s => s.StartDate);
+                    break;
+                case "date_desc":
+                    sop = sop.OrderByDescending(s => s.StartDate);
+                    break;
+                case "EndDate":
+                    sop = sop.OrderBy(s => s.EndDate);
+                    break;
+                case "enddate_desc":
+                    sop = sop.OrderByDescending(s => s.EndDate);
+                    break;
+                default:
+                    sop = sop.OrderBy(s => s.StartDate);
+                    break;
+            }
+            int pageSize = 12;
+            int pageNumber = (page ?? 1);
+            return View(sop.ToPagedList(pageNumber, pageSize));
+        }
+
+
 
         //
         // GET: /DocHist/Details/5
