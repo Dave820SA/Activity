@@ -11,10 +11,11 @@
 </div>
 
 @using (Html.BeginForm("FileUpload", "DocHist", FormMethod.Post, new { @encType = "multipart/Form-data" }))
+
 {
     @Html.AntiForgeryToken()
 
-    <form class="form-horizontal">
+    <form  class="form-horizontal">
     <div class="Container">
         <div class="row">
             <div class="col-sm-6">
@@ -26,6 +27,7 @@
                         @Html.TextBox("file", "", new { type = "file", @class = "form-control" })
                         <br />
                         <input type="submit" class="btn btn-primary" value="Upload" />
+                   
                     </div>
                 </fieldset>
                 <br />

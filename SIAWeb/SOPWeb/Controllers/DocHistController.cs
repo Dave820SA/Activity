@@ -118,12 +118,24 @@ namespace SOPWeb.Controllers
             return View(sop.ToPagedList(pageNumber, pageSize));
         }
 
+       
 
 
         //
         // GET: /DocHist/Details/5
 
         public ActionResult Details(int id = 0)
+        {
+            DocHistory dochistory = db.DocHistories.Single(d => d.DocHistoryID == id);
+            if (dochistory == null)
+            {
+                return HttpNotFound();
+            }
+            return View(dochistory);
+        }
+
+
+        public ActionResult DetailsAll(int id = 0)
         {
             DocHistory dochistory = db.DocHistories.Single(d => d.DocHistoryID == id);
             if (dochistory == null)
@@ -155,12 +167,12 @@ namespace SOPWeb.Controllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
-            var path = "";
-            try
-            {
-                if (file.ContentLength > 0)
+            //var path = "";
+            //try
+            //{
+                //if (file.ContentLength > 0)
                
-                {
+                //{
                     var fileName = Path.GetFileName(file.FileName);
                     string fileExtension = Path.GetExtension(fileName).ToString();
 
@@ -172,19 +184,19 @@ namespace SOPWeb.Controllers
                     fileName = objRegEx.Replace(fileName, "");
                     string filePath = System.Configuration.ConfigurationManager.AppSettings["SavePath"].ToString();
 
-                    path = Path.Combine(filePath, fileName);
+                    var path = Path.Combine(filePath, fileName);
 
                     file.SaveAs(path);
                     
-                }
+                //}
 
                 return RedirectToAction("Create", "DocHist", new { value1 = path });
-            }
-            catch
-            {
-                ViewBag.Message = "Upload failed";
-                return RedirectToAction("FileUpload", "DocHist");
-            }
+            //}
+            //catch
+            //{
+            //    ViewBag.Message = "Upload failed";
+            //    return RedirectToAction("FileUpload", "DocHist");
+            //}
         }
 
 

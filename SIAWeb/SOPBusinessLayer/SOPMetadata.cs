@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace SOPBusinessLayer
 {
@@ -88,6 +89,10 @@ namespace SOPBusinessLayer
             [Display(Name = "Effect On")]
             [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
             public DateTime StartDate { get; set; }
+
+            [Display(Name = "End Date")]
+            [DisplayFormat(NullDisplayText="Current Doc",DataFormatString = "{0:MM/dd/yyyy}")]
+            public DateTime EndDate { get; set; }
 
             [Display(Name = "Modified Date")]
             public DateTime ModifiedDate { get; set; }

@@ -322,6 +322,7 @@
     <Content Include="Views\NonUser\Index.cshtml" />
     <Content Include="Views\DocHist\FileUpload.cshtml" />
     <Content Include="Views\DocHist\Search.cshtml" />
+    <Content Include="Views\DocHist\DetailsAll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
