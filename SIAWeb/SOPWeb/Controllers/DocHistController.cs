@@ -59,6 +59,8 @@ namespace SOPWeb.Controllers
                     sop = sop.OrderBy(s => s.StartDate);
                     break;
             }
+
+
             int pageSize = 12;
             int pageNumber = (page ?? 1);
             return View(sop.ToPagedList(pageNumber, pageSize));
@@ -167,12 +169,12 @@ namespace SOPWeb.Controllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
-            //var path = "";
-            //try
-            //{
-                //if (file.ContentLength > 0)
+            var path = "";
+            try
+            {
+                if (file.ContentLength > 0)
                
-                //{
+                {
                     var fileName = Path.GetFileName(file.FileName);
                     string fileExtension = Path.GetExtension(fileName).ToString();
 
@@ -184,19 +186,19 @@ namespace SOPWeb.Controllers
                     fileName = objRegEx.Replace(fileName, "");
                     string filePath = System.Configuration.ConfigurationManager.AppSettings["SavePath"].ToString();
 
-                    var path = Path.Combine(filePath, fileName);
+                     path = Path.Combine(filePath, fileName);
 
                     file.SaveAs(path);
                     
-                //}
+                }
 
                 return RedirectToAction("Create", "DocHist", new { value1 = path });
-            //}
-            //catch
-            //{
-            //    ViewBag.Message = "Upload failed";
-            //    return RedirectToAction("FileUpload", "DocHist");
-            //}
+            }
+            catch
+            {
+                ViewBag.Message = "Upload failed";
+                return RedirectToAction("FileUpload", "DocHist");
+            }
         }
 
 
