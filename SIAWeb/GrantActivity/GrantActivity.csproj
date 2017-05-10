@@ -7,16 +7,15 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{30E53529-D590-46CE-AF05-E37E1F384D51}</ProjectGuid>
+    <ProjectGuid>{351825E3-2950-4F0F-98E9-B4FBC3D58F6F}</ProjectGuid>
     <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SIAWeb</RootNamespace>
-    <AssemblyName>SIAWeb</AssemblyName>
+    <RootNamespace>GrantActivity</RootNamespace>
+    <AssemblyName>GrantActivity</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
-    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -36,23 +35,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Antlr3.Runtime, Version=3.4.1.9004, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
-      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net40\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PagedList, Version=1.17.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.1.17.0.0\lib\net40\PagedList.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PagedList.Mvc, Version=4.5.0.0, Culture=neutral, PublicKeyToken=abbb863e9397c5e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\PagedList.Mvc.4.5.0.0\lib\net40\PagedList.Mvc.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Entity" />
@@ -63,10 +54,6 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -76,12 +63,12 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.5.0.0\lib\net40\EntityFramework.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.6\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http">
       <Private>True</Private>
@@ -104,6 +91,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Providers">
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
     </Reference>
@@ -123,9 +113,13 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
-    <Reference Include="WebGrease, Version=1.5.2.14234, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    <Reference Include="WebGrease">
       <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.1.0\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -133,18 +127,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\AuthorizeUserAccessLevel.cs" />
-    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LinkAddressController.cs" />
-    <Compile Include="Controllers\LinkCatController.cs" />
-    <Compile Include="Controllers\NonUserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CurrentUser.cs" />
-    <Compile Include="Models\WebLinksMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -152,12 +138,10 @@
     <Content Include="bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="bootstrap\css\bootstrap.css" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
-    <Content Include="bootstrap\css\cyborg.css" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\npm.js" />
-    <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -212,11 +196,6 @@
     <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
-    <Content Include="favicon.ico" />
-    <Content Include="font-awesome-4.7.0\css\font-awesome.css" />
-    <Content Include="font-awesome-4.7.0\css\font-awesome.min.css" />
-    <Content Include="font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-    <Content Include="font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Male.png" />
@@ -236,9 +215,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
+    <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -252,9 +229,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="bootstrap\css\bootstrap-theme.css.map" />
@@ -265,64 +246,13 @@
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Views\Contact\Index.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
-    <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
-    <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <None Include="font-awesome-4.7.0\fonts\FontAwesome.otf" />
-    <None Include="font-awesome-4.7.0\less\animated.less" />
-    <None Include="font-awesome-4.7.0\less\bordered-pulled.less" />
-    <None Include="font-awesome-4.7.0\less\core.less" />
-    <None Include="font-awesome-4.7.0\less\fixed-width.less" />
-    <None Include="font-awesome-4.7.0\less\font-awesome.less" />
-    <None Include="font-awesome-4.7.0\less\icons.less" />
-    <None Include="font-awesome-4.7.0\less\larger.less" />
-    <None Include="font-awesome-4.7.0\less\list.less" />
-    <None Include="font-awesome-4.7.0\less\mixins.less" />
-    <None Include="font-awesome-4.7.0\less\path.less" />
-    <None Include="font-awesome-4.7.0\less\rotated-flipped.less" />
-    <None Include="font-awesome-4.7.0\less\screen-reader.less" />
-    <None Include="font-awesome-4.7.0\less\stacked.less" />
-    <None Include="font-awesome-4.7.0\less\variables.less" />
-    <None Include="font-awesome-4.7.0\scss\font-awesome.scss" />
-    <None Include="font-awesome-4.7.0\scss\_animated.scss" />
-    <None Include="font-awesome-4.7.0\scss\_bordered-pulled.scss" />
-    <None Include="font-awesome-4.7.0\scss\_core.scss" />
-    <None Include="font-awesome-4.7.0\scss\_fixed-width.scss" />
-    <None Include="font-awesome-4.7.0\scss\_icons.scss" />
-    <None Include="font-awesome-4.7.0\scss\_larger.scss" />
-    <None Include="font-awesome-4.7.0\scss\_list.scss" />
-    <None Include="font-awesome-4.7.0\scss\_mixins.scss" />
-    <None Include="font-awesome-4.7.0\scss\_path.scss" />
-    <None Include="font-awesome-4.7.0\scss\_rotated-flipped.scss" />
-    <None Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
-    <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
-    <None Include="font-awesome-4.7.0\scss\_variables.scss" />
-    <None Include="Properties\PublishProfiles\SIAWeb.pubxml" />
-    <None Include="Properties\PublishProfiles\SIAWEB2.pubxml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\LinkCat\Index.cshtml" />
-    <Content Include="Views\LinkCat\Details.cshtml" />
-    <Content Include="Views\LinkCat\Create.cshtml" />
-    <Content Include="Views\LinkCat\Edit.cshtml" />
-    <Content Include="Views\LinkCat\Delete.cshtml" />
-    <Content Include="Views\LinkAddress\Index.cshtml" />
-    <Content Include="Views\LinkAddress\Details.cshtml" />
-    <Content Include="Views\LinkAddress\Create.cshtml" />
-    <Content Include="Views\LinkAddress\Edit.cshtml" />
-    <Content Include="Views\LinkAddress\Delete.cshtml" />
-    <Content Include="Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Views\LinkCat\_ViewStart.cshtml" />
-    <Content Include="Views\LinkAddress\_ViewStart.cshtml" />
-    <Content Include="Views\Admin\_ViewStart.cshtml" />
-    <Content Include="Views\NonUser\Index.cshtml" />
+    <Content Include="Views\Shared\_Alternate.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SIAWebLinksBusinessLayer\SIAWebLinksBusinessLayer.csproj">
-      <Project>{70250470-C2A5-4A25-B55B-9CC78D5AA12D}</Project>
-      <Name>SIAWebLinksBusinessLayer</Name>
+    <ProjectReference Include="..\SOPBusinessLayer\SOPBusinessLayer.csproj">
+      <Project>{D2A217D9-E4E4-40CE-805E-2F0F7ACFAFE9}</Project>
+      <Name>SOPBusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserBusinessLayer\UserBusinessLayer.csproj">
       <Project>{A6CC0DB3-58C7-4711-BB18-3AF06472115F}</Project>
@@ -345,7 +275,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>54471</DevelopmentServerPort>
+          <DevelopmentServerPort>63223</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
