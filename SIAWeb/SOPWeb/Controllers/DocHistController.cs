@@ -61,7 +61,7 @@ namespace SOPWeb.Controllers
             }
 
 
-            int pageSize = 12;
+            int pageSize = 8;
             int pageNumber = (page ?? 1);
             return View(sop.ToPagedList(pageNumber, pageSize));
         }
@@ -70,7 +70,16 @@ namespace SOPWeb.Controllers
         public ViewResult Search(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sop_desc" : "";
+            ViewBag.CurrentSort = sortOrder;
+            if (sortOrder == "sop_aesc" || sortOrder == "")
+            {
+                ViewBag.NameSortParm = "sop_desc";
+            }
+            else
+            {
+                ViewBag.NameSortParm = "sop_aesc";
+            }
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sop_desc" : "";
             ViewBag.StartDateSortParm = sortOrder == "StartDate" ? "date_desc" : "StartDate";
             ViewBag.EndDateSortParm = sortOrder == "EndDate" ? "enddate_desc" : "EndDate";
 
@@ -99,6 +108,9 @@ namespace SOPWeb.Controllers
                 case "sop_desc":
                     sop = sop.OrderByDescending(s => s.SOP_SOP.Name);
                     break;
+                case "sop_aesc":
+                    sop = sop.OrderBy(s => s.SOP_SOP.Name);
+                    break;
                 case "StartDate":
                     sop = sop.OrderBy(s => s.StartDate);
                     break;
@@ -115,12 +127,10 @@ namespace SOPWeb.Controllers
                     sop = sop.OrderBy(s => s.StartDate);
                     break;
             }
-            int pageSize = 12;
+            int pageSize = 8;
             int pageNumber = (page ?? 1);
             return View(sop.ToPagedList(pageNumber, pageSize));
         }
-
-       
 
 
         //
@@ -200,8 +210,6 @@ namespace SOPWeb.Controllers
                 return RedirectToAction("FileUpload", "DocHist");
             }
         }
-
-
 
         [HttpPost]
         public ActionResult Create(DocHistory dochistory)
