@@ -1,0 +1,77 @@
+﻿@{
+    Layout = "~/Views/Shared/_Alternate.cshtml";
+}
+
+@model IEnumerable<GrantReportingBusinessLayer.ActivityCategory>
+
+@{
+    ViewBag.Title = "Reporting Categories";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 ">
+            @*<span class="h6">@Html.ActionLink("Upload New", "FileUpload")&nbsp;&nbsp;|&nbsp;&nbsp;</span>*@
+            @*<span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>*@
+            <table class="table table-condensed table-hover" >
+                <tr>
+                    <th>
+                       @* @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })*@
+                       @Html.DisplayNameFor(model => model.Activity)
+                    </th>
+                   
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td >
+                            @Html.DisplayFor(modelItem => item.Activity)
+                        </td>
+                        
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.ActivityID }) | <strong>@Html.ActionLink("Details", "Details", new { id = item.ActivityID })</strong>
+                            |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.ActivityID })
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+           @* Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+        </div>
+    </div>
+</div>
+
+@*<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Activity)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Activity)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ActivityID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ActivityID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ActivityID })
+        </td>
+    </tr>
+}
+
+</table>*@

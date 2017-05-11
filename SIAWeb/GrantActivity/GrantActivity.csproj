@@ -127,6 +127,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\DailyController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -138,6 +140,7 @@
     <Content Include="bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="bootstrap\css\bootstrap.css" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
+    <Content Include="bootstrap\css\Sandstone.css" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
@@ -248,11 +251,22 @@
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Shared\_Alternate.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Daily\Index.cshtml" />
+    <Content Include="Views\Daily\Details.cshtml" />
+    <Content Include="Views\Daily\Create.cshtml" />
+    <Content Include="Views\Daily\Edit.cshtml" />
+    <Content Include="Views\Daily\Delete.cshtml" />
+    <Content Include="Views\Category\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SOPBusinessLayer\SOPBusinessLayer.csproj">
-      <Project>{D2A217D9-E4E4-40CE-805E-2F0F7ACFAFE9}</Project>
-      <Name>SOPBusinessLayer</Name>
+    <ProjectReference Include="..\GrantReportingBusinessLayer\GrantReportingBusinessLayer.csproj">
+      <Project>{32604186-7E82-4F7C-A8F7-5A9EFFD8CFA2}</Project>
+      <Name>GrantReportingBusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserBusinessLayer\UserBusinessLayer.csproj">
       <Project>{A6CC0DB3-58C7-4711-BB18-3AF06472115F}</Project>

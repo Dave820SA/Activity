@@ -2,9 +2,10 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/bootstrap/css/bootstrap.css")
+    @Styles.Render("~/bootstrap/css/Sandstone.css")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -23,7 +24,8 @@
                         <ul class="nav nav-pills">
                             <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
                             </a></li>
-                            <li><a href="~/Home/Search"><i class="fa fa-search"></i> Search </a></li>
+                            <li><a href="~/Category/Index"><i class="fa fa-search"></i> Categories </a></li>
+                            <li><a href="~/Daily/Index"><i class="fa fa-search"></i> Reporting </a></li>
                             <li><a href="~/Home/Contact"><i class="fa fa-phone"></i> Contact </a></li>
                             <li><a href="~/Home/Admin"><i class="fa fa-user-circle"></i> Admin </a></li>
                         </ul>

@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SAPDActivityModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SAPDActivityModelStoreContainer">
+          <EntitySet Name="Grant_ActivityCategory" EntityType="SAPDActivityModel.Store.Grant_ActivityCategory" store:Type="Tables" Schema="dbo" Table="Grant.ActivityCategory" />
+          <EntitySet Name="Grant_DailyActivity" EntityType="SAPDActivityModel.Store.Grant_DailyActivity" store:Type="Tables" Schema="dbo" Table="Grant.DailyActivity" />
+          <AssociationSet Name="FK_Grant_DailyActivity_Grant_ActivityCategory" Association="SAPDActivityModel.Store.FK_Grant_DailyActivity_Grant_ActivityCategory">
+            <End Role="Grant_ActivityCategory" EntitySet="Grant_ActivityCategory" />
+            <End Role="Grant_DailyActivity" EntitySet="Grant_DailyActivity" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Grant_ActivityCategory">
+          <Key>
+            <PropertyRef Name="ActivityID" />
+          </Key>
+          <Property Name="ActivityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Activity" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Grant_DailyActivity">
+          <Key>
+            <PropertyRef Name="AdminActivityID" />
+          </Key>
+          <Property Name="AdminActivityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="ActivityID" Type="int" Nullable="false" />
+          <Property Name="ActivityStart" Type="datetime" Nullable="false" />
+          <Property Name="ActivityEnd" Type="datetime" Nullable="false" />
+          <Property Name="Notes" Type="varchar(max)" Nullable="false" />
+          <Property Name="EnteredDate" Type="datetime" />
+          <Property Name="ApprovedFlag" Type="bit" />
+          <Property Name="MoreInformationFlag" Type="bit" />
+          <Property Name="ApprovedByID" Type="int" />
+          <Property Name="ApprovedDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Grant_DailyActivity_Grant_ActivityCategory">
+          <End Role="Grant_ActivityCategory" Type="SAPDActivityModel.Store.Grant_ActivityCategory" Multiplicity="1" />
+          <End Role="Grant_DailyActivity" Type="SAPDActivityModel.Store.Grant_DailyActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grant_ActivityCategory">
+              <PropertyRef Name="ActivityID" />
+            </Principal>
+            <Dependent Role="Grant_DailyActivity">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SAPDActivityModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="GrantReportingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActivityCategories" EntityType="SAPDActivityModel.ActivityCategory" />
+          <EntitySet Name="DailyActivities" EntityType="SAPDActivityModel.DailyActivity" />
+          <AssociationSet Name="FK_Grant_DailyActivity_Grant_ActivityCategory" Association="SAPDActivityModel.FK_Grant_DailyActivity_Grant_ActivityCategory">
+            <End Role="Grant_ActivityCategory" EntitySet="ActivityCategories" />
+            <End Role="Grant_DailyActivity" EntitySet="DailyActivities" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ActivityCategory">
+          <Key>
+            <PropertyRef Name="ActivityID" />
+          </Key>
+          <Property Name="ActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Activity" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Grant_DailyActivity" Relationship="SAPDActivityModel.FK_Grant_DailyActivity_Grant_ActivityCategory" FromRole="Grant_ActivityCategory" ToRole="Grant_DailyActivity" />
+        </EntityType>
+        <EntityType Name="DailyActivity">
+          <Key>
+            <PropertyRef Name="AdminActivityID" />
+          </Key>
+          <Property Name="AdminActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppEntityID" Type="Int32" Nullable="false" />
+          <Property Name="ActivityID" Type="Int32" Nullable="false" />
+          <Property Name="ActivityStart" Type="DateTime" Nullable="false" />
+          <Property Name="ActivityEnd" Type="DateTime" Nullable="false" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="EnteredDate" Type="DateTime" />
+          <Property Name="ApprovedFlag" Type="Boolean" />
+          <Property Name="MoreInformationFlag" Type="Boolean" />
+          <Property Name="ApprovedByID" Type="Int32" />
+          <Property Name="ApprovedDate" Type="DateTime" />
+          <NavigationProperty Name="Grant_ActivityCategory" Relationship="SAPDActivityModel.FK_Grant_DailyActivity_Grant_ActivityCategory" FromRole="Grant_DailyActivity" ToRole="Grant_ActivityCategory" />
+        </EntityType>
+        <Association Name="FK_Grant_DailyActivity_Grant_ActivityCategory">
+          <End Role="Grant_ActivityCategory" Type="SAPDActivityModel.ActivityCategory" Multiplicity="1" />
+          <End Role="Grant_DailyActivity" Type="SAPDActivityModel.DailyActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grant_ActivityCategory">
+              <PropertyRef Name="ActivityID" />
+            </Principal>
+            <Dependent Role="Grant_DailyActivity">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SAPDActivityModelStoreContainer" CdmEntityContainer="GrantReportingEntities">
+          <EntitySetMapping Name="ActivityCategories">
+            <EntityTypeMapping TypeName="SAPDActivityModel.ActivityCategory">
+              <MappingFragment StoreEntitySet="Grant_ActivityCategory">
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DailyActivities">
+            <EntityTypeMapping TypeName="SAPDActivityModel.DailyActivity">
+              <MappingFragment StoreEntitySet="Grant_DailyActivity">
+                <ScalarProperty Name="AdminActivityID" ColumnName="AdminActivityID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+                <ScalarProperty Name="ActivityStart" ColumnName="ActivityStart" />
+                <ScalarProperty Name="ActivityEnd" ColumnName="ActivityEnd" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+                <ScalarProperty Name="ApprovedFlag" ColumnName="ApprovedFlag" />
+                <ScalarProperty Name="MoreInformationFlag" ColumnName="MoreInformationFlag" />
+                <ScalarProperty Name="ApprovedByID" ColumnName="ApprovedByID" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="GrandReportingModel">
+        <EntityTypeShape EntityType="SAPDActivityModel.ActivityCategory" Width="1.5" PointX="0.75" PointY="1.875" Height="1.5956835937499998" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAPDActivityModel.DailyActivity" Width="1.5" PointX="3" PointY="1" Height="3.3263964843749996" IsExpanded="true" />
+        <AssociationConnector Association="SAPDActivityModel.FK_Grant_DailyActivity_Grant_ActivityCategory" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.672841796875" />
+          <ConnectorPoint PointX="3" PointY="2.672841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

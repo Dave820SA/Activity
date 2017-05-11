@@ -75,7 +75,7 @@ namespace SOPWeb.Controllers
                     sop = sop.OrderBy(s => s.StartDate);
                     break;
             }
-            int pageSize = 12;
+            int pageSize = 8;
             int pageNumber = (page ?? 1);
             return View(sop.ToPagedList(pageNumber, pageSize));
         }

@@ -1,0 +1,86 @@
+﻿@model GrantReportingBusinessLayer.ActivityCategory
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+        <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset class="scheduler-border">
+                   
+                    <div class="form-group col-xs-12">
+                        @Html.HiddenFor(model => model.ActivityID)
+                        @Html.HiddenFor(model => model.Activity, new { @class = "form-control" })
+                        <strong style="font-size: 1.2em">@Html.LabelFor(model => model.Activity, new { @class = "control-label" })</strong>
+                        <div>
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Activity, new { @class = "form-control" })</strong>
+                        </div>
+                        @*@Html.DropDownList("SOPID", null, "Select SOP", new { @class = "form-control" })*@
+                        @Html.ValidationMessageFor(model => model.Activity, "", new { @class = "text-danger" })
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    </form>
+
+}
+
+
+
+
+@*@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) 
+{
+     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>ActivityCategory</legend>
+
+        @Html.HiddenFor(model => model.ActivityID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Activity)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Activity)
+            @Html.ValidationMessageFor(model => model.Activity)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+}*@
+
+@section Scripts {
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+    </script>
+          
+
+}

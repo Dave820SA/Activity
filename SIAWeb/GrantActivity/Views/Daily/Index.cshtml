@@ -1,0 +1,87 @@
+﻿@model IEnumerable<GrantReportingBusinessLayer.DailyActivity>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.AppEntityID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grant_ActivityCategory.Activity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityStart)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ActivityEnd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Notes)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnteredDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedFlag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MoreInformationFlag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedByID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ApprovedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.AppEntityID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grant_ActivityCategory.Activity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityStart)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActivityEnd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Notes)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedFlag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MoreInformationFlag)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedByID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ApprovedDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.AdminActivityID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.AdminActivityID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.AdminActivityID })
+        </td>
+    </tr>
+}
+
+</table>

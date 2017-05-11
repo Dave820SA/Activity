@@ -1,0 +1,22 @@
+﻿@model GrantReportingBusinessLayer.ActivityCategory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>ActivityCategory</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Activity)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Activity)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ActivityID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

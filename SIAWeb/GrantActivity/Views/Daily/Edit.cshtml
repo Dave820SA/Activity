@@ -1,0 +1,109 @@
+﻿@model GrantReportingBusinessLayer.DailyActivity
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>DailyActivity</legend>
+
+        @Html.HiddenFor(model => model.AdminActivityID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AppEntityID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AppEntityID)
+            @Html.ValidationMessageFor(model => model.AppEntityID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ActivityID, "Grant_ActivityCategory")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("ActivityID", String.Empty)
+            @Html.ValidationMessageFor(model => model.ActivityID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ActivityStart)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ActivityStart)
+            @Html.ValidationMessageFor(model => model.ActivityStart)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ActivityEnd)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ActivityEnd)
+            @Html.ValidationMessageFor(model => model.ActivityEnd)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Notes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Notes)
+            @Html.ValidationMessageFor(model => model.Notes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EnteredDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EnteredDate)
+            @Html.ValidationMessageFor(model => model.EnteredDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ApprovedFlag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ApprovedFlag)
+            @Html.ValidationMessageFor(model => model.ApprovedFlag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.MoreInformationFlag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.MoreInformationFlag)
+            @Html.ValidationMessageFor(model => model.MoreInformationFlag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ApprovedByID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ApprovedByID)
+            @Html.ValidationMessageFor(model => model.ApprovedByID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ApprovedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ApprovedDate)
+            @Html.ValidationMessageFor(model => model.ApprovedDate)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

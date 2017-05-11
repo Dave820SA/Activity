@@ -1,0 +1,88 @@
+﻿@model GrantReportingBusinessLayer.DailyActivity
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>DailyActivity</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AppEntityID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AppEntityID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Grant_ActivityCategory.Activity)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Grant_ActivityCategory.Activity)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ActivityStart)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActivityStart)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ActivityEnd)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ActivityEnd)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Notes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EnteredDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EnteredDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ApprovedFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ApprovedFlag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MoreInformationFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MoreInformationFlag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ApprovedByID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ApprovedByID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ApprovedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ApprovedDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

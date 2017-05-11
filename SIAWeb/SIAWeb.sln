@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserBusinessLayer", "UserBu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrantActivity", "GrantActivity\GrantActivity.csproj", "{351825E3-2950-4F0F-98E9-B4FBC3D58F6F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrantReportingBusinessLayer", "GrantReportingBusinessLayer\GrantReportingBusinessLayer.csproj", "{32604186-7E82-4F7C-A8F7-5A9EFFD8CFA2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{351825E3-2950-4F0F-98E9-B4FBC3D58F6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{351825E3-2950-4F0F-98E9-B4FBC3D58F6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{351825E3-2950-4F0F-98E9-B4FBC3D58F6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32604186-7E82-4F7C-A8F7-5A9EFFD8CFA2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32604186-7E82-4F7C-A8F7-5A9EFFD8CFA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32604186-7E82-4F7C-A8F7-5A9EFFD8CFA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32604186-7E82-4F7C-A8F7-5A9EFFD8CFA2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
