@@ -13,11 +13,11 @@
         <legend>ActivityCategory</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.Activity)
+            @Html.LabelFor(model => model.Name)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.Activity)
-            @Html.ValidationMessageFor(model => model.Activity)
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
         </div>
 
         <p>
@@ -31,5 +31,10 @@
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+    </script>
+    }

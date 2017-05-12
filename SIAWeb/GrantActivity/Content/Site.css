@@ -1,61 +1,45 @@
-﻿body {
-    font-size: .85em;
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    color: #232323;
-    background-color: #fff;
+﻿body 
+{
+	padding-top:15px;
+	/*
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;*/
 }
 
-header, footer, nav, section {
-    display: block;
+.customDiv
+{
+    margin:10px;
+    min-height:50px;
+    background-color:silver;
+    text-align:center;
+    font-size:large;
+    padding:10px;
+}
+.jumbotron
+{
+	margin-left: 15px;
 }
 
-
-/* Styles for basic forms
------------------------------------------------------------*/
-fieldset {
-    border: 1px solid #ddd;
-    padding: 0 1.4em 1.4em 1.4em;
-    margin: 0 0 1.5em 0;
+.legend.scheduler-border {
+    width:inherit; /* Or auto */
+    padding:0 10px; /* To give a bit of padding on the left and right */
+    border-bottom:none;
 }
-
-legend {
-    font-size: 1.2em;
-    font-weight: bold;
-}
-
 textarea {
-    min-height: 75px;
+    max-width: 600px;
 }
 
-.editor-label {
-    margin: 1em 0 0 0;
-}
-
-.editor-field {
-    margin: 0.5em 0 0 0;
-}
-
-
-/* Styles for validation helpers
------------------------------------------------------------*/
-.field-validation-error {
-    color: #f00;
-}
-
-.field-validation-valid {
-    display: none;
-}
-
-.input-validation-error {
-    border: 1px solid #f00;
-    background-color: #fee;
-}
-
-.validation-summary-errors {
-    font-weight: bold;
-    color: #f00;
-}
-
-.validation-summary-valid {
-    display: none;
+.image_true
+{
+	border-style: none;
+	background-position: center;
+	margin: 0px;
+	display: inline-block; /*padding: 8px 0px 1px 0px;
+	text-decoration: none;
+	white-space: nowrap;
+	font-size: small;*/
+	width: 25px;
+	height: 25px;
+	background-image: url('../Images/Check_Round.png');
+	background-repeat: no-repeat;
+	background-attachment: inherit;
 }

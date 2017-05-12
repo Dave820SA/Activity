@@ -7,30 +7,40 @@
     <link href="~/favicon.ico" rel="Shortcut Icon" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    
-    @Styles.Render("~/bootstrap/css/Sandstone.css")
-    @Styles.Render("~/Content/css")
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+    @*@Styles.Render("~/bootstrap/css/sandstone.min.css")*@
+    @*@Styles.Render("~/bootstrap/css/superhero.min.css")*@
+    @Styles.Render("~/bootstrap/css/Slate.css")
     @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+    
 </head>
 <body>
-<div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="jumbotron">
                     <h1>
-                        @Html.ActionLink("Grant Activity Reporting", "Index", "Home")</h1>
+                        @Html.ActionLink("Grant Admin Reporting", "Index", "Home")</h1>
                     <p>
-                        The San Antonio Police Department’s Grant Activity Reporting provides the Department’s members with
-                        quick access to enter Grant related activity.
+                        The San Antonio Police Department’s Grant Activity Reporting provides the Department’s
+                        members with quick access to enter Grant related activity.
                     </p>
                     <p>
                         <ul class="nav nav-pills">
-                            <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
+                            <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span> Home
                             </a></li>
-                            <li><a href="~/Category/Index"><i class="fa fa-search"></i> Categories </a></li>
-                            <li><a href="~/Daily/Index"><i class="fa fa-search"></i> Reporting </a></li>
                             <li><a href="~/Home/Contact"><i class="fa fa-phone"></i> Contact </a></li>
+                            
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                aria-haspopup="true" aria-expanded="false">Reporting <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="~/Category/Index">Category</a></li>
+                                        <li role="separator" class="divider"></li>
+                                    <li><a href="~/Daily/Index">Enter Activity</a></li>
+                                    
+                                </ul>
+                            </li>
                             <li><a href="~/Home/Admin"><i class="fa fa-user-circle"></i> Admin </a></li>
                         </ul>
                     </p>
@@ -40,18 +50,15 @@
             </div>
         </div>
     </div>
-
-    
-        <footer>
-            <div class="content-wrapper" style="margin-top: 20px">
+    <footer>
+            <div class="content-wrapper">
                 <div class="float-left">
                     <p class="text-center">&copy; @DateTime.Now.Year - Activity App - Created by: D.Davidson#1341 & John Riojas</p>
                 </div>
             </div>
       </footer>
- 
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
-        @RenderSection("scripts", required: false)
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

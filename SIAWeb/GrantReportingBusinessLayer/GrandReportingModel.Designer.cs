@@ -145,12 +145,12 @@ namespace GrantReportingBusinessLayer
         /// Create a new ActivityCategory object.
         /// </summary>
         /// <param name="activityID">Initial value of the ActivityID property.</param>
-        /// <param name="activity">Initial value of the Activity property.</param>
-        public static ActivityCategory CreateActivityCategory(global::System.Int32 activityID, global::System.String activity)
+        /// <param name="name">Initial value of the Name property.</param>
+        public static ActivityCategory CreateActivityCategory(global::System.Int32 activityID, global::System.String name)
         {
             ActivityCategory activityCategory = new ActivityCategory();
             activityCategory.ActivityID = activityID;
-            activityCategory.Activity = activity;
+            activityCategory.Name = name;
             return activityCategory;
         }
 
@@ -190,24 +190,24 @@ namespace GrantReportingBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Activity
+        public global::System.String Name
         {
             get
             {
-                return _Activity;
+                return _Name;
             }
             set
             {
-                OnActivityChanging(value);
-                ReportPropertyChanging("Activity");
-                _Activity = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Activity");
-                OnActivityChanged();
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
             }
         }
-        private global::System.String _Activity;
-        partial void OnActivityChanging(global::System.String value);
-        partial void OnActivityChanged();
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
 
         #endregion
 
