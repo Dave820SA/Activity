@@ -1,15 +1,39 @@
 ﻿@model IEnumerable<GrantReportingBusinessLayer.DailyActivity>
 
 @{
-    ViewBag.Title = "Entered Activity";
+    ViewBag.Title = "View Activity";
 }
 
-<h2>Entered Activity</h2>
+@*<h2>Entered Activity</h2>*@
+
+
+<div class="row">
+    <div class="col-md-3">
+        <strong style="font-size:1.8em; padding-left:10px">Entered Activity</strong>
+    </div>
+    <div class="col-md-9">
+        <div style="float: right">
+            @using (Html.BeginForm("Index", "Daily", FormMethod.Post))
+            { 
+                <strong style="font-size: 1.2em;">Sort By:&nbsp; &nbsp;</strong>
+            
+                
+                @Html.RadioButton("Answer", "Last30") <span>Last 30 Days |</span>
+                @Html.RadioButton("Answer", "Approve") <span>Approved |</span>
+                @Html.RadioButton("Answer", "NotApprove") <span>Not Approved |</span>
+                @Html.RadioButton("Answer", "MoreInfo") <span>More Info |</span>
+                @Html.RadioButton("Answer", "All") <span>All &nbsp; &nbsp;</span> 
+
+                <input type="submit" class="btn btn-primary" value="Sort" />
+            }
+        </div>
+    </div>
+</div>
 
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            <span class="h5">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="h5">@Html.ActionLink("Enter New Activity", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span>
             @*<span class="h6">@Html.ActionLink("Admin", "Index", "Admin")</span>*@
             <table class="table table-condensed table-hover">
                 <tr>
@@ -68,28 +92,34 @@
                         @*<td>
                             @Html.DisplayFor(modelItem => item.EnteredDate)
                         </td>*@
-                        <td style="max-height:10px">
-                           @* @Html.DisplayFor(modelItem => item.ApprovedFlag)*@
+                        <td style="max-height: 10px">
+                            @* @Html.DisplayFor(modelItem => item.ApprovedFlag)*@
                             @{
-                            string approve = (item.ApprovedFlag).ToString();
-                            //string approve = "False";
-                            if (approve == "True")
-                            {
-                                <img src="~/Images/Check_Round.png" alt=""   style="text-align: center; width: 25px; height: 25px; margin-left: 20px;"  />
-                            }
-                            else {
-                                <img src="~/Images/red-minus.png" alt="" style="text-align: center; width: 25px; height: 25px; margin-left: 20px;" />
-                             } }
+                    string approve = (item.ApprovedFlag).ToString();
+                    if (approve == "True")
+                    {
+                                <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                    }
+                    else
+                    {
+                                <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                    } }
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.MoreInformationFlag)
+                            @*@Html.DisplayFor(modelItem => item.MoreInformationFlag)*@
+                            @{
+                    string moreinfo = (item.MoreInformationFlag).ToString();
+                    //string approve = "False";
+                    if (moreinfo == "True")
+                    {
+                                <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                    }
+                    else
+                    {
+                                <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                    } }
                         </td>
-                        @* <td>
-                            @Html.DisplayFor(modelItem => item.ApprovedByID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ApprovedDate)
-                        </td>*@
+                       
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.AdminActivityID }) |
                             @Html.ActionLink("Details", "Details", new { id = item.AdminActivityID }) |
@@ -102,82 +132,4 @@
     </div>
 </div>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AppEntityID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Grant_ActivityCategory.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityStart)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ActivityEnd)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EnteredDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApprovedFlag)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MoreInformationFlag)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApprovedByID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ApprovedDate)
-        </th>
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AppEntityID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Grant_ActivityCategory.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityStart)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ActivityEnd)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EnteredDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApprovedFlag)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MoreInformationFlag)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApprovedByID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ApprovedDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.AdminActivityID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.AdminActivityID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AdminActivityID })
-        </td>
-    </tr>
-}
-
-</table>*@

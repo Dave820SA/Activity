@@ -28,18 +28,11 @@ textarea {
     max-width: 600px;
 }
 
-.image_true
+.image_background
 {
-	border-style: none;
-	background-position: center;
-	margin: 0px;
-	display: inline-block; /*padding: 8px 0px 1px 0px;
-	text-decoration: none;
-	white-space: nowrap;
-	font-size: small;*/
+	text-align: center;
 	width: 25px;
 	height: 25px;
-	background-image: url('../Images/Check_Round.png');
-	background-repeat: no-repeat;
+	margin-left: 20px;
 	background-attachment: inherit;
 }

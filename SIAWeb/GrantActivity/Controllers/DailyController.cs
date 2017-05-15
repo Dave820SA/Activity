@@ -17,9 +17,58 @@ namespace GrantActivity.Controllers
 
         public ActionResult Index()
         {
-            var dailyactivities = db.DailyActivities.Include("Grant_ActivityCategory");
+            int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+
+            var dailyactivities = from d in db.DailyActivities.Where(d => d.AppEntityID == userId).OrderByDescending(date => date.EnteredDate)
+                                  select d;
+
+            //var dailyactivities = db.DailyActivities.Include("Grant_ActivityCategory");
             return View(dailyactivities.ToList());
         }
+
+        [HttpPost]
+        public ActionResult Index(string Answer)
+        {
+            int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+
+            var dailyactivities = from d in db.DailyActivities.Where(d => d.AppEntityID == userId)
+                                  select d;
+            switch (Answer)
+            {
+                case "Last30":
+                    var baseline = DateTime.Now.AddDays(-30);
+                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.ActivityStart >= baseline)
+                        .OrderByDescending(date => date.EnteredDate);
+                    break;
+                case "Approve":
+                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.ApprovedFlag == true)
+                        .OrderByDescending(date => date.EnteredDate);
+                    break;
+                case "NotApprove":
+                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.ApprovedFlag == false)
+                        .OrderByDescending(date => date.EnteredDate);
+                    break;
+                case "MoreInfo":
+                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.MoreInformationFlag == true)
+                        .OrderByDescending(date => date.EnteredDate);
+                    break;
+                case "All":
+                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId )
+                        .OrderByDescending(date => date.EnteredDate);
+                    break;
+                default:
+                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId)
+                        .OrderByDescending(date => date.EnteredDate);
+                    break;
+            }
+
+            //dailyactivities = dailyactivities.OrderByDescending(d => d.ActivityStart);
+            
+
+            //var dailyactivities = db.DailyActivities.Include("Grant_ActivityCategory");
+            return View(dailyactivities.ToList());
+        }
+
 
         //
         // GET: /Daily/Details/5
@@ -39,7 +88,7 @@ namespace GrantActivity.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Activity");
+            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Name");
             return View();
         }
 
@@ -56,7 +105,7 @@ namespace GrantActivity.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Activity", dailyactivity.ActivityID);
+            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Name", dailyactivity.ActivityID);
             return View(dailyactivity);
         }
 
@@ -70,7 +119,7 @@ namespace GrantActivity.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Activity", dailyactivity.ActivityID);
+            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Name", dailyactivity.ActivityID);
             return View(dailyactivity);
         }
 
@@ -87,7 +136,7 @@ namespace GrantActivity.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Activity", dailyactivity.ActivityID);
+            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Name", dailyactivity.ActivityID);
             return View(dailyactivity);
         }
 
