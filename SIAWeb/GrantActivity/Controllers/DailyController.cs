@@ -21,8 +21,6 @@ namespace GrantActivity.Controllers
 
             var dailyactivities = from d in db.DailyActivities.Where(d => d.AppEntityID == userId).OrderByDescending(date => date.EnteredDate)
                                   select d;
-
-            //var dailyactivities = db.DailyActivities.Include("Grant_ActivityCategory");
             return View(dailyactivities.ToList());
         }
 
@@ -37,7 +35,7 @@ namespace GrantActivity.Controllers
             {
                 case "Last30":
                     var baseline = DateTime.Now.AddDays(-30);
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.ActivityStart >= baseline)
+                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.EnteredDate >= baseline)
                         .OrderByDescending(date => date.EnteredDate);
                     break;
                 case "Approve":
@@ -100,6 +98,8 @@ namespace GrantActivity.Controllers
         {
             if (ModelState.IsValid)
             {
+
+
                 db.DailyActivities.AddObject(dailyactivity);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -89,11 +89,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.ActivityEnd)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.EnteredDate)
-                        </td>*@
                         <td style="max-height: 10px">
-                            @* @Html.DisplayFor(modelItem => item.ApprovedFlag)*@
                             @{
                     string approve = (item.ApprovedFlag).ToString();
                     if (approve == "True")
@@ -106,10 +102,9 @@
                     } }
                         </td>
                         <td>
-                            @*@Html.DisplayFor(modelItem => item.MoreInformationFlag)*@
                             @{
                     string moreinfo = (item.MoreInformationFlag).ToString();
-                    //string approve = "False";
+                    
                     if (moreinfo == "True")
                     {
                                 <img src="~/Images/Check_Round.png" alt="" class="image_background" />
