@@ -1,4 +1,4 @@
-﻿@model GrantReportingBusinessLayer.DailyActivity
+﻿@model GrantBusinessLayer.Grant_Daily
 
 @{
     ViewBag.Title = "Delete";
@@ -8,7 +8,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
-    <legend>DailyActivity</legend>
+    <legend>Grant_Daily</legend>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.AppEntityID)
@@ -18,31 +18,24 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Grant_ActivityCategory.Name)
+         @Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Grant_ActivityCategory.Name)
+        @Html.DisplayFor(model => model.Grant_GrantType.GrantType)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ActivityStart)
+         @Html.DisplayNameFor(model => model.DailyStart)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.ActivityStart)
+        @Html.DisplayFor(model => model.DailyStart)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ActivityEnd)
+         @Html.DisplayNameFor(model => model.DailyEnd)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.ActivityEnd)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Notes)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Notes)
+        @Html.DisplayFor(model => model.DailyEnd)
     </div>
 
     <div class="display-label">
@@ -64,6 +57,13 @@
     </div>
     <div class="display-field">
         @Html.DisplayFor(model => model.MoreInformationFlag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AdminNotes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AdminNotes)
     </div>
 
     <div class="display-label">

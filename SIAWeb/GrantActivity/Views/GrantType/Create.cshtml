@@ -1,5 +1,4 @@
-﻿@model GrantBusinessLayer.Grant_Category
-
+﻿@model GrantBusinessLayer.Grant_GrantType
 
 @{
     ViewBag.Title = "Create";
@@ -7,7 +6,7 @@
 
 <div style="padding-left: 5px">
     <h4>
-        Create <small>New Grant Activity Category</small></h4>
+        Create <small>New Grant Type</small></h4>
 </div>
 
 @using (Html.BeginForm()) 
@@ -24,11 +23,11 @@
                     
                     <div class="form-group col-xs-12">
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.Name)
+                            @Html.LabelFor(model => model.GrantType)
                         </div>
                         <div class="editor-label">
-                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            @Html.TextBoxFor(model => model.GrantType, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GrantType, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     
@@ -38,7 +37,7 @@
                 </fieldset>
 
                  <div>
-                    <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>
+                    <strong style="font-size: 1.2em">| @Html.ActionLink("Back to List", "Index")</strong>
                 </div>
             </div>
         </div>
@@ -47,12 +46,3 @@
    
 }
 
-@section Scripts {
-
-   <script type="text/javascript">
-       $(document).ready(function () {
-
-       });
-    </script>
-
-}

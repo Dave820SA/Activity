@@ -1,13 +1,101 @@
-﻿@model GrantReportingBusinessLayer.DailyActivity
+﻿@model GrantBusinessLayer.Grant_Daily
 
 @{
+    ViewBag.Title = "Details";
+}
+
+<div style="padding-left: 5px">
+    <h3>
+        Activity<small> Details</small></h3>
+</div>
+<form class="form-horizontal">
+<div class="Container">
+    <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <fieldset class="scheduler-border">
+                
+               
+                <div class="form-group col-xs-12">
+                <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Grant_GrantType.GrantType)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DailyStart)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DailyStart)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DailyEnd)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DailyEnd)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+
+                </div>
+                <div class="form-group col-xs-12">
+                   <strong style="font-size: 1.2em">@Html.ActionLink("Edit", "Edit", new { id=Model.AdminDailyID }) |</strong> 
+                <strong style="font-size: 1.2em"> @Html.ActionLink("Back to List", "Index")</strong>
+                </div>
+            </fieldset>
+        </div>
+        <div class="col-xs-12 col-md-8">
+            
+            <h2>
+                Index</h2>
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table>
+                <tr>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in ViewData["Activities"]
+                as IEnumerable<GrantBusinessLayer.Grant_Activity>)
+                {
+                    
+                        
+                            {
+                            <option>@item.Notes
+                            </option>
+                            }
+                        
+                    <tr>
+
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+    </div>
+</div>
+</form>
+
+
+
+@*@{
     ViewBag.Title = "Details";
 }
 
 <h2>Details</h2>
 
 <fieldset>
-    <legend>DailyActivity</legend>
+    <legend>Grant_Daily</legend>
 
     <div class="display-label">
          @Html.DisplayNameFor(model => model.AppEntityID)
@@ -17,31 +105,24 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Grant_ActivityCategory.Name)
+         @Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Grant_ActivityCategory.Name)
+        @Html.DisplayFor(model => model.Grant_GrantType.GrantType)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ActivityStart)
+         @Html.DisplayNameFor(model => model.DailyStart)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.ActivityStart)
+        @Html.DisplayFor(model => model.DailyStart)
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.ActivityEnd)
+         @Html.DisplayNameFor(model => model.DailyEnd)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.ActivityEnd)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Notes)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Notes)
+        @Html.DisplayFor(model => model.DailyEnd)
     </div>
 
     <div class="display-label">
@@ -66,6 +147,13 @@
     </div>
 
     <div class="display-label">
+         @Html.DisplayNameFor(model => model.AdminNotes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AdminNotes)
+    </div>
+
+    <div class="display-label">
          @Html.DisplayNameFor(model => model.ApprovedByID)
     </div>
     <div class="display-field">
@@ -80,6 +168,6 @@
     </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.AdminActivityID }) |
+    @Html.ActionLink("Edit", "Edit", new { id=Model.AdminDailyID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
+</p>*@

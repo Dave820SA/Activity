@@ -1,7 +1,7 @@
-﻿@model IEnumerable<GrantBusinessLayer.Grant_Category>
+﻿@model IEnumerable<GrantBusinessLayer.Grant_GrantType>
 
 @{
-    ViewBag.Title = "Grant Category";
+    ViewBag.Title = "Grant Type";
 }
 
 <div class="container">
@@ -13,7 +13,7 @@
                 <tr>
                     <th>
                        @* @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })*@
-                       @Html.DisplayNameFor(model => model.Name)
+                       @Html.DisplayNameFor(model => model.GrantType)
                     </th>
                    
                     <th>
@@ -23,13 +23,13 @@
                 {
                     <tr>
                         <td >
-                            @Html.DisplayFor(modelItem => item.Name)
+                            @Html.DisplayFor(modelItem => item.GrantType)
                         </td>
                         
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) | @Html.ActionLink("Details", "Details", new { id = item.CategoryID })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.GrantTypeID }) | @Html.ActionLink("Details", "Details", new { id = item.GrantTypeID })
                             |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.GrantTypeID })
                         </td>
                     </tr>
                 }
@@ -42,5 +42,4 @@
         </div>
     </div>
 </div>
-
 

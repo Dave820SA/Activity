@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+//using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using GrantReportingBusinessLayer;
+using GrantBusinessLayer;
 
 namespace GrantActivity.Controllers
 {
     public class DailyController : Controller
     {
-        private GrantReportingEntities db = new GrantReportingEntities();
+        private GrantEntities db = new GrantEntities();
 
         //
         // GET: /Daily/
@@ -19,66 +20,34 @@ namespace GrantActivity.Controllers
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
 
-            var dailyactivities = from d in db.DailyActivities.Where(d => d.AppEntityID == userId).OrderByDescending(date => date.EnteredDate)
-                                  select d;
-            return View(dailyactivities.ToList());
+            var daily = from d in db.Grant_Daily
+                        select d;
+
+            daily = daily.Where(d => d.AppEntityID == userId);
+
+            return View(daily.ToList());
         }
-
-        [HttpPost]
-        public ActionResult Index(string Answer)
-        {
-            int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
-
-            var dailyactivities = from d in db.DailyActivities.Where(d => d.AppEntityID == userId)
-                                  select d;
-            switch (Answer)
-            {
-                case "Last30":
-                    var baseline = DateTime.Now.AddDays(-30);
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.EnteredDate >= baseline)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                case "Approve":
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.ApprovedFlag == true)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                case "NotApprove":
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.ApprovedFlag == false)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                case "MoreInfo":
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.MoreInformationFlag == true)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                case "All":
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId )
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                default:
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-            }
-
-            //dailyactivities = dailyactivities.OrderByDescending(d => d.ActivityStart);
-            
-
-            //var dailyactivities = db.DailyActivities.Include("Grant_ActivityCategory");
-            return View(dailyactivities.ToList());
-        }
-
 
         //
         // GET: /Daily/Details/5
 
         public ActionResult Details(int id = 0)
         {
-            DailyActivity dailyactivity = db.DailyActivities.Single(d => d.AdminActivityID == id);
-            if (dailyactivity == null)
+            Grant_Daily grant_daily = db.Grant_Daily.Single(g => g.AdminDailyID == id);
+            if (grant_daily == null)
             {
                 return HttpNotFound();
             }
-            return View(dailyactivity);
+
+
+            var activity = from a in db.Grant_Activity
+                        select a;
+
+            activity = activity.Where(a => a.DailyID == id);
+
+            ViewData["Activities"] = activity;
+
+            return View(grant_daily);
         }
 
         //
@@ -86,7 +55,7 @@ namespace GrantActivity.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Name");
+            ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType, "GrantTypeID", "GrantType");
             return View();
         }
 
@@ -94,19 +63,17 @@ namespace GrantActivity.Controllers
         // POST: /Daily/Create
 
         [HttpPost]
-        public ActionResult Create(DailyActivity dailyactivity)
+        public ActionResult Create(Grant_Daily grant_daily)
         {
             if (ModelState.IsValid)
             {
-
-
-                db.DailyActivities.AddObject(dailyactivity);
+                db.Grant_Daily.AddObject(grant_daily);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Name", dailyactivity.ActivityID);
-            return View(dailyactivity);
+            ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType, "GrantTypeID", "GrantType", grant_daily.GrantTypeID);
+            return View(grant_daily);
         }
 
         //
@@ -114,30 +81,30 @@ namespace GrantActivity.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            DailyActivity dailyactivity = db.DailyActivities.Single(d => d.AdminActivityID == id);
-            if (dailyactivity == null)
+            Grant_Daily grant_daily = db.Grant_Daily.Single(g => g.AdminDailyID == id);
+            if (grant_daily == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Name", dailyactivity.ActivityID);
-            return View(dailyactivity);
+            ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType, "GrantTypeID", "GrantType", grant_daily.GrantTypeID);
+            return View(grant_daily);
         }
 
         //
         // POST: /Daily/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(DailyActivity dailyactivity)
+        public ActionResult Edit(Grant_Daily grant_daily)
         {
             if (ModelState.IsValid)
             {
-                db.DailyActivities.Attach(dailyactivity);
-                db.ObjectStateManager.ChangeObjectState(dailyactivity, EntityState.Modified);
+                db.Grant_Daily.Attach(grant_daily);
+                db.ObjectStateManager.ChangeObjectState(grant_daily, EntityState.Modified);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.ActivityID = new SelectList(db.ActivityCategories, "ActivityID", "Name", dailyactivity.ActivityID);
-            return View(dailyactivity);
+            ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType, "GrantTypeID", "GrantType", grant_daily.GrantTypeID);
+            return View(grant_daily);
         }
 
         //
@@ -145,12 +112,12 @@ namespace GrantActivity.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            DailyActivity dailyactivity = db.DailyActivities.Single(d => d.AdminActivityID == id);
-            if (dailyactivity == null)
+            Grant_Daily grant_daily = db.Grant_Daily.Single(g => g.AdminDailyID == id);
+            if (grant_daily == null)
             {
                 return HttpNotFound();
             }
-            return View(dailyactivity);
+            return View(grant_daily);
         }
 
         //
@@ -159,8 +126,8 @@ namespace GrantActivity.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            DailyActivity dailyactivity = db.DailyActivities.Single(d => d.AdminActivityID == id);
-            db.DailyActivities.DeleteObject(dailyactivity);
+            Grant_Daily grant_daily = db.Grant_Daily.Single(g => g.AdminDailyID == id);
+            db.Grant_Daily.DeleteObject(grant_daily);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,25 +1,20 @@
-﻿using System;
-using System.Data;
-using System.IO;
-//using System.Data.Entity;
+﻿using System.Data;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Mvc;
-using GrantReportingBusinessLayer;
+using GrantBusinessLayer;
 
 namespace GrantActivity.Controllers
 {
     public class CategoryController : Controller
     {
-        private GrantReportingEntities db = new GrantReportingEntities();
+        private GrantEntities db = new GrantEntities();
 
         //
         // GET: /Category/
 
         public ActionResult Index()
         {
-            return View(db.ActivityCategories.ToList());
+            return View(db.Grant_Category.ToList());
         }
 
         //
@@ -27,12 +22,12 @@ namespace GrantActivity.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            ActivityCategory activitycategory = db.ActivityCategories.Single(a => a.ActivityID == id);
-            if (activitycategory == null)
+            Grant_Category grant_category = db.Grant_Category.Single(g => g.CategoryID == id);
+            if (grant_category == null)
             {
                 return HttpNotFound();
             }
-            return View(activitycategory);
+            return View(grant_category);
         }
 
         //
@@ -47,16 +42,16 @@ namespace GrantActivity.Controllers
         // POST: /Category/Create
 
         [HttpPost]
-        public ActionResult Create(ActivityCategory activitycategory)
+        public ActionResult Create(Grant_Category grant_category)
         {
             if (ModelState.IsValid)
             {
-                db.ActivityCategories.AddObject(activitycategory);
+                db.Grant_Category.AddObject(grant_category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(activitycategory);
+            return View(grant_category);
         }
 
         //
@@ -64,28 +59,28 @@ namespace GrantActivity.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            ActivityCategory activitycategory = db.ActivityCategories.Single(a => a.ActivityID == id);
-            if (activitycategory == null)
+            Grant_Category grant_category = db.Grant_Category.Single(g => g.CategoryID == id);
+            if (grant_category == null)
             {
                 return HttpNotFound();
             }
-            return View(activitycategory);
+            return View(grant_category);
         }
 
         //
         // POST: /Category/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(ActivityCategory activitycategory)
+        public ActionResult Edit(Grant_Category grant_category)
         {
             if (ModelState.IsValid)
             {
-                db.ActivityCategories.Attach(activitycategory);
-                db.ObjectStateManager.ChangeObjectState(activitycategory, EntityState.Modified);
+                db.Grant_Category.Attach(grant_category);
+                db.ObjectStateManager.ChangeObjectState(grant_category, EntityState.Modified);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(activitycategory);
+            return View(grant_category);
         }
 
         //
@@ -93,12 +88,12 @@ namespace GrantActivity.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            ActivityCategory activitycategory = db.ActivityCategories.Single(a => a.ActivityID == id);
-            if (activitycategory == null)
+            Grant_Category grant_category = db.Grant_Category.Single(g => g.CategoryID == id);
+            if (grant_category == null)
             {
                 return HttpNotFound();
             }
-            return View(activitycategory);
+            return View(grant_category);
         }
 
         //
@@ -107,8 +102,8 @@ namespace GrantActivity.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            ActivityCategory activitycategory = db.ActivityCategories.Single(a => a.ActivityID == id);
-            db.ActivityCategories.DeleteObject(activitycategory);
+            Grant_Category grant_category = db.Grant_Category.Single(g => g.CategoryID == id);
+            db.Grant_Category.DeleteObject(grant_category);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

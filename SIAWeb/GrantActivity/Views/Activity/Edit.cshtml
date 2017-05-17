@@ -1,0 +1,37 @@
+﻿@model GrantBusinessLayer.Grant_Activity
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Grant_Activity</legend>
+
+        @Html.HiddenFor(model => model.GrantActivityID)
+
+        @Html.HiddenFor(model => model.DailyID)
+
+        @Html.HiddenFor(model => model.CategoryID)
+
+        @Html.HiddenFor(model => model.Notes)
+
+        @Html.HiddenFor(model => model.EnteredDate)
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

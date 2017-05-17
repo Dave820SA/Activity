@@ -1,5 +1,4 @@
-﻿@model GrantBusinessLayer.Grant_Category
-
+﻿@model GrantBusinessLayer.Grant_GrantType
 
 @{
     ViewBag.Title = "Edit";
@@ -7,9 +6,7 @@
 
 <div style="padding-left: 5px">
     <h3>
-        Edit<small> Grant Activity Category</small></h3>
-        <br />
-        
+        Edit<small> SOP</small></h3>
 </div>
 
 @using (Html.BeginForm())
@@ -22,12 +19,12 @@
             <div class="col-sm-6">
                 <fieldset class="scheduler-border">
                     
-                    @Html.HiddenFor(model => model.CategoryID)
+                    @Html.HiddenFor(model => model.GrantTypeID)
                     <div class="form-group col-xs-12">
-                        <strong style="font-size: 1.2em">@Html.LabelFor(model => model.Name, new { @class = "control-label" })</strong>
+                        <strong style="font-size: 1.2em">@Html.LabelFor(model => model.GrantType, new { @class = "control-label" })</strong>
                         <div>
-                             @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                             @Html.TextBoxFor(model => model.GrantType, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.GrantType, "", new { @class = "text-danger" })
                         </div>
                     </div>
                      
@@ -52,4 +49,6 @@
 
        });
     </script>
-    }
+	}
+
+

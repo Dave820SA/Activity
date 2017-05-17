@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EB198192-BD41-49C1-9F50-6D4E9157F329}</ProjectGuid>
+    <ProjectGuid>{0F63D961-5D2B-4ED4-BE54-4E25D1F75835}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SIAUserBusinessLayer</RootNamespace>
-    <AssemblyName>SIAUserBusinessLayer</AssemblyName>
+    <RootNamespace>GrantBusinessLayer</RootNamespace>
+    <AssemblyName>GrantBusinessLayer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
@@ -43,23 +44,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SIAUserModel.Designer.cs">
+    <Compile Include="GrantEntities.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SIAUserModel.edmx</DependentUpon>
+      <DependentUpon>GrantEntities.edmx</DependentUpon>
     </Compile>
+    <Compile Include="GrantMetadata.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="SIAUserModel.edmx">
+    <EntityDeploy Include="GrantEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>SIAUserModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>GrantEntities.Designer.cs</LastGenOutput>
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

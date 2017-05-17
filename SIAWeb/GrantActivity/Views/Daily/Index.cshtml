@@ -1,10 +1,8 @@
-﻿@model IEnumerable<GrantReportingBusinessLayer.DailyActivity>
+﻿@model IEnumerable<GrantBusinessLayer.Grant_Daily>
 
 @{
     ViewBag.Title = "View Activity";
 }
-
-@*<h2>Entered Activity</h2>*@
 
 
 <div class="row">
@@ -37,57 +35,49 @@
             @*<span class="h6">@Html.ActionLink("Admin", "Index", "Admin")</span>*@
             <table class="table table-condensed table-hover">
                 <tr>
-                    @* <th>
+                    @*<th>
                         @Html.DisplayNameFor(model => model.AppEntityID)
                     </th>*@
                     <th>
-                        @Html.DisplayNameFor(model => model.Grant_ActivityCategory.Name)
+                        @Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Notes)
+                        @Html.DisplayNameFor(model => model.DailyStart)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ActivityStart)
+                        @Html.DisplayNameFor(model => model.DailyEnd)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ActivityEnd)
-                    </th>
-                    @* <th>
                         @Html.DisplayNameFor(model => model.EnteredDate)
-                    </th>*@
+                    </th>
                     <th>
-                         
                         @Html.DisplayNameFor(model => model.ApprovedFlag)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.MoreInformationFlag)
                     </th>
-                    @*<th>
-                        @Html.DisplayNameFor(model => model.ApprovedByID)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ApprovedDate)
-                    </th>*@
                     <th>
                     </th>
                 </tr>
                 @foreach (var item in Model)
                 {
+                    @Html.HiddenFor(modelItem => item.AppEntityID)
                     <tr>
-                        @* <td>
+                       @* <td>
+                        
                             @Html.DisplayFor(modelItem => item.AppEntityID)
                         </td>*@
                         <td>
-                            @Html.DisplayFor(modelItem => item.Grant_ActivityCategory.Name)
+                            @Html.DisplayFor(modelItem => item.Grant_GrantType.GrantType)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Notes)
+                            @Html.DisplayFor(modelItem => item.DailyStart)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ActivityStart)
+                            @Html.DisplayFor(modelItem => item.DailyEnd)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.ActivityEnd)
+                            @Html.DisplayFor(modelItem => item.EnteredDate)
                         </td>
                         <td style="max-height: 10px">
                             @{
@@ -104,7 +94,7 @@
                         <td>
                             @{
                     string moreinfo = (item.MoreInformationFlag).ToString();
-                    
+
                     if (moreinfo == "True")
                     {
                                 <img src="~/Images/Check_Round.png" alt="" class="image_background" />
@@ -114,11 +104,10 @@
                                 <img src="~/Images/red-minus.png" alt="" class="image_background" />
                     } }
                         </td>
-                       
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.AdminActivityID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.AdminActivityID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.AdminActivityID })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.AdminDailyID }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.AdminDailyID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.AdminDailyID })
                         </td>
                     </tr>
                 }
@@ -126,5 +115,3 @@
         </div>
     </div>
 </div>
-
-

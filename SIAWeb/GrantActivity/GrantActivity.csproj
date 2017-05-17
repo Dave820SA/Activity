@@ -127,8 +127,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\ActivityController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\DailyController.cs" />
+    <Compile Include="Controllers\GrantTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -260,17 +262,6 @@
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Shared\_Alternate.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Category\Index.cshtml" />
-    <Content Include="Views\Category\Details.cshtml" />
-    <Content Include="Views\Category\Create.cshtml" />
-    <Content Include="Views\Category\Edit.cshtml" />
-    <Content Include="Views\Category\Delete.cshtml" />
-    <Content Include="Views\Daily\Index.cshtml" />
-    <Content Include="Views\Daily\Details.cshtml" />
-    <Content Include="Views\Daily\Create.cshtml" />
-    <Content Include="Views\Daily\Edit.cshtml" />
-    <Content Include="Views\Daily\Delete.cshtml" />
-    <Content Include="Views\Category\_ViewStart.cshtml" />
     <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
@@ -304,13 +295,37 @@
     <None Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
     <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <None Include="font-awesome-4.7.0\scss\_variables.scss" />
-    <Content Include="Views\Daily\_ViewStart.cshtml" />
+    <None Include="Properties\PublishProfiles\GrantAdminReporting.pubxml" />
     <None Include="Scripts\jquery-1.9.0.min.map" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\GrantType\Index.cshtml" />
+    <Content Include="Views\GrantType\Details.cshtml" />
+    <Content Include="Views\GrantType\Create.cshtml" />
+    <Content Include="Views\GrantType\Edit.cshtml" />
+    <Content Include="Views\GrantType\Delete.cshtml" />
+    <Content Include="Views\Daily\Index.cshtml" />
+    <Content Include="Views\Daily\Details.cshtml" />
+    <Content Include="Views\Daily\Create.cshtml" />
+    <Content Include="Views\Daily\Edit.cshtml" />
+    <Content Include="Views\Daily\Delete.cshtml" />
+    <Content Include="Views\Activity\Index.cshtml" />
+    <Content Include="Views\Activity\Details.cshtml" />
+    <Content Include="Views\Activity\Create.cshtml" />
+    <Content Include="Views\Activity\Edit.cshtml" />
+    <Content Include="Views\Activity\Delete.cshtml" />
+    <Content Include="Views\Activity\_ViewStart.cshtml" />
+    <Content Include="Views\Category\_ViewStart.cshtml" />
+    <Content Include="Views\Daily\_ViewStart.cshtml" />
+    <Content Include="Views\GrantType\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\GrantReportingBusinessLayer\GrantReportingBusinessLayer.csproj">
-      <Project>{32604186-7E82-4F7C-A8F7-5A9EFFD8CFA2}</Project>
-      <Name>GrantReportingBusinessLayer</Name>
+    <ProjectReference Include="..\GrantBusinessLayer\GrantBusinessLayer.csproj">
+      <Project>{0F63D961-5D2B-4ED4-BE54-4E25D1F75835}</Project>
+      <Name>GrantBusinessLayer</Name>
     </ProjectReference>
     <ProjectReference Include="..\UserBusinessLayer\UserBusinessLayer.csproj">
       <Project>{A6CC0DB3-58C7-4711-BB18-3AF06472115F}</Project>

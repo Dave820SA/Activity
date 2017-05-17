@@ -1,4 +1,4 @@
-﻿@model GrantReportingBusinessLayer.DailyActivity
+﻿@model GrantBusinessLayer.Grant_Daily
 
 @{
     ViewBag.Title = "Edit";
@@ -10,9 +10,9 @@
     @Html.ValidationSummary(true)
 
     <fieldset>
-        <legend>DailyActivity</legend>
+        <legend>Grant_Daily</legend>
 
-        @Html.HiddenFor(model => model.AdminActivityID)
+        @Html.HiddenFor(model => model.AdminDailyID)
 
         <div class="editor-label">
             @Html.LabelFor(model => model.AppEntityID)
@@ -23,35 +23,27 @@
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ActivityID, "Grant_ActivityCategory")
+            @Html.LabelFor(model => model.GrantTypeID, "Grant_GrantType")
         </div>
         <div class="editor-field">
-            @Html.DropDownList("ActivityID", String.Empty)
-            @Html.ValidationMessageFor(model => model.ActivityID)
+            @Html.DropDownList("GrantTypeID", String.Empty)
+            @Html.ValidationMessageFor(model => model.GrantTypeID)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ActivityStart)
+            @Html.LabelFor(model => model.DailyStart)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ActivityStart)
-            @Html.ValidationMessageFor(model => model.ActivityStart)
+            @Html.EditorFor(model => model.DailyStart)
+            @Html.ValidationMessageFor(model => model.DailyStart)
         </div>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.ActivityEnd)
+            @Html.LabelFor(model => model.DailyEnd)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.ActivityEnd)
-            @Html.ValidationMessageFor(model => model.ActivityEnd)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Notes)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Notes)
-            @Html.ValidationMessageFor(model => model.Notes)
+            @Html.EditorFor(model => model.DailyEnd)
+            @Html.ValidationMessageFor(model => model.DailyEnd)
         </div>
 
         <div class="editor-label">
@@ -76,6 +68,14 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.MoreInformationFlag)
             @Html.ValidationMessageFor(model => model.MoreInformationFlag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AdminNotes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AdminNotes)
+            @Html.ValidationMessageFor(model => model.AdminNotes)
         </div>
 
         <div class="editor-label">
@@ -105,11 +105,5 @@
 </div>
 
 @section Scripts {
-
-   <script type="text/javascript">
-       $(document).ready(function () {
-
-       });
-      
-    </script>
- }
+    @Scripts.Render("~/bundles/jqueryval")
+}

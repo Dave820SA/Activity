@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GrantModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="GrantModelStoreContainer">
+          <EntitySet Name="Grant_Activity" EntityType="GrantModel.Store.Grant_Activity" store:Type="Tables" store:Schema="dbo" store:Name="Grant.Activity">
+            <DefiningQuery>SELECT 
+      [Grant_Activity].[GrantActivityID] AS [GrantActivityID], 
+      [Grant_Activity].[DailyID] AS [DailyID], 
+      [Grant_Activity].[CategoryID] AS [CategoryID], 
+      [Grant_Activity].[Notes] AS [Notes], 
+      [Grant_Activity].[EnteredDate] AS [EnteredDate]
+      FROM [dbo].[Grant.Activity] AS [Grant_Activity]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Grant_Category" EntityType="GrantModel.Store.Grant_Category" store:Type="Tables" Schema="dbo" Table="Grant.Category" />
+          <EntitySet Name="Grant_Daily" EntityType="GrantModel.Store.Grant_Daily" store:Type="Tables" Schema="dbo" Table="Grant.Daily" />
+          <EntitySet Name="Grant_GrantType" EntityType="GrantModel.Store.Grant_GrantType" store:Type="Tables" Schema="dbo" Table="Grant.GrantType" />
+          <AssociationSet Name="FK_Grant_Activity_Grant_Category" Association="GrantModel.Store.FK_Grant_Activity_Grant_Category">
+            <End Role="Grant_Category" EntitySet="Grant_Category" />
+            <End Role="Grant_Activity" EntitySet="Grant_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grant_Activity_Grant_Daily" Association="GrantModel.Store.FK_Grant_Activity_Grant_Daily">
+            <End Role="Grant_Daily" EntitySet="Grant_Daily" />
+            <End Role="Grant_Activity" EntitySet="Grant_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grant_Daily_Grant_GrantType" Association="GrantModel.Store.FK_Grant_Daily_Grant_GrantType">
+            <End Role="Grant_GrantType" EntitySet="Grant_GrantType" />
+            <End Role="Grant_Daily" EntitySet="Grant_Daily" />
+          </AssociationSet>
+        </EntityContainer>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SAPDActivity.dbo.Grant.Activity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="Grant_Activity">
+          <Key>
+            <PropertyRef Name="GrantActivityID" />
+            <PropertyRef Name="DailyID" />
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="Notes" />
+            <PropertyRef Name="EnteredDate" />
+          </Key>
+          <Property Name="GrantActivityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DailyID" Type="int" Nullable="false" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar(max)" Nullable="false" />
+          <Property Name="EnteredDate" Type="datetime2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Grant_Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="Grant_Daily">
+          <Key>
+            <PropertyRef Name="AdminDailyID" />
+          </Key>
+          <Property Name="AdminDailyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="GrantTypeID" Type="int" Nullable="false" />
+          <Property Name="DailyStart" Type="datetime" Nullable="false" />
+          <Property Name="DailyEnd" Type="datetime" Nullable="false" />
+          <Property Name="EnteredDate" Type="datetime" Nullable="false" />
+          <Property Name="ApprovedFlag" Type="bit" />
+          <Property Name="MoreInformationFlag" Type="bit" />
+          <Property Name="AdminNotes" Type="varchar(max)" />
+          <Property Name="ApprovedByID" Type="int" />
+          <Property Name="ApprovedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Grant_GrantType">
+          <Key>
+            <PropertyRef Name="GrantTypeID" />
+          </Key>
+          <Property Name="GrantTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GrantType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Grant_Activity_Grant_Category">
+          <End Role="Grant_Category" Type="GrantModel.Store.Grant_Category" Multiplicity="1" />
+          <End Role="Grant_Activity" Type="GrantModel.Store.Grant_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grant_Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Grant_Activity">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grant_Activity_Grant_Daily">
+          <End Role="Grant_Daily" Type="GrantModel.Store.Grant_Daily" Multiplicity="1" />
+          <End Role="Grant_Activity" Type="GrantModel.Store.Grant_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grant_Daily">
+              <PropertyRef Name="AdminDailyID" />
+            </Principal>
+            <Dependent Role="Grant_Activity">
+              <PropertyRef Name="DailyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grant_Daily_Grant_GrantType">
+          <End Role="Grant_GrantType" Type="GrantModel.Store.Grant_GrantType" Multiplicity="1" />
+          <End Role="Grant_Daily" Type="GrantModel.Store.Grant_Daily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grant_GrantType">
+              <PropertyRef Name="GrantTypeID" />
+            </Principal>
+            <Dependent Role="Grant_Daily">
+              <PropertyRef Name="GrantTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GrantModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="GrantEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Grant_Activity" EntityType="GrantModel.Grant_Activity" />
+          <EntitySet Name="Grant_Category" EntityType="GrantModel.Grant_Category" />
+          <EntitySet Name="Grant_Daily" EntityType="GrantModel.Grant_Daily" />
+          <EntitySet Name="Grant_GrantType" EntityType="GrantModel.Grant_GrantType" />
+          <AssociationSet Name="FK_Grant_Activity_Grant_Category" Association="GrantModel.FK_Grant_Activity_Grant_Category">
+            <End Role="Grant_Category" EntitySet="Grant_Category" />
+            <End Role="Grant_Activity" EntitySet="Grant_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grant_Activity_Grant_Daily" Association="GrantModel.FK_Grant_Activity_Grant_Daily">
+            <End Role="Grant_Daily" EntitySet="Grant_Daily" />
+            <End Role="Grant_Activity" EntitySet="Grant_Activity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Grant_Daily_Grant_GrantType" Association="GrantModel.FK_Grant_Daily_Grant_GrantType">
+            <End Role="Grant_GrantType" EntitySet="Grant_GrantType" />
+            <End Role="Grant_Daily" EntitySet="Grant_Daily" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Grant_Activity">
+          <Key>
+            <PropertyRef Name="GrantActivityID" />
+            <PropertyRef Name="DailyID" />
+            <PropertyRef Name="CategoryID" />
+            <PropertyRef Name="Notes" />
+            <PropertyRef Name="EnteredDate" />
+          </Key>
+          <Property Name="GrantActivityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DailyID" Type="Int32" Nullable="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" Nullable="false" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="EnteredDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Grant_Category" Relationship="GrantModel.FK_Grant_Activity_Grant_Category" FromRole="Grant_Activity" ToRole="Grant_Category" />
+          <NavigationProperty Name="Grant_Daily" Relationship="GrantModel.FK_Grant_Activity_Grant_Daily" FromRole="Grant_Activity" ToRole="Grant_Daily" />
+        </EntityType>
+        <EntityType Name="Grant_Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="200" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Grant_Activity" Relationship="GrantModel.FK_Grant_Activity_Grant_Category" FromRole="Grant_Category" ToRole="Grant_Activity" />
+        </EntityType>
+        <EntityType Name="Grant_Daily">
+          <Key>
+            <PropertyRef Name="AdminDailyID" />
+          </Key>
+          <Property Name="AdminDailyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AppEntityID" Type="Int32" Nullable="false" />
+          <Property Name="GrantTypeID" Type="Int32" Nullable="false" />
+          <Property Name="DailyStart" Type="DateTime" Nullable="false" />
+          <Property Name="DailyEnd" Type="DateTime" Nullable="false" />
+          <Property Name="EnteredDate" Type="DateTime" Nullable="false" />
+          <Property Name="ApprovedFlag" Type="Boolean" />
+          <Property Name="MoreInformationFlag" Type="Boolean" />
+          <Property Name="AdminNotes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="ApprovedByID" Type="Int32" />
+          <Property Name="ApprovedDate" Type="DateTime" />
+          <NavigationProperty Name="Grant_Activity" Relationship="GrantModel.FK_Grant_Activity_Grant_Daily" FromRole="Grant_Daily" ToRole="Grant_Activity" />
+          <NavigationProperty Name="Grant_GrantType" Relationship="GrantModel.FK_Grant_Daily_Grant_GrantType" FromRole="Grant_Daily" ToRole="Grant_GrantType" />
+        </EntityType>
+        <EntityType Name="Grant_GrantType">
+          <Key>
+            <PropertyRef Name="GrantTypeID" />
+          </Key>
+          <Property Name="GrantTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GrantType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Grant_Daily" Relationship="GrantModel.FK_Grant_Daily_Grant_GrantType" FromRole="Grant_GrantType" ToRole="Grant_Daily" />
+        </EntityType>
+        <Association Name="FK_Grant_Activity_Grant_Category">
+          <End Role="Grant_Category" Type="GrantModel.Grant_Category" Multiplicity="1" />
+          <End Role="Grant_Activity" Type="GrantModel.Grant_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grant_Category">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Grant_Activity">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grant_Activity_Grant_Daily">
+          <End Role="Grant_Daily" Type="GrantModel.Grant_Daily" Multiplicity="1" />
+          <End Role="Grant_Activity" Type="GrantModel.Grant_Activity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grant_Daily">
+              <PropertyRef Name="AdminDailyID" />
+            </Principal>
+            <Dependent Role="Grant_Activity">
+              <PropertyRef Name="DailyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Grant_Daily_Grant_GrantType">
+          <End Role="Grant_GrantType" Type="GrantModel.Grant_GrantType" Multiplicity="1" />
+          <End Role="Grant_Daily" Type="GrantModel.Grant_Daily" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Grant_GrantType">
+              <PropertyRef Name="GrantTypeID" />
+            </Principal>
+            <Dependent Role="Grant_Daily">
+              <PropertyRef Name="GrantTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GrantModelStoreContainer" CdmEntityContainer="GrantEntities">
+          <EntitySetMapping Name="Grant_Activity">
+            <EntityTypeMapping TypeName="GrantModel.Grant_Activity">
+              <MappingFragment StoreEntitySet="Grant_Activity">
+                <ScalarProperty Name="GrantActivityID" ColumnName="GrantActivityID" />
+                <ScalarProperty Name="DailyID" ColumnName="DailyID" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grant_Category">
+            <EntityTypeMapping TypeName="GrantModel.Grant_Category">
+              <MappingFragment StoreEntitySet="Grant_Category">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grant_Daily">
+            <EntityTypeMapping TypeName="GrantModel.Grant_Daily">
+              <MappingFragment StoreEntitySet="Grant_Daily">
+                <ScalarProperty Name="AdminDailyID" ColumnName="AdminDailyID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="GrantTypeID" ColumnName="GrantTypeID" />
+                <ScalarProperty Name="DailyStart" ColumnName="DailyStart" />
+                <ScalarProperty Name="DailyEnd" ColumnName="DailyEnd" />
+                <ScalarProperty Name="EnteredDate" ColumnName="EnteredDate" />
+                <ScalarProperty Name="ApprovedFlag" ColumnName="ApprovedFlag" />
+                <ScalarProperty Name="MoreInformationFlag" ColumnName="MoreInformationFlag" />
+                <ScalarProperty Name="AdminNotes" ColumnName="AdminNotes" />
+                <ScalarProperty Name="ApprovedByID" ColumnName="ApprovedByID" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grant_GrantType">
+            <EntityTypeMapping TypeName="GrantModel.Grant_GrantType">
+              <MappingFragment StoreEntitySet="Grant_GrantType">
+                <ScalarProperty Name="GrantTypeID" ColumnName="GrantTypeID" />
+                <ScalarProperty Name="GrantType" ColumnName="GrantType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="GrantEntities">
+        <EntityTypeShape EntityType="GrantModel.Grant_Activity" Width="1.5" PointX="5.25" PointY="1.625" Height="2.3648893229166656" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrantModel.Grant_Category" Width="1.5" PointX="3" PointY="6" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrantModel.Grant_Daily" Width="1.5" PointX="3" PointY="1" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrantModel.Grant_GrantType" Width="1.5" PointX="0.75" PointY="2" Height="1.5956835937499996" IsExpanded="true" />
+        <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Category" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="6.797841796875" />
+          <ConnectorPoint PointX="6" PointY="6.797841796875" />
+          <ConnectorPoint PointX="6" PointY="3.9898893229166656" />
+        </AssociationConnector>
+        <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Daily" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="2.8074446614583328" />
+          <ConnectorPoint PointX="5.25" PointY="2.8074446614583328" />
+        </AssociationConnector>
+        <AssociationConnector Association="GrantModel.FK_Grant_Daily_Grant_GrantType" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.797841796875" />
+          <ConnectorPoint PointX="3" PointY="2.797841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
