@@ -19,9 +19,9 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
+[assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Daily_Grant_GrantType", "Grant_GrantType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_GrantType), "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Activity_Grant_Category", "Grant_Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_Category), "Grant_Activity", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Activity), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Activity_Grant_Daily", "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_Daily), "Grant_Activity", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Activity), true)]
-[assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Daily_Grant_GrantType", "Grant_GrantType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_GrantType), "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), true)]
 
 #endregion
 
@@ -76,22 +76,6 @@ namespace GrantBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Grant_Activity> Grant_Activity
-        {
-            get
-            {
-                if ((_Grant_Activity == null))
-                {
-                    _Grant_Activity = base.CreateObjectSet<Grant_Activity>("Grant_Activity");
-                }
-                return _Grant_Activity;
-            }
-        }
-        private ObjectSet<Grant_Activity> _Grant_Activity;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Grant_Category> Grant_Category
         {
             get
@@ -136,18 +120,26 @@ namespace GrantBusinessLayer
             }
         }
         private ObjectSet<Grant_GrantType> _Grant_GrantType;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Grant_Activity> Grant_Activity
+        {
+            get
+            {
+                if ((_Grant_Activity == null))
+                {
+                    _Grant_Activity = base.CreateObjectSet<Grant_Activity>("Grant_Activity");
+                }
+                return _Grant_Activity;
+            }
+        }
+        private ObjectSet<Grant_Activity> _Grant_Activity;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Grant_Activity EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToGrant_Activity(Grant_Activity grant_Activity)
-        {
-            base.AddObject("Grant_Activity", grant_Activity);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Grant_Category EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -172,6 +164,14 @@ namespace GrantBusinessLayer
         {
             base.AddObject("Grant_GrantType", grant_GrantType);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Grant_Activity EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGrant_Activity(Grant_Activity grant_Activity)
+        {
+            base.AddObject("Grant_Activity", grant_Activity);
+        }
 
         #endregion
 
@@ -194,19 +194,15 @@ namespace GrantBusinessLayer
         /// <summary>
         /// Create a new Grant_Activity object.
         /// </summary>
-        /// <param name="grantActivityID">Initial value of the GrantActivityID property.</param>
+        /// <param name="activityID">Initial value of the ActivityID property.</param>
         /// <param name="dailyID">Initial value of the DailyID property.</param>
         /// <param name="categoryID">Initial value of the CategoryID property.</param>
-        /// <param name="notes">Initial value of the Notes property.</param>
-        /// <param name="enteredDate">Initial value of the EnteredDate property.</param>
-        public static Grant_Activity CreateGrant_Activity(global::System.Int32 grantActivityID, global::System.Int32 dailyID, global::System.Int32 categoryID, global::System.String notes, global::System.DateTime enteredDate)
+        public static Grant_Activity CreateGrant_Activity(global::System.Int32 activityID, global::System.Int32 dailyID, global::System.Int32 categoryID)
         {
             Grant_Activity grant_Activity = new Grant_Activity();
-            grant_Activity.GrantActivityID = grantActivityID;
+            grant_Activity.ActivityID = activityID;
             grant_Activity.DailyID = dailyID;
             grant_Activity.CategoryID = categoryID;
-            grant_Activity.Notes = notes;
-            grant_Activity.EnteredDate = enteredDate;
             return grant_Activity;
         }
 
@@ -219,32 +215,32 @@ namespace GrantBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 GrantActivityID
+        public global::System.Int32 ActivityID
         {
             get
             {
-                return _GrantActivityID;
+                return _ActivityID;
             }
             set
             {
-                if (_GrantActivityID != value)
+                if (_ActivityID != value)
                 {
-                    OnGrantActivityIDChanging(value);
-                    ReportPropertyChanging("GrantActivityID");
-                    _GrantActivityID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("GrantActivityID");
-                    OnGrantActivityIDChanged();
+                    OnActivityIDChanging(value);
+                    ReportPropertyChanging("ActivityID");
+                    _ActivityID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ActivityID");
+                    OnActivityIDChanged();
                 }
             }
         }
-        private global::System.Int32 _GrantActivityID;
-        partial void OnGrantActivityIDChanging(global::System.Int32 value);
-        partial void OnGrantActivityIDChanged();
+        private global::System.Int32 _ActivityID;
+        partial void OnActivityIDChanging(global::System.Int32 value);
+        partial void OnActivityIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 DailyID
         {
@@ -254,14 +250,11 @@ namespace GrantBusinessLayer
             }
             set
             {
-                if (_DailyID != value)
-                {
-                    OnDailyIDChanging(value);
-                    ReportPropertyChanging("DailyID");
-                    _DailyID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("DailyID");
-                    OnDailyIDChanged();
-                }
+                OnDailyIDChanging(value);
+                ReportPropertyChanging("DailyID");
+                _DailyID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DailyID");
+                OnDailyIDChanged();
             }
         }
         private global::System.Int32 _DailyID;
@@ -271,7 +264,7 @@ namespace GrantBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 CategoryID
         {
@@ -281,14 +274,11 @@ namespace GrantBusinessLayer
             }
             set
             {
-                if (_CategoryID != value)
-                {
-                    OnCategoryIDChanging(value);
-                    ReportPropertyChanging("CategoryID");
-                    _CategoryID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("CategoryID");
-                    OnCategoryIDChanged();
-                }
+                OnCategoryIDChanging(value);
+                ReportPropertyChanging("CategoryID");
+                _CategoryID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CategoryID");
+                OnCategoryIDChanged();
             }
         }
         private global::System.Int32 _CategoryID;
@@ -298,7 +288,7 @@ namespace GrantBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String Notes
         {
@@ -308,14 +298,11 @@ namespace GrantBusinessLayer
             }
             set
             {
-                if (_Notes != value)
-                {
-                    OnNotesChanging(value);
-                    ReportPropertyChanging("Notes");
-                    _Notes = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("Notes");
-                    OnNotesChanged();
-                }
+                OnNotesChanging(value);
+                ReportPropertyChanging("Notes");
+                _Notes = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Notes");
+                OnNotesChanged();
             }
         }
         private global::System.String _Notes;
@@ -325,9 +312,9 @@ namespace GrantBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime EnteredDate
+        public Nullable<global::System.DateTime> EnteredDate
         {
             get
             {
@@ -335,18 +322,15 @@ namespace GrantBusinessLayer
             }
             set
             {
-                if (_EnteredDate != value)
-                {
-                    OnEnteredDateChanging(value);
-                    ReportPropertyChanging("EnteredDate");
-                    _EnteredDate = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("EnteredDate");
-                    OnEnteredDateChanged();
-                }
+                OnEnteredDateChanging(value);
+                ReportPropertyChanging("EnteredDate");
+                _EnteredDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EnteredDate");
+                OnEnteredDateChanged();
             }
         }
-        private global::System.DateTime _EnteredDate;
-        partial void OnEnteredDateChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _EnteredDate;
+        partial void OnEnteredDateChanging(Nullable<global::System.DateTime> value);
         partial void OnEnteredDateChanged();
 
         #endregion
@@ -856,28 +840,6 @@ namespace GrantBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "FK_Grant_Activity_Grant_Daily", "Grant_Activity")]
-        public EntityCollection<Grant_Activity> Grant_Activity
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Grant_Activity>("GrantModel.FK_Grant_Activity_Grant_Daily", "Grant_Activity");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Grant_Activity>("GrantModel.FK_Grant_Activity_Grant_Daily", "Grant_Activity", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("GrantModel", "FK_Grant_Daily_Grant_GrantType", "Grant_GrantType")]
         public Grant_GrantType Grant_GrantType
         {
@@ -906,6 +868,28 @@ namespace GrantBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Grant_GrantType>("GrantModel.FK_Grant_Daily_Grant_GrantType", "Grant_GrantType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "FK_Grant_Activity_Grant_Daily", "Grant_Activity")]
+        public EntityCollection<Grant_Activity> Grant_Activity
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Grant_Activity>("GrantModel.FK_Grant_Activity_Grant_Daily", "Grant_Activity");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Grant_Activity>("GrantModel.FK_Grant_Activity_Grant_Daily", "Grant_Activity", value);
                 }
             }
         }

@@ -1,4 +1,6 @@
-﻿@model GrantBusinessLayer.Grant_Daily
+﻿
+@model GrantBusinessLayer.Grant_Daily
+
 
 @{
     ViewBag.Title = "Details";
@@ -43,6 +45,7 @@
 
                 </div>
                 <div class="form-group col-xs-12">
+
                    <strong style="font-size: 1.2em">@Html.ActionLink("Edit", "Edit", new { id=Model.AdminDailyID }) |</strong> 
                 <strong style="font-size: 1.2em"> @Html.ActionLink("Back to List", "Index")</strong>
                 </div>
@@ -51,8 +54,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-9">
+                @Html.ActionLink("Details", "Create", "Activity", new { id = Model.AdminDailyID }, null) 
+                    @*<a href="~/Activity/Create">Add Item</a>*@
                     @*<span class="h6">@Html.ActionLink("Add Item", "Create", "Activity", new { id = Model.AdminDailyID })&nbsp;&nbsp</span>*@
-                    <span class="h6">@Html.ActionLink("Edit", "Edit", new { id = Model.AdminDailyID }, new { @class = "enterActivity", @data_target = "editCourseModal" })&nbsp;&nbsp</span>
+                    @*<span class="h6">@Html.ActionLink("Edit", "Edit", new { id = Model.AdminDailyID }, new { @class = "enterActivity", @data_target = "editCourseModal" })&nbsp;&nbsp</span>*@
                     <table class="table table-condensed table-hover">
                         <tr>
                             <th>
@@ -74,9 +79,9 @@
                                     @item.Notes
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.GrantActivityID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.GrantActivityID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.GrantActivityID })
+                                    @Html.ActionLink("Edit", "Edit", "Activity", new { id = item.ActivityID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.ActivityID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ActivityID })
                                 </td>
                             </tr>
                         }
@@ -89,6 +94,8 @@
 
 <div class="modal fade" id="enterActivityModal">
     <div class="modal-dialog">
+    @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "ID", OnSuccess = "onSuccess" }))
+    {
         <div id="mainContent" class="modal-content col-sm-12">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
@@ -105,9 +112,11 @@
                 <input class="btn btn-primary" type="submit" value="Save" />
             </div>
         </div>
+      }    
     </div>
+        
 </div>
-
+  
 </form>
 
 @section Scripts {
@@ -116,6 +125,36 @@
        $(document).ready(function () {
 
        });
+
+//       $(function () {
+//           $(".enterActivity").dialog({
+//               autoOpen: false,
+//               width: 300,
+//               hight: 250,
+//               show: {
+//                   effect: "blind",
+//                   duration: 1000
+//               },
+//               hide: {
+//                   effect: "example",
+//                   duration: 1000
+//               }
+//           });
+
+//           $(".enterActivity").click(function () {
+//               $("#modal-dialog").dialog("open");
+//           });
+//       });
+
+//       function onSuccess() {
+//           $("#modal-dialog").dialog("close");
+//       }
+
+
+
+
+
+
 
        $(function () {
            $('.enterActivity').on("click", function (e) {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GrantBusinessLayer;
+using GrantActivity.Models;
 
 namespace GrantActivity.Controllers
 {
@@ -49,6 +50,8 @@ namespace GrantActivity.Controllers
 
             return View(grant_daily);
         }
+
+       
 
         //
         // GET: /Daily/Create

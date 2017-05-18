@@ -8,8 +8,36 @@
 
 <fieldset>
     <legend>Grant_Activity</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Grant_Daily.AdminNotes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Grant_Daily.AdminNotes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Grant_Category.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Grant_Category.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Notes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.EnteredDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EnteredDate)
+    </div>
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", new { id=Model.ActivityID }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

@@ -14,7 +14,7 @@ namespace GrantBusinessLayer
             sealed class Metadata
             {
                 [Key]
-                public int GrantActivityID { get; set; }
+                public int ActivityID { get; set; }
 
                 [Required]
                 [Display(Name = "Daily")]

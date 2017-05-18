@@ -27,7 +27,7 @@ namespace GrantActivity.Controllers
 
         public ActionResult Details(int id = 0)
         {
-            Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.GrantActivityID == id);
+            Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.ActivityID == id);
             if (grant_activity == null)
             {
                 return HttpNotFound();
@@ -68,7 +68,7 @@ namespace GrantActivity.Controllers
 
         public ActionResult Edit(int id = 0)
         {
-            Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.GrantActivityID == id);
+            Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.ActivityID == id);
             if (grant_activity == null)
             {
                 return HttpNotFound();
@@ -101,7 +101,7 @@ namespace GrantActivity.Controllers
 
         public ActionResult Delete(int id = 0)
         {
-            Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.GrantActivityID == id);
+            Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.ActivityID == id);
             if (grant_activity == null)
             {
                 return HttpNotFound();
@@ -115,7 +115,7 @@ namespace GrantActivity.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.GrantActivityID == id);
+            Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.ActivityID == id);
             db.Grant_Activity.DeleteObject(grant_activity);
             db.SaveChanges();
             return RedirectToAction("Index");
