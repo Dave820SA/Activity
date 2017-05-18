@@ -11,7 +11,7 @@
 <form class="form-horizontal">
 <div class="Container">
     <div class="row">
-        <div class="col-xs-6 col-md-4">
+        <div class="col-xs-6 col-md-3">
             <fieldset class="scheduler-border">
                 
                
@@ -48,126 +48,102 @@
                 </div>
             </fieldset>
         </div>
-        <div class="col-xs-12 col-md-8">
-            
-            <h2>
-                Index</h2>
-            <p>
-                @Html.ActionLink("Create New", "Create")
-            </p>
-            <table>
-                <tr>
-                    <th>
-                    </th>
-                </tr>
-                @foreach (var item in ViewData["Activities"]
-                as IEnumerable<GrantBusinessLayer.Grant_Activity>)
-                {
-                    
-                        
-                            {
-                            <option>@item.Notes
-                            </option>
-                            }
-                        
-                    <tr>
-
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                        </td>
-                    </tr>
-                }
-            </table>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                    @*<span class="h6">@Html.ActionLink("Add Item", "Create", "Activity", new { id = Model.AdminDailyID })&nbsp;&nbsp</span>*@
+                    <span class="h6">@Html.ActionLink("Edit", "Edit", new { id = Model.AdminDailyID }, new { @class = "enterActivity", @data_target = "editCourseModal" })&nbsp;&nbsp</span>
+                    <table class="table table-condensed table-hover">
+                        <tr>
+                            <th>
+                                Grant Category 
+                            </th>
+                            <th>
+                                Notes
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+                        @foreach (var item in ViewData["Activities"] as IEnumerable<GrantBusinessLayer.Grant_Activity>)
+                        {
+                            <tr>
+                                <td>
+                                    @item.Grant_Category.Name
+                                </td>
+                                <td>
+                                    @item.Notes
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.GrantActivityID }) |
+                                    @Html.ActionLink("Details", "Details", new { id = item.GrantActivityID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.GrantActivityID })
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
         </div>
-
     </div>
 </div>
+
+<div class="modal fade" id="enterActivityModal">
+    <div class="modal-dialog">
+        <div id="mainContent" class="modal-content col-sm-12">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Edit Course</h4>
+            </div>
+            <div class="modal-body">
+                //YOUR EXISTING FORM HERE
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal">
+                    Cancel</button>
+                <input class="btn btn-primary" type="submit" value="Save" />
+            </div>
+        </div>
+    </div>
+</div>
+
 </form>
 
+@section Scripts {
 
+   <script type="text/javascript">
+       $(document).ready(function () {
 
-@*@{
-    ViewBag.Title = "Details";
-}
+       });
 
-<h2>Details</h2>
+       $(function () {
+           $('.enterActivity').on("click", function (e) {
+        e.preventDefault();
+        //perform the url load  then
+        $('#enterActivityModal').modal({
+                keyboard : true
+            }, 'show');
+        return false;
+         })
+       })
 
-<fieldset>
-    <legend>Grant_Daily</legend>
+//       $(function () {
+//        $('.enterActivity').on("click", function (e) {
+//        e.preventDefault();
+//        //replace the get with this.href to load the edit page
+//        $.get('https://developer.mozilla.org/en-US/docs/Web', function (data) {
+//            //replace the content returned
+//            $("#mainContent").html(data);
+//        });
+//        //show the modal
+//        $('#enterActivityModal').modal({
+//            keyboard : true,
+//        }, 'show');
+//        return false;
+//    })
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AppEntityID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AppEntityID)
-    </div>
+//})
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Grant_GrantType.GrantType)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DailyStart)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DailyStart)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DailyEnd)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DailyEnd)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.EnteredDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.EnteredDate)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ApprovedFlag)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ApprovedFlag)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.MoreInformationFlag)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.MoreInformationFlag)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AdminNotes)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AdminNotes)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ApprovedByID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ApprovedByID)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.ApprovedDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.ApprovedDate)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.AdminDailyID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@
+    </script>
+    }
