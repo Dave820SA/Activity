@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GrantBusinessLayer;
+using System.Web.Routing;
 
 namespace GrantActivity.Controllers
 {
@@ -38,10 +39,11 @@ namespace GrantActivity.Controllers
         //
         // GET: /Activity/Create
 
-        public ActionResult Create()
+        public ActionResult Create(int id = 0)
         {
             ViewBag.CategoryID = new SelectList(db.Grant_Category, "CategoryID", "Name");
             ViewBag.DailyID = new SelectList(db.Grant_Daily, "AdminDailyID", "AdminNotes");
+            ViewBag.DailyID = id;
             return View();
         }
 
@@ -49,13 +51,14 @@ namespace GrantActivity.Controllers
         // POST: /Activity/Create
 
         [HttpPost]
-        public ActionResult Create(Grant_Activity grant_activity)
+        public ActionResult Create(Grant_Activity grant_activity, int id )
         {
             if (ModelState.IsValid)
             {
                 db.Grant_Activity.AddObject(grant_activity);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Details", "Daily", new { id = id });
             }
 
             ViewBag.CategoryID = new SelectList(db.Grant_Category, "CategoryID", "Name", grant_activity.CategoryID);

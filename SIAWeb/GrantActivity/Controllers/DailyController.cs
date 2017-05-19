@@ -59,6 +59,7 @@ namespace GrantActivity.Controllers
         public ActionResult Create()
         {
             ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType, "GrantTypeID", "GrantType");
+            ViewBag.UserID = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
             return View();
         }
 
@@ -72,7 +73,7 @@ namespace GrantActivity.Controllers
             {
                 db.Grant_Daily.AddObject(grant_daily);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = grant_daily.AdminDailyID });
             }
 
             ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType, "GrantTypeID", "GrantType", grant_daily.GrantTypeID);

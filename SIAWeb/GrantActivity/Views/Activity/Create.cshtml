@@ -21,7 +21,7 @@
             <div class="col-sm-6">
                 <fieldset class="scheduler-border">
                     
-                    @Html.HiddenFor(model => model.DailyID, new { @Value = @DateTime.Now.ToString() })
+                    @Html.HiddenFor(model => model.DailyID, new { @Value = @ViewBag.DailyID })
                     @Html.HiddenFor(model => model.EnteredDate, new { @Value = @DateTime.Now.ToString() })
                  
                     <div class="form-group col-xs-12">
@@ -39,16 +39,6 @@
                         @Html.ValidationMessageFor(model => model.Notes, "", new { @class = "text-danger" })
                     </div>
 
-
-                    @*<div class="form-group col-xs-12">
-                        <div class="editor-label">
-                            @Html.LabelFor(model => model.ModifiedDate)
-                        </div>
-                        <div class="editor-label">
-                            @Html.TextBoxFor(model => model.ModifiedDate, new { @Value = @DateTime.Now.ToString(), @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })
-                        </div>
-                    </div>*@
                     <div class="form-group col-xs-12">
                         <input type="submit" class="btn btn-primary" value="Create" />
                     </div>
@@ -75,63 +65,3 @@
 }
 
 
-
-
-@*@{
-    ViewBag.Title = "Create";
-}
-
-<h2>Create</h2>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Grant_Activity</legend>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DailyID, "Grant_Daily")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("DailyID", String.Empty)
-            @Html.ValidationMessageFor(model => model.DailyID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CategoryID, "Grant_Category")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("CategoryID", String.Empty)
-            @Html.ValidationMessageFor(model => model.CategoryID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Notes)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Notes)
-            @Html.ValidationMessageFor(model => model.Notes)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EnteredDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EnteredDate)
-            @Html.ValidationMessageFor(model => model.EnteredDate)
-        </div>
-
-        <p>
-            <input type="submit" value="Create" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
-*@

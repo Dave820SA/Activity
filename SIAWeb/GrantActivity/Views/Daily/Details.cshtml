@@ -54,10 +54,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-9">
-                @Html.ActionLink("Details", "Create", "Activity", new { id = Model.AdminDailyID }, null) 
-                    @*<a href="~/Activity/Create">Add Item</a>*@
-                    @*<span class="h6">@Html.ActionLink("Add Item", "Create", "Activity", new { id = Model.AdminDailyID })&nbsp;&nbsp</span>*@
-                    @*<span class="h6">@Html.ActionLink("Edit", "Edit", new { id = Model.AdminDailyID }, new { @class = "enterActivity", @data_target = "editCourseModal" })&nbsp;&nbsp</span>*@
+                @Html.ActionLink("Add New Item", "Create", "Activity", new { id = Model.AdminDailyID }, null) 
+                    
                     <table class="table table-condensed table-hover">
                         <tr>
                             <th>
@@ -125,36 +123,6 @@
        $(document).ready(function () {
 
        });
-
-//       $(function () {
-//           $(".enterActivity").dialog({
-//               autoOpen: false,
-//               width: 300,
-//               hight: 250,
-//               show: {
-//                   effect: "blind",
-//                   duration: 1000
-//               },
-//               hide: {
-//                   effect: "example",
-//                   duration: 1000
-//               }
-//           });
-
-//           $(".enterActivity").click(function () {
-//               $("#modal-dialog").dialog("open");
-//           });
-//       });
-
-//       function onSuccess() {
-//           $("#modal-dialog").dialog("close");
-//       }
-
-
-
-
-
-
 
        $(function () {
            $('.enterActivity').on("click", function (e) {
