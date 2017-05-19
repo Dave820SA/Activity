@@ -67,11 +67,13 @@ namespace GrantBusinessLayer
                 public int GrantTypeID { get; set; }
 
                 [Required]
+                [DataType(DataType.Date)]
                 [Display(Name = "Start")]
                 [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy HH:mm}")]
                 public DateTime DailyStart { get; set; }
 
                 [Required]
+                [DataType(DataType.Date)]
                 [Display(Name = "End")]
                 [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy HH:mm}")]
                 public DateTime DailyEnd{ get; set; }

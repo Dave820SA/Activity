@@ -1,61 +1,58 @@
 ﻿@model GrantBusinessLayer.Grant_Activity
 
+
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm()) {
-    @Html.ValidationSummary(true)
-
-    <fieldset>
-        <legend>Grant_Activity</legend>
-
-        @Html.HiddenFor(model => model.ActivityID)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DailyID, "Grant_Daily")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("DailyID", String.Empty)
-            @Html.ValidationMessageFor(model => model.DailyID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CategoryID, "Grant_Category")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("CategoryID", String.Empty)
-            @Html.ValidationMessageFor(model => model.CategoryID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Notes)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Notes)
-            @Html.ValidationMessageFor(model => model.Notes)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EnteredDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EnteredDate)
-            @Html.ValidationMessageFor(model => model.EnteredDate)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div style="padding-left: 5px">
+    <h3>
+        Edit<small> SOP</small></h3>
 </div>
 
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset class="scheduler-border">
+                    
+                    @Html.HiddenFor(model => model.ActivityID)
+                    @Html.HiddenFor(model => model.DailyID)
+                   
+                     <div class="form-group col-xs-12">
+                         <strong style="font-size:1.2em">@Html.LabelFor(model => model.CategoryID, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("CategoryID", null, "Select Item", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                    </div>
+                     <div class="form-group col-xs-12">
+                         <strong style="font-size: 1.2em">@Html.LabelFor(model => model.Notes, new { @class = "control-label" })</strong>
+                        @Html.TextAreaFor(model => model.Notes, new { @class = "form-control", cols = "20", rows = "7" })
+                        @*@Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })*@
+                    </div>
+                    @Html.HiddenFor(model => model.EnteredDate, new { @Value = @DateTime.Now.ToString() })
+                      <div class="form-group col-xs-12">
+                        <input type="submit" class="btn btn-success" value="Submit" />
+                        <br />
+                        <br />
+                        <a href="@Url.Action("Details", "Daily", new { id = Model.DailyID })" class="btn btn-warning btn-sm"> Back To List <span class="glyphicon glyphicon-share-alt"></span></a>
+                    </div>
+                </fieldset>
+                
+            </div>
+        </div>
+    </div>
+    </form> 
+}     
+
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+    </script>
+	}

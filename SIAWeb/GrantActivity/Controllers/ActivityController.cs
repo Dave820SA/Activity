@@ -62,7 +62,8 @@ namespace GrantActivity.Controllers
             }
 
             ViewBag.CategoryID = new SelectList(db.Grant_Category, "CategoryID", "Name", grant_activity.CategoryID);
-            ViewBag.DailyID = new SelectList(db.Grant_Daily, "AdminDailyID", "AdminNotes", grant_activity.DailyID);
+            ViewBag.DailyID = id;
+            //ViewBag.DailyID = new SelectList(db.Grant_Daily, "AdminDailyID", "AdminNotes", grant_activity.DailyID);
             return View(grant_activity);
         }
 
@@ -92,7 +93,8 @@ namespace GrantActivity.Controllers
                 db.Grant_Activity.Attach(grant_activity);
                 db.ObjectStateManager.ChangeObjectState(grant_activity, EntityState.Modified);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                return RedirectToAction("Details", "Daily", new { id = grant_activity.DailyID });
             }
             ViewBag.CategoryID = new SelectList(db.Grant_Category, "CategoryID", "Name", grant_activity.CategoryID);
             ViewBag.DailyID = new SelectList(db.Grant_Daily, "AdminDailyID", "AdminNotes", grant_activity.DailyID);
@@ -121,7 +123,8 @@ namespace GrantActivity.Controllers
             Grant_Activity grant_activity = db.Grant_Activity.Single(g => g.ActivityID == id);
             db.Grant_Activity.DeleteObject(grant_activity);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return RedirectToAction("Details", "Daily", new { id = grant_activity.DailyID });
         }
 
         protected override void Dispose(bool disposing)

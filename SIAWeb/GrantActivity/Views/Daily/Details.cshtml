@@ -9,6 +9,7 @@
 <div style="padding-left: 5px">
     <h3>
         Activity<small> Details</small></h3>
+        <hr />
 </div>
 <form class="form-horizontal">
 <div class="Container">
@@ -46,20 +47,20 @@
                 </div>
                 <div class="form-group col-xs-12">
 
-                   <strong style="font-size: 1.2em">@Html.ActionLink("Edit", "Edit", new { id=Model.AdminDailyID }) |</strong> 
-                <strong style="font-size: 1.2em"> @Html.ActionLink("Back to List", "Index")</strong>
+                <a href="@Url.Action("Index", "Daily")" class="btn btn-warning btn-sm"> Back To List <span class="glyphicon glyphicon-share-alt"></span></a>
                 </div>
             </fieldset>
         </div>
         <div class="container">
             <div class="row">
                 <div class="col-xs-12 col-md-9">
-                @Html.ActionLink("Add New Item", "Create", "Activity", new { id = Model.AdminDailyID }, null) 
-                    
-                    <table class="table table-condensed table-hover">
+                    @*@Html.ActionLink("Add New Item", "Create", "Activity", new { id = Model.AdminDailyID }, null) *@
+                    <a href="@Url.Action("Create", "Activity", new { id = Model.AdminDailyID }, null)" class="btn btn-warning btn-xs">
+                        Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>
+                    <table class="table table-condensed table-hover table-bordered">
                         <tr>
                             <th>
-                                Grant Category 
+                                Activity
                             </th>
                             <th>
                                 Notes
@@ -70,16 +71,16 @@
                         @foreach (var item in ViewData["Activities"] as IEnumerable<GrantBusinessLayer.Grant_Activity>)
                         {
                             <tr>
-                                <td>
+                                <td style="max-width: 300px; min-width: 300px; width: 300px;">
                                     @item.Grant_Category.Name
                                 </td>
-                                <td>
+                                <td style="max-width: 400px; min-width: 420px; width: 400px;">
                                     @item.Notes
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", "Activity", new { id = item.ActivityID }) |
-                                    @Html.ActionLink("Details", "Details", new { id = item.ActivityID }) |
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.ActivityID })
+                                    <a href="@Url.Action("Edit", "Activity", new { id = item.ActivityID })" class="btn btn-info btn-xs">
+                                        Edit <span class="glyphicon glyphicon-edit"></span></a>| <a href="@Url.Action("Delete", "Activity", new { id = item.ActivityID })" class="btn btn-danger btn-xs">
+                                            Delete <span class="glyphicon glyphicon-remove"></span></a>
                                 </td>
                             </tr>
                         }
