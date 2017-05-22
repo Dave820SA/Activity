@@ -7,7 +7,10 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-           <span class="h5">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;</span>
+           @*<span class="h5">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;</span>*@
+           <a href="@Url.Action("Create", "GrantType")" class="btn btn-warning btn-sm"> Add New Entry <i class="fa fa-plus-square" aria-hidden="true"></i></a>
+           <br />
+           <br />
            @*|&nbsp;&nbsp;</span><span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>*@
             <table class="table table-condensed table-hover" >
                 <tr>
@@ -27,9 +30,12 @@
                         </td>
                         
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.GrantTypeID }) | @Html.ActionLink("Details", "Details", new { id = item.GrantTypeID })
+                        <a href="@Url.Action("Edit", "GrantType", new { id = item.GrantTypeID })" class="btn btn-info btn-xs"> Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
+                        <a href="@Url.Action("Details", "GrantType", new { id = item.GrantTypeID })" class="btn btn-success btn-xs"> Details <i class="fa fa-list" aria-hidden="true"></i></a> |
+                        <a href="@Url.Action("Delete", "GrantType", new { id = item.GrantTypeID })" class="btn btn-danger btn-xs"> Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                           @* @Html.ActionLink("Edit", "Edit", new { id = item.GrantTypeID }) | @Html.ActionLink("Details", "Details", new { id = item.GrantTypeID })
                             |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.GrantTypeID })
+                            @Html.ActionLink("Delete", "Delete", new { id = item.GrantTypeID })*@
                         </td>
                     </tr>
                 }

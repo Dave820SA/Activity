@@ -32,12 +32,13 @@
                     </div>
                     
                     <div class="form-group col-xs-12">
-                        <input type="submit" class="btn btn-primary" value="Create" />
+                        <input type="submit" class="btn btn-success" value="Create" />
                     </div>
                 </fieldset>
 
                  <div>
-                    <strong style="font-size: 1.2em">| @Html.ActionLink("Back to List", "Index")</strong>
+                 <a href="@Url.Action("Index", "GrantType")" class="btn btn-warning btn-xs"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+                    @*<strong style="font-size: 1.2em">| @Html.ActionLink("Back to List", "Index")</strong>*@
                 </div>
             </div>
         </div>

@@ -47,7 +47,7 @@
                 </div>
                 <div class="form-group col-xs-12">
 
-                <a href="@Url.Action("Index", "Daily")" class="btn btn-warning btn-sm"> Back To List <span class="glyphicon glyphicon-share-alt"></span></a>
+                <a href="@Url.Action("Index", "Daily")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
                 </div>
             </fieldset>
         </div>
@@ -56,7 +56,9 @@
                 <div class="col-xs-12 col-md-9">
                     @*@Html.ActionLink("Add New Item", "Create", "Activity", new { id = Model.AdminDailyID }, null) *@
                     <a href="@Url.Action("Create", "Activity", new { id = Model.AdminDailyID }, null)" class="btn btn-warning btn-xs">
-                        Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>
+                        Add New Entry <i class="fa fa-plus-square" aria-hidden="true"></i></a>
+                        <br />
+                        <br />
                     <table class="table table-condensed table-hover table-bordered">
                         <tr>
                             <th>
@@ -71,16 +73,16 @@
                         @foreach (var item in ViewData["Activities"] as IEnumerable<GrantBusinessLayer.Grant_Activity>)
                         {
                             <tr>
-                                <td style="max-width: 300px; min-width: 300px; width: 300px;">
+                                <td style="max-width: 280px; min-width: 280px; width: 280px;">
                                     @item.Grant_Category.Name
                                 </td>
                                 <td style="max-width: 400px; min-width: 420px; width: 400px;">
                                     @item.Notes
                                 </td>
                                 <td>
-                                    <a href="@Url.Action("Edit", "Activity", new { id = item.ActivityID })" class="btn btn-info btn-xs">
-                                        Edit <span class="glyphicon glyphicon-edit"></span></a>| <a href="@Url.Action("Delete", "Activity", new { id = item.ActivityID })" class="btn btn-danger btn-xs">
-                                            Delete <span class="glyphicon glyphicon-remove"></span></a>
+                                    <a href="@Url.Action("Edit", "Activity", new { id = item.ActivityID })" class="btn btn-info btn-xs">Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                  | <a href="@Url.Action("Delete", "Activity", new { id = item.ActivityID })" class="btn btn-danger btn-xs">Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                            
                                 </td>
                             </tr>
                         }

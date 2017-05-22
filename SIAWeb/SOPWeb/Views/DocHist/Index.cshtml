@@ -24,8 +24,9 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            <span class="h6">@Html.ActionLink("Upload New", "FileUpload")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span
-                class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
+            <span class="h6">@Html.ActionLink("Upload New", "FileUpload")&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            @*<a href="@Url.Action("FileUpload", "DocHist")" class="btn btn-warning btn-xs"> Upload New <span class="glyphicon glyphicon-plus-sign"></span></a>*@
+                <span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
             <table class="table table-condensed table-hover" >
                 <tr>
                     <th>

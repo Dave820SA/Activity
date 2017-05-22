@@ -32,14 +32,16 @@
                         </div>
                     </div>
                     
+                   
                     <div class="form-group col-xs-12">
-                        <input type="submit" class="btn btn-primary" value="Create" />
+                        <input type="submit" class="btn btn-success" value="Submit" />
+                        <br />
+                        <br />
+                        <a href="@Url.Action("Index", "Category")" class="btn btn-warning btn-sm"> Back To List <span class="glyphicon glyphicon-share-alt"></span></a>
                     </div>
                 </fieldset>
 
-                 <div>
-                    <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>
-                </div>
+                
             </div>
         </div>
     </div>

@@ -31,8 +31,9 @@
 
                 </div>
                 <div class="form-group col-xs-12">
-                   <strong style="font-size: 1.5em">@Html.ActionLink("Edit", "Edit", new { id=Model.CategoryID }) |</strong> 
-                <strong style="font-size: 1.2em"> @Html.ActionLink("Back to List", "Index")</strong>
+                    <a href="@Url.Action("Edit", "Category")" class="btn btn-info btn-xs">Edit <i class="fa fa-pencil-square-o"
+                        aria-hidden="true"></i></a><a href="@Url.Action("Index", "Category")" class="btn btn-warning btn-xs">
+                            Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
                 </div>
             </fieldset>
         </div>
@@ -40,23 +41,4 @@
 </div>
 </form>
 
-@*@{
-    ViewBag.Title = "Details";
-}
 
-<h2>Details</h2>
-
-<fieldset>
-    <legend>Grant_Category</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.CategoryID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@

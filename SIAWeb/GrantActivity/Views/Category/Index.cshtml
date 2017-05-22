@@ -7,12 +7,15 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-           <span class="h5">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;</span>
+           @*<span class="h5">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;</span>*@
+           <a href="@Url.Action("Create", "Category")" class="btn btn-warning btn-xs"> Add New Entry <i class="fa fa-plus-square" aria-hidden="true"></i></a>
+           <br />
+           <br />
            @*|&nbsp;&nbsp;</span><span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>*@
             <table class="table table-condensed table-hover" >
                 <tr>
                     <th>
-                       @* @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })*@
+                       
                        @Html.DisplayNameFor(model => model.Name)
                     </th>
                    
@@ -27,9 +30,11 @@
                         </td>
                         
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) | @Html.ActionLink("Details", "Details", new { id = item.CategoryID })
-                            |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                            <a href="@Url.Action("Edit", "Category", new { id = item.CategoryID })" class="btn btn-info btn-xs"> Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
+                            <a href="@Url.Action("Details", "Category", new { id = item.CategoryID })" class="btn btn-success btn-xs"> Details <i class="fa fa-list" aria-hidden="true"></i></a> |
+                            <a href="@Url.Action("Delete", "Category", new { id = item.CategoryID })" class="btn btn-danger btn-xs"> Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+
+                         
                         </td>
                     </tr>
                 }
