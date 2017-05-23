@@ -21,8 +21,10 @@
                 <fieldset class="scheduler-border">
                     
                     @Html.HiddenFor(model => model.AdminDailyID)
-                    @Html.HiddenFor(model => model.EnteredDate, new { @Value = @DateTime.Now.ToString()})
-                    @Html.HiddenFor(model => model.AppEntityID)
+                   @Html.HiddenFor(model => model.AppEntityID)
+                     @Html.HiddenFor(model => model.EnteredDate, new { @Value = @DateTime.Now.ToString() })
+                    @Html.HiddenFor(model => model.ApprovedFlag)
+                    @Html.HiddenFor(model => model.MoreInformationFlag)
                     
                      <div class="form-group col-xs-12">
                          <strong style="font-size:1.2em">@Html.LabelFor(model => model.GrantTypeID, new { @class = "control-label" })</strong>
@@ -31,12 +33,17 @@
                     </div>
                      <div class="form-group col-xs-12">
                          <strong style="font-size: 1.2em">@Html.LabelFor(model => model.DailyStart, new { @class = "control-label" })</strong>
-                        @Html.TextBoxFor(model => model.DailyStart, new { @class = "form-control"})
+                          @*@Html.TextBoxFor(model => model.DailyStart, new { @class = "form-control" })*@
+
+                          @Html.TextBoxFor(m => m.DailyStart, new { id = "StartDate", Value = Model.DailyStart.ToString("MM/dd/yyyy HH:mm"), @class = "form-control", mask = "99/99/9999 99:99" })
+                         
+                        
                         @Html.ValidationMessageFor(model => model.DailyStart, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group col-xs-12">
                          <strong style="font-size: 1.2em">@Html.LabelFor(model => model.DailyEnd, new { @class = "control-label" })</strong>
-                        @Html.TextBoxFor(model => model.DailyEnd, new { @class = "form-control" })
+                        @*@Html.TextBoxFor(model => model.DailyEnd, new { @class = "form-control" })*@
+                        @Html.TextBoxFor(m => m.DailyEnd, new {id="EndDate", Value = Model.DailyEnd.ToString("MM/dd/yyyy HH:mm"), @class = "form-control", mask = "99/99/9999 99:99" })
                         @Html.ValidationMessageFor(model => model.DailyEnd, "", new { @class = "text-danger" })
                     </div>
                       <div class="form-group col-xs-12">
@@ -58,7 +65,19 @@
    <script type="text/javascript">
        $(document).ready(function () {
 
+           $("#EndDate").change(function () {
+               var startDate = document.getElementById("StartDate").value;
+               var endDate = document.getElementById("EndDate").value;
+
+               if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                   alert("End date should be greater than Start date");
+                   document.getElementById("EndDate").value = "";
+               }
+           });
+
        });
+
+      
     </script>
 	}
 

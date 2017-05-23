@@ -18,10 +18,10 @@ namespace GrantActivity.Controllers
         }
 
         [HttpPost]
-        public ActionResult GiveReview(RatingAndReviews model)
+        public ActionResult GiveReview()
         {
-            model.InsertRating(model.UserId, model.RatingStar, model.ConsumerName, model.ReviewHeader, model.ReviewContent);
-            return View("SubmittedReview", model);
+           
+            return View();
         }
     }
 }
