@@ -32,8 +32,8 @@ namespace GrantActivity
         {
             UserLayerEntities user = new UserLayerEntities();
 
-            //var myUser = from u in user.spWebSiteUserInfo("dd94223", 1)
-            var myUser = from u in user.spWebSiteUserInfo(userPin, 1)
+            var myUser = from u in user.spWebSiteUserInfo("dd94223", 1)
+            //var myUser = from u in user.spWebSiteUserInfo(userPin, 1)
                          select u;
             foreach (var u in myUser)
             {

@@ -23,7 +23,8 @@ namespace GrantActivity.Controllers
             var daily = from d in db.Grant_Daily
                         select d;
 
-            daily = daily.Where(d => d.AppEntityID == userId && d.ApprovedFlag == false);
+            daily = daily.Where(d => d.AppEntityID == userId && d.ApprovedFlag == false)
+                                  .OrderByDescending(date => date.EnteredDate);
 
             return View(daily.ToList());
         }
@@ -35,6 +36,7 @@ namespace GrantActivity.Controllers
 
             var dailyactivities = from d in db.Grant_Daily.Where(d => d.AppEntityID == userId)
                                   select d;
+
             switch (Answer)
             {
                 case "Last30":
@@ -59,10 +61,11 @@ namespace GrantActivity.Controllers
                         .OrderByDescending(date => date.EnteredDate);
                     break;
                 default:
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId)
+                    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.ApprovedFlag == false)
                         .OrderByDescending(date => date.EnteredDate);
                     break;
             }
+
 
             return View(dailyactivities.ToList());
         }
@@ -107,6 +110,10 @@ namespace GrantActivity.Controllers
         [HttpPost]
         public ActionResult Create(Grant_Daily grant_daily)
         {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType, "GrantTypeID", "GrantType");
+            ViewBag.UserID = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
+
             if (ModelState.IsValid)
             {
                 db.Grant_Daily.AddObject(grant_daily);
