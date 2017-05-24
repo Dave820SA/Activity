@@ -116,6 +116,27 @@ namespace GrantBusinessLayer
             }
         }
 
+        [MetadataType(typeof(Person.Metadata))]
+        public partial class Person
+        {
+            sealed class Metadata
+            {
+                [Key]
+                public int AppEntityID { get; set; }
+
+                
+                [Display(Name = "First")]
+                public String FirstName { get; set; }
+
+                
+                [Display(Name = "Last")]
+                public String LastName { get; set; }
+
+                
+
+            }
+        }
+
 
     
 }

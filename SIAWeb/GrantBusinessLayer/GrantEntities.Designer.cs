@@ -22,6 +22,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Daily_Grant_GrantType", "Grant_GrantType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_GrantType), "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Activity_Grant_Category", "Grant_Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_Category), "Grant_Activity", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Activity), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Activity_Grant_Daily", "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_Daily), "Grant_Activity", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Activity), true)]
+[assembly: EdmRelationshipAttribute("GrantModel", "Daily_Person", "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Person), true)]
 
 #endregion
 
@@ -136,6 +137,22 @@ namespace GrantBusinessLayer
             }
         }
         private ObjectSet<Grant_Activity> _Grant_Activity;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Person> People
+        {
+            get
+            {
+                if ((_People == null))
+                {
+                    _People = base.CreateObjectSet<Person>("People");
+                }
+                return _People;
+            }
+        }
+        private ObjectSet<Person> _People;
 
         #endregion
 
@@ -171,6 +188,14 @@ namespace GrantBusinessLayer
         public void AddToGrant_Activity(Grant_Activity grant_Activity)
         {
             base.AddObject("Grant_Activity", grant_Activity);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the People EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPeople(Person person)
+        {
+            base.AddObject("People", person);
         }
 
         #endregion
@@ -893,6 +918,44 @@ namespace GrantBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "Daily_Person", "Person")]
+        public Person Person
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("GrantModel.Daily_Person", "Person").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("GrantModel.Daily_Person", "Person").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Person> PersonReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("GrantModel.Daily_Person", "Person");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("GrantModel.Daily_Person", "Person", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -997,6 +1060,281 @@ namespace GrantBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Grant_Daily>("GrantModel.FK_Grant_Daily_Grant_GrantType", "Grant_Daily", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GrantModel", Name="Person")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Person : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Person object.
+        /// </summary>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        public static Person CreatePerson(global::System.Int32 appEntityID)
+        {
+            Person person = new Person();
+            person.AppEntityID = appEntityID;
+            return person;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                if (_AppEntityID != value)
+                {
+                    OnAppEntityIDChanging(value);
+                    ReportPropertyChanging("AppEntityID");
+                    _AppEntityID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AppEntityID");
+                    OnAppEntityIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PersonTypeID
+        {
+            get
+            {
+                return _PersonTypeID;
+            }
+            set
+            {
+                OnPersonTypeIDChanging(value);
+                ReportPropertyChanging("PersonTypeID");
+                _PersonTypeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PersonTypeID");
+                OnPersonTypeIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PersonTypeID;
+        partial void OnPersonTypeIDChanging(Nullable<global::System.Int32> value);
+        partial void OnPersonTypeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Title
+        {
+            get
+            {
+                return _Title;
+            }
+            set
+            {
+                OnTitleChanging(value);
+                ReportPropertyChanging("Title");
+                _Title = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Title");
+                OnTitleChanged();
+            }
+        }
+        private global::System.String _Title;
+        partial void OnTitleChanging(global::System.String value);
+        partial void OnTitleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
+            }
+        }
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String MiddleName
+        {
+            get
+            {
+                return _MiddleName;
+            }
+            set
+            {
+                OnMiddleNameChanging(value);
+                ReportPropertyChanging("MiddleName");
+                _MiddleName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("MiddleName");
+                OnMiddleNameChanged();
+            }
+        }
+        private global::System.String _MiddleName;
+        partial void OnMiddleNameChanging(global::System.String value);
+        partial void OnMiddleNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Suffix
+        {
+            get
+            {
+                return _Suffix;
+            }
+            set
+            {
+                OnSuffixChanging(value);
+                ReportPropertyChanging("Suffix");
+                _Suffix = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Suffix");
+                OnSuffixChanged();
+            }
+        }
+        private global::System.String _Suffix;
+        partial void OnSuffixChanging(global::System.String value);
+        partial void OnSuffixChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Guid> rowguid
+        {
+            get
+            {
+                return _rowguid;
+            }
+            set
+            {
+                OnrowguidChanging(value);
+                ReportPropertyChanging("rowguid");
+                _rowguid = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("rowguid");
+                OnrowguidChanged();
+            }
+        }
+        private Nullable<global::System.Guid> _rowguid;
+        partial void OnrowguidChanging(Nullable<global::System.Guid> value);
+        partial void OnrowguidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "Daily_Person", "Grant_Daily")]
+        public EntityCollection<Grant_Daily> Grant_Daily
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Grant_Daily>("GrantModel.Daily_Person", "Grant_Daily");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Grant_Daily>("GrantModel.Daily_Person", "Grant_Daily", value);
                 }
             }
         }

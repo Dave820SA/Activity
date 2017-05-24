@@ -10,6 +10,7 @@
           <EntitySet Name="Grant_Category" EntityType="GrantModel.Store.Grant_Category" store:Type="Tables" Schema="dbo" Table="Grant.Category" />
           <EntitySet Name="Grant_Daily" EntityType="GrantModel.Store.Grant_Daily" store:Type="Tables" Schema="dbo" Table="Grant.Daily" />
           <EntitySet Name="Grant_GrantType" EntityType="GrantModel.Store.Grant_GrantType" store:Type="Tables" Schema="dbo" Table="Grant.GrantType" />
+          <EntitySet Name="Person_Person" EntityType="GrantModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
           <AssociationSet Name="FK_Grant_Activity_Grant_Category" Association="GrantModel.Store.FK_Grant_Activity_Grant_Category">
             <End Role="Grant_Category" EntitySet="Grant_Category" />
             <End Role="Grant_Activity" EntitySet="Grant_Activity" />
@@ -62,6 +63,20 @@
           </Key>
           <Property Name="GrantTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="GrantType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Person_Person">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="PersonTypeID" Type="int" />
+          <Property Name="Title" Type="varchar" MaxLength="8" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="Suffix" Type="varchar" MaxLength="10" />
+          <Property Name="rowguid" Type="uniqueidentifier" />
+          <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <Association Name="FK_Grant_Activity_Grant_Category">
           <End Role="Grant_Category" Type="GrantModel.Store.Grant_Category" Multiplicity="1" />
@@ -120,6 +135,11 @@
             <End Role="Grant_Daily" EntitySet="Grant_Daily" />
             <End Role="Grant_Activity" EntitySet="Grant_Activity" />
           </AssociationSet>
+          <EntitySet Name="People" EntityType="GrantModel.Person" />
+          <AssociationSet Name="Daily_Person" Association="GrantModel.Daily_Person">
+            <End Role="Grant_Daily" EntitySet="Grant_Daily" />
+            <End Role="Person" EntitySet="People" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grant_Category">
           <Key>
@@ -146,6 +166,7 @@
           <Property Name="ApprovedDate" Type="DateTime" />
           <NavigationProperty Name="Grant_GrantType" Relationship="GrantModel.FK_Grant_Daily_Grant_GrantType" FromRole="Grant_Daily" ToRole="Grant_GrantType" />
           <NavigationProperty Name="Grant_Activity" Relationship="GrantModel.FK_Grant_Activity_Grant_Daily" FromRole="Grant_Daily" ToRole="Grant_Activity" />
+          <NavigationProperty Name="Person" Relationship="GrantModel.Daily_Person" FromRole="Grant_Daily" ToRole="Person" />
         </EntityType>
         <EntityType Name="Grant_GrantType">
           <Key>
@@ -203,6 +224,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="PersonTypeID" />
+          <Property Type="String" Name="Title" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Suffix" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="rowguid" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <NavigationProperty Name="Grant_Daily" Relationship="GrantModel.Daily_Person" FromRole="Person" ToRole="Grant_Daily" />
+        </EntityType>
+        <Association Name="Daily_Person">
+          <End Type="GrantModel.Grant_Daily" Role="Grant_Daily" Multiplicity="*" />
+          <End Type="GrantModel.Person" Role="Person" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="Grant_Daily">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -253,6 +301,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="GrantModel.Person">
+              <MappingFragment StoreEntitySet="Person_Person">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PersonTypeID" ColumnName="PersonTypeID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -283,13 +346,24 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="GrantModel.Grant_Activity" Width="1.5" PointX="6" PointY="1.875" Height="2.3648893229166656" />
         <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Category" >
-          <ConnectorPoint PointX="4.5" PointY="6.797841796875" />
-          <ConnectorPoint PointX="6.75" PointY="6.797841796875" />
-          <ConnectorPoint PointX="6.75" PointY="4.2398893229166656" />
+          <ConnectorPoint PointX="4.5" PointY="6" />
+          <ConnectorPoint PointX="4.875" PointY="5.625" />
+          <ConnectorPoint PointX="4.875" PointY="3.6799189921875" />
+          <ConnectorPoint PointX="6" PointY="3.6799189921875" />
         </AssociationConnector>
         <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Daily" >
           <ConnectorPoint PointX="4.5" PointY="3.0574446614583328" />
           <ConnectorPoint PointX="6" PointY="3.0574446614583328" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GrantModel.Person" Width="1.5" PointX="6" PointY="5.125" Height="2.7494921874999996" />
+        <AssociationConnector Association="GrantModel.Daily_Person">
+          <ConnectorPoint PointX="4.5" PointY="4.64869065665064" />
+          <ConnectorPoint PointX="4.8160744349011217" PointY="4.9647650915517607" />
+          <ConnectorPoint PointX="4.9339255650988791" PointY="5.082616221749519" />
+          <ConnectorPoint PointX="5.1875" PointY="5.33619065665064" />
+          <ConnectorPoint PointX="5.1875" PointY="4.75" />
+          <ConnectorPoint PointX="5.625" PointY="4.75" />
+          <ConnectorPoint PointX="6" PointY="5.125" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
