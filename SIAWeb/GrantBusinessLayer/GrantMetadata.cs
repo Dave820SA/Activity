@@ -102,6 +102,7 @@ namespace GrantBusinessLayer
             }
         }
 
+
         [MetadataType(typeof(Grant_GrantType.Metadata))]
         public partial class Grant_GrantType
         {
@@ -116,6 +117,7 @@ namespace GrantBusinessLayer
             }
         }
 
+
         [MetadataType(typeof(Person.Metadata))]
         public partial class Person
         {
@@ -124,15 +126,35 @@ namespace GrantBusinessLayer
                 [Key]
                 public int AppEntityID { get; set; }
 
-                
+
                 [Display(Name = "First")]
                 public String FirstName { get; set; }
 
-                
+
                 [Display(Name = "Last")]
                 public String LastName { get; set; }
 
-                
+
+            }
+        }
+
+
+        [MetadataType(typeof(Approver.Metadata))]
+        public partial class Approver
+        {
+            sealed class Metadata
+            {
+                [Key]
+                public int AppEntityID { get; set; }
+
+
+                [Display(Name = "First")]
+                public String FirstName { get; set; }
+
+
+                [Display(Name = "Last")]
+                public String LastName { get; set; }
+
 
             }
         }

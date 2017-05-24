@@ -1,0 +1,134 @@
+﻿@model GrantBusinessLayer.Grant_Daily
+
+@{
+    ViewBag.Title = "Details";
+    
+}
+
+<h2>Details</h2>
+
+<div style="padding-left: 5px">
+    <h3>
+        Activity<small> Details by @(String.Format("{0} {1}", Model.Person.FirstName, Model.Person.LastName )) </small></h3>
+        <hr />
+</div>
+<form class="form-horizontal">
+<div class="Container">
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <fieldset class="scheduler-border">
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Grant_GrantType.GrantType)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DailyStart)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DailyStart)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DailyEnd)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DailyEnd)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">Total Time</strong>
+                    </div>
+                    <div class="display-field">
+                        @{
+                           
+                            var hours = (Model.DailyEnd - Model.DailyStart).TotalHours;
+                            
+                            <strong style="font-size: 1.5em; color: White">@(String.Format("{0:0.0} Hrs", hours))</strong>
+                        }
+                    </div>
+                </div>
+
+                 <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.EnteredDate)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.EnteredDate)</strong>
+                    </div>
+                </div>
+
+                <div class="form-group col-xs-12">
+                </div>
+
+                <div class="form-group col-xs-12">
+                    <a href="@Url.Action("Index", "Admin")" class="btn btn-warning btn-sm">Back To List
+                        <i class="fa fa-share" aria-hidden="true"></i></a>
+                </div>
+            </fieldset>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                   
+                    <table class="table table-condensed table-hover table-bordered">
+                        <tr>
+                            <th>
+                                Activity
+                            </th>
+                            <th>
+                                Notes
+                            </th>
+                            
+                        </tr>
+                        @foreach (var item in ViewData["Activities"] as IEnumerable<GrantBusinessLayer.Grant_Activity>)
+                        {
+                            <tr>
+                                <td style="max-width: 280px; min-width: 280px; width: 280px;">
+                                    @item.Grant_Category.Name
+                                </td>
+                                <td style="max-width: 400px; min-width: 400px; width: 400px;">
+                                    @item.Notes
+                                </td>
+                                
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="enterActivityModal">
+    <div class="modal-dialog">
+    @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "ID", OnSuccess = "onSuccess" }))
+    {
+        <div id="mainContent" class="modal-content col-sm-12">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                    &times;</button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Edit Course</h4>
+            </div>
+            <div class="modal-body">
+                //YOUR EXISTING FORM HERE
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal">
+                    Cancel</button>
+                <input class="btn btn-primary" type="submit" value="Save" />
+            </div>
+        </div>
+      }    
+    </div>
+        
+</div>
+  
+</form>
