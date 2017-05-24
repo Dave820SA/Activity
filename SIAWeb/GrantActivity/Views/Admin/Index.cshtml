@@ -1,10 +1,32 @@
 ﻿@model IEnumerable<GrantBusinessLayer.Grant_Daily>
+
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Alternate.cshtml";
+    ViewBag.Title = "View Activity";
 }
 
-<h2>Index</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <strong style="font-size:1.8em; padding-left:10px">Entered Activity</strong>
+    </div>
+    <div class="col-md-9">
+        <div style="float: right">
+            @using (Html.BeginForm("Index", "Admin", FormMethod.Post))
+            { 
+                <strong style="font-size: 1.2em;">Sort By:&nbsp; &nbsp;</strong>
+            
+                
+                @Html.RadioButton("Answer", "Last30") <span>Last 30 Days |</span>
+                @Html.RadioButton("Answer", "Approve") <span>Approved |</span>
+                @Html.RadioButton("Answer", "NotApprove") <span>Not Approved |</span>
+                @Html.RadioButton("Answer", "MoreInfo") <span>More Info |</span>
+                @Html.RadioButton("Answer", "All") <span>All &nbsp; &nbsp;</span> 
+
+                <input type="submit" class="btn btn-primary" value="Sort" />
+            }
+        </div>
+    </div>
+</div>
 
 
 <div class="container">
@@ -35,14 +57,16 @@
                     <th>
                         @Html.DisplayNameFor(model => model.MoreInformationFlag)
                     </th>
+                   @* <th>
+                        @Html.DisplayNameFor(model => model.Approvel.Approver)
+                    </th>*@
                     <th>
                     </th>
                 </tr>
                 @foreach (var item in Model)
                 {
                     @Html.HiddenFor(modelItem => item.AppEntityID)
-                    <tr>
-                       
+                                        <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Grant_GrantType.GrantType)
                         </td>
@@ -80,6 +104,9 @@
                                 <img src="~/Images/red-minus.png" alt="" class="image_background" />
                     } }
                         </td>
+                       @* <th>
+                            @Html.DisplayFor(modelItem => item.Approvel.Approver)
+                        </th>*@
                         <td>
                             <a href="@Url.Action("Details", "Admin", new { id = item.AdminDailyID })" class="btn btn-success btn-xs">
                                 Details <i class="fa fa-list" aria-hidden="true"></i></a>

@@ -297,6 +297,7 @@
     <None Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
     <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <None Include="font-awesome-4.7.0\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\GrantActivity.pubxml" />
     <None Include="Properties\PublishProfiles\GrantAdminReporting.pubxml" />
     <None Include="Scripts\jquery-1.9.0.min.map" />
     <Content Include="Views\Category\Index.cshtml" />

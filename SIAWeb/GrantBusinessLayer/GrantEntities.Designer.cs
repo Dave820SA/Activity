@@ -23,6 +23,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Activity_Grant_Category", "Grant_Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_Category), "Grant_Activity", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Activity), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_Grant_Activity_Grant_Daily", "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Grant_Daily), "Grant_Activity", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Activity), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "Daily_Person", "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Person), true)]
+[assembly: EdmRelationshipAttribute("GrantModel", "Grant_vActivityApproverGrant_Daily", "Grant_vActivityApprover", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GrantBusinessLayer.Grant_vActivityApprover), "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), true)]
 
 #endregion
 
@@ -153,6 +154,22 @@ namespace GrantBusinessLayer
             }
         }
         private ObjectSet<Person> _People;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Grant_vActivityApprover> Grant_vActivityApprover
+        {
+            get
+            {
+                if ((_Grant_vActivityApprover == null))
+                {
+                    _Grant_vActivityApprover = base.CreateObjectSet<Grant_vActivityApprover>("Grant_vActivityApprover");
+                }
+                return _Grant_vActivityApprover;
+            }
+        }
+        private ObjectSet<Grant_vActivityApprover> _Grant_vActivityApprover;
 
         #endregion
 
@@ -196,6 +213,14 @@ namespace GrantBusinessLayer
         public void AddToPeople(Person person)
         {
             base.AddObject("People", person);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Grant_vActivityApprover EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGrant_vActivityApprover(Grant_vActivityApprover grant_vActivityApprover)
+        {
+            base.AddObject("Grant_vActivityApprover", grant_vActivityApprover);
         }
 
         #endregion
@@ -956,6 +981,44 @@ namespace GrantBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "Grant_vActivityApproverGrant_Daily", "Grant_vActivityApprover")]
+        public Grant_vActivityApprover Grant_vActivityApprover
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Grant_vActivityApprover>("GrantModel.Grant_vActivityApproverGrant_Daily", "Grant_vActivityApprover").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Grant_vActivityApprover>("GrantModel.Grant_vActivityApproverGrant_Daily", "Grant_vActivityApprover").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Grant_vActivityApprover> Grant_vActivityApproverReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Grant_vActivityApprover>("GrantModel.Grant_vActivityApproverGrant_Daily", "Grant_vActivityApprover");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Grant_vActivityApprover>("GrantModel.Grant_vActivityApproverGrant_Daily", "Grant_vActivityApprover", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -1060,6 +1123,113 @@ namespace GrantBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Grant_Daily>("GrantModel.FK_Grant_Daily_Grant_GrantType", "Grant_Daily", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GrantModel", Name="Grant_vActivityApprover")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Grant_vActivityApprover : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Grant_vActivityApprover object.
+        /// </summary>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        public static Grant_vActivityApprover CreateGrant_vActivityApprover(global::System.Int32 appEntityID)
+        {
+            Grant_vActivityApprover grant_vActivityApprover = new Grant_vActivityApprover();
+            grant_vActivityApprover.AppEntityID = appEntityID;
+            return grant_vActivityApprover;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                if (_AppEntityID != value)
+                {
+                    OnAppEntityIDChanging(value);
+                    ReportPropertyChanging("AppEntityID");
+                    _AppEntityID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AppEntityID");
+                    OnAppEntityIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ApproveBy
+        {
+            get
+            {
+                return _ApproveBy;
+            }
+            set
+            {
+                OnApproveByChanging(value);
+                ReportPropertyChanging("ApproveBy");
+                _ApproveBy = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ApproveBy");
+                OnApproveByChanged();
+            }
+        }
+        private global::System.String _ApproveBy;
+        partial void OnApproveByChanging(global::System.String value);
+        partial void OnApproveByChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "Grant_vActivityApproverGrant_Daily", "Grant_Daily")]
+        public EntityCollection<Grant_Daily> Grant_Daily
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Grant_Daily>("GrantModel.Grant_vActivityApproverGrant_Daily", "Grant_Daily");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Grant_Daily>("GrantModel.Grant_vActivityApproverGrant_Daily", "Grant_Daily", value);
                 }
             }
         }

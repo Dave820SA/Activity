@@ -64,12 +64,24 @@
                     </div>
                 </div>
 
+                 <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Grant_vActivityApprover.ApproveBy)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Grant_vActivityApprover.ApproveBy)</strong>
+                    </div>
+                </div>
+
                 <div class="form-group col-xs-12">
                 </div>
 
                 <div class="form-group col-xs-12">
                     <a href="@Url.Action("Index", "Admin")" class="btn btn-warning btn-sm">Back To List
                         <i class="fa fa-share" aria-hidden="true"></i></a>
+                    <br />
+                    <br />
+                    <input id="enterActivity" type="submit" class="btn btn-success" value="More Information" />
                 </div>
             </fieldset>
         </div>
@@ -104,6 +116,7 @@
             </div>
         </div>
     </div>
+   
 </div>
 
 <div class="modal fade" id="enterActivityModal">
@@ -132,3 +145,26 @@
 </div>
   
 </form>
+
+@section Scripts {
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+
+    $(function () {
+           $('.enterActivity').on("click", function (e) {
+               e.preventDefault();
+               //perform the url load  then
+               $('#enterActivityModal').modal({
+                   keyboard: true
+               }, 'show');
+               return false;
+           })
+       })
+      
+
+     
+    </script>
+    }
