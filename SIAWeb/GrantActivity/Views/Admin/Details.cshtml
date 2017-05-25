@@ -1,11 +1,9 @@
 ﻿@model GrantBusinessLayer.Grant_Daily
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Activity Details";
     
 }
-
-<h2>Details</h2>
 
 <div style="padding-left: 5px">
     <h3>
@@ -66,24 +64,48 @@
 
                  <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Grant_vActivityApprover.ApproveBy)</strong>
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.ApprovedByID)</strong>
                     </div>
-                    <div class="display-field">
-                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Grant_vActivityApprover.ApproveBy)</strong>
-                    </div>
+                     <div class="display-field">
+                         @{
+                             var approve = Html.DisplayFor(model => model.Grant_vActivityApprover.ApproveBy).ToString();
+
+                             if (approve != "")
+                             {
+                            
+                             <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Grant_vActivityApprover.ApproveBy)</strong>
+                             
+                         }
+                         else
+                         {
+                             <strong style="font-size: 1.5em; color: White">Not Yet Approved</strong>
+                           
+                         }
+                         
+                         
+                         }
+                     </div>
                 </div>
 
                 <div class="form-group col-xs-12">
                 </div>
-
                 <div class="form-group col-xs-12">
-                    <a href="@Url.Action("Index", "Admin")" class="btn btn-warning btn-sm">Back To List
-                        <i class="fa fa-share" aria-hidden="true"></i></a>
+                    <button type="button" class="btn btn-success btn-sm" style="width: 140px">
+                        Approve
+                    </button>
                     <br />
                     <br />
-                    <input id="enterActivity" type="submit" class="btn btn-success" value="More Information" />
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"
+                        style="width: 140px">
+                        Request More Info
+                    </button>
+                    <br />
+                    <br />
+                    <a href="@Url.Action("Index", "Admin")" class="btn btn-warning btn-sm" style="width:140px">
+                        Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
                 </div>
             </fieldset>
+
         </div>
         <div class="container">
             <div class="row">
@@ -119,29 +141,30 @@
    
 </div>
 
-<div class="modal fade" id="enterActivityModal">
-    <div class="modal-dialog">
-    @using (Ajax.BeginForm("Index", new AjaxOptions { UpdateTargetId = "ID", OnSuccess = "onSuccess" }))
-    {
-        <div id="mainContent" class="modal-content col-sm-12">
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
-                    &times;</button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">
-                    Edit Course</h4>
+                    Request More Information from User</h4>
             </div>
             <div class="modal-body">
-                //YOUR EXISTING FORM HERE
+                <div class="display-field">
+                    <strong style="font-size: 1.5em; color: White">@Html.TextAreaFor(model => model.AdminNotes, new { @class = "form-control", cols = "20", rows = "7" })
+                    </strong>
+                </div>
             </div>
             <div class="modal-footer">
-                <button class="btn" data-dismiss="modal">
-                    Cancel</button>
-                <input class="btn btn-primary" type="submit" value="Save" />
+                <button type="button" class="btn btn-default" data-dismiss="modal">
+                    Close</button>
+                <button type="button" class="btn btn-primary">
+                    Save changes</button>
             </div>
         </div>
-      }    
     </div>
-        
 </div>
   
 </form>
@@ -153,18 +176,5 @@
 
        });
 
-    $(function () {
-           $('.enterActivity').on("click", function (e) {
-               e.preventDefault();
-               //perform the url load  then
-               $('#enterActivityModal').modal({
-                   keyboard: true
-               }, 'show');
-               return false;
-           })
-       })
-      
-
-     
     </script>
     }
