@@ -19,7 +19,7 @@
             else
             {
              <h4>
-                Welcome<small>, <a href="#">Click to become an SIA Web user</a> </small>
+                Welcome<small>, <a href="#">Click a bureau link to see SOP’s  </a> </small>
             </h4>
             }
         }
@@ -44,8 +44,8 @@
                                     
                                     if (item.BureauID == 1)
                                     {
-                                    <li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>
-                                    @*<li><a href="D:\Reports.pdf" target="_blank">@item.SOP </a></li>*@
+                                    <li><a href=" @item.DocPath " target="_blank" >@item.SOP </a></li>
+                                    
                                     }
                                 }
                             </ul>
@@ -97,11 +97,11 @@
                             <ul>
                                 @foreach (var item in Model)
                                 {
-                                    
+
                                     if (item.BureauID == 3)
                                     {
                                     <li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>
-                                    @*<li><a href="D:\Reports.pdf" target="_blank">@item.SOP </a></li>*@
+                                    
                                     }
                                 }
                             </ul>
@@ -136,6 +136,7 @@
             </div>
         </div>
     </div>
+    	
 </div>
 
 @section scripts
@@ -152,6 +153,15 @@
                                 .removeClass("fa-angle-double-up")
                                 .addClass("fa-angle-double-down");
             });
+
+
+            $(function () {
+                $('div.panel-body a').click(function () {
+                    alert($(this).attr('href'));
+//                    alert($(this).text());
+                });
+            });
+
 
         });
 

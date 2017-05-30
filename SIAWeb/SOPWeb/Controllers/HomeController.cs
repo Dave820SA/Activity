@@ -23,6 +23,23 @@ namespace SOPWeb.Controllers
             return View(sopCurrentDoc);
         }
 
+
+        //[HttpPost]
+        //public ActionResult Index(string doc)
+        //{
+
+        //    List<SOP_vCurrentDoc> sopCurrentDoc = db.SOP_vCurrentDoc.ToList();
+
+        //    ViewBag.Message = "Welcome to the SOP Web App.";
+
+        //    return View(sopCurrentDoc);
+        //}
+
+        public ActionResult Info()
+        {
+            return View();
+        }
+
         public ViewResult Search(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;

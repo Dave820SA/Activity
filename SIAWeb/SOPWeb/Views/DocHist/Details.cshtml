@@ -54,12 +54,16 @@
                     </div>
                 </div>
             </fieldset>
-            <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>
+            <a href="@Url.Action("Index", "DocHist")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+            @*<strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>*@
         </div>
         <div class="col-sm-6">
-            <iframe src=@Html.DisplayFor(model => model.DocPath) width="500" height="625">
-
-            </iframe>
+            <iframe src=@Html.DisplayFor(model => model.DocPath) width="500" height="625"></iframe>
+            <div style="text-align: center">
+                <br />
+                <a href=@Html.DisplayFor(model => model.DocPath) target="_blank" class="btn btn-success btn-sm">
+                    View Full Screen <i class="fa fa-list" aria-hidden="true"></i></a>
+            </div>
         </div>
     </div>
 </div>

@@ -302,6 +302,7 @@
     <None Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
     <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
     <None Include="font-awesome-4.7.0\scss\_variables.scss" />
+    <None Include="Properties\PublishProfiles\SOP Web.pubxml" />
     <None Include="Properties\PublishProfiles\SOPWeb.pubxml" />
     <None Include="readme.txt" />
     <Content Include="Views\Home\Search.cshtml" />
@@ -324,6 +325,7 @@
     <Content Include="Views\DocHist\Search.cshtml" />
     <Content Include="Views\DocHist\DetailsAll.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Info.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
