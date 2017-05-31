@@ -13,6 +13,7 @@ namespace SOPWeb.Controllers
 
         SAPDActivityEntities db = new SAPDActivityEntities();
 
+        [OutputCache(Duration=10)]
         public ActionResult Index()
         {
 
@@ -23,23 +24,33 @@ namespace SOPWeb.Controllers
             return View(sopCurrentDoc);
         }
 
+        //track the clicked links
+        public ActionResult updateStats(string link)
+        {
+            ActivityLog track = new ActivityLog();
+            track.WebLinkID = 13;
+            string appID = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
+            if (appID != null)
+            {
+                track.AppEntityID = Int32.Parse(appID);
+            }
+            track.Link = link;
+            track.ClickedDatetime = DateTime.Parse(DateTime.Now.ToString());
+            track.Flagged = false;
 
-        //[HttpPost]
-        //public ActionResult Index(string doc)
-        //{
+            db.ActivityLogs.AddObject(track);
+            db.SaveChanges();
 
-        //    List<SOP_vCurrentDoc> sopCurrentDoc = db.SOP_vCurrentDoc.ToList();
+            return View();
+        }
 
-        //    ViewBag.Message = "Welcome to the SOP Web App.";
-
-        //    return View(sopCurrentDoc);
-        //}
 
         public ActionResult Info()
         {
             return View();
         }
 
+        [OutputCache(Duration = 10)]
         public ViewResult Search(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;

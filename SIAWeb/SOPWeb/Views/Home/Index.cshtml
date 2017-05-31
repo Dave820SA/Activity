@@ -155,10 +155,30 @@
             });
 
 
+            //            $(function () {
+            //                $('div.panel-body a').click(function () {
+            //                    alert($(this).attr('href'));
+            //                   alert($(this).text());
+            //                });
+            //            });
+
+
             $(function () {
                 $('div.panel-body a').click(function () {
-                    alert($(this).attr('href'));
-//                    alert($(this).text());
+                    var link = $(this).text()
+                    //alert($(this).attr('href'));
+                    //alert($(this).text());
+                    //alert(link);
+
+                    $.ajax({
+                        type: 'get',
+                        url: '@Url.Action("updateStats")',
+                        data: {"link": link},
+                        success: function (result) {
+                        
+                        }
+                    });
+
                 });
             });
 

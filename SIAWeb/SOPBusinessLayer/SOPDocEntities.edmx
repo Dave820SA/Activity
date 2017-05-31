@@ -6,6 +6,7 @@
     <edmx:StorageModels>
     <Schema Namespace="SOPDocModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SOPDocModelStoreContainer">
+          <EntitySet Name="Activity_ActivityLog" EntityType="SOPDocModel.Store.Activity_ActivityLog" store:Type="Tables" Schema="dbo" Table="Activity.ActivityLog" />
           <EntitySet Name="Office_Bureau" EntityType="SOPDocModel.Store.Office_Bureau" store:Type="Tables" Schema="dbo" Table="Office.Bureau" />
           <EntitySet Name="SOP_DocHistory" EntityType="SOPDocModel.Store.SOP_DocHistory" store:Type="Tables" store:Schema="dbo" store:Name="SOP.DocHistory">
             <DefiningQuery>SELECT 
@@ -39,6 +40,17 @@
             <End Role="SOP_SOP" EntitySet="SOP_SOP" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Activity_ActivityLog">
+          <Key>
+            <PropertyRef Name="ActivityLogID" />
+          </Key>
+          <Property Name="ActivityLogID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebLinkID" Type="int" Nullable="false" />
+          <Property Name="AppEntityID" Type="int" />
+          <Property Name="Link" Type="varchar" MaxLength="50" />
+          <Property Name="ClickedDatetime" Type="datetime" />
+          <Property Name="Flagged" Type="bit" />
+        </EntityType>
         <EntityType Name="Office_Bureau">
           <Key>
             <PropertyRef Name="BureauID" />
@@ -156,6 +168,7 @@
             <Parameter Name="DocPath" Mode="In" Type="String" />
             <Parameter Name="StartDate" Mode="In" Type="DateTime" />
           </FunctionImport>
+          <EntitySet Name="ActivityLogs" EntityType="SOPDocModel.ActivityLog" />
         </EntityContainer>
         <EntityType Name="Bureau">
           <Key>
@@ -232,6 +245,17 @@
           <Property Type="Int32" Name="BureauID" Nullable="false" />
           <Property Type="String" Name="DocPath" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="ActivityLogID" />
+          </Key>
+          <Property Type="Int32" Name="ActivityLogID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="WebLinkID" Nullable="false" />
+          <Property Type="Int32" Name="AppEntityID" />
+          <Property Type="String" Name="Link" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ClickedDatetime" />
+          <Property Type="Boolean" Name="Flagged" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -304,6 +328,18 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SOP_spInsertNew" FunctionName="SOPDocModel.Store.SOP_spInsertNew">
           </FunctionImportMapping>
+          <EntitySetMapping Name="ActivityLogs">
+            <EntityTypeMapping TypeName="SOPDocModel.ActivityLog">
+              <MappingFragment StoreEntitySet="Activity_ActivityLog">
+                <ScalarProperty Name="Flagged" ColumnName="Flagged" />
+                <ScalarProperty Name="ClickedDatetime" ColumnName="ClickedDatetime" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="WebLinkID" ColumnName="WebLinkID" />
+                <ScalarProperty Name="ActivityLogID" ColumnName="ActivityLogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -337,6 +373,7 @@
           <ConnectorPoint PointX="5.25" PointY="2.2112939453125" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SOPDocModel.SOP_vCurrentDoc" Width="1.5" PointX="0.75" PointY="4.75" Height="1.9802864583333335" />
+        <EntityTypeShape EntityType="SOPDocModel.ActivityLog" Width="2" PointX="3.25" PointY="4.75" Height="2.1725878906249996" />
       </Diagram>
     </Diagrams>
   </Designer>

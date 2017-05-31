@@ -135,6 +135,22 @@ namespace SOPBusinessLayer
             }
         }
         private ObjectSet<SOP_vCurrentDoc> _SOP_vCurrentDoc;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ActivityLog> ActivityLogs
+        {
+            get
+            {
+                if ((_ActivityLogs == null))
+                {
+                    _ActivityLogs = base.CreateObjectSet<ActivityLog>("ActivityLogs");
+                }
+                return _ActivityLogs;
+            }
+        }
+        private ObjectSet<ActivityLog> _ActivityLogs;
 
         #endregion
 
@@ -170,6 +186,14 @@ namespace SOPBusinessLayer
         public void AddToSOP_vCurrentDoc(SOP_vCurrentDoc sOP_vCurrentDoc)
         {
             base.AddObject("SOP_vCurrentDoc", sOP_vCurrentDoc);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ActivityLogs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToActivityLogs(ActivityLog activityLog)
+        {
+            base.AddObject("ActivityLogs", activityLog);
         }
 
         #endregion
@@ -235,6 +259,185 @@ namespace SOPBusinessLayer
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SOPDocModel", Name="ActivityLog")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ActivityLog : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ActivityLog object.
+        /// </summary>
+        /// <param name="activityLogID">Initial value of the ActivityLogID property.</param>
+        /// <param name="webLinkID">Initial value of the WebLinkID property.</param>
+        public static ActivityLog CreateActivityLog(global::System.Int32 activityLogID, global::System.Int32 webLinkID)
+        {
+            ActivityLog activityLog = new ActivityLog();
+            activityLog.ActivityLogID = activityLogID;
+            activityLog.WebLinkID = webLinkID;
+            return activityLog;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ActivityLogID
+        {
+            get
+            {
+                return _ActivityLogID;
+            }
+            set
+            {
+                if (_ActivityLogID != value)
+                {
+                    OnActivityLogIDChanging(value);
+                    ReportPropertyChanging("ActivityLogID");
+                    _ActivityLogID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ActivityLogID");
+                    OnActivityLogIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ActivityLogID;
+        partial void OnActivityLogIDChanging(global::System.Int32 value);
+        partial void OnActivityLogIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebLinkID
+        {
+            get
+            {
+                return _WebLinkID;
+            }
+            set
+            {
+                OnWebLinkIDChanging(value);
+                ReportPropertyChanging("WebLinkID");
+                _WebLinkID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WebLinkID");
+                OnWebLinkIDChanged();
+            }
+        }
+        private global::System.Int32 _WebLinkID;
+        partial void OnWebLinkIDChanging(global::System.Int32 value);
+        partial void OnWebLinkIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _AppEntityID;
+        partial void OnAppEntityIDChanging(Nullable<global::System.Int32> value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Link
+        {
+            get
+            {
+                return _Link;
+            }
+            set
+            {
+                OnLinkChanging(value);
+                ReportPropertyChanging("Link");
+                _Link = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Link");
+                OnLinkChanged();
+            }
+        }
+        private global::System.String _Link;
+        partial void OnLinkChanging(global::System.String value);
+        partial void OnLinkChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ClickedDatetime
+        {
+            get
+            {
+                return _ClickedDatetime;
+            }
+            set
+            {
+                OnClickedDatetimeChanging(value);
+                ReportPropertyChanging("ClickedDatetime");
+                _ClickedDatetime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClickedDatetime");
+                OnClickedDatetimeChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ClickedDatetime;
+        partial void OnClickedDatetimeChanging(Nullable<global::System.DateTime> value);
+        partial void OnClickedDatetimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Flagged
+        {
+            get
+            {
+                return _Flagged;
+            }
+            set
+            {
+                OnFlaggedChanging(value);
+                ReportPropertyChanging("Flagged");
+                _Flagged = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Flagged");
+                OnFlaggedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Flagged;
+        partial void OnFlaggedChanging(Nullable<global::System.Boolean> value);
+        partial void OnFlaggedChanged();
+
+        #endregion
+
+    
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
