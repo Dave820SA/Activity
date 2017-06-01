@@ -274,12 +274,12 @@ namespace SOPBusinessLayer
         /// Create a new ActivityLog object.
         /// </summary>
         /// <param name="activityLogID">Initial value of the ActivityLogID property.</param>
-        /// <param name="webLinkID">Initial value of the WebLinkID property.</param>
-        public static ActivityLog CreateActivityLog(global::System.Int32 activityLogID, global::System.Int32 webLinkID)
+        /// <param name="webAppID">Initial value of the WebAppID property.</param>
+        public static ActivityLog CreateActivityLog(global::System.Int32 activityLogID, global::System.Int32 webAppID)
         {
             ActivityLog activityLog = new ActivityLog();
             activityLog.ActivityLogID = activityLogID;
-            activityLog.WebLinkID = webLinkID;
+            activityLog.WebAppID = webAppID;
             return activityLog;
         }
 
@@ -319,24 +319,24 @@ namespace SOPBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 WebLinkID
+        public global::System.Int32 WebAppID
         {
             get
             {
-                return _WebLinkID;
+                return _WebAppID;
             }
             set
             {
-                OnWebLinkIDChanging(value);
-                ReportPropertyChanging("WebLinkID");
-                _WebLinkID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("WebLinkID");
-                OnWebLinkIDChanged();
+                OnWebAppIDChanging(value);
+                ReportPropertyChanging("WebAppID");
+                _WebAppID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WebAppID");
+                OnWebAppIDChanged();
             }
         }
-        private global::System.Int32 _WebLinkID;
-        partial void OnWebLinkIDChanging(global::System.Int32 value);
-        partial void OnWebLinkIDChanged();
+        private global::System.Int32 _WebAppID;
+        partial void OnWebAppIDChanging(global::System.Int32 value);
+        partial void OnWebAppIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -367,6 +367,30 @@ namespace SOPBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public Nullable<global::System.Int32> WebLinkID
+        {
+            get
+            {
+                return _WebLinkID;
+            }
+            set
+            {
+                OnWebLinkIDChanging(value);
+                ReportPropertyChanging("WebLinkID");
+                _WebLinkID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WebLinkID");
+                OnWebLinkIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _WebLinkID;
+        partial void OnWebLinkIDChanging(Nullable<global::System.Int32> value);
+        partial void OnWebLinkIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public global::System.String Link
         {
             get
@@ -385,6 +409,30 @@ namespace SOPBusinessLayer
         private global::System.String _Link;
         partial void OnLinkChanging(global::System.String value);
         partial void OnLinkChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String WebPage
+        {
+            get
+            {
+                return _WebPage;
+            }
+            set
+            {
+                OnWebPageChanging(value);
+                ReportPropertyChanging("WebPage");
+                _WebPage = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("WebPage");
+                OnWebPageChanged();
+            }
+        }
+        private global::System.String _WebPage;
+        partial void OnWebPageChanging(global::System.String value);
+        partial void OnWebPageChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

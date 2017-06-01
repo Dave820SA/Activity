@@ -45,9 +45,11 @@
             <PropertyRef Name="ActivityLogID" />
           </Key>
           <Property Name="ActivityLogID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="WebLinkID" Type="int" Nullable="false" />
+          <Property Name="WebAppID" Type="int" Nullable="false" />
           <Property Name="AppEntityID" Type="int" />
-          <Property Name="Link" Type="varchar" MaxLength="50" />
+          <Property Name="WebLinkID" Type="int" />
+          <Property Name="Link" Type="varchar" MaxLength="100" />
+          <Property Name="WebPage" Type="varchar" MaxLength="50" />
           <Property Name="ClickedDatetime" Type="datetime" />
           <Property Name="Flagged" Type="bit" />
         </EntityType>
@@ -250,9 +252,11 @@
             <PropertyRef Name="ActivityLogID" />
           </Key>
           <Property Type="Int32" Name="ActivityLogID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="WebLinkID" Nullable="false" />
+          <Property Type="Int32" Name="WebAppID" Nullable="false" />
           <Property Type="Int32" Name="AppEntityID" />
-          <Property Type="String" Name="Link" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="WebLinkID" />
+          <Property Type="String" Name="Link" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WebPage" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="DateTime" Name="ClickedDatetime" />
           <Property Type="Boolean" Name="Flagged" />
         </EntityType>
@@ -333,9 +337,11 @@
               <MappingFragment StoreEntitySet="Activity_ActivityLog">
                 <ScalarProperty Name="Flagged" ColumnName="Flagged" />
                 <ScalarProperty Name="ClickedDatetime" ColumnName="ClickedDatetime" />
+                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
                 <ScalarProperty Name="Link" ColumnName="Link" />
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="WebLinkID" ColumnName="WebLinkID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="WebAppID" ColumnName="WebAppID" />
                 <ScalarProperty Name="ActivityLogID" ColumnName="ActivityLogID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -373,7 +379,7 @@
           <ConnectorPoint PointX="5.25" PointY="2.2112939453125" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SOPDocModel.SOP_vCurrentDoc" Width="1.5" PointX="0.75" PointY="4.75" Height="1.9802864583333335" />
-        <EntityTypeShape EntityType="SOPDocModel.ActivityLog" Width="2" PointX="3.25" PointY="4.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="SOPDocModel.ActivityLog" Width="1.75" PointX="3.375" PointY="4.75" Height="2.5571907552083317" />
       </Diagram>
     </Diagrams>
   </Designer>

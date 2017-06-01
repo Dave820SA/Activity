@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using SOPBusinessLayer;
 using PagedList;
@@ -25,16 +24,17 @@ namespace SOPWeb.Controllers
         }
 
         //track the clicked links
-        public ActionResult updateStats(string link)
+        public ActionResult updateStats(string link, string page)
         {
             ActivityLog track = new ActivityLog();
-            track.WebLinkID = 13;
+            track.WebAppID = 13;
             string appID = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
             if (appID != null)
             {
                 track.AppEntityID = Int32.Parse(appID);
             }
             track.Link = link;
+            track.WebPage = page;
             track.ClickedDatetime = DateTime.Parse(DateTime.Now.ToString());
             track.Flagged = false;
 

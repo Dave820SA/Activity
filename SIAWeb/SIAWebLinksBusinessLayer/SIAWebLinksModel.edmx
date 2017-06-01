@@ -4,15 +4,37 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="SIAWebLinksModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="SIAWebLinksModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SIAWebLinksModelStoreContainer">
+          <EntitySet Name="Activity_ActivityLog" EntityType="SIAWebLinksModel.Store.Activity_ActivityLog" store:Type="Tables" Schema="dbo" Table="Activity.ActivityLog" />
           <EntitySet Name="SIA_WebCategories" EntityType="SIAWebLinksModel.Store.SIA_WebCategories" store:Type="Tables" Schema="dbo" Table="SIA.WebCategories" />
           <EntitySet Name="SIA_WebLinks" EntityType="SIAWebLinksModel.Store.SIA_WebLinks" store:Type="Tables" Schema="dbo" Table="SIA.WebLinks" />
+          <AssociationSet Name="FK_Activity_ActivityLog_SIA_WebLinks" Association="SIAWebLinksModel.Store.FK_Activity_ActivityLog_SIA_WebLinks">
+            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
+            <End Role="Activity_ActivityLog" EntitySet="Activity_ActivityLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_ActivityLog_SIA_WebLinks1" Association="SIAWebLinksModel.Store.FK_Activity_ActivityLog_SIA_WebLinks1">
+            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
+            <End Role="Activity_ActivityLog" EntitySet="Activity_ActivityLog" />
+          </AssociationSet>
           <AssociationSet Name="FK_SIA_WebLinks_SIA_WebCategories" Association="SIAWebLinksModel.Store.FK_SIA_WebLinks_SIA_WebCategories">
             <End Role="SIA_WebCategories" EntitySet="SIA_WebCategories" />
             <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Activity_ActivityLog">
+          <Key>
+            <PropertyRef Name="ActivityLogID" />
+          </Key>
+          <Property Name="ActivityLogID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebAppID" Type="int" Nullable="false" />
+          <Property Name="AppEntityID" Type="int" />
+          <Property Name="WebLinkID" Type="int" />
+          <Property Name="Link" Type="varchar" MaxLength="100" />
+          <Property Name="WebPage" Type="varchar" MaxLength="50" />
+          <Property Name="ClickedDatetime" Type="datetime" />
+          <Property Name="Flagged" Type="bit" />
+        </EntityType>
         <EntityType Name="SIA_WebCategories">
           <Key>
             <PropertyRef Name="WebCategoriesID" />
@@ -31,6 +53,30 @@
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
           <Property Name="NeedAuthorizationFlag" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Activity_ActivityLog_SIA_WebLinks">
+          <End Role="SIA_WebLinks" Type="SIAWebLinksModel.Store.SIA_WebLinks" Multiplicity="0..1" />
+          <End Role="Activity_ActivityLog" Type="SIAWebLinksModel.Store.Activity_ActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_WebLinks">
+              <PropertyRef Name="WebLinkID" />
+            </Principal>
+            <Dependent Role="Activity_ActivityLog">
+              <PropertyRef Name="WebLinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_ActivityLog_SIA_WebLinks1">
+          <End Role="SIA_WebLinks" Type="SIAWebLinksModel.Store.SIA_WebLinks" Multiplicity="1" />
+          <End Role="Activity_ActivityLog" Type="SIAWebLinksModel.Store.Activity_ActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_WebLinks">
+              <PropertyRef Name="WebLinkID" />
+            </Principal>
+            <Dependent Role="Activity_ActivityLog">
+              <PropertyRef Name="WebAppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_SIA_WebLinks_SIA_WebCategories">
           <End Role="SIA_WebCategories" Type="SIAWebLinksModel.Store.SIA_WebCategories" Multiplicity="1" />
           <End Role="SIA_WebLinks" Type="SIAWebLinksModel.Store.SIA_WebLinks" Multiplicity="*" />
@@ -44,8 +90,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="spGetAllSIAWebLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="SIAWebLinksModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -57,6 +102,15 @@
             <End Role="SIA_WebLinks" EntitySet="WebLinks" />
           </AssociationSet>
           <FunctionImport Name="spGetAllSIAWebLinks" ReturnType="Collection(SIAWebLinksModel.spGetAllSIAWebLinks_Result)" />
+          <EntitySet Name="ActivityLogs" EntityType="SIAWebLinksModel.ActivityLog" />
+          <AssociationSet Name="FK_Activity_ActivityLog_SIA_WebLinks" Association="SIAWebLinksModel.FK_Activity_ActivityLog_SIA_WebLinks">
+            <End Role="WebLinks" EntitySet="WebLinks" />
+            <End Role="Activity_ActivityLog" EntitySet="ActivityLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Activity_ActivityLog_SIA_WebLinks1" Association="SIAWebLinksModel.FK_Activity_ActivityLog_SIA_WebLinks1">
+            <End Role="WebLinks" EntitySet="WebLinks" />
+            <End Role="Activity_ActivityLog" EntitySet="ActivityLogs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="WebCategories">
           <Key>
@@ -77,6 +131,8 @@
           <Property Name="VisibleFlag" Type="Boolean" Nullable="false" />
           <Property Name="NeedAuthorizationFlag" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="SIA_WebCategories" Relationship="SIAWebLinksModel.FK_SIA_WebLinks_SIA_WebCategories" FromRole="SIA_WebLinks" ToRole="SIA_WebCategories" />
+          <NavigationProperty Name="Activity_ActivityLog" Relationship="SIAWebLinksModel.FK_Activity_ActivityLog_SIA_WebLinks" FromRole="WebLinks" ToRole="Activity_ActivityLog" />
+          <NavigationProperty Name="Activity_ActivityLog1" Relationship="SIAWebLinksModel.FK_Activity_ActivityLog_SIA_WebLinks1" FromRole="WebLinks" ToRole="Activity_ActivityLog" />
         </EntityType>
         <Association Name="FK_SIA_WebLinks_SIA_WebCategories">
           <End Role="SIA_WebCategories" Type="SIAWebLinksModel.WebCategories" Multiplicity="1" />
@@ -95,6 +151,45 @@
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
           <Property Type="String" Name="WebLink" Nullable="false" MaxLength="200" />
         </ComplexType>
+        <EntityType Name="ActivityLog">
+          <Key>
+            <PropertyRef Name="ActivityLogID" />
+          </Key>
+          <Property Type="Int32" Name="ActivityLogID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="WebAppID" Nullable="false" />
+          <Property Type="Int32" Name="AppEntityID" />
+          <Property Type="Int32" Name="WebLinkID" />
+          <Property Type="String" Name="Link" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WebPage" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ClickedDatetime" />
+          <Property Type="Boolean" Name="Flagged" />
+          <NavigationProperty Name="SIA_WebLinks" Relationship="SIAWebLinksModel.FK_Activity_ActivityLog_SIA_WebLinks" FromRole="Activity_ActivityLog" ToRole="WebLinks" />
+          <NavigationProperty Name="SIA_WebLinks1" Relationship="SIAWebLinksModel.FK_Activity_ActivityLog_SIA_WebLinks1" FromRole="Activity_ActivityLog" ToRole="WebLinks" />
+        </EntityType>
+        <Association Name="FK_Activity_ActivityLog_SIA_WebLinks">
+          <End Type="SIAWebLinksModel.WebLinks" Role="WebLinks" Multiplicity="0..1" />
+          <End Type="SIAWebLinksModel.ActivityLog" Role="Activity_ActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebLinks">
+              <PropertyRef Name="WebLinkID" />
+            </Principal>
+            <Dependent Role="Activity_ActivityLog">
+              <PropertyRef Name="WebLinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Activity_ActivityLog_SIA_WebLinks1">
+          <End Type="SIAWebLinksModel.WebLinks" Role="WebLinks" Multiplicity="1" />
+          <End Type="SIAWebLinksModel.ActivityLog" Role="Activity_ActivityLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WebLinks">
+              <PropertyRef Name="WebLinkID" />
+            </Principal>
+            <Dependent Role="Activity_ActivityLog">
+              <PropertyRef Name="WebAppID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -130,6 +225,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="ActivityLogs">
+            <EntityTypeMapping TypeName="SIAWebLinksModel.ActivityLog">
+              <MappingFragment StoreEntitySet="Activity_ActivityLog">
+                <ScalarProperty Name="Flagged" ColumnName="Flagged" />
+                <ScalarProperty Name="ClickedDatetime" ColumnName="ClickedDatetime" />
+                <ScalarProperty Name="WebPage" ColumnName="WebPage" />
+                <ScalarProperty Name="Link" ColumnName="Link" />
+                <ScalarProperty Name="WebLinkID" ColumnName="WebLinkID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="WebAppID" ColumnName="WebAppID" />
+                <ScalarProperty Name="ActivityLogID" ColumnName="ActivityLogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -156,6 +265,15 @@
         <AssociationConnector Association="SIAWebLinksModel.FK_SIA_WebLinks_SIA_WebCategories" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="2.1728417968750002" />
           <ConnectorPoint PointX="3" PointY="2.1728417968750002" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SIAWebLinksModel.ActivityLog" Width="2.25" PointX="5.25" PointY="0.875" Height="2.9417936197916656" />
+        <AssociationConnector Association="SIAWebLinksModel.FK_Activity_ActivityLog_SIA_WebLinks" >
+          <ConnectorPoint PointX="4.5" PointY="2.7496826171874997" />
+          <ConnectorPoint PointX="5.25" PointY="2.7496826171874997" />
+        </AssociationConnector>
+        <AssociationConnector Association="SIAWebLinksModel.FK_Activity_ActivityLog_SIA_WebLinks1" >
+          <ConnectorPoint PointX="4.5" PointY="1.8123413085937499" />
+          <ConnectorPoint PointX="5.25" PointY="1.8123413085937499" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
