@@ -15,14 +15,18 @@
             { 
                 <strong style="font-size: 1.2em;">Sort By:&nbsp; &nbsp;</strong>
             
-                
-                @Html.RadioButton("Answer", "Last30") <span>Last 30 Days |</span>
-                @Html.RadioButton("Answer", "Approve") <span>Approved |</span>
-                @Html.RadioButton("Answer", "NotApprove") <span>Not Approved |</span>
-                @Html.RadioButton("Answer", "MoreInfo") <span>More Info |</span>
-                @Html.RadioButton("Answer", "All") <span>All &nbsp; &nbsp;</span> 
+                @Html.RadioButton("Answer", "Last30", new { onchange = "this.form.submit();" }) <span>Last
+                    30 Days |</span>
+                @Html.RadioButton("Answer", "Approve", new { onchange = "this.form.submit();" }) <span>Approved
+                    |</span>
+                @Html.RadioButton("Answer", "NotApprove", new { onchange = "this.form.submit();" }) <span>Not
+                    Approved |</span>
+                @Html.RadioButton("Answer", "MoreInfo", new { onchange = "this.form.submit();" }) <span>More
+                    Info |</span>
+                @Html.RadioButton("Answer", "All", new { onchange = "this.form.submit();" }) <span>All
+                    &nbsp; &nbsp;</span> 
 
-                <input type="submit" class="btn btn-primary" value="Sort" />
+               
             }
         </div>
     </div>
@@ -32,9 +36,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            
-            
-           
+                  
             <table class="table table-condensed table-hover">
                 <tr>
                    
@@ -118,46 +120,4 @@
     </div>
 </div>
 
-@*<div class="row">
-    <div class="col-md-3">
-        <span class="profile-name">Select Your Ratings</span>
-    </div>
-    <div class="col-md-2">
-        <div class="stars">
-            <input type="radio" name="RatingStar" class="star-1" id="star-1" value="1" />
-            <label class="star-1" for="star-1">
-                1</label>
-            <input type="radio" name="RatingStar" class="star-2" id="star-2" value="2" />
-            <label class="star-2" for="star-2">
-                2</label>
-            <input type="radio" name="RatingStar" class="star-3" id="star-3" value="3" />
-            <label class="star-3" for="star-3">
-                3</label>
-            <input type="radio" name="RatingStar" class="star-4" id="star-4" value="4" />
-            <label class="star-4" for="star-4">
-                4</label>
-            <input type="radio" name="RatingStar" class="star-5" id="star-5" value="5" />
-            <label class="star-5" for="star-5">
-                5</label>
-            <span></span>
-        </div>
-    </div>
-</div>
-<br />*@
 
-@section Scripts {
-    <script type="text/javascript">
-        $(document).ready(function () {
-
-//            $(".group").change(function () {
-
-//                var val = $('.group:checked').val();
-//                //document.getElementById('<%=txtGroup.ClientID %>').value = val;
-//                document.getElementById('<% argument.ClientID %>').value = val;
-
-//            });
-
-        });                                
-    </script>
-    
-}

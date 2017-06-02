@@ -16,14 +16,16 @@
             { 
                 <strong style="font-size: 1.2em;">Sort By:&nbsp; &nbsp;</strong>
             
-                
-                @Html.RadioButton("Answer", "Last30") <span>Last 30 Days |</span>
-                @Html.RadioButton("Answer", "Approve") <span>Approved |</span>
-                @Html.RadioButton("Answer", "NotApprove") <span>Not Approved |</span>
-                @Html.RadioButton("Answer", "MoreInfo") <span>More Info |</span>
-                @Html.RadioButton("Answer", "All") <span>All &nbsp; &nbsp;</span> 
-
-                <input type="submit" class="btn btn-primary" value="Sort" />
+                @Html.RadioButton("Answer", "Last30", new { onchange = "this.form.submit();" }) <span>Last
+                    30 Days |</span>
+                @Html.RadioButton("Answer", "Approve", new { onchange = "this.form.submit();" }) <span>Approved
+                    |</span>
+                @Html.RadioButton("Answer", "NotApprove", new { onchange = "this.form.submit();" }) <span>Not
+                    Approved |</span>
+                @Html.RadioButton("Answer", "MoreInfo", new { onchange = "this.form.submit();" }) <span>More
+                    Info |</span>
+                @Html.RadioButton("Answer", "All", new { onchange = "this.form.submit();" }) <span>All
+                    &nbsp; &nbsp;</span> 
             }
         </div>
     </div>

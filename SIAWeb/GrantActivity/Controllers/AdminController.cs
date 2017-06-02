@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using GrantBusinessLayer;
 using GrantActivity.Models;
+using System.Data;
 
 namespace GrantActivity.Controllers
 {
@@ -71,15 +72,15 @@ namespace GrantActivity.Controllers
 
         //
         // GET: /Daily/Details/5
-
+        //[HttpGet]
         public ActionResult Details(int id = 0)
         {
             Grant_Daily grant_daily = db.Grant_Daily.Single(g => g.AdminDailyID == id);
-            if (grant_daily == null)
+            if (grant_daily == null )
             {
-                return HttpNotFound();
+                //return HttpNotFound();
+                return Redirect("Index");
             }
-
 
             var activity = from a in db.Grant_Activity
                            select a;
@@ -90,5 +91,33 @@ namespace GrantActivity.Controllers
 
             return View(grant_daily);
         }
+
+
+        //Approve items
+        public void approve(int id)
+        {
+            var approv = db.Grant_Daily.FirstOrDefault(x => x.AdminDailyID == id);
+
+            approv.ApprovedFlag = true;
+            approv.MoreInformationFlag = false;
+            string user = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
+            approv.ApprovedByID = int.Parse(user);
+            approv.ApprovedDate = DateTime.Now;
+
+            db.SaveChanges();
+
+            RedirectToAction("Index", "Admin");
+        }
+
+        //Ask the user for more information
+        public void moreInfo(string info, int id)
+        {
+            var approv = db.Grant_Daily.FirstOrDefault(x => x.AdminDailyID == id);
+            approv.MoreInformationFlag = true;
+            approv.AdminNotes = info;
+            db.SaveChanges();
+
+        }
+
     }
 }
