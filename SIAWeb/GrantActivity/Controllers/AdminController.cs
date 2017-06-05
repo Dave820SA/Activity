@@ -9,7 +9,9 @@ using System.Data;
 
 namespace GrantActivity.Controllers
 {
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
     public class AdminController : Controller
+        
     {
         private GrantEntities db = new GrantEntities();
         //

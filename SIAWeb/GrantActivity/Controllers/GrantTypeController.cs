@@ -9,8 +9,10 @@ using GrantBusinessLayer;
 
 namespace GrantActivity.Controllers
 {
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
     public class GrantTypeController : Controller
     {
+        
         private GrantEntities db = new GrantEntities();
 
         //

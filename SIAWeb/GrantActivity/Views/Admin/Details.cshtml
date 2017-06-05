@@ -21,7 +21,7 @@
             <fieldset class="scheduler-border">
                 <div class="form-group col-xs-12">
                         @Html.HiddenFor(model => model.AdminDailyID, new {id="adminID"})
-                        @Html.Hidden("RedirectTo", Url.Action("Index", "Admin"));
+                        @Html.Hidden("RedirectTo", Url.Action("Index", "Admin"))
                     <div class="display-label">
                         <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)</strong>
                     </div>

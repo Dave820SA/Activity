@@ -10,6 +10,7 @@ using System.Web.Routing;
 
 namespace GrantActivity.Controllers
 {
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
     public class ActivityController : Controller
     {
         private GrantEntities db = new GrantEntities();

@@ -5,6 +5,7 @@ using GrantBusinessLayer;
 
 namespace GrantActivity.Controllers
 {
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
     public class CategoryController : Controller
     {
         private GrantEntities db = new GrantEntities();
