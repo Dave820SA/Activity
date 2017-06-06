@@ -324,6 +324,7 @@
     <Content Include="Views\LinkAddress\_ViewStart.cshtml" />
     <Content Include="Views\Admin\_ViewStart.cshtml" />
     <Content Include="Views\NonUser\Index.cshtml" />
+    <Content Include="Views\Shared\_Alternate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SIAWebLinksBusinessLayer\SIAWebLinksBusinessLayer.csproj">
