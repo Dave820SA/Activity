@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using SOPBusinessLayer;
 using PagedList;
+using System.Text;
 
 namespace SOPWeb.Controllers
 {
@@ -15,11 +16,25 @@ namespace SOPWeb.Controllers
         [OutputCache(Duration=10)]
         public ActionResult Index()
         {
+            StringBuilder sb = new StringBuilder();
+            string user = (string)System.Web.HttpContext.Current.Session["userName"];
+
+            if (user != "Unknown User")
+            {
+                sb.AppendLine("<h4>" + user + "<small>, Welcome Back! &nbsp;");
+                sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</small></h4>");
+
+                ViewBag.User = sb;
+            }
+            else
+            {
+                sb.AppendLine("<h5>To see content expand one of the categories and click a link.&nbsp; ");
+                sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</h5>");
+
+                ViewBag.User = sb;
+            }
 
             List<SOP_vCurrentDoc> sopCurrentDoc = db.SOP_vCurrentDoc.ToList();
-
-            ViewBag.Message = "Welcome to the SOP Web App.";
-
             return View(sopCurrentDoc);
         }
 

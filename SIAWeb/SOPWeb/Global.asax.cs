@@ -8,6 +8,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using UserBusinessLayer;
 using System.Web.Helpers;
+using SOPWeb.Common;
+
 
 namespace SOPWeb
 {
@@ -27,43 +29,15 @@ namespace SOPWeb
 
         }
 
+
         protected void Session_Start()
         {
-            SessionUser(getUserPin());
+            SessionLogin user = new SessionLogin();
+            string myUser = HttpContext.Current.User.Identity.Name.ToString();
+            //string myUser = "dd94224";
+            user.getUserPin(myUser);
+
         }
 
-        private void SessionUser(string userPin)
-        {
-            HttpContext.Current.Session.Add("userName", "Unknown");
-            UserLayerEntities user = new UserLayerEntities();
-
-           //var myUser = from u in user.spWebSiteUserInfo("db94224", 2)
-            var myUser = from u in user.spWebSiteUserInfo(userPin, 2)
-                         select u;
-            foreach (var u in myUser)
-            {
-                HttpContext.Current.Session.Add("AppEntityID", u.AppEntityID.ToString());
-                HttpContext.Current.Session.Add("userPin", u.PIN.ToString());
-                HttpContext.Current.Session.Add("userName", u.UserName.ToString());
-                HttpContext.Current.Session.Add("WebRole", u.WebRole.ToString());
-            }
-        }
-
-
-        private string getUserPin()
-        {
-            string userPin = HttpContext.Current.User.Identity.Name.ToString();
-            string result;
-            if (userPin.Length == 12)
-            {
-                result = userPin.Substring(userPin.Length - 7, 7);
-            }
-            else
-            {
-                result = userPin.Substring(userPin.Length - 6, 6);
-            }
-
-            return result;
-        }
     }
 }

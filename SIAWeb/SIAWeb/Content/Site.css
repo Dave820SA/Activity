@@ -27,3 +27,11 @@
 textarea {
     max-width: 600px;
 }
+.image_background
+{
+	text-align: center;
+	width: 25px;
+	height: 25px;
+	margin-left: 20px;
+	background-attachment: inherit;
+}

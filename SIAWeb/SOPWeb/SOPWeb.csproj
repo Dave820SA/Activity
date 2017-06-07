@@ -132,6 +132,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
+    <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Controllers\DocHistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

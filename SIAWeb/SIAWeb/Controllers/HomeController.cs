@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using SIAWebLinksBusinessLayer;
+using System.Text;
 
 
 namespace SIAWeb.Controllers
@@ -13,7 +14,24 @@ namespace SIAWeb.Controllers
 
         public ActionResult Index()
         {
-            //List<WebLinks> siaWebLinks = db.WebLinks.ToList();
+            StringBuilder sb = new StringBuilder();
+            string user = (string)System.Web.HttpContext.Current.Session["userName"];
+
+            if (user != "Unknown User")
+            {
+
+                sb.AppendLine("<h4>" + user + "<small>, Welcome Back! &nbsp;");
+                sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</small></h4>");
+               
+                ViewBag.User = sb;
+            }
+            else
+            {
+                sb.AppendLine("<h5>To see content expand one of the categories and click a link.&nbsp; ");
+                sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</h5>");
+                ViewBag.User = sb;
+            }
+
             List<WebLinks> siaWebLinks = db.WebLinks.Where(s => s.VisibleFlag).ToList();
             return View(siaWebLinks);
         }
@@ -37,6 +55,11 @@ namespace SIAWeb.Controllers
             db.ActivityLogs.AddObject(track);
             db.SaveChanges();
 
+        }
+
+        public ActionResult Info()
+        {
+            return View();
         }
 
         //Helper method to get the ID of the web link clicked on by the user

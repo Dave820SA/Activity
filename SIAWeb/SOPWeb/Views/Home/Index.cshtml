@@ -5,25 +5,12 @@
 }
 
 <div class="container">
-    <div style="padding-bottom: 10px">
-       
-        @{
-            string user = (string)System.Web.HttpContext.Current.Session["userName"];
-
-            if (@user != "Unknown")
-            {
-            <h4>
-                @user<small>, Welcome back </small>
-            </h4>
-            }
-            else
-            {
-             <h4>
-                Welcome<small>, <a href="#">Click a bureau link to see SOP’s  </a> </small>
-            </h4>
-            }
-        }
-        
+    <div class="row">
+        <div class="col-lg-12" style="padding-bottom: 10px">
+            
+                @Html.Raw(@ViewBag.User)
+            
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using SIAWebLinksBusinessLayer;
+using System;
 
 namespace SIAWeb.Controllers
 {
@@ -17,9 +18,25 @@ namespace SIAWeb.Controllers
         
         public ActionResult Index()
         {
-            var weblinks = db.WebLinks.Include("SIA_WebCategories");
-            return View(weblinks.ToList());
+            var weblinks = db.WebLinks.OrderBy(s => s.SIA_WebCategories.Name).ToList();
+            return View(weblinks);
         }
+
+        [HttpPost]
+        public ViewResult Search(string searchString)
+        {
+            var weblinks = db.WebLinks.OrderBy(s => s.SIA_WebCategories.Name).ToList();
+            
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                weblinks.Where(s => s.SIA_WebCategories.Name.Contains(searchString)
+                                       || s.Name.Contains(searchString));
+            }
+
+            return View(weblinks);
+        }
+
 
         //
         // GET: /LinkAddress/Details/5

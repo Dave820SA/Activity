@@ -3,26 +3,14 @@
     ViewBag.Title = "SAPD Web Home";
 }
 <div class="container">
-    <div style="padding-bottom: 10px">
-       
-        @{
-            string user = (string)System.Web.HttpContext.Current.Session["userName"];
-
-            if (@user != "Unknown User")
-            {
-            <h4>
-                @user<small>, Welcome back </small>
-            </h4>
-            }
-            else
-            {
-             <h4>
-                Welcome<small>, <a href="#">Click a link below to access content</a> </small>
-            </h4>
-            }
-        }
-        
+    <div class="row">
+        <div class="col-lg-12" style="padding-bottom: 10px">
+            
+                @Html.Raw(@ViewBag.User)
+            
+        </div>
     </div>
+   
     <div class="row">
         <div class="col-lg-5 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
             <div id="accordion" class="panel-group">
@@ -93,23 +81,28 @@
         </div>
         <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
             <div id="accordion" class="panel-group">
-                @*<div class="panel panel-primary">
+                <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
-                            <span class="glyphicon glyphicon-menu-down"></span>
-                            <a href="#panelBodyFour" data-toggle="collapse" data-parent="#accordion">Asia </a>
+                            <i class="fa fa-angle-double-down"></i><a href="#panelBodyFour" data-toggle="collapse"
+                                data-parent="#accordion"> Information/Criminal Search </a>
                         </h4>
                     </div>
                     <div id="panelBodyFour" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                                <li>India</li>
-                                <li>China</li>
-                                <li>Japan</li>
+                                @foreach (var item in Model)
+                                {
+                                    if (item.WebCategoryID == 6)
+                                    {
+                                    <li><a href=" @item.WebLink " target="_blank">@item.Name</a></li>
+                                    }
+                                }
                             </ul>
                         </div>
                     </div>
-                </div>*@ @*<div class="panel panel-primary">
+                </div>
+                @*<div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <span class="glyphicon glyphicon-menu-down"></span>

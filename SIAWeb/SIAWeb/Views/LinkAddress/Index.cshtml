@@ -1,13 +1,31 @@
 ﻿@model IEnumerable<SIAWebLinksBusinessLayer.WebLinks>
 
 @{
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Link Address";
 }
 
-<div style="padding-left:30px">
+@*<div style="padding-left:30px">
     <h4>Web<small> Address</small> </h4>
+</div>*@
+<div class="row">
+    <div class="col-md-3">
+        <strong style="font-size:1.7em; padding-left:2px">Current Links</strong>
+    </div>
+    <div class="col-md-9">
+        <div style="float: right">
+            @using (Html.BeginForm("Index", "LinkAddress", FormMethod.Get))
+            {
+                <strong style="font-size: 1.2em;">Find by Category or Name:&nbsp; &nbsp;</strong>
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
+                <input type="submit" class="btn btn-primary" value="Search" />
+          
+        }
+        </div>
+        
+    </div>
+    
 </div>
+<br />
 
 <div class="container">
     <div class="row">
@@ -44,7 +62,18 @@
                             @Html.DisplayFor(modelItem => item.WebLink)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.VisibleFlag)
+                            @{
+                                string approve = (item.VisibleFlag).ToString();
+                                    if (approve == "True")
+                                        {
+                                            <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                                        }
+                                    else
+                                        {
+                                            <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                                        } 
+                              }
+                            @*@Html.DisplayFor(modelItem => item.VisibleFlag)*@
                         </td>
                        
                         <td>
