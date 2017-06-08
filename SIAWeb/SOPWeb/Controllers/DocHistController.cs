@@ -69,7 +69,7 @@ namespace SOPWeb.Controllers
 
         public ViewResult Search(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewBag.CurrentSort = sortOrder;
+            //ViewBag.CurrentSort = sortOrder;
             ViewBag.CurrentSort = sortOrder;
             if (sortOrder == "sop_aesc" || sortOrder == "")
             {

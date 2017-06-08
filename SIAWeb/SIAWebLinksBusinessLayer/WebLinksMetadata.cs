@@ -42,6 +42,11 @@ namespace SIAWebLinksBusinessLayer
 
             [Display(Name= "Visaible")]
             public Boolean VisibleFlag { get; set; }
+
+
+            [Display(Name="Req Login")]
+            public Boolean NeedAuthorizationFlag { get; set; }
+
         }
     }
 }

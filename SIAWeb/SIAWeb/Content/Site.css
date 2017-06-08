@@ -30,8 +30,20 @@ textarea {
 .image_background
 {
 	text-align: center;
-	width: 25px;
-	height: 25px;
-	margin-left: 20px;
+	width: 20px;
+	height: 20px;
+	margin-left: 12px;
 	background-attachment: inherit;
+}
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:22px;
+    height:22px;
+    background:white;
+    border-radius:5px;
+    border:1px solid #555;
+}
+input[type='checkbox']:checked {
+    background: #abd;
 }

@@ -12,14 +12,22 @@ namespace SIAWeb.Controllers
         
         private WebLinksEntities db = new WebLinksEntities();
 
-        //
-        // GET: /LinkAddress/
-
-        
-        public ActionResult Index()
+        public ActionResult Index(string searchString)
         {
-            var weblinks = db.WebLinks.OrderBy(s => s.SIA_WebCategories.Name).ToList();
-            return View(weblinks);
+
+            var link = from s in db.WebLinks
+                      select s;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                link = link.Where(s => s.SIA_WebCategories.Name.Contains(searchString)
+                                       || s.Name.Contains(searchString));
+               
+            }
+
+            link = link.OrderBy(s => s.SIA_WebCategories.Name);
+
+            return View(link);
         }
 
         [HttpPost]
