@@ -140,6 +140,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Activity.cs" />
+    <Compile Include="Models\MyDrop.cs" />
     <Compile Include="Models\Rating.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
