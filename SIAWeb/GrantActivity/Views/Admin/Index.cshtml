@@ -4,34 +4,25 @@
     ViewBag.Title = "View Activity";
 }
 
-
 <div class="row">
-    <div class="col-md-3">
-        <strong style="font-size:1.8em; padding-left:10px">Entered Activity</strong>
+    <div class="col-md-7">
+        <h3>Entered Activity <small> Last 30 Days</small></h3>
     </div>
-    <div class="col-md-9">
+    <div class="col-md-5">
         <div style="float: right">
             @using (Html.BeginForm("Index", "Admin", FormMethod.Post))
             { 
-                <strong style="font-size: 1.2em;">Sort By:&nbsp; &nbsp;</strong>
-            
-                @Html.RadioButton("Answer", "Last30", new { onchange = "this.form.submit();" }) <span>Last
-                    30 Days |</span>
-                @Html.RadioButton("Answer", "Approve", new { onchange = "this.form.submit();" }) <span>Approved
-                    |</span>
-                @Html.RadioButton("Answer", "NotApprove", new { onchange = "this.form.submit();" }) <span>Not
-                    Approved |</span>
-                @Html.RadioButton("Answer", "MoreInfo", new { onchange = "this.form.submit();" }) <span>More
-                    Info |</span>
-                @Html.RadioButton("Answer", "All", new { onchange = "this.form.submit();" }) <span>All
-                    &nbsp; &nbsp;</span> 
-
+                <h4>
+                    Sort By:
+                </h4>
                
+                @Html.DropDownList("Value", new SelectList(ViewBag.SortBy, "Value", "Text"), new { @class = "form-control", onchange = "this.form.submit();" })
             }
         </div>
     </div>
 </div>
 
+<br />
 
 <div class="container">
     <div class="row">

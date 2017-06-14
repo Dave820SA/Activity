@@ -32,22 +32,29 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-              <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span> Home
+              <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
               </a></li>
-              <li><a href="~/Home/Contact"><i class="fa fa-phone"></i> Contact </a></li>
               <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                  aria-haspopup="true" aria-expanded="false">Reporting <span class="caret"></span>
-              </a>
+                  aria-haspopup="true" aria-expanded="false">Inbox <span class="caret"></span></a>
                   <ul class="dropdown-menu">
-                      <li><a href="~/Daily/Index">Enter Admin Item</a></li>
+                      <li><a href="~/Daily/Create">New Entry</a></li>
                       <li role="separator" class="divider"></li>
-                      <li><a href="~/GrantType/Index">Grant Type</a></li>
+                      <li><a href="~/Daily/Index">My Que</a></li>
                       <li role="separator" class="divider"></li>
-                      <li><a href="~/Category/Index">Categories</a></li>
+                      <li><a href="~/Admin/Index">Approval Request</a></li>
                   </ul>
               </li>
-              <li><a href="~/Admin/Index"><i class="fa fa-user-circle"></i> Admin </a></li>
+              <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                  aria-haspopup="true" aria-expanded="false">Add/Edit <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="~/GrantType/Index">Grant Type</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="~/Category/Index">Activity</a></li>
+                  </ul>
+              </li>
+              <li><a href="~/Home/Contact"><i class="fa fa-phone"></i>Contact </a></li>
           </ul>
+          
       </div>
       <!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

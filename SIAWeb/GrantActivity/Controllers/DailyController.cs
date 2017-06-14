@@ -24,14 +24,7 @@ namespace GrantActivity.Controllers
 
             var daily = activies(userId,"1");
 
-            List<SelectListItem> sortBy = new List<SelectListItem>();
-            sortBy.Add(new SelectListItem { Text = "All Last 15 Days", Value = "1" });
-            sortBy.Add(new SelectListItem { Text = "More Info Last 15", Value = "2" });
-            sortBy.Add(new SelectListItem { Text = "Approved Last 15 Days", Value = "3" });
-            sortBy.Add(new SelectListItem { Text = "Not Approved Last 15 Days", Value = "4" });
-            ViewData["SortBy"] = new SelectList(sortBy, "Value", "Text", "1");
-            //ViewBag.SortBy = new SelectList(sortBy, "Value", "Text", "1");
-
+            sortByItems();
             return View(daily.ToList());
         }
 
@@ -39,10 +32,21 @@ namespace GrantActivity.Controllers
         public ActionResult Index(string Value)
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
-
+            ViewBag.User = System.Web.HttpContext.Current.Session["userName"];
             var daily = activies(userId, Value);
 
+            sortByItems();
             return View(daily.ToList());
+        }
+
+        private void  sortByItems()
+        {
+            List<SelectListItem> sortBy = new List<SelectListItem>();
+            sortBy.Add(new SelectListItem { Text = "All", Value = "1" });
+            sortBy.Add(new SelectListItem { Text = "More Info", Value = "2" });
+            sortBy.Add(new SelectListItem { Text = "Approved", Value = "3" });
+            sortBy.Add(new SelectListItem { Text = "Not Approved", Value = "4" });
+            ViewBag.SortBy = new SelectList(sortBy, "Value", "Text", "1");
         }
 
 

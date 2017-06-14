@@ -12,41 +12,18 @@
 
 
 <div class="row">
-    <div class="col-md-8">
-        @*<strong style="font-size:1.3em; padding-left:10px">@ViewBag.User Entered Activity</strong>*@
-        <h3>@ViewBag.User <small>Entered Activity</small></h3>
+    <div class="col-md-7">
+        <h3>@ViewBag.User <small>Entered Activity Last 15 Days</small></h3>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
         <div style="float: right">
             @using (Html.BeginForm("Index", "Daily", FormMethod.Post))
             { 
-                <strong style="font-size: 1.2em;">Sort By:&nbsp; &nbsp;</strong>
+                <h4>
+                    Sort By:
+                </h4>
                
-                @Html.DropDownList(ViewData["SortBy"],null,  new { onchange = "this.form.submit();" }) 
-                
-                @*@Html.DropDownList("SortBy", (SelectList)ViewBag.SortBy, new { @class = "form-control", onchange = "this.form.submit();" })*@
-               @*@Html.DropDownList("Answer", (SelectList)ViewBag.SortBy, new { onchange = "this.form.submit();" })*@
-                @*@Html.DropDownList("Value", null, new { @class = "form-control", onchange = "this.form.submit();" }) *@
-                
-               @*<select name="Answer" id="Answer" style="width:200px" onchange = "this.form.submit();">
-                    <option value="1">All Last 15 Days</option>
-                    <option value="2">More Info Last 15 Days</option>
-                    <option value="3">Approved Last 15 Days</option>
-                    <option value="4">Not Approved Last 15 Days</option>
-                   
-                </select>*@
-                                                
-            
-               @* @Html.RadioButton("Answer", "Last30", new { onchange = "this.form.submit();" }) <span>Last
-                    30 Days |</span>
-                @Html.RadioButton("Answer", "Approve", new { onchange = "this.form.submit();" }) <span>Approved
-                    |</span>
-                @Html.RadioButton("Answer", "NotApprove", new { onchange = "this.form.submit();" }) <span>Not
-                    Approved |</span>
-                @Html.RadioButton("Answer", "MoreInfo", new { onchange = "this.form.submit();" }) <span>More
-                    Info |</span>
-                @Html.RadioButton("Answer", "All", new { onchange = "this.form.submit();" }) <span>All
-                    &nbsp; &nbsp;</span> *@
+                @Html.DropDownList("Value", new SelectList(ViewBag.SortBy, "Value", "Text"), new { @class = "form-control", onchange = "this.form.submit();" })
             }
         </div>
     </div>
@@ -66,10 +43,10 @@
                     <th>
                         @Html.DisplayNameFor(model => model.DailyStart)
                     </th>
-                   @* <th>
-                        @Html.DisplayNameFor(model => model.DailyEnd)
-                    </th>
                     <th>
+                        Hours
+                    </th>
+                   @* <th>
                         @Html.DisplayNameFor(model => model.EnteredDate)
                     </th>*@
                     <th>
@@ -91,10 +68,15 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.DailyStart)
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.DailyEnd)
-                        </td>
                         <td>
+                             @{
+                           
+                            var hours = (item.DailyEnd - item.DailyStart).TotalHours;
+                            
+                            <strong style="font-size: 1.1em; color: White">@(String.Format("{0:0.0} Hrs", hours))</strong>
+                        }
+                        </td>
+                        @*<td>
                             @Html.DisplayFor(modelItem => item.EnteredDate)
                         </td>*@
                         <td style="max-height: 10px">
@@ -109,18 +91,15 @@
                                 <img src="~/Images/red-minus.png" alt="" class="image_background" />
                     } }
                         </td>
-                        <td>
+                        <td style="max-height: 10px; max-width: 175px">
                             @{
                     string moreinfo = (item.MoreInformationFlag).ToString();
 
                     if (moreinfo == "True")
                     {
-                                @*<img src="~/Images/Check_Round.png" alt="" class="image_background" />*@
+                                <span style="color: #CC4040;"> 
                                 @Html.DisplayFor(modelItem => item.AdminNotes)
-                                @*<button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"
-                                style="width: 140px ">
-                                Request More Info
-                                </button>*@
+                                </span>
                                 
                     }
                     else
@@ -144,32 +123,7 @@
     </div>
 </div>
 
-                  @*<!-- Modal -->
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="myModalLabel">
-                                        Request More Information from User</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="display-field">
-                                        <strong style="font-size: 1.5em; color: White">@Html.TextAreaFor(model => model., new { @class = "form-control", cols = "20", rows = "7", id = "moreInfo" })
-                                        </strong>
-                                       
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                                        Close</button>
-                                    <button type="submit" id="reqMore" class="btn btn-primary">
-                                        Request More info</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>   *@
+              
 
 </form>  
 }

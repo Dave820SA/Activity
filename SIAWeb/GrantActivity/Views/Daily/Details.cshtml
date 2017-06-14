@@ -42,9 +42,44 @@
                         <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DailyEnd)</strong>
                     </div>
                 </div>
-                <div class="form-group col-xs-12">
-
+                 <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">Total Time</strong>
+                    </div>
+                    <div class="display-field">
+                        @{
+                           
+                            var hours = (Model.DailyEnd - Model.DailyStart).TotalHours;
+                            
+                            <strong style="font-size: 1.5em; color: White">@(String.Format("{0:0.0} Hrs", hours))</strong>
+                        }
+                    </div>
                 </div>
+
+                 <div class="form-group col-xs-12">
+
+                    @{
+                    string moreinfo = (Model.MoreInformationFlag).ToString();
+                           if (moreinfo == "True")
+                        {
+                           <strong style="font-size: 1.5em">Information Requested</strong>   <br /> 
+                           <span style="color: #CC4040;"> 
+                                @Html.DisplayFor(model => model.AdminNotes)
+                                </span>
+                                
+                         }
+                    else
+                        {
+                                <strong style="font-size: 1.2em"></strong>
+                        }      
+                               
+                               
+                     }            
+                              
+                      
+                </div>
+
+
                 <div class="form-group col-xs-12">
 
                 <a href="@Url.Action("Index", "Daily")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
@@ -56,7 +91,7 @@
                 <div class="col-xs-12 col-md-9">
                     @*@Html.ActionLink("Add New Item", "Create", "Activity", new { id = Model.AdminDailyID }, null) *@
                     <a href="@Url.Action("Create", "Activity", new { id = Model.AdminDailyID }, null)" class="btn btn-warning btn-xs">
-                        Add New Entry <i class="fa fa-plus-square" aria-hidden="true"></i></a>
+                        Add Activity <i class="fa fa-plus-square" aria-hidden="true"></i></a>
                         <br />
                         <br />
                     <table class="table table-condensed table-hover table-bordered">

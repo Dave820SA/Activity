@@ -19,21 +19,47 @@ namespace SIAWeb.Controllers
 
             if (user != "Unknown User")
             {
-
                 sb.AppendLine("<h4>" + user + "<small>, Welcome Back! &nbsp;");
-                sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</small></h4>");
-               
+                if (browserIssue())
+                {
+                    sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</small></h4>");
+                }
+                else
+                {
+                    sb.AppendLine("</small></h4>");
+                }
+                
                 ViewBag.User = sb;
             }
             else
             {
                 sb.AppendLine("<h5>To see content expand one of the categories and click a link.&nbsp; ");
-                sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</h5>");
+                if (browserIssue())
+                {
+                    sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</h5>");
+                }
+                else
+                {
+                    sb.AppendLine("</h5>");
+                }
                 ViewBag.User = sb;
             }
 
             List<WebLinks> siaWebLinks = db.WebLinks.Where(s => s.VisibleFlag).ToList();
             return View(siaWebLinks);
+        }
+
+        private Boolean browserIssue()
+        {
+            string browser = Request.Browser.Browser;
+            if (browser == "Chrome")
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         //track the clicked links, called from Ajax on the Index view

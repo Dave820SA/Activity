@@ -21,55 +21,62 @@ namespace GrantActivity.Controllers
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
 
-            var daily = from d in db.Grant_Daily
-                        select d;
-
-            daily = daily.Where(d => d.AppEntityID != userId && (d.ApprovedFlag == false || d.MoreInformationFlag != false))
-                                  .OrderByDescending(date => date.EnteredDate);
-
+            var daily = activies(userId, "1");
+            sortByItems();
             return View(daily.ToList());
 
         }
 
         [HttpPost]
-        public ActionResult Index(string Answer)
+        public ActionResult Index(string Value)
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+            var daily = activies(userId, Value);
 
-            var dailyactivities = from d in db.Grant_Daily.Where(d => d.AppEntityID != userId)
+            sortByItems();
+            return View(daily.ToList());
+        }
+
+        private void sortByItems()
+        {
+            List<SelectListItem> sortBy = new List<SelectListItem>();
+            sortBy.Add(new SelectListItem { Text = "All", Value = "1" });
+            sortBy.Add(new SelectListItem { Text = "More Info", Value = "2" });
+            sortBy.Add(new SelectListItem { Text = "Approved", Value = "3" });
+            sortBy.Add(new SelectListItem { Text = "Not Approved", Value = "4" });
+            ViewBag.SortBy = new SelectList(sortBy, "Value", "Text", "1");
+        }
+
+        private IList<GrantBusinessLayer.Grant_Daily> activies(int userId, string selectedItem)
+        {
+            var dailyactivities = from d in db.Grant_Daily
                                   select d;
 
-            switch (Answer)
+            var baseline = DateTime.Now.AddDays(-30);
+
+            switch (selectedItem)
             {
-                case "Last30":
-                    var baseline = DateTime.Now.AddDays(-30);
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.EnteredDate >= baseline)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                case "Approve":
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.ApprovedFlag == true)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                case "NotApprove":
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.ApprovedFlag == false)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                case "MoreInfo":
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.MoreInformationFlag == true)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
-                case "All":
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
+                case "2":
+                       dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.MoreInformationFlag == true
+                           && d.EnteredDate >= baseline)
+                       .OrderBy(date => date.EnteredDate);
+                   break;
+                case "3":
+                   dailyactivities = dailyactivities.Where(d => d.ApprovedFlag == true && d.EnteredDate >= baseline)
+                           .OrderBy(date => date.EnteredDate);
+                      break;
+                case "4":
+                       dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.ApprovedFlag == false
+                           && d.EnteredDate >= baseline)
+                          .OrderBy(date => date.EnteredDate);
+                      break;
                 default:
-                    dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.ApprovedFlag == false)
-                        .OrderByDescending(date => date.EnteredDate);
-                    break;
+                      dailyactivities = dailyactivities.Where(d =>  d.EnteredDate >= baseline != (d.AppEntityID == userId && d.ApprovedFlag == false) )
+                           .OrderBy(date => date.EnteredDate);
+                       break;
             }
 
-
-            return View(dailyactivities.ToList());
+            return dailyactivities.ToList();
         }
 
         //
