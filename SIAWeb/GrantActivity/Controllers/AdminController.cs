@@ -59,20 +59,20 @@ namespace GrantActivity.Controllers
                 case "2":
                        dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.MoreInformationFlag == true
                            && d.EnteredDate >= baseline)
-                       .OrderBy(date => date.EnteredDate);
+                       .OrderByDescending(date => date.EnteredDate);
                    break;
                 case "3":
                    dailyactivities = dailyactivities.Where(d => d.ApprovedFlag == true && d.EnteredDate >= baseline)
-                           .OrderBy(date => date.EnteredDate);
+                           .OrderByDescending(date => date.EnteredDate);
                       break;
                 case "4":
                        dailyactivities = dailyactivities.Where(d => d.AppEntityID != userId && d.ApprovedFlag == false
                            && d.EnteredDate >= baseline)
-                          .OrderBy(date => date.EnteredDate);
+                          .OrderByDescending(date => date.EnteredDate);
                       break;
                 default:
                       dailyactivities = dailyactivities.Where(d =>  d.EnteredDate >= baseline != (d.AppEntityID == userId && d.ApprovedFlag == false) )
-                           .OrderBy(date => date.EnteredDate);
+                           .OrderByDescending(date => date.EnteredDate);
                        break;
             }
 

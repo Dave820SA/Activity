@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Web.Mvc;
 using GrantBusinessLayer;
+using System;
+using System.Web;
 
 namespace GrantActivity.Controllers
 {
@@ -12,7 +14,7 @@ namespace GrantActivity.Controllers
 
         //
         // GET: /Category/
-
+        [HandleError()]
         public ActionResult Index()
         {
             return View(db.Grant_Category.ToList());
@@ -103,9 +105,12 @@ namespace GrantActivity.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+           
             Grant_Category grant_category = db.Grant_Category.Single(g => g.CategoryID == id);
             db.Grant_Category.DeleteObject(grant_category);
+           
             db.SaveChanges();
+
             return RedirectToAction("Index");
         }
 
