@@ -69,16 +69,16 @@
                             @Html.DisplayFor(modelItem => item.DailyStart)
                         </td>
                         <td>
-                             @{
-                           
-                            var hours = (item.DailyEnd - item.DailyStart).TotalHours;
+                            @{
+                            DateTime dtStart = item.DailyStart;
+                            DateTime dtEnd = item.DailyEnd;
+                            TimeSpan ts = dtEnd.Subtract(dtStart);
+                            string totalTime = string.Format("{0:hh:mm}", ts.ToString());
                             
-                            <strong style="font-size: 1.1em; color: White">@(String.Format("{0:0.0} Hrs", hours))</strong>
-                        }
+                            <strong style="font-size: 1.1em;">@(totalTime)</strong>
+                            }
                         </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.EnteredDate)
-                        </td>*@
+                       
                         <td style="max-height: 10px">
                             @{
                     string approve = (item.ApprovedFlag).ToString();

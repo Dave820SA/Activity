@@ -51,10 +51,12 @@
                     </div>
                     <div class="display-field">
                         @{
-                           
-                            var hours = (Model.DailyEnd - Model.DailyStart).TotalHours;
+                            DateTime dtStart = Model.DailyStart;
+                            DateTime dtEnd = Model.DailyEnd;
+                            TimeSpan ts = dtEnd.Subtract(dtStart);
+                            string totalTime = string.Format("{0:hh:mm}", ts.ToString());
                             
-                            <strong style="font-size: 1.5em; color: White">@(String.Format("{0:0.0} Hrs", hours))</strong>
+                            <strong style="font-size: 1.5em; color: White">@(totalTime)</strong>
                         }
                     </div>
                 </div>
@@ -97,18 +99,18 @@
                    
                 </div>
                 <div class="form-group col-xs-12">
-                
-                    <button type="submit" id="approveItem" class="btn btn-success btn-sm"  style="width: 140px">
+                    <button type="submit" id="approveItem" class="btn btn-success btn-sm" style="width: 140px">
                         Approve
                     </button>
-                   
                     <br />
-                    <br />
-                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal"
-                        style="width: 140px ">
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal"
+                        style="width: 140px">
                         Request More Info
                     </button>
                     <br />
+                     <button type="submit" id="itemReport" class="btn btn-info  btn-sm" style="width: 140px">
+                        Item Report
+                    </button>
                     <br />
                     <a href="@Url.Action("Index", "Admin")" class="btn btn-warning btn-sm" style="width:140px">
                         Back To List <i class="fa fa-share" aria-hidden="true"></i></a>

@@ -47,11 +47,13 @@
                         <strong style="font-size: 1.2em">Total Time</strong>
                     </div>
                     <div class="display-field">
-                        @{
-                           
-                            var hours = (Model.DailyEnd - Model.DailyStart).TotalHours;
+                       @{
+                            DateTime dtStart = Model.DailyStart;
+                            DateTime dtEnd = Model.DailyEnd;
+                            TimeSpan ts = dtEnd.Subtract(dtStart);
+                            string totalTime = string.Format("{0:hh:mm}", ts.ToString());
                             
-                            <strong style="font-size: 1.5em; color: White">@(String.Format("{0:0.0} Hrs", hours))</strong>
+                            <strong style="font-size: 1.5em; color: White">@(totalTime)</strong>
                         }
                     </div>
                 </div>
@@ -172,23 +174,6 @@
         return false;
          })
        })
-
-//       $(function () {
-//        $('.enterActivity').on("click", function (e) {
-//        e.preventDefault();
-//        //replace the get with this.href to load the edit page
-//        $.get('https://developer.mozilla.org/en-US/docs/Web', function (data) {
-//            //replace the content returned
-//            $("#mainContent").html(data);
-//        });
-//        //show the modal
-//        $('#enterActivityModal').modal({
-//            keyboard : true,
-//        }, 'show');
-//        return false;
-//    })
-
-//})
 
     </script>
     }

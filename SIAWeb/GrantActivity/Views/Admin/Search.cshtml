@@ -1,0 +1,140 @@
+﻿@model IEnumerable<GrantBusinessLayer.Grant_Daily>
+
+@{
+    ViewBag.Title = "View Activity";
+}
+
+<div class="container">
+    <div class="row">
+        <div >
+            <h3>
+                Search <small>All Activity</small></h3>
+        </div>
+        <div class="col-md-12">
+            <span style="font-size:1.2em">Select From Date:</span> &nbsp;
+            @Html.TextBox("fromSearchDate")&nbsp;&nbsp;&nbsp;&nbsp;
+           <span style="font-size:1.2em">Select To Date:</span> &nbsp;
+            @Html.TextBox("toSearchDate")
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="Search"  class="btn btn-info btn-sm"/>
+        </div>
+        <div class="col-md-12">
+            @ViewBag.SearchInfo
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 ">
+                  
+            <table class="table table-condensed table-hover">
+                <tr>
+                   
+                    <th>
+                        @Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)
+                    </th>
+                    <th>
+                        Entered By
+                        @*@Html.DisplayNameFor(model => model.Person.FirstName & " " & model.Person.LastName)*@
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DailyStart)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DailyEnd)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ApprovedFlag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MoreInformationFlag)
+                    </th>
+                   @* <th>
+                        @Html.DisplayNameFor(model => model.Approvel.Approver)
+                    </th>*@
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    @Html.HiddenFor(modelItem => item.AppEntityID)
+                                        <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Grant_GrantType.GrantType)
+                        </td>
+                        <td>
+                            @(String.Format("{0} {1}", item.Person.FirstName, item.Person.LastName))
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DailyStart)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DailyEnd)
+                        </td>
+                        <td style="max-height: 10px">
+                            @{
+                                string approve = (item.ApprovedFlag).ToString();
+                                    if (approve == "True")
+                                        {
+                                            <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                                        }
+                                    else
+                                        {
+                                            <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                                        } 
+                              }
+                        </td>
+                        <td>
+                            @{
+                    string moreinfo = (item.MoreInformationFlag).ToString();
+
+                    if (moreinfo == "True")
+                    {
+                                <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                    }
+                    else
+                    {
+                                <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                    } }
+                        </td>
+                      
+                        <td>
+                            <a href="@Url.Action("Details", "Admin", new { id = item.AdminDailyID })" class="btn btn-success btn-xs">
+                                Details <i class="fa fa-list" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+  <script type="text/javascript">
+      $(document).ready(function () {
+
+      });
+
+        $(function () {
+            $('#fromSearchDate').datepicker({
+                dateFormat: "mm/dd/yy",
+                changeMonth: true,
+                changeYear: true
+            });
+        });
+
+        $(function () {
+            $('#toSearchDate').datepicker({
+                dateFormat: "mm/dd/yy"
+//                changeMonth: true,
+//                changeYear: true
+            });
+        });
+
+
+    </script>
+
+}

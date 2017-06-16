@@ -105,10 +105,9 @@ namespace GrantActivity.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-           
             Grant_Category grant_category = db.Grant_Category.Single(g => g.CategoryID == id);
             db.Grant_Category.DeleteObject(grant_category);
-           
+
             db.SaveChanges();
 
             return RedirectToAction("Index");

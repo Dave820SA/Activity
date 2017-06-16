@@ -79,6 +79,48 @@ namespace GrantActivity.Controllers
             return dailyactivities.ToList();
         }
 
+        public ActionResult Search()
+        {
+            int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+            DateTime startDate = DateTime.Now.AddDays(-30);
+            DateTime endDate = DateTime.Now.AddDays(-60);
+            var daily = searchActivies(userId, endDate, startDate);
+
+            return View(daily.ToList());
+
+        }
+
+        //[HttpPost]
+        //public ActionResult Search(DateTime? fromDate, DateTime? toDate)
+        //{
+        //    if (!fromDate.HasValue) fromDate = DateTime.Now.Date;
+        //    if (!toDate.HasValue) toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+        //    if (toDate < fromDate) toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
+        //    ViewBag.fromDate = fromDate;
+        //    ViewBag.toDate = toDate;
+
+        //    var dailyactivities = from d in db.Grant_Daily
+        //                          select d;
+        //    dailyactivities.Where(d => d.DailyEnd >= fromDate && d.DailyStart < toDate)
+        //       .ToList();
+
+
+        //    return View(dailyactivities);
+        //}
+
+
+        private IList<GrantBusinessLayer.Grant_Daily> searchActivies(int userId, DateTime? fromDate, DateTime? toDate)
+        {
+            
+            ViewBag.fromDate = fromDate;
+            ViewBag.toDate = toDate;
+
+            var dailyactivities = from d in db.Grant_Daily
+                                  where d.DailyEnd >= fromDate && d.DailyStart <= toDate
+                                  select d;
+            return dailyactivities.ToList();
+        }
+
         //
         // GET: /Daily/Details/5
         //[HttpGet]
@@ -127,6 +169,9 @@ namespace GrantActivity.Controllers
             db.SaveChanges();
 
         }
+
+
+        
 
     }
 }
