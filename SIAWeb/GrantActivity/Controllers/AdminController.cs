@@ -90,22 +90,28 @@ namespace GrantActivity.Controllers
 
         }
 
-        //[HttpPost]
-        //public ActionResult Search(DateTime? fromDate, DateTime? toDate)
+        
+        //[HttpGet]
+        [HttpPost]
+        public ActionResult Search(DateTime? fromDate, DateTime? toDate)
+        {
+            int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+
+            var daily = searchActivies(userId, fromDate, toDate);
+
+            return View(daily.ToList());
+        }
+
+        //[HttpGet]
+        //public JsonResult DoGet(DateTime fromDate, DateTime toDate)
         //{
-        //    if (!fromDate.HasValue) fromDate = DateTime.Now.Date;
-        //    if (!toDate.HasValue) toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
-        //    if (toDate < fromDate) toDate = fromDate.GetValueOrDefault(DateTime.Now.Date).Date.AddDays(1);
-        //    ViewBag.fromDate = fromDate;
-        //    ViewBag.toDate = toDate;
+        //    int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
 
-        //    var dailyactivities = from d in db.Grant_Daily
-        //                          select d;
-        //    dailyactivities.Where(d => d.DailyEnd >= fromDate && d.DailyStart < toDate)
-        //       .ToList();
+        //    var daily = searchActivies(userId, fromDate, toDate);
 
+        //    //return View(daily.ToList());
 
-        //    return View(dailyactivities);
+        //    return View(daily.ToList(), JsonRequestBehavior.AllowGet);
         //}
 
 

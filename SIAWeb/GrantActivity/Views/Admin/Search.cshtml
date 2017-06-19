@@ -4,6 +4,10 @@
     ViewBag.Title = "View Activity";
 }
 
+
+@using (Html.BeginForm())
+{
+
 <div class="container">
     <div class="row">
         <div >
@@ -12,11 +16,15 @@
         </div>
         <div class="col-md-12">
             <span style="font-size:1.2em">Select From Date:</span> &nbsp;
-            @Html.TextBox("fromSearchDate")&nbsp;&nbsp;&nbsp;&nbsp;
+            @Html.TextBox("fromSearchDate" )&nbsp;&nbsp;&nbsp;&nbsp;
            <span style="font-size:1.2em">Select To Date:</span> &nbsp;
             @Html.TextBox("toSearchDate")
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="submit" value="Search"  class="btn btn-info btn-sm"/>
+            @*<input type="submit" id="btnSearch" class="btn btn-success" />*@
+          @*@Html.ActionLink("Back", "Search", "Admin", new { @fromDate = "fromSearchDate", @toDate = "toSearchDate" }, null)*@
+          	<a href="@Url.Action("Search", "Admin", new { @fromDate = "@fromSearchDate", @toDate = "@toSearchDate" }, null)" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>
+
+
         </div>
         <div class="col-md-12">
             @ViewBag.SearchInfo
@@ -75,15 +83,15 @@
                         </td>
                         <td style="max-height: 10px">
                             @{
-                                string approve = (item.ApprovedFlag).ToString();
-                                    if (approve == "True")
-                                        {
+                    string approve = (item.ApprovedFlag).ToString();
+                    if (approve == "True")
+                    {
                                             <img src="~/Images/Check_Round.png" alt="" class="image_background" />
-                                        }
-                                    else
-                                        {
+                    }
+                    else
+                    {
                                             <img src="~/Images/red-minus.png" alt="" class="image_background" />
-                                        } 
+                    } 
                               }
                         </td>
                         <td>
@@ -110,13 +118,30 @@
         </div>
     </div>
 </div>
+  
+} 
+
 
 @section Scripts {
 
   <script type="text/javascript">
       $(document).ready(function () {
 
+    
       });
+
+//      $('#btnSearch').click(function () {
+//          var fromDt = $('#fromSearchDate').val();
+//          var toDt = $('#toSearchDate').val(); 
+//          $.ajax({
+//              type: 'post',
+//              url: '@Url.Action("Search")',
+//              data: { "fromDate": fromDt, "toDate": toDt },
+//              success: function (result) {
+
+//              }
+//          });
+//      });
 
         $(function () {
             $('#fromSearchDate').datepicker({
@@ -134,6 +159,16 @@
             });
         });
 
+
+        $("#toSearchDate").change(function () {
+            var startDate = document.getElementById("fromSearchDate").value;
+            var endDate = document.getElementById("toSearchDate").value;
+
+            if ((Date.parse(startDate) >= Date.parse(endDate))) {
+                alert("End date should be greater than Start date");
+                document.getElementById("EndDate").value = "";
+            }
+        });
 
     </script>
 
