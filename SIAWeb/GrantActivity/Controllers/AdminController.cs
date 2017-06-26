@@ -93,7 +93,8 @@ namespace GrantActivity.Controllers
         
         //[HttpGet]
         [HttpPost]
-        public ActionResult Search(DateTime? fromDate, DateTime? toDate)
+        //[AllowAnonymous]
+        public ActionResult Search(DateTime fromDate, DateTime toDate)
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
 

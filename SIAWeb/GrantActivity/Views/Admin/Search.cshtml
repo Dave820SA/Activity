@@ -22,8 +22,9 @@
             &nbsp;&nbsp;&nbsp;&nbsp;
             @*<input type="submit" id="btnSearch" class="btn btn-success" />*@
           @*@Html.ActionLink("Back", "Search", "Admin", new { @fromDate = "fromSearchDate", @toDate = "toSearchDate" }, null)*@
-          	<a href="@Url.Action("Search", "Admin", new { @fromDate = "@fromSearchDate", @toDate = "@toSearchDate" }, null)" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>
+          	@*<a href="@Url.Action("Search", "Admin", new { @fromDate = "@fromSearchDate", @toDate = "@toSearchDate" }, null)" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
 
+            <button class="btn btn-primary" id="btnSearch">Upload</button>
 
         </div>
         <div class="col-md-12">
@@ -127,14 +128,29 @@
   <script type="text/javascript">
       $(document).ready(function () {
 
-    
+
       });
+
+    $('#btnSearch').click(function () {
+          var fromDt = $('#fromSearchDate').val();
+          var toDt = $('#toSearchDate').val(); 
+          $.ajax({
+              type: 'post',
+              url: '@Url.Action("Search")',
+              data: { "fromDate": fromDt, "toDate": toDt },
+              success: function (result) {
+
+              }
+          });
+      });
+
+      
+
 
 //      $('#btnSearch').click(function () {
 //          var fromDt = $('#fromSearchDate').val();
-//          var toDt = $('#toSearchDate').val(); 
+//          var toDt = $('#toSearchDate').val();
 //          $.ajax({
-//              type: 'post',
 //              url: '@Url.Action("Search")',
 //              data: { "fromDate": fromDt, "toDate": toDt },
 //              success: function (result) {
@@ -142,6 +158,7 @@
 //              }
 //          });
 //      });
+
 
         $(function () {
             $('#fromSearchDate').datepicker({
