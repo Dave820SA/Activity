@@ -79,6 +79,7 @@ namespace GrantActivity.Controllers
             return dailyactivities.ToList();
         }
 
+        [HttpGet]
         public ActionResult Search()
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
@@ -92,13 +93,17 @@ namespace GrantActivity.Controllers
 
         
         //[HttpGet]
-        [HttpPost]
-        //[AllowAnonymous]
+        //[HttpPost]
+        [AllowAnonymous]
+        //[AcceptVerbs(HttpVerbs.Post)]
         public ActionResult Search(DateTime fromDate, DateTime toDate)
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+            DateTime fDate = fromDate.Add(TimeSpan.Parse("00:00:01"));
+            DateTime tDate = toDate.Add(TimeSpan.Parse("11:59:59"));
+            var daily = searchActivies(userId, fDate, tDate);
 
-            var daily = searchActivies(userId, fromDate, toDate);
+
 
             return View(daily.ToList());
         }
@@ -116,7 +121,7 @@ namespace GrantActivity.Controllers
         //}
 
 
-        private IList<GrantBusinessLayer.Grant_Daily> searchActivies(int userId, DateTime? fromDate, DateTime? toDate)
+        private IList<GrantBusinessLayer.Grant_Daily> searchActivies(int? userId, DateTime? fromDate, DateTime? toDate)
         {
             
             ViewBag.fromDate = fromDate;

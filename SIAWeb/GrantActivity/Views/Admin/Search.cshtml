@@ -24,7 +24,17 @@
           @*@Html.ActionLink("Back", "Search", "Admin", new { @fromDate = "fromSearchDate", @toDate = "toSearchDate" }, null)*@
           	@*<a href="@Url.Action("Search", "Admin", new { @fromDate = "@fromSearchDate", @toDate = "@toSearchDate" }, null)" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
 
-            <button class="btn btn-primary" id="btnSearch">Upload</button>
+            @*<button class="btn btn-primary" id="btnSearch" value="123">Upload</button>*@
+           	@*<a href="@Html.ActionLink("Search", "Admin", new {  @fromDate = "5/1/2017", @toDate = "5/30/2017" }, null)" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
+
+
+            @*@Url.Action("Search", "Admin", new { @fromDate = "5/1/2017", @toDate = "5/30/2017", class="btn btn-warning btn-sm"}, null, )*@
+
+            @*<a href="@Html.Raw(@Url.Action("Search", "Admin", new { @fromDate = "5/1/2017", @toDate = "5/30/2017" }))" id="btnSearch" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
+            <a href="@Html.Raw(@Url.Action("Search", "Admin"))" id="btnSearch" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>
+
+
+           @* @Html.Raw(@Url.Action("Search", "Admin", new { @fromDate = "5/1/2017", @toDate = "5/30/2017" }));*@
 
         </div>
         <div class="col-md-12">
@@ -128,8 +138,11 @@
   <script type="text/javascript">
       $(document).ready(function () {
 
-
       });
+
+
+    
+
 
     $('#btnSearch').click(function () {
           var fromDt = $('#fromSearchDate').val();
@@ -137,28 +150,14 @@
           $.ajax({
               type: 'post',
               url: '@Url.Action("Search")',
-              data: { "fromDate": fromDt, "toDate": toDt },
-              success: function (result) {
+              data: { "fromDate": fromDt, "toDate": toDt }
+//              success: function (result) {
 
-              }
+//              }
           });
       });
 
       
-
-
-//      $('#btnSearch').click(function () {
-//          var fromDt = $('#fromSearchDate').val();
-//          var toDt = $('#toSearchDate').val();
-//          $.ajax({
-//              url: '@Url.Action("Search")',
-//              data: { "fromDate": fromDt, "toDate": toDt },
-//              success: function (result) {
-
-//              }
-//          });
-//      });
-
 
         $(function () {
             $('#fromSearchDate').datepicker({
