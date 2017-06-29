@@ -1,4 +1,9 @@
-﻿@model IEnumerable<GrantBusinessLayer.Grant_Daily>
+﻿@{
+   
+    Layout = "~/Views/Shared/_Alternate.cshtml";
+}
+
+@model IEnumerable<GrantBusinessLayer.Grant_Daily>
 
 @{
     ViewBag.Title = "View Activity";
@@ -20,18 +25,14 @@
            <span style="font-size:1.2em">Select To Date:</span> &nbsp;
             @Html.TextBox("toSearchDate")
             &nbsp;&nbsp;&nbsp;&nbsp;
-            @*<input type="submit" id="btnSearch" class="btn btn-success" />*@
-          @*@Html.ActionLink("Back", "Search", "Admin", new { @fromDate = "fromSearchDate", @toDate = "toSearchDate" }, null)*@
-          	@*<a href="@Url.Action("Search", "Admin", new { @fromDate = "@fromSearchDate", @toDate = "@toSearchDate" }, null)" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
+           
+           <input type="submit" id="btnSearch" value="123">
 
-            @*<button class="btn btn-primary" id="btnSearch" value="123">Upload</button>*@
-           	@*<a href="@Html.ActionLink("Search", "Admin", new {  @fromDate = "5/1/2017", @toDate = "5/30/2017" }, null)" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
+           
 
+            @*<a href="@Html.Raw(@Url.Action("Search", "Admin"))" id="btnSearch" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
 
-            @*@Url.Action("Search", "Admin", new { @fromDate = "5/1/2017", @toDate = "5/30/2017", class="btn btn-warning btn-sm"}, null, )*@
-
-            @*<a href="@Html.Raw(@Url.Action("Search", "Admin", new { @fromDate = "5/1/2017", @toDate = "5/30/2017" }))" id="btnSearch" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
-            <a href="@Html.Raw(@Url.Action("Search", "Admin"))" id="btnSearch" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>
+            @*<a href="@Html.Raw(@Url.Action("Search", "Admin", new { @Id = "btnSearch", onClick = "this.form.submit();" }))" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
 
 
            @* @Html.Raw(@Url.Action("Search", "Admin", new { @fromDate = "5/1/2017", @toDate = "5/30/2017" }));*@
@@ -53,6 +54,7 @@
                    
                     <th>
                         @Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)
+                        
                     </th>
                     <th>
                         Entered By
@@ -79,7 +81,8 @@
                 @foreach (var item in Model)
                 {
                     @Html.HiddenFor(modelItem => item.AppEntityID)
-                                        <tr>
+                   
+                    <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.Grant_GrantType.GrantType)
                         </td>
@@ -97,13 +100,13 @@
                     string approve = (item.ApprovedFlag).ToString();
                     if (approve == "True")
                     {
-                                            <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                                <img src="~/Images/Check_Round.png" alt="" class="image_background" />
                     }
                     else
                     {
-                                            <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                                <img src="~/Images/red-minus.png" alt="" class="image_background" />
                     } 
-                              }
+                            }
                         </td>
                         <td>
                             @{
@@ -118,7 +121,6 @@
                                 <img src="~/Images/red-minus.png" alt="" class="image_background" />
                     } }
                         </td>
-                      
                         <td>
                             <a href="@Url.Action("Details", "Admin", new { id = item.AdminDailyID })" class="btn btn-success btn-xs">
                                 Details <i class="fa fa-list" aria-hidden="true"></i></a>
@@ -141,23 +143,62 @@
       });
 
 
-    
+//      $('#btnSearch').click(function (e) {
+//          e.preventDefault();
+//          var fromDt = $('#fromSearchDate').val();
+//          var toDt = $('#toSearchDate').val();
+//          $.ajax({
+//              //type: 'post',
+//              url: '@Url.Action("Search2")',
+//              data: { "fromDate": fromDt, "toDate": toDt }
+//              //              success: function (result) {
+
+//              //              }
+//          });
+//      });
 
 
-    $('#btnSearch').click(function () {
+
+//      $("form").submit(function (e) {
+//          e.preventDefault();
+//          var fromDt = $('#fromSearchDate').val();
+//          var toDt = $('#toSearchDate').val();
+//          $.ajax({
+//              type: 'POST',
+//              //url: '@Url.Action("Search")',
+//              data: { "fromDate": fromDt, "toDate": toDt },
+//              success: function (result) {
+//                  if (result.success) {
+//                      window.location.reload();
+//                  }
+//                  else {
+//                      // inform the user that the save didn't work
+//                  }
+//              }
+//          });
+//      });
+
+
+
+
+      $('#btnSearch').click(function () {
           var fromDt = $('#fromSearchDate').val();
-          var toDt = $('#toSearchDate').val(); 
+          var toDt = $('#toSearchDate').val();
+
           $.ajax({
               type: 'post',
-              url: '@Url.Action("Search")',
+              //url: '@Url.Action("Search")',
               data: { "fromDate": fromDt, "toDate": toDt }
-//              success: function (result) {
+              //              success: function (result) {
 
-//              }
+              //              }
           });
       });
 
-      
+
+     
+
+
 
         $(function () {
             $('#fromSearchDate').datepicker({

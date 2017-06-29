@@ -79,30 +79,50 @@ namespace GrantActivity.Controllers
             return dailyactivities.ToList();
         }
 
-        [HttpGet]
+
+
         public ActionResult Search()
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
-            DateTime startDate = DateTime.Now.AddDays(-30);
-            DateTime endDate = DateTime.Now.AddDays(-60);
+
+            DateTime startDate;
+            DateTime endDate;
+            //if (fromDate.HasValue)
+            //{
+            //    endDate = fromDate.Value;
+            //    endDate = endDate.Add(TimeSpan.Parse("00:00:01"));
+            //}
+            //else
+            //{
+            endDate = DateTime.Now.AddDays(-60);
+            //}
+
+            //if (toDate.HasValue)
+            //{
+            //    startDate = toDate.Value;
+            //    startDate = startDate.Add(TimeSpan.Parse("11:59:59"));
+            //}
+            //else
+            //{
+                startDate = DateTime.Now.AddDays(-30);
+            //}
+            
+            //DateTime endDate = DateTime.Now.AddDays(-60);
             var daily = searchActivies(userId, endDate, startDate);
 
             return View(daily.ToList());
 
         }
 
-        
-        //[HttpGet]
-        //[HttpPost]
-        [AllowAnonymous]
-        //[AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult Search(DateTime fromDate, DateTime toDate)
+
+        [HttpPost, ActionName("Search")]
+        public ActionResult Search(DateTime? fromDate, DateTime? toDate)
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
-            DateTime fDate = fromDate.Add(TimeSpan.Parse("00:00:01"));
-            DateTime tDate = toDate.Add(TimeSpan.Parse("11:59:59"));
-            var daily = searchActivies(userId, fDate, tDate);
-
+            //DateTime fDate = fromDate.Add(TimeSpan.Parse("00:00:01"));
+            //DateTime tDate = toDate.Add(TimeSpan.Parse("11:59:59"));
+            //var daily = searchActivies(userId, fDate, tDate);
+            var daily = searchActivies(userId, fromDate, toDate);
 
 
             return View(daily.ToList());
