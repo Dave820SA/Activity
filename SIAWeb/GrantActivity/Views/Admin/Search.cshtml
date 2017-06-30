@@ -1,7 +1,4 @@
-﻿@{
-   
-    Layout = "~/Views/Shared/_Alternate.cshtml";
-}
+﻿
 
 @model IEnumerable<GrantBusinessLayer.Grant_Daily>
 
@@ -10,8 +7,6 @@
 }
 
 
-@using (Html.BeginForm())
-{
 
 <div class="container">
     <div class="row">
@@ -20,22 +15,18 @@
                 Search <small>All Activity</small></h3>
         </div>
         <div class="col-md-12">
+
             <span style="font-size:1.2em">Select From Date:</span> &nbsp;
             @Html.TextBox("fromSearchDate" )&nbsp;&nbsp;&nbsp;&nbsp;
            <span style="font-size:1.2em">Select To Date:</span> &nbsp;
             @Html.TextBox("toSearchDate")
             &nbsp;&nbsp;&nbsp;&nbsp;
-           
+           @using (Html.BeginForm("Search", "Admin", FormMethod.Get))
+{   
+            @Html.TextBox("SearchString", ViewBag.FromDate as string, new { style = " padding-bottom:8px; " })
            <input type="submit" id="btnSearch" value="123">
-
-           
-
-            @*<a href="@Html.Raw(@Url.Action("Search", "Admin"))" id="btnSearch" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
-
-            @*<a href="@Html.Raw(@Url.Action("Search", "Admin", new { @Id = "btnSearch", onClick = "this.form.submit();" }))" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
-
-
-           @* @Html.Raw(@Url.Action("Search", "Admin", new { @fromDate = "5/1/2017", @toDate = "5/30/2017" }));*@
+}
+         
 
         </div>
         <div class="col-md-12">
@@ -44,6 +35,9 @@
     </div>
 </div>
 <br />
+    
+
+ 
 
 <div class="container">
     <div class="row">
@@ -132,39 +126,32 @@
     </div>
 </div>
   
-} 
+
 
 
 @section Scripts {
 
+
+
   <script type="text/javascript">
+
+
       $(document).ready(function () {
 
       });
 
 
-//      $('#btnSearch').click(function (e) {
-//          e.preventDefault();
+
+
+
+
+
+//      $('#btnSearch').click(function () {
 //          var fromDt = $('#fromSearchDate').val();
 //          var toDt = $('#toSearchDate').val();
+
 //          $.ajax({
-//              //type: 'post',
-//              url: '@Url.Action("Search2")',
-//              data: { "fromDate": fromDt, "toDate": toDt }
-//              //              success: function (result) {
-
-//              //              }
-//          });
-//      });
-
-
-
-//      $("form").submit(function (e) {
-//          e.preventDefault();
-//          var fromDt = $('#fromSearchDate').val();
-//          var toDt = $('#toSearchDate').val();
-//          $.ajax({
-//              type: 'POST',
+//              type: 'post',
 //              //url: '@Url.Action("Search")',
 //              data: { "fromDate": fromDt, "toDate": toDt },
 //              success: function (result) {
@@ -177,23 +164,6 @@
 //              }
 //          });
 //      });
-
-
-
-
-      $('#btnSearch').click(function () {
-          var fromDt = $('#fromSearchDate').val();
-          var toDt = $('#toSearchDate').val();
-
-          $.ajax({
-              type: 'post',
-              //url: '@Url.Action("Search")',
-              data: { "fromDate": fromDt, "toDate": toDt }
-              //              success: function (result) {
-
-              //              }
-          });
-      });
 
 
      
@@ -227,6 +197,6 @@
             }
         });
 
-    </script>
+  </script>
 
 }

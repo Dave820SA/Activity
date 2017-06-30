@@ -81,52 +81,85 @@ namespace GrantActivity.Controllers
 
 
 
-        public ActionResult Search()
-        {
-            int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+        //public ActionResult Search()
+        //{
+        //    int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
 
-            DateTime startDate;
-            DateTime endDate;
-            //if (fromDate.HasValue)
-            //{
-            //    endDate = fromDate.Value;
-            //    endDate = endDate.Add(TimeSpan.Parse("00:00:01"));
-            //}
-            //else
-            //{
-            endDate = DateTime.Now.AddDays(-60);
-            //}
+        //    DateTime startDate;
+        //    DateTime endDate;
+        //    //if (fromDate.HasValue)
+        //    //{
+        //    //    endDate = fromDate.Value;
+        //    //    endDate = endDate.Add(TimeSpan.Parse("00:00:01"));
+        //    //}
+        //    //else
+        //    //{
+        //    endDate = DateTime.Now.AddDays(-60);
+        //    //}
 
-            //if (toDate.HasValue)
-            //{
-            //    startDate = toDate.Value;
-            //    startDate = startDate.Add(TimeSpan.Parse("11:59:59"));
-            //}
-            //else
-            //{
-                startDate = DateTime.Now.AddDays(-30);
-            //}
+        //    //if (toDate.HasValue)
+        //    //{
+        //    //    startDate = toDate.Value;
+        //    //    startDate = startDate.Add(TimeSpan.Parse("11:59:59"));
+        //    //}
+        //    //else
+        //    //{
+        //        startDate = DateTime.Now.AddDays(-30);
+        //    //}
             
-            //DateTime endDate = DateTime.Now.AddDays(-60);
-            var daily = searchActivies(userId, endDate, startDate);
+        //    //DateTime endDate = DateTime.Now.AddDays(-60);
+        //    var daily = searchActivies(userId, endDate, startDate);
 
-            return View(daily.ToList());
+        //    return View(daily.ToList());
 
-        }
+        //}
 
-
-        [HttpPost, ActionName("Search")]
-        public ActionResult Search(DateTime? fromDate, DateTime? toDate)
+        //public ViewResult Search(DateTime? fromDate, DateTime? toDate)
+        public ViewResult Search(string fromDate, string toDate)
         {
+            //ModelState.Clear();
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
             //DateTime fDate = fromDate.Add(TimeSpan.Parse("00:00:01"));
             //DateTime tDate = toDate.Add(TimeSpan.Parse("11:59:59"));
             //var daily = searchActivies(userId, fDate, tDate);
-            var daily = searchActivies(userId, fromDate, toDate);
+
+
+            DateTime fDate;
+            DateTime tDate;
+            string testdate = ViewBag.FromDate;
+            if (string.IsNullOrEmpty(fromDate) == false)
+            //if (searchString != null)
+            {
+                 fDate = DateTime.Parse(fromDate);
+                 tDate = DateTime.Parse(toDate);
+            }
+            else
+            {
+                tDate = DateTime.Now.AddDays(-30);
+                fDate = DateTime.Now.AddDays(-60);
+            }
+            
+
+            var daily = searchActivies(userId, fDate, tDate);
 
 
             return View(daily.ToList());
         }
+
+
+        //[HttpPost]
+        //public ActionResult Search(DateTime? fromDate, DateTime? toDate)
+        //{
+        //    //ModelState.Clear();
+        //    int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+        //    //DateTime fDate = fromDate.Add(TimeSpan.Parse("00:00:01"));
+        //    //DateTime tDate = toDate.Add(TimeSpan.Parse("11:59:59"));
+        //    //var daily = searchActivies(userId, fDate, tDate);
+        //    var daily = searchActivies(userId, fromDate, toDate);
+
+
+        //    return View(daily.ToList());
+        //}
 
         //[HttpGet]
         //public JsonResult DoGet(DateTime fromDate, DateTime toDate)
@@ -144,8 +177,8 @@ namespace GrantActivity.Controllers
         private IList<GrantBusinessLayer.Grant_Daily> searchActivies(int? userId, DateTime? fromDate, DateTime? toDate)
         {
             
-            ViewBag.fromDate = fromDate;
-            ViewBag.toDate = toDate;
+            //ViewBag.fromDate = fromDate;
+            //ViewBag.toDate = toDate;
 
             var dailyactivities = from d in db.Grant_Daily
                                   where d.DailyEnd >= fromDate && d.DailyStart <= toDate
