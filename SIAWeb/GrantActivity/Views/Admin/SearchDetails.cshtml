@@ -1,0 +1,231 @@
+﻿@model GrantBusinessLayer.Grant_Daily
+
+@{
+    ViewBag.Title = "Activity Details";
+    
+}
+
+
+<div style="padding-left: 5px">
+    <h3>
+        Activity<small> Details by @(String.Format("{0} {1}", Model.Person.FirstName, Model.Person.LastName)) </small></h3>
+        <hr />
+</div>
+    
+@using (Html.BeginForm())
+{    
+<form class="form-horizontal">
+<div class="Container">
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <fieldset class="scheduler-border">
+                <div class="form-group col-xs-12">
+                        @Html.HiddenFor(model => model.AdminDailyID, new {id="adminID"})
+                        @Html.Hidden("RedirectTo", Url.Action("Index", "Admin"))
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Grant_GrantType.GrantType)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DailyStart)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DailyStart)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DailyEnd)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DailyEnd)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">Total Time</strong>
+                    </div>
+                    <div class="display-field">
+                        @{
+                            DateTime dtStart = Model.DailyStart;
+                            DateTime dtEnd = Model.DailyEnd;
+                            TimeSpan ts = dtEnd.Subtract(dtStart);
+                            string totalTime = string.Format("{0:hh:mm}", ts.ToString());
+                            
+                            <strong style="font-size: 1.5em; color: White">@(totalTime)</strong>
+                        }
+                    </div>
+                </div>
+
+                 <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.EnteredDate)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.EnteredDate)</strong>
+                    </div>
+                </div>
+
+                 <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.ApprovedByID)</strong>
+                    </div>
+                     <div class="display-field">
+                         @{
+                            var approve = Html.DisplayFor(model => model.Grant_vActivityApprover.ApproveBy).ToString();
+
+                            if (approve != "")
+                            {
+                            
+                             <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Grant_vActivityApprover.ApproveBy)</strong>
+                             
+                            }
+                            else
+                            {
+                             <strong style="font-size: 1.5em; color: White">Not Yet Approved</strong>
+                           
+                            }
+
+                         }
+                     </div>
+                </div>
+
+                <div class="form-group col-xs-12">
+                  
+                   
+                </div>
+                <div class="form-group col-xs-12">
+                    @*<button type="submit" id="approveItem" class="btn btn-success btn-sm" style="width: 140px">
+                        Approve
+                    </button>
+                    <br />
+                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#myModal"
+                        style="width: 140px">
+                        Request More Info
+                    </button>
+                    <br />*@
+                     <button type="submit" id="itemReport" class="btn btn-info  btn-sm" style="width: 140px">
+                        Item Report
+                    </button>
+                    <br />
+                    <a href="@Url.Action("Search", "Admin")" class="btn btn-warning btn-sm" style="width:140px">
+                        Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+                </div>
+            </fieldset>
+
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-md-9">
+                   
+                    <table class="table table-condensed table-hover table-bordered">
+                        <tr>
+                            <th>
+                                Activity
+                            </th>
+                            <th>
+                                Notes
+                            </th>
+                            
+                        </tr>
+                        @foreach (var item in ViewData["Activities"] as IEnumerable<GrantBusinessLayer.Grant_Activity>)
+                        {
+                            <tr>
+                                <td style="max-width: 280px; min-width: 280px; width: 280px;">
+                                    @item.Grant_Category.Name
+                                </td>
+                                <td style="max-width: 400px; min-width: 400px; width: 400px;">
+                                    @item.Notes
+                                </td>
+                                
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">
+                    Request More Information from User</h4>
+            </div>
+            <div class="modal-body">
+                <div class="display-field">
+                    <strong style="font-size: 1.5em; color: White">@Html.TextAreaFor(model => model.AdminNotes, new { @class = "form-control", cols = "20", rows = "7" , id="moreInfo" })
+                    </strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-default" data-dismiss="modal">
+                    Close</button>
+                <button type="submit" id="reqMore" class="btn btn-primary">
+                    Request More info</button>
+            </div>
+        </div>
+    </div>
+</div>
+  
+</form>
+}
+
+@section Scripts {
+
+  <script type="text/javascript">
+      $(document).ready(function () {
+
+      });
+
+      $(function () {
+          var url = $("#RedirectTo").val();
+          $('#reqMore').click(function () {
+              var info = $('#moreInfo').text()
+              var id = $('#adminID').val()
+
+              $.ajax({
+                  type: 'get',
+                  url: '@Url.Action("moreInfo")',
+                  data: { "info": info, "id": id },
+                  success: function (result) {
+                      location.href = url;
+                  }
+              });
+
+
+          });
+
+          $('#approveItem').click(function () {
+              //var info = $('#moreInfo').text()
+              var id = $('#adminID').val()
+
+              $.ajax({
+                  type: 'get',
+                  url: '@Url.Action("approve")',
+                  data: { "id": id },
+                  success: function (result) {
+                      location.href = url;
+                  }
+              });
+          });
+
+
+      });
+
+
+      
+                         
+    </script>
+
+  }
