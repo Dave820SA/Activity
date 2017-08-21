@@ -1,0 +1,372 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SAPDActivityModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SAPDActivityModelStoreContainer">
+          <EntitySet Name="Award_AwardType" EntityType="SAPDActivityModel.Store.Award_AwardType" store:Type="Tables" Schema="dbo" Table="Award.AwardType" />
+          <EntitySet Name="Award_RecognitionType" EntityType="SAPDActivityModel.Store.Award_RecognitionType" store:Type="Tables" Schema="dbo" Table="Award.RecognitionType" />
+          <EntitySet Name="Award_Recognize" EntityType="SAPDActivityModel.Store.Award_Recognize" store:Type="Tables" Schema="dbo" Table="Award.Recognize" />
+          <EntitySet Name="Office_Office" EntityType="SAPDActivityModel.Store.Office_Office" store:Type="Tables" Schema="dbo" Table="Office.Office" />
+          <EntitySet Name="Person_Person" EntityType="SAPDActivityModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
+          <AssociationSet Name="FK_Award_Recognize_Award_AwardType" Association="SAPDActivityModel.Store.FK_Award_Recognize_Award_AwardType">
+            <End Role="Award_AwardType" EntitySet="Award_AwardType" />
+            <End Role="Award_Recognize" EntitySet="Award_Recognize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Award_Recognize_Award_RecognitionType" Association="SAPDActivityModel.Store.FK_Award_Recognize_Award_RecognitionType">
+            <End Role="Award_RecognitionType" EntitySet="Award_RecognitionType" />
+            <End Role="Award_Recognize" EntitySet="Award_Recognize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Award_Recognize_Office_Office" Association="SAPDActivityModel.Store.FK_Award_Recognize_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="Award_Recognize" EntitySet="Award_Recognize" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Award_AwardType">
+          <Key>
+            <PropertyRef Name="AwardTypeId" />
+          </Key>
+          <Property Name="AwardTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Code" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Award_RecognitionType">
+          <Key>
+            <PropertyRef Name="RecognitionTypeId" />
+          </Key>
+          <Property Name="RecognitionTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Code" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Award_Recognize">
+          <Key>
+            <PropertyRef Name="RecognitionId" />
+          </Key>
+          <Property Name="RecognitionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RecogTypeId" Type="int" Nullable="false" />
+          <Property Name="AwardTypeId" Type="int" />
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="OfficeId" Type="int" Nullable="false" />
+          <Property Name="Notes" Type="varchar(max)" />
+          <Property Name="DocPath" Type="varchar" MaxLength="500" />
+          <Property Name="IssuedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Office_Office">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Name="OfficeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DivisionSectionID" Type="int" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Ranking" Type="int" />
+          <Property Name="Visible" Type="bit" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="PAOfficeID" Type="int" />
+        </EntityType>
+        <EntityType Name="Person_Person">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="PersonTypeID" Type="int" />
+          <Property Name="Title" Type="varchar" MaxLength="8" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="Suffix" Type="varchar" MaxLength="10" />
+          <Property Name="rowguid" Type="uniqueidentifier" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Award_Recognize_Award_AwardType">
+          <End Role="Award_AwardType" Type="SAPDActivityModel.Store.Award_AwardType" Multiplicity="0..1" />
+          <End Role="Award_Recognize" Type="SAPDActivityModel.Store.Award_Recognize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Award_AwardType">
+              <PropertyRef Name="AwardTypeId" />
+            </Principal>
+            <Dependent Role="Award_Recognize">
+              <PropertyRef Name="AwardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Award_Recognize_Award_RecognitionType">
+          <End Role="Award_RecognitionType" Type="SAPDActivityModel.Store.Award_RecognitionType" Multiplicity="1" />
+          <End Role="Award_Recognize" Type="SAPDActivityModel.Store.Award_Recognize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Award_RecognitionType">
+              <PropertyRef Name="RecognitionTypeId" />
+            </Principal>
+            <Dependent Role="Award_Recognize">
+              <PropertyRef Name="RecogTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Award_Recognize_Office_Office">
+          <End Role="Office_Office" Type="SAPDActivityModel.Store.Office_Office" Multiplicity="1" />
+          <End Role="Award_Recognize" Type="SAPDActivityModel.Store.Award_Recognize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="Award_Recognize">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SAPDActivityModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SAPDActivityEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AwardTypes" EntityType="SAPDActivityModel.AwardType" />
+          <EntitySet Name="RecognitionTypes" EntityType="SAPDActivityModel.RecognitionType" />
+          <EntitySet Name="Recognizes" EntityType="SAPDActivityModel.Recognize" />
+          <AssociationSet Name="FK_Award_Recognize_Award_AwardType" Association="SAPDActivityModel.FK_Award_Recognize_Award_AwardType">
+            <End Role="Award_AwardType" EntitySet="AwardTypes" />
+            <End Role="Award_Recognize" EntitySet="Recognizes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Award_Recognize_Award_RecognitionType" Association="SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType">
+            <End Role="Award_RecognitionType" EntitySet="RecognitionTypes" />
+            <End Role="Award_Recognize" EntitySet="Recognizes" />
+          </AssociationSet>
+          <EntitySet Name="People" EntityType="SAPDActivityModel.Person" />
+          <AssociationSet Name="PersonRecognize" Association="SAPDActivityModel.PersonRecognize">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Recognize" EntitySet="Recognizes" />
+          </AssociationSet>
+          <EntitySet Name="Office_Office" EntityType="SAPDActivityModel.Office_Office" />
+          <AssociationSet Name="FK_Award_Recognize_Office_Office" Association="SAPDActivityModel.FK_Award_Recognize_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="Recognize" EntitySet="Recognizes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AwardType">
+          <Key>
+            <PropertyRef Name="AwardTypeId" />
+          </Key>
+          <Property Name="AwardTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Code" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Award_Recognize" Relationship="SAPDActivityModel.FK_Award_Recognize_Award_AwardType" FromRole="Award_AwardType" ToRole="Award_Recognize" />
+        </EntityType>
+        <EntityType Name="RecognitionType">
+          <Key>
+            <PropertyRef Name="RecognitionTypeId" />
+          </Key>
+          <Property Name="RecognitionTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Code" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Award_Recognize" Relationship="SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType" FromRole="Award_RecognitionType" ToRole="Award_Recognize" />
+        </EntityType>
+        <EntityType Name="Recognize">
+          <Key>
+            <PropertyRef Name="RecognitionId" />
+          </Key>
+          <Property Name="RecognitionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecogTypeId" Type="Int32" Nullable="false" />
+          <Property Name="AwardTypeId" Type="Int32" />
+          <Property Name="AppEntityID" Type="Int32" Nullable="false" />
+          <Property Name="OfficeId" Type="Int32" Nullable="false" />
+          <Property Name="Notes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="DocPath" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="IssuedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Award_AwardType" Relationship="SAPDActivityModel.FK_Award_Recognize_Award_AwardType" FromRole="Award_Recognize" ToRole="Award_AwardType" />
+          <NavigationProperty Name="Award_RecognitionType" Relationship="SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType" FromRole="Award_Recognize" ToRole="Award_RecognitionType" />
+          <NavigationProperty Name="Person" Relationship="SAPDActivityModel.PersonRecognize" FromRole="Recognize" ToRole="Person" />
+          <NavigationProperty Name="Office_Office" Relationship="SAPDActivityModel.FK_Award_Recognize_Office_Office" FromRole="Recognize" ToRole="Office_Office" />
+        </EntityType>
+        <Association Name="FK_Award_Recognize_Award_AwardType">
+          <End Role="Award_AwardType" Type="SAPDActivityModel.AwardType" Multiplicity="0..1" />
+          <End Role="Award_Recognize" Type="SAPDActivityModel.Recognize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Award_AwardType">
+              <PropertyRef Name="AwardTypeId" />
+            </Principal>
+            <Dependent Role="Award_Recognize">
+              <PropertyRef Name="AwardTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Award_Recognize_Award_RecognitionType">
+          <End Role="Award_RecognitionType" Type="SAPDActivityModel.RecognitionType" Multiplicity="1" />
+          <End Role="Award_Recognize" Type="SAPDActivityModel.Recognize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Award_RecognitionType">
+              <PropertyRef Name="RecognitionTypeId" />
+            </Principal>
+            <Dependent Role="Award_Recognize">
+              <PropertyRef Name="RecogTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="PersonTypeID" />
+          <Property Type="String" Name="Title" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Suffix" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="rowguid" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <NavigationProperty Name="Recognizes" Relationship="SAPDActivityModel.PersonRecognize" FromRole="Person" ToRole="Recognize" />
+        </EntityType>
+        <Association Name="PersonRecognize">
+          <End Type="SAPDActivityModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="SAPDActivityModel.Recognize" Role="Recognize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="Recognize">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Office_Office">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Type="Int32" Name="OfficeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DivisionSectionID" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Ranking" />
+          <Property Type="Boolean" Name="Visible" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="Int32" Name="PAOfficeID" />
+          <NavigationProperty Name="Award_Recognize" Relationship="SAPDActivityModel.FK_Award_Recognize_Office_Office" FromRole="Office_Office" ToRole="Recognize" />
+        </EntityType>
+        <Association Name="FK_Award_Recognize_Office_Office">
+          <End Type="SAPDActivityModel.Office_Office" Role="Office_Office" Multiplicity="1" />
+          <End Type="SAPDActivityModel.Recognize" Role="Recognize" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="Recognize">
+              <PropertyRef Name="OfficeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SAPDActivityModelStoreContainer" CdmEntityContainer="SAPDActivityEntities1">
+          <EntitySetMapping Name="AwardTypes">
+            <EntityTypeMapping TypeName="SAPDActivityModel.AwardType">
+              <MappingFragment StoreEntitySet="Award_AwardType">
+                <ScalarProperty Name="AwardTypeId" ColumnName="AwardTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecognitionTypes">
+            <EntityTypeMapping TypeName="SAPDActivityModel.RecognitionType">
+              <MappingFragment StoreEntitySet="Award_RecognitionType">
+                <ScalarProperty Name="RecognitionTypeId" ColumnName="RecognitionTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recognizes">
+            <EntityTypeMapping TypeName="SAPDActivityModel.Recognize">
+              <MappingFragment StoreEntitySet="Award_Recognize">
+                <ScalarProperty Name="RecognitionId" ColumnName="RecognitionId" />
+                <ScalarProperty Name="RecogTypeId" ColumnName="RecogTypeId" />
+                <ScalarProperty Name="AwardTypeId" ColumnName="AwardTypeId" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="OfficeId" ColumnName="OfficeId" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="DocPath" ColumnName="DocPath" />
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="SAPDActivityModel.Person">
+              <MappingFragment StoreEntitySet="Person_Person">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PersonTypeID" ColumnName="PersonTypeID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Office_Office">
+            <EntityTypeMapping TypeName="SAPDActivityModel.Office_Office">
+              <MappingFragment StoreEntitySet="Office_Office">
+                <ScalarProperty Name="PAOfficeID" ColumnName="PAOfficeID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DivisionSectionID" ColumnName="DivisionSectionID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="AwardEntities">
+        <EntityTypeShape EntityType="SAPDActivityModel.AwardType" Width="1.875" PointX="0.5" PointY="1.5" Height="1.7879850260416672" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAPDActivityModel.RecognitionType" Width="1.875" PointX="0.5" PointY="5.5" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAPDActivityModel.Recognize" Width="2.5" PointX="3" PointY="1" Height="2.9417936197916661" IsExpanded="true" />
+        <AssociationConnector Association="SAPDActivityModel.FK_Award_Recognize_Award_AwardType" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.375" PointY="2.3939925130208337" />
+          <ConnectorPoint PointX="3" PointY="2.3939925130208337" />
+        </AssociationConnector>
+        <AssociationConnector Association="SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.375" PointY="6.3939925130208337" />
+          <ConnectorPoint PointX="4.25" PointY="6.3939925130208337" />
+          <ConnectorPoint PointX="4.25" PointY="4.326396484375" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SAPDActivityModel.Person" Width="1.5" PointX="6.625" PointY="0.625" Height="2.7494921875" />
+        <AssociationConnector Association="SAPDActivityModel.PersonRecognize">
+          <ConnectorPoint PointX="6.625" PointY="2.2833968098958337" />
+          <ConnectorPoint PointX="5.5" PointY="2.2833968098958337" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SAPDActivityModel.Office_Office" Width="1.5" PointX="8.5" PointY="5.625" Height="2.7494921874999996" />
+        <AssociationConnector Association="SAPDActivityModel.FK_Award_Recognize_Office_Office" >
+          <ConnectorPoint PointX="9.25" PointY="5.625" />
+          <ConnectorPoint PointX="9.25" PointY="3.9778450520833331" />
+          <ConnectorPoint PointX="5.5" PointY="3.9778450520833331" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

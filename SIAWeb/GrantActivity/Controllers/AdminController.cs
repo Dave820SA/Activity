@@ -181,7 +181,17 @@ namespace GrantActivity.Controllers
             db.SaveChanges();
 
         }
-  
+
+
+        [HttpPost]
+        public void ShowDailyRptInNewWin(string DailyID)
+        {
+            this.HttpContext.Session["ReportName"] = "ActivityDetails.rpt";
+            this.HttpContext.Session["ActivityID"] = DailyID;
+            //this.HttpContext.Session["rptToDate"] = ToDate;
+            //this.HttpContext.Session["rptSource"] = GetStudents();
+            //return RedirectToAction("ShowGenericRpt", "GenericReportViewer");
+        }
 
     }
 }

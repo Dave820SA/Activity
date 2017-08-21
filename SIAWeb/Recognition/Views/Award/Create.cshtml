@@ -1,0 +1,75 @@
+﻿@model RecognitionBusinessLayer.Recognize
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-1 col-md-6 col-sm-6 col-xs-12">
+                <fieldset class="scheduler-border">
+                    <div class="form-group col-xs-11 col-md-8">
+                        <strong style="font-size:1.2em">@Html.LabelFor(model => model.RecogTypeId, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("RecogTypeId", null, "Select Recognition Type", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RecogTypeId, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-xs-11 col-md-8">
+                        <strong style="font-size:1.2em">@Html.LabelFor(model => model.AwardTypeId, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("AwardTypeId", null, "Select Award Type", new { @class = "form-control" })
+                        
+                    </div>
+
+                    <div class="form-group col-xs-11 col-md-8">
+                        <strong style="font-size:1.2em">@Html.LabelFor(model => model.AppEntityID, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("AppEntityID", null, "Select Employee", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.AppEntityID, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-xs-11 col-md-8">
+                        <strong style="font-size:1.2em">@Html.LabelFor(model => model.OfficeId, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("OfficeId", null, "Select Office", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OfficeId, "", new { @class = "text-danger" })
+                    </div>
+
+                    
+
+
+                    <div class="form-group col-xs-11 col-md-8">
+                        <input type="submit" class="btn btn-primary" value="Create" />
+                    </div>
+                    <p>
+                    </p>
+                </fieldset>
+                <div>
+                    <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+
+   
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+    </script>
+         
+
+}

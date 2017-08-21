@@ -1,0 +1,64 @@
+﻿@model RecognitionBusinessLayer.Recognize
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Recognize</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Award_RecognitionType.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Award_RecognitionType.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Award_AwardType.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Award_AwardType.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Person.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Person.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Office_Office.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Office_Office.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Notes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocPath)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocPath)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IssuedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IssuedDate)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.RecognitionId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

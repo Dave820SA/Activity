@@ -1,0 +1,67 @@
+﻿@model RecognitionBusinessLayer.Recognize
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Recognize</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Award_RecognitionType.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Award_RecognitionType.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Award_AwardType.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Award_AwardType.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Person.Title)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Person.Title)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Office_Office.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Office_Office.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Notes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Notes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.DocPath)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DocPath)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IssuedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IssuedDate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
