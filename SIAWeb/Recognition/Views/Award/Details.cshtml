@@ -1,64 +1,114 @@
 ﻿@model RecognitionBusinessLayer.Recognize
 
+
 @{
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
 
-<fieldset>
-    <legend>Recognize</legend>
+<form class="form-horizontal">
+<div class="Container">
+    <div class="row">
+        <div class="col-sm-6">
+            <fieldset class="scheduler-border">
+                <h5 class="text-warning">
+                    Recognition Details</h5>
+                <br />
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Person.FullName)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong class="sop" style="font-size: 1.5em; color: Orange">@Html.DisplayFor(model => model.Person.FullName)</strong>
+                        	@*@Html.HiddenFor(model => model.Person.FirstName, new { id = "txtHidden" })*@
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Award_RecognitionType.Name)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong class="sop" style="font-size: 1.5em; color: Orange">@Html.DisplayFor(model => model.Award_RecognitionType.Name)</strong>
+                        	@*@Html.HiddenFor(model => model.Award_RecognitionType.Name, new { id = "txtHidden" })*@
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Award_AwardType.Name)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong class="sop" style="font-size: 1.5em; color: Orange">@Html.DisplayFor(model => model.Award_AwardType.Name)</strong>
+                        	@*@Html.HiddenFor(model => model.Award_RecognitionType.Name, new { id = "txtHidden" })*@
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Notes)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: Orange">@Html.DisplayFor(model => model.Notes)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.IssuedDate)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: Orange">@Html.DisplayFor(model => model.IssuedDate)</strong>
+                    </div>
+                </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Award_RecognitionType.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Award_RecognitionType.Name)
-    </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DocPath)</strong>
+                    </div>
+                    <div class="display-field">
+                        @*<strong style="font-size: 1.5em; color: Orange">@Html.DisplayFor(model => model.DocPath)</strong>*@
+                        <strong style="font-size: 1.5em; color: Orange">@Html.Raw(ViewBag.DocPaths)</strong>
+                    </div>
+                </div>
+               
+               
+            </fieldset>
+            	<a href="@Url.Action("Index", "Award")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+        </div>
+        <div class="col-sm-6">
+            @*<iframe src=@Html.DisplayFor(model => model.DocPath,new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.DocPaths } }) width="500" height="625" ></iframe>*@
+            <iframe src=@Html.Raw(ViewBag.DocPaths) width="500" height="625" ></iframe>
+            <div style="text-align: center">
+                <br />
+                @*<a href=@Html.DisplayFor(model => model.DocPaths) target="_blank" class="btn btn-success btn-sm"> View Full Screen <i class="fa fa-list" aria-hidden="true"></i></a>*@
+                <a href=@Html.Raw(ViewBag.DocPaths) target="_blank" class="btn btn-success btn-sm"> View Full Screen <i class="fa fa-list" aria-hidden="true"></i></a>
+                
+            </div>
+        </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Award_AwardType.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Award_AwardType.Name)
-    </div>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Person.Title)
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Person.Title)
-    </div>
+</div>
+</form>
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Office_Office.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Office_Office.Name)
-    </div>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Notes)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Notes)
-    </div>
+//            var link = $('#txtHidden').val();
+//            var page = "Search";
+//            $.ajax({
+//                type: 'get',
+//                url: '@Url.Action("updateStats")',
+//                data: { "link": link, "page": page },
+//                success: function (result) {
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DocPath)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DocPath)
-    </div>
+//                }
+//            });
 
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.IssuedDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.IssuedDate)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.RecognitionId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+        });
+
+                        
+    </script>
+}
+
+

@@ -6,19 +6,21 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using RecognitionBusinessLayer;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Recognition.Controllers
 {
     public class AwardController : Controller
     {
-        private SAPDActivityEntities1 db = new SAPDActivityEntities1();
+        private SAPDActivityEntities db = new SAPDActivityEntities();
 
         //
         // GET: /Award/
 
         public ActionResult Index()
         {
-            var recognizes = db.Recognizes.Include("Award_AwardType").Include("Award_RecognitionType").Include("Person").Include("Office_Office");
+            var recognizes = db.Recognizes.Include("Award_AwardType").Include("Award_RecognitionType").Include("Office_Office").Include("Person");
             return View(recognizes.ToList());
         }
 
@@ -28,9 +30,25 @@ namespace Recognition.Controllers
         public ActionResult Details(int id = 0)
         {
             Recognize recognize = db.Recognizes.Single(r => r.RecognitionId == id);
+
             if (recognize == null)
             {
                 return HttpNotFound();
+            }
+            else
+            {
+                string docpath ;
+                if (recognize.DocPath == null)
+                {
+                    docpath = @"/Images/Daniel.pdf";
+                }
+                else
+                {
+                    docpath = recognize.DocPath;
+                }
+
+                ViewBag.DocPaths = docpath;
+                
             }
             return View(recognize);
         }
@@ -42,8 +60,21 @@ namespace Recognition.Controllers
         {
             ViewBag.AwardTypeId = new SelectList(db.AwardTypes, "AwardTypeId", "Name");
             ViewBag.RecogTypeId = new SelectList(db.RecognitionTypes, "RecognitionTypeId", "Name");
-            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "Title");
-            ViewBag.OfficeId = new SelectList(db.Office_Office, "OfficeID", "Name");
+
+            ViewBag.AppEntityID = db.People.OrderBy(p => p.LastName).AsEnumerable().Select(p => new SelectListItem()
+            {
+
+                Value = p.AppEntityID.ToString(),
+                Text = string.Format("{0} {1} {2} - {3}", p.LastName, p.FirstName,p.Badge, p.OfficeCode).ToUpper()
+            });
+
+            ViewBag.OfficeId = db.Offices.OrderBy(p => p.Code).AsEnumerable().Select(p => new SelectListItem()
+            {
+
+                Value = p.OfficeID.ToString(),
+                Text = string.Format("{0} - {1}", p.Code, p.Name).ToUpper()
+            });
+            
             return View();
         }
 
@@ -53,6 +84,13 @@ namespace Recognition.Controllers
         [HttpPost]
         public ActionResult Create(Recognize recognize)
         {
+            //var x = recognize.AppEntityID;
+            //var id = db.People.Where(p => p.AppEntityID == x).Select(p => p.OfficeID);
+
+            //Recognize recognizeFromDb = db.Recognizes.Single(y => y.AppEntityID == recognize.AppEntityID);
+
+
+
             if (ModelState.IsValid)
             {
                 db.Recognizes.AddObject(recognize);
@@ -62,9 +100,52 @@ namespace Recognition.Controllers
 
             ViewBag.AwardTypeId = new SelectList(db.AwardTypes, "AwardTypeId", "Name", recognize.AwardTypeId);
             ViewBag.RecogTypeId = new SelectList(db.RecognitionTypes, "RecognitionTypeId", "Name", recognize.RecogTypeId);
-            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "Title", recognize.AppEntityID);
-            ViewBag.OfficeId = new SelectList(db.Office_Office, "OfficeID", "Name", recognize.OfficeId);
+            ViewBag.OfficeId = new SelectList(db.Offices, "OfficeID", "Name", recognize.OfficeId);
+            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "FirstName", recognize.AppEntityID);
             return View(recognize);
+        }
+
+
+        public ActionResult FileUpload()
+        {
+            return View();
+        }
+
+        //
+        // POST: /DocHist/Create
+
+        [HttpPost]
+        public ActionResult FileUpload(HttpPostedFileBase file)
+        {
+            var path = "";
+            try
+            {
+                if (file.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file.FileName);
+                    string fileExtension = Path.GetExtension(fileName).ToString();
+
+                    fileName = fileName.Replace(" ", string.Empty);
+
+                    dynamic rgPattern = "[\\\\\\/:\\*\\?\"'<>|]";
+                    Regex objRegEx = new Regex(rgPattern);
+
+                    fileName = objRegEx.Replace(fileName, "");
+                    string filePath = System.Configuration.ConfigurationManager.AppSettings["SavePath"].ToString();
+
+                    path = Path.Combine(filePath, fileName);
+
+                    file.SaveAs(path);
+
+                }
+
+                return RedirectToAction("Create", "Award", new { value1 = path });
+            }
+            catch
+            {
+                ViewBag.Message = "Upload failed";
+                return RedirectToAction("FileUpload", "Award");
+            }
         }
 
         //
@@ -79,8 +160,8 @@ namespace Recognition.Controllers
             }
             ViewBag.AwardTypeId = new SelectList(db.AwardTypes, "AwardTypeId", "Name", recognize.AwardTypeId);
             ViewBag.RecogTypeId = new SelectList(db.RecognitionTypes, "RecognitionTypeId", "Name", recognize.RecogTypeId);
-            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "Title", recognize.AppEntityID);
-            ViewBag.OfficeId = new SelectList(db.Office_Office, "OfficeID", "Name", recognize.OfficeId);
+            ViewBag.OfficeId = new SelectList(db.Offices, "OfficeID", "Name", recognize.OfficeId);
+            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "FirstName", recognize.AppEntityID);
             return View(recognize);
         }
 
@@ -99,8 +180,8 @@ namespace Recognition.Controllers
             }
             ViewBag.AwardTypeId = new SelectList(db.AwardTypes, "AwardTypeId", "Name", recognize.AwardTypeId);
             ViewBag.RecogTypeId = new SelectList(db.RecognitionTypes, "RecognitionTypeId", "Name", recognize.RecogTypeId);
-            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "Title", recognize.AppEntityID);
-            ViewBag.OfficeId = new SelectList(db.Office_Office, "OfficeID", "Name", recognize.OfficeId);
+            ViewBag.OfficeId = new SelectList(db.Offices, "OfficeID", "Name", recognize.OfficeId);
+            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "FirstName", recognize.AppEntityID);
             return View(recognize);
         }
 

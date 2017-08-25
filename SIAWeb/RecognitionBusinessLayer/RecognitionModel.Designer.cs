@@ -21,8 +21,8 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_AwardType", "Award_AwardType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(RecognitionBusinessLayer.AwardType), "Award_Recognize", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(RecognitionBusinessLayer.Recognize), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(RecognitionBusinessLayer.RecognitionType), "Award_Recognize", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(RecognitionBusinessLayer.Recognize), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Office_Office", "Office_Office", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(RecognitionBusinessLayer.Office), "Award_Recognize", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(RecognitionBusinessLayer.Recognize), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "PersonRecognize", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(RecognitionBusinessLayer.Person), "Recognize", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(RecognitionBusinessLayer.Recognize), true)]
-[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Office_Office", "Office_Office", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(RecognitionBusinessLayer.Office_Office), "Recognize", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(RecognitionBusinessLayer.Recognize), true)]
 
 #endregion
 
@@ -33,32 +33,32 @@ namespace RecognitionBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    public partial class SAPDActivityEntities1 : ObjectContext
+    public partial class SAPDActivityEntities : ObjectContext
     {
         #region Constructors
     
         /// <summary>
-        /// Initializes a new SAPDActivityEntities1 object using the connection string found in the 'SAPDActivityEntities1' section of the application configuration file.
+        /// Initializes a new SAPDActivityEntities object using the connection string found in the 'SAPDActivityEntities' section of the application configuration file.
         /// </summary>
-        public SAPDActivityEntities1() : base("name=SAPDActivityEntities1", "SAPDActivityEntities1")
+        public SAPDActivityEntities() : base("name=SAPDActivityEntities", "SAPDActivityEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new SAPDActivityEntities1 object.
+        /// Initialize a new SAPDActivityEntities object.
         /// </summary>
-        public SAPDActivityEntities1(string connectionString) : base(connectionString, "SAPDActivityEntities1")
+        public SAPDActivityEntities(string connectionString) : base(connectionString, "SAPDActivityEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// Initialize a new SAPDActivityEntities1 object.
+        /// Initialize a new SAPDActivityEntities object.
         /// </summary>
-        public SAPDActivityEntities1(EntityConnection connection) : base(connection, "SAPDActivityEntities1")
+        public SAPDActivityEntities(EntityConnection connection) : base(connection, "SAPDActivityEntities")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -125,6 +125,22 @@ namespace RecognitionBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Office> Offices
+        {
+            get
+            {
+                if ((_Offices == null))
+                {
+                    _Offices = base.CreateObjectSet<Office>("Offices");
+                }
+                return _Offices;
+            }
+        }
+        private ObjectSet<Office> _Offices;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<Person> People
         {
             get
@@ -137,22 +153,6 @@ namespace RecognitionBusinessLayer
             }
         }
         private ObjectSet<Person> _People;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Office_Office> Office_Office
-        {
-            get
-            {
-                if ((_Office_Office == null))
-                {
-                    _Office_Office = base.CreateObjectSet<Office_Office>("Office_Office");
-                }
-                return _Office_Office;
-            }
-        }
-        private ObjectSet<Office_Office> _Office_Office;
 
         #endregion
 
@@ -183,19 +183,19 @@ namespace RecognitionBusinessLayer
         }
     
         /// <summary>
+        /// Deprecated Method for adding a new object to the Offices EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOffices(Office office)
+        {
+            base.AddObject("Offices", office);
+        }
+    
+        /// <summary>
         /// Deprecated Method for adding a new object to the People EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToPeople(Person person)
         {
             base.AddObject("People", person);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Office_Office EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToOffice_Office(Office_Office office_Office)
-        {
-            base.AddObject("Office_Office", office_Office);
         }
 
         #endregion
@@ -342,26 +342,26 @@ namespace RecognitionBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="Office_Office")]
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="Office")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Office_Office : EntityObject
+    public partial class Office : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Office_Office object.
+        /// Create a new Office object.
         /// </summary>
         /// <param name="officeID">Initial value of the OfficeID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="code">Initial value of the Code property.</param>
-        public static Office_Office CreateOffice_Office(global::System.Int32 officeID, global::System.String name, global::System.String code)
+        public static Office CreateOffice(global::System.Int32 officeID, global::System.String name, global::System.String code)
         {
-            Office_Office office_Office = new Office_Office();
-            office_Office.OfficeID = officeID;
-            office_Office.Name = name;
-            office_Office.Code = code;
-            return office_Office;
+            Office office = new Office();
+            office.OfficeID = officeID;
+            office.Name = name;
+            office.Code = code;
+            return office;
         }
 
         #endregion
@@ -574,18 +574,18 @@ namespace RecognitionBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Award_Recognize_Office_Office", "Recognize")]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Award_Recognize_Office_Office", "Award_Recognize")]
         public EntityCollection<Recognize> Award_Recognize
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Recognize>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Recognize");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Recognize>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Award_Recognize");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Recognize>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Recognize", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Recognize>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Award_Recognize", value);
                 }
             }
         }
@@ -651,54 +651,6 @@ namespace RecognitionBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> PersonTypeID
-        {
-            get
-            {
-                return _PersonTypeID;
-            }
-            set
-            {
-                OnPersonTypeIDChanging(value);
-                ReportPropertyChanging("PersonTypeID");
-                _PersonTypeID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("PersonTypeID");
-                OnPersonTypeIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _PersonTypeID;
-        partial void OnPersonTypeIDChanging(Nullable<global::System.Int32> value);
-        partial void OnPersonTypeIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String Title
-        {
-            get
-            {
-                return _Title;
-            }
-            set
-            {
-                OnTitleChanging(value);
-                ReportPropertyChanging("Title");
-                _Title = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Title");
-                OnTitleChanged();
-            }
-        }
-        private global::System.String _Title;
-        partial void OnTitleChanging(global::System.String value);
-        partial void OnTitleChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public global::System.String FirstName
         {
             get
@@ -747,96 +699,115 @@ namespace RecognitionBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String MiddleName
+        public global::System.String Badge
         {
             get
             {
-                return _MiddleName;
+                return _Badge;
             }
             set
             {
-                OnMiddleNameChanging(value);
-                ReportPropertyChanging("MiddleName");
-                _MiddleName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("MiddleName");
-                OnMiddleNameChanged();
+                OnBadgeChanging(value);
+                ReportPropertyChanging("Badge");
+                _Badge = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Badge");
+                OnBadgeChanged();
             }
         }
-        private global::System.String _MiddleName;
-        partial void OnMiddleNameChanging(global::System.String value);
-        partial void OnMiddleNameChanged();
+        private global::System.String _Badge;
+        partial void OnBadgeChanging(global::System.String value);
+        partial void OnBadgeChanged();
+
+
+        
+        public string FullName
+        {
+            get
+            {
+                string fullname;
+                if (Badge != null)
+                {
+                    fullname = FirstName + " " + LastName + " #" + Badge;
+                }
+                else
+                {
+                    fullname = FirstName + " " + LastName;
+                }
+                return fullname;
+            }
+        }  
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Suffix
+        public global::System.String OfficeCode
         {
             get
             {
-                return _Suffix;
+                return _OfficeCode;
             }
             set
             {
-                OnSuffixChanging(value);
-                ReportPropertyChanging("Suffix");
-                _Suffix = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Suffix");
-                OnSuffixChanged();
+                OnOfficeCodeChanging(value);
+                ReportPropertyChanging("OfficeCode");
+                _OfficeCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("OfficeCode");
+                OnOfficeCodeChanged();
             }
         }
-        private global::System.String _Suffix;
-        partial void OnSuffixChanging(global::System.String value);
-        partial void OnSuffixChanged();
+        private global::System.String _OfficeCode;
+        partial void OnOfficeCodeChanging(global::System.String value);
+        partial void OnOfficeCodeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Guid> rowguid
+        public global::System.String Office
         {
             get
             {
-                return _rowguid;
+                return _Office;
             }
             set
             {
-                OnrowguidChanging(value);
-                ReportPropertyChanging("rowguid");
-                _rowguid = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("rowguid");
-                OnrowguidChanged();
+                OnOfficeChanging(value);
+                ReportPropertyChanging("Office");
+                _Office = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Office");
+                OnOfficeChanged();
             }
         }
-        private Nullable<global::System.Guid> _rowguid;
-        partial void OnrowguidChanging(Nullable<global::System.Guid> value);
-        partial void OnrowguidChanged();
+        private global::System.String _Office;
+        partial void OnOfficeChanging(global::System.String value);
+        partial void OnOfficeChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> ModifiedDate
+        public Nullable<global::System.Int32> OfficeID
         {
             get
             {
-                return _ModifiedDate;
+                return _OfficeID;
             }
             set
             {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
+                OnOfficeIDChanging(value);
+                ReportPropertyChanging("OfficeID");
+                _OfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeID");
+                OnOfficeIDChanged();
             }
         }
-        private Nullable<global::System.DateTime> _ModifiedDate;
-        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnModifiedDateChanged();
+        private Nullable<global::System.Int32> _OfficeID;
+        partial void OnOfficeIDChanging(Nullable<global::System.Int32> value);
+        partial void OnOfficeIDChanged();
 
         #endregion
 
@@ -1317,6 +1288,44 @@ namespace RecognitionBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Award_Recognize_Office_Office", "Office_Office")]
+        public Office Office_Office
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Office_Office").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Office_Office").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Office> Office_OfficeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Office_Office");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Office>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Office_Office", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "PersonRecognize", "Person")]
         public Person Person
         {
@@ -1345,44 +1354,6 @@ namespace RecognitionBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("SAPDActivityModel.PersonRecognize", "Person", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Award_Recognize_Office_Office", "Office_Office")]
-        public Office_Office Office_Office
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Office>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Office_Office").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Office>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Office_Office").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Office_Office> Office_OfficeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Office>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Office_Office");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Office_Office>("SAPDActivityModel.FK_Award_Recognize_Office_Office", "Office_Office", value);
                 }
             }
         }

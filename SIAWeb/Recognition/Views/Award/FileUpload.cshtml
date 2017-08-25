@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "FileUpload";
+    Layout = "~/Views/Shared/_Alternate.cshtml";
+}
+
+<div style="padding-left: 5px">
+    <h4>
+        Upload <small>New File</small></h4>
+</div>
+
+@using (Html.BeginForm("FileUpload", "Award", FormMethod.Post, new { @encType = "multipart/Form-data" }))
+
+{
+    @Html.AntiForgeryToken()
+
+    <form  class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset class="scheduler-border">
+                    <h5 class="text-warning">
+                        Select a file to upload</h5>
+                    <br />
+                    <div class="form-group col-xs-12">
+                        @Html.TextBox("file", "", new { type = "file", @class = "form-control" })
+                        <br />
+                        <input type="submit" class="btn btn-primary" value="Upload" />
+                   
+                    </div>
+                </fieldset>
+                <br />
+                <div>
+                    <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    
+}

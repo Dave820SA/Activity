@@ -1,69 +1,80 @@
 ﻿@model IEnumerable<RecognitionBusinessLayer.Recognize>
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Recognition";
 }
-
-<h2>Index</h2>
-
-<p>
+<h2>
+    Recognition</h2>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Award_RecognitionType.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Award_AwardType.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Person.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Office_Office.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Notes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DocPath)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IssuedDate)
-        </th>
-        <th></th>
-    </tr>
+</p>*@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 ">
+            <a href="@Url.Action("FileUpload", "Award")" class="btn btn-warning btn-xs" style="margin-bottom: 10px">Add New Entry
+                <i class="fa fa-plus-square" aria-hidden="true"></i></a>
+            <table class="table table-condensed table-hover">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Person.FullName)
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Award_RecognitionType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Award_AwardType.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Person.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Office_Office.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Notes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DocPath)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IssuedDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.RecognitionId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.RecognitionId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.RecognitionId })
-        </td>
-    </tr>
-}
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Award_RecognitionType.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Award_AwardType.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Office_Office.Name)
+                    </th>
+                    @* <th>
+                        @Html.DisplayNameFor(model => model.Notes)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DocPath)
+                    </th>*@
+                    <th>
+                        @Html.DisplayNameFor(model => model.IssuedDate)
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    var conc = item.Person.FirstName + " " + item.Person.LastName;
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Person.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Award_RecognitionType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Award_AwardType.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Office_Office.Code)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Notes)
+                        </td>*@ @*<td>
+                            @Html.DisplayFor(modelItem => item.DocPath)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IssuedDate)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "Award", new { id = item.RecognitionId })" class="btn btn-info btn-xs">
+                                Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "Award", new { id = item.RecognitionId })" class="btn btn-success btn-xs">
+                                Details <i class="fa fa-list" aria-hidden="true"></i></a>| <a href="@Url.Action("Delete", "Award", new { id = item.RecognitionId })" class="btn btn-danger btn-xs">
+                                Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                        
+                                       
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
 
-</table>

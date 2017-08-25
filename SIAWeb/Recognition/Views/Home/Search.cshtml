@@ -1,0 +1,106 @@
+﻿@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Alternate.cshtml";
+}
+
+@model PagedList.IPagedList<RecognitionBusinessLayer.Recognize>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <strong style="font-size:1.7em; padding-left:2px">Recognition Items</strong>
+    </div>
+    <div class="col-md-9">
+        <div style="float: right">
+            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
+            {
+                <strong style="font-size: 1.2em;">Find:&nbsp; &nbsp;</strong>
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
+                <input type="submit" class="btn btn-primary btn-sm" value="Search" />
+                @*<input type="submit" class="btn btn-success btn-sm" value="Clear" />*@
+          
+            }
+        </div>
+        
+    </div>
+    
+</div>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 ">
+            
+            <table class="table table-condensed table-hover" >
+                <tr>
+                    <th>
+                        @Html.ActionLink("Employee", "Search", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Type", "Search", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Award", "Search", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        @Html.ActionLink("Issed", "Search", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        See More Info
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td >
+                            @Html.DisplayFor(modelItem => item.Person.FullName)
+                        </td>
+                        <td >
+                            @Html.DisplayFor(modelItem => item.Award_RecognitionType.Name)
+                        </td>
+                        @*<td style="max-width:275px; min-width:275px; max-height:50px; min-height:50px; width:275px; height:50px;">
+                            @Html.DisplayFor(modelItem => item.DocPath)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Award_AwardType.Name)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Office_Office.Code)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IssuedDate)
+                        </td>
+                        <td>
+                            <strong>@Html.ActionLink("Details", "Details", new { id = item.RecognitionId })</strong>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Search",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+        });
+
+
+
+
+    </script>
+}
+
