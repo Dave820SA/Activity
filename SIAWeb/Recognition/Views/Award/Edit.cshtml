@@ -1,85 +1,95 @@
 ﻿@model RecognitionBusinessLayer.Recognize
 
+
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
+<div style="padding-left: 5px">
+    <h4>
+        Edit<small> Recognition</small></h4>
+</div>
 
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>Recognize</legend>
+    <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-8">
+                <fieldset class="scheduler-border">
+                    
+                    @Html.HiddenFor(model => model.RecognitionId)
+                    
 
-        @Html.HiddenFor(model => model.RecognitionId)
+                    <div class="form-group col-xs-12">
+                         <strong style="font-size:1.2em; color: #F47C3C">@Html.LabelFor(model => model.RecogTypeId, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("RecogTypeId", null, "Select Type", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.RecogTypeId, "", new { @class = "text-danger" })
+                    </div>
+                  
+                     <div class="form-group col-xs-12">
+                         <strong style="font-size:1.2em; color: #F47C3C">@Html.LabelFor(model => model.AwardTypeId, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("AwardTypeId", null, "Select Award", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.AwardTypeId, "", new { @class = "text-danger" })
+                    </div>
+                   
+                    <div class="form-group col-xs-12">
+                         <strong style="font-size:1.2em; color: #F47C3C">@Html.LabelFor(model => model.Person.FullName, new { @class = "control-label" })</strong>
+                         @*@Html.TextBoxFor(model => model.Person.FullName, new { @class = "form-control" })
+                         @Html.HiddenFor(model => model.AppEntityID)*@
+                        @Html.DropDownList("AppEntityID", null, "Select Employee", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.AppEntityID, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.RecogTypeId, "Award_RecognitionType")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("RecogTypeId", String.Empty)
-            @Html.ValidationMessageFor(model => model.RecogTypeId)
-        </div>
+                    <div class="form-group col-xs-12">
+                         <strong style="font-size:1.2em; color: #F47C3C">@Html.LabelFor(model => model.OfficeId, new { @class = "control-label" })</strong>
+                        @Html.DropDownList("OfficeId", null, "Select Office", new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.OfficeId, "", new { @class = "text-danger" })
+                    </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AwardTypeId, "Award_AwardType")
+                    <div class="form-group col-xs-12">
+                         <strong style="font-size:1.2em; color: #F47C3C">@Html.LabelFor(model => model.Notes, new { @class = "control-label" })</strong>
+                       	@Html.TextAreaFor(model => model.Notes, new { @class = "form-control", cols = "20", rows = "7" })
+                    </div>
+                     <div class="form-group col-xs-12">
+                         <strong style="font-size:1.2em; color: #F47C3C">@Html.LabelFor(model => model.DocPath, new { @class = "control-label" })</strong>
+                       	@Html.TextBoxFor(model => model.DocPath, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <strong style="font-size: 1.2em; color: #F47C3C">@Html.LabelFor(model => model.IssuedDate, new { @class = "control-label" })</strong>
+                        <div class="form-group">
+                            <div class='input-group date' id='datetimepicker1'>
+                                @Html.TextBoxFor(model => model.IssuedDate, new { @class = "form-control" })
+                                <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <p>
+                        <input type="submit" class="btn btn-success btn-sm" value="Save" />
+                    </p>
+                </fieldset>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DropDownList("AwardTypeId", String.Empty)
-            @Html.ValidationMessageFor(model => model.AwardTypeId)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AppEntityID, "Person")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("AppEntityID", String.Empty)
-            @Html.ValidationMessageFor(model => model.AppEntityID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.OfficeId, "Office_Office")
-        </div>
-        <div class="editor-field">
-            @Html.DropDownList("OfficeId", String.Empty)
-            @Html.ValidationMessageFor(model => model.OfficeId)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.Notes)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.Notes)
-            @Html.ValidationMessageFor(model => model.Notes)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.DocPath)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.DocPath)
-            @Html.ValidationMessageFor(model => model.DocPath)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.IssuedDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.IssuedDate)
-            @Html.ValidationMessageFor(model => model.IssuedDate)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+    </div>
+    </form>
+               
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+   <a href="@Url.Action("Index", "Award")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
 </div>
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+           $('#datetimepicker1').datetimepicker({ format: 'MM/DD/YYYY' });
+
+        });
+
+
+
+    </script>
 }

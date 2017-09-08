@@ -57,3 +57,17 @@ textarea {
 .validation-summary-valid {
     display: none;
 }
+
+.progress
+{
+	position: relative;
+	width: 400px;
+	border: 1px solid #ddd;
+}
+
+.progress-bar
+{
+	width: 0px;
+	height: 20px;
+	background-color: #00ff21;
+}

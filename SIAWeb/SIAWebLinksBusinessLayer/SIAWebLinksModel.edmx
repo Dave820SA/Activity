@@ -9,14 +9,6 @@
           <EntitySet Name="Activity_ActivityLog" EntityType="SIAWebLinksModel.Store.Activity_ActivityLog" store:Type="Tables" Schema="dbo" Table="Activity.ActivityLog" />
           <EntitySet Name="SIA_WebCategories" EntityType="SIAWebLinksModel.Store.SIA_WebCategories" store:Type="Tables" Schema="dbo" Table="SIA.WebCategories" />
           <EntitySet Name="SIA_WebLinks" EntityType="SIAWebLinksModel.Store.SIA_WebLinks" store:Type="Tables" Schema="dbo" Table="SIA.WebLinks" />
-          <AssociationSet Name="FK_Activity_ActivityLog_SIA_WebLinks" Association="SIAWebLinksModel.Store.FK_Activity_ActivityLog_SIA_WebLinks">
-            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
-            <End Role="Activity_ActivityLog" EntitySet="Activity_ActivityLog" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Activity_ActivityLog_SIA_WebLinks1" Association="SIAWebLinksModel.Store.FK_Activity_ActivityLog_SIA_WebLinks1">
-            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
-            <End Role="Activity_ActivityLog" EntitySet="Activity_ActivityLog" />
-          </AssociationSet>
           <AssociationSet Name="FK_SIA_WebLinks_SIA_WebCategories" Association="SIAWebLinksModel.Store.FK_SIA_WebLinks_SIA_WebCategories">
             <End Role="SIA_WebCategories" EntitySet="SIA_WebCategories" />
             <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
@@ -53,30 +45,6 @@
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
           <Property Name="NeedAuthorizationFlag" Type="bit" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Activity_ActivityLog_SIA_WebLinks">
-          <End Role="SIA_WebLinks" Type="SIAWebLinksModel.Store.SIA_WebLinks" Multiplicity="0..1" />
-          <End Role="Activity_ActivityLog" Type="SIAWebLinksModel.Store.Activity_ActivityLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SIA_WebLinks">
-              <PropertyRef Name="WebLinkID" />
-            </Principal>
-            <Dependent Role="Activity_ActivityLog">
-              <PropertyRef Name="WebLinkID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Activity_ActivityLog_SIA_WebLinks1">
-          <End Role="SIA_WebLinks" Type="SIAWebLinksModel.Store.SIA_WebLinks" Multiplicity="1" />
-          <End Role="Activity_ActivityLog" Type="SIAWebLinksModel.Store.Activity_ActivityLog" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SIA_WebLinks">
-              <PropertyRef Name="WebLinkID" />
-            </Principal>
-            <Dependent Role="Activity_ActivityLog">
-              <PropertyRef Name="WebAppID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_SIA_WebLinks_SIA_WebCategories">
           <End Role="SIA_WebCategories" Type="SIAWebLinksModel.Store.SIA_WebCategories" Multiplicity="1" />
           <End Role="SIA_WebLinks" Type="SIAWebLinksModel.Store.SIA_WebLinks" Multiplicity="*" />
@@ -89,6 +57,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Activity_spMyTopWebLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="Activity.spMyTopWebLinks" Schema="dbo">
+          <Parameter Name="Pin" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="spGetAllSIAWebLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -111,6 +82,9 @@
             <End Role="WebLinks" EntitySet="WebLinks" />
             <End Role="Activity_ActivityLog" EntitySet="ActivityLogs" />
           </AssociationSet>
+          <FunctionImport Name="Activity_spMyTopWebLinks" ReturnType="Collection(SIAWebLinksModel.MyTopWebLinks_Result)">
+            <Parameter Name="Pin" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="WebCategories">
           <Key>
@@ -190,6 +164,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="MyTopWebLinks_Result">
+          <Property Type="String" Name="TopLink" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TopLinkPath" Nullable="false" MaxLength="200" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -239,6 +217,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Activity_spMyTopWebLinks" FunctionName="SIAWebLinksModel.Store.Activity_spMyTopWebLinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SIAWebLinksModel.MyTopWebLinks_Result">
+                <ScalarProperty Name="TopLink" ColumnName="TopLink" />
+                <ScalarProperty Name="TopLinkPath" ColumnName="TopLinkPath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

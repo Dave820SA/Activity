@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web.Mvc;
 using SIAWebLinksBusinessLayer;
 using System.Text;
+using System.Web.UI.WebControls;
+using SIAWeb.Models;
 
 
 namespace SIAWeb.Controllers
@@ -45,9 +47,42 @@ namespace SIAWeb.Controllers
                 ViewBag.User = sb;
             }
 
-            List<WebLinks> siaWebLinks = db.WebLinks.Where(s => s.VisibleFlag).ToList();
-            return View(siaWebLinks);
+            List<webLink> web_Link = new List<webLink>();
+            List<topLink> top_Link = new List<topLink>();
+
+            var myLinks = from l in db.WebLinks
+                          orderby l.Name
+                          select l;
+
+            foreach (var L in myLinks)
+            {
+                web_Link.Add(new webLink { category = L.WebCategoryID, link = L.Name, linkPath = L.WebLink });
+            }
+
+            var myTopLinks = from T in db.Activity_spMyTopWebLinks((string)System.Web.HttpContext.Current.Session["userPin"])
+                             select T;
+
+            foreach (var T in myTopLinks)
+            {
+                top_Link.Add(new topLink { toplink = T.TopLink.Trim(), toplinkpath = T.TopLinkPath.Trim() });
+            }
+
+            WebLinkModel finalItem = new WebLinkModel();
+            finalItem.WebLinks = web_Link;
+            finalItem.TopLinks = top_Link;
+
+            return View(finalItem);
+
+
+
+            //TopLinkManager link = new TopLinkManager();
+            //List<topLink> myLinks = link.GetTopLinks((string)System.Web.HttpContext.Current.Session["userPin"]);
+            //ViewData["myLinks"] = link.GetTopLinks((string)System.Web.HttpContext.Current.Session["userPin"]);
+
+            //List<WebLinks> siaWebLinks = db.WebLinks.Where(s => s.VisibleFlag).ToList();
+            //return View(siaWebLinks);
         }
+
 
         private Boolean browserIssue()
         {
@@ -72,9 +107,22 @@ namespace SIAWeb.Controllers
             {
                 track.AppEntityID = Int32.Parse(appID);
             }
-            track.Link = link;
+
+            string appLink;
+            string s2 = "\n";
+            bool b = link.Contains(s2);
+            if (b)
+            {
+                appLink = link.Substring(0, link.Length - 21);
+            }
+            else
+            {
+                appLink = link;
+            };
+
+            track.Link = appLink;
             track.WebPage = page;
-            track.WebLinkID = getWebAppID(link);
+            track.WebLinkID = getWebAppID(appLink);
             track.ClickedDatetime = DateTime.Parse(DateTime.Now.ToString());
             track.Flagged = false;
 
@@ -91,7 +139,7 @@ namespace SIAWeb.Controllers
         //Helper method to get the ID of the web link clicked on by the user
         private int getWebAppID(string appName)
         {
-            return  db.WebLinks.Where(c => c.Name == appName).Single().WebLinkID;
+            return db.WebLinks.Where(c => c.Name == appName).Single().WebLinkID;
         }
 
     }

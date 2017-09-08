@@ -1,8 +1,10 @@
-﻿@model RecognitionBusinessLayer.Recognize
+﻿
+@model RecognitionBusinessLayer.Recognize
 
 
 @{
     ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Alternate.cshtml";
 }
 
 
@@ -70,7 +72,7 @@
                
                
             </fieldset>
-            	<a href="@Url.Action("Index", "Award")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+            	<a href="@Url.Action("Search", "Home")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
         </div>
         <div class="col-sm-6">
             @*<iframe src=@Html.DisplayFor(model => model.DocPath,new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.DocPaths } }) width="500" height="625" ></iframe>*@
@@ -93,22 +95,9 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-//            var link = $('#txtHidden').val();
-//            var page = "Search";
-//            $.ajax({
-//                type: 'get',
-//                url: '@Url.Action("updateStats")',
-//                data: { "link": link, "page": page },
-//                success: function (result) {
-
-//                }
-//            });
-
 
         });
 
                         
     </script>
 }
-
-

@@ -1,5 +1,76 @@
-﻿@{
+﻿@model IEnumerable<RecognitionBusinessLayer.Recognize>
+@{
     ViewBag.Title = "Recognition";
 }
 
-<h2>Index</h2>
+<h2>Last 10 Recognition Items Entered</h2>
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 ">
+            <table class="table table-condensed table-hover">
+                <tr>
+                    <th>
+                        Employee
+                    </th>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Award
+                    </th>
+                    <th>
+                        Issued Date
+                    </th>
+                    <th>
+                        See More Info
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Person.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Award_RecognitionType.Name)
+                        </td>
+                        @*<td style="max-width:275px; min-width:275px; max-height:50px; min-height:50px; width:275px; height:50px;">
+                            @Html.DisplayFor(modelItem => item.DocPath)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Award_AwardType.Name)
+                        </td>
+                        @*<td>
+                            @Html.DisplayFor(modelItem => item.Office_Office.Code)
+                        </td>*@
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IssuedDate)
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Details", "Home", new { id = item.RecognitionId })" class="btn btn-success btn-xs">
+                                Details <i class="fa fa-list" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+           
+        </div>
+    </div>
+    <div>
+</div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+        });
+    </script>
+}
+

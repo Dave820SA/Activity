@@ -160,6 +160,25 @@ namespace SIAWebLinksBusinessLayer
         {
             return base.ExecuteFunction<spGetAllSIAWebLinks_Result>("spGetAllSIAWebLinks");
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="pin">No Metadata Documentation available.</param>
+        public ObjectResult<MyTopWebLinks_Result> Activity_spMyTopWebLinks(global::System.String pin)
+        {
+            ObjectParameter pinParameter;
+            if (pin != null)
+            {
+                pinParameter = new ObjectParameter("Pin", pin);
+            }
+            else
+            {
+                pinParameter = new ObjectParameter("Pin", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<MyTopWebLinks_Result>("Activity_spMyTopWebLinks", pinParameter);
+        }
 
         #endregion
 
@@ -861,6 +880,83 @@ namespace SIAWebLinksBusinessLayer
     #endregion
 
     #region ComplexTypes
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="SIAWebLinksModel", Name="MyTopWebLinks_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class MyTopWebLinks_Result : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new MyTopWebLinks_Result object.
+        /// </summary>
+        /// <param name="topLinkPath">Initial value of the TopLinkPath property.</param>
+        public static MyTopWebLinks_Result CreateMyTopWebLinks_Result(global::System.String topLinkPath)
+        {
+            MyTopWebLinks_Result myTopWebLinks_Result = new MyTopWebLinks_Result();
+            myTopWebLinks_Result.TopLinkPath = topLinkPath;
+            return myTopWebLinks_Result;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String TopLink
+        {
+            get
+            {
+                return _TopLink;
+            }
+            set
+            {
+                OnTopLinkChanging(value);
+                ReportPropertyChanging("TopLink");
+                _TopLink = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("TopLink");
+                OnTopLinkChanged();
+            }
+        }
+        private global::System.String _TopLink;
+        partial void OnTopLinkChanging(global::System.String value);
+        partial void OnTopLinkChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String TopLinkPath
+        {
+            get
+            {
+                return _TopLinkPath;
+            }
+            set
+            {
+                OnTopLinkPathChanging(value);
+                ReportPropertyChanging("TopLinkPath");
+                _TopLinkPath = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("TopLinkPath");
+                OnTopLinkPathChanged();
+            }
+        }
+        private global::System.String _TopLinkPath;
+        partial void OnTopLinkPathChanging(global::System.String value);
+        partial void OnTopLinkPathChanged();
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.

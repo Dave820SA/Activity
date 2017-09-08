@@ -9,17 +9,25 @@ using RecognitionBusinessLayer;
 namespace Recognition.Controllers
 {
 
-     
-
     public class HomeController : Controller
     {
         private SAPDActivityEntities db = new SAPDActivityEntities();
         //
         // GET: /Home/
 
+        //public ActionResult Index()
+        //{
+        //    var recognizes = db.Recognizes.Include("Award_AwardType").Include("Award_RecognitionType").Include("Office_Office").Include("Person");
+        //    return View(recognizes.ToList());
+        //}
+
         public ActionResult Index()
         {
-            return View();
+            var rec = from r in db.Recognizes
+                      select r;
+            rec = rec.OrderByDescending(r => r.IssuedDate).Take(10);
+
+            return View(rec);
         }
 
         public ActionResult Contact()
@@ -29,21 +37,23 @@ namespace Recognition.Controllers
             return View();
         }
 
+        public ActionResult Info()
+        {
+            return View();
+        }
 
-        [OutputCache(Duration = 10)]
+     
         public ViewResult Search(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
-            if (sortOrder == "rec_aesc" || sortOrder == "")
+            if (sortOrder == "")
             {
-                ViewBag.NameSortParm = "rec_desc";
+                ViewBag.NameSortParm = "name_desc";
             }
-            //else
-            //{
-            //    ViewBag.NameSortParm = "rec_aesc";
-            //}
-            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sop_desc" : "sop_aesc";
-            ViewBag.DateSortParm = sortOrder == "IssueDate" ? "date_desc" : "IssueDate";
+            else
+            {
+                ViewBag.NameSortParm = "name_aesc";
+            }
 
             if (searchString != null)
             {
@@ -54,10 +64,10 @@ namespace Recognition.Controllers
                 searchString = currentFilter;
             }
 
-            ViewBag.CurrentFilter = searchString;
+            var rec = from r in db.Recognizes
+                      select r;
 
-            var rec = from s in db.Recognizes.OrderByDescending(s => s.IssuedDate)
-                      select s;
+            ViewBag.CurrentFilter = searchString;
 
             if (!String.IsNullOrEmpty(searchString))
             {
@@ -66,38 +76,67 @@ namespace Recognition.Controllers
                                        || s.Award_AwardType.Name.Contains(searchString));
             }
 
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "name_aesc";
+            ViewBag.NameSortParm = sortOrder == "name_aesc" ? "name_desc" : "name_aesc";
+            ViewBag.DateSortParm = sortOrder == "date_aesc" ? "date_desc" : "date_aesc";
+
+            var today = DateTime.Today.AddDays(-60);
+
             switch (sortOrder)
             {
-                case "rec_desc":
-                    rec = rec.OrderByDescending(s => s.Award_RecognitionType.Name).Take(100);
+                case "name_desc":
+                    rec = rec.OrderByDescending(r => r.Person.LastName).Where(r => r.IssuedDate >= today);
                     break;
-                case "rec_aesc":
-                    rec = rec.OrderBy(s => s.Award_RecognitionType.Name).Take(100);
+                case "name_aesc":
+                    rec = rec.OrderBy(r => r.Person.LastName).Where(r => r.IssuedDate >= today);
                     break;
-                case "StartDate":
-                    rec = rec.OrderBy(s => s.IssuedDate).Take(100);
-                    break;
-                case "date_desc":
-                    rec = rec.OrderByDescending(s => s.IssuedDate).Take(100);
+                case "date_aesc":
+                    rec = rec.OrderBy(r => r.IssuedDate).Take(100);
                     break;
                 default:
-                    if (sortOrder == null && searchString != null )
+                    if (String.IsNullOrEmpty(searchString))
                     {
-                        rec = rec.OrderByDescending(s => s.IssuedDate);
+                        rec = rec.OrderByDescending(r => r.IssuedDate).Take(100);
                     }
                     else
                     {
-                        rec = rec.OrderByDescending(s => s.IssuedDate).Take(100);
+                        rec = rec.OrderByDescending(r => r.IssuedDate);
                     }
-                    
                     break;
             }
+
             int pageSize = 8;
             int pageNumber = (page ?? 1);
             return View(rec.ToPagedList(pageNumber, pageSize));
         }
 
+        //
+        // GET: /Award/Details/5
+        public ActionResult Details(int id = 0)
+        {
+            Recognize recognize = db.Recognizes.Single(r => r.RecognitionId == id);
 
+            if (recognize == null)
+            {
+                return HttpNotFound();
+            }
+            else
+            {
+                string docpath;
+                if (recognize.DocPath == null)
+                {
+                    docpath = @"/Images/Daniel.pdf";
+                }
+                else
+                {
+                    docpath = recognize.DocPath;
+                }
+
+                ViewBag.DocPaths = docpath;
+
+            }
+            return View(recognize);
+        }
 
         [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
         public ActionResult Admin()

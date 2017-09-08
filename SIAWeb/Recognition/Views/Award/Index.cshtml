@@ -1,80 +1,114 @@
-﻿@model IEnumerable<RecognitionBusinessLayer.Recognize>
-@{
-    ViewBag.Title = "Recognition";
+﻿@{
+    ViewBag.Title = "Search";
 }
-<h2>
-    Recognition</h2>
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
+
+@model PagedList.IPagedList<RecognitionBusinessLayer.Recognize>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="row">
+    <div class="col-md-3">
+        <strong style="font-size:1.7em; padding-left:2px">Recognition Items</strong>
+    </div>
+    <div class="col-md-9">
+        <div style="float: right">
+            @using (Html.BeginForm("Index", "Award", FormMethod.Get))
+            {
+                <strong style="font-size: 1.2em;">Find:&nbsp; &nbsp;</strong>
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
+                <input type="submit" class="btn btn-primary btn-sm" value="Search" />
+                @*<input type="submit" class="btn btn-success btn-sm" value="Clear" />*@
+          
+            }
+        </div>
+        
+    </div>
+    
+</div>
+<br />
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            <a href="@Url.Action("FileUpload", "Award")" class="btn btn-warning btn-xs" style="margin-bottom: 10px">Add New Entry
-                <i class="fa fa-plus-square" aria-hidden="true"></i></a>
-            <table class="table table-condensed table-hover">
+            
+            <table class="table table-condensed table-hover" >
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Person.FullName)
-
+                        @Html.ActionLink("Employee", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Award_RecognitionType.Name)
+                        Type
+                       @* @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Award_AwardType.Name)
+                        Award
+                        @*@Html.ActionLink("Award", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Office_Office.Name)
-                    </th>
-                    @* <th>
-                        @Html.DisplayNameFor(model => model.Notes)
+                        @Html.ActionLink("Issed", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.DocPath)
-                    </th>*@
-                    <th>
-                        @Html.DisplayNameFor(model => model.IssuedDate)
-                    </th>
-                    <th>
+                        See More Info
                     </th>
                 </tr>
                 @foreach (var item in Model)
                 {
-                    var conc = item.Person.FirstName + " " + item.Person.LastName;
                     <tr>
-                        <td>
+                        <td >
                             @Html.DisplayFor(modelItem => item.Person.FullName)
                         </td>
-                        <td>
+                        <td >
                             @Html.DisplayFor(modelItem => item.Award_RecognitionType.Name)
                         </td>
+                        @*<td style="max-width:275px; min-width:275px; max-height:50px; min-height:50px; width:275px; height:50px;">
+                            @Html.DisplayFor(modelItem => item.DocPath)
+                        </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.Award_AwardType.Name)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Office_Office.Code)
-                        </td>
                         @*<td>
-                            @Html.DisplayFor(modelItem => item.Notes)
-                        </td>*@ @*<td>
-                            @Html.DisplayFor(modelItem => item.DocPath)
+                            @Html.DisplayFor(modelItem => item.Office_Office.Code)
                         </td>*@
                         <td>
                             @Html.DisplayFor(modelItem => item.IssuedDate)
                         </td>
                         <td>
                             <a href="@Url.Action("Edit", "Award", new { id = item.RecognitionId })" class="btn btn-info btn-xs">
-                                Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "Award", new { id = item.RecognitionId })" class="btn btn-success btn-xs">
-                                Details <i class="fa fa-list" aria-hidden="true"></i></a>| <a href="@Url.Action("Delete", "Award", new { id = item.RecognitionId })" class="btn btn-danger btn-xs">
+                                Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> | <a href="@Url.Action("Details", "Award", new { id = item.RecognitionId })" class="btn btn-success btn-xs">
+                                Details <i class="fa fa-list" aria-hidden="true"></i></a> | <a href="@Url.Action("Delete", "Award", new { id = item.RecognitionId })" class="btn btn-danger btn-xs">
                                 Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
-                                        
-                                       
                         </td>
                     </tr>
                 }
             </table>
+            <br />
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>
+    <div>
+   <a href="@Url.Action("Admin", "Home")" class="btn btn-warning btn-sm"> Back To Admin <i class="fa fa-share" aria-hidden="true"></i></a>
 </div>
+</div>
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+
+
+        });
+
+
+
+
+    </script>
+}
+
 

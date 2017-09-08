@@ -5,9 +5,11 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 using RecognitionBusinessLayer;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Recognition.Controllers
 {
@@ -15,14 +17,79 @@ namespace Recognition.Controllers
     {
         private SAPDActivityEntities db = new SAPDActivityEntities();
 
-        //
         // GET: /Award/
-
-        public ActionResult Index()
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var recognizes = db.Recognizes.Include("Award_AwardType").Include("Award_RecognitionType").Include("Office_Office").Include("Person");
-            return View(recognizes.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            if (sortOrder == "")
+            {
+                ViewBag.NameSortParm = "name_desc";
+            }
+            else
+            {
+                ViewBag.NameSortParm = "name_aesc";
+            }
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            var rec = from r in db.Recognizes
+                      select r;
+
+            ViewBag.CurrentFilter = searchString;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                rec = rec.Where(s => s.Person.LastName.Contains(searchString) || s.Person.FirstName.Contains(searchString)
+                                       || s.Award_RecognitionType.Name.Contains(searchString) || s.Person.Badge.Contains(searchString)
+                                       || s.Award_AwardType.Name.Contains(searchString));
+            }
+
+            //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "name_aesc";
+            ViewBag.NameSortParm = sortOrder == "name_aesc" ? "name_desc" : "name_aesc";
+            ViewBag.DateSortParm = sortOrder == "date_aesc" ? "date_desc" : "date_aesc";
+           
+            var today = DateTime.Today.AddDays(-60);
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    rec = rec.OrderByDescending(r => r.Person.LastName).Where(r => r.IssuedDate >= today);
+                    break;
+                case "name_aesc":
+                    rec = rec.OrderBy(r => r.Person.LastName).Where(r => r.IssuedDate >= today);
+                    break;
+                case "date_aesc":
+                    rec = rec.OrderBy(r => r.IssuedDate).Take(100);
+                    break;
+                default:
+                    if (String.IsNullOrEmpty(searchString))
+                    {
+                        rec = rec.OrderByDescending(r => r.IssuedDate).Take(100);
+                    }
+                    else
+                    {
+                        rec = rec.OrderByDescending(r => r.IssuedDate);
+                    }
+                    break;
+            }
+
+            int pageSize = 8;
+            int pageNumber = (page ?? 1);
+            return View(rec.ToPagedList(pageNumber, pageSize));
         }
+
+        //public ActionResult Index()
+        //{
+        //    var recognizes = db.Recognizes.Include("Award_AwardType").Include("Award_RecognitionType").Include("Office_Office").Include("Person");
+        //    return View(recognizes.ToList());
+        //}
 
         //
         // GET: /Award/Details/5
@@ -111,6 +178,7 @@ namespace Recognition.Controllers
             return View();
         }
 
+      
         //
         // POST: /DocHist/Create
 
@@ -158,10 +226,14 @@ namespace Recognition.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.Employee = db.People.Where(p => p.AppEntityID == id).Select(p => p.FullName);
+
             ViewBag.AwardTypeId = new SelectList(db.AwardTypes, "AwardTypeId", "Name", recognize.AwardTypeId);
             ViewBag.RecogTypeId = new SelectList(db.RecognitionTypes, "RecognitionTypeId", "Name", recognize.RecogTypeId);
+            
             ViewBag.OfficeId = new SelectList(db.Offices, "OfficeID", "Name", recognize.OfficeId);
-            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "FirstName", recognize.AppEntityID);
+            ViewBag.AppEntityID = new SelectList(db.People, "AppEntityID", "FullName", recognize.AppEntityID);
             return View(recognize);
         }
 
@@ -200,7 +272,6 @@ namespace Recognition.Controllers
 
         //
         // POST: /Award/Delete/5
-
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {

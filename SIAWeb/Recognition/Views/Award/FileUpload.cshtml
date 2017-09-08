@@ -8,7 +8,7 @@
         Upload <small>New File</small></h4>
 </div>
 
-@using (Html.BeginForm("FileUpload", "Award", FormMethod.Post, new { @encType = "multipart/Form-data" }))
+@using (Html.BeginForm("FileUpload", "Award", FormMethod.Post, new { @encType = "multipart/Form-data", id = "myform", name = "myform" }))
 
 {
     @Html.AntiForgeryToken()
@@ -22,19 +22,78 @@
                         Select a file to upload</h5>
                     <br />
                     <div class="form-group col-xs-12">
-                        @Html.TextBox("file", "", new { type = "file", @class = "form-control" })
+
+                        @Html.TextBox("file", "",  new { id = "fu1", type = "file", @class = "form-control" })
+                        
                         <br />
-                        <input type="submit" class="btn btn-primary" value="Upload" />
-                   
+                        <input type="submit" id="btnUpload" class="btn btn-primary" value="Upload" />
                     </div>
+                    <br /><br />
+                    @*<div class="progress" style="width: 50%">
+                        <div class="progress-bar">
+                        </div>
+                        <div class="percent">
+                            0%</div>
+                    </div>
+                    <div id="status">
+                    </div>*@
+                  
                 </fieldset>
                 <br />
                 <div>
-                    <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>
+                    @*<strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>*@
+                    <a href="@Url.Action("Admin", "Home")" class="btn btn-warning btn-sm"> Back To Admin <i class="fa fa-share" aria-hidden="true"></i></a>
                 </div>
             </div>
         </div>
     </div>
     </form>
     
+}
+@section Scripts {
+
+
+   <script type="text/javascript">
+
+//        function () {
+//               var bar = $('.progress-bar');
+//               var percent = $('.progress-bar');
+//               var status = $('#status');
+
+//               $('#Myform').ajaxForm({
+//               //$('form').Html({
+//                   beforeSend: function () {
+//                       status.empty();
+//                       var percentValue = '0%';
+//                       bar.width(percentValue);
+//                       percent.html(percentValue);
+//                   },
+//                   uploadProgress: function (event, position, total, percentComplete) {
+//                       var percentValue = percentComplete + '%';
+//                       bar.width(percentValue);
+//                       percent.html(percentValue);
+//                   },
+//                   success: function (d) {
+//                       var percentValue = '100%';
+//                       bar.width(percentValue);
+//                       percent.html(percentValue);
+//                       $('#fu1').val('');
+//                       alert(d);
+//                   },
+//                   complete: function (xhr) {
+//                       status.html(xhr.responseText);
+//                   }
+//               });
+//           }
+
+       $(document).ready(function () {
+
+          
+
+          
+       });
+
+    </script>
+         
+
 }

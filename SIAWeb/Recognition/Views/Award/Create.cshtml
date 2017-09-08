@@ -92,8 +92,8 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <div class='input-group date' id='datetimepicker1'>
-                        @Html.TextBoxFor(model => model.IssuedDate, new { @class = "form-control" })
-                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                        @Html.TextBoxFor(model => model.IssuedDate, new { @class = "form-control", mask = "99/99/9999" })
+                        <span class="input-group-addon"><span class="fa fa-calendar"></span>
                         </span>
                     </div>
                 </div>
@@ -112,7 +112,8 @@
             </div>
         </div>
         <div>
-            <strong style="font-size: 1.5em"> @Html.ActionLink("Back to List", "Index")</strong>
+            @*<strong style="font-size: 1.5em"> @Html.ActionLink("Back to Admin Page", "Index")</strong>*@
+            <a href="@Url.Action("Admin", "Home")" class="btn btn-success btn-sm"> Back To Admin <i class="fa fa-share" aria-hidden="true"></i></a>
         </div>
     </div>
     </form>

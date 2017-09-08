@@ -1,0 +1,53 @@
+﻿@model RecognitionBusinessLayer.AwardType
+
+@{
+    ViewBag.Title = "Delete Award Type";
+}
+<div style="padding-left: 5px">
+    <h3>
+        Delete<small> Award Type</small></h3>
+</div>
+
+@using (Html.BeginForm()) {
+
+<form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset class="scheduler-border">
+                    <h5 class="text-danger">
+                        Are you sure you want to delete this Award Type?</h5>
+                    <br />
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.Name)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.Name)</strong>
+                        </div>
+                    </div>
+                     <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.Code)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.Code)</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group col-xs-12">
+
+                    </div>
+                     <div class="form-group col-xs-12">
+                        <input type="submit" class="btn btn-danger btn-sm" value="Delete" />
+                        <br />
+                        <br />
+                        <a href="@Url.Action("Index", "AwardType")" class="btn btn-warning btn-sm"> Back To List <span class="glyphicon glyphicon-share-alt"></span></a>
+                    </div>
+                </fieldset>
+                
+            </div>
+        </div>
+    </div>
+</form>
+}

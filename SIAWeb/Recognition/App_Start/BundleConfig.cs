@@ -23,7 +23,23 @@ namespace Recognition
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/datepick").Include(
+                        "~/bootstrap/js/bootstrap-datetimepicker.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/moment").Include(
+                        "~/bootstrap/js/moment.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquerys").Include(
+                        "~/Scripts/jquery-1.9.1.min.js"));
+
+
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+
+            bundles.Add(new StyleBundle("~/Content/sandstone").Include("~/bootstrap/css/sandstone.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/fontawesome").Include("~/Content/css/font-awesome.min.css"));
+
+         
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",

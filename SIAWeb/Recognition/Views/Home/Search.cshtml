@@ -8,7 +8,7 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = "Recognition Search";
 }
 
 <div class="row">
@@ -28,7 +28,7 @@
         </div>
         
     </div>
-    
+   
 </div>
 <br />
 <div class="container">
@@ -41,10 +41,12 @@
                         @Html.ActionLink("Employee", "Search", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                        @Html.ActionLink("Type", "Search", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                        Type
+                        @*@Html.ActionLink("Type", "Search", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
                     </th>
                     <th>
-                        @Html.ActionLink("Award", "Search", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                        Award
+                        @*@Html.ActionLink("Award", "Search", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
                     </th>
                     <th>
                         @Html.ActionLink("Issed", "Search", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -56,15 +58,13 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td >
+                        <td>
                             @Html.DisplayFor(modelItem => item.Person.FullName)
                         </td>
-                        <td >
+                        <td>
                             @Html.DisplayFor(modelItem => item.Award_RecognitionType.Name)
                         </td>
-                        @*<td style="max-width:275px; min-width:275px; max-height:50px; min-height:50px; width:275px; height:50px;">
-                            @Html.DisplayFor(modelItem => item.DocPath)
-                        </td>*@
+                       
                         <td>
                             @Html.DisplayFor(modelItem => item.Award_AwardType.Name)
                         </td>
@@ -75,7 +75,9 @@
                             @Html.DisplayFor(modelItem => item.IssuedDate)
                         </td>
                         <td>
-                            <strong>@Html.ActionLink("Details", "Details", new { id = item.RecognitionId })</strong>
+                            @*<strong>@Html.ActionLink("Details", "Details", new { id = item.RecognitionId })</strong>*@
+                            <a href="@Url.Action("Details", "Home", new { id = item.RecognitionId })" class="btn btn-success btn-xs">
+                                Details <i class="fa fa-list" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                 }
@@ -94,13 +96,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-
-
+ 
         });
-
-
-
-
     </script>
 }
 

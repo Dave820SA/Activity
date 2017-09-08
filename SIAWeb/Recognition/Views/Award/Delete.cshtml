@@ -1,67 +1,90 @@
 ﻿@model RecognitionBusinessLayer.Recognize
-
 @{
     ViewBag.Title = "Delete";
 }
+<div style="padding-left: 5px">
+    <h3>
+        <span style="color: #FF0000">Delete</span><small> Recognition Item</small></h3>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
 
-<h2>Delete</h2>
-
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>Recognize</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Award_RecognitionType.Name)
+    <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-6">
+                @*<hr />*@
+                <fieldset class="scheduler-border">
+                    <h5 class="text-danger">
+                        Are you sure you want to delete this recognition entry?</h5>
+                    <br />
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.Person.FullName)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.Person.FullName)</strong>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.Award_RecognitionType.Name)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.Award_RecognitionType.Name)</strong>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.Award_AwardType.Name)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.Award_AwardType.Name)</strong>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.Notes)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.Notes)</strong>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.IssuedDate)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.IssuedDate)</strong>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.DocPath)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.DocPath)</strong>
+                        </div>
+                    </div>
+                </fieldset>
+                <div>
+                    <p>
+                        <input type="submit" class="btn btn-danger" value="Delete" />
+                        <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Index")</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div style="text-align: center; vertical-align: middle">
+                    <h3>
+                        <span style="color: #FF0000">Note:</span><br />
+                        <small>If you delete this recognition item make note of the Document name because you
+                            will need to manually delete the document from the Recognition folder.</small></h3>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Award_RecognitionType.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Award_AwardType.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Award_AwardType.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Person.FirstName)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Person.FirstName)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Office_Office.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Office_Office.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Notes)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Notes)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.DocPath)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.DocPath)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.IssuedDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.IssuedDate)
-    </div>
-</fieldset>
-@using (Html.BeginForm()) {
-    <p>
-        <input type="submit" value="Delete" /> |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    </form>
+    
 }
