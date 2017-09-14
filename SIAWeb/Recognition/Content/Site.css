@@ -7,6 +7,87 @@ header, footer, nav, section {
 }
 
 
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6
+{
+	font-family: "Roboto" , "Helvetica Neue" , Helvetica, Arial, sans-serif;
+	font-weight: 500;
+	line-height: 1.1;
+	color: #FFCC00;
+}
+
+.jumbotron {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: #FFCC00;
+  background-color: #151515;
+}
+.jumbotron h1,
+.jumbotron .h1 {
+  color: #FFCC00;
+}
+.jumbotron p {
+  margin-bottom: 15px;
+  font-size: 21px;
+  font-weight: 200;
+}
+.jumbotron > hr {
+  border-top-color: #000000;
+}
+.container .jumbotron,
+.container-fluid .jumbotron {
+  border-radius: 6px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.jumbotron .container {
+  max-width: 100%;
+}
+
+.nav-pills > li.active > a,
+.nav-pills > li.active > a:hover,
+.nav-pills > li.active > a:focus {
+  color: #ffffff;
+  background-color: #FFCC00;
+}
+
+
+.navbar-default .navbar-brand {
+  color: #FFCC00;
+}
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+  color: #ffffff;
+  background-color: transparent;
+}
+
+.btn-primary
+{
+	color: #FFCC00;
+	background-color: #808080;
+	border-color: #FFCC00;
+}
+.btn-primary:focus,
+.btn-primary.focus {
+  color: #ffffff;
+  background-color: #2180ac;
+  border-color: #15506c;
+}
+.btn-primary:hover
+{
+	color: #000000;
+	background-color: #FFCC00;
+	border-color: #1f79a3;
+}
+/* Label
+_______________________________________________________*/
+.lable_gold
+{
+	color: #FFCC00;
+	font-size: 1.2em;
+}
+
+
 
 /* Styles for basic forms
 -----------------------------------------------------------*/

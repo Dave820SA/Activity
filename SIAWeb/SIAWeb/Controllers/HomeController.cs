@@ -52,6 +52,7 @@ namespace SIAWeb.Controllers
 
             var myLinks = from l in db.WebLinks
                           orderby l.Name
+                          where l.VisibleFlag == true
                           select l;
 
             foreach (var L in myLinks)

@@ -138,6 +138,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MonthYearManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\SessionLogin.cs" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <Content Include="bootstrap\css\bootstrap-theme.min.css" />
     <Content Include="bootstrap\css\bootstrap.css" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
+    <Content Include="bootstrap\css\cyborg.css" />
     <Content Include="bootstrap\css\sandstone.min.css" />
     <Content Include="bootstrap\css\datepicker.css" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -240,7 +242,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -319,6 +320,7 @@
     <Content Include="Views\AwardType\Delete.cshtml" />
     <Content Include="Views\AwardType\_ViewStart.cshtml" />
     <Content Include="Views\Home\Info.cshtml" />
+    <Content Include="Views\Home\AwardView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RecognitionBusinessLayer\RecognitionBusinessLayer.csproj">

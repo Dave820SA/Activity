@@ -1,40 +1,43 @@
-﻿@{
-    ViewBag.Title = "Search";
+﻿@model IEnumerable<RecognitionBusinessLayer.Award_spRecTypeMonthYear_Result>
+
+@{
+    ViewBag.Title = "AwardView";
     Layout = "~/Views/Shared/_Alternate.cshtml";
 }
 
-@model PagedList.IPagedList<RecognitionBusinessLayer.Recognize>
-@using PagedList.Mvc;
-<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+<form class="form-inline">
+  <div class="form-group">
+    <h5>Select Month & Year to view <span style="color: #FFFFFF">@ViewBag.Message:</span>  </h5>
+  </div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-@{
-    ViewBag.Title = "Recognition Search";
-}
+   @Html.Hidden("recType")
 
-<div class="row">
-    <div class="col-md-3">
-        <strong style="font-size:1.7em; padding-left:2px; color: #FFCC00;">Recognition Items</strong>
-    </div>
-    <div class="col-md-9">
-        <div style="float: right">
-            @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-            {
-                <strong style="font-size: 1.2em;">Find:&nbsp; &nbsp;</strong>
-                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
-                <input type="submit" class="btn btn-primary btn-sm" value="Search" />
-                @*<input type="submit" class="btn btn-success btn-sm" value="Clear" />*@
+    <div class="form-group" style="padding-top: 5px">
+        <label for="ddlMonth" style="color: #FFCC00; font-size: 1.3em;">
+            Month:
+        </label>
+        @Html.DropDownList("MonthNbr", (IEnumerable<SelectListItem>)ViewBag.MonthList, "Select Month", new { id = "ddlMonth", @class = "form-control" })
+    </div>&nbsp; &nbsp; &nbsp;
+    <div class="form-group" style="padding-top: 5px">
+        <label for="ddlYear" style="color: #FFCC00; font-size: 1.3em;">
+            Year:
+        </label>
+        @Html.DropDownList("YearNbr", (IEnumerable<SelectListItem>)ViewBag.YearList, "Select Year", new { id = "ddlYear", @class = "form-control" })
+    </div>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
           
-            }
-        </div>
-        
-    </div>
-   
-</div>
-<br />
+
+    <button type="submit" class="btn btn-primary" style="margin-top: 6px">
+        Submit</button>
+  
+
+</form>
+
+<hr />
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
             
+            <h5>@ViewBag.MessageToUser</h5>
             <table class="table table-condensed table-hover" >
                 <tr>
                     <th>
@@ -59,14 +62,14 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Person.FullName)
+                            @Html.DisplayFor(modelItem => item.FullName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Award_RecognitionType.Name)
+                            @Html.DisplayFor(modelItem => item.Type)
                         </td>
                        
                         <td>
-                            @Html.DisplayFor(modelItem => item.Award_AwardType.Name)
+                            @Html.DisplayFor(modelItem => item.Award)
                         </td>
                         @*<td>
                             @Html.DisplayFor(modelItem => item.Office_Office.Code)
@@ -75,7 +78,7 @@
                             @Html.DisplayFor(modelItem => item.IssuedDate)
                         </td>
                         <td>
-                            @*<strong>@Html.ActionLink("Details", "Details", new { id = item.RecognitionId })</strong>*@
+                          
                             <a href="@Url.Action("Details", "Home", new { id = item.RecognitionId })" class="btn btn-success btn-xs">
                                 Details <i class="fa fa-list" aria-hidden="true"></i></a>
                         </td>
@@ -83,21 +86,11 @@
                 }
             </table>
             <br />
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+           @* Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
             of @Model.PageCount
             @Html.PagedListPager(Model, page => Url.Action("Search",
-                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
         </div>
     </div>
 </div>
-
-@section scripts
-{
-    <script type="text/javascript">
-        $(document).ready(function () {
-
- 
-        });
-    </script>
-}
 

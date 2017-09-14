@@ -18,7 +18,8 @@
       [PA_vOfficerOffice].[Badge] AS [Badge], 
       [PA_vOfficerOffice].[OfficeCode] AS [OfficeCode], 
       [PA_vOfficerOffice].[Office] AS [Office], 
-      [PA_vOfficerOffice].[OfficeID] AS [OfficeID]
+      [PA_vOfficerOffice].[OfficeID] AS [OfficeID], 
+      [PA_vOfficerOffice].[FullName] AS [FullName]
       FROM [dbo].[PA.vOfficerOffice] AS [PA_vOfficerOffice]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_Award_Recognize_Award_AwardType" Association="SAPDActivityModel.Store.FK_Award_Recognize_Award_AwardType">
@@ -62,6 +63,7 @@
           <Property Name="Notes" Type="varchar(max)" />
           <Property Name="DocPath" Type="varchar" MaxLength="500" />
           <Property Name="IssuedDate" Type="date" Nullable="false" />
+          <Property Name="AnnualAward" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Office_Office">
           <Key>
@@ -90,6 +92,7 @@
           <Property Name="OfficeCode" Type="varchar" MaxLength="6" />
           <Property Name="Office" Type="varchar" MaxLength="50" />
           <Property Name="OfficeID" Type="int" />
+          <Property Name="FullName" Type="varchar" MaxLength="101" />
         </EntityType>
         <Association Name="FK_Award_Recognize_Award_AwardType">
           <End Role="Award_AwardType" Type="SAPDActivityModel.Store.Award_AwardType" Multiplicity="0..1" />
@@ -127,6 +130,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Award_spRecTypeMonthYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="Award.spRecTypeMonthYear" Schema="dbo">
+          <Parameter Name="RecType" Type="int" Mode="In" />
+          <Parameter Name="MonthNbr" Type="int" Mode="In" />
+          <Parameter Name="YearNbr" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -153,6 +161,11 @@
             <End Role="Person" EntitySet="People" />
             <End Role="Recognize" EntitySet="Recognizes" />
           </AssociationSet>
+          <FunctionImport Name="Award_spRecTypeMonthYear" ReturnType="Collection(SAPDActivityModel.Award_spRecTypeMonthYear_Result)">
+            <Parameter Name="RecType" Mode="In" Type="Int32" />
+            <Parameter Name="MonthNbr" Mode="In" Type="Int32" />
+            <Parameter Name="YearNbr" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="AwardType">
           <Key>
@@ -188,6 +201,7 @@
           <NavigationProperty Name="Award_RecognitionType" Relationship="SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType" FromRole="Award_Recognize" ToRole="Award_RecognitionType" />
           <NavigationProperty Name="Office_Office" Relationship="SAPDActivityModel.FK_Award_Recognize_Office_Office" FromRole="Award_Recognize" ToRole="Office_Office" />
           <NavigationProperty Name="Person" Relationship="SAPDActivityModel.PersonRecognize" FromRole="Recognize" ToRole="Person" />
+          <Property Type="Boolean" Name="AnnualAward" Nullable="false" />
         </EntityType>
         <EntityType Name="Office">
           <Key>
@@ -251,6 +265,7 @@
           <Property Type="String" Name="Office" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Recognizes" Relationship="SAPDActivityModel.PersonRecognize" FromRole="Person" ToRole="Recognize" />
           <Property Type="Int32" Name="OfficeID" />
+          <Property Type="String" Name="FullName" MaxLength="101" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="PersonRecognize">
           <End Type="SAPDActivityModel.Person" Role="Person" Multiplicity="1" />
@@ -264,6 +279,14 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Award_spRecTypeMonthYear_Result">
+          <Property Type="Int32" Name="RecognitionId" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Award" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="IssuedDate" Nullable="false" />
+          <Property Type="String" Name="DocPath" Nullable="true" MaxLength="500" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -291,6 +314,7 @@
           <EntitySetMapping Name="Recognizes">
             <EntityTypeMapping TypeName="SAPDActivityModel.Recognize">
               <MappingFragment StoreEntitySet="Award_Recognize">
+                <ScalarProperty Name="AnnualAward" ColumnName="AnnualAward" />
                 <ScalarProperty Name="RecognitionId" ColumnName="RecognitionId" />
                 <ScalarProperty Name="RecogTypeId" ColumnName="RecogTypeId" />
                 <ScalarProperty Name="AwardTypeId" ColumnName="AwardTypeId" />
@@ -319,6 +343,7 @@
           <EntitySetMapping Name="People">
             <EntityTypeMapping TypeName="SAPDActivityModel.Person">
               <MappingFragment StoreEntitySet="PA_vOfficerOffice">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="Office" ColumnName="Office" />
                 <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
@@ -329,6 +354,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Award_spRecTypeMonthYear" FunctionName="SAPDActivityModel.Store.Award_spRecTypeMonthYear">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SAPDActivityModel.Award_spRecTypeMonthYear_Result">
+                <ScalarProperty Name="RecognitionId" ColumnName="RecognitionId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Award" ColumnName="Award" />
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+                <ScalarProperty Name="DocPath" ColumnName="DocPath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

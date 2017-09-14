@@ -8,8 +8,12 @@ namespace Recognition
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //            "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/googlejquery", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js").Include(
                         "~/Scripts/jquery-{version}.js"));
+
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -23,19 +27,28 @@ namespace Recognition
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/datepick").Include(
-                        "~/bootstrap/js/bootstrap-datetimepicker.js"));
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+                        "~/bootstrap/js/bootstrap.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                         "~/bootstrap/js/moment.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datepick").Include(
+                        "~/Scripts/bootstrap-datetimepicker.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquerys").Include(
                         "~/Scripts/jquery-1.9.1.min.js"));
 
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            BundleTable.EnableOptimizations = true;
+            bundles.UseCdn = true;
+
+
+
+            bundles.Add(new StyleBundle("~/Content/customcss").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/sandstone").Include("~/bootstrap/css/sandstone.min.css"));
+            bundles.Add(new StyleBundle("~/Content/cyborg").Include("~/bootstrap/css/cyborg.css"));
 
             bundles.Add(new StyleBundle("~/Content/fontawesome").Include("~/Content/css/font-awesome.min.css"));
 

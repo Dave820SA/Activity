@@ -7,20 +7,11 @@
     <link href="~/favicon.ico" rel="Shortcut Icon" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-
-
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
-    @*<link href="../../Content/css/font-awesome.css" rel="stylesheet" type="text/css" />*@
+    @Styles.Render("~/Content/cyborg")
+    @Styles.Render("~/Content/customcss")
 
-    @*@Styles.Render("~/Content/fontawesome")*@
-    @*@Styles.Render("~/bootstrap/css/sandstone.min.css")*@
-    @Styles.Render("~/Content/sandstone")
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    
-     
 </head>
 <body>
     <div class="navbar navbar-default">
@@ -64,13 +55,13 @@
                 </div>
             </div>
       </footer>
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>*@
 
-    @Scripts.Render("~/bundles/jquerys")
+    @Scripts.Render("~/bundles/modernizr")
+   @Scripts.Render("~/bundles/googlejquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
-     @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/datepick")
-
   
 </body>
 </html>

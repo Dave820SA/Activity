@@ -134,4 +134,25 @@ namespace RecognitionBusinessLayer
 
         }
     }
+
+    [MetadataType(typeof(Award_spRecTypeMonthYear_Result.Metadata))]
+    public partial class Award_spRecTypeMonthYear_Result
+    {
+        sealed class Metadata
+        {
+            [Key]
+            [Display(Name = "ID")]
+            public int RecognitionId { get; set; }
+
+            
+            [Display(Name = "Employee")]
+            public string FullName { get; set; }
+
+
+            [Display(Name = "Date Issued")]
+            [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+            public DateTime IssuedDate { get; set; }
+
+        }
+    }
 }

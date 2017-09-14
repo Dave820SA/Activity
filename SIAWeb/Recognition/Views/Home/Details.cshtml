@@ -13,12 +13,13 @@
     <div class="row">
         <div class="col-sm-6">
             <fieldset class="scheduler-border">
-                <h3 class="text-warning">
+                <h3 >
                     Recognition Details</h3>
                 <br />
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.Person.FullName)</strong>
+                        @*<strong style="font-size: 1.2em; color: #FFCC00">@Html.DisplayNameFor(model => model.Person.FullName)</strong>*@
+                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.Person.FullName)</strong>
                     </div>
                     <div class="display-field">
                         <strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.Person.FullName)</strong>
@@ -27,7 +28,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C"">@Html.DisplayNameFor(model => model.Award_RecognitionType.Name)</strong>
+                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.Award_RecognitionType.Name)</strong>
                     </div>
                     <div class="display-field">
                         <strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.Award_RecognitionType.Name)</strong>
@@ -36,7 +37,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C"">@Html.DisplayNameFor(model => model.Award_AwardType.Name)</strong>
+                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.Award_AwardType.Name)</strong>
                     </div>
                     <div class="display-field">
                         <strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.Award_AwardType.Name)</strong>
@@ -45,7 +46,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C"">@Html.DisplayNameFor(model => model.Notes)</strong>
+                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.Notes)</strong>
                     </div>
                     <div class="display-field">
                         <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.Notes)</strong>
@@ -53,7 +54,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C"">@Html.DisplayNameFor(model => model.IssuedDate)</strong>
+                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.IssuedDate)</strong>
                     </div>
                     <div class="display-field">
                         <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.IssuedDate)</strong>
@@ -62,7 +63,7 @@
 
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C"">@Html.DisplayNameFor(model => model.DocPath)</strong>
+                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.DocPath)</strong>
                     </div>
                     <div class="display-field">
                         @*<strong style="font-size: 1.5em; color: Orange">@Html.DisplayFor(model => model.DocPath)</strong>*@
@@ -72,7 +73,9 @@
                
                
             </fieldset>
-            	<a href="@Url.Action("Search", "Home")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+            	@*<a href="@Url.Action("Search", "Home")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>*@
+                
+                @Html.ActionLink("Back to previous page", null, null, null, new { href = Request.UrlReferrer})
         </div>
         <div class="col-sm-6">
             @*<iframe src=@Html.DisplayFor(model => model.DocPath,new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.DocPaths } }) width="500" height="625" ></iframe>*@

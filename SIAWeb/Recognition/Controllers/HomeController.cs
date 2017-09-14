@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using RecognitionBusinessLayer;
+using Recognition.Models;
+using System.Globalization;
 
 namespace Recognition.Controllers
 {
@@ -29,6 +31,72 @@ namespace Recognition.Controllers
 
             return View(rec);
         }
+
+        public ActionResult AwardView(int recType, int? MonthNbr, int? YearNbr)
+        { 
+            ViewBag.Message = recogType(recType);
+
+            var months = MonthYearManager.GetMonthNames();
+            var myYears = MonthYearManager.GetYearNames();
+
+          ViewBag.MonthList = new SelectList(months.ToList(), "MonthNbr", "MoName");
+          ViewBag.YearList = new SelectList(myYears.ToList(),"YearNbr","YearName");
+         
+          int mo = (int)DateTime.Now.Month;
+          int yr = (int)DateTime.Now.Year;
+          int myMonthNbr = (MonthNbr != null) ? (int)MonthNbr : (int)mo;
+          int myYearNbr = (YearNbr != null) ? (int)YearNbr : (int)yr;
+         
+            var rec = from r in db.Award_spRecTypeMonthYear(recType, myMonthNbr, myYearNbr)
+                      select r;
+
+            ViewBag.MessageToUser = string.Format("You are viewing all {0} for {1} {2}", ViewBag.Message, monthName(myMonthNbr), myYearNbr);
+
+
+            return View(rec);
+        }
+
+        
+        private string recogType(int recType)
+        {
+            string recognition;
+            switch (recType)
+            {
+                case  1:
+                    recognition = "Commendations";
+                    break;
+                case 2:
+                    recognition = "Merits";
+                    break;
+                case 3:
+                    recognition = "Certificate Of Appreciations";
+                    break;
+                case 4:
+                    recognition = "Letter Of Appreciations";
+                    break;
+                case 5:
+                    recognition = "Of The Month";
+                    break;
+                case 6:
+                    recognition = "Oak Farns";
+                    break;
+                case 7:
+                    recognition = "EnC.O.R.E. Awards";
+                    break;
+                default:
+                    recognition = "Annual Awards";
+                    break;
+            }
+
+            return recognition;
+        }
+
+        private string monthName(int monthNbr)
+        {
+
+            return CultureInfo.CurrentCulture.DateTimeFormat.GetAbbreviatedMonthName(monthNbr);
+        }
+
 
         public ActionResult Contact()
         {

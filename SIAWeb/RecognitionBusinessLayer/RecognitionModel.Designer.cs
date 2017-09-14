@@ -200,6 +200,51 @@ namespace RecognitionBusinessLayer
 
         #endregion
 
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="recType">No Metadata Documentation available.</param>
+        /// <param name="monthNbr">No Metadata Documentation available.</param>
+        /// <param name="yearNbr">No Metadata Documentation available.</param>
+        public ObjectResult<Award_spRecTypeMonthYear_Result> Award_spRecTypeMonthYear(Nullable<global::System.Int32> recType, Nullable<global::System.Int32> monthNbr, Nullable<global::System.Int32> yearNbr)
+        {
+            ObjectParameter recTypeParameter;
+            if (recType.HasValue)
+            {
+                recTypeParameter = new ObjectParameter("RecType", recType);
+            }
+            else
+            {
+                recTypeParameter = new ObjectParameter("RecType", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter monthNbrParameter;
+            if (monthNbr.HasValue)
+            {
+                monthNbrParameter = new ObjectParameter("MonthNbr", monthNbr);
+            }
+            else
+            {
+                monthNbrParameter = new ObjectParameter("MonthNbr", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter yearNbrParameter;
+            if (yearNbr.HasValue)
+            {
+                yearNbrParameter = new ObjectParameter("YearNbr", yearNbr);
+            }
+            else
+            {
+                yearNbrParameter = new ObjectParameter("YearNbr", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<Award_spRecTypeMonthYear_Result>("Award_spRecTypeMonthYear", recTypeParameter, monthNbrParameter, yearNbrParameter);
+        }
+
+        #endregion
+
     }
 
     #endregion
@@ -717,25 +762,6 @@ namespace RecognitionBusinessLayer
         private global::System.String _Badge;
         partial void OnBadgeChanging(global::System.String value);
         partial void OnBadgeChanged();
-
-
-        
-        public string FullName
-        {
-            get
-            {
-                string fullname;
-                if (Badge != null)
-                {
-                    fullname = FirstName + " " + LastName + " #" + Badge;
-                }
-                else
-                {
-                    fullname = FirstName + " " + LastName;
-                }
-                return fullname;
-            }
-        }  
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -808,6 +834,30 @@ namespace RecognitionBusinessLayer
         private Nullable<global::System.Int32> _OfficeID;
         partial void OnOfficeIDChanging(Nullable<global::System.Int32> value);
         partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FullName
+        {
+            get
+            {
+                return _FullName;
+            }
+            set
+            {
+                OnFullNameChanging(value);
+                ReportPropertyChanging("FullName");
+                _FullName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FullName");
+                OnFullNameChanged();
+            }
+        }
+        private global::System.String _FullName;
+        partial void OnFullNameChanging(global::System.String value);
+        partial void OnFullNameChanged();
 
         #endregion
 
@@ -991,7 +1041,8 @@ namespace RecognitionBusinessLayer
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
         /// <param name="officeId">Initial value of the OfficeId property.</param>
         /// <param name="issuedDate">Initial value of the IssuedDate property.</param>
-        public static Recognize CreateRecognize(global::System.Int32 recognitionId, global::System.Int32 recogTypeId, global::System.Int32 appEntityID, global::System.Int32 officeId, global::System.DateTime issuedDate)
+        /// <param name="annualAward">Initial value of the AnnualAward property.</param>
+        public static Recognize CreateRecognize(global::System.Int32 recognitionId, global::System.Int32 recogTypeId, global::System.Int32 appEntityID, global::System.Int32 officeId, global::System.DateTime issuedDate, global::System.Boolean annualAward)
         {
             Recognize recognize = new Recognize();
             recognize.RecognitionId = recognitionId;
@@ -999,6 +1050,7 @@ namespace RecognitionBusinessLayer
             recognize.AppEntityID = appEntityID;
             recognize.OfficeId = officeId;
             recognize.IssuedDate = issuedDate;
+            recognize.AnnualAward = annualAward;
             return recognize;
         }
 
@@ -1200,6 +1252,30 @@ namespace RecognitionBusinessLayer
         private global::System.DateTime _IssuedDate;
         partial void OnIssuedDateChanging(global::System.DateTime value);
         partial void OnIssuedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean AnnualAward
+        {
+            get
+            {
+                return _AnnualAward;
+            }
+            set
+            {
+                OnAnnualAwardChanging(value);
+                ReportPropertyChanging("AnnualAward");
+                _AnnualAward = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AnnualAward");
+                OnAnnualAwardChanged();
+            }
+        }
+        private global::System.Boolean _AnnualAward;
+        partial void OnAnnualAwardChanging(global::System.Boolean value);
+        partial void OnAnnualAwardChanged();
 
         #endregion
 
@@ -1357,6 +1433,187 @@ namespace RecognitionBusinessLayer
                 }
             }
         }
+
+        #endregion
+
+    }
+
+    #endregion
+
+    #region ComplexTypes
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="SAPDActivityModel", Name="Award_spRecTypeMonthYear_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class Award_spRecTypeMonthYear_Result : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Award_spRecTypeMonthYear_Result object.
+        /// </summary>
+        /// <param name="recognitionId">Initial value of the RecognitionId property.</param>
+        /// <param name="type">Initial value of the Type property.</param>
+        /// <param name="issuedDate">Initial value of the IssuedDate property.</param>
+        public static Award_spRecTypeMonthYear_Result CreateAward_spRecTypeMonthYear_Result(global::System.Int32 recognitionId, global::System.String type, global::System.DateTime issuedDate)
+        {
+            Award_spRecTypeMonthYear_Result award_spRecTypeMonthYear_Result = new Award_spRecTypeMonthYear_Result();
+            award_spRecTypeMonthYear_Result.RecognitionId = recognitionId;
+            award_spRecTypeMonthYear_Result.Type = type;
+            award_spRecTypeMonthYear_Result.IssuedDate = issuedDate;
+            return award_spRecTypeMonthYear_Result;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RecognitionId
+        {
+            get
+            {
+                return _RecognitionId;
+            }
+            set
+            {
+                OnRecognitionIdChanging(value);
+                ReportPropertyChanging("RecognitionId");
+                _RecognitionId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RecognitionId");
+                OnRecognitionIdChanged();
+            }
+        }
+        private global::System.Int32 _RecognitionId;
+        partial void OnRecognitionIdChanging(global::System.Int32 value);
+        partial void OnRecognitionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FullName
+        {
+            get
+            {
+                return _FullName;
+            }
+            set
+            {
+                OnFullNameChanging(value);
+                ReportPropertyChanging("FullName");
+                _FullName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FullName");
+                OnFullNameChanged();
+            }
+        }
+        private global::System.String _FullName;
+        partial void OnFullNameChanging(global::System.String value);
+        partial void OnFullNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Award
+        {
+            get
+            {
+                return _Award;
+            }
+            set
+            {
+                OnAwardChanging(value);
+                ReportPropertyChanging("Award");
+                _Award = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Award");
+                OnAwardChanged();
+            }
+        }
+        private global::System.String _Award;
+        partial void OnAwardChanging(global::System.String value);
+        partial void OnAwardChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime IssuedDate
+        {
+            get
+            {
+                return _IssuedDate;
+            }
+            set
+            {
+                OnIssuedDateChanging(value);
+                ReportPropertyChanging("IssuedDate");
+                _IssuedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IssuedDate");
+                OnIssuedDateChanged();
+            }
+        }
+        private global::System.DateTime _IssuedDate;
+        partial void OnIssuedDateChanging(global::System.DateTime value);
+        partial void OnIssuedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DocPath
+        {
+            get
+            {
+                return _DocPath;
+            }
+            set
+            {
+                OnDocPathChanging(value);
+                ReportPropertyChanging("DocPath");
+                _DocPath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DocPath");
+                OnDocPathChanged();
+            }
+        }
+        private global::System.String _DocPath;
+        partial void OnDocPathChanging(global::System.String value);
+        partial void OnDocPathChanged();
 
         #endregion
 

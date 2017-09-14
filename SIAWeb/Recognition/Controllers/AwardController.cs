@@ -60,10 +60,10 @@ namespace Recognition.Controllers
             switch (sortOrder)
             {
                 case "name_desc":
-                    rec = rec.OrderByDescending(r => r.Person.LastName).Where(r => r.IssuedDate >= today);
+                    rec = rec.OrderByDescending(r => r.Person.FullName).Where(r => r.IssuedDate >= today);
                     break;
                 case "name_aesc":
-                    rec = rec.OrderBy(r => r.Person.LastName).Where(r => r.IssuedDate >= today);
+                    rec = rec.OrderBy(r => r.Person.FullName).Where(r => r.IssuedDate >= today);
                     break;
                 case "date_aesc":
                     rec = rec.OrderBy(r => r.IssuedDate).Take(100);
@@ -227,7 +227,7 @@ namespace Recognition.Controllers
                 return HttpNotFound();
             }
 
-            ViewBag.Employee = db.People.Where(p => p.AppEntityID == id).Select(p => p.FullName);
+            ViewBag.Employee = db.People.Where(p => p.AppEntityID == id).Select(p => p.LastName);
 
             ViewBag.AwardTypeId = new SelectList(db.AwardTypes, "AwardTypeId", "Name", recognize.AwardTypeId);
             ViewBag.RecogTypeId = new SelectList(db.RecognitionTypes, "RecognitionTypeId", "Name", recognize.RecogTypeId);
