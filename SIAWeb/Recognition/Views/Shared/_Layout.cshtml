@@ -7,7 +7,10 @@
     <link href="~/favicon.ico" rel="Shortcut Icon" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+
+
     @Styles.Render("~/Content/cyborg")
     @Styles.Render("~/Content/customcss")
 </head>
@@ -16,26 +19,27 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class=" jumbotron ">
-                    <h1>
-                        SAPD Recognition
-                        @*@Html.ActionLink("SAPD Recognition", "Index", "Home")*@</h1>
-                    <p>
-                        The San Antonio Police Department’s Recognition & Awards application provides quick
-                        access to Department member’s achievements.
-                    </p>
-                    <p>
-                        <ul class="nav nav-pills">
-                            <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
-                            </a></li>
-                            <li><a href="~/Home/Search"><i class="fa fa-search"></i>&nbsp;Search </a></li>
-                           
-                            <li><a href="~/Home/Contact"><i class="fa fa-phone"></i>&nbsp;Contact </a></li>
-                            <li><a href="~/Home/Info"><i class="fa fa-question-circle-o"></i>&nbsp;Site Info </a></li>
-                            <li><a href="~/Home/Admin"><i class="fa fa-user-circle"></i>&nbsp;Admin </a></li>
-                        </ul>
-                    </p>
-                </div>
+                <div class="bg"></div>
+                    <div class=" jumbotron ">
+                        <h1>
+                            SAPD Recognition @*@Html.ActionLink("SAPD Recognition", "Index", "Home")*@</h1>
+                        <p style="width: 85%"  >
+                            The San Antonio Police Department’s Recognition & Awards application provides quick
+                            access to Department member’s achievements.
+                        </p>
+                        <p>
+                            <ul class="nav nav-pills">
+                                <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
+                                </a></li>
+                                <li><a href="~/Home/Search"><i class="fa fa-search"></i>&nbsp;Search </a></li>
+                                <li><a href="~/Home/Contact"><i class="fa fa-phone"></i>&nbsp;Contact </a></li>
+                                <li><a href="~/Home/Info"><i class="fa fa-question-circle-o"></i>&nbsp;Site Info </a>
+                                </li>
+                                <li><a href="~/Home/Admin"><i class="fa fa-user-circle"></i>&nbsp;Admin </a></li>
+                            </ul>
+                        </p>
+                    </div>
+                
                 @RenderBody()
                 <hr />
             </div>

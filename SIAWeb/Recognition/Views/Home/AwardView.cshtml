@@ -13,13 +13,13 @@
    @Html.Hidden("recType")
 
     <div class="form-group" style="padding-top: 5px">
-        <label for="ddlMonth" style="color: #FFCC00; font-size: 1.3em;">
+        <label for="ddlMonth" style="color: #efa930; font-size: 1.3em;">
             Month:
         </label>
         @Html.DropDownList("MonthNbr", (IEnumerable<SelectListItem>)ViewBag.MonthList, "Select Month", new { id = "ddlMonth", @class = "form-control" })
     </div>&nbsp; &nbsp; &nbsp;
     <div class="form-group" style="padding-top: 5px">
-        <label for="ddlYear" style="color: #FFCC00; font-size: 1.3em;">
+        <label for="ddlYear" style="color: #efa930; font-size: 1.3em;">
             Year:
         </label>
         @Html.DropDownList("YearNbr", (IEnumerable<SelectListItem>)ViewBag.YearList, "Select Year", new { id = "ddlYear", @class = "form-control" })
