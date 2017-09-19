@@ -8,114 +8,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    @*<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*@
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
 
-    @Styles.Render("~/Content/solar")
-    @*@Styles.Render("~/Content/customcss")*@
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/customcss")
 </head>
 <body>
-     
-    <div class="container">
+  <div class="container">
+
+      <div class="masthead">
+        @*<h3 class="text-muted">SAPD Activity Application</h3>*@
+
+        <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">IECA Web</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="#">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li role="separator" class="divider"></li>
+                  <li class="dropdown-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            @*<ul class="nav navbar-nav navbar-right">
+              <li class="active"><a href="./">Default <span class="sr-only">(current)</span></a></li>
+              <li><a href="../navbar-static-top/">Static top</a></li>
+              <li><a href="../navbar-fixed-top/">Fixed top</a></li>
+            </ul>*@
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+          
+
+         @* <ul class="nav nav-pills">
+                            <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span> 
+                                Home </a></li>
+                            <li><a href="~/Contact/Index"><i class="fa fa-phone"></i> Contact
+                            </a></li>
+                            <li><a href="~/Home/Info"><i class="fa fa-question-circle-o"></i> Site Info </a></li>
+                            <li><a href="~/Admin/Index"><i class="fa fa-user-circle"></i> Admin
+                            </a></li>
+                            </ul>*@
+       
+
+      <!-- Jumbotron -->
+      <div class="jumbotron">
+        <h1>Investigative Electronic Case Audit Entry System</h1>
+        <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+        <p><a class="btn btn-lg btn-success" href="#" role="button">Get started today</a></p>
+      </div>
+       <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="bg"></div>
-                    <div class=" jumbotron ">
-                        <h1>
-                            SAPD Recognition @*@Html.ActionLink("SAPD Recognition", "Index", "Home")*@</h1>
-                        <p style="width: 85%"  >
-                            The San Antonio Police Department’s Recognition & Awards application provides quick
-                            access to Department member’s achievements.
-                        </p>
-                        <p>
-                            <ul class="nav nav-pills">
-                                <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
-                                </a></li>
-                                <li><a href="~/Home/Search"><i class="fa fa-search"></i>&nbsp;Search </a></li>
-                                <li><a href="~/Home/Contact"><i class="fa fa-phone"></i>&nbsp;Contact </a></li>
-                                <li><a href="~/Home/Info"><i class="fa fa-question-circle-o"></i>&nbsp;Site Info </a>
-                                </li>
-                                <li><a href="~/Home/Admin"><i class="fa fa-user-circle"></i>&nbsp;Admin </a></li>
-                            </ul>
-                        </p>
-                    </div>
-                     @RenderSection("featured", required: false)
-                        <section class="content-wrapper main-content clear-fix">
-                            @RenderBody()
-                        </section>
-                
-               @* @RenderBody()*@
+            @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">*@
+                @RenderBody()
                 <hr />
-            </div>
+           @* </div>*@
         </div>
     </div>
-    <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="text-center">&copy; @DateTime.Now.Year - Activity App - Created by: D.Davidson#1341</p>
-                </div>
-            </div>
+     
+
+      <!-- Site footer -->
+      <footer class="footer">
+        <p>&copy; Company 2017</p>
       </footer>
 
-    @Scripts.Render("~/bundles/modernizr")
+    </div> <!-- /container -->
+     
+
+      @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/googlejquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @Scripts.Render("~/bundles/moment")
     @Scripts.Render("~/bundles/datepick")
-
-   
 </body>
 </html>
 
 
-
-
-@*<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - My ASP.NET MVC Application</title>
-        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-        <meta name="viewport" content="width=device-width" />
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/modernizr")
-    </head>
-    <body>
-        <header>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
-                </div>
-                <div class="float-right">
-                    <section id="login">
-                        Hello, <span class="username">@User.Identity.Name</span>!
-                    </section>
-                    <nav>
-                        <ul id="menu">
-                            <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                            <li>@Html.ActionLink("About", "About", "Home")</li>
-                            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
-        <footer>
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
-                </div>
-            </div>
-        </footer>
-
-        @Scripts.Render("~/bundles/jquery")
-        @RenderSection("scripts", required: false)
-    </body>
-</html>*@
