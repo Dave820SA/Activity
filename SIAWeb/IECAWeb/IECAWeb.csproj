@@ -124,6 +124,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
+    <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -241,11 +243,18 @@
     <None Include="readme.txt" />
     <None Include="Scripts\jquery-1.9.0.min.map" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
+    <Content Include="Views\Shared\_Alternate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Images\" />
     <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UserBusinessLayer\UserBusinessLayer.csproj">
+      <Project>{A6CC0DB3-58C7-4711-BB18-3AF06472115F}</Project>
+      <Name>UserBusinessLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

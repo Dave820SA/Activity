@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using IECAWeb.Common;
 
 namespace IECAWeb
 {
@@ -23,5 +21,14 @@ namespace IECAWeb
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
+
+        //protected void Session_Start()
+        //{
+        //    SessionLogin user = new SessionLogin();
+        //    string myUser = HttpContext.Current.User.Identity.Name.ToString();
+        //    //string myUser = "COSA\\TB93703";
+        //    user.getUserPin(myUser);
+
+        //}
     }
 }
