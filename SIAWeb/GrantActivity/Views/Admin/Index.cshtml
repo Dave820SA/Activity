@@ -64,7 +64,7 @@
                             @Html.DisplayFor(modelItem => item.Grant_GrantType.GrantType)
                         </td>
                         <td>
-                            @(String.Format("{0} {1}", item.Person.FirstName, item.Person.LastName))
+                            @(String.Format("{0} {1} #{2}", item.Person.FirstName, item.Person.LastName, item.Person.User_User.Badge))
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DailyStart)

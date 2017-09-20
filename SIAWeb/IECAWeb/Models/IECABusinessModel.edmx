@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SAPDActivityModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SAPDActivityModelStoreContainer">
+          <EntitySet Name="IECA_AuditHistrory" EntityType="SAPDActivityModel.Store.IECA_AuditHistrory" store:Type="Tables" Schema="dbo" Table="IECA.AuditHistrory" />
+          <EntitySet Name="IECA_vUsers" EntityType="SAPDActivityModel.Store.IECA_vUsers" store:Type="Views" store:Schema="dbo" store:Name="IECA.vUsers">
+            <DefiningQuery>SELECT 
+      [IECA_vUsers].[AppEntityID] AS [AppEntityID], 
+      [IECA_vUsers].[First] AS [First], 
+      [IECA_vUsers].[Last] AS [Last], 
+      [IECA_vUsers].[Badge] AS [Badge], 
+      [IECA_vUsers].[OfficeID] AS [OfficeID], 
+      [IECA_vUsers].[Status] AS [Status], 
+      [IECA_vUsers].[OfficeLong] AS [OfficeLong], 
+      [IECA_vUsers].[OfficeShort] AS [OfficeShort]
+      FROM [dbo].[IECA.vUsers] AS [IECA_vUsers]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="IECA_AuditHistrory">
+          <Key>
+            <PropertyRef Name="IECAID" />
+          </Key>
+          <Property Name="IECAID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppEntityID" Type="int" />
+          <Property Name="OfficeID" Type="int" />
+          <Property Name="CaseAuditFlag" Type="bit" />
+          <Property Name="AuditNotes" Type="varchar(max)" />
+          <Property Name="AuditorID" Type="int" />
+          <Property Name="AuditDate" Type="datetime" />
+          <Property Name="LastUpdate" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SAPDActivity.dbo.IECA.vUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="IECA_vUsers">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="First" Type="varchar" MaxLength="50" />
+          <Property Name="Last" Type="varchar" MaxLength="50" />
+          <Property Name="Badge" Type="varchar" MaxLength="6" />
+          <Property Name="OfficeID" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="OfficeLong" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="OfficeShort" Type="varchar" Nullable="false" MaxLength="10" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SAPDActivityModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="SAPDActivityEntities1" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="AuditHistrories" EntityType="SAPDActivityModel.AuditHistrory" />
+          <EntitySet Name="Detectives" EntityType="SAPDActivityModel.Detective" />
+          <AssociationSet Name="DetectiveAuditHistrory" Association="SAPDActivityModel.DetectiveAuditHistrory">
+            <End Role="Detective" EntitySet="Detectives" />
+            <End Role="AuditHistrory" EntitySet="AuditHistrories" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="AuditHistrory">
+          <Key>
+            <PropertyRef Name="IECAID" />
+          </Key>
+          <Property Type="Int32" Name="IECAID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="OfficeID" />
+          <Property Type="Boolean" Name="CaseAuditFlag" />
+          <Property Type="String" Name="AuditNotes" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="AuditorID" />
+          <Property Type="DateTime" Name="AuditDate" />
+          <Property Type="DateTime" Name="LastUpdate" Nullable="false" />
+          <NavigationProperty Name="Detective" Relationship="SAPDActivityModel.DetectiveAuditHistrory" FromRole="AuditHistrory" ToRole="Detective" />
+        </EntityType>
+        <EntityType Name="Detective">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="First" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Last" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OfficeID" Nullable="false" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OfficeLong" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OfficeShort" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AuditHistrories" Relationship="SAPDActivityModel.DetectiveAuditHistrory" FromRole="Detective" ToRole="AuditHistrory" />
+        </EntityType>
+        <Association Name="DetectiveAuditHistrory">
+          <End Type="SAPDActivityModel.Detective" Role="Detective" Multiplicity="1" />
+          <End Type="SAPDActivityModel.AuditHistrory" Role="AuditHistrory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Detective">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="AuditHistrory">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SAPDActivityModelStoreContainer" CdmEntityContainer="SAPDActivityEntities1" >
+          <EntitySetMapping Name="AuditHistrories">
+            <EntityTypeMapping TypeName="SAPDActivityModel.AuditHistrory">
+              <MappingFragment StoreEntitySet="IECA_AuditHistrory">
+                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
+                <ScalarProperty Name="AuditDate" ColumnName="AuditDate" />
+                <ScalarProperty Name="AuditorID" ColumnName="AuditorID" />
+                <ScalarProperty Name="AuditNotes" ColumnName="AuditNotes" />
+                <ScalarProperty Name="CaseAuditFlag" ColumnName="CaseAuditFlag" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="IECAID" ColumnName="IECAID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Detectives">
+            <EntityTypeMapping TypeName="SAPDActivityModel.Detective">
+              <MappingFragment StoreEntitySet="IECA_vUsers">
+                <ScalarProperty Name="OfficeShort" ColumnName="OfficeShort" />
+                <ScalarProperty Name="OfficeLong" ColumnName="OfficeLong" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="Last" ColumnName="Last" />
+                <ScalarProperty Name="First" ColumnName="First" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="IECABusinessModel" >
+        <EntityTypeShape EntityType="SAPDActivityModel.AuditHistrory" Width="2.5" PointX="0.875" PointY="1" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="SAPDActivityModel.Detective" Width="2.375" PointX="5.375" PointY="0.625" Height="2.7494921874999996" />
+        <AssociationConnector Association="SAPDActivityModel.DetectiveAuditHistrory">
+          <ConnectorPoint PointX="5.375" PointY="2.18724609375" />
+          <ConnectorPoint PointX="3.375" PointY="2.18724609375" />
+        </AssociationConnector>
+        </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

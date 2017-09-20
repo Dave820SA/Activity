@@ -1,0 +1,85 @@
+﻿@model IECAWeb.Models.AuditHistrory
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>AuditHistrory</legend>
+
+        @Html.HiddenFor(model => model.IECAID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AppEntityID, "Detective")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("AppEntityID", String.Empty)
+            @Html.ValidationMessageFor(model => model.AppEntityID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.OfficeID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.OfficeID)
+            @Html.ValidationMessageFor(model => model.OfficeID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CaseAuditFlag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CaseAuditFlag)
+            @Html.ValidationMessageFor(model => model.CaseAuditFlag)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AuditNotes)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AuditNotes)
+            @Html.ValidationMessageFor(model => model.AuditNotes)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AuditorID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AuditorID)
+            @Html.ValidationMessageFor(model => model.AuditorID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.AuditDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.AuditDate)
+            @Html.ValidationMessageFor(model => model.AuditDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastUpdate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastUpdate)
+            @Html.ValidationMessageFor(model => model.LastUpdate)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

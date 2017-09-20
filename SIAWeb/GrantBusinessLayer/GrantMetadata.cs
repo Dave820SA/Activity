@@ -139,25 +139,25 @@ namespace GrantBusinessLayer
         }
 
 
-        //[MetadataType(typeof(Approvel.Metadata))]
-        //public partial class Approvel
-        //{
-        //    sealed class Metadata
-        //    {
-        //        [Key]
-        //        public int ID { get; set; }
+        [MetadataType(typeof(User.Metadata))]
+        public partial class User
+        {
+            sealed class Metadata
+            {
+                [Key]
+                public int AppEntityID { get; set; }
 
 
-        //        [Display(Name = "Approve By")]
-        //        public String Approver { get; set; }
+                [Display(Name = "Badge")]
+                public String Badge { get; set; }
 
 
-        //        //[Display(Name = "Last")]
-        //        //public String LastName { get; set; }
+                //[Display(Name = "Last")]
+                //public String LastName { get; set; }
 
 
-        //    }
-        //}
+            }
+        }
 
 
     

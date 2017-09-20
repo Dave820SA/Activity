@@ -1,0 +1,67 @@
+﻿@model IECAWeb.Models.AuditHistrory
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>AuditHistrory</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Detective.First)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Detective.First)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.OfficeID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.OfficeID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CaseAuditFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CaseAuditFlag)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AuditNotes)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AuditNotes)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AuditorID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AuditorID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.AuditDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.AuditDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.LastUpdate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.LastUpdate)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

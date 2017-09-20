@@ -17,7 +17,10 @@ namespace GrantActivity.Controllers
         [HandleError()]
         public ActionResult Index()
         {
-            return View(db.Grant_Category.ToList());
+            var grantCat = from c in db.Grant_Category
+                           orderby c.Name
+                           select c;
+            return View(grantCat.ToList());
         }
 
         //

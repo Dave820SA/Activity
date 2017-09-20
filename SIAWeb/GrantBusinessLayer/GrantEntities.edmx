@@ -11,6 +11,7 @@
           <EntitySet Name="Grant_Daily" EntityType="GrantModel.Store.Grant_Daily" store:Type="Tables" Schema="dbo" Table="Grant.Daily" />
           <EntitySet Name="Grant_GrantType" EntityType="GrantModel.Store.Grant_GrantType" store:Type="Tables" Schema="dbo" Table="Grant.GrantType" />
           <EntitySet Name="Person_Person" EntityType="GrantModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
+          <EntitySet Name="User_User" EntityType="GrantModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
           <EntitySet Name="Grant_vActivityApprover" EntityType="GrantModel.Store.Grant_vActivityApprover" store:Type="Views" store:Schema="dbo" store:Name="Grant.vActivityApprover">
             <DefiningQuery>SELECT 
       [Grant_vActivityApprover].[AppEntityID] AS [AppEntityID], 
@@ -28,6 +29,10 @@
           <AssociationSet Name="FK_Grant_Daily_Grant_GrantType" Association="GrantModel.Store.FK_Grant_Daily_Grant_GrantType">
             <End Role="Grant_GrantType" EntitySet="Grant_GrantType" />
             <End Role="Grant_Daily" EntitySet="Grant_Daily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Person_Person" Association="GrantModel.Store.FK_User_User_Person_Person">
+            <End Role="Person_Person" EntitySet="Person_Person" />
+            <End Role="User_User" EntitySet="User_User" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grant_Activity">
@@ -84,6 +89,26 @@
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="User_User">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="PIN" Type="varchar" MaxLength="8" />
+          <Property Name="SAP" Type="varchar" MaxLength="8" />
+          <Property Name="CADID" Type="int" />
+          <Property Name="JobTitleID" Type="int" />
+          <Property Name="ClassificationID" Type="int" />
+          <Property Name="Badge" Type="varchar" MaxLength="6" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Gender" Type="nchar" MaxLength="1" />
+          <Property Name="Ethnicty" Type="nchar" MaxLength="1" />
+          <Property Name="MaritalStatus" Type="nchar" MaxLength="1" />
+          <Property Name="HireDate" Type="date" />
+          <Property Name="rowguid" Type="uniqueidentifier" />
+          <Property Name="WorksheetVisibleFlag" Type="bit" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'SAPDActivity.dbo.Grant.vActivityApprover' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
@@ -130,6 +155,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_User_Person_Person">
+          <End Role="Person_Person" Type="GrantModel.Store.Person_Person" Multiplicity="1" />
+          <End Role="User_User" Type="GrantModel.Store.User_User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person_Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -160,6 +197,11 @@
           <AssociationSet Name="Grant_vActivityApproverGrant_Daily" Association="GrantModel.Grant_vActivityApproverGrant_Daily">
             <End Role="Grant_vActivityApprover" EntitySet="Grant_vActivityApprover" />
             <End Role="Grant_Daily" EntitySet="Grant_Daily" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="GrantModel.User" />
+          <AssociationSet Name="FK_User_User_Person_Person" Association="GrantModel.FK_User_User_Person_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="User_User" EntitySet="Users" />
           </AssociationSet>
          <!-- <EntitySet Name="ApproveWorks" EntityType="GrantModel.ApproveWork" /> -->
         </EntityContainer>
@@ -261,6 +303,7 @@
           <Property Name="rowguid" Type="Guid" />
           <Property Name="ModifiedDate" Type="DateTime" />
           <NavigationProperty Name="Grant_Daily" Relationship="GrantModel.Daily_Person" FromRole="Person" ToRole="Grant_Daily" />
+          <NavigationProperty Name="User_User" Relationship="GrantModel.FK_User_User_Person_Person" FromRole="Person" ToRole="User_User" />
         </EntityType>
         <Association Name="Daily_Person">
           <End Type="GrantModel.Grant_Daily" Multiplicity="*" Role="Grant_Daily" />
@@ -291,6 +334,39 @@
             </Principal>
             <Dependent Role="Grant_Daily">
               <PropertyRef Name="ApprovedByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="PIN" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAP" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CADID" />
+          <Property Type="Int32" Name="JobTitleID" />
+          <Property Type="Int32" Name="ClassificationID" />
+          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="DOB" />
+          <Property Type="String" Name="Gender" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Ethnicty" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="MaritalStatus" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Type="DateTime" Name="HireDate" />
+          <Property Type="Guid" Name="rowguid" />
+          <Property Type="Boolean" Name="WorksheetVisibleFlag" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <NavigationProperty Name="Person_Person" Relationship="GrantModel.FK_User_User_Person_Person" FromRole="User_User" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_User_User_Person_Person">
+          <End Type="GrantModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="GrantModel.User" Role="User_User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="AppEntityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -367,6 +443,27 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="GrantModel.User">
+              <MappingFragment StoreEntitySet="User_User">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorksheetVisibleFlag" ColumnName="WorksheetVisibleFlag" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="Ethnicty" ColumnName="Ethnicty" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="ClassificationID" ColumnName="ClassificationID" />
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+                <ScalarProperty Name="CADID" ColumnName="CADID" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -399,8 +496,8 @@
         <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Category">
           <ConnectorPoint PointX="4.5" PointY="6" />
           <ConnectorPoint PointX="4.875" PointY="5.625" />
-          <ConnectorPoint PointX="4.875" PointY="4.0549189921874929" />
-          <ConnectorPoint PointX="5.625" PointY="4.0549189921874929" />
+          <ConnectorPoint PointX="4.875" PointY="3.7280578268229165" />
+          <ConnectorPoint PointX="5.625" PointY="3.7280578268229165" />
         </AssociationConnector>
         <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Daily">
           <ConnectorPoint PointX="4.5" PointY="2.7787223307291664" />
@@ -412,15 +509,20 @@
           <ConnectorPoint PointX="7.34375" PointY="1.59375" />
           <ConnectorPoint PointX="7.34375" PointY="5.125" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GrantModel.Grant_vActivityApprover" Width="1.5" PointX="8.375" PointY="2.375" Height="1.4033821614583388" />
+        <EntityTypeShape EntityType="GrantModel.Grant_vActivityApprover" Width="2" PointX="8.375" PointY="2.375" Height="1.59568359375" />
         <AssociationConnector Association="GrantModel.Grant_vActivityApproverGrant_Daily">
-          <ConnectorPoint PointX="9.125" PointY="3.97068359375" />
-          <ConnectorPoint PointX="9.125" PointY="4.7903450520833326" />
+          <ConnectorPoint PointX="9.375" PointY="3.97068359375" />
+          <ConnectorPoint PointX="9.375" PointY="4.7903450520833326" />
           <ConnectorPoint PointX="7.427083333333333" PointY="4.7903450520833317" />
           <ConnectorPoint PointX="7.260416666666667" PointY="4.7903450520833326" />
           <ConnectorPoint PointX="4.958333333333333" PointY="4.7903450520833317" />
           <ConnectorPoint PointX="4.791666666666667" PointY="4.7903450520833326" />
           <ConnectorPoint PointX="4.5" PointY="4.7903450520833326" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GrantModel.User" Width="1.5" PointX="8.25" PointY="5.625" Height="4.0956022135416665" />
+        <AssociationConnector Association="GrantModel.FK_User_User_Person_Person" >
+          <ConnectorPoint PointX="7.5" PointY="6.9420475260416667" />
+          <ConnectorPoint PointX="8.25" PointY="6.9420475260416667" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
