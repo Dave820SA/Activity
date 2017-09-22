@@ -1063,10 +1063,12 @@ namespace GrantBusinessLayer
         /// Create a new Grant_GrantType object.
         /// </summary>
         /// <param name="grantTypeID">Initial value of the GrantTypeID property.</param>
-        public static Grant_GrantType CreateGrant_GrantType(global::System.Int32 grantTypeID)
+        /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
+        public static Grant_GrantType CreateGrant_GrantType(global::System.Int32 grantTypeID, global::System.Boolean visibleFlag)
         {
             Grant_GrantType grant_GrantType = new Grant_GrantType();
             grant_GrantType.GrantTypeID = grantTypeID;
+            grant_GrantType.VisibleFlag = visibleFlag;
             return grant_GrantType;
         }
 
@@ -1124,6 +1126,30 @@ namespace GrantBusinessLayer
         private global::System.String _GrantType;
         partial void OnGrantTypeChanging(global::System.String value);
         partial void OnGrantTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private global::System.Boolean _VisibleFlag;
+        partial void OnVisibleFlagChanging(global::System.Boolean value);
+        partial void OnVisibleFlagChanged();
 
         #endregion
 

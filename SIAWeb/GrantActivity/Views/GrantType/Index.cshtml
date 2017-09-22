@@ -12,28 +12,40 @@
            <br />
            <br />
            @*|&nbsp;&nbsp;</span><span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>*@
-            <table class="table table-condensed table-hover" >
+            <table class="table table-condensed table-hover">
                 <tr>
                     <th>
-                       @* @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })*@
-                       @Html.DisplayNameFor(model => model.GrantType)
+                        @* @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })*@
+                        @Html.DisplayNameFor(model => model.GrantType)
                     </th>
-                   
                     <th>
+                        @Html.DisplayNameFor(model => model.VisibleFlag)
                     </th>
                 </tr>
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td >
+                        <td>
                             @Html.DisplayFor(modelItem => item.GrantType)
                         </td>
-                        
                         <td>
-                        <a href="@Url.Action("Edit", "GrantType", new { id = item.GrantTypeID })" class="btn btn-info btn-xs"> Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
-                        <a href="@Url.Action("Details", "GrantType", new { id = item.GrantTypeID })" class="btn btn-success btn-xs"> Details <i class="fa fa-list" aria-hidden="true"></i></a> |
-                        <a href="@Url.Action("Delete", "GrantType", new { id = item.GrantTypeID })" class="btn btn-danger btn-xs"> Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
-                           @* @Html.ActionLink("Edit", "Edit", new { id = item.GrantTypeID }) | @Html.ActionLink("Details", "Details", new { id = item.GrantTypeID })
+                            @{
+                                string approve = (item.VisibleFlag).ToString();
+                                    if (approve == "True")
+                                        {
+                                        <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                                        }
+                                    else
+                                        {
+                                        <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                                        } 
+                            }
+                        </td>
+                        <td>
+                            <a href="@Url.Action("Edit", "GrantType", new { id = item.GrantTypeID })" class="btn btn-info btn-xs">
+                                Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "GrantType", new { id = item.GrantTypeID })" class="btn btn-success btn-xs">
+                                    Details <i class="fa fa-list" aria-hidden="true"></i></a>| <a href="@Url.Action("Delete", "GrantType", new { id = item.GrantTypeID })" class="btn btn-danger btn-xs">
+                                        Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>@* @Html.ActionLink("Edit", "Edit", new { id = item.GrantTypeID }) | @Html.ActionLink("Details", "Details", new { id = item.GrantTypeID })
                             |
                             @Html.ActionLink("Delete", "Delete", new { id = item.GrantTypeID })*@
                         </td>

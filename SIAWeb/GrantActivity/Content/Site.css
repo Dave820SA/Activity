@@ -36,3 +36,15 @@ textarea {
 	margin-left: 20px;
 	background-attachment: inherit;
 }
+
+input[type='checkbox'] {
+    -webkit-appearance:none;
+    width:22px;
+    height:22px;
+    background:white;
+    border-radius:5px;
+    border:1px solid #555;
+}
+input[type='checkbox']:checked {
+    background: #abd;
+}

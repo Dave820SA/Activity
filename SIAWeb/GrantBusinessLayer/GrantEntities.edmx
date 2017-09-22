@@ -74,6 +74,7 @@
           </Key>
           <Property Name="GrantTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="GrantType" Type="varchar" MaxLength="50" />
+          <Property Name="VisibleFlag" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Person_Person">
           <Key>
@@ -240,6 +241,7 @@
           <Property Name="GrantTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" />
           <Property Name="GrantType" MaxLength="50" FixedLength="false" Unicode="false" Type="String" />
           <NavigationProperty Name="Grant_Daily" Relationship="GrantModel.FK_Grant_Daily_Grant_GrantType" FromRole="Grant_GrantType" ToRole="Grant_Daily" />
+          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
         </EntityType>
         <Association Name="FK_Grant_Daily_Grant_GrantType">
           <End Type="GrantModel.Grant_GrantType" Multiplicity="1" Role="Grant_GrantType" />
@@ -404,6 +406,7 @@
           <EntitySetMapping Name="Grant_GrantType">
             <EntityTypeMapping TypeName="GrantModel.Grant_GrantType">
               <MappingFragment StoreEntitySet="Grant_GrantType">
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
                 <ScalarProperty Name="GrantTypeID" ColumnName="GrantTypeID" />
                 <ScalarProperty Name="GrantType" ColumnName="GrantType" />
               </MappingFragment>

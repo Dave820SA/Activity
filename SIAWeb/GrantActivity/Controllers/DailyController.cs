@@ -112,7 +112,7 @@ namespace GrantActivity.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType, "GrantTypeID", "GrantType");
+            ViewBag.GrantTypeID = new SelectList(db.Grant_GrantType.Where(x => x.VisibleFlag == true), "GrantTypeID", "GrantType");
             ViewBag.UserID = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
             return View();
         }

@@ -42,7 +42,8 @@ namespace GrantActivity.Controllers
 
         public ActionResult Create(int id = 0)
         {
-            ViewBag.CategoryID = new SelectList(db.Grant_Category, "CategoryID", "Name");
+
+            ViewBag.CategoryID = new SelectList(db.Grant_Category.OrderBy(x => x.Name), "CategoryID", "Name");
             ViewBag.DailyID = new SelectList(db.Grant_Daily, "AdminDailyID", "AdminNotes");
             ViewBag.DailyID = id;
             return View();
