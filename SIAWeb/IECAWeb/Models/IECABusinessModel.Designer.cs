@@ -19,7 +19,7 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("SAPDActivityModel", "DetectiveAuditHistrory", "Detective", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Detective), "AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.AuditHistrory), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "OfficerAuditHistrory", "Officer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Officer), "AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.AuditHistrory), true)]
 
 #endregion
 
@@ -74,6 +74,22 @@ namespace IECAWeb.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        public ObjectSet<Officer> Officers
+        {
+            get
+            {
+                if ((_Officers == null))
+                {
+                    _Officers = base.CreateObjectSet<Officer>("Officers");
+                }
+                return _Officers;
+            }
+        }
+        private ObjectSet<Officer> _Officers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         public ObjectSet<AuditHistrory> AuditHistrories
         {
             get
@@ -86,26 +102,18 @@ namespace IECAWeb.Models
             }
         }
         private ObjectSet<AuditHistrory> _AuditHistrories;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Detective> Detectives
-        {
-            get
-            {
-                if ((_Detectives == null))
-                {
-                    _Detectives = base.CreateObjectSet<Detective>("Detectives");
-                }
-                return _Detectives;
-            }
-        }
-        private ObjectSet<Detective> _Detectives;
 
         #endregion
 
         #region AddTo Methods
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Officers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOfficers(Officer officer)
+        {
+            base.AddObject("Officers", officer);
+        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the AuditHistrories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -113,14 +121,6 @@ namespace IECAWeb.Models
         public void AddToAuditHistrories(AuditHistrory auditHistrory)
         {
             base.AddObject("AuditHistrories", auditHistrory);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Detectives EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToDetectives(Detective detective)
-        {
-            base.AddObject("Detectives", detective);
         }
 
         #endregion
@@ -146,13 +146,11 @@ namespace IECAWeb.Models
         /// </summary>
         /// <param name="iECAID">Initial value of the IECAID property.</param>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
-        /// <param name="lastUpdate">Initial value of the LastUpdate property.</param>
-        public static AuditHistrory CreateAuditHistrory(global::System.Int32 iECAID, global::System.Int32 appEntityID, global::System.DateTime lastUpdate)
+        public static AuditHistrory CreateAuditHistrory(global::System.Int32 iECAID, global::System.Int32 appEntityID)
         {
             AuditHistrory auditHistrory = new AuditHistrory();
             auditHistrory.IECAID = iECAID;
             auditHistrory.AppEntityID = appEntityID;
-            auditHistrory.LastUpdate = lastUpdate;
             return auditHistrory;
         }
 
@@ -334,9 +332,9 @@ namespace IECAWeb.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime LastUpdate
+        public Nullable<global::System.DateTime> LastUpdate
         {
             get
             {
@@ -351,8 +349,8 @@ namespace IECAWeb.Models
                 OnLastUpdateChanged();
             }
         }
-        private global::System.DateTime _LastUpdate;
-        partial void OnLastUpdateChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _LastUpdate;
+        partial void OnLastUpdateChanging(Nullable<global::System.DateTime> value);
         partial void OnLastUpdateChanged();
 
         #endregion
@@ -366,16 +364,16 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "DetectiveAuditHistrory", "Detective")]
-        public Detective Detective
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "OfficerAuditHistrory", "Officer")]
+        public Officer Officer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Detective>("SAPDActivityModel.DetectiveAuditHistrory", "Detective").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("SAPDActivityModel.OfficerAuditHistrory", "Officer").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Detective>("SAPDActivityModel.DetectiveAuditHistrory", "Detective").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("SAPDActivityModel.OfficerAuditHistrory", "Officer").Value = value;
             }
         }
         /// <summary>
@@ -383,17 +381,17 @@ namespace IECAWeb.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Detective> DetectiveReference
+        public EntityReference<Officer> OfficerReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Detective>("SAPDActivityModel.DetectiveAuditHistrory", "Detective");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("SAPDActivityModel.OfficerAuditHistrory", "Officer");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Detective>("SAPDActivityModel.DetectiveAuditHistrory", "Detective", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Officer>("SAPDActivityModel.OfficerAuditHistrory", "Officer", value);
                 }
             }
         }
@@ -405,28 +403,34 @@ namespace IECAWeb.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="Detective")]
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="Officer")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Detective : EntityObject
+    public partial class Officer : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Detective object.
+        /// Create a new Officer object.
         /// </summary>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="rDID">Initial value of the RDID property.</param>
+        /// <param name="rD">Initial value of the RD property.</param>
+        /// <param name="workStatusID">Initial value of the WorkStatusID property.</param>
         /// <param name="officeID">Initial value of the OfficeID property.</param>
         /// <param name="officeLong">Initial value of the OfficeLong property.</param>
         /// <param name="officeShort">Initial value of the OfficeShort property.</param>
-        public static Detective CreateDetective(global::System.Int32 appEntityID, global::System.Int32 officeID, global::System.String officeLong, global::System.String officeShort)
+        public static Officer CreateOfficer(global::System.Int32 appEntityID, global::System.Int32 rDID, global::System.String rD, global::System.Int32 workStatusID, global::System.Int32 officeID, global::System.String officeLong, global::System.String officeShort)
         {
-            Detective detective = new Detective();
-            detective.AppEntityID = appEntityID;
-            detective.OfficeID = officeID;
-            detective.OfficeLong = officeLong;
-            detective.OfficeShort = officeShort;
-            return detective;
+            Officer officer = new Officer();
+            officer.AppEntityID = appEntityID;
+            officer.RDID = rDID;
+            officer.RD = rD;
+            officer.WorkStatusID = workStatusID;
+            officer.OfficeID = officeID;
+            officer.OfficeLong = officeLong;
+            officer.OfficeShort = officeShort;
+            return officer;
         }
 
         #endregion
@@ -535,26 +539,98 @@ namespace IECAWeb.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 OfficeID
+        public global::System.String RankLong
         {
             get
             {
-                return _OfficeID;
+                return _RankLong;
             }
             set
             {
-                OnOfficeIDChanging(value);
-                ReportPropertyChanging("OfficeID");
-                _OfficeID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("OfficeID");
-                OnOfficeIDChanged();
+                OnRankLongChanging(value);
+                ReportPropertyChanging("RankLong");
+                _RankLong = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("RankLong");
+                OnRankLongChanged();
             }
         }
-        private global::System.Int32 _OfficeID;
-        partial void OnOfficeIDChanging(global::System.Int32 value);
-        partial void OnOfficeIDChanged();
+        private global::System.String _RankLong;
+        partial void OnRankLongChanging(global::System.String value);
+        partial void OnRankLongChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Rank
+        {
+            get
+            {
+                return _Rank;
+            }
+            set
+            {
+                OnRankChanging(value);
+                ReportPropertyChanging("Rank");
+                _Rank = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Rank");
+                OnRankChanged();
+            }
+        }
+        private global::System.String _Rank;
+        partial void OnRankChanging(global::System.String value);
+        partial void OnRankChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RDID
+        {
+            get
+            {
+                return _RDID;
+            }
+            set
+            {
+                OnRDIDChanging(value);
+                ReportPropertyChanging("RDID");
+                _RDID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RDID");
+                OnRDIDChanged();
+            }
+        }
+        private global::System.Int32 _RDID;
+        partial void OnRDIDChanging(global::System.Int32 value);
+        partial void OnRDIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String RD
+        {
+            get
+            {
+                return _RD;
+            }
+            set
+            {
+                OnRDChanging(value);
+                ReportPropertyChanging("RD");
+                _RD = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("RD");
+                OnRDChanged();
+            }
+        }
+        private global::System.String _RD;
+        partial void OnRDChanging(global::System.String value);
+        partial void OnRDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -579,6 +655,54 @@ namespace IECAWeb.Models
         private global::System.String _Status;
         partial void OnStatusChanging(global::System.String value);
         partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WorkStatusID
+        {
+            get
+            {
+                return _WorkStatusID;
+            }
+            set
+            {
+                OnWorkStatusIDChanging(value);
+                ReportPropertyChanging("WorkStatusID");
+                _WorkStatusID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WorkStatusID");
+                OnWorkStatusIDChanged();
+            }
+        }
+        private global::System.Int32 _WorkStatusID;
+        partial void OnWorkStatusIDChanging(global::System.Int32 value);
+        partial void OnWorkStatusIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                OnOfficeIDChanging(value);
+                ReportPropertyChanging("OfficeID");
+                _OfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeID");
+                OnOfficeIDChanged();
+            }
+        }
+        private global::System.Int32 _OfficeID;
+        partial void OnOfficeIDChanging(global::System.Int32 value);
+        partial void OnOfficeIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -639,18 +763,18 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "DetectiveAuditHistrory", "AuditHistrory")]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "OfficerAuditHistrory", "AuditHistrory")]
         public EntityCollection<AuditHistrory> AuditHistrories
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AuditHistrory>("SAPDActivityModel.DetectiveAuditHistrory", "AuditHistrory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AuditHistrory>("SAPDActivityModel.OfficerAuditHistrory", "AuditHistrory");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AuditHistrory>("SAPDActivityModel.DetectiveAuditHistrory", "AuditHistrory", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AuditHistrory>("SAPDActivityModel.OfficerAuditHistrory", "AuditHistrory", value);
                 }
             }
         }

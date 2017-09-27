@@ -336,11 +336,15 @@ namespace UserBusinessLayer
         /// </summary>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
         /// <param name="webRole">Initial value of the WebRole property.</param>
-        public static spWebSiteUserInfo_Result CreatespWebSiteUserInfo_Result(global::System.Int32 appEntityID, global::System.String webRole)
+        /// <param name="officeID">Initial value of the OfficeID property.</param>
+        /// <param name="officeCode">Initial value of the OfficeCode property.</param>
+        public static spWebSiteUserInfo_Result CreatespWebSiteUserInfo_Result(global::System.Int32 appEntityID, global::System.String webRole, global::System.Int32 officeID, global::System.String officeCode)
         {
             spWebSiteUserInfo_Result spWebSiteUserInfo_Result = new spWebSiteUserInfo_Result();
             spWebSiteUserInfo_Result.AppEntityID = appEntityID;
             spWebSiteUserInfo_Result.WebRole = webRole;
+            spWebSiteUserInfo_Result.OfficeID = officeID;
+            spWebSiteUserInfo_Result.OfficeCode = officeCode;
             return spWebSiteUserInfo_Result;
         }
 
@@ -443,6 +447,54 @@ namespace UserBusinessLayer
         private global::System.String _WebRole;
         partial void OnWebRoleChanging(global::System.String value);
         partial void OnWebRoleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                OnOfficeIDChanging(value);
+                ReportPropertyChanging("OfficeID");
+                _OfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeID");
+                OnOfficeIDChanged();
+            }
+        }
+        private global::System.Int32 _OfficeID;
+        partial void OnOfficeIDChanging(global::System.Int32 value);
+        partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String OfficeCode
+        {
+            get
+            {
+                return _OfficeCode;
+            }
+            set
+            {
+                OnOfficeCodeChanging(value);
+                ReportPropertyChanging("OfficeCode");
+                _OfficeCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("OfficeCode");
+                OnOfficeCodeChanged();
+            }
+        }
+        private global::System.String _OfficeCode;
+        partial void OnOfficeCodeChanging(global::System.String value);
+        partial void OnOfficeCodeChanged();
 
         #endregion
 

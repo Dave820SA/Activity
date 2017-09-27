@@ -133,6 +133,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AuditMetadata.cs" />
     <Compile Include="Models\IECABusinessModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -261,6 +262,7 @@
     <Content Include="Views\Audit\Create.cshtml" />
     <Content Include="Views\Audit\Edit.cshtml" />
     <Content Include="Views\Audit\Delete.cshtml" />
+    <Content Include="Views\Audit\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

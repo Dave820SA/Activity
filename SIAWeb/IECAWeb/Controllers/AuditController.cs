@@ -18,7 +18,7 @@ namespace IECAWeb.Controllers
 
         public ActionResult Index()
         {
-            var audithistrories = db.AuditHistrories.Include("Detective");
+            var audithistrories = db.AuditHistrories.Include("Officer");
             return View(audithistrories.ToList());
         }
 
@@ -40,7 +40,7 @@ namespace IECAWeb.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.AppEntityID = new SelectList(db.Detectives, "AppEntityID", "First");
+            ViewBag.AppEntityID = new SelectList(db.Officers, "AppEntityID", "First");
             return View();
         }
 
@@ -57,7 +57,7 @@ namespace IECAWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AppEntityID = new SelectList(db.Detectives, "AppEntityID", "First", audithistrory.AppEntityID);
+            ViewBag.AppEntityID = new SelectList(db.Officers, "AppEntityID", "First", audithistrory.AppEntityID);
             return View(audithistrory);
         }
 
@@ -71,7 +71,7 @@ namespace IECAWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AppEntityID = new SelectList(db.Detectives, "AppEntityID", "First", audithistrory.AppEntityID);
+            ViewBag.AppEntityID = new SelectList(db.Officers, "AppEntityID", "First", audithistrory.AppEntityID);
             return View(audithistrory);
         }
 
@@ -88,7 +88,7 @@ namespace IECAWeb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AppEntityID = new SelectList(db.Detectives, "AppEntityID", "First", audithistrory.AppEntityID);
+            ViewBag.AppEntityID = new SelectList(db.Officers, "AppEntityID", "First", audithistrory.AppEntityID);
             return View(audithistrory);
         }
 

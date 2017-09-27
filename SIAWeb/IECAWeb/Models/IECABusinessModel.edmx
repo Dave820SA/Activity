@@ -13,8 +13,13 @@
       [IECA_vUsers].[First] AS [First], 
       [IECA_vUsers].[Last] AS [Last], 
       [IECA_vUsers].[Badge] AS [Badge], 
-      [IECA_vUsers].[OfficeID] AS [OfficeID], 
+      [IECA_vUsers].[RankLong] AS [RankLong], 
+      [IECA_vUsers].[Rank] AS [Rank], 
+      [IECA_vUsers].[RDID] AS [RDID], 
+      [IECA_vUsers].[RD] AS [RD], 
       [IECA_vUsers].[Status] AS [Status], 
+      [IECA_vUsers].[WorkStatusID] AS [WorkStatusID], 
+      [IECA_vUsers].[OfficeID] AS [OfficeID], 
       [IECA_vUsers].[OfficeLong] AS [OfficeLong], 
       [IECA_vUsers].[OfficeShort] AS [OfficeShort]
       FROM [dbo].[IECA.vUsers] AS [IECA_vUsers]</DefiningQuery>
@@ -25,7 +30,7 @@
             <PropertyRef Name="IECAID" />
           </Key>
           <Property Name="IECAID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="AppEntityID" Type="int" />
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="OfficeID" Type="int" />
           <Property Name="CaseAuditFlag" Type="bit" />
           <Property Name="AuditNotes" Type="varchar(max)" />
@@ -39,13 +44,24 @@
         <EntityType Name="IECA_vUsers">
           <Key>
             <PropertyRef Name="AppEntityID" />
+            
+            
+            
+            
+            
+            
           </Key>
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="First" Type="varchar" MaxLength="50" />
           <Property Name="Last" Type="varchar" MaxLength="50" />
           <Property Name="Badge" Type="varchar" MaxLength="6" />
-          <Property Name="OfficeID" Type="int" Nullable="false" />
+          <Property Name="RankLong" Type="varchar" MaxLength="50" />
+          <Property Name="Rank" Type="varchar" MaxLength="10" />
+          <Property Name="RDID" Type="int" Nullable="false" />
+          <Property Name="RD" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="WorkStatusID" Type="int" Nullable="false" />
+          <Property Name="OfficeID" Type="int" Nullable="false" />
           <Property Name="OfficeLong" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="OfficeShort" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
@@ -54,13 +70,32 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SAPDActivityModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="SAPDActivityEntities1" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Officers" EntityType="SAPDActivityModel.Officer" />
           <EntitySet Name="AuditHistrories" EntityType="SAPDActivityModel.AuditHistrory" />
-          <EntitySet Name="Detectives" EntityType="SAPDActivityModel.Detective" />
-          <AssociationSet Name="DetectiveAuditHistrory" Association="SAPDActivityModel.DetectiveAuditHistrory">
-            <End Role="Detective" EntitySet="Detectives" />
+          <AssociationSet Name="OfficerAuditHistrory" Association="SAPDActivityModel.OfficerAuditHistrory">
+            <End Role="Officer" EntitySet="Officers" />
             <End Role="AuditHistrory" EntitySet="AuditHistrories" />
           </AssociationSet>
           </EntityContainer>
+        <EntityType Name="Officer">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="First" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Last" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="RankLong" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Rank" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="RDID" Nullable="false" />
+          <Property Type="String" Name="RD" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="WorkStatusID" Nullable="false" />
+          <Property Type="Int32" Name="OfficeID" Nullable="false" />
+          <Property Type="String" Name="OfficeLong" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OfficeShort" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AuditHistrories" Relationship="SAPDActivityModel.OfficerAuditHistrory" FromRole="Officer" ToRole="AuditHistrory" />
+        </EntityType>
         <EntityType Name="AuditHistrory">
           <Key>
             <PropertyRef Name="IECAID" />
@@ -72,28 +107,14 @@
           <Property Type="String" Name="AuditNotes" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="AuditorID" />
           <Property Type="DateTime" Name="AuditDate" />
-          <Property Type="DateTime" Name="LastUpdate" Nullable="false" />
-          <NavigationProperty Name="Detective" Relationship="SAPDActivityModel.DetectiveAuditHistrory" FromRole="AuditHistrory" ToRole="Detective" />
+          <Property Type="DateTime" Name="LastUpdate" />
+          <NavigationProperty Name="Officer" Relationship="SAPDActivityModel.OfficerAuditHistrory" FromRole="AuditHistrory" ToRole="Officer" />
         </EntityType>
-        <EntityType Name="Detective">
-          <Key>
-            <PropertyRef Name="AppEntityID" />
-          </Key>
-          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
-          <Property Type="String" Name="First" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Last" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="OfficeID" Nullable="false" />
-          <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="OfficeLong" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="OfficeShort" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AuditHistrories" Relationship="SAPDActivityModel.DetectiveAuditHistrory" FromRole="Detective" ToRole="AuditHistrory" />
-        </EntityType>
-        <Association Name="DetectiveAuditHistrory">
-          <End Type="SAPDActivityModel.Detective" Role="Detective" Multiplicity="1" />
+        <Association Name="OfficerAuditHistrory">
+          <End Type="SAPDActivityModel.Officer" Role="Officer" Multiplicity="1" />
           <End Type="SAPDActivityModel.AuditHistrory" Role="AuditHistrory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Detective">
+            <Principal Role="Officer">
               <PropertyRef Name="AppEntityID" />
             </Principal>
             <Dependent Role="AuditHistrory">
@@ -107,6 +128,25 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SAPDActivityModelStoreContainer" CdmEntityContainer="SAPDActivityEntities1" >
+          <EntitySetMapping Name="Officers">
+            <EntityTypeMapping TypeName="SAPDActivityModel.Officer">
+              <MappingFragment StoreEntitySet="IECA_vUsers">
+                <ScalarProperty Name="OfficeShort" ColumnName="OfficeShort" />
+                <ScalarProperty Name="OfficeLong" ColumnName="OfficeLong" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RD" ColumnName="RD" />
+                <ScalarProperty Name="RDID" ColumnName="RDID" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="RankLong" ColumnName="RankLong" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="Last" ColumnName="Last" />
+                <ScalarProperty Name="First" ColumnName="First" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="AuditHistrories">
             <EntityTypeMapping TypeName="SAPDActivityModel.AuditHistrory">
               <MappingFragment StoreEntitySet="IECA_AuditHistrory">
@@ -118,20 +158,6 @@
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="IECAID" ColumnName="IECAID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Detectives">
-            <EntityTypeMapping TypeName="SAPDActivityModel.Detective">
-              <MappingFragment StoreEntitySet="IECA_vUsers">
-                <ScalarProperty Name="OfficeShort" ColumnName="OfficeShort" />
-                <ScalarProperty Name="OfficeLong" ColumnName="OfficeLong" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
-                <ScalarProperty Name="Badge" ColumnName="Badge" />
-                <ScalarProperty Name="Last" ColumnName="Last" />
-                <ScalarProperty Name="First" ColumnName="First" />
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -156,11 +182,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="IECABusinessModel" >
-        <EntityTypeShape EntityType="SAPDActivityModel.AuditHistrory" Width="2.5" PointX="0.875" PointY="1" Height="2.7494921874999996" />
-        <EntityTypeShape EntityType="SAPDActivityModel.Detective" Width="2.375" PointX="5.375" PointY="0.625" Height="2.7494921874999996" />
-        <AssociationConnector Association="SAPDActivityModel.DetectiveAuditHistrory">
-          <ConnectorPoint PointX="5.375" PointY="2.18724609375" />
-          <ConnectorPoint PointX="3.375" PointY="2.18724609375" />
+        <EntityTypeShape EntityType="SAPDActivityModel.Officer" Width="2.5" PointX="5.75" PointY="0.75" Height="3.5186979166666656" />
+        <EntityTypeShape EntityType="SAPDActivityModel.AuditHistrory" Width="2.75" PointX="0.75" PointY="0.75" Height="2.7494921874999996" />
+        <AssociationConnector Association="SAPDActivityModel.OfficerAuditHistrory">
+          <ConnectorPoint PointX="5.75" PointY="2.12474609375" />
+          <ConnectorPoint PointX="3.5" PointY="2.12474609375" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

@@ -28,7 +28,7 @@
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="PIN" Type="varchar" MaxLength="8" />
           <Property Name="SAP" Type="varchar" MaxLength="8" />
-          <Property Name="UserName" Type="varchar" MaxLength="111" />
+          <Property Name="UserName" Type="varchar" MaxLength="102" />
           <Property Name="DutyStatus" Type="varchar" MaxLength="50" />
           <Property Name="OfficeCode" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
@@ -62,8 +62,10 @@
         <ComplexType Name="spWebSiteUserInfo_Result">
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="String" Name="PIN" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="111" />
-          <Property Type="String" Name="WebRole" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="WebRole" Nullable="false" MaxLength="12" />
+          <Property Type="Int32" Name="OfficeID" Nullable="false" />
+          <Property Type="String" Name="OfficeCode" Nullable="false" MaxLength="10" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -90,6 +92,8 @@
                 <ScalarProperty Name="PIN" ColumnName="PIN" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="WebRole" ColumnName="WebRole" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

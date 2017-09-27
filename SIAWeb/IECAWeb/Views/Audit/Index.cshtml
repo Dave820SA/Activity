@@ -1,69 +1,112 @@
 ﻿@model IEnumerable<IECAWeb.Models.AuditHistrory>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Audit List";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-md-3">
+        <strong style="font-size:1.7em; padding-left:2px">Audit Items</strong>
+    </div>
+    <div class="col-md-9">
+        <div style="float: right">
+            @using (Html.BeginForm("Index", "Award", FormMethod.Get))
+            {
+                <strong style="font-size: 1.2em;">Find:&nbsp; &nbsp;</strong>
+                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
+                <input type="submit" class="btn btn-primary btn-sm" value="Search" />
+                @*<input type="submit" class="btn btn-success btn-sm" value="Clear" />*@
+          
+            }
+        </div>
+        
+    </div>
+    
+</div>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12 ">
+            
+            <table class="table table-condensed table-hover" >
+                <tr>
+                    <th>
+                        @Html.ActionLink("Employee", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        Type
+                       @* @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
+                    </th>
+                    <th>
+                        Award
+                        @*@Html.ActionLink("Award", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
+                    </th>
+                    <th>
+                        @Html.ActionLink("Issed", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>
+                    <th>
+                        See More Info
+                    </th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td >
+                            @{
+                                string fullName;
+                                fullName = String.Format("{0} {1} #{2}", item.Officer.First, item.Officer.Last, item.Officer.Badge);
+                             
+                             <strong style="font-size: 1.1em;">@fullName</strong>
+                                
+                             
+                            }
+                             
+                           
+                        </td>
+                        <td >
+                            @Html.DisplayFor(modelItem => item.CaseAuditFlag)
+                        </td>
+                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AuditDate)
+                        </td>
+                       
+                       @* <td>
+                            @Html.DisplayFor(modelItem => item.IssuedDate)
+                        </td>*@
+                        <td>
+                            <a href="@Url.Action("Edit", "Audit", new { id = item.IECAID })" class="btn btn-info btn-xs">
+                                Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> | <a href="@Url.Action("Details", "Audit", new { id = item.IECAID })" class="btn btn-success btn-xs">
+                                Details <i class="fa fa-list" aria-hidden="true"></i></a> | <a href="@Url.Action("Delete", "Audit", new { id = item.IECAID })" class="btn btn-danger btn-xs">
+                                Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                        </td>
+                    </tr>
+                }
+            </table>
+            <br />
+           @* Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))*@
+        </div>
+    </div>
+    <div>
+   <a href="@Url.Action("Audit", "Home")" class="btn btn-warning btn-sm"> Back To Admin <i class="fa fa-share" aria-hidden="true"></i></a>
+</div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Detective.First)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OfficeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CaseAuditFlag)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuditNotes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuditorID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuditDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastUpdate)
-        </th>
-        <th></th>
-    </tr>
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Detective.First)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OfficeID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CaseAuditFlag)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuditNotes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuditorID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuditDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IECAID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IECAID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IECAID })
-        </td>
-    </tr>
+
+
+        });
+
+
+
+
+    </script>
 }
 
-</table>
