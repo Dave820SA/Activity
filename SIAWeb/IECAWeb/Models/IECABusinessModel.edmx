@@ -13,6 +13,7 @@
       [IECA_vUsers].[First] AS [First], 
       [IECA_vUsers].[Last] AS [Last], 
       [IECA_vUsers].[Badge] AS [Badge], 
+      [IECA_vUsers].[FullName] AS [FullName], 
       [IECA_vUsers].[RankLong] AS [RankLong], 
       [IECA_vUsers].[Rank] AS [Rank], 
       [IECA_vUsers].[RDID] AS [RDID], 
@@ -55,6 +56,7 @@
           <Property Name="First" Type="varchar" MaxLength="50" />
           <Property Name="Last" Type="varchar" MaxLength="50" />
           <Property Name="Badge" Type="varchar" MaxLength="6" />
+          <Property Name="FullName" Type="varchar" MaxLength="110" />
           <Property Name="RankLong" Type="varchar" MaxLength="50" />
           <Property Name="Rank" Type="varchar" MaxLength="10" />
           <Property Name="RDID" Type="int" Nullable="false" />
@@ -65,6 +67,9 @@
           <Property Name="OfficeLong" Type="varchar" Nullable="false" MaxLength="50" />
           <Property Name="OfficeShort" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SAPDActivity.dbo.vAllUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -95,6 +100,7 @@
           <Property Type="String" Name="OfficeLong" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="OfficeShort" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AuditHistrories" Relationship="SAPDActivityModel.OfficerAuditHistrory" FromRole="Officer" ToRole="AuditHistrory" />
+          <Property Type="String" Name="FullName" MaxLength="110" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="AuditHistrory">
           <Key>
@@ -105,7 +111,7 @@
           <Property Type="Int32" Name="OfficeID" />
           <Property Type="Boolean" Name="CaseAuditFlag" />
           <Property Type="String" Name="AuditNotes" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="AuditorID" />
+          <Property Type="Int32" Name="AuditorID" Nullable="false" />
           <Property Type="DateTime" Name="AuditDate" />
           <Property Type="DateTime" Name="LastUpdate" />
           <NavigationProperty Name="Officer" Relationship="SAPDActivityModel.OfficerAuditHistrory" FromRole="AuditHistrory" ToRole="Officer" />
@@ -131,6 +137,7 @@
           <EntitySetMapping Name="Officers">
             <EntityTypeMapping TypeName="SAPDActivityModel.Officer">
               <MappingFragment StoreEntitySet="IECA_vUsers">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
                 <ScalarProperty Name="OfficeShort" ColumnName="OfficeShort" />
                 <ScalarProperty Name="OfficeLong" ColumnName="OfficeLong" />
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
@@ -182,11 +189,11 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="IECABusinessModel" >
-        <EntityTypeShape EntityType="SAPDActivityModel.Officer" Width="2.5" PointX="5.75" PointY="0.75" Height="3.5186979166666656" />
+        <EntityTypeShape EntityType="SAPDActivityModel.Officer" Width="2.5" PointX="4.25" PointY="1.375" Height="3.9033007812499996" />
         <EntityTypeShape EntityType="SAPDActivityModel.AuditHistrory" Width="2.75" PointX="0.75" PointY="0.75" Height="2.7494921874999996" />
         <AssociationConnector Association="SAPDActivityModel.OfficerAuditHistrory">
-          <ConnectorPoint PointX="5.75" PointY="2.12474609375" />
-          <ConnectorPoint PointX="3.5" PointY="2.12474609375" />
+          <ConnectorPoint PointX="4.25" PointY="2.43724609375" />
+          <ConnectorPoint PointX="3.5" PointY="2.43724609375" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

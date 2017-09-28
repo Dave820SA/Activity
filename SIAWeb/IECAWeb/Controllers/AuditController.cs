@@ -12,6 +12,8 @@ namespace IECAWeb.Controllers
     public class AuditController : Controller
     {
         private SAPDActivityEntities1 db = new SAPDActivityEntities1();
+        
+       
 
         //
         // GET: /Audit/

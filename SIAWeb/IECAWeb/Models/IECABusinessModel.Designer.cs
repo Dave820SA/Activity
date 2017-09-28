@@ -146,11 +146,13 @@ namespace IECAWeb.Models
         /// </summary>
         /// <param name="iECAID">Initial value of the IECAID property.</param>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
-        public static AuditHistrory CreateAuditHistrory(global::System.Int32 iECAID, global::System.Int32 appEntityID)
+        /// <param name="auditorID">Initial value of the AuditorID property.</param>
+        public static AuditHistrory CreateAuditHistrory(global::System.Int32 iECAID, global::System.Int32 appEntityID, global::System.Int32 auditorID)
         {
             AuditHistrory auditHistrory = new AuditHistrory();
             auditHistrory.IECAID = iECAID;
             auditHistrory.AppEntityID = appEntityID;
+            auditHistrory.AuditorID = auditorID;
             return auditHistrory;
         }
 
@@ -284,9 +286,9 @@ namespace IECAWeb.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AuditorID
+        public global::System.Int32 AuditorID
         {
             get
             {
@@ -301,8 +303,8 @@ namespace IECAWeb.Models
                 OnAuditorIDChanged();
             }
         }
-        private Nullable<global::System.Int32> _AuditorID;
-        partial void OnAuditorIDChanging(Nullable<global::System.Int32> value);
+        private global::System.Int32 _AuditorID;
+        partial void OnAuditorIDChanging(global::System.Int32 value);
         partial void OnAuditorIDChanged();
     
         /// <summary>
@@ -751,6 +753,30 @@ namespace IECAWeb.Models
         private global::System.String _OfficeShort;
         partial void OnOfficeShortChanging(global::System.String value);
         partial void OnOfficeShortChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FullName
+        {
+            get
+            {
+                return _FullName;
+            }
+            set
+            {
+                OnFullNameChanging(value);
+                ReportPropertyChanging("FullName");
+                _FullName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FullName");
+                OnFullNameChanged();
+            }
+        }
+        private global::System.String _FullName;
+        partial void OnFullNameChanging(global::System.String value);
+        partial void OnFullNameChanged();
 
         #endregion
 

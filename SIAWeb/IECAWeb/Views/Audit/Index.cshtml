@@ -31,18 +31,18 @@
             <table class="table table-condensed table-hover" >
                 <tr>
                     <th>
-                        @Html.ActionLink("Employee", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+                        @Html.ActionLink("Officer", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                        Type
+                       Case Audit
                        @* @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
                     </th>
+                    @*<th>
+                        Case Audit
+                        @Html.ActionLink("Award", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                    </th>*@
                     <th>
-                        Award
-                        @*@Html.ActionLink("Award", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
-                    </th>
-                    <th>
-                        @Html.ActionLink("Issed", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+                        @Html.ActionLink("Audit Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
                         See More Info
@@ -51,17 +51,8 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td >
-                            @{
-                                string fullName;
-                                fullName = String.Format("{0} {1} #{2}", item.Officer.First, item.Officer.Last, item.Officer.Badge);
-                             
-                             <strong style="font-size: 1.1em;">@fullName</strong>
-                                
-                             
-                            }
-                             
-                           
+                        <td>
+                            @Html.Raw(String.Format("{0} {1} #{2}", item.Officer.First, item.Officer.Last, item.Officer.Badge))
                         </td>
                         <td >
                             @Html.DisplayFor(modelItem => item.CaseAuditFlag)
