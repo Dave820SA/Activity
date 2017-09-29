@@ -16,14 +16,44 @@ namespace IECAWeb.Controllers
         //
         // GET: /Audit/
 
-        public ActionResult Index()
+        
+        public ActionResult Index(int id)
         {
-            var audithistrories = db.AuditHistrories.Include("AppEntity");
+            //int officeID = int.Parse(Request.QueryString["id"]);
+            //string office = Request.QueryString();
+            //var audithistrories = db.AuditHistrories.Include("AppEntity");
+            var audithistrories = auditHistory(id, DateTime.Now);
             return View(audithistrories.ToList());
         }
 
-        //
-        // GET: /Audit/Details/5
+        private IList<AuditHistrory> auditHistory(int office, DateTime myDate)
+        {
+            int mo = partOfDate("Month", myDate);
+            int yr = partOfDate("Year", myDate);
+            //string newDate = myDate.ToShortDateString();
+
+            var history = from d in db.AuditHistrories
+                          where d.AuditDate.Value.Year == yr && d.AuditDate.Value.Month == mo
+                          select d;
+
+            return history.ToList();
+        }
+
+        private int partOfDate(string direct, DateTime mydate)
+        {
+            int getDatePart;
+            if (direct == "Month")
+            {
+                getDatePart = mydate.Month;
+            }
+            else
+            {
+                getDatePart = mydate.Year;
+            }
+
+            return getDatePart;   
+
+        }
 
         public ActionResult Details(int id = 0)
         {

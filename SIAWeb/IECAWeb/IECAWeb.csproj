@@ -129,6 +129,7 @@
     <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -137,6 +138,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IECAModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OfficeMetadata.cs" />
+    <Compile Include="Models\OfficeModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OfficeModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -256,6 +263,10 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>IECAModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <EntityDeploy Include="Models\OfficeModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OfficeModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
     <None Include="readme.txt" />
     <None Include="Scripts\jquery-1.9.0.min.map" />
     <None Include="Scripts\jquery-1.9.1.min.map" />
@@ -266,6 +277,12 @@
     <Content Include="Views\Audit\Edit.cshtml" />
     <Content Include="Views\Audit\Delete.cshtml" />
     <Content Include="Views\Audit\_ViewStart.cshtml" />
+    <Content Include="Views\Office\Index.cshtml" />
+    <Content Include="Views\Office\Details.cshtml" />
+    <Content Include="Views\Office\Create.cshtml" />
+    <Content Include="Views\Office\Edit.cshtml" />
+    <Content Include="Views\Office\Delete.cshtml" />
+    <Content Include="Views\Office\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

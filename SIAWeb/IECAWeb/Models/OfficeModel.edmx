@@ -1,0 +1,152 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SAPDActivityModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="SAPDActivityModelStoreContainer">
+          <EntitySet Name="IECA_AuditOffice" EntityType="SAPDActivityModel.Store.IECA_AuditOffice" store:Type="Tables" Schema="dbo" Table="IECA.AuditOffice" />
+          <EntitySet Name="Office_Office" EntityType="SAPDActivityModel.Store.Office_Office" store:Type="Tables" Schema="dbo" Table="Office.Office" />
+          <AssociationSet Name="FK_IECA_AuditOffice_Office_Office" Association="SAPDActivityModel.Store.FK_IECA_AuditOffice_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="IECA_AuditOffice" EntitySet="IECA_AuditOffice" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="IECA_AuditOffice">
+          <Key>
+            <PropertyRef Name="AuditOfficeID" />
+          </Key>
+          <Property Name="AuditOfficeID" Type="int" Nullable="false" />
+          <Property Name="VisibleFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Office_Office">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Name="OfficeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DivisionSectionID" Type="int" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Ranking" Type="int" />
+          <Property Name="Visible" Type="bit" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="PAOfficeID" Type="int" />
+        </EntityType>
+        <Association Name="FK_IECA_AuditOffice_Office_Office">
+          <End Role="Office_Office" Type="SAPDActivityModel.Store.Office_Office" Multiplicity="1" />
+          <End Role="IECA_AuditOffice" Type="SAPDActivityModel.Store.IECA_AuditOffice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="IECA_AuditOffice">
+              <PropertyRef Name="AuditOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SAPDActivityModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="OfficeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="IECA_AuditOffice" EntityType="SAPDActivityModel.IECA_AuditOffice" />
+          <EntitySet Name="Office_Office" EntityType="SAPDActivityModel.Office_Office" />
+          <AssociationSet Name="FK_IECA_AuditOffice_Office_Office" Association="SAPDActivityModel.FK_IECA_AuditOffice_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="IECA_AuditOffice" EntitySet="IECA_AuditOffice" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="IECA_AuditOffice">
+          <Key>
+            <PropertyRef Name="AuditOfficeID" />
+          </Key>
+          <Property Type="Int32" Name="AuditOfficeID" Nullable="false" />
+          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
+          <NavigationProperty Name="Office_Office" Relationship="SAPDActivityModel.FK_IECA_AuditOffice_Office_Office" FromRole="IECA_AuditOffice" ToRole="Office_Office" />
+        </EntityType>
+        <EntityType Name="Office_Office">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Type="Int32" Name="OfficeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DivisionSectionID" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Ranking" />
+          <Property Type="Boolean" Name="Visible" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="Int32" Name="PAOfficeID" />
+          <NavigationProperty Name="IECA_AuditOffice" Relationship="SAPDActivityModel.FK_IECA_AuditOffice_Office_Office" FromRole="Office_Office" ToRole="IECA_AuditOffice" />
+        </EntityType>
+        <Association Name="FK_IECA_AuditOffice_Office_Office">
+          <End Type="SAPDActivityModel.Office_Office" Role="Office_Office" Multiplicity="1" />
+          <End Type="SAPDActivityModel.IECA_AuditOffice" Role="IECA_AuditOffice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="IECA_AuditOffice">
+              <PropertyRef Name="AuditOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SAPDActivityModelStoreContainer" CdmEntityContainer="OfficeEntities">
+          <EntitySetMapping Name="IECA_AuditOffice">
+            <EntityTypeMapping TypeName="SAPDActivityModel.IECA_AuditOffice">
+              <MappingFragment StoreEntitySet="IECA_AuditOffice">
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="AuditOfficeID" ColumnName="AuditOfficeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Office_Office">
+            <EntityTypeMapping TypeName="SAPDActivityModel.Office_Office">
+              <MappingFragment StoreEntitySet="Office_Office">
+                <ScalarProperty Name="PAOfficeID" ColumnName="PAOfficeID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DivisionSectionID" ColumnName="DivisionSectionID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="OfficeModel">
+        <EntityTypeShape EntityType="SAPDActivityModel.IECA_AuditOffice" Width="2.375" PointX="4" PointY="2.25" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="SAPDActivityModel.Office_Office" Width="1.5" PointX="1.25" PointY="1.875" Height="2.7494921874999996" />
+        <AssociationConnector Association="SAPDActivityModel.FK_IECA_AuditOffice_Office_Office" >
+          <ConnectorPoint PointX="2.75" PointY="3.047841796875" />
+          <ConnectorPoint PointX="4" PointY="3.047841796875" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

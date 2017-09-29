@@ -6,17 +6,24 @@
 }
 
 <div class="row">
-    <div class="col-md-3">
+    @*<div class="col-md-3">
         <strong style="font-size:1.7em; padding-left:2px">Audit Items</strong>
-    </div>
-    <div class="col-md-9">
-        <div style="float: right">
+    </div>*@
+    <div class="col-md-12">
+        <div style=" text-align: center;">
             @using (Html.BeginForm("Index", "Award", FormMethod.Get))
             {
-                <strong style="font-size: 1.2em;">Find:&nbsp; &nbsp;</strong>
+                @*<strong style="font-size: 1.2em;">Find:&nbsp; &nbsp;</strong>
                 @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
-                <input type="submit" class="btn btn-primary btn-sm" value="Search" />
-                @*<input type="submit" class="btn btn-success btn-sm" value="Clear" />*@
+                <input type="submit" class="btn btn-primary btn-sm" value="Search" />*@
+           <nav aria-label="...">
+                <ul class="pager">
+                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Last Month</a></li>
+                       <span style="font-size: x-large">@ViewBag.User Entered Activity Last 15 Days</span> 
+                    <li class="next"><a href="#">Next Month <span aria-hidden="true">&rarr;</span></a></li>
+                </ul>
+            </nav>
+                
           
             }
         </div>
@@ -55,39 +62,32 @@
                         <td>
                             @Html.Raw(String.Format("{0} {1} #{2}", item.AppEntity.Officer.FirstName, item.AppEntity.Officer.LastName, item.AppEntity.Officer.User_User.Badge))
                         </td>
-                        <td >
+                        <td>
                             @{
                     string approve = (item.CaseAuditFlag).ToString();
-                                    if (approve == "True")
-                                        {
-                                            <img src="~/Images/Check32x32.png" alt="" class="image_background" />
-                                        }
-                                    else if (approve == "False")
-                                    {
-                                            <img src="~/Images/RedX32x32.png" alt="" class="image_background" />
-                                    }
-                                    else
-                                    {
-                                            <img src="~/Images/Minus32x32.png" alt="" class="image_background" />
-                                    }
+                    if (approve == "True")
+                    {
+                                <img src="~/Images/Check32x32.png" alt="" class="image_background" />
+                    }
+                    else if (approve == "False")
+                    {
+                                <img src="~/Images/RedX32x32.png" alt="" class="image_background" />
+                    }
+                    else
+                    {
+                                <img src="~/Images/Minus32x32.png" alt="" class="image_background" />
+                    }
                             }
-
-
-                            @*@Html.DisplayFor(modelItem => item.CaseAuditFlag)*@
                         </td>
-                       
                         <td>
                             @Html.DisplayFor(modelItem => item.AuditDate)
                         </td>
                        
-                       @* <td>
-                            @Html.DisplayFor(modelItem => item.IssuedDate)
-                        </td>*@
                         <td>
                             <a href="@Url.Action("Edit", "Audit", new { id = item.IECAID })" class="btn btn-info btn-xs">
-                                Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> | <a href="@Url.Action("Details", "Audit", new { id = item.IECAID })" class="btn btn-success btn-xs">
-                                Details <i class="fa fa-list" aria-hidden="true"></i></a> | <a href="@Url.Action("Delete", "Audit", new { id = item.IECAID })" class="btn btn-danger btn-xs">
-                                Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "Audit", new { id = item.IECAID })" class="btn btn-success btn-xs">
+                                    Details <i class="fa fa-list" aria-hidden="true"></i></a>| <a href="@Url.Action("Delete", "Audit", new { id = item.IECAID })" class="btn btn-danger btn-xs">
+                                        Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                 }
