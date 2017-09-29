@@ -56,7 +56,24 @@
                             @Html.Raw(String.Format("{0} {1} #{2}", item.AppEntity.Officer.FirstName, item.AppEntity.Officer.LastName, item.AppEntity.Officer.User_User.Badge))
                         </td>
                         <td >
-                            @Html.DisplayFor(modelItem => item.CaseAuditFlag)
+                            @{
+                    string approve = (item.CaseAuditFlag).ToString();
+                                    if (approve == "True")
+                                        {
+                                            <img src="~/Images/Check32x32.png" alt="" class="image_background" />
+                                        }
+                                    else if (approve == "False")
+                                    {
+                                            <img src="~/Images/RedX32x32.png" alt="" class="image_background" />
+                                    }
+                                    else
+                                    {
+                                            <img src="~/Images/Minus32x32.png" alt="" class="image_background" />
+                                    }
+                            }
+
+
+                            @*@Html.DisplayFor(modelItem => item.CaseAuditFlag)*@
                         </td>
                        
                         <td>

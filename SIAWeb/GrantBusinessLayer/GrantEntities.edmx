@@ -489,26 +489,27 @@
     <Diagrams>
       <Diagram Name="GrantEntities">
         <EntityTypeShape EntityType="GrantModel.Grant_Category" PointX="3" PointY="6" Width="1.5" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="GrantModel.Grant_Daily" PointX="3" PointY="1" Width="1.5" Height="3.5186979166666656" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrantModel.Grant_Daily" PointX="3" PointY="1" Width="2" Height="3.9033007812499996" IsExpanded="true" />
         <EntityTypeShape EntityType="GrantModel.Grant_GrantType" PointX="0.75" PointY="2" Width="1.5" Height="1.5956835937499996" IsExpanded="true" />
         <AssociationConnector ManuallyRouted="false" Association="GrantModel.FK_Grant_Daily_Grant_GrantType">
-          <ConnectorPoint PointX="2.25" PointY="2.797841796875" />
-          <ConnectorPoint PointX="3" PointY="2.797841796875" />
+          <ConnectorPoint PointX="2.25" PointY="2.8939925130208337" />
+          <ConnectorPoint PointX="3" PointY="2.8939925130208337" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GrantModel.Grant_Activity" PointX="5.625" PointY="2.25" Width="1.5" Height="2.3648893229166656" />
         <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Category">
-          <ConnectorPoint PointX="4.5" PointY="6" />
-          <ConnectorPoint PointX="4.875" PointY="5.625" />
-          <ConnectorPoint PointX="4.875" PointY="3.7280578268229165" />
-          <ConnectorPoint PointX="5.625" PointY="3.7280578268229165" />
+          <ConnectorPoint PointX="4.5" PointY="6.797841796875" />
+          <ConnectorPoint PointX="5.75" PointY="6.797841796875" />
+          <ConnectorPoint PointX="5.75" PointY="5" />
+          <ConnectorPoint PointX="6.375" PointY="5" />
+          <ConnectorPoint PointX="6.375" PointY="4.6148893229166656" />
         </AssociationConnector>
         <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Daily">
-          <ConnectorPoint PointX="4.5" PointY="2.7787223307291664" />
-          <ConnectorPoint PointX="5.625" PointY="2.7787223307291664" />
+          <ConnectorPoint PointX="5" PointY="3.4324446614583328" />
+          <ConnectorPoint PointX="5.625" PointY="3.4324446614583328" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GrantModel.Person" PointX="6" PointY="5.125" Width="1.5" Height="2.7494921874999996" />
         <AssociationConnector Association="GrantModel.Daily_Person">
-          <ConnectorPoint PointX="4.5" PointY="1.59375" />
+          <ConnectorPoint PointX="5" PointY="1.59375" />
           <ConnectorPoint PointX="7.34375" PointY="1.59375" />
           <ConnectorPoint PointX="7.34375" PointY="5.125" />
         </AssociationConnector>
@@ -518,9 +519,9 @@
           <ConnectorPoint PointX="9.375" PointY="4.7903450520833326" />
           <ConnectorPoint PointX="7.427083333333333" PointY="4.7903450520833317" />
           <ConnectorPoint PointX="7.260416666666667" PointY="4.7903450520833326" />
-          <ConnectorPoint PointX="4.958333333333333" PointY="4.7903450520833317" />
-          <ConnectorPoint PointX="4.791666666666667" PointY="4.7903450520833326" />
-          <ConnectorPoint PointX="4.5" PointY="4.7903450520833326" />
+          <ConnectorPoint PointX="6.458333333333333" PointY="4.7903450520833317" />
+          <ConnectorPoint PointX="6.291666666666667" PointY="4.7903450520833326" />
+          <ConnectorPoint PointX="5" PointY="4.7903450520833326" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GrantModel.User" Width="1.5" PointX="8.25" PointY="5.625" Height="4.0956022135416665" />
         <AssociationConnector Association="GrantModel.FK_User_User_Person_Person" >

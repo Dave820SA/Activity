@@ -7,7 +7,6 @@
     <Schema Namespace="IECAModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="IECAModelStoreContainer">
           <EntitySet Name="IECA_AuditHistrory" EntityType="IECAModel.Store.IECA_AuditHistrory" store:Type="Tables" Schema="dbo" Table="IECA.AuditHistrory" />
-          <EntitySet Name="IECA_Auditor" EntityType="IECAModel.Store.IECA_Auditor" store:Type="Tables" Schema="dbo" Table="IECA.Auditor" />
           <EntitySet Name="Person_AppEntity" EntityType="IECAModel.Store.Person_AppEntity" store:Type="Tables" store:Schema="dbo" store:Name="Person.AppEntity">
             <DefiningQuery>SELECT 
       [Person_AppEntity].[AppEntityID] AS [AppEntityID], 
@@ -18,16 +17,12 @@
           </EntitySet>
           <EntitySet Name="Person_Person" EntityType="IECAModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
           <EntitySet Name="User_User" EntityType="IECAModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
-          <EntitySet Name="vAllUsers" EntityType="IECAModel.Store.vAllUsers" store:Type="Views" store:Schema="dbo" store:Name="vAllUsers">
+          <EntitySet Name="Grant_vActivityApprover" EntityType="IECAModel.Store.Grant_vActivityApprover" store:Type="Views" store:Schema="dbo" store:Name="Grant.vActivityApprover">
             <DefiningQuery>SELECT 
-      [vAllUsers].[ID] AS [ID], 
-      [vAllUsers].[UserName] AS [UserName]
-      FROM [dbo].[vAllUsers] AS [vAllUsers]</DefiningQuery>
+      [Grant_vActivityApprover].[AppEntityID] AS [AppEntityID], 
+      [Grant_vActivityApprover].[ApproveBy] AS [ApproveBy]
+      FROM [dbo].[Grant.vActivityApprover] AS [Grant_vActivityApprover]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK_IECA_Auditor_IECA_AuditHistrory" Association="IECAModel.Store.FK_IECA_Auditor_IECA_AuditHistrory">
-            <End Role="IECA_AuditHistrory" EntitySet="IECA_AuditHistrory" />
-            <End Role="IECA_Auditor" EntitySet="IECA_Auditor" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_User_Person_Person" Association="IECAModel.Store.FK_User_User_Person_Person">
             <End Role="Person_Person" EntitySet="Person_Person" />
             <End Role="User_User" EntitySet="User_User" />
@@ -44,14 +39,7 @@
           <Property Name="AuditNotes" Type="varchar(max)" />
           <Property Name="AuditDate" Type="datetime" />
           <Property Name="LastUpdate" Type="datetime" />
-        </EntityType>
-        <EntityType Name="IECA_Auditor">
-          <Key>
-            <PropertyRef Name="AuditSupervisorID" />
-          </Key>
-          <Property Name="AuditSupervisorID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="IECAID" Type="int" Nullable="false" />
-          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="AuditByID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'SAPDActivity.dbo.Person.AppEntity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -101,27 +89,15 @@
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDActivity.dbo.vAllUsers' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'SAPDActivity.dbo.Grant.vActivityApprover' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
-        <EntityType Name="vAllUsers">
+        <EntityType Name="Grant_vActivityApprover">
           <Key>
-            <PropertyRef Name="ID" />
+            <PropertyRef Name="AppEntityID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="UserName" Type="varchar" MaxLength="102" />
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="ApproveBy" Type="varchar" MaxLength="111" />
         </EntityType>
-        <Association Name="FK_IECA_Auditor_IECA_AuditHistrory">
-          <End Role="IECA_AuditHistrory" Type="IECAModel.Store.IECA_AuditHistrory" Multiplicity="1" />
-          <End Role="IECA_Auditor" Type="IECAModel.Store.IECA_Auditor" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="IECA_AuditHistrory">
-              <PropertyRef Name="IECAID" />
-            </Principal>
-            <Dependent Role="IECA_Auditor">
-              <PropertyRef Name="IECAID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_User_Person_Person">
           <End Role="Person_Person" Type="IECAModel.Store.Person_Person" Multiplicity="1" />
           <End Role="User_User" Type="IECAModel.Store.User_User" Multiplicity="0..1" />
@@ -156,11 +132,10 @@
             <End Role="User_User" EntitySet="User_User" />
           </AssociationSet>
           <EntitySet Name="Auditors" EntityType="IECAModel.Auditor" />
-          <AssociationSet Name="AuditHistroryAuditor" Association="IECAModel.AuditHistroryAuditor">
+          <AssociationSet Name="Grant_vActivityApproverAuditHistrory" Association="IECAModel.Grant_vActivityApproverAuditHistrory">
+            <End Role="Grant_vActivityApprover" EntitySet="Auditors" />
             <End Role="AuditHistrory" EntitySet="AuditHistrories" />
-            <End Role="Auditor" EntitySet="Auditors" />
           </AssociationSet>
-          <EntitySet Name="vAllUsers" EntityType="IECAModel.vAllUser" />
           </EntityContainer>
         <EntityType Name="AuditHistrory">
           <Key>
@@ -174,7 +149,8 @@
           <Property Name="AuditDate" Type="DateTime" />
           <Property Name="LastUpdate" Type="DateTime" />
           <NavigationProperty Name="AppEntity" Relationship="IECAModel.AppEntityAuditHistrory" FromRole="AuditHistrory" ToRole="AppEntity" />
-          <NavigationProperty Name="Auditors" Relationship="IECAModel.AuditHistroryAuditor" FromRole="AuditHistrory" ToRole="Auditor" />
+          <Property Type="Int32" Name="AuditByID" />
+          <NavigationProperty Name="Grant_vActivityApprover" Relationship="IECAModel.Grant_vActivityApproverAuditHistrory" FromRole="AuditHistrory" ToRole="Grant_vActivityApprover" />
         </EntityType>
         <EntityType Name="AppEntity">
           <Key>
@@ -262,32 +238,24 @@
         </Association>
         <EntityType Name="Auditor">
           <Key>
-            <PropertyRef Name="AuditSupervisorID" />
+            <PropertyRef Name="AppEntityID" />
           </Key>
-          <Property Type="Int32" Name="AuditSupervisorID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int32" Name="IECAID" Nullable="false" />
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
-          <NavigationProperty Name="AuditHistrory" Relationship="IECAModel.AuditHistroryAuditor" FromRole="Auditor" ToRole="AuditHistrory" />
+          <Property Type="String" Name="ApproveBy" MaxLength="111" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AuditHistrories" Relationship="IECAModel.Grant_vActivityApproverAuditHistrory" FromRole="Grant_vActivityApprover" ToRole="AuditHistrory" />
         </EntityType>
-        <Association Name="AuditHistroryAuditor">
-          <End Type="IECAModel.AuditHistrory" Role="AuditHistrory" Multiplicity="1" />
-          <End Type="IECAModel.Auditor" Role="Auditor" Multiplicity="*" />
+        <Association Name="Grant_vActivityApproverAuditHistrory">
+          <End Type="IECAModel.Auditor" Role="Grant_vActivityApprover" Multiplicity="0..1" />
+          <End Type="IECAModel.AuditHistrory" Role="AuditHistrory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="AuditHistrory">
-              <PropertyRef Name="IECAID" />
+            <Principal Role="Grant_vActivityApprover">
+              <PropertyRef Name="AppEntityID" />
             </Principal>
-            <Dependent Role="Auditor">
-              <PropertyRef Name="IECAID" />
+            <Dependent Role="AuditHistrory">
+              <PropertyRef Name="AuditByID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="vAllUser">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="UserName" MaxLength="102" FixedLength="false" Unicode="false" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -297,6 +265,7 @@
           <EntitySetMapping Name="AuditHistrories">
             <EntityTypeMapping TypeName="IECAModel.AuditHistrory">
               <MappingFragment StoreEntitySet="IECA_AuditHistrory">
+                <ScalarProperty Name="AuditByID" ColumnName="AuditByID" />
                 <ScalarProperty Name="IECAID" ColumnName="IECAID" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
@@ -355,18 +324,9 @@
           </EntitySetMapping>
           <EntitySetMapping Name="Auditors">
             <EntityTypeMapping TypeName="IECAModel.Auditor">
-              <MappingFragment StoreEntitySet="IECA_Auditor">
+              <MappingFragment StoreEntitySet="Grant_vActivityApprover">
+                <ScalarProperty Name="ApproveBy" ColumnName="ApproveBy" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
-                <ScalarProperty Name="IECAID" ColumnName="IECAID" />
-                <ScalarProperty Name="AuditSupervisorID" ColumnName="AuditSupervisorID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="vAllUsers">
-            <EntityTypeMapping TypeName="IECAModel.vAllUser">
-              <MappingFragment StoreEntitySet="vAllUsers">
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -391,12 +351,12 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="IECAModel">
-        <EntityTypeShape EntityType="IECAModel.AuditHistrory" Width="2" PointX="0.75" PointY="1" Height="2.5571907552083331" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECAModel.AuditHistrory" Width="2" PointX="0.75" PointY="1" Height="2.9417936197916661" IsExpanded="true" />
         <EntityTypeShape EntityType="IECAModel.AppEntity" Width="2.25" PointX="1" PointY="4.25" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="IECAModel.Officer" Width="1.5" PointX="1.75" PointY="7" Height="3.1340950520833326" IsExpanded="true" />
         <AssociationConnector Association="IECAModel.AppEntityAuditHistrory">
           <ConnectorPoint PointX="1.875" PointY="4.25" />
-          <ConnectorPoint PointX="1.875" PointY="3.5571907552083331" />
+          <ConnectorPoint PointX="1.875" PointY="3.9417936197916661" />
         </AssociationConnector>
         <AssociationConnector Association="IECAModel.OfficerAppEntity">
           <ConnectorPoint PointX="2.5" PointY="7" />
@@ -407,12 +367,11 @@
           <ConnectorPoint PointX="3.25" PointY="8.5670475260416659" />
           <ConnectorPoint PointX="3.875" PointY="8.5670475260416659" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="IECAModel.Auditor" Width="1.5" PointX="4.625" PointY="1.125" Height="1.787985026041667" />
-        <AssociationConnector Association="IECAModel.AuditHistroryAuditor">
-          <ConnectorPoint PointX="2.75" PointY="2.0189925130208337" />
-          <ConnectorPoint PointX="4.625" PointY="2.0189925130208337" />
+        <EntityTypeShape EntityType="IECAModel.Auditor" Width="1.5" PointX="3.375" PointY="1.75" Height="1.59568359375" />
+        <AssociationConnector Association="IECAModel.Grant_vActivityApproverAuditHistrory">
+          <ConnectorPoint PointX="3.375" PointY="2.547841796875" />
+          <ConnectorPoint PointX="2.75" PointY="2.547841796875" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="IECAModel.vAllUser" Width="1.5" PointX="7.25" PointY="3.25" Height="1.4033821614583388" />
         </Diagram>
     </Diagrams>
   </Designer>

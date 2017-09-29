@@ -39,6 +39,19 @@ namespace IECAWeb.Models
         }
     }
 
+    [MetadataType(typeof(Auditor.Metadata))]
+    public partial class Auditor
+    {
+        sealed class Metadata
+        {
+            [Key]
+            public int AppEntityID { get; set; }
 
+            
+            [Display(Name = "Auditor")]
+            public string ApproveBy { get; set; }
+
+        }
+    }
 
 }

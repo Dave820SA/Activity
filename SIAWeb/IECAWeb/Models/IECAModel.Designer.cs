@@ -22,7 +22,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("IECAModel", "AppEntityAuditHistrory", "AppEntity", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.AppEntity), "AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.AuditHistrory), true)]
 [assembly: EdmRelationshipAttribute("IECAModel", "OfficerAppEntity", "Officer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Officer), "AppEntity", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.AppEntity), true)]
 [assembly: EdmRelationshipAttribute("IECAModel", "FK_User_User_Person_Person", "Officer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Officer), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IECAWeb.Models.User_User), true)]
-[assembly: EdmRelationshipAttribute("IECAModel", "AuditHistroryAuditor", "AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.AuditHistrory), "Auditor", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.Auditor), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IECAWeb.Models.Auditor), "AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.AuditHistrory), true)]
 
 #endregion
 
@@ -153,22 +153,6 @@ namespace IECAWeb.Models
             }
         }
         private ObjectSet<Auditor> _Auditors;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<vAllUser> vAllUsers
-        {
-            get
-            {
-                if ((_vAllUsers == null))
-                {
-                    _vAllUsers = base.CreateObjectSet<vAllUser>("vAllUsers");
-                }
-                return _vAllUsers;
-            }
-        }
-        private ObjectSet<vAllUser> _vAllUsers;
 
         #endregion
 
@@ -212,14 +196,6 @@ namespace IECAWeb.Models
         public void AddToAuditors(Auditor auditor)
         {
             base.AddObject("Auditors", auditor);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the vAllUsers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddTovAllUsers(vAllUser vAllUser)
-        {
-            base.AddObject("vAllUsers", vAllUser);
         }
 
         #endregion
@@ -624,6 +600,30 @@ namespace IECAWeb.Models
         private Nullable<global::System.DateTime> _LastUpdate;
         partial void OnLastUpdateChanging(Nullable<global::System.DateTime> value);
         partial void OnLastUpdateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> AuditByID
+        {
+            get
+            {
+                return _AuditByID;
+            }
+            set
+            {
+                OnAuditByIDChanging(value);
+                ReportPropertyChanging("AuditByID");
+                _AuditByID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AuditByID");
+                OnAuditByIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _AuditByID;
+        partial void OnAuditByIDChanging(Nullable<global::System.Int32> value);
+        partial void OnAuditByIDChanged();
 
         #endregion
 
@@ -674,18 +674,34 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "AuditHistroryAuditor", "Auditor")]
-        public EntityCollection<Auditor> Auditors
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover")]
+        public Auditor Grant_vActivityApprover
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Auditor>("IECAModel.AuditHistroryAuditor", "Auditor");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Auditor> Grant_vActivityApproverReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Auditor>("IECAModel.AuditHistroryAuditor", "Auditor", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Auditor>("IECAModel.Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover", value);
                 }
             }
         }
@@ -707,14 +723,10 @@ namespace IECAWeb.Models
         /// <summary>
         /// Create a new Auditor object.
         /// </summary>
-        /// <param name="auditSupervisorID">Initial value of the AuditSupervisorID property.</param>
-        /// <param name="iECAID">Initial value of the IECAID property.</param>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
-        public static Auditor CreateAuditor(global::System.Int32 auditSupervisorID, global::System.Int32 iECAID, global::System.Int32 appEntityID)
+        public static Auditor CreateAuditor(global::System.Int32 appEntityID)
         {
             Auditor auditor = new Auditor();
-            auditor.AuditSupervisorID = auditSupervisorID;
-            auditor.IECAID = iECAID;
             auditor.AppEntityID = appEntityID;
             return auditor;
         }
@@ -728,57 +740,6 @@ namespace IECAWeb.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 AuditSupervisorID
-        {
-            get
-            {
-                return _AuditSupervisorID;
-            }
-            set
-            {
-                if (_AuditSupervisorID != value)
-                {
-                    OnAuditSupervisorIDChanging(value);
-                    ReportPropertyChanging("AuditSupervisorID");
-                    _AuditSupervisorID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("AuditSupervisorID");
-                    OnAuditSupervisorIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _AuditSupervisorID;
-        partial void OnAuditSupervisorIDChanging(global::System.Int32 value);
-        partial void OnAuditSupervisorIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 IECAID
-        {
-            get
-            {
-                return _IECAID;
-            }
-            set
-            {
-                OnIECAIDChanging(value);
-                ReportPropertyChanging("IECAID");
-                _IECAID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("IECAID");
-                OnIECAIDChanged();
-            }
-        }
-        private global::System.Int32 _IECAID;
-        partial void OnIECAIDChanging(global::System.Int32 value);
-        partial void OnIECAIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.Int32 AppEntityID
         {
             get
@@ -787,16 +748,43 @@ namespace IECAWeb.Models
             }
             set
             {
-                OnAppEntityIDChanging(value);
-                ReportPropertyChanging("AppEntityID");
-                _AppEntityID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AppEntityID");
-                OnAppEntityIDChanged();
+                if (_AppEntityID != value)
+                {
+                    OnAppEntityIDChanging(value);
+                    ReportPropertyChanging("AppEntityID");
+                    _AppEntityID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AppEntityID");
+                    OnAppEntityIDChanged();
+                }
             }
         }
         private global::System.Int32 _AppEntityID;
         partial void OnAppEntityIDChanging(global::System.Int32 value);
         partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ApproveBy
+        {
+            get
+            {
+                return _ApproveBy;
+            }
+            set
+            {
+                OnApproveByChanging(value);
+                ReportPropertyChanging("ApproveBy");
+                _ApproveBy = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ApproveBy");
+                OnApproveByChanged();
+            }
+        }
+        private global::System.String _ApproveBy;
+        partial void OnApproveByChanging(global::System.String value);
+        partial void OnApproveByChanged();
 
         #endregion
 
@@ -809,34 +797,18 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "AuditHistroryAuditor", "AuditHistrory")]
-        public AuditHistrory AuditHistrory
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "Grant_vActivityApproverAuditHistrory", "AuditHistrory")]
+        public EntityCollection<AuditHistrory> AuditHistrories
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditHistrory>("IECAModel.AuditHistroryAuditor", "AuditHistrory").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditHistrory>("IECAModel.AuditHistroryAuditor", "AuditHistrory").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<AuditHistrory> AuditHistroryReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditHistrory>("IECAModel.AuditHistroryAuditor", "AuditHistrory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AuditHistrory>("IECAModel.Grant_vActivityApproverAuditHistrory", "AuditHistrory");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AuditHistrory>("IECAModel.AuditHistroryAuditor", "AuditHistrory", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AuditHistrory>("IECAModel.Grant_vActivityApproverAuditHistrory", "AuditHistrory", value);
                 }
             }
         }
@@ -1607,87 +1579,6 @@ namespace IECAWeb.Models
 
         #endregion
 
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="IECAModel", Name="vAllUser")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class vAllUser : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new vAllUser object.
-        /// </summary>
-        /// <param name="id">Initial value of the ID property.</param>
-        public static vAllUser CreatevAllUser(global::System.Int32 id)
-        {
-            vAllUser vAllUser = new vAllUser();
-            vAllUser.ID = id;
-            return vAllUser;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 ID
-        {
-            get
-            {
-                return _ID;
-            }
-            set
-            {
-                if (_ID != value)
-                {
-                    OnIDChanging(value);
-                    ReportPropertyChanging("ID");
-                    _ID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ID");
-                    OnIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _ID;
-        partial void OnIDChanging(global::System.Int32 value);
-        partial void OnIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String UserName
-        {
-            get
-            {
-                return _UserName;
-            }
-            set
-            {
-                OnUserNameChanging(value);
-                ReportPropertyChanging("UserName");
-                _UserName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("UserName");
-                OnUserNameChanged();
-            }
-        }
-        private global::System.String _UserName;
-        partial void OnUserNameChanging(global::System.String value);
-        partial void OnUserNameChanged();
-
-        #endregion
-
-    
     }
 
     #endregion

@@ -54,3 +54,12 @@ body {
     padding-left: 0;
   }
 }
+
+.image_background
+{
+	text-align: center;
+	width: 25px;
+	height: 25px;
+	margin-left: 20px;
+	background-attachment: inherit;
+}
