@@ -126,18 +126,17 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AuditMetadata.cs" />
-    <Compile Include="Models\IECABusinessModel.Designer.cs">
+    <Compile Include="Models\IECAMetadata.cs" />
+    <Compile Include="Models\IECAModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IECABusinessModel.edmx</DependentUpon>
+      <DependentUpon>IECAModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -207,9 +206,10 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Images\Check_Round.png" />
+    <Content Include="Images\Check32x32.png" />
     <Content Include="Images\Male.png" />
-    <Content Include="Images\red-minus.png" />
+    <Content Include="Images\Minus32x32.png" />
+    <Content Include="Images\RedX32x32.png" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -252,9 +252,9 @@
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.ttf" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
-    <EntityDeploy Include="Models\IECABusinessModel.edmx">
+    <EntityDeploy Include="Models\IECAModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IECABusinessModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>IECAModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <None Include="readme.txt" />
     <None Include="Scripts\jquery-1.9.0.min.map" />

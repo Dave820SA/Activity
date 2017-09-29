@@ -13,7 +13,7 @@
         <legend>AuditHistrory</legend>
 
         <div class="editor-label">
-            @Html.LabelFor(model => model.AppEntityID, "Officer")
+            @Html.LabelFor(model => model.AppEntityID, "AppEntity")
         </div>
         <div class="editor-field">
             @Html.DropDownList("AppEntityID", String.Empty)
@@ -42,14 +42,6 @@
         <div class="editor-field">
             @Html.EditorFor(model => model.AuditNotes)
             @Html.ValidationMessageFor(model => model.AuditNotes)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AuditorID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AuditorID)
-            @Html.ValidationMessageFor(model => model.AuditorID)
         </div>
 
         <div class="editor-label">

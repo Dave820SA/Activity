@@ -11,16 +11,14 @@ namespace IECAWeb.Controllers
 {
     public class AuditController : Controller
     {
-        private SAPDActivityEntities1 db = new SAPDActivityEntities1();
-        
-       
+        private AuditEntities db = new AuditEntities();
 
         //
         // GET: /Audit/
 
         public ActionResult Index()
         {
-            var audithistrories = db.AuditHistrories.Include("Officer");
+            var audithistrories = db.AuditHistrories.Include("AppEntity");
             return View(audithistrories.ToList());
         }
 
@@ -42,7 +40,7 @@ namespace IECAWeb.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.AppEntityID = new SelectList(db.Officers, "AppEntityID", "First");
+            ViewBag.AppEntityID = new SelectList(db.AppEntities, "AppEntityID", "AppEntityID");
             return View();
         }
 
@@ -59,7 +57,7 @@ namespace IECAWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.AppEntityID = new SelectList(db.Officers, "AppEntityID", "First", audithistrory.AppEntityID);
+            ViewBag.AppEntityID = new SelectList(db.AppEntities, "AppEntityID", "AppEntityID", audithistrory.AppEntityID);
             return View(audithistrory);
         }
 
@@ -73,7 +71,7 @@ namespace IECAWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.AppEntityID = new SelectList(db.Officers, "AppEntityID", "First", audithistrory.AppEntityID);
+            ViewBag.AppEntityID = new SelectList(db.AppEntities, "AppEntityID", "AppEntityID", audithistrory.AppEntityID);
             return View(audithistrory);
         }
 
@@ -90,7 +88,7 @@ namespace IECAWeb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.AppEntityID = new SelectList(db.Officers, "AppEntityID", "First", audithistrory.AppEntityID);
+            ViewBag.AppEntityID = new SelectList(db.AppEntities, "AppEntityID", "AppEntityID", audithistrory.AppEntityID);
             return View(audithistrory);
         }
 

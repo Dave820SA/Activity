@@ -10,42 +10,63 @@
         <div class="col-sm-6">
             <fieldset class="scheduler-border">
                 <h3 class="text-warning">
-                    Recognition Details</h3>
+                    Audit Details</h3>
                 <br />
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C">@Html.DisplayNameFor(model => model.Officer.FullName)</strong>
+                        @*<strong style="font-size: 1.2em" >@Html.DisplayNameFor(model => model.AppEntity.Officer.FirstName)</strong>*@
+                        <strong class="text-warning" style="font-size: 1.5em" >Officer</strong>
                     </div>
                     <div class="display-field">
-                        <strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.Officer.FullName)</strong>
-                        	@*@Html.HiddenFor(model => model.Person.FirstName, new { id = "txtHidden" })*@
+                       
+                        <strong style="font-size: 1.2em">@(String.Format("{0} {1} #{2}", Model.AppEntity.Officer.FirstName , Model.AppEntity.Officer.LastName, Model.AppEntity.Officer.User_User.Badge))</strong>
+                        	
                     </div>
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C"">@Html.DisplayNameFor(model => model.CaseAuditFlag)</strong>
+                        <strong class="text-warning" style="font-size: 1.5em;">@Html.DisplayNameFor(model => model.CaseAuditFlag)</strong>
                     </div>
                     <div class="display-field">
-                        <strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.CaseAuditFlag)</strong>
-                        	@*@Html.HiddenFor(model => model.Award_RecognitionType.Name, new { id = "txtHidden" })*@
+                        @{
+                            string approve = (Model.CaseAuditFlag).ToString();
+                            string answer;
+
+                            if (approve == "True")
+                            {
+                                answer = "Audit Preformed This Month";
+
+                            }
+                            else if (approve == "False")
+                            {
+                                answer = "No Audit This Month";
+                            }
+                            else
+                            {
+                                answer = "Unknown Status Of Audit";
+                            } 
+                                                   
+                        }
+                        <strong style="font-size: 1.2em">@answer</strong>
                     </div>
                 </div>
                
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em; color: #F47C3C"">@Html.DisplayNameFor(model => model.AuditNotes)</strong>
+                        <strong class="text-warning" style="font-size: 1.5em;">@Html.DisplayNameFor(model => model.AuditNotes)</strong>
                     </div>
                     <div class="display-field">
-                        <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.AuditNotes)</strong>
+                        <strong style="font-size: 1.2em">@Html.DisplayFor(model => model.AuditNotes)</strong>
                     </div>
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        @*<strong style="font-size: 1.2em; color: #F47C3C"">@Html.DisplayNameFor(model => model.Auditor.UserName)</strong>*@
+                        <strong class="text-warning" style="font-size: 1.5em;">@Html.DisplayNameFor(model => model.Auditors)</strong>
                     </div>
                     <div class="display-field">
                         @*<strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.Auditor.UserName)</strong>*@
                         	@*@Html.HiddenFor(model => model.Award_RecognitionType.Name, new { id = "txtHidden" })*@
+                            <strong style="font-size: 1.2em">@Html.DisplayFor(model => model.Auditors)</strong>
                     </div>
                 </div>
 
@@ -83,7 +104,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-         
+
         });
 
                         
@@ -91,16 +112,24 @@
 }
 
 
-@*<h2>Details</h2>
+
+
+@*@model IECAWeb.Models.AuditHistrory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
 
 <fieldset>
     <legend>AuditHistrory</legend>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.Officer.First)
+         @Html.DisplayNameFor(model => model.AppEntity.AppEntityID)
     </div>
     <div class="display-field">
-        @Html.DisplayFor(model => model.Officer.First)
+        @Html.DisplayFor(model => model.AppEntity.AppEntityID)
     </div>
 
     <div class="display-label">
@@ -125,13 +154,6 @@
     </div>
 
     <div class="display-label">
-         @Html.DisplayNameFor(model => model.AuditorID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AuditorID)
-    </div>
-
-    <div class="display-label">
          @Html.DisplayNameFor(model => model.AuditDate)
     </div>
     <div class="display-field">
@@ -148,5 +170,4 @@
 <p>
     @Html.ActionLink("Edit", "Edit", new { id=Model.IECAID }) |
     @Html.ActionLink("Back to List", "Index")
-</p>
-*@
+</p>*@
