@@ -5,33 +5,29 @@
     ViewBag.Title = "Audit List";
 }
 
-<div class="row">
-    @*<div class="col-md-3">
-        <strong style="font-size:1.7em; padding-left:2px">Audit Items</strong>
-    </div>*@
-    <div class="col-md-12">
-        <div style=" text-align: center;">
-            @using (Html.BeginForm("Index", "Award", FormMethod.Get))
-            {
-                @*<strong style="font-size: 1.2em;">Find:&nbsp; &nbsp;</strong>
-                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
-                <input type="submit" class="btn btn-primary btn-sm" value="Search" />*@
-           <nav aria-label="...">
-                <ul class="pager">
-                    <li class="previous"><a href="#"><span aria-hidden="true">&larr;</span> Last Month</a></li>
-                       <span style="font-size: x-large">@ViewBag.User Entered Activity Last 15 Days</span> 
-                    <li class="next"><a href="#">Next Month <span aria-hidden="true">&rarr;</span></a></li>
-                </ul>
-            </nav>
-                
-          
-            }
+@*<div class="bs-example">*@
+<div class="pager">
+    <div class="btn-group btn-group-justified">
+        <div class="btn-group">
+       @* <a href="@Url.Action("moveBack", "Audit", new { id = "149" }, null)" class="btn btn-warning btn-sm"> Add New Entry <span class="glyphicon glyphicon-plus-sign"></span></a>*@
+        <input type="submit" class="btn btn-primary" />
+
+           @* <button type="submit" id="moBack" class="btn btn-primary">
+                <i class="fa fa-angle-left fa-1x" aria-hidden="true"></i><span style="font-size: medium;
+                    padding-bottom 5px;">&nbsp;&nbsp;&nbsp;&nbsp;Last Month</span></button>*@
         </div>
-        
+        <div class="btn-group">
+            <span style="font-size: x-large">@ViewBag.MyMonth</span>
+        </div>
+        <div class="btn-group">
+            <button type="button" id="moNext" class="btn btn-primary">
+                <span style="font-size: medium; padding-bottom: 5px;">Next Month&nbsp;&nbsp;&nbsp;&nbsp;</span><i
+                    class="fa fa-angle-right fa-1x" aria-hidden="true"></i></button>
+        </div>
     </div>
-    
 </div>
 <br />
+
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
@@ -39,6 +35,7 @@
             <table class="table table-condensed table-hover" >
                 <tr>
                     <th>
+                       @*@Html.Hidden("OfficeID", ViewBag.OfficeID)*@
                         @Html.ActionLink("Officer", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
@@ -100,21 +97,25 @@
         </div>
     </div>
     <div>
-   <a href="@Url.Action("Audit", "Home")" class="btn btn-warning btn-sm"> Back To Admin <i class="fa fa-share" aria-hidden="true"></i></a>
+   <a href="@Url.Action("Index", "Office")" class="btn btn-warning btn-sm"> Back To Office List <i class="fa fa-share" aria-hidden="true"></i></a>
 </div>
 </div>
 
 @section scripts
 {
     <script type="text/javascript">
-        $(document).ready(function () {
+//        $(document).ready(function () {
+//            $('#moBack').click(function () {
+//                location.reload();
+//            });
+//        });
+
+//        $(document).ready(function () {
+//            alert();
+//        });
 
 
-
-        });
-
-
-
+//  
 
     </script>
 }

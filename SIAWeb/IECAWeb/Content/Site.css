@@ -63,3 +63,8 @@ body {
 	margin-left: 20px;
 	background-attachment: inherit;
 }
+
+ .bs-example
+ {
+    	margin: 20px;
+    }

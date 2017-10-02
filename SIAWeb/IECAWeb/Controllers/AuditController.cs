@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using IECAWeb.Models;
+using System.Globalization;
 
 namespace IECAWeb.Controllers
 {
@@ -19,10 +20,21 @@ namespace IECAWeb.Controllers
         
         public ActionResult Index(int id)
         {
-            //int officeID = int.Parse(Request.QueryString["id"]);
-            //string office = Request.QueryString();
-            //var audithistrories = db.AuditHistrories.Include("AppEntity");
-            var audithistrories = auditHistory(id, DateTime.Now);
+            DateTime dtDate = DateTime.Now;
+            ViewBag.MyMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dtDate.Month);
+            var audithistrories = auditHistory(id, dtDate);
+
+            return View(audithistrories.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(int id, DateTime dtDate)
+        {
+            
+            //DateTime dtDate = DateTime.Now;
+            ViewBag.MyMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dtDate.Month);
+            var audithistrories = auditHistory(id, dtDate);
+
             return View(audithistrories.ToList());
         }
 
@@ -30,10 +42,9 @@ namespace IECAWeb.Controllers
         {
             int mo = partOfDate("Month", myDate);
             int yr = partOfDate("Year", myDate);
-            //string newDate = myDate.ToShortDateString();
 
             var history = from d in db.AuditHistrories
-                          where d.AuditDate.Value.Year == yr && d.AuditDate.Value.Month == mo
+                          where d.AuditDate.Value.Year == yr && d.AuditDate.Value.Month == mo && d.OfficeID == office
                           select d;
 
             return history.ToList();
