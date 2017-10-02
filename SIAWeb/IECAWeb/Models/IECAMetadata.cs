@@ -32,9 +32,9 @@ namespace IECAWeb.Models
             [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm}")]
             public DateTime AuditDate { get; set; }
 
-            [Display(Name = "Last Update")]
+            [Display(Name = "Insert Date")]
             [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm}")]
-            public DateTime LastUpdate { get; set; }
+            public DateTime InsertDate { get; set; }
 
         }
     }

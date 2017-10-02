@@ -38,7 +38,7 @@
           <Property Name="CaseAuditFlag" Type="bit" />
           <Property Name="AuditNotes" Type="varchar(max)" />
           <Property Name="AuditDate" Type="datetime" />
-          <Property Name="LastUpdate" Type="datetime" />
+          <Property Name="InsertDate" Type="datetime" />
           <Property Name="AuditByID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -147,10 +147,10 @@
           <Property Name="CaseAuditFlag" Type="Boolean" />
           <Property Name="AuditNotes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
           <Property Name="AuditDate" Type="DateTime" />
-          <Property Name="LastUpdate" Type="DateTime" />
           <NavigationProperty Name="AppEntity" Relationship="IECAModel.AppEntityAuditHistrory" FromRole="AuditHistrory" ToRole="AppEntity" />
           <Property Type="Int32" Name="AuditByID" />
           <NavigationProperty Name="Grant_vActivityApprover" Relationship="IECAModel.Grant_vActivityApproverAuditHistrory" FromRole="AuditHistrory" ToRole="Grant_vActivityApprover" />
+          <Property Type="DateTime" Name="InsertDate" />
         </EntityType>
         <EntityType Name="AppEntity">
           <Key>
@@ -265,6 +265,7 @@
           <EntitySetMapping Name="AuditHistrories">
             <EntityTypeMapping TypeName="IECAModel.AuditHistrory">
               <MappingFragment StoreEntitySet="IECA_AuditHistrory">
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
                 <ScalarProperty Name="AuditByID" ColumnName="AuditByID" />
                 <ScalarProperty Name="IECAID" ColumnName="IECAID" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
@@ -272,7 +273,6 @@
                 <ScalarProperty Name="CaseAuditFlag" ColumnName="CaseAuditFlag" />
                 <ScalarProperty Name="AuditNotes" ColumnName="AuditNotes" />
                 <ScalarProperty Name="AuditDate" ColumnName="AuditDate" />
-                <ScalarProperty Name="LastUpdate" ColumnName="LastUpdate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

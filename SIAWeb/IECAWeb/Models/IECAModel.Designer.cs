@@ -582,30 +582,6 @@ namespace IECAWeb.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> LastUpdate
-        {
-            get
-            {
-                return _LastUpdate;
-            }
-            set
-            {
-                OnLastUpdateChanging(value);
-                ReportPropertyChanging("LastUpdate");
-                _LastUpdate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("LastUpdate");
-                OnLastUpdateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _LastUpdate;
-        partial void OnLastUpdateChanging(Nullable<global::System.DateTime> value);
-        partial void OnLastUpdateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.Int32> AuditByID
         {
             get
@@ -624,6 +600,30 @@ namespace IECAWeb.Models
         private Nullable<global::System.Int32> _AuditByID;
         partial void OnAuditByIDChanging(Nullable<global::System.Int32> value);
         partial void OnAuditByIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> InsertDate
+        {
+            get
+            {
+                return _InsertDate;
+            }
+            set
+            {
+                OnInsertDateChanging(value);
+                ReportPropertyChanging("InsertDate");
+                _InsertDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("InsertDate");
+                OnInsertDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _InsertDate;
+        partial void OnInsertDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnInsertDateChanged();
 
         #endregion
 

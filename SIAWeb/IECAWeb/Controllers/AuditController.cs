@@ -10,17 +10,17 @@ using System.Globalization;
 
 namespace IECAWeb.Controllers
 {
+ 
     public class AuditController : Controller
     {
         private AuditEntities db = new AuditEntities();
 
-        //
-        // GET: /Audit/
 
-        
         public ActionResult Index(int id)
         {
             DateTime dtDate = DateTime.Now;
+            ViewBag.OfficeID = id;
+            ViewBag.MyDate = dtDate;
             ViewBag.MyMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dtDate.Month);
             var audithistrories = auditHistory(id, dtDate);
 
@@ -28,14 +28,32 @@ namespace IECAWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(int id, DateTime dtDate)
+        public ActionResult Index(int id, DateTime dtDate, string myMove)
         {
-            
-            //DateTime dtDate = DateTime.Now;
+            if (myMove == "Back")
+            {
+                dtDate = moBack(dtDate);
+            }
+            else
+            {
+                dtDate = moForward(dtDate);
+            }
+
+            ViewBag.OfficeID = id;
+            ViewBag.MyDate = dtDate;
             ViewBag.MyMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dtDate.Month);
             var audithistrories = auditHistory(id, dtDate);
-
             return View(audithistrories.ToList());
+        }
+
+
+        private DateTime moBack(DateTime myDate)
+        {
+            return  myDate.AddMonths(-1);
+        }
+        private DateTime moForward(DateTime myDate)
+        {
+            return myDate.AddMonths(1);
         }
 
         private IList<AuditHistrory> auditHistory(int office, DateTime myDate)
@@ -44,7 +62,7 @@ namespace IECAWeb.Controllers
             int yr = partOfDate("Year", myDate);
 
             var history = from d in db.AuditHistrories
-                          where d.AuditDate.Value.Year == yr && d.AuditDate.Value.Month == mo && d.OfficeID == office
+                          where d.InsertDate.Value.Year == yr && d.InsertDate.Value.Month == mo && d.OfficeID == office
                           select d;
 
             return history.ToList();
