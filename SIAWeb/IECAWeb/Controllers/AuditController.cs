@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using IECAWeb.Models;
 using System.Globalization;
@@ -18,12 +16,14 @@ namespace IECAWeb.Controllers
 
         public ActionResult Index(int id)
         {
-            DateTime dtDate = DateTime.Now;
-            ViewBag.OfficeID = id;
-            ViewBag.MyDate = dtDate;
-            ViewBag.MyMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dtDate.Month);
-            var audithistrories = auditHistory(id, dtDate);
+            //automatically Enter officers into the table that belong to the office
+            enterAuditOfficers(id, DateTime.Now.ToShortDateString());
+            var audithistrories = auditHistory(id, DateTime.Now);
 
+            ViewBag.OfficeID = id;
+            ViewBag.MyDate = DateTime.Now;
+            ViewBag.MyMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month) + " " + DateTime.Now.Year.ToString();
+            
             return View(audithistrories.ToList());
         }
 
@@ -41,9 +41,14 @@ namespace IECAWeb.Controllers
 
             ViewBag.OfficeID = id;
             ViewBag.MyDate = dtDate;
-            ViewBag.MyMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dtDate.Month);
+            ViewBag.MyMonth = CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(dtDate.Month) + " " + dtDate.Year.ToString();
             var audithistrories = auditHistory(id, dtDate);
             return View(audithistrories.ToList());
+        }
+
+        private void enterAuditOfficers(int officeID, string auditDate)
+        {
+            var noReturn = db.spEnterAuditOfficers(officeID, auditDate);
         }
 
 
@@ -130,6 +135,7 @@ namespace IECAWeb.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Auditor = (string)System.Web.HttpContext.Current.Session["AppEntityID"]; ;
             ViewBag.AppEntityID = new SelectList(db.AppEntities, "AppEntityID", "AppEntityID", audithistrory.AppEntityID);
             return View(audithistrory);
         }
@@ -138,14 +144,15 @@ namespace IECAWeb.Controllers
         // POST: /Audit/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(AuditHistrory audithistrory)
+        public ActionResult Edit(AuditHistrory audithistrory, int officeID)
         {
             if (ModelState.IsValid)
             {
+                //var officeID = audithistrory.OfficeID;
                 db.AuditHistrories.Attach(audithistrory);
                 db.ObjectStateManager.ChangeObjectState(audithistrory, EntityState.Modified);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index/" + audithistrory.OfficeID + "");
             }
             ViewBag.AppEntityID = new SelectList(db.AppEntities, "AppEntityID", "AppEntityID", audithistrory.AppEntityID);
             return View(audithistrory);

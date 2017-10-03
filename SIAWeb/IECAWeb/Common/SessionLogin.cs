@@ -10,7 +10,7 @@ namespace IECAWeb.Common
         {
             UserLayerEntities user = new UserLayerEntities();
 
-            var myUser = from u in user.spWebSiteUserInfo(userPin, 60)
+            var myUser = from u in user.spWebSiteUserInfo(userPin, 75)
                          select u;
 
             var theUser = myUser.ToList();

@@ -150,11 +150,13 @@ namespace UserBusinessLayer
         /// </summary>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
         /// <param name="officeCode">Initial value of the OfficeCode property.</param>
-        public static vWebUserInfo CreatevWebUserInfo(global::System.Int32 appEntityID, global::System.String officeCode)
+        /// <param name="officeID">Initial value of the OfficeID property.</param>
+        public static vWebUserInfo CreatevWebUserInfo(global::System.Int32 appEntityID, global::System.String officeCode, global::System.Int32 officeID)
         {
             vWebUserInfo vWebUserInfo = new vWebUserInfo();
             vWebUserInfo.AppEntityID = appEntityID;
             vWebUserInfo.OfficeCode = officeCode;
+            vWebUserInfo.OfficeID = officeID;
             return vWebUserInfo;
         }
 
@@ -311,6 +313,33 @@ namespace UserBusinessLayer
         private global::System.String _OfficeCode;
         partial void OnOfficeCodeChanging(global::System.String value);
         partial void OnOfficeCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                if (_OfficeID != value)
+                {
+                    OnOfficeIDChanging(value);
+                    ReportPropertyChanging("OfficeID");
+                    _OfficeID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("OfficeID");
+                    OnOfficeIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _OfficeID;
+        partial void OnOfficeIDChanging(global::System.Int32 value);
+        partial void OnOfficeIDChanged();
 
         #endregion
 

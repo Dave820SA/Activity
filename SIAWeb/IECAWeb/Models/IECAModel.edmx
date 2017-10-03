@@ -110,6 +110,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="IECA_spEnterAuditOfficers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="IECA.spEnterAuditOfficers" Schema="dbo">
+          <Parameter Name="OfficeID" Type="int" Mode="In" />
+          <Parameter Name="AuditDate" Type="varchar" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -136,6 +140,10 @@
             <End Role="Grant_vActivityApprover" EntitySet="Auditors" />
             <End Role="AuditHistrory" EntitySet="AuditHistrories" />
           </AssociationSet>
+          <FunctionImport Name="spEnterAuditOfficers">
+            <Parameter Name="OfficeID" Mode="In" Type="Int32" />
+            <Parameter Name="AuditDate" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="AuditHistrory">
           <Key>
@@ -330,6 +338,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spEnterAuditOfficers" FunctionName="IECAModel.Store.IECA_spEnterAuditOfficers" />
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -152,6 +152,8 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap2-toggle.css" />
+    <Content Include="Content\bootstrap2-toggle.min.css" />
     <Content Include="Content\Slate.css" />
     <Content Include="Content\Solar.min.css" />
     <Content Include="Content\Spacelab.min.css" />
@@ -217,6 +219,8 @@
     <Content Include="Images\Male.png" />
     <Content Include="Images\Minus32x32.png" />
     <Content Include="Images\RedX32x32.png" />
+    <Content Include="Scripts\bootstrap2-toggle.js" />
+    <Content Include="Scripts\bootstrap2-toggle.min.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -267,6 +271,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OfficeModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Scripts\bootstrap2-toggle.min.js.map" />
     <None Include="readme.txt" />
     <None Include="Scripts\jquery-1.9.0.min.map" />
     <None Include="Scripts\jquery-1.9.1.min.map" />

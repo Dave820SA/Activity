@@ -78,11 +78,14 @@ namespace IECAWeb.Controllers
         public ActionResult Edit(int id = 0)
         {
             IECA_AuditOffice ieca_auditoffice = db.IECA_AuditOffice.Single(i => i.AuditOfficeID == id);
+           
             if (ieca_auditoffice == null)
             {
                 return HttpNotFound();
             }
+            
             ViewBag.AuditOfficeID = new SelectList(db.Office_Office, "OfficeID", "Name", ieca_auditoffice.AuditOfficeID);
+            
             return View(ieca_auditoffice);
         }
 

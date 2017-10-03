@@ -35,6 +35,17 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
+            <div class="col-xs-12 col-md-12" style="padding-bottom: 5px">
+                <div class="col-xs-5 col-md-5 ">
+                    <a href="@Url.Action("Index", "Office")" class="btn btn-warning btn-sm">Back To Office
+                        List <i class="fa fa-share" aria-hidden="true"></i></a>
+                </div>
+                <div class="col-xs-7 col-md-7 ">
+                    Audited<img src="~/Images/Check32x32.png" alt="" class="image_background" />&nbsp;&nbsp;&nbsp;&nbsp;|
+                    No Audit Needed<img src="~/Images/RedX32x32.png" alt="" class="image_background" />&nbsp;&nbsp;&nbsp;&nbsp;|
+                    Status Pending<img src="~/Images/Minus32x32.png" alt="" class="image_background" />
+                </div>
+            </div>
             
             <table class="table table-condensed table-hover" >
                 <tr>
@@ -43,7 +54,7 @@
                         @Html.ActionLink("Officer", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                       Case Audit
+                       Audit Complete
                        @* @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
                     </th>
                     @*<th>
@@ -86,9 +97,10 @@
                        
                         <td>
                             <a href="@Url.Action("Edit", "Audit", new { id = item.IECAID })" class="btn btn-info btn-xs">
-                                Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "Audit", new { id = item.IECAID })" class="btn btn-success btn-xs">
-                                    Details <i class="fa fa-list" aria-hidden="true"></i></a>| <a href="@Url.Action("Delete", "Audit", new { id = item.IECAID })" class="btn btn-danger btn-xs">
-                                        Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                Enter Audit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "Audit", new { id = item.IECAID })" class="btn btn-success btn-xs">
+                                   View Details <i class="fa fa-list" aria-hidden="true"></i></a>
+                                    @*| <a href="@Url.Action("Delete", "Audit", new { id = item.IECAID })" class="btn btn-danger btn-xs">
+                                        Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>*@
                         </td>
                     </tr>
                 }
@@ -101,7 +113,7 @@
         </div>
     </div>
     <div>
-   <a href="@Url.Action("Index", "Office")" class="btn btn-warning btn-sm"> Back To Office List <i class="fa fa-share" aria-hidden="true"></i></a>
+   
 </div>
 </div>
 

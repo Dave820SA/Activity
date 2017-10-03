@@ -68,3 +68,26 @@ body {
  {
     	margin: 20px;
     }
+    
+  
+ /*_______________Checkbox______________*/ 
+  
+/*** custom checkboxes ***/
+
+.checkbox .btn, .checkbox-inline .btn
+{
+	padding-left: 2em;
+	min-width: 7em;
+	color: #000000;
+}
+ 
+  .checkbox label,
+  .checkbox-inline label {
+    text-align: left;
+  }
+  
+  .myEditorFor
+{
+	color: #000000;
+	width: 100px;
+}

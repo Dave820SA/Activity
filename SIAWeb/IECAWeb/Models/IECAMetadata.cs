@@ -22,7 +22,7 @@ namespace IECAWeb.Models
             [Display(Name = "Office ID")]
             public int OfficeID { get; set; }
 
-            [Display(Name = "Case Flag")]
+            [Display(Name = "Case Audit Complete")]
             public bool CaseAuditFlag { get; set; }
 
             [Display(Name = "Audit Notes")]

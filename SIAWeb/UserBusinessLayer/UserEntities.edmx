@@ -13,7 +13,8 @@
       [vWebUserInfo].[SAP] AS [SAP], 
       [vWebUserInfo].[UserName] AS [UserName], 
       [vWebUserInfo].[DutyStatus] AS [DutyStatus], 
-      [vWebUserInfo].[OfficeCode] AS [OfficeCode]
+      [vWebUserInfo].[OfficeCode] AS [OfficeCode], 
+      [vWebUserInfo].[OfficeID] AS [OfficeID]
       FROM [dbo].[vWebUserInfo] AS [vWebUserInfo]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -24,6 +25,7 @@
           <Key>
             <PropertyRef Name="AppEntityID" />
             <PropertyRef Name="OfficeCode" />
+            <PropertyRef Name="OfficeID" />
           </Key>
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="PIN" Type="varchar" MaxLength="8" />
@@ -31,6 +33,7 @@
           <Property Name="UserName" Type="varchar" MaxLength="102" />
           <Property Name="DutyStatus" Type="varchar" MaxLength="50" />
           <Property Name="OfficeCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="OfficeID" Type="int" Nullable="false" />
         </EntityType>
         <Function Name="spWebSiteUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Pin" Type="varchar" Mode="In" />
@@ -51,6 +54,7 @@
           <Key>
             <PropertyRef Name="AppEntityID" />
             <PropertyRef Name="OfficeCode" />
+            <PropertyRef Name="OfficeID" />
           </Key>
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="PIN" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
@@ -58,6 +62,7 @@
           <Property Name="UserName" Type="String" MaxLength="111" Unicode="false" FixedLength="false" />
           <Property Name="DutyStatus" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="OfficeCode" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Type="Int32" Name="OfficeID" Nullable="false" />
         </EntityType>
         <ComplexType Name="spWebSiteUserInfo_Result">
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
@@ -76,6 +81,7 @@
           <EntitySetMapping Name="vWebUserInfoes">
             <EntityTypeMapping TypeName="UserModel.vWebUserInfo">
               <MappingFragment StoreEntitySet="vWebUserInfo">
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="PIN" ColumnName="PIN" />
                 <ScalarProperty Name="SAP" ColumnName="SAP" />

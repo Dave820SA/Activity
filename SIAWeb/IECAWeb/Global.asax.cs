@@ -22,13 +22,13 @@ namespace IECAWeb
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
 
-        //protected void Session_Start()
-        //{
-        //    SessionLogin user = new SessionLogin();
-        //    string myUser = HttpContext.Current.User.Identity.Name.ToString();
-        //    //string myUser = "COSA\\dw94685";
-        //    user.getUserPin(myUser);
+        protected void Session_Start()
+        {
+            SessionLogin user = new SessionLogin();
+            string myUser = HttpContext.Current.User.Identity.Name.ToString();
+            //string myUser = "COSA\\dw94685";
+            user.getUserPin(myUser);
 
-        //}
+        }
     }
 }

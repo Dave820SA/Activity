@@ -1,77 +1,67 @@
 ﻿@model IECAWeb.Models.AuditHistrory
 
+
 @{
     ViewBag.Title = "Edit";
 }
 
-<h2>Edit</h2>
-
-@using (Html.BeginForm()) {
+<div style="padding-left: 5px">
+    <h3>
+        Enter<small> Audit Details</small></h3>
+</div>
+<hr />
+@using (Html.BeginForm())
+{
     @Html.ValidationSummary(true)
 
-    <fieldset>
-        <legend>AuditHistrory</legend>
-
-        @Html.HiddenFor(model => model.IECAID)
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AppEntityID, "AppEntity")
+        <form class="form-horizontal">
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset class="scheduler-border">
+                    @Html.HiddenFor(model => model.IECAID)
+                    @Html.HiddenFor(model => model.AppEntityID)
+                    @Html.HiddenFor(model => model.OfficeID)
+                    @Html.HiddenFor(model => model.InsertDate)
+                    @Html.HiddenFor(model => model.AuditByID, new { @Value = @ViewBag.Auditor })
+                    <div class="form-group col-xs-12">
+                        <div class="checkbox">
+                            <label class="btn btn-info">
+                                @Html.EditorFor(model => model.CaseAuditFlag, new { htmlAttributes = new { @class = "myEditorFor" } })
+                                <strong style="font-size: 1.2em">@Html.LabelFor(model => model.CaseAuditFlag, new { @class = "control-label" })</strong>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <strong style="font-size: 1.2em">@Html.LabelFor(model => model.AuditNotes, new { @class = "control-label" })</strong>
+                        @Html.TextAreaFor(model => model.AuditNotes, new { @class = "form-control", cols = "20", rows = "7" })
+                        @Html.ValidationMessageFor(model => model.AuditNotes, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <strong style="font-size: 1.2em">@Html.LabelFor(model => model.AuditDate, new { @class = "control-label" })</strong>
+                        @Html.TextBoxFor(model => model.AuditDate, new { @class = "form-control", @Value = @DateTime.Now.ToString() })
+                        @Html.ValidationMessageFor(model => model.AuditDate, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <input type="submit" class="btn btn-success" value="Submit" />
+                        <br />
+                        <br />
+                        <a href="@Url.Action("Index", "Audit", new { id = Model.OfficeID })" class="btn btn-warning btn-sm">
+                            Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+                    </div>
+                </fieldset>
+            </div>
         </div>
-        <div class="editor-field">
-            @Html.DropDownList("AppEntityID", String.Empty)
-            @Html.ValidationMessageFor(model => model.AppEntityID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.OfficeID)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.OfficeID)
-            @Html.ValidationMessageFor(model => model.OfficeID)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.CaseAuditFlag)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.CaseAuditFlag)
-            @Html.ValidationMessageFor(model => model.CaseAuditFlag)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AuditNotes)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AuditNotes)
-            @Html.ValidationMessageFor(model => model.AuditNotes)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.AuditDate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.AuditDate)
-            @Html.ValidationMessageFor(model => model.AuditDate)
-        </div>
-
-        <div class="editor-label">
-            @Html.LabelFor(model => model.LastUpdate)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.LastUpdate)
-            @Html.ValidationMessageFor(model => model.LastUpdate)
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+    </div>
+    </form> 
+}     
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+       });
+    </script>
+	}
+

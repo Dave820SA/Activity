@@ -200,6 +200,40 @@ namespace IECAWeb.Models
 
         #endregion
 
+        #region Function Imports
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="officeID">No Metadata Documentation available.</param>
+        /// <param name="auditDate">No Metadata Documentation available.</param>
+        public int spEnterAuditOfficers(Nullable<global::System.Int32> officeID, global::System.String auditDate)
+        {
+            ObjectParameter officeIDParameter;
+            if (officeID.HasValue)
+            {
+                officeIDParameter = new ObjectParameter("OfficeID", officeID);
+            }
+            else
+            {
+                officeIDParameter = new ObjectParameter("OfficeID", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter auditDateParameter;
+            if (auditDate != null)
+            {
+                auditDateParameter = new ObjectParameter("AuditDate", auditDate);
+            }
+            else
+            {
+                auditDateParameter = new ObjectParameter("AuditDate", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction("spEnterAuditOfficers", officeIDParameter, auditDateParameter);
+        }
+
+        #endregion
+
     }
 
     #endregion
