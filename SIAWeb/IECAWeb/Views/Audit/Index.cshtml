@@ -65,6 +65,10 @@
                         @Html.ActionLink("Audit Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
+                        Audit By
+                    </th>
+
+                    <th>
                         See More Info
                     </th>
                 </tr>
@@ -94,7 +98,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.AuditDate)
                         </td>
-                       
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Grant_vActivityApprover.ApproveBy)
+                        </td>
                         <td>
                             <a href="@Url.Action("Edit", "Audit", new { id = item.IECAID })" class="btn btn-info btn-xs">
                                 Enter Audit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "Audit", new { id = item.IECAID })" class="btn btn-success btn-xs">

@@ -243,7 +243,9 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -271,6 +273,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>OfficeModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="Properties\PublishProfiles\IECA.pubxml" />
     <None Include="Scripts\bootstrap2-toggle.min.js.map" />
     <None Include="readme.txt" />
     <None Include="Scripts\jquery-1.9.0.min.map" />
