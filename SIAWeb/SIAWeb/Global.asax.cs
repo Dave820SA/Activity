@@ -25,8 +25,8 @@ namespace SIAWeb
         protected void Session_Start()
         {
             SessionLogin user = new SessionLogin();
-            string myUser = HttpContext.Current.User.Identity.Name.ToString();
-            //string myUser = "COSA\\CB96189";
+            //string myUser = HttpContext.Current.User.Identity.Name.ToString();
+            string myUser = "COSA\\dd94223";
             user.getUserPin(myUser);
 
         }

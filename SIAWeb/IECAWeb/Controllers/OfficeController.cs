@@ -22,14 +22,7 @@ namespace IECAWeb.Controllers
             return View(ieca_auditoffice.ToList());
         }
 
-        //[HttpPost]
-        //public ActionResult Index(string _office)
-        //{
-        //    Response.Redirect(
-        //}
-
-        //
-        // GET: /Office/Details/5
+       
 
         public ActionResult Details(int id = 0)
         {
@@ -83,9 +76,7 @@ namespace IECAWeb.Controllers
             {
                 return HttpNotFound();
             }
-            
-            ViewBag.AuditOfficeID = new SelectList(db.Office_Office, "OfficeID", "Name", ieca_auditoffice.AuditOfficeID);
-            
+             
             return View(ieca_auditoffice);
         }
 

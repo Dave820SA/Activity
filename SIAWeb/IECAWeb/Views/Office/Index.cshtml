@@ -15,8 +15,9 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-           <span class="h4">@Html.ActionLink("Add Office", "Create")&nbsp;&nbsp;&nbsp;&nbsp;</span> 
-            <table class="table table-condensed table-hover" >
+           <span class="h4">@Html.ActionLink("Add New Office", "Create", null, new { @class = "btn btn-success" })&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+           <br /><br />
+            <table class="table table-condensed table-hover">
                 <tr>
                     <th>
                         Goto Office
@@ -24,19 +25,16 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Office_Office.Name)
                     </th>
-
                     <th>
                         @Html.DisplayNameFor(model => model.VisibleFlag)
                     </th>
-                    
-                    
                 </tr>
                 @foreach (var item in Model)
                 {
                     <tr>
                         <td style="width: 100px">
-                           	<a href="@Url.Action("Index", "Audit", new { id =  item.AuditOfficeID }, null)" class="btn btn-warning btn-xs"> View Office Audit <span class="glyphicon glyphicon-plus-sign"></span></a>
- 
+                            <a href="@Url.Action("Index", "Audit", new { id = item.AuditOfficeID }, null)" class="btn btn-warning btn-xs">
+                                View Office Audit <span class="fa fa-share"></span></a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Office_Office.Name)
@@ -58,8 +56,8 @@
                         <td>
                             <a href="@Url.Action("Edit", "Office", new { id = item.AuditOfficeID })" class="btn btn-info btn-xs">
                                 Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "Office", new { id = item.AuditOfficeID })" class="btn btn-success btn-xs">
-                                    Details <i class="fa fa-list" aria-hidden="true"></i></a>| <a href="@Url.Action("Delete", "Office", new { id = item.AuditOfficeID })" class="btn btn-danger btn-xs">
-                                        Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                    Details <i class="fa fa-list" aria-hidden="true"></i></a>@*| <a href="@Url.Action("Delete", "Office", new { id = item.AuditOfficeID })" class="btn btn-danger btn-xs">
+                                        Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>*@
                         </td>
                     </tr>
                 }
