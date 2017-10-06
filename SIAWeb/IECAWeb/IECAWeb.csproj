@@ -291,6 +291,7 @@
     <Content Include="Views\Office\Edit.cshtml" />
     <Content Include="Views\Office\Delete.cshtml" />
     <Content Include="Views\Office\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

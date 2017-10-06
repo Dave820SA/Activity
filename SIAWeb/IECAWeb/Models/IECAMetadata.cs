@@ -22,8 +22,10 @@ namespace IECAWeb.Models
             [Display(Name = "Office ID")]
             public int OfficeID { get; set; }
 
+            [UIHint("Boolean")]
             [Display(Name = "Case Audit Complete")]
-            public bool CaseAuditFlag { get; set; }
+            public Nullable<bool> CaseAuditFlag { get; set; }
+            //public bool CaseAuditFlag { get; set; }
 
             [Display(Name = "Audit Notes")]
             public string AuditNotes { get; set; }
