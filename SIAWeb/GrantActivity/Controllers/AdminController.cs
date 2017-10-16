@@ -20,7 +20,7 @@ namespace GrantActivity.Controllers
         {
             int userId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
 
-            var daily = activies(userId, "1");
+            var daily = activies(userId, "4");
             sortByItems();
             return View(daily.ToList());
 
@@ -42,7 +42,7 @@ namespace GrantActivity.Controllers
             sortBy.Add(new SelectListItem { Text = "All", Value = "1" });
             sortBy.Add(new SelectListItem { Text = "More Info", Value = "2" });
             sortBy.Add(new SelectListItem { Text = "Approved", Value = "3" });
-            sortBy.Add(new SelectListItem { Text = "Not Approved", Value = "4" });
+            sortBy.Add(new SelectListItem { Text = "Not Approved", Value = "4",Selected=true });
             ViewBag.SortBy = new SelectList(sortBy, "Value", "Text", "1");
         }
 
