@@ -83,7 +83,7 @@
             <End Role="Activity_ActivityLog" EntitySet="ActivityLogs" />
           </AssociationSet>
           <FunctionImport Name="Activity_spMyTopWebLinks" ReturnType="Collection(SIAWebLinksModel.MyTopWebLinks_Result)">
-            <Parameter Name="Pin" Mode="In" Type="String" />
+          <Parameter Name="Pin" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="WebCategories">
