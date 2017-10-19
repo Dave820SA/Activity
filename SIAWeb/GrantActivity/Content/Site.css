@@ -14,9 +14,23 @@
     font-size:large;
     padding:10px;
 }
+/*
 .jumbotron
 {
 	margin-left: 15px;
+}
+*/
+.jumbotron {
+    padding: 0.5em 0.6em;
+    h1 {
+        font-size: 2em;
+    }
+    p {
+        font-size: 1.2em;
+        .btn {
+            padding: 0.5em;
+        }
+    }
 }
 
 .legend.scheduler-border {
