@@ -25,6 +25,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("GrantModel", "Daily_Person", "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Person), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "Grant_vActivityApproverGrant_Daily", "Grant_vActivityApprover", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GrantBusinessLayer.Grant_vActivityApprover), "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_User_User_Person_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Person), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GrantBusinessLayer.User), true)]
+[assembly: EdmRelationshipAttribute("GrantModel", "UserOfficeHistory", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.User), "OfficeHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GrantBusinessLayer.OfficeHistory), true)]
+[assembly: EdmRelationshipAttribute("GrantModel", "FK_User_UserOfficeHistory_User_Shift", "User_Shift", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GrantBusinessLayer.User_Shift), "OfficeHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.OfficeHistory), true)]
 
 #endregion
 
@@ -187,6 +189,38 @@ namespace GrantBusinessLayer
             }
         }
         private ObjectSet<User> _Users;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<OfficeHistory> OfficeHistories
+        {
+            get
+            {
+                if ((_OfficeHistories == null))
+                {
+                    _OfficeHistories = base.CreateObjectSet<OfficeHistory>("OfficeHistories");
+                }
+                return _OfficeHistories;
+            }
+        }
+        private ObjectSet<OfficeHistory> _OfficeHistories;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<User_Shift> User_Shift
+        {
+            get
+            {
+                if ((_User_Shift == null))
+                {
+                    _User_Shift = base.CreateObjectSet<User_Shift>("User_Shift");
+                }
+                return _User_Shift;
+            }
+        }
+        private ObjectSet<User_Shift> _User_Shift;
 
         #endregion
 
@@ -246,6 +280,22 @@ namespace GrantBusinessLayer
         public void AddToUsers(User user)
         {
             base.AddObject("Users", user);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the OfficeHistories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOfficeHistories(OfficeHistory officeHistory)
+        {
+            base.AddObject("OfficeHistories", officeHistory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the User_Shift EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUser_Shift(User_Shift user_Shift)
+        {
+            base.AddObject("User_Shift", user_Shift);
         }
 
         #endregion
@@ -1292,6 +1342,315 @@ namespace GrantBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GrantModel", Name="OfficeHistory")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class OfficeHistory : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new OfficeHistory object.
+        /// </summary>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="officeID">Initial value of the OfficeID property.</param>
+        /// <param name="startDate">Initial value of the StartDate property.</param>
+        public static OfficeHistory CreateOfficeHistory(global::System.Int32 appEntityID, global::System.Int32 officeID, global::System.DateTime startDate)
+        {
+            OfficeHistory officeHistory = new OfficeHistory();
+            officeHistory.AppEntityID = appEntityID;
+            officeHistory.OfficeID = officeID;
+            officeHistory.StartDate = startDate;
+            return officeHistory;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                if (_AppEntityID != value)
+                {
+                    OnAppEntityIDChanging(value);
+                    ReportPropertyChanging("AppEntityID");
+                    _AppEntityID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AppEntityID");
+                    OnAppEntityIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                OnOfficeIDChanging(value);
+                ReportPropertyChanging("OfficeID");
+                _OfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeID");
+                OnOfficeIDChanged();
+            }
+        }
+        private global::System.Int32 _OfficeID;
+        partial void OnOfficeIDChanging(global::System.Int32 value);
+        partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SectionID
+        {
+            get
+            {
+                return _SectionID;
+            }
+            set
+            {
+                OnSectionIDChanging(value);
+                ReportPropertyChanging("SectionID");
+                _SectionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SectionID");
+                OnSectionIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SectionID;
+        partial void OnSectionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnSectionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ShiftID
+        {
+            get
+            {
+                return _ShiftID;
+            }
+            set
+            {
+                OnShiftIDChanging(value);
+                ReportPropertyChanging("ShiftID");
+                _ShiftID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ShiftID");
+                OnShiftIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ShiftID;
+        partial void OnShiftIDChanging(Nullable<global::System.Int32> value);
+        partial void OnShiftIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RDID
+        {
+            get
+            {
+                return _RDID;
+            }
+            set
+            {
+                OnRDIDChanging(value);
+                ReportPropertyChanging("RDID");
+                _RDID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RDID");
+                OnRDIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RDID;
+        partial void OnRDIDChanging(Nullable<global::System.Int32> value);
+        partial void OnRDIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime StartDate
+        {
+            get
+            {
+                return _StartDate;
+            }
+            set
+            {
+                OnStartDateChanging(value);
+                ReportPropertyChanging("StartDate");
+                _StartDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StartDate");
+                OnStartDateChanged();
+            }
+        }
+        private global::System.DateTime _StartDate;
+        partial void OnStartDateChanging(global::System.DateTime value);
+        partial void OnStartDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> EndDate
+        {
+            get
+            {
+                return _EndDate;
+            }
+            set
+            {
+                OnEndDateChanging(value);
+                ReportPropertyChanging("EndDate");
+                _EndDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EndDate");
+                OnEndDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _EndDate;
+        partial void OnEndDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnEndDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "UserOfficeHistory", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GrantModel.UserOfficeHistory", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GrantModel.UserOfficeHistory", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("GrantModel.UserOfficeHistory", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GrantModel.UserOfficeHistory", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "FK_User_UserOfficeHistory_User_Shift", "User_Shift")]
+        public User_Shift User_Shift
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User_Shift>("GrantModel.FK_User_UserOfficeHistory_User_Shift", "User_Shift").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User_Shift>("GrantModel.FK_User_UserOfficeHistory_User_Shift", "User_Shift").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User_Shift> User_ShiftReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User_Shift>("GrantModel.FK_User_UserOfficeHistory_User_Shift", "User_Shift");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User_Shift>("GrantModel.FK_User_UserOfficeHistory_User_Shift", "User_Shift", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="GrantModel", Name="Person")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2029,6 +2388,271 @@ namespace GrantBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("GrantModel.FK_User_User_Person_Person", "Person", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "UserOfficeHistory", "OfficeHistory")]
+        public OfficeHistory OfficeHistories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OfficeHistory>("GrantModel.UserOfficeHistory", "OfficeHistory").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OfficeHistory>("GrantModel.UserOfficeHistory", "OfficeHistory").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<OfficeHistory> OfficeHistoriesReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OfficeHistory>("GrantModel.UserOfficeHistory", "OfficeHistory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<OfficeHistory>("GrantModel.UserOfficeHistory", "OfficeHistory", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GrantModel", Name="User_Shift")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class User_Shift : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new User_Shift object.
+        /// </summary>
+        /// <param name="shiftID">Initial value of the ShiftID property.</param>
+        public static User_Shift CreateUser_Shift(global::System.Int32 shiftID)
+        {
+            User_Shift user_Shift = new User_Shift();
+            user_Shift.ShiftID = shiftID;
+            return user_Shift;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ShiftID
+        {
+            get
+            {
+                return _ShiftID;
+            }
+            set
+            {
+                if (_ShiftID != value)
+                {
+                    OnShiftIDChanging(value);
+                    ReportPropertyChanging("ShiftID");
+                    _ShiftID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ShiftID");
+                    OnShiftIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ShiftID;
+        partial void OnShiftIDChanging(global::System.Int32 value);
+        partial void OnShiftIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.TimeSpan> StartTime
+        {
+            get
+            {
+                return _StartTime;
+            }
+            set
+            {
+                OnStartTimeChanging(value);
+                ReportPropertyChanging("StartTime");
+                _StartTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StartTime");
+                OnStartTimeChanged();
+            }
+        }
+        private Nullable<global::System.TimeSpan> _StartTime;
+        partial void OnStartTimeChanging(Nullable<global::System.TimeSpan> value);
+        partial void OnStartTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.TimeSpan> EndTime
+        {
+            get
+            {
+                return _EndTime;
+            }
+            set
+            {
+                OnEndTimeChanging(value);
+                ReportPropertyChanging("EndTime");
+                _EndTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EndTime");
+                OnEndTimeChanged();
+            }
+        }
+        private Nullable<global::System.TimeSpan> _EndTime;
+        partial void OnEndTimeChanging(Nullable<global::System.TimeSpan> value);
+        partial void OnEndTimeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String MainframCode
+        {
+            get
+            {
+                return _MainframCode;
+            }
+            set
+            {
+                OnMainframCodeChanging(value);
+                ReportPropertyChanging("MainframCode");
+                _MainframCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("MainframCode");
+                OnMainframCodeChanged();
+            }
+        }
+        private global::System.String _MainframCode;
+        partial void OnMainframCodeChanging(global::System.String value);
+        partial void OnMainframCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PAShiftID
+        {
+            get
+            {
+                return _PAShiftID;
+            }
+            set
+            {
+                OnPAShiftIDChanging(value);
+                ReportPropertyChanging("PAShiftID");
+                _PAShiftID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PAShiftID");
+                OnPAShiftIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PAShiftID;
+        partial void OnPAShiftIDChanging(Nullable<global::System.Int32> value);
+        partial void OnPAShiftIDChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "FK_User_UserOfficeHistory_User_Shift", "OfficeHistory")]
+        public EntityCollection<OfficeHistory> User_UserOfficeHistory
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<OfficeHistory>("GrantModel.FK_User_UserOfficeHistory_User_Shift", "OfficeHistory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<OfficeHistory>("GrantModel.FK_User_UserOfficeHistory_User_Shift", "OfficeHistory", value);
                 }
             }
         }

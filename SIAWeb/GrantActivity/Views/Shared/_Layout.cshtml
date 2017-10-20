@@ -7,13 +7,12 @@
     <link href="~/favicon.ico" rel="Shortcut Icon" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-    @*@Styles.Render("~/bootstrap/css/sandstone.min.css")*@
-    @*@Styles.Render("~/bootstrap/css/superhero.min.css")*@
-    @Styles.Render("~/bootstrap/css/Slate.css")
-    @Scripts.Render("~/bundles/modernizr")
+
+    @Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/css")
-    
+   
+      
 </head>
 <body>
     <div class="container">
@@ -76,8 +75,13 @@
                 </div>
             </div>
       </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
+
+     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/googlejquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    
+   
     @RenderSection("scripts", required: false)
+   
 </body>
 </html>

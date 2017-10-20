@@ -126,6 +126,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -146,6 +147,7 @@
       <DependentUpon>OfficeModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -218,6 +220,7 @@
     <Content Include="Images\Check32x32.png" />
     <Content Include="Images\Male.png" />
     <Content Include="Images\Minus32x32.png" />
+    <Content Include="Images\Question32x32.png" />
     <Content Include="Images\RedX32x32.png" />
     <Content Include="Scripts\bootstrap2-toggle.js" />
     <Content Include="Scripts\bootstrap2-toggle.min.js" />
@@ -291,7 +294,8 @@
     <Content Include="Views\Office\Edit.cshtml" />
     <Content Include="Views\Office\Delete.cshtml" />
     <Content Include="Views\Office\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
+    <Content Include="Views\NonUser\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

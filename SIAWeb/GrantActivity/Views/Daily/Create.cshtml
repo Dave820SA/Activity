@@ -26,15 +26,24 @@
                     @Html.HiddenFor(model => model.MoreInformationFlag, new { @Value = false })
                     <div class="form-group col-xs-12">
                         <div class="editor-label">
-                            @Html.LabelFor(model => model.GrantTypeID, "Grant_GrantType")
+                            @Html.LabelFor(model => model.GrantTypeID, new { @class = "control-label" })
                         </div>
                         <div class="editor-label">
                             @Html.DropDownList("GrantTypeID", null, "Select Grant", new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.GrantTypeID, "", new { @class = "text-danger" })
                         </div>
                     </div>
-					
+
                     <div class="form-group col-xs-12">
+                        <strong style="font-size: 1.2em; color: Orange">@Html.LabelFor(model => model.DailyStart, new { @class = "control-label" })</strong>
+                        <div class='input-group date' id='datetimepicker1'>
+                            @Html.TextBoxFor(model => model.DailyStart, new {id = "StartDate", @class = "form-control", mask = "99/99/9999 99:99" })
+                            @Html.ValidationMessageFor(model => model.DailyStart, "", new { @class = "text-danger" })
+                            <span class="input-group-addon"><span class="fa fa-calendar" data-toggle="tooltip" title="Click to see calendar!"></span></span>
+                        </div>
+                    </div>
+					
+                   @* <div class="form-group col-xs-12">
                         <div class="editor-label">
                             @Html.LabelFor(model => model.DailyStart)
                         </div>
@@ -43,8 +52,18 @@
                             
                             @Html.ValidationMessageFor(model => model.DailyStart, "", new { @class = "text-danger" })
                         </div>
+                    </div>*@
+
+                    <div class="form-group col-xs-12">
+                        <strong style="font-size: 1.2em; color: Orange">@Html.LabelFor(model => model.DailyEnd, new { @class = "control-label" })</strong>
+                        <div class='input-group date' id='datetimepicker2'>
+                            @Html.TextBoxFor(model => model.DailyEnd, new { id = "EndDate", @class = "form-control" ,mask = "99/99/9999 99:99"})
+                            @Html.ValidationMessageFor(model => model.DailyEnd, "", new { @class = "text-danger" })
+                            <span class="input-group-addon"><span class="fa fa-calendar" data-toggle="tooltip" title="Click to see calendar!"></span></span>
+                        </div>
                     </div>
-                     <div class="form-group col-xs-12">
+
+                     @*<div class="form-group col-xs-12">
                         <div class="editor-label">
                             @Html.LabelFor(model => model.DailyEnd)
                         </div>
@@ -52,7 +71,7 @@
                             @Html.TextBoxFor(model => model.DailyEnd, new { id = "EndDate", @class = "form-control" ,mask = "99/99/9999 99:99"})
                             @Html.ValidationMessageFor(model => model.DailyEnd, "", new { @class = "text-danger" })
                         </div>
-                    </div>
+                    </div>*@
                     <div class="form-group col-xs-12">
                    
                     </div>
@@ -76,19 +95,80 @@
    <script type="text/javascript">
        $(document).ready(function () {
 
-           $("#EndDate").change(function () {
-               var startDate = document.getElementById("StartDate").value;
-               var endDate = document.getElementById("EndDate").value;
+           $('[data-toggle="tooltip"]').tooltip();
 
-               if ((Date.parse(startDate) >= Date.parse(endDate))) {
-                   alert("End date should be greater than Start date");
-                   document.getElementById("EndDate").value = "";
-               }
-           });
 
        });
 
+       $(function () {
+           $('#datetimepicker1').datetimepicker({
+               icons: {
+                   time: "fa fa-clock-o",
+                   date: "fa fa-calendar",
+                   up: "fa fa-arrow-up",
+                   down: "fa fa-arrow-down"
+               }
+           });
+       });
+
+       $(function () {
+           $('#datetimepicker2').datetimepicker({
+               icons: {
+                   time: "fa fa-clock-o",
+                   date: "fa fa-calendar",
+                   up: "fa fa-arrow-up",
+                   down: "fa fa-arrow-down"
+               }
+           });
+       });
+
+
       
+    </script>
+          
+
+}
+
+@*@section Scripts {
+
+   <script type="text/javascript">
+       $(document).ready(function () {
+
+//           $("#EndDate").change(function () {
+//               var startDate = document.getElementById("StartDate").value;
+//               var endDate = document.getElementById("EndDate").value;
+
+//               if ((Date.parse(startDate) >= Date.parse(endDate))) {
+//                   alert("End date should be greater than Start date");
+//                   document.getElementById("EndDate").value = "";
+//               }
+//           });
+
+           $('[data-toggle="tooltip"]').tooltip(); 
+
+       });
+
+       $(function () {
+           $('#datetimepicker1').datetimepicker({
+               icons: {
+                   time: "fa fa-clock-o",
+                   date: "fa fa-calendar",
+                   up: "fa fa-arrow-up",
+                   down: "fa fa-arrow-down"
+               }
+           });
+       });
+
+       $(function () {
+           $('#datetimepicker2').datetimepicker({
+               icons: {
+                   time: "fa fa-clock-o",
+                   date: "fa fa-calendar",
+                   up: "fa fa-arrow-up",
+                   down: "fa fa-arrow-down"
+               }
+           });
+       });
       
 
       
@@ -97,7 +177,7 @@
     
 
 }
-
+*@
 
 
 

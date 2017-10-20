@@ -1,18 +1,19 @@
-﻿@model System.Boolean?
+﻿@model bool?
+
 
 @if (Model.HasValue)
 {
     if (Model.Value)
     {
-        <text>YES</text>
+       <span class="label label-success">Yes</span>
     }
     else
     {
-        <text>NO</text>
+        <span class="label label-impotant">No</span>
     }
 
 }
 else
 {
-    <text>UNK</text>
+    <span class="label label-inverse">Not Set</span>
 }

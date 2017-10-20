@@ -9,6 +9,7 @@ using IECAWeb.Models;
 
 namespace IECAWeb.Controllers
 {
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin, Supervisor")]
     public class OfficeController : Controller
     {
         private OfficeEntities db = new OfficeEntities();

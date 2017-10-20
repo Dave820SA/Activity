@@ -11,7 +11,9 @@
           <EntitySet Name="Grant_Daily" EntityType="GrantModel.Store.Grant_Daily" store:Type="Tables" Schema="dbo" Table="Grant.Daily" />
           <EntitySet Name="Grant_GrantType" EntityType="GrantModel.Store.Grant_GrantType" store:Type="Tables" Schema="dbo" Table="Grant.GrantType" />
           <EntitySet Name="Person_Person" EntityType="GrantModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
+          <EntitySet Name="User_Shift" EntityType="GrantModel.Store.User_Shift" store:Type="Tables" Schema="dbo" Table="User.Shift" />
           <EntitySet Name="User_User" EntityType="GrantModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
+          <EntitySet Name="User_UserOfficeHistory" EntityType="GrantModel.Store.User_UserOfficeHistory" store:Type="Tables" Schema="dbo" Table="User.UserOfficeHistory" />
           <EntitySet Name="Grant_vActivityApprover" EntityType="GrantModel.Store.Grant_vActivityApprover" store:Type="Views" store:Schema="dbo" store:Name="Grant.vActivityApprover">
             <DefiningQuery>SELECT 
       [Grant_vActivityApprover].[AppEntityID] AS [AppEntityID], 
@@ -33,6 +35,10 @@
           <AssociationSet Name="FK_User_User_Person_Person" Association="GrantModel.Store.FK_User_User_Person_Person">
             <End Role="Person_Person" EntitySet="Person_Person" />
             <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserOfficeHistory_User_Shift" Association="GrantModel.Store.FK_User_UserOfficeHistory_User_Shift">
+            <End Role="User_Shift" EntitySet="User_Shift" />
+            <End Role="User_UserOfficeHistory" EntitySet="User_UserOfficeHistory" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Grant_Activity">
@@ -90,6 +96,18 @@
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="User_Shift">
+          <Key>
+            <PropertyRef Name="ShiftID" />
+          </Key>
+          <Property Name="ShiftID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="StartTime" Type="time" />
+          <Property Name="EndTime" Type="time" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="MainframCode" Type="varchar" MaxLength="10" />
+          <Property Name="PAShiftID" Type="int" />
+        </EntityType>
         <EntityType Name="User_User">
           <Key>
             <PropertyRef Name="AppEntityID" />
@@ -109,6 +127,19 @@
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="WorksheetVisibleFlag" Type="bit" />
           <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_UserOfficeHistory">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="OfficeID" Type="int" Nullable="false" />
+          <Property Name="SectionID" Type="int" />
+          <Property Name="ShiftID" Type="int" />
+          <Property Name="RDID" Type="int" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" />
+          <Property Name="ModifiedDate" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'SAPDActivity.dbo.Grant.vActivityApprover' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
@@ -168,6 +199,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_UserOfficeHistory_User_Shift">
+          <End Role="User_Shift" Type="GrantModel.Store.User_Shift" Multiplicity="0..1" />
+          <End Role="User_UserOfficeHistory" Type="GrantModel.Store.User_UserOfficeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Shift">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="User_UserOfficeHistory">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -204,7 +247,17 @@
             <End Role="Person" EntitySet="People" />
             <End Role="User_User" EntitySet="Users" />
           </AssociationSet>
-         <!-- <EntitySet Name="ApproveWorks" EntityType="GrantModel.ApproveWork" /> -->
+          <EntitySet Name="OfficeHistories" EntityType="GrantModel.OfficeHistory" />
+          <AssociationSet Name="UserOfficeHistory" Association="GrantModel.UserOfficeHistory">
+            <End Role="User" EntitySet="Users" />
+            <End Role="OfficeHistory" EntitySet="OfficeHistories" />
+          </AssociationSet>
+          <EntitySet Name="User_Shift" EntityType="GrantModel.User_Shift" />
+          <AssociationSet Name="FK_User_UserOfficeHistory_User_Shift" Association="GrantModel.FK_User_UserOfficeHistory_User_Shift">
+            <End Role="User_Shift" EntitySet="User_Shift" />
+            <End Role="OfficeHistory" EntitySet="OfficeHistories" />
+          </AssociationSet>
+          <!-- <EntitySet Name="ApproveWorks" EntityType="GrantModel.ApproveWork" /> -->
         </EntityContainer>
         <EntityType Name="Grant_Category">
           <Key>
@@ -359,6 +412,7 @@
           <Property Type="Boolean" Name="WorksheetVisibleFlag" />
           <Property Type="DateTime" Name="ModifiedDate" />
           <NavigationProperty Name="Person_Person" Relationship="GrantModel.FK_User_User_Person_Person" FromRole="User_User" ToRole="Person" />
+          <NavigationProperty Name="OfficeHistories" Relationship="GrantModel.UserOfficeHistory" FromRole="User" ToRole="OfficeHistory" />
         </EntityType>
         <Association Name="FK_User_User_Person_Person">
           <End Type="GrantModel.Person" Role="Person" Multiplicity="1" />
@@ -372,7 +426,59 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="OfficeHistory">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="OfficeID" Nullable="false" />
+          <Property Type="Int32" Name="SectionID" />
+          <Property Type="Int32" Name="ShiftID" />
+          <Property Type="Int32" Name="RDID" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="EndDate" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <NavigationProperty Name="User" Relationship="GrantModel.UserOfficeHistory" FromRole="OfficeHistory" ToRole="User" />
+          <NavigationProperty Name="User_Shift" Relationship="GrantModel.FK_User_UserOfficeHistory_User_Shift" FromRole="OfficeHistory" ToRole="User_Shift" />
+        </EntityType>
+        <Association Name="UserOfficeHistory">
+          <End Type="GrantModel.User" Role="User" Multiplicity="1" />
+          <End Type="GrantModel.OfficeHistory" Role="OfficeHistory" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="OfficeHistory">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User_Shift">
+          <Key>
+            <PropertyRef Name="ShiftID" />
+          </Key>
+          <Property Type="Int32" Name="ShiftID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Time" Name="StartTime" />
+          <Property Type="Time" Name="EndTime" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="String" Name="MainframCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="PAShiftID" />
+          <NavigationProperty Name="User_UserOfficeHistory" Relationship="GrantModel.FK_User_UserOfficeHistory_User_Shift" FromRole="User_Shift" ToRole="OfficeHistory" />
+        </EntityType>
+        <Association Name="FK_User_UserOfficeHistory_User_Shift">
+          <End Type="GrantModel.User_Shift" Role="User_Shift" Multiplicity="0..1" />
+          <End Type="GrantModel.OfficeHistory" Role="OfficeHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Shift">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="OfficeHistory">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -467,6 +573,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="OfficeHistories">
+            <EntityTypeMapping TypeName="GrantModel.OfficeHistory">
+              <MappingFragment StoreEntitySet="User_UserOfficeHistory">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="RDID" ColumnName="RDID" />
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Shift">
+            <EntityTypeMapping TypeName="GrantModel.User_Shift">
+              <MappingFragment StoreEntitySet="User_Shift">
+                <ScalarProperty Name="PAShiftID" ColumnName="PAShiftID" />
+                <ScalarProperty Name="MainframCode" ColumnName="MainframCode" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -527,6 +660,16 @@
         <AssociationConnector Association="GrantModel.FK_User_User_Person_Person" >
           <ConnectorPoint PointX="7.5" PointY="6.9420475260416667" />
           <ConnectorPoint PointX="8.25" PointY="6.9420475260416667" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GrantModel.OfficeHistory" Width="2.375" PointX="10.5" PointY="6.875" Height="2.7494921874999996" />
+        <AssociationConnector Association="GrantModel.UserOfficeHistory">
+          <ConnectorPoint PointX="9.75" PointY="8.3458968098958337" />
+          <ConnectorPoint PointX="10.5" PointY="8.3458968098958337" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GrantModel.User_Shift" Width="1.5" PointX="12.375" PointY="10.75" Height="2.5571907552083317" />
+        <AssociationConnector Association="GrantModel.FK_User_UserOfficeHistory_User_Shift" >
+          <ConnectorPoint PointX="12.625" PointY="10.75" />
+          <ConnectorPoint PointX="12.625" PointY="9.8167936197916656" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

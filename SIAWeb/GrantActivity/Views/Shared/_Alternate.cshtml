@@ -7,14 +7,12 @@
     <link href="~/favicon.ico" rel="Shortcut Icon" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 
-
-     @Styles.Render("~/bootstrap/css/Slate.css")
-    @Scripts.Render("~/bundles/modernizr")
+   @Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Content/bootstrap")
     @Styles.Render("~/Content/css")
     
-    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -81,15 +79,12 @@
             </div>
       </footer>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    
-
-    @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/googlejquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/datetimepicker")
     @RenderSection("scripts", required: false)
 
-    @Scripts.Render("~/bundles/jquerymask")
-
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    
 </body>
 </html>

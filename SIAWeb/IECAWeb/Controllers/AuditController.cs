@@ -8,7 +8,8 @@ using System.Globalization;
 
 namespace IECAWeb.Controllers
 {
- 
+
+    [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin, Supervisor")]
     public class AuditController : Controller
     {
         private AuditEntities db = new AuditEntities();

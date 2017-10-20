@@ -25,13 +25,13 @@
                     @Html.HiddenFor(model => model.InsertDate)
                     @Html.HiddenFor(model => model.AuditByID, new { @Value = @ViewBag.Auditor })
                     <div class="form-group col-xs-12">
-                        <div class="checkbox">
-                            <label class="btn btn-info">
+                        @*<div class="checkbox">*@
+                            <label class="btn btn-success">
                                 @*@Html.EditorFor(model => model.CaseAuditFlag, new { htmlAttributes = new { @class = "myEditorFor" } })*@
                                 @Html.EditorFor(model => model.CaseAuditFlag)
                                 <strong style="font-size: 1.2em">@Html.LabelFor(model => model.CaseAuditFlag, new { @class = "control-label" })</strong>
                             </label>
-                        </div>
+                       @* </div>*@
                     </div>
 
                     <div class="form-group col-xs-12">
