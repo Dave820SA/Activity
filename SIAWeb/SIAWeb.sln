@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RecognitionBusinessLayer", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IECAWeb", "IECAWeb\IECAWeb.csproj", "{1E142F42-AC3D-4A1F-A3F4-C77604A66FCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonnelBusinessLayer", "PersonnelBusinessLayer\PersonnelBusinessLayer.csproj", "{EE6894CC-58C5-4ADE-AF8A-19A08DCF9AA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{1E142F42-AC3D-4A1F-A3F4-C77604A66FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E142F42-AC3D-4A1F-A3F4-C77604A66FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E142F42-AC3D-4A1F-A3F4-C77604A66FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE6894CC-58C5-4ADE-AF8A-19A08DCF9AA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE6894CC-58C5-4ADE-AF8A-19A08DCF9AA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE6894CC-58C5-4ADE-AF8A-19A08DCF9AA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE6894CC-58C5-4ADE-AF8A-19A08DCF9AA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

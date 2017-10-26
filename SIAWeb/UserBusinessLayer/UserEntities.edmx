@@ -14,7 +14,8 @@
       [vWebUserInfo].[UserName] AS [UserName], 
       [vWebUserInfo].[DutyStatus] AS [DutyStatus], 
       [vWebUserInfo].[OfficeCode] AS [OfficeCode], 
-      [vWebUserInfo].[OfficeID] AS [OfficeID]
+      [vWebUserInfo].[OfficeID] AS [OfficeID], 
+      [vWebUserInfo].[Badge] AS [Badge]
       FROM [dbo].[vWebUserInfo] AS [vWebUserInfo]</DefiningQuery>
           </EntitySet>
         </EntityContainer>
@@ -30,10 +31,11 @@
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="PIN" Type="varchar" MaxLength="8" />
           <Property Name="SAP" Type="varchar" MaxLength="8" />
-          <Property Name="UserName" Type="varchar" MaxLength="102" />
+          <Property Name="UserName" Type="varchar" MaxLength="111" />
           <Property Name="DutyStatus" Type="varchar" MaxLength="50" />
-          <Property Name="OfficeCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="OfficeCode" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="OfficeID" Type="int" Nullable="false" />
+          <Property Name="Badge" Type="varchar" MaxLength="6" />
         </EntityType>
         <Function Name="spWebSiteUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Pin" Type="varchar" Mode="In" />
@@ -63,6 +65,7 @@
           <Property Name="DutyStatus" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="OfficeCode" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Type="Int32" Name="OfficeID" Nullable="false" />
+          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
         </EntityType>
         <ComplexType Name="spWebSiteUserInfo_Result">
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
@@ -81,6 +84,7 @@
           <EntitySetMapping Name="vWebUserInfoes">
             <EntityTypeMapping TypeName="UserModel.vWebUserInfo">
               <MappingFragment StoreEntitySet="vWebUserInfo">
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="PIN" ColumnName="PIN" />
@@ -124,7 +128,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="UserEntities">
-        <EntityTypeShape EntityType="UserModel.vWebUserInfo" Width="1.5" PointX="0.75" PointY="0.75" Height="2.172587890625" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.vWebUserInfo" Width="1.75" PointX="0.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
       </Diagram>
     </Diagrams>
   </Designer>

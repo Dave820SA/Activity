@@ -340,6 +340,30 @@ namespace UserBusinessLayer
         private global::System.Int32 _OfficeID;
         partial void OnOfficeIDChanging(global::System.Int32 value);
         partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Badge
+        {
+            get
+            {
+                return _Badge;
+            }
+            set
+            {
+                OnBadgeChanging(value);
+                ReportPropertyChanging("Badge");
+                _Badge = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Badge");
+                OnBadgeChanged();
+            }
+        }
+        private global::System.String _Badge;
+        partial void OnBadgeChanging(global::System.String value);
+        partial void OnBadgeChanged();
 
         #endregion
 
