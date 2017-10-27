@@ -11,6 +11,12 @@ namespace SIAWeb
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/googlejs", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js").Include(
+                     "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/datetimepicker", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js").Include(
+                     "~/Scripts/jquery-{version}.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
 
@@ -22,6 +28,16 @@ namespace SIAWeb
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
+                       "~/Scripts/bootstrap.js"));
+
+            bundles.Add(new StyleBundle("~/Content/font-awesome", "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/bootstrap").Include("~/Content/cyborg.css"));
+            //bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
+            //            "~/Content/cyborg.css",
+            //            "~/Content/bootstrap-theme.css"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
@@ -39,7 +55,9 @@ namespace SIAWeb
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
 
-            
+
+            BundleTable.EnableOptimizations = true;
+            bundles.UseCdn = true;
 
         }
     }
