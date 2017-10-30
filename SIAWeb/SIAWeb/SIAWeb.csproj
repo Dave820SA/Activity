@@ -151,6 +151,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CurrentUser.cs" />
+    <Compile Include="Models\SearchPersonnel.cs" />
     <Compile Include="Models\topLink.cs" />
     <Compile Include="Models\WebLinkModel.cs" />
     <Compile Include="Models\WebLink.cs" />

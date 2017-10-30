@@ -7,7 +7,6 @@ using System.Text;
 using System.Web.UI.WebControls;
 using SIAWeb.Models;
 
-
 namespace SIAWeb.Controllers
 {
     public class HomeController : Controller
