@@ -146,6 +146,7 @@
     <Compile Include="Controllers\LinkAddressController.cs" />
     <Compile Include="Controllers\LinkCatController.cs" />
     <Compile Include="Controllers\NonUserController.cs" />
+    <Compile Include="Controllers\PersonnelSearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,8 +164,17 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\cyborg.css" />
     <Content Include="bootstrap\css\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\jquery.bootgrid.css" />
+    <Content Include="Content\jquery.bootgrid.min.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.11.1-vsdoc.js" />
+    <Content Include="Scripts\jquery-1.11.1.js" />
+    <Content Include="Scripts\jquery-1.11.1.min.js" />
+    <Content Include="Scripts\jquery.bootgrid.fa.js" />
+    <Content Include="Scripts\jquery.bootgrid.fa.min.js" />
+    <Content Include="Scripts\jquery.bootgrid.js" />
+    <Content Include="Scripts\jquery.bootgrid.min.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -222,18 +232,11 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
-    <Content Include="Controllers\font-awesome-4.7.0\css\font-awesome.css" />
-    <Content Include="Controllers\font-awesome-4.7.0\css\font-awesome.min.css" />
-    <Content Include="Controllers\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
-    <Content Include="Controllers\font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\Check_Round.png" />
     <Content Include="Images\Male.png" />
     <Content Include="Images\red-minus.png" />
-    <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -279,39 +282,6 @@
     <None Include="bootstrap\css\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <None Include="Controllers\font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
-    <None Include="Controllers\font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
-    <None Include="Controllers\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
-    <None Include="Controllers\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
-    <None Include="Controllers\font-awesome-4.7.0\fonts\FontAwesome.otf" />
-    <None Include="Controllers\font-awesome-4.7.0\less\animated.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\bordered-pulled.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\core.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\fixed-width.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\font-awesome.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\icons.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\larger.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\list.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\mixins.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\path.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\rotated-flipped.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\screen-reader.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\stacked.less" />
-    <None Include="Controllers\font-awesome-4.7.0\less\variables.less" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\font-awesome.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_animated.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_core.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_fixed-width.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_icons.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_larger.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_list.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_mixins.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_path.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_screen-reader.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_stacked.scss" />
-    <None Include="Controllers\font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="Properties\PublishProfiles\SAPDWeb.pubxml" />
     <None Include="Properties\PublishProfiles\SIAWeb.pubxml" />
     <None Include="Properties\PublishProfiles\SIAWEB2.pubxml" />
@@ -333,8 +303,14 @@
     <Content Include="Views\NonUser\Index.cshtml" />
     <Content Include="Views\Shared\_Alternate.cshtml" />
     <Content Include="Views\Home\Info.cshtml" />
+    <None Include="Scripts\jquery-1.11.1.min.map" />
+    <Content Include="Views\PersonnelSearch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PersonnelBusinessLayer\PersonnelBusinessLayer.csproj">
+      <Project>{EE6894CC-58C5-4ADE-AF8A-19A08DCF9AA8}</Project>
+      <Name>PersonnelBusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SIAWebLinksBusinessLayer\SIAWebLinksBusinessLayer.csproj">
       <Project>{70250470-C2A5-4A25-B55B-9CC78D5AA12D}</Project>
       <Name>SIAWebLinksBusinessLayer</Name>
