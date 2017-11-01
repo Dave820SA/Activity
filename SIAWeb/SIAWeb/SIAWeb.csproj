@@ -138,6 +138,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\GetPeople.cs" />
     <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
@@ -146,12 +147,12 @@
     <Compile Include="Controllers\LinkAddressController.cs" />
     <Compile Include="Controllers\LinkCatController.cs" />
     <Compile Include="Controllers\NonUserController.cs" />
-    <Compile Include="Controllers\PersonnelSearchController.cs" />
+    <Compile Include="Controllers\PersonSearchController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\CurrentUser.cs" />
-    <Compile Include="Models\SearchPersonnel.cs" />
+    <Compile Include="Models\People.cs" />
     <Compile Include="Models\topLink.cs" />
     <Compile Include="Models\WebLinkModel.cs" />
     <Compile Include="Models\WebLink.cs" />
@@ -305,7 +306,10 @@
     <Content Include="Views\Shared\_Alternate.cshtml" />
     <Content Include="Views\Home\Info.cshtml" />
     <None Include="Scripts\jquery-1.11.1.min.map" />
-    <Content Include="Views\PersonnelSearch\Index.cshtml" />
+    <Content Include="Views\PersonSearch\Index.cshtml" />
+    <Content Include="Views\Shared\_Alternate2.cshtml" />
+    <Content Include="Views\Contact\_ViewStart.cshtml" />
+    <Content Include="Views\PersonSearch\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PersonnelBusinessLayer\PersonnelBusinessLayer.csproj">

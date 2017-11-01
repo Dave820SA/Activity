@@ -1397,30 +1397,6 @@ namespace PersonnelBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int32> Ranking
-        {
-            get
-            {
-                return _Ranking;
-            }
-            set
-            {
-                OnRankingChanging(value);
-                ReportPropertyChanging("Ranking");
-                _Ranking = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Ranking");
-                OnRankingChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _Ranking;
-        partial void OnRankingChanging(Nullable<global::System.Int32> value);
-        partial void OnRankingChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> ModifiedDate
         {
             get
@@ -1487,6 +1463,30 @@ namespace PersonnelBusinessLayer
         private Nullable<global::System.Int32> _PAJobTitleID;
         partial void OnPAJobTitleIDChanging(Nullable<global::System.Int32> value);
         partial void OnPAJobTitleIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> jtRanking
+        {
+            get
+            {
+                return _jtRanking;
+            }
+            set
+            {
+                OnjtRankingChanging(value);
+                ReportPropertyChanging("jtRanking");
+                _jtRanking = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("jtRanking");
+                OnjtRankingChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _jtRanking;
+        partial void OnjtRankingChanging(Nullable<global::System.Int32> value);
+        partial void OnjtRankingChanged();
 
         #endregion
 

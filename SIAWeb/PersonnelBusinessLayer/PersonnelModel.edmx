@@ -230,7 +230,7 @@
           <Property Name="JobTitleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="NameCode" Type="varchar" MaxLength="10" />
-          <Property Name="Ranking" Type="int" />
+          <Property Name="jtRanking" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="VisibleFlag" Type="bit" />
           <Property Name="PAJobTitleID" Type="int" />
@@ -303,7 +303,7 @@
           <Property Name="RDID" Type="int" />
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" />
-          <Property Name="ModifiedDate" Type="date" />
+          <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="EnteredBy" Type="int" />
         </EntityType>
         <EntityType Name="User_UserRDHistory">
@@ -743,11 +743,11 @@
           <Property Name="JobTitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="NameCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="Ranking" Type="Int32" />
           <Property Name="ModifiedDate" Type="DateTime" />
           <Property Name="VisibleFlag" Type="Boolean" />
           <Property Name="PAJobTitleID" Type="Int32" />
           <NavigationProperty Name="User_UserJobTitleHistory" Relationship="SAPDActivityModel.FK_User_UserJobTitleHistory_User_JobTitle" FromRole="User_JobTitle" ToRole="User_UserJobTitleHistory" />
+          <Property Type="Int32" Name="jtRanking" />
         </EntityType>
         <EntityType Name="Shift">
           <Key>
@@ -1312,10 +1312,10 @@
           <EntitySetMapping Name="JobTitles">
             <EntityTypeMapping TypeName="SAPDActivityModel.JobTitle">
               <MappingFragment StoreEntitySet="User_JobTitle">
+                <ScalarProperty Name="jtRanking" ColumnName="jtRanking" />
                 <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="NameCode" ColumnName="NameCode" />
-                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
                 <ScalarProperty Name="PAJobTitleID" ColumnName="PAJobTitleID" />
