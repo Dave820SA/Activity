@@ -657,6 +657,10 @@
             <End Role="Person" EntitySet="People" />
             <End Role="P_Address" EntitySet="P_Address" />
           </AssociationSet>
+          <AssociationSet Name="UserWorkStatusHistory" Association="SAPDActivityModel.UserWorkStatusHistory">
+            <End Role="User" EntitySet="Users" />
+            <End Role="WorkStatusHistory" EntitySet="WorkStatusHistories" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="P_EmailAddress">
           <Key>
@@ -789,6 +793,7 @@
           <NavigationProperty Name="SectionHistories" Relationship="SAPDActivityModel.UserSectionHistory" FromRole="User" ToRole="SectionHistory" />
           <NavigationProperty Name="RDHistories" Relationship="SAPDActivityModel.UserRDHistory" FromRole="User" ToRole="RDHistory" />
           <NavigationProperty Name="OfficeHistories" Relationship="SAPDActivityModel.UserOfficeHistory" FromRole="User" ToRole="OfficeHistory" />
+          <NavigationProperty Name="WorkStatusHistories" Relationship="SAPDActivityModel.UserWorkStatusHistory" FromRole="User" ToRole="WorkStatusHistory" />
         </EntityType>
         <EntityType Name="BadgeHistory">
           <Key>
@@ -888,6 +893,7 @@
           <Property Name="EndDate" Type="DateTime" />
           <Property Name="ModifiedDate" Type="DateTime" />
           <NavigationProperty Name="User_WorkStatus" Relationship="SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus" FromRole="User_UserWorkStatusHistory" ToRole="User_WorkStatus" />
+          <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserWorkStatusHistory" FromRole="WorkStatusHistory" ToRole="User" />
         </EntityType>
         <EntityType Name="WorksheetClassification">
           <Key>
@@ -1229,6 +1235,18 @@
               <PropertyRef Name="AppEntityID" />
             </Principal>
             <Dependent Role="P_Address">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserWorkStatusHistory">
+          <End Type="SAPDActivityModel.User" Role="User" Multiplicity="1" />
+          <End Type="SAPDActivityModel.WorkStatusHistory" Role="WorkStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="WorkStatusHistory">
               <PropertyRef Name="AppEntityID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1576,7 +1594,7 @@
         <EntityTypeShape EntityType="SAPDActivityModel.RDHistory" Width="2.125" PointX="16" PointY="4.125" Height="2.7494921874999987" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.SectionHistory" Width="2.125" PointX="13" PointY="8.375" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.ShiftHistory" Width="2" PointX="18.5" PointY="8.5" Height="2.7494921874999978" IsExpanded="true" />
-        <EntityTypeShape EntityType="SAPDActivityModel.WorkStatusHistory" Width="2.75" PointX="15.375" PointY="0.625" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAPDActivityModel.WorkStatusHistory" Width="2.75" PointX="15.375" PointY="0.625" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.WorksheetClassification" Width="2" PointX="10.125" PointY="6.375" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.WorkStatus" Width="2" PointX="18.5" PointY="1.75" Height="2.5571907552083246" IsExpanded="true" />
         <AssociationConnector Association="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" ManuallyRouted="false">
@@ -1630,8 +1648,8 @@
           <ConnectorPoint PointX="12" PointY="3.6167748730468716" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus" ManuallyRouted="false">
-          <ConnectorPoint PointX="18.5" PointY="2.4660953776041659" />
-          <ConnectorPoint PointX="18.125" PointY="2.4660953776041659" />
+          <ConnectorPoint PointX="18.5" PointY="2.56224609375" />
+          <ConnectorPoint PointX="18.125" PointY="2.56224609375" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserBadgeHistory">
           <ConnectorPoint PointX="14.375" PointY="5.9417122395833326" />
@@ -1703,6 +1721,10 @@
           <ConnectorPoint PointX="8.0833333333333339" PointY="6.2812499999999991" />
           <ConnectorPoint PointX="7.916666666666667" PointY="6.28125" />
           <ConnectorPoint PointX="5.5" PointY="6.28125" />
+        </AssociationConnector>
+        <AssociationConnector Association="SAPDActivityModel.UserWorkStatusHistory">
+          <ConnectorPoint PointX="14.375" PointY="1.9997460937499998" />
+          <ConnectorPoint PointX="15.375" PointY="1.9997460937499998" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

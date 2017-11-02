@@ -144,7 +144,7 @@
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\LinkAddressController.cs" />
+    <Compile Include="Images\LinkAddressController.cs" />
     <Compile Include="Controllers\LinkCatController.cs" />
     <Compile Include="Controllers\NonUserController.cs" />
     <Compile Include="Controllers\PersonSearchController.cs" />
@@ -168,6 +168,10 @@
     <Content Include="bootstrap\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\jquery.bootgrid.css" />
     <Content Include="Content\jquery.bootgrid.min.css" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\OfficerBadgeIcon.png" />
+    <Content Include="Images\SAPD-Patch.png" />
+    <Content Include="Images\SupervisorBadgeIcon.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.11.1-vsdoc.js" />
@@ -251,6 +255,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\Spin.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

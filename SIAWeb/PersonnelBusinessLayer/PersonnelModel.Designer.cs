@@ -40,6 +40,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_Address_Person_AddressType", "Person_AddressType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.AddressType), "Person_Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_Address), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_Address_User_State", "Person_State", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.State), "Person_Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_Address), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "PersonP_Address", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "P_Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_Address), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "UserWorkStatusHistory", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "WorkStatusHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.WorkStatusHistory), true)]
 
 #endregion
 
@@ -6097,6 +6098,28 @@ namespace PersonnelBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "UserWorkStatusHistory", "WorkStatusHistory")]
+        public EntityCollection<WorkStatusHistory> WorkStatusHistories
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkStatusHistory>("SAPDActivityModel.UserWorkStatusHistory", "WorkStatusHistory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkStatusHistory>("SAPDActivityModel.UserWorkStatusHistory", "WorkStatusHistory", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -6773,6 +6796,44 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WorkStatus>("SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus", "User_WorkStatus", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "UserWorkStatusHistory", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UserWorkStatusHistory", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UserWorkStatusHistory", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UserWorkStatusHistory", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SAPDActivityModel.UserWorkStatusHistory", "User", value);
                 }
             }
         }

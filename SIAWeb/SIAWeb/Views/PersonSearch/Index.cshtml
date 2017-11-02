@@ -14,22 +14,42 @@
     </div>
     <div class="col-md-5">
 
-        @using (Html.BeginForm("Index", "PersonSearch", FormMethod.Get))
+        @using (Html.BeginForm("Index", "PersonSearch", FormMethod.Get, new { encType = "multipart/form-data", id = "myform", name = "myform" }))
         {
            <div class="input-group">
                 @Html.TextBox("search_string", null, new { @class = "form-control" })
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit">
+                    <button class="btn btn-default" type="submit" id="process" value="process">
+                        @*<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>*@
+                        @*<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>*@
                         <i class="fa fa-search"></i>
+                        
                     </button>
                 </div>
             </div>
         }
         
     </div>
-    
+</div>  
+
+<div id="loading">
+    <div id="loadingcontent">
+        <p id="loadingspinner">
+            Searching things...
+        </p>
+    </div>
 </div>
-<hr />
+
+@*<div id="spinner">
+    <img src="@Url.Content("~/Images/ajax-loader.gif")" alt="Please wait...">
+</div>*@
+
+  @*We want to show this while the server process is running:*@
+@*<div id="divProcessing">
+    <p>Processing, please wait . . . <img src="../../Images/ajax-loader.gif"></p>
+</div>*@   
+
+<br />
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -52,8 +72,11 @@
                         </th>
                       
                         <th>
-                            
                             Office
+                        </th>
+
+                        <th>
+                            Status
                         </th>
                       
                         <th>
@@ -63,20 +86,40 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.JobTitle)
+                                @{
+                                    
+                                string title = string.Format(" - {0}", item.RankCode);   
+                                int rank = (item.jtRanking);
+                                    if (rank <= 6)
+                                        {
+                                           
+                                        <img src="~/Images/SupervisorBadgeIcon.png" alt="" class="image_background" /> @Html.Raw(title.ToUpper())  
+                                        }
+                                    else if (rank >= 7 && rank <= 11)
+                                    {
+                                         <img src="~/Images/OfficerBadgeIcon.png" alt="" class="image_background" /> @Html.Raw(title.ToUpper())  
+                                    }
+                                    else
+                                    {
+                                       <img src="~/Images/SAPD-Patch.png" alt="" class="image_background" /> @Html.Raw(title.ToUpper())
+                                    }
+                              }
+
+
+                               @* @Html.DisplayFor(modelItem => item.RankCode)*@
                             </td>
                             <td>
                             @{
-                                if (!String.IsNullOrEmpty(item.Badge))
-                                {
-                                     string person = string.Format("{0} {1} #{2}", item.First, item.Last, item.Badge);
+                                    if (!String.IsNullOrEmpty(item.Badge))
+                                    {
+                                        string person = string.Format("{0} {1} #{2}", item.First, item.Last, item.Badge);
                                     @Html.Raw(person.ToUpper())
-                                }
-                                else
-                                {
-                                    string person = string.Format("{0} {1}", item.First, item.Last);
+                                    }
+                                    else
+                                    {
+                                        string person = string.Format("{0} {1}", item.First, item.Last);
                                     @Html.Raw(person.ToUpper())
-                                }
+                                    }
                                     
                                
                                 }
@@ -89,14 +132,18 @@
                            
                             <td>
                                 @{
-                                if (!String.IsNullOrEmpty(item.Badge))
-                                {
-                                     string office = string.Format("{0} - {1}", item.Office, item.OfficeCode);
+                                    if (!String.IsNullOrEmpty(item.Badge))
+                                    {
+                                        string office = string.Format("{0} - {1}", item.Office, item.OfficeCode);
                                     @Html.Raw(office.ToUpper())
-                                }
+                                    }
                              
                                 }
                                 
+                            </td>
+
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Status)
                             </td>
                           
                             <td>
@@ -121,3 +168,21 @@
 </div>
 
 
+
+@section Scripts {
+    
+
+    <script type="text/javascript">
+
+        $(function () {
+            $("#process").click(function () {
+                $("#loading").fadeIn();
+            });
+        });
+
+
+
+    </script>
+
+    
+}

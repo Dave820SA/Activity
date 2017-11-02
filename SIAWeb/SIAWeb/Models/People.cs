@@ -18,5 +18,7 @@ namespace SIAWeb.Models
         public string Office { get; set; }
         public string JobTitle { get; set; }
         public int jtRanking { get; set; }
+        public string RankCode { get; set; }
+        public string Status { get; set; }
     }
 }
