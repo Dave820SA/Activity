@@ -11,20 +11,20 @@ namespace SIAWeb.Common
     {
         PersonnelContext db = new PersonnelContext();
 
-        public List<Badges> GetBadgeHistory(int appEntity)
+        public List<Badge> GetBadgeHistory(int appEntity)
         {
             var myBadges = from u in db.Users
                         join bh in db.BadgeHistories on u.AppEntityID equals bh.AppEntityID
                         join p in db.People on bh.EnteredBy equals p.AppEntityID
                         orderby bh.StartDate
                         where u.AppEntityID == appEntity
-                        select new Badges
+                        select new Badge
                         {
-                            Start = bh.StartDate,
-                            End = (bh.EndDate ?? DateTime.Now),
+                            StartDate = bh.StartDate,
+                            EndDate = (bh.EndDate ?? DateTime.Now),
                             FirstName = p.FirstName,
                             LastName = p.LastName,
-                             Badge = bh.Badge
+                             BadgeNbr = bh.Badge
                         };
             return myBadges.ToList();
 

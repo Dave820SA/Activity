@@ -32,5 +32,14 @@ namespace SIAWeb.Controllers
 
         }
 
+
+        public ActionResult SelectedPerson(int id)
+        {
+            GetPerson myperson = new GetPerson();
+
+            return View(myperson.GetPersonInfo(id));
+
+        }
+
     }
 }

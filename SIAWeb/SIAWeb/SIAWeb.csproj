@@ -140,6 +140,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\BadgeHistory.cs" />
     <Compile Include="Common\GetPeople.cs" />
+    <Compile Include="Common\GetPerson.cs" />
     <Compile Include="Common\RDHistory.cs" />
     <Compile Include="Common\ShiftHistory.cs" />
     <Compile Include="Common\SessionLogin.cs" />
@@ -155,9 +156,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Badges.cs" />
+    <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Models\People.cs" />
+    <Compile Include="Models\PersonInfo.cs" />
     <Compile Include="Models\RDs.cs" />
     <Compile Include="Models\Shifts.cs" />
     <Compile Include="Models\topLink.cs" />
@@ -323,6 +325,7 @@
     <Content Include="Views\Shared\_Alternate2.cshtml" />
     <Content Include="Views\Contact\_ViewStart.cshtml" />
     <Content Include="Views\PersonSearch\_ViewStart.cshtml" />
+    <Content Include="Views\PersonSearch\SelectedPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PersonnelBusinessLayer\PersonnelBusinessLayer.csproj">

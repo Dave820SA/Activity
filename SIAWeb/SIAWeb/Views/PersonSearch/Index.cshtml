@@ -86,8 +86,9 @@
                     {
                         <tr>
                             <td>
+                                @Html.HiddenFor(model => item.AppEntityID)
                                 @{
-                                    
+                                   
                                 string title = string.Format(" - {0}", item.RankCode);   
                                 int rank = (item.jtRanking);
                                     if (rank <= 6)
@@ -147,8 +148,8 @@
                             </td>
                           
                             <td>
-                                
-                                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) 
+                                <a href="@Url.Action("SelectedPerson", "PersonSearch", new { id = item.AppEntityID })" class="btn btn-success btn-sm"> View <i class="fa fa-list" aria-hidden="true"></i></a>
+                                @*@Html.ActionLink("SelectedPerson", "View", new { appEntity = item.AppEntityID }) *@
                             </td>
                         </tr>
     

@@ -1,8 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 
 namespace SIAWeb.Models
 {
-    public class People
+    public class PersonInfo
     {
         public int AppEntityID { get; set; }
         public string First { get; set; }
@@ -28,5 +29,15 @@ namespace SIAWeb.Models
         public string State { get; set; }
         public string Zip { get; set; }
 
+        //public virtual ICollection<Badge> Badges { get; set; }
+        
+        //public List<Badge> Badges { get; set; }
+        public IEnumerable<Badge> Badges { get; set; }
+       
+        //public List<RDs> RDHist { get; set; }
+        
+        //public List<WorkStatuss> StatusHist { get; set; }
+        
+        //public List<Shifts> ShiftHist { get; set; }
     }
 }
