@@ -138,8 +138,12 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Common\BadgeHistory.cs" />
     <Compile Include="Common\GetPeople.cs" />
+    <Compile Include="Common\RDHistory.cs" />
+    <Compile Include="Common\ShiftHistory.cs" />
     <Compile Include="Common\SessionLogin.cs" />
+    <Compile Include="Common\WorkStatusHistory.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -151,11 +155,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Badges.cs" />
     <Compile Include="Models\CurrentUser.cs" />
     <Compile Include="Models\People.cs" />
+    <Compile Include="Models\RDs.cs" />
+    <Compile Include="Models\Shifts.cs" />
     <Compile Include="Models\topLink.cs" />
     <Compile Include="Models\WebLinkModel.cs" />
     <Compile Include="Models\WebLink.cs" />
+    <Compile Include="Models\WorkStatuss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Views\PersonelSearchController.cs" />
   </ItemGroup>
