@@ -19,7 +19,6 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_EmailAddress_Person_Person", "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Person_EmailAddress", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_EmailAddress), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_Person_Person_PersonType", "Person_PersonType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.PersonType), "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Person), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_User_Person_Person", "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.User), true)]
@@ -41,6 +40,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_Address_User_State", "Person_State", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.State), "Person_Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_Address), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "PersonP_Address", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "P_Address", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_Address), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "UserWorkStatusHistory", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "WorkStatusHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.WorkStatusHistory), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_EmailAddress_person_EmailAddressType", "person_EmailAddressType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.p_EmailAddressType), "Person_EmailAddress", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_EmailAddress), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_EmailAddress_Person_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Person_EmailAddress", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_EmailAddress), true)]
 
 #endregion
 
@@ -91,22 +92,6 @@ namespace PersonnelBusinessLayer
         #endregion
     
         #region ObjectSet Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<P_EmailAddress> P_EmailAddress
-        {
-            get
-            {
-                if ((_P_EmailAddress == null))
-                {
-                    _P_EmailAddress = base.CreateObjectSet<P_EmailAddress>("P_EmailAddress");
-                }
-                return _P_EmailAddress;
-            }
-        }
-        private ObjectSet<P_EmailAddress> _P_EmailAddress;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -459,18 +444,42 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<State> _States;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<P_EmailAddress> P_EmailAddress
+        {
+            get
+            {
+                if ((_P_EmailAddress == null))
+                {
+                    _P_EmailAddress = base.CreateObjectSet<P_EmailAddress>("P_EmailAddress");
+                }
+                return _P_EmailAddress;
+            }
+        }
+        private ObjectSet<P_EmailAddress> _P_EmailAddress;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<p_EmailAddressType> p_EmailAddressType
+        {
+            get
+            {
+                if ((_p_EmailAddressType == null))
+                {
+                    _p_EmailAddressType = base.CreateObjectSet<p_EmailAddressType>("p_EmailAddressType");
+                }
+                return _p_EmailAddressType;
+            }
+        }
+        private ObjectSet<p_EmailAddressType> _p_EmailAddressType;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the P_EmailAddress EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToP_EmailAddress(P_EmailAddress p_EmailAddress)
-        {
-            base.AddObject("P_EmailAddress", p_EmailAddress);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the People EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -646,6 +655,22 @@ namespace PersonnelBusinessLayer
         public void AddToStates(State state)
         {
             base.AddObject("States", state);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the P_EmailAddress EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToP_EmailAddress(P_EmailAddress p_EmailAddress)
+        {
+            base.AddObject("P_EmailAddress", p_EmailAddress);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the p_EmailAddressType EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTop_EmailAddressType(p_EmailAddressType p_EmailAddressType)
+        {
+            base.AddObject("p_EmailAddressType", p_EmailAddressType);
         }
 
         #endregion
@@ -3090,13 +3115,17 @@ namespace PersonnelBusinessLayer
         /// </summary>
         /// <param name="emailAddressID">Initial value of the EmailAddressID property.</param>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="emailAddressTypeID">Initial value of the EmailAddressTypeID property.</param>
+        /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
         /// <param name="rowguid">Initial value of the rowguid property.</param>
         /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static P_EmailAddress CreateP_EmailAddress(global::System.Int32 emailAddressID, global::System.Int32 appEntityID, global::System.Guid rowguid, global::System.DateTime modifiedDate)
+        public static P_EmailAddress CreateP_EmailAddress(global::System.Int32 emailAddressID, global::System.Int32 appEntityID, global::System.Int32 emailAddressTypeID, global::System.String emailAddress, global::System.Guid rowguid, global::System.DateTime modifiedDate)
         {
             P_EmailAddress p_EmailAddress = new P_EmailAddress();
             p_EmailAddress.EmailAddressID = emailAddressID;
             p_EmailAddress.AppEntityID = appEntityID;
+            p_EmailAddress.EmailAddressTypeID = emailAddressTypeID;
+            p_EmailAddress.EmailAddress = emailAddress;
             p_EmailAddress.rowguid = rowguid;
             p_EmailAddress.ModifiedDate = modifiedDate;
             return p_EmailAddress;
@@ -3160,7 +3189,31 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EmailAddressTypeID
+        {
+            get
+            {
+                return _EmailAddressTypeID;
+            }
+            set
+            {
+                OnEmailAddressTypeIDChanging(value);
+                ReportPropertyChanging("EmailAddressTypeID");
+                _EmailAddressTypeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EmailAddressTypeID");
+                OnEmailAddressTypeIDChanged();
+            }
+        }
+        private global::System.Int32 _EmailAddressTypeID;
+        partial void OnEmailAddressTypeIDChanging(global::System.Int32 value);
+        partial void OnEmailAddressTypeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String EmailAddress
         {
@@ -3172,7 +3225,7 @@ namespace PersonnelBusinessLayer
             {
                 OnEmailAddressChanging(value);
                 ReportPropertyChanging("EmailAddress");
-                _EmailAddress = StructuralObject.SetValidValue(value, true);
+                _EmailAddress = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("EmailAddress");
                 OnEmailAddressChanged();
             }
@@ -3240,16 +3293,54 @@ namespace PersonnelBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_EmailAddress_Person_Person", "Person_Person")]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_EmailAddress_person_EmailAddressType", "person_EmailAddressType")]
+        public p_EmailAddressType person_EmailAddressType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<p_EmailAddressType>("SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType", "person_EmailAddressType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<p_EmailAddressType>("SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType", "person_EmailAddressType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<p_EmailAddressType> person_EmailAddressTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<p_EmailAddressType>("SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType", "person_EmailAddressType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<p_EmailAddressType>("SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType", "person_EmailAddressType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_EmailAddress_Person_Person", "Person")]
         public Person Person_Person
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person_Person").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person_Person").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person").Value = value;
             }
         }
         /// <summary>
@@ -3261,13 +3352,122 @@ namespace PersonnelBusinessLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person_Person");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person_Person", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="p_EmailAddressType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class p_EmailAddressType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new p_EmailAddressType object.
+        /// </summary>
+        /// <param name="emailAddressTypeID">Initial value of the EmailAddressTypeID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static p_EmailAddressType Createp_EmailAddressType(global::System.Int32 emailAddressTypeID, global::System.String name)
+        {
+            p_EmailAddressType p_EmailAddressType = new p_EmailAddressType();
+            p_EmailAddressType.EmailAddressTypeID = emailAddressTypeID;
+            p_EmailAddressType.Name = name;
+            return p_EmailAddressType;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EmailAddressTypeID
+        {
+            get
+            {
+                return _EmailAddressTypeID;
+            }
+            set
+            {
+                if (_EmailAddressTypeID != value)
+                {
+                    OnEmailAddressTypeIDChanging(value);
+                    ReportPropertyChanging("EmailAddressTypeID");
+                    _EmailAddressTypeID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("EmailAddressTypeID");
+                    OnEmailAddressTypeIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _EmailAddressTypeID;
+        partial void OnEmailAddressTypeIDChanging(global::System.Int32 value);
+        partial void OnEmailAddressTypeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_EmailAddress_person_EmailAddressType", "Person_EmailAddress")]
+        public EntityCollection<P_EmailAddress> Person_EmailAddress
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<P_EmailAddress>("SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType", "Person_EmailAddress");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<P_EmailAddress>("SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType", "Person_EmailAddress", value);
                 }
             }
         }
@@ -3531,28 +3731,6 @@ namespace PersonnelBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_EmailAddress_Person_Person", "Person_EmailAddress")]
-        public EntityCollection<P_EmailAddress> Person_EmailAddress
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<P_EmailAddress>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person_EmailAddress");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<P_EmailAddress>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person_EmailAddress", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_Person_Person_PersonType", "Person_PersonType")]
         public PersonType Person_PersonType
         {
@@ -3663,6 +3841,28 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<P_Address>("SAPDActivityModel.PersonP_Address", "P_Address", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_EmailAddress_Person_Person", "Person_EmailAddress")]
+        public EntityCollection<P_EmailAddress> Person_EmailAddress
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<P_EmailAddress>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person_EmailAddress");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<P_EmailAddress>("SAPDActivityModel.FK_Person_EmailAddress_Person_Person", "Person_EmailAddress", value);
                 }
             }
         }

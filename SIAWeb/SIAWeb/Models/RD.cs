@@ -5,7 +5,7 @@ using System.Web;
 
 namespace SIAWeb.Models
 {
-    public class RDs
+    public class RD
     {
         public int EnteredBy { get; set; }
         public string FirstName { get; set; }

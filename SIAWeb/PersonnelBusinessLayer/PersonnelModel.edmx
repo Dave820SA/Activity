@@ -11,6 +11,7 @@
           <EntitySet Name="Person_Address" EntityType="SAPDActivityModel.Store.Person_Address" store:Type="Tables" Schema="dbo" Table="Person.Address" />
           <EntitySet Name="Person_AddressType" EntityType="SAPDActivityModel.Store.Person_AddressType" store:Type="Tables" Schema="dbo" Table="Person.AddressType" />
           <EntitySet Name="Person_EmailAddress" EntityType="SAPDActivityModel.Store.Person_EmailAddress" store:Type="Tables" Schema="dbo" Table="Person.EmailAddress" />
+          <EntitySet Name="person_EmailAddressType" EntityType="SAPDActivityModel.Store.person_EmailAddressType" store:Type="Tables" Schema="dbo" Table="person.EmailAddressType" />
           <EntitySet Name="Person_Person" EntityType="SAPDActivityModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
           <EntitySet Name="Person_PersonPhone" EntityType="SAPDActivityModel.Store.Person_PersonPhone" store:Type="Tables" store:Schema="dbo" store:Name="Person.PersonPhone">
             <DefiningQuery>SELECT 
@@ -39,6 +40,10 @@
           <AssociationSet Name="FK_Person_Address_Person_AddressType" Association="SAPDActivityModel.Store.FK_Person_Address_Person_AddressType">
             <End Role="Person_AddressType" EntitySet="Person_AddressType" />
             <End Role="Person_Address" EntitySet="Person_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_EmailAddress_person_EmailAddressType" Association="SAPDActivityModel.Store.FK_Person_EmailAddress_person_EmailAddressType">
+            <End Role="person_EmailAddressType" EntitySet="person_EmailAddressType" />
+            <End Role="Person_EmailAddress" EntitySet="Person_EmailAddress" />
           </AssociationSet>
           <AssociationSet Name="FK_Person_Person_Person_PersonType" Association="SAPDActivityModel.Store.FK_Person_Person_Person_PersonType">
             <End Role="Person_PersonType" EntitySet="Person_PersonType" />
@@ -149,9 +154,17 @@
           </Key>
           <Property Name="EmailAddressID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
-          <Property Name="EmailAddress" Type="varchar" MaxLength="50" />
+          <Property Name="EmailAddressTypeID" Type="int" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="100" />
           <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="person_EmailAddressType">
+          <Key>
+            <PropertyRef Name="EmailAddressTypeID" />
+          </Key>
+          <Property Name="EmailAddressTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
         </EntityType>
         <EntityType Name="Person_Person">
           <Key>
@@ -389,6 +402,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Person_EmailAddress_person_EmailAddressType">
+          <End Role="person_EmailAddressType" Type="SAPDActivityModel.Store.person_EmailAddressType" Multiplicity="1" />
+          <End Role="Person_EmailAddress" Type="SAPDActivityModel.Store.Person_EmailAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person_EmailAddressType">
+              <PropertyRef Name="EmailAddressTypeID" />
+            </Principal>
+            <Dependent Role="Person_EmailAddress">
+              <PropertyRef Name="EmailAddressTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Person_Person_Person_PersonType">
           <End Role="Person_PersonType" Type="SAPDActivityModel.Store.Person_PersonType" Multiplicity="0..1" />
           <End Role="Person_Person" Type="SAPDActivityModel.Store.Person_Person" Multiplicity="*" />
@@ -550,7 +575,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="SAPDActivityModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="PersonnelContext" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="P_EmailAddress" EntityType="SAPDActivityModel.P_EmailAddress" />
           <EntitySet Name="People" EntityType="SAPDActivityModel.Person" />
           <EntitySet Name="PersonPhones" EntityType="SAPDActivityModel.PersonPhone" />
           <EntitySet Name="PersonTypes" EntityType="SAPDActivityModel.PersonType" />
@@ -568,10 +592,6 @@
           <EntitySet Name="WorkStatusHistories" EntityType="SAPDActivityModel.WorkStatusHistory" />
           <EntitySet Name="WorksheetClassifications" EntityType="SAPDActivityModel.WorksheetClassification" />
           <EntitySet Name="WorkStatus" EntityType="SAPDActivityModel.WorkStatus" />
-          <AssociationSet Name="FK_Person_EmailAddress_Person_Person" Association="SAPDActivityModel.FK_Person_EmailAddress_Person_Person">
-            <End Role="Person_Person" EntitySet="People" />
-            <End Role="Person_EmailAddress" EntitySet="P_EmailAddress" />
-          </AssociationSet>
           <AssociationSet Name="FK_Person_Person_Person_PersonType" Association="SAPDActivityModel.FK_Person_Person_Person_PersonType">
             <End Role="Person_PersonType" EntitySet="PersonTypes" />
             <End Role="Person_Person" EntitySet="People" />
@@ -661,18 +681,17 @@
             <End Role="User" EntitySet="Users" />
             <End Role="WorkStatusHistory" EntitySet="WorkStatusHistories" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="P_EmailAddress">
-          <Key>
-            <PropertyRef Name="EmailAddressID" />
-          </Key>
-          <Property Name="EmailAddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AppEntityID" Type="Int32" Nullable="false" />
-          <Property Name="EmailAddress" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="rowguid" Type="Guid" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
-          <NavigationProperty Name="Person_Person" Relationship="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" FromRole="Person_EmailAddress" ToRole="Person_Person" />
-        </EntityType>
+          <EntitySet Name="P_EmailAddress" EntityType="SAPDActivityModel.P_EmailAddress" />
+          <EntitySet Name="p_EmailAddressType" EntityType="SAPDActivityModel.p_EmailAddressType" />
+          <AssociationSet Name="FK_Person_EmailAddress_person_EmailAddressType" Association="SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType">
+            <End Role="person_EmailAddressType" EntitySet="p_EmailAddressType" />
+            <End Role="Person_EmailAddress" EntitySet="P_EmailAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_EmailAddress_Person_Person" Association="SAPDActivityModel.FK_Person_EmailAddress_Person_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Person_EmailAddress" EntitySet="P_EmailAddress" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="Person">
           <Key>
             <PropertyRef Name="AppEntityID" />
@@ -686,11 +705,11 @@
           <Property Name="Suffix" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="rowguid" Type="Guid" />
           <Property Name="ModifiedDate" Type="DateTime" />
-          <NavigationProperty Name="Person_EmailAddress" Relationship="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" FromRole="Person_Person" ToRole="Person_EmailAddress" />
           <NavigationProperty Name="Person_PersonType" Relationship="SAPDActivityModel.FK_Person_Person_Person_PersonType" FromRole="Person_Person" ToRole="Person_PersonType" />
           <NavigationProperty Name="Person_PersonPhone" Relationship="SAPDActivityModel.FK_Person_PersonPhone_Person_Person" FromRole="Person_Person" ToRole="Person_PersonPhone" />
           <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_User_Person_Person" FromRole="Person_Person" ToRole="User_User" />
           <NavigationProperty Name="P_Address" Relationship="SAPDActivityModel.PersonP_Address" FromRole="Person" ToRole="P_Address" />
+          <NavigationProperty Name="Person_EmailAddress" Relationship="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" FromRole="Person" ToRole="Person_EmailAddress" />
         </EntityType>
         <EntityType Name="PersonPhone">
           <Key>
@@ -920,18 +939,6 @@
           <Property Name="PAWorkStatusID" Type="Int32" />
           <NavigationProperty Name="User_UserWorkStatusHistory" Relationship="SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus" FromRole="User_WorkStatus" ToRole="User_UserWorkStatusHistory" />
         </EntityType>
-        <Association Name="FK_Person_EmailAddress_Person_Person">
-          <End Role="Person_Person" Type="SAPDActivityModel.Person" Multiplicity="1" />
-          <End Role="Person_EmailAddress" Type="SAPDActivityModel.P_EmailAddress" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Person_Person">
-              <PropertyRef Name="AppEntityID" />
-            </Principal>
-            <Dependent Role="Person_EmailAddress">
-              <PropertyRef Name="AppEntityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Person_Person_Person_PersonType">
           <End Role="Person_PersonType" Type="SAPDActivityModel.PersonType" Multiplicity="0..1" />
           <End Role="Person_Person" Type="SAPDActivityModel.Person" Multiplicity="*" />
@@ -1251,23 +1258,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <EntityType Name="P_EmailAddress">
+          <Key>
+            <PropertyRef Name="EmailAddressID" />
+          </Key>
+          <Property Type="Int32" Name="EmailAddressID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="EmailAddressTypeID" Nullable="false" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="rowguid" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+          <NavigationProperty Name="person_EmailAddressType" Relationship="SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType" FromRole="Person_EmailAddress" ToRole="person_EmailAddressType" />
+          <NavigationProperty Name="Person_Person" Relationship="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" FromRole="Person_EmailAddress" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="p_EmailAddressType">
+          <Key>
+            <PropertyRef Name="EmailAddressTypeID" />
+          </Key>
+          <Property Type="Int32" Name="EmailAddressTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Person_EmailAddress" Relationship="SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType" FromRole="person_EmailAddressType" ToRole="Person_EmailAddress" />
+        </EntityType>
+        <Association Name="FK_Person_EmailAddress_person_EmailAddressType">
+          <End Type="SAPDActivityModel.p_EmailAddressType" Role="person_EmailAddressType" Multiplicity="1" />
+          <End Type="SAPDActivityModel.P_EmailAddress" Role="Person_EmailAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="person_EmailAddressType">
+              <PropertyRef Name="EmailAddressTypeID" />
+            </Principal>
+            <Dependent Role="Person_EmailAddress">
+              <PropertyRef Name="EmailAddressTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_EmailAddress_Person_Person">
+          <End Type="SAPDActivityModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="SAPDActivityModel.P_EmailAddress" Role="Person_EmailAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="Person_EmailAddress">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="SAPDActivityModelStoreContainer" CdmEntityContainer="PersonnelContext">
-          <EntitySetMapping Name="P_EmailAddress">
-            <EntityTypeMapping TypeName="SAPDActivityModel.P_EmailAddress">
-              <MappingFragment StoreEntitySet="Person_EmailAddress">
-                <ScalarProperty Name="EmailAddressID" ColumnName="EmailAddressID" />
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
-                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="People">
             <EntityTypeMapping TypeName="SAPDActivityModel.Person">
               <MappingFragment StoreEntitySet="Person_Person">
@@ -1558,6 +1599,26 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="P_EmailAddress">
+            <EntityTypeMapping TypeName="SAPDActivityModel.P_EmailAddress">
+              <MappingFragment StoreEntitySet="Person_EmailAddress">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="EmailAddressTypeID" ColumnName="EmailAddressTypeID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="EmailAddressID" ColumnName="EmailAddressID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="p_EmailAddressType">
+            <EntityTypeMapping TypeName="SAPDActivityModel.p_EmailAddressType">
+              <MappingFragment StoreEntitySet="person_EmailAddressType">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmailAddressTypeID" ColumnName="EmailAddressTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1579,7 +1640,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="PersonnelModel">
-        <EntityTypeShape EntityType="SAPDActivityModel.P_EmailAddress" Width="1.5" PointX="1.625" PointY="3" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.Person" Width="2" PointX="9" PointY="0.625" Height="3.7109993489583326" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.PersonPhone" Width="2" PointX="4.625" PointY="0.5" Height="2.1725878906249996" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.PersonType" Width="1.5" PointX="4.75" PointY="2.875" Height="2.3648893229166674" IsExpanded="true" />
@@ -1597,32 +1657,17 @@
         <EntityTypeShape EntityType="SAPDActivityModel.WorkStatusHistory" Width="2.75" PointX="15.375" PointY="0.625" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.WorksheetClassification" Width="2" PointX="10.125" PointY="6.375" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.WorkStatus" Width="2" PointX="18.5" PointY="1.75" Height="2.5571907552083246" IsExpanded="true" />
-        <AssociationConnector Association="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" ManuallyRouted="false">
-          <ConnectorPoint PointX="10" PointY="0.625" />
-          <ConnectorPoint PointX="10" PointY="0.37499999999999978" />
-          <ConnectorPoint PointX="8.75" PointY="0.37499999999999978" />
-          <ConnectorPoint PointX="8.75" PointY="5.4898893229166674" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="5.4898893229166665" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="5.4898893229166674" />
-          <ConnectorPoint PointX="3.5" PointY="5.4898893229166674" />
-          <ConnectorPoint PointX="3.5" PointY="4.0862939453125" />
-          <ConnectorPoint PointX="3.125" PointY="4.0862939453125" />
-        </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_Person_Person_Person_PersonType" ManuallyRouted="false">
-          <ConnectorPoint PointX="6.25" PointY="3.6054996744791663" />
-          <ConnectorPoint PointX="8.6666666666666661" PointY="3.6054996744791659" />
-          <ConnectorPoint PointX="8.8333333333333339" PointY="3.6054996744791663" />
-          <ConnectorPoint PointX="9" PointY="3.6054996744791663" />
+          <ConnectorPoint PointX="6.25" PointY="3.7278450520833357" />
+          <ConnectorPoint PointX="9" PointY="3.7278450520833357" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_Person_PersonPhone_Person_Person" ManuallyRouted="false">
-          <ConnectorPoint PointX="9" PointY="1.6487939453124998" />
-          <ConnectorPoint PointX="8.8333333333333339" PointY="1.6487939453124991" />
-          <ConnectorPoint PointX="8.6666666666666661" PointY="1.6487939453124998" />
-          <ConnectorPoint PointX="6.625" PointY="1.6487939453124998" />
+          <ConnectorPoint PointX="9" PointY="1.6487939453124996" />
+          <ConnectorPoint PointX="6.625" PointY="1.6487939453124996" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_User_Person_Person" ManuallyRouted="false">
-          <ConnectorPoint PointX="11" PointY="2.4804996744791663" />
-          <ConnectorPoint PointX="12" PointY="2.4804996744791663" />
+          <ConnectorPoint PointX="11" PointY="3.8528450520833357" />
+          <ConnectorPoint PointX="12" PointY="3.8528450520833357" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType" ManuallyRouted="false">
           <ConnectorPoint PointX="3.875" PointY="1.7689925130208337" />
@@ -1641,11 +1686,11 @@
           <ConnectorPoint PointX="19.75" PointY="11.249492187499998" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_Clasification_User_Classification" ManuallyRouted="false">
-          <ConnectorPoint PointX="11.125" PointY="6.375" />
-          <ConnectorPoint PointX="11.125" PointY="6" />
-          <ConnectorPoint PointX="11.625" PointY="6" />
-          <ConnectorPoint PointX="11.625" PointY="3.6167748730468716" />
-          <ConnectorPoint PointX="12" PointY="3.6167748730468716" />
+          <ConnectorPoint PointX="12.125" PointY="7.5574446614583337" />
+          <ConnectorPoint PointX="12.447917166666665" PointY="7.5574446614583328" />
+          <ConnectorPoint PointX="12.614583833333333" PointY="7.5574446614583337" />
+          <ConnectorPoint PointX="12.8710933125" PointY="7.5574446614583337" />
+          <ConnectorPoint PointX="12.8710933125" PointY="6.134013671875" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus" ManuallyRouted="false">
           <ConnectorPoint PointX="18.5" PointY="2.56224609375" />
@@ -1670,7 +1715,7 @@
           <ConnectorPoint PointX="18.5" PointY="9.874746093749998" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserJobTitleHistory">
-          <ConnectorPoint PointX="12.531250499999999" PointY="5.9417122395833326" />
+          <ConnectorPoint PointX="12.531250499999999" PointY="6.134013671875" />
           <ConnectorPoint PointX="12.531250499999999" PointY="11.31224609375" />
           <ConnectorPoint PointX="12.125" PointY="11.31224609375" />
         </AssociationConnector>
@@ -1683,14 +1728,12 @@
           <ConnectorPoint PointX="16" PointY="4.8858562497996791" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserOfficeHistory">
-          <ConnectorPoint PointX="12" PointY="4.75305007161459" />
-          <ConnectorPoint PointX="11.708333333333334" PointY="4.7530500716145889" />
-          <ConnectorPoint PointX="11.541666666666666" PointY="4.75305007161459" />
-          <ConnectorPoint PointX="9.9583333333333339" PointY="4.7530500716145889" />
-          <ConnectorPoint PointX="9.7916666666666661" PointY="4.75305007161459" />
-          <ConnectorPoint PointX="8.8333333333333339" PointY="4.7530500716145889" />
-          <ConnectorPoint PointX="8.6666666666666661" PointY="4.75305007161459" />
-          <ConnectorPoint PointX="8" PointY="4.75305007161459" />
+          <ConnectorPoint PointX="12" PointY="4.9441943359375" />
+          <ConnectorPoint PointX="10.552085833333335" PointY="4.9441943359374987" />
+          <ConnectorPoint PointX="10.385419166666667" PointY="4.9441943359375" />
+          <ConnectorPoint PointX="9.9583333333333339" PointY="4.9441943359374987" />
+          <ConnectorPoint PointX="9.7916666666666661" PointY="4.9441943359375" />
+          <ConnectorPoint PointX="8" PointY="4.9441943359375" />
           <ConnectorPoint PointX="8" PointY="7.125" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.Office_Office" Width="1.5" PointX="7.875" PointY="10.75" Height="2.749492187499996" />
@@ -1711,22 +1754,37 @@
           <ConnectorPoint PointX="3.25" PointY="8.8651432291666623" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_Address_User_State" >
-          <ConnectorPoint PointX="2.25" PointY="11.34375" />
-          <ConnectorPoint PointX="4.90625" PointY="11.34375" />
-          <ConnectorPoint PointX="4.90625" PointY="10.15330078125" />
+          <ConnectorPoint PointX="2.25" PointY="11.28125" />
+          <ConnectorPoint PointX="5.21875" PointY="11.28125" />
+          <ConnectorPoint PointX="5.21875" PointY="10.15330078125" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.PersonP_Address">
           <ConnectorPoint PointX="9.875" PointY="4.3359993489583326" />
-          <ConnectorPoint PointX="9.875" PointY="6.28125" />
-          <ConnectorPoint PointX="8.0833333333333339" PointY="6.2812499999999991" />
-          <ConnectorPoint PointX="7.916666666666667" PointY="6.28125" />
-          <ConnectorPoint PointX="5.5" PointY="6.28125" />
+          <ConnectorPoint PointX="9.875" PointY="6.2812500000000009" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="6.28125" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="6.2812500000000009" />
+          <ConnectorPoint PointX="5.5" PointY="6.2812500000000009" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserWorkStatusHistory">
           <ConnectorPoint PointX="14.375" PointY="1.9997460937499998" />
           <ConnectorPoint PointX="15.375" PointY="1.9997460937499998" />
         </AssociationConnector>
-      </Diagram>
+        <EntityTypeShape EntityType="SAPDActivityModel.P_EmailAddress" Width="1.5" PointX="2.75" PointY="3.375" Height="2.5571907552083388" />
+        <EntityTypeShape EntityType="SAPDActivityModel.p_EmailAddressType" Width="1.5" PointX="0.75" PointY="4.75" Height="1.595683593749996" />
+        <AssociationConnector Association="SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType" >
+          <ConnectorPoint PointX="2.25" PointY="5.3410953776041694" />
+          <ConnectorPoint PointX="2.75" PointY="5.3410953776041694" />
+        </AssociationConnector>
+        <AssociationConnector Association="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" >
+          <ConnectorPoint PointX="10.4687525" PointY="4.3359993489583326" />
+          <ConnectorPoint PointX="10.4687525" PointY="5.6172900390625031" />
+          <ConnectorPoint PointX="9.9583333333333339" PointY="5.6172900390625022" />
+          <ConnectorPoint PointX="9.7916666666666661" PointY="5.6172900390625031" />
+          <ConnectorPoint PointX="8.0833333333333339" PointY="5.6172900390625022" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="5.6172900390625031" />
+          <ConnectorPoint PointX="4.25" PointY="5.6172900390625031" />
+        </AssociationConnector>
+        </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>

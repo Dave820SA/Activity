@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SIAWeb.Models
 {
@@ -28,11 +30,16 @@ namespace SIAWeb.Models
         public string City { get; set; }
         public string State { get; set; }
         public string Zip { get; set; }
+        [DisplayName("Day Off")]
+        public string RD { get; set; }
 
-        //public virtual ICollection<Badge> Badges { get; set; }
-        
-        //public List<Badge> Badges { get; set; }
+        [DisplayFormat(DataFormatString = "{0:d}")]
+        public DateTime Employeed { get; set; }
+        public string Email { get; set; }
+
         public IEnumerable<Badge> Badges { get; set; }
+        public IEnumerable<RD> RDs { get; set; }
+        public IEnumerable<EmailAddress> Emails { get; set; }
        
         //public List<RDs> RDHist { get; set; }
         

@@ -37,6 +37,11 @@ namespace SIAWeb.Common
 
                            join jth in db.JobTitles on jb.JobTitleID equals jth.JobTitleID
 
+                           join r in db.RDHistories on u.AppEntityID equals r.AppEntityID into crd
+                           from curRd in crd.DefaultIfEmpty()
+
+                           join dayo in db.DayOffs on curRd.RDID equals dayo.RDID
+
                            join a in db.P_Address on p.AppEntityID equals a.AppEntityID into add
                            from ad in add.DefaultIfEmpty()
 
@@ -46,9 +51,11 @@ namespace SIAWeb.Common
                            join s in db.States on ad.StateID equals s.StateID into stt
                            from st in stt.DefaultIfEmpty()
 
+                           //join eml in db.P_EmailAddress on p.AppEntityID equals eml.AppEntityID
+
                            orderby p.LastName, p.FirstName
 
-                           where (ws.EndDate == null && uf.EndDate == null && nb.EndDate == null && jb.EndDate == null && ad.EndDate == null) && (p.AppEntityID == appEntityID)
+                           where (ws.EndDate == null && uf.EndDate == null && nb.EndDate == null && jb.EndDate == null && ad.EndDate == null && curRd.EndDate == null) && (p.AppEntityID == appEntityID)
 
                            select new PersonInfo
                            {
@@ -71,6 +78,9 @@ namespace SIAWeb.Common
                                Zip = ad.PostalCode,
                                State = st.StateName,
                                AddressType = adt.Name,
+                               RD = dayo.Name,
+                               Employeed = (DateTime)u.HireDate,
+                               //Email = eml.EmailAddress,
                                Badges = (from us in db.Users
                                             join bh in db.BadgeHistories on us.AppEntityID equals bh.AppEntityID
                                             join pr in db.People on bh.EnteredBy equals pr.AppEntityID
@@ -83,22 +93,33 @@ namespace SIAWeb.Common
                                                 FirstName = pr.FirstName,
                                                 LastName = pr.LastName,
                                                 BadgeNbr = bh.Badge
-                                            })
+                                            }),
+                               RDs = (from us in db.Users
+                                            join rdh in db.RDHistories on us.AppEntityID equals rdh.AppEntityID
+                                            join dayoff in db.DayOffs on rdh.RDID equals dayoff.RDID
+                                            join pr in db.People on rdh.EnteredBy equals p.AppEntityID
+                                            orderby rdh.StartDate
+                                            where u.AppEntityID == appEntityID
+                                            select new RD
+                                                {
+                                                    Start = rdh.StartDate,
+                                                    End = (rdh.EndDate ?? DateTime.Now),
+                                                    FirstName = p.FirstName,
+                                                    LastName = p.LastName,
+                                                    DayOff = dayoff.Name
+                                                }),
+                            Emails = (from ep in db.People
+                                          join e in db.P_EmailAddress on ep.AppEntityID equals e.AppEntityID
+                                          join et in db.p_EmailAddressType on e.EmailAddressTypeID equals et.EmailAddressTypeID
+                                          where ep.AppEntityID == appEntityID
+                                          select new EmailAddress
+                                          { AddressType = et.Name,
+                                            userEmailAddress = e.EmailAddress
+                                          })
+
                            });
 
-            //var myBadges = from u in db.Users
-            //               join bh in db.BadgeHistories on u.AppEntityID equals bh.AppEntityID
-            //               join p in db.People on bh.EnteredBy equals p.AppEntityID
-            //               orderby bh.StartDate
-            //               where u.AppEntityID == appEntityID
-            //               select new Badge
-            //               {
-            //                   StartDate = bh.StartDate,
-            //                   EndDate = (bh.EndDate ?? DateTime.Now),
-            //                   FirstName = p.FirstName,
-            //                   LastName = p.LastName,
-            //                   BadgeNbr = bh.Badge
-            //               };
+           
            
 
             return newPerson.ToList();

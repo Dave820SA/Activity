@@ -21,12 +21,7 @@ namespace SIAWeb.Models
         public string RankCode { get; set; }
         [DisplayName("Work Status")]
         public string Status { get; set; }
-        public string AddressType { get; set; }
-        public string AdressL1 { get; set; }
-        public string AddressL2 { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string Zip { get; set; }
+       
 
     }
 }

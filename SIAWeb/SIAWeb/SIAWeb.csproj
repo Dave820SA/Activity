@@ -158,9 +158,10 @@
     </Compile>
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CurrentUser.cs" />
+    <Compile Include="Models\EmailAddress.cs" />
     <Compile Include="Models\People.cs" />
     <Compile Include="Models\PersonInfo.cs" />
-    <Compile Include="Models\RDs.cs" />
+    <Compile Include="Models\RD.cs" />
     <Compile Include="Models\Shifts.cs" />
     <Compile Include="Models\topLink.cs" />
     <Compile Include="Models\WebLinkModel.cs" />
