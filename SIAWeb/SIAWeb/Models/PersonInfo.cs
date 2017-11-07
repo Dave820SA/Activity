@@ -40,6 +40,8 @@ namespace SIAWeb.Models
         public IEnumerable<Badge> Badges { get; set; }
         public IEnumerable<RD> RDs { get; set; }
         public IEnumerable<EmailAddress> Emails { get; set; }
+        public IEnumerable<OfficeAssigment> OfficeAssigments { get; set; }
+        public IEnumerable<PhoneNumber> PhoneNumbers { get; set; }
        
         //public List<RDs> RDHist { get; set; }
         

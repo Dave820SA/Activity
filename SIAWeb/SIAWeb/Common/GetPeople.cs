@@ -3,6 +3,7 @@ using System.Linq;
 using SIAWeb.Models;
 using PersonnelBusinessLayer;
 
+
 namespace SIAWeb.Common
 {
     public class GetPeople
@@ -45,6 +46,7 @@ namespace SIAWeb.Common
             return myPeople.ToList();
 
         }
+
 
     }
 }

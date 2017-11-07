@@ -83,29 +83,29 @@ namespace SIAWeb.Common
                                //Email = eml.EmailAddress,
                                Badges = (from us in db.Users
                                             join bh in db.BadgeHistories on us.AppEntityID equals bh.AppEntityID
-                                            join pr in db.People on bh.EnteredBy equals pr.AppEntityID
+                                            //join pr in db.People on bh.EnteredBy equals pr.AppEntityID
                                             orderby bh.StartDate
-                                            where us.AppEntityID == appEntityID
+                                            where bh.AppEntityID == appEntityID
                                             select new Badge
                                             {
                                                 StartDate = bh.StartDate,
                                                 EndDate = (bh.EndDate ?? DateTime.Now),
-                                                FirstName = pr.FirstName,
-                                                LastName = pr.LastName,
+                                                //FirstName = pr.FirstName,
+                                                //LastName = pr.LastName,
                                                 BadgeNbr = bh.Badge
                                             }),
                                RDs = (from us in db.Users
                                             join rdh in db.RDHistories on us.AppEntityID equals rdh.AppEntityID
                                             join dayoff in db.DayOffs on rdh.RDID equals dayoff.RDID
-                                            join pr in db.People on rdh.EnteredBy equals p.AppEntityID
+                                            //join pr in db.People on rdh.EnteredBy equals p.AppEntityID
                                             orderby rdh.StartDate
-                                            where u.AppEntityID == appEntityID
+                                            where rdh.AppEntityID == appEntityID
                                             select new RD
                                                 {
-                                                    Start = rdh.StartDate,
-                                                    End = (rdh.EndDate ?? DateTime.Now),
-                                                    FirstName = p.FirstName,
-                                                    LastName = p.LastName,
+                                                    StartDate = rdh.StartDate,
+                                                    EndDate = (rdh.EndDate ?? DateTime.Now),
+                                                    //FirstName = p.FirstName,
+                                                    //LastName = p.LastName,
                                                     DayOff = dayoff.Name
                                                 }),
                             Emails = (from ep in db.People
@@ -115,7 +115,30 @@ namespace SIAWeb.Common
                                           select new EmailAddress
                                           { AddressType = et.Name,
                                             userEmailAddress = e.EmailAddress
-                                          })
+                                          }),
+                            OfficeAssigments = (from us in db.Users
+                                            join oh in db.OfficeHistories on us.AppEntityID equals oh.AppEntityID
+                                            join o in db.Office_Office on oh.OfficeID equals o.OfficeID
+                                            orderby oh.StartDate
+                                            where oh.AppEntityID == appEntityID
+                                            select new OfficeAssigment
+                                            {
+                                                StartDate = oh.StartDate,
+                                                EndDate = (oh.EndDate ?? DateTime.Now),
+                                                Office = o.Name,
+                                                OfficeCode = o.Code
+                                            }),
+                           PhoneNumbers = (from pp in db.People
+                                      join ph in db.PersonPhones on pp.AppEntityID equals ph.AppEntityID
+                                      join phType in db.PhoneNumberTypes on ph.PhoneNumberTypeID equals phType.PhoneNumberTypeID
+                                      //join pr in db.People on rdh.EnteredBy equals p.AppEntityID
+                                      //orderby rdh.StartDate
+                                      where ph.AppEntityID == appEntityID
+                                      select new PhoneNumber
+                                      {
+                                          PhoneType = phType.Name,
+                                          PhoneNbr = ph.PhoneNumber
+                                      })
 
                            });
 

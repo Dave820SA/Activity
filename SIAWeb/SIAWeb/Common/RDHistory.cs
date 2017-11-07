@@ -21,8 +21,8 @@ namespace SIAWeb.Common
                            where u.AppEntityID == appEntity
                            select new RD
                            {
-                               Start = rdh.StartDate,
-                               End = (rdh.EndDate ?? DateTime.Now),
+                               StartDate = rdh.StartDate,
+                               EndDate = (rdh.EndDate ?? DateTime.Now),
                                FirstName = p.FirstName,
                                LastName = p.LastName,
                                DayOff = dayoff.Name

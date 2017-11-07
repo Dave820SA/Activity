@@ -10,8 +10,8 @@ namespace SIAWeb.Models
         public int EnteredBy { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
         public string DayOff { get; set; }
     }
 }
