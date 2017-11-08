@@ -80,6 +80,7 @@ namespace SIAWeb.Common
                                AddressType = adt.Name,
                                RD = dayo.Name,
                                Employeed = (DateTime)u.HireDate,
+                               
                                //Email = eml.EmailAddress,
                                Badges = (from us in db.Users
                                             join bh in db.BadgeHistories on us.AppEntityID equals bh.AppEntityID
@@ -142,8 +143,7 @@ namespace SIAWeb.Common
 
                            });
 
-           
-           
+
 
             return newPerson.ToList();
         }
