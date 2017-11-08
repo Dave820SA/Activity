@@ -15,13 +15,38 @@
         <div class="portlet light profile-sidebar-portlet bordered">
             <div class="profile-userpic">
                 @{
-                    string sap = "106919";
-                    string picPath = "http://wppswebprod/FileShare/Images/" + sap + ".png";
+                    string sap = pInfo.SAP;
+
+                    string newSAP = sap.Substring(sap.Length - 6, 6);
+
+                    var url = "http://wppswebprod/FileShare/Images/" + newSAP + ".png";
+                    HttpWebResponse response = null;
+                    var request = (HttpWebRequest)WebRequest.Create(url);
+                    request.Method = "HEAD";
+
+                    try
+                        {
+                            response = (HttpWebResponse)request.GetResponse();
+                        }
+                    catch (WebException ex)
+                        {
+                            url = "~/Images/Male.png";
+                         /* A WebException will be thrown if the status of the response is not `200 OK` */
+                        }
+                    finally
+                        {
+                            // Don't forget to close your response.
+                             if (response != null)
+                            {
+                             response.Close();
+                            }
+                        }
                     
-                    <img src="@Url.Content(picPath)" class="img-responsive" alt="">
+                    
+                    <img src="@Url.Content(url)" class="img-responsive" alt="">
                  }
 
-                 </div>
+            </div>
             <div class="profile-usertitle">
                 @{
                     if (!String.IsNullOrEmpty(pInfo.Badge))
