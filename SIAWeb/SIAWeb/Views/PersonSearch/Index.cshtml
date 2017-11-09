@@ -127,11 +127,11 @@
                             </td>
                             <td>
                                 @{
-                        if (!String.IsNullOrEmpty(item.Badge))
-                        {
-                            string office = string.Format("{0} - {1}", item.Office, item.OfficeCode);
+                                    //if (!String.IsNullOrEmpty(item.Badge))
+                                    //{
+                                        string office = string.Format("{0} - {1}", item.Office, item.OfficeCode);
                                     @Html.Raw(office.ToUpper())
-                                    }
+                                   @* }*@
                              
                                 }
                             </td>
@@ -139,8 +139,8 @@
                                 @Html.DisplayFor(modelItem => item.Status)
                             </td>
                             <td>
-                                <a href="@Url.Action("SelectedPerson", "PersonSearch", new { id = item.AppEntityID })" class="btn btn-success btn-sm">
-                                    View <i class="fa fa-list" aria-hidden="true"></i></a>@*@Html.ActionLink("SelectedPerson", "View", new { appEntity = item.AppEntityID }) *@
+                                <a href="@Url.Action("SelectedPerson", "PersonSearch", new { id = item.AppEntityID })" class="btn btn-default btn-xs">
+                                    Select&nbsp; <i class="fa fa-list" aria-hidden="true"></i></a>@*@Html.ActionLink("SelectedPerson", "View", new { appEntity = item.AppEntityID }) *@
                             </td>
                         </tr>
     

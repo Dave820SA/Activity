@@ -275,7 +275,7 @@
           <Property Name="Gender" Type="nchar" MaxLength="1" />
           <Property Name="Ethnicty" Type="nchar" MaxLength="1" />
           <Property Name="MaritalStatus" Type="nchar" MaxLength="1" />
-          <Property Name="HireDate" Type="date" />
+          <Property Name="HireDate" Type="date" Nullable="false" />
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="WorksheetVisibleFlag" Type="bit" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -570,6 +570,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spPersonnelSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchString" Type="varchar" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -691,6 +694,9 @@
             <End Role="Person" EntitySet="People" />
             <End Role="Person_EmailAddress" EntitySet="P_EmailAddress" />
           </AssociationSet>
+          <FunctionImport Name="spPersonnelSearch" ReturnType="Collection(SAPDActivityModel.spPersonnelSearch_Result)">
+            <Parameter Name="SearchString" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Person">
           <Key>
@@ -800,7 +806,7 @@
           <Property Name="Gender" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
           <Property Name="Ethnicty" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
           <Property Name="MaritalStatus" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
-          <Property Name="HireDate" Type="DateTime" />
+          <Property Name="HireDate" Type="DateTime" Nullable="false" />
           <Property Name="rowguid" Type="Guid" />
           <Property Name="WorksheetVisibleFlag" Type="Boolean" />
           <Property Name="ModifiedDate" Type="DateTime" />
@@ -1303,6 +1309,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="spPersonnelSearch_Result">
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Badge" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SAP" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="RankCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Office" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficeCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Ranking" Nullable="true" />
+          <Property Type="String" Name="WorkStatus" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1619,6 +1637,22 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spPersonnelSearch" FunctionName="SAPDActivityModel.Store.spPersonnelSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SAPDActivityModel.spPersonnelSearch_Result">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="RankCode" ColumnName="RankCode" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

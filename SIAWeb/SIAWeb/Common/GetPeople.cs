@@ -12,36 +12,55 @@ namespace SIAWeb.Common
 
         public List<People> GetSearched(string searchString)
         {
-            var myPeople = from p in db.People
+            var myPeople = from p in db.spPersonnelSearch(searchString)
+                           select new People
+                           {
+                               AppEntityID = p.AppEntityID,
+                               First = p.FirstName,
+                               Last = p.LastName,
+                               SAP = p.SAP,
+                               Badge = p.Badge,
+                               Office = p.Office,
+                               OfficeCode = p.OfficeCode,
+                               RankCode = p.RankCode,
+                               jtRanking = (p.Ranking ?? 12),
+                               Status = p.WorkStatus
+
+                           };
+                                 
+
+
+
+            //var myPeople = from p in db.People
                            
-                           join u in db.Users on p.AppEntityID equals u.AppEntityID
+            //               join u in db.Users on p.AppEntityID equals u.AppEntityID
 
-                           join w in db.WorkStatusHistories on u.AppEntityID equals w.AppEntityID into wsh
-                           from ws in wsh.DefaultIfEmpty()
+            //               join w in db.WorkStatusHistories on u.AppEntityID equals w.AppEntityID into wsh
+            //               from ws in wsh.DefaultIfEmpty()
 
-                           join wst in db.WorkStatus on ws.WorkstatusID equals wst.WorkStatusID
+            //               join wst in db.WorkStatus on ws.WorkstatusID equals wst.WorkStatusID
 
-                           join o in db.OfficeHistories on u.AppEntityID equals o.AppEntityID into uof
-                           from uf in uof.DefaultIfEmpty()
+            //               join o in db.OfficeHistories on u.AppEntityID equals o.AppEntityID into uof
+            //               from uf in uof.DefaultIfEmpty()
 
-                           join of in db.Office_Office on uf.OfficeID equals of.OfficeID
+            //               join of in db.Office_Office on uf.OfficeID equals of.OfficeID
 
-                           join b in db.BadgeHistories on u.AppEntityID equals b.AppEntityID into nob
-                           from nb in nob.DefaultIfEmpty()
+            //               join b in db.BadgeHistories on u.AppEntityID equals b.AppEntityID into nob
+            //               from nb in nob.DefaultIfEmpty()
 
-                           join j in db.JobTitleHistories on u.AppEntityID equals j.AppEntityID into job
-                           from jb in job.DefaultIfEmpty()
+            //               join j in db.JobTitleHistories on u.AppEntityID equals j.AppEntityID into job
+            //               from jb in job.DefaultIfEmpty()
 
-                           join jth in db.JobTitles on jb.JobTitleID equals jth.JobTitleID
+            //               join jth in db.JobTitles on jb.JobTitleID equals jth.JobTitleID
                     
-                           orderby p.LastName, p.FirstName
+            //               orderby p.LastName, p.FirstName
 
-                           where (ws.EndDate == null &&  uf.EndDate == null && nb.EndDate == null && jb.EndDate == null) && (p.LastName.Contains(searchString) || p.FirstName.Contains(searchString)
-                           || u.SAP.Contains(searchString) || nb.Badge.Contains(searchString))
+            //               where (ws.EndDate == null &&  uf.EndDate == null && nb.EndDate == null && jb.EndDate == null) && (p.LastName.Contains(searchString) || p.FirstName.Contains(searchString)
+            //               || u.SAP.Contains(searchString) || nb.Badge.Contains(searchString))
 
-                           select new People {AppEntityID = p.AppEntityID, First = p.FirstName, Last = p.LastName, PIN = u.PIN, Badge = nb.Badge,
-                           SAP = u.SAP, OfficeID = of.OfficeID, Office = of.Name, OfficeCode = of.Code, JobTitle = jth.Name, jtRanking = (jth.jtRanking ?? 12),
-                           RankCode = jth.NameCode, Status = wst.Name};
+            //               select new People {AppEntityID = p.AppEntityID, First = p.FirstName, Last = p.LastName, PIN = u.PIN, Badge = nb.Badge,
+            //               SAP = u.SAP, OfficeID = of.OfficeID, Office = of.Name, OfficeCode = of.Code, JobTitle = jth.Name, jtRanking = (jth.jtRanking ?? 12),
+            //               RankCode = jth.NameCode, Status = wst.Name};
 
             return myPeople.ToList();
 
