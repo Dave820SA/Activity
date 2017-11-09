@@ -42,6 +42,9 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "UserWorkStatusHistory", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "WorkStatusHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.WorkStatusHistory), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_EmailAddress_person_EmailAddressType", "person_EmailAddressType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.p_EmailAddressType), "Person_EmailAddress", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_EmailAddress), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_EmailAddress_Person_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Person_EmailAddress", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.P_EmailAddress), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "PersonAward", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_AwardType", "Award_AwardType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.AwardType), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.RecognitionType), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
 
 #endregion
 
@@ -476,6 +479,54 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<p_EmailAddressType> _p_EmailAddressType;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Award> Awards
+        {
+            get
+            {
+                if ((_Awards == null))
+                {
+                    _Awards = base.CreateObjectSet<Award>("Awards");
+                }
+                return _Awards;
+            }
+        }
+        private ObjectSet<Award> _Awards;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AwardType> AwardTypes
+        {
+            get
+            {
+                if ((_AwardTypes == null))
+                {
+                    _AwardTypes = base.CreateObjectSet<AwardType>("AwardTypes");
+                }
+                return _AwardTypes;
+            }
+        }
+        private ObjectSet<AwardType> _AwardTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<RecognitionType> RecognitionTypes
+        {
+            get
+            {
+                if ((_RecognitionTypes == null))
+                {
+                    _RecognitionTypes = base.CreateObjectSet<RecognitionType>("RecognitionTypes");
+                }
+                return _RecognitionTypes;
+            }
+        }
+        private ObjectSet<RecognitionType> _RecognitionTypes;
 
         #endregion
 
@@ -672,6 +723,30 @@ namespace PersonnelBusinessLayer
         {
             base.AddObject("p_EmailAddressType", p_EmailAddressType);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Awards EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAwards(Award award)
+        {
+            base.AddObject("Awards", award);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AwardTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAwardTypes(AwardType awardType)
+        {
+            base.AddObject("AwardTypes", awardType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the RecognitionTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToRecognitionTypes(RecognitionType recognitionType)
+        {
+            base.AddObject("RecognitionTypes", recognitionType);
+        }
 
         #endregion
 
@@ -851,6 +926,514 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<P_Address>("SAPDActivityModel.FK_Person_Address_Person_AddressType", "Person_Address", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="Award")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Award : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Award object.
+        /// </summary>
+        /// <param name="recognitionId">Initial value of the RecognitionId property.</param>
+        /// <param name="recogTypeId">Initial value of the RecogTypeId property.</param>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="issuedDate">Initial value of the IssuedDate property.</param>
+        /// <param name="annualAward">Initial value of the AnnualAward property.</param>
+        public static Award CreateAward(global::System.Int32 recognitionId, global::System.Int32 recogTypeId, global::System.Int32 appEntityID, global::System.DateTime issuedDate, global::System.Boolean annualAward)
+        {
+            Award award = new Award();
+            award.RecognitionId = recognitionId;
+            award.RecogTypeId = recogTypeId;
+            award.AppEntityID = appEntityID;
+            award.IssuedDate = issuedDate;
+            award.AnnualAward = annualAward;
+            return award;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RecognitionId
+        {
+            get
+            {
+                return _RecognitionId;
+            }
+            set
+            {
+                if (_RecognitionId != value)
+                {
+                    OnRecognitionIdChanging(value);
+                    ReportPropertyChanging("RecognitionId");
+                    _RecognitionId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("RecognitionId");
+                    OnRecognitionIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _RecognitionId;
+        partial void OnRecognitionIdChanging(global::System.Int32 value);
+        partial void OnRecognitionIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RecogTypeId
+        {
+            get
+            {
+                return _RecogTypeId;
+            }
+            set
+            {
+                OnRecogTypeIdChanging(value);
+                ReportPropertyChanging("RecogTypeId");
+                _RecogTypeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RecogTypeId");
+                OnRecogTypeIdChanged();
+            }
+        }
+        private global::System.Int32 _RecogTypeId;
+        partial void OnRecogTypeIdChanging(global::System.Int32 value);
+        partial void OnRecogTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> AwardTypeId
+        {
+            get
+            {
+                return _AwardTypeId;
+            }
+            set
+            {
+                OnAwardTypeIdChanging(value);
+                ReportPropertyChanging("AwardTypeId");
+                _AwardTypeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AwardTypeId");
+                OnAwardTypeIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _AwardTypeId;
+        partial void OnAwardTypeIdChanging(Nullable<global::System.Int32> value);
+        partial void OnAwardTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> OfficeId
+        {
+            get
+            {
+                return _OfficeId;
+            }
+            set
+            {
+                OnOfficeIdChanging(value);
+                ReportPropertyChanging("OfficeId");
+                _OfficeId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeId");
+                OnOfficeIdChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _OfficeId;
+        partial void OnOfficeIdChanging(Nullable<global::System.Int32> value);
+        partial void OnOfficeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Notes
+        {
+            get
+            {
+                return _Notes;
+            }
+            set
+            {
+                OnNotesChanging(value);
+                ReportPropertyChanging("Notes");
+                _Notes = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Notes");
+                OnNotesChanged();
+            }
+        }
+        private global::System.String _Notes;
+        partial void OnNotesChanging(global::System.String value);
+        partial void OnNotesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DocPath
+        {
+            get
+            {
+                return _DocPath;
+            }
+            set
+            {
+                OnDocPathChanging(value);
+                ReportPropertyChanging("DocPath");
+                _DocPath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("DocPath");
+                OnDocPathChanged();
+            }
+        }
+        private global::System.String _DocPath;
+        partial void OnDocPathChanging(global::System.String value);
+        partial void OnDocPathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime IssuedDate
+        {
+            get
+            {
+                return _IssuedDate;
+            }
+            set
+            {
+                OnIssuedDateChanging(value);
+                ReportPropertyChanging("IssuedDate");
+                _IssuedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IssuedDate");
+                OnIssuedDateChanged();
+            }
+        }
+        private global::System.DateTime _IssuedDate;
+        partial void OnIssuedDateChanging(global::System.DateTime value);
+        partial void OnIssuedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean AnnualAward
+        {
+            get
+            {
+                return _AnnualAward;
+            }
+            set
+            {
+                OnAnnualAwardChanging(value);
+                ReportPropertyChanging("AnnualAward");
+                _AnnualAward = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AnnualAward");
+                OnAnnualAwardChanged();
+            }
+        }
+        private global::System.Boolean _AnnualAward;
+        partial void OnAnnualAwardChanging(global::System.Boolean value);
+        partial void OnAnnualAwardChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "PersonAward", "Person")]
+        public Person Person
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.PersonAward", "Person").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.PersonAward", "Person").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Person> PersonReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.PersonAward", "Person");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("SAPDActivityModel.PersonAward", "Person", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_AwardType", "Award_AwardType")]
+        public AwardType Award_AwardType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AwardType>("SAPDActivityModel.FK_Award_Recognize_Award_AwardType", "Award_AwardType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AwardType>("SAPDActivityModel.FK_Award_Recognize_Award_AwardType", "Award_AwardType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<AwardType> Award_AwardTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AwardType>("SAPDActivityModel.FK_Award_Recognize_Award_AwardType", "Award_AwardType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AwardType>("SAPDActivityModel.FK_Award_Recognize_Award_AwardType", "Award_AwardType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType")]
+        public RecognitionType Award_RecognitionType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RecognitionType>("SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RecognitionType>("SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<RecognitionType> Award_RecognitionTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RecognitionType>("SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RecognitionType>("SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="AwardType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AwardType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AwardType object.
+        /// </summary>
+        /// <param name="awardTypeId">Initial value of the AwardTypeId property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static AwardType CreateAwardType(global::System.Int32 awardTypeId, global::System.String name)
+        {
+            AwardType awardType = new AwardType();
+            awardType.AwardTypeId = awardTypeId;
+            awardType.Name = name;
+            return awardType;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AwardTypeId
+        {
+            get
+            {
+                return _AwardTypeId;
+            }
+            set
+            {
+                if (_AwardTypeId != value)
+                {
+                    OnAwardTypeIdChanging(value);
+                    ReportPropertyChanging("AwardTypeId");
+                    _AwardTypeId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AwardTypeId");
+                    OnAwardTypeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AwardTypeId;
+        partial void OnAwardTypeIdChanging(global::System.Int32 value);
+        partial void OnAwardTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_AwardType", "Award")]
+        public EntityCollection<Award> Award_Recognize
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Award>("SAPDActivityModel.FK_Award_Recognize_Award_AwardType", "Award");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Award>("SAPDActivityModel.FK_Award_Recognize_Award_AwardType", "Award", value);
                 }
             }
         }
@@ -3889,6 +4472,28 @@ namespace PersonnelBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "PersonAward", "Award")]
+        public EntityCollection<Award> Awards
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Award>("SAPDActivityModel.PersonAward", "Award");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Award>("SAPDActivityModel.PersonAward", "Award", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -4733,6 +5338,139 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SAPDActivityModel.UserRDHistory", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="RecognitionType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class RecognitionType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new RecognitionType object.
+        /// </summary>
+        /// <param name="recognitionTypeId">Initial value of the RecognitionTypeId property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static RecognitionType CreateRecognitionType(global::System.Int32 recognitionTypeId, global::System.String name)
+        {
+            RecognitionType recognitionType = new RecognitionType();
+            recognitionType.RecognitionTypeId = recognitionTypeId;
+            recognitionType.Name = name;
+            return recognitionType;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RecognitionTypeId
+        {
+            get
+            {
+                return _RecognitionTypeId;
+            }
+            set
+            {
+                if (_RecognitionTypeId != value)
+                {
+                    OnRecognitionTypeIdChanging(value);
+                    ReportPropertyChanging("RecognitionTypeId");
+                    _RecognitionTypeId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("RecognitionTypeId");
+                    OnRecognitionTypeIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _RecognitionTypeId;
+        partial void OnRecognitionTypeIdChanging(global::System.Int32 value);
+        partial void OnRecognitionTypeIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_RecognitionType", "Award")]
+        public EntityCollection<Award> Award_Recognize
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Award>("SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType", "Award");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Award>("SAPDActivityModel.FK_Award_Recognize_Award_RecognitionType", "Award", value);
                 }
             }
         }

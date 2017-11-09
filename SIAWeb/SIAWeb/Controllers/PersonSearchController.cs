@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SIAWeb.Common;
+using System.Threading;
 
 namespace SIAWeb.Controllers
 {
@@ -19,6 +20,7 @@ namespace SIAWeb.Controllers
 
         public ActionResult Index(string search_string)
         {
+            //Thread.Sleep(4000);
             if (!String.IsNullOrEmpty(search_string))
             {
                 GetPeople mySearch = new GetPeople();

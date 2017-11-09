@@ -32,6 +32,7 @@ namespace SIAWeb.Models
         public string Zip { get; set; }
         [DisplayName("Day Off")]
         public string RD { get; set; }
+        public string Shift { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime Employeed { get; set; }
@@ -42,6 +43,7 @@ namespace SIAWeb.Models
         public IEnumerable<EmailAddress> Emails { get; set; }
         public IEnumerable<OfficeAssigment> OfficeAssigments { get; set; }
         public IEnumerable<PhoneNumber> PhoneNumbers { get; set; }
+        public IEnumerable<UserAward> myAwards { get; set; }
        
         //public List<RDs> RDHist { get; set; }
         
