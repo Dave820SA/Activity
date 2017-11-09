@@ -42,6 +42,11 @@ namespace SIAWeb.Common
 
                            join dayo in db.DayOffs on curRd.RDID equals dayo.RDID
 
+                           join s in db.ShiftHistories on u.AppEntityID equals s.AppEntityID into shh
+                           from sh in shh.DefaultIfEmpty()
+
+                           join csh in db.Shifts on sh.ShiftID equals csh.ShiftID
+
                            join a in db.P_Address on p.AppEntityID equals a.AppEntityID into add
                            from ad in add.DefaultIfEmpty()
 
@@ -51,11 +56,13 @@ namespace SIAWeb.Common
                            join s in db.States on ad.StateID equals s.StateID into stt
                            from st in stt.DefaultIfEmpty()
 
+                           
+
                            //join eml in db.P_EmailAddress on p.AppEntityID equals eml.AppEntityID
 
                            orderby p.LastName, p.FirstName
 
-                           where (ws.EndDate == null && uf.EndDate == null && nb.EndDate == null && jb.EndDate == null && ad.EndDate == null && curRd.EndDate == null) && (p.AppEntityID == appEntityID)
+                           where (ws.EndDate == null && uf.EndDate == null && nb.EndDate == null && jb.EndDate == null && ad.EndDate == null && curRd.EndDate == null && sh.EndDate == null) && (p.AppEntityID == appEntityID)
 
                            select new PersonInfo
                            {
@@ -79,6 +86,7 @@ namespace SIAWeb.Common
                                State = st.StateName,
                                AddressType = adt.Name,
                                RD = dayo.Name,
+                               Shift = csh.Name,
                                Employeed = (DateTime)u.HireDate,
                                
                                //Email = eml.EmailAddress,
@@ -139,9 +147,29 @@ namespace SIAWeb.Common
                                       {
                                           PhoneType = phType.Name,
                                           PhoneNbr = ph.PhoneNumber
-                                      })
+                                      }),
+
+                               myAwards = (from pawr in db.People
+                                         join aw in db.Awards on pawr.AppEntityID equals aw.AppEntityID into awar
+                                         from aww in awar.DefaultIfEmpty()
+
+                                         join rt in db.RecognitionTypes on aww.RecogTypeId equals rt.RecognitionTypeId 
+                                         
+
+                                         where pawr.AppEntityID == appEntityID
+                                         select new UserAward
+                                         {
+                                               DocPath = aww.DocPath,
+                                               AwardName = rt.Name,
+                                                IssuedDate = aww.IssuedDate
+                                         }),
 
                            });
+
+            //join aw in db.Awards on p.AppEntityID equals aw.AppEntityID into awar
+            //from aww in awar.DefaultIfEmpty()
+
+            //join rt in db.RecognitionTypes on aww.RecogTypeId equals rt.RecognitionTypeId
 
 
 
