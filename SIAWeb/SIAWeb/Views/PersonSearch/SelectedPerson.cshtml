@@ -461,11 +461,16 @@
                                             </td>
 
                                             <td>
-                                                @*@Html.HiddenFor(modelItem => uAwards.DocPath)*@
                                                 @{
-                                                    string awardPath = uAwards.DocPath;
-                                                    }
-                                            
+                                                   if (!String.IsNullOrEmpty(uAwards.DocPath))
+                                                   {
+                                                        string awardPath = uAwards.DocPath;
+                                         
+                                                    <a href=@Html.Raw(awardPath) target="_blank" class="btn btn-success btn-xs">View Full
+                                                        Screen <i class="fa fa-list" aria-hidden="true"></i></a>
+                                                   };
+                                                       
+                                                }
                                             </td>
                                            
                                         </tr>

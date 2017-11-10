@@ -95,6 +95,7 @@ namespace SIAWeb.Common
                                             //join pr in db.People on bh.EnteredBy equals pr.AppEntityID
                                             orderby bh.StartDate
                                             where bh.AppEntityID == appEntityID
+                                           
                                             select new Badge
                                             {
                                                 StartDate = bh.StartDate,
