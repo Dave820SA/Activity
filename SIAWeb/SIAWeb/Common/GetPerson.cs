@@ -133,6 +133,7 @@ namespace SIAWeb.Common
                                             where oh.AppEntityID == appEntityID
                                             select new OfficeAssigment
                                             {
+                                                OfficeID = oh.OfficeID,
                                                 StartDate = oh.StartDate,
                                                 EndDate = (oh.EndDate ?? DateTime.Now),
                                                 Office = o.Name,

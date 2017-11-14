@@ -128,15 +128,17 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                           <a href="@Url.Action("Create", "Activity", new { id = pInfo.OfficeID }, null)" class="btn btn-default btn-sm"> Office: <span class="glyphicon glyphicon-plus-sign"></span></a>
+                                           @*<a href="@Url.Action("Create", "Activity", new { id = pInfo.OfficeID }, null)" class="btn btn-default btn-sm"> Office: <span class="glyphicon glyphicon-plus-sign"></span></a>*@
 
-                                            
+                                            Current Assignment:
                                         </td>
                                         <td style="color: #5b9bd1; font-size: 1.2em;">
                                             @{
                                                string office = string.Format("{0} - {1}", pInfo.Office, pInfo.OfficeCode);
+                                               
+                                               <a href="@Url.Action("Index", "Office", new { id = pInfo.OfficeID }, null)" > @Html.Raw(office.ToUpper()) <span class="glyphicon glyphicon-plus-sign"></span></a>
                         
-                                                @Html.Raw(office.ToUpper())
+                                                @*@Html.Raw(office.ToUpper())*@
                                             }
                                         </td>
                                     </tr>
@@ -171,16 +173,16 @@
                                         </td>
                                         <td style="color: #5b9bd1; font-size: 1.2em;">
                                             @{
-                                                 DateTime sdate = pInfo.Employeed;
-                                                 DateTime edate = DateTime.Today;
-                                                 var yrDiff = (((TimeSpan)(edate - sdate)).TotalDays / 365.2425);
-                                                 double yrs = Math.Round(yrDiff, 1);
+                                               DateTime sdate = pInfo.Employeed;
+                                               DateTime edate = DateTime.Today;
+                                               var yrDiff = (((TimeSpan)(edate - sdate)).TotalDays / 365.2425);
+                                               double yrs = Math.Round(yrDiff, 1);
 
-                                                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                                               System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-                                                 sb.Append(pInfo.Employeed.ToShortDateString());
-                                                 sb.Append("&nbsp;-- &nbsp;&nbsp;<span style=\"color: #FFFFFF\">Services Years:</span>&nbsp;&nbsp;");
-                                                 sb.Append(yrs.ToString());
+                                               sb.Append(pInfo.Employeed.ToShortDateString());
+                                               sb.Append("&nbsp;-- &nbsp;&nbsp;<span style=\"color: #FFFFFF\">Services Years:</span>&nbsp;&nbsp;");
+                                               sb.Append(yrs.ToString());
 
                                                 @Html.Raw(sb)
                                             }
@@ -382,36 +384,39 @@
                                         <tr>
                                             <td style="color: #5b9bd1; font-size: .9em;">
                                                 @{
-                                                    string officeHist = string.Format("{0} - {1}", oHist.Office, oHist.OfficeCode);
-                        
-                                                @Html.Raw(officeHist.ToUpper())
+                                                    
+                                                string officeHist = string.Format("{0} - {1}", oHist.Office, oHist.OfficeCode);
+                                               
+                                               <a href="@Url.Action("Index", "Office", new { id = oHist.OfficeID }, null)" > @Html.Raw(officeHist.ToUpper()) </a>  
+
+                                                @*@Html.Raw(officeHist.ToUpper())*@
                                                 }
                                             </td>
                                             <td style="color: #5b9bd1; font-size: .9em;">
                                                 @{
-                                                    DateTime sDate = Convert.ToDateTime(oHist.StartDate);
-                                                    string stSDate = string.Format("{0:M/d/yyyy}", sDate);
+                                                  DateTime sDate = Convert.ToDateTime(oHist.StartDate);
+                                                  string stSDate = string.Format("{0:M/d/yyyy}", sDate);
                                                     @Html.Raw(stSDate)
                                                 }
                                             </td>
                                             <td style="color: #5b9bd1; font-size: .9em;">
                                                 @{
-                                                    DateTime eDate = Convert.ToDateTime(oHist.EndDate);
-                                                    string stEDate = string.Format("{0:M/d/yyyy}", eDate);
-                                                    string cDate = DateTime.Now.ToShortDateString();
-                                                    int iCompair = string.Compare(stEDate, cDate);
+                                                  DateTime eDate = Convert.ToDateTime(oHist.EndDate);
+                                                  string stEDate = string.Format("{0:M/d/yyyy}", eDate);
+                                                  string cDate = DateTime.Now.ToShortDateString();
+                                                  int iCompair = string.Compare(stEDate, cDate);
 
-                                                    if (iCompair == 0)
-                                                    {
-                                                        System.Text.StringBuilder sbOff = new System.Text.StringBuilder();
-                                                        sbOff.Append("<span style=\"color: #FFFF00\">Current Office</span>");
+                                                  if (iCompair == 0)
+                                                  {
+                                                      System.Text.StringBuilder sbOff = new System.Text.StringBuilder();
+                                                      sbOff.Append("<span style=\"color: #FFFF00\">Current Office</span>");
                                                          @Html.Raw(sbOff)
                                                     
-                                                    }
-                                                    else
-                                                    {            
+                                                  }
+                                                  else
+                                                  {            
                                                          @Html.Raw(stEDate)            
-                                                    }
+                                                  }
   
                                                 }
                                                 
@@ -462,13 +467,13 @@
 
                                             <td>
                                                 @{
-                                                   if (!String.IsNullOrEmpty(uAwards.DocPath))
-                                                   {
-                                                        string awardPath = uAwards.DocPath;
+                                        if (!String.IsNullOrEmpty(uAwards.DocPath))
+                                        {
+                                            string awardPath = uAwards.DocPath;
                                          
                                                     <a href=@Html.Raw(awardPath) target="_blank" class="btn btn-success btn-xs">View Full
                                                         Screen <i class="fa fa-list" aria-hidden="true"></i></a>
-                                                   };
+                                        };
                                                        
                                                 }
                                             </td>

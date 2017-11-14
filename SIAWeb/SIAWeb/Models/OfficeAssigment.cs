@@ -7,6 +7,7 @@ namespace SIAWeb.Models
 {
     public class OfficeAssigment
     {
+        public int OfficeID { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public string Office { get; set; }

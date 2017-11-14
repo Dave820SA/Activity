@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SIAWeb.Models.OfficeInfo>
+
+@{
+    ViewBag.Title = "Office Information";
+    Layout = "~/Views/Shared/_Alternate2.cshtml";
+}
+
+@foreach (var pOffice in Model)
+{
+<div class="row">
+  <div class="col-sm-12">
+    <div class="portlet light profile-sidebar-portlet bordered">
+        <h2>@Html.DisplayFor(modelItem => pOffice.Name)</h2>
+    </div>
+  </div>
+  <div class="col-sm-1">
+        <div class="portlet light profile-sidebar-portlet bordered"></div>
+  </div>
+  <div class="col-sm-4">
+    <div class="portlet light profile-sidebar-portlet bordered">
+        <div class="profile-userpic">
+        
+        </div>
+    </div>
+  </div>
+  <div class="col-sm-7">
+     <div class="portlet light bordered">
+            <div class="portlet-title tabbable-line">
+                <div class="caption caption-md">
+                    <i class="icon-globe theme-font hide"></i>
+                    <span class="caption-subject font-blue-madison bold uppercase">SAPD Office info</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+            </div>
+        </div>
+  
+  
+  </div>
+
+
+</div>
+}
