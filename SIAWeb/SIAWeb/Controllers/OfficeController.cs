@@ -12,19 +12,12 @@ namespace SIAWeb.Controllers
         //
         // GET: /Office/
 
-        public ActionResult Index(int searchOffice)
+        public ActionResult Index(int id)
         {
-            //if (searchOffice != null)
-            //{
-            //    GetOffice myOffice = new GetOffice();
-            //    return View(myOffice.GetOfficeInfo(searchOffice));
-            //}
-            //else
-            //{
-                return View();
-            //}
-            
-
+           
+            GetOffice myOffice = new GetOffice();
+            return View(myOffice.GetOfficeInfo(id));
+           
         }
 
     }

@@ -22,7 +22,6 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("OfficeModel", "FK_User_Division_User_Bureau", "Office_Bureau", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.Bureau), "Office_Division", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.Division), true)]
 [assembly: EdmRelationshipAttribute("OfficeModel", "FK_User_DivisionSection_User_Division", "Office_Division", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.Division), "Office_DivisionSection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.DivisionSection), true)]
 [assembly: EdmRelationshipAttribute("OfficeModel", "FK_User_Office_User_DivisionSection", "Office_DivisionSection", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OfficeBusinessLayer.DivisionSection), "Office_Office", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.Office), true)]
-[assembly: EdmRelationshipAttribute("OfficeModel", "OfficeOfficeSection", "Office", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.Office), "OfficeSection", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.OfficeSection), true)]
 [assembly: EdmRelationshipAttribute("OfficeModel", "FK_User_User_Person_Person", "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.Person), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(OfficeBusinessLayer.User), true)]
 [assembly: EdmRelationshipAttribute("OfficeModel", "FK_User_UserOfficeHistory_User_Office", "Office", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.Office), "User_UserOfficeHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.OfficeHistory), true)]
 [assembly: EdmRelationshipAttribute("OfficeModel", "OfficeHistoryUser", "OfficeHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.OfficeHistory), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.User), true)]
@@ -31,6 +30,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("OfficeModel", "UserJobTitleHistory", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.User), "JobTitleHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.JobTitleHistory), true)]
 [assembly: EdmRelationshipAttribute("OfficeModel", "FK_User_UserSectionHistory_Office_OfficeSection", "OfficeSection", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.OfficeSection), "User_UserSectionHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.SectionHistory), true)]
 [assembly: EdmRelationshipAttribute("OfficeModel", "UserSectionHistory", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.User), "SectionHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.SectionHistory), true)]
+[assembly: EdmRelationshipAttribute("OfficeModel", "FK_User_UserJobTitleHistory_User_JobTitle", "User_JobTitle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.JobTitle), "JobTitleHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.JobTitleHistory), true)]
+[assembly: EdmRelationshipAttribute("OfficeModel", "FK_User_UserWorkStatusHistory_User_WorkStatus", "User_WorkStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(OfficeBusinessLayer.WorkStatus), "WorkStatusHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(OfficeBusinessLayer.WorkStatusHistory), true)]
 
 #endregion
 
@@ -273,6 +274,38 @@ namespace OfficeBusinessLayer
             }
         }
         private ObjectSet<SectionHistory> _SectionHistories;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<JobTitle> JobTitles
+        {
+            get
+            {
+                if ((_JobTitles == null))
+                {
+                    _JobTitles = base.CreateObjectSet<JobTitle>("JobTitles");
+                }
+                return _JobTitles;
+            }
+        }
+        private ObjectSet<JobTitle> _JobTitles;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<WorkStatus> WorkStatus
+        {
+            get
+            {
+                if ((_WorkStatus == null))
+                {
+                    _WorkStatus = base.CreateObjectSet<WorkStatus>("WorkStatus");
+                }
+                return _WorkStatus;
+            }
+        }
+        private ObjectSet<WorkStatus> _WorkStatus;
 
         #endregion
 
@@ -372,6 +405,22 @@ namespace OfficeBusinessLayer
         public void AddToSectionHistories(SectionHistory sectionHistory)
         {
             base.AddObject("SectionHistories", sectionHistory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the JobTitles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToJobTitles(JobTitle jobTitle)
+        {
+            base.AddObject("JobTitles", jobTitle);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the WorkStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToWorkStatus(WorkStatus workStatus)
+        {
+            base.AddObject("WorkStatus", workStatus);
         }
 
         #endregion
@@ -1331,6 +1380,233 @@ namespace OfficeBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OfficeModel", Name="JobTitle")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class JobTitle : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new JobTitle object.
+        /// </summary>
+        /// <param name="jobTitleID">Initial value of the JobTitleID property.</param>
+        public static JobTitle CreateJobTitle(global::System.Int32 jobTitleID)
+        {
+            JobTitle jobTitle = new JobTitle();
+            jobTitle.JobTitleID = jobTitleID;
+            return jobTitle;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 JobTitleID
+        {
+            get
+            {
+                return _JobTitleID;
+            }
+            set
+            {
+                if (_JobTitleID != value)
+                {
+                    OnJobTitleIDChanging(value);
+                    ReportPropertyChanging("JobTitleID");
+                    _JobTitleID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("JobTitleID");
+                    OnJobTitleIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _JobTitleID;
+        partial void OnJobTitleIDChanging(global::System.Int32 value);
+        partial void OnJobTitleIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String NameCode
+        {
+            get
+            {
+                return _NameCode;
+            }
+            set
+            {
+                OnNameCodeChanging(value);
+                ReportPropertyChanging("NameCode");
+                _NameCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("NameCode");
+                OnNameCodeChanged();
+            }
+        }
+        private global::System.String _NameCode;
+        partial void OnNameCodeChanging(global::System.String value);
+        partial void OnNameCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> jtRanking
+        {
+            get
+            {
+                return _jtRanking;
+            }
+            set
+            {
+                OnjtRankingChanging(value);
+                ReportPropertyChanging("jtRanking");
+                _jtRanking = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("jtRanking");
+                OnjtRankingChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _jtRanking;
+        partial void OnjtRankingChanging(Nullable<global::System.Int32> value);
+        partial void OnjtRankingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _VisibleFlag;
+        partial void OnVisibleFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnVisibleFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PAJobTitleID
+        {
+            get
+            {
+                return _PAJobTitleID;
+            }
+            set
+            {
+                OnPAJobTitleIDChanging(value);
+                ReportPropertyChanging("PAJobTitleID");
+                _PAJobTitleID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PAJobTitleID");
+                OnPAJobTitleIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PAJobTitleID;
+        partial void OnPAJobTitleIDChanging(Nullable<global::System.Int32> value);
+        partial void OnPAJobTitleIDChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OfficeModel", "FK_User_UserJobTitleHistory_User_JobTitle", "JobTitleHistory")]
+        public EntityCollection<JobTitleHistory> User_UserJobTitleHistory
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<JobTitleHistory>("OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle", "JobTitleHistory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobTitleHistory>("OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle", "JobTitleHistory", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="OfficeModel", Name="JobTitleHistory")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1569,6 +1845,44 @@ namespace OfficeBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("OfficeModel.UserJobTitleHistory", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OfficeModel", "FK_User_UserJobTitleHistory_User_JobTitle", "User_JobTitle")]
+        public JobTitle User_JobTitle
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<JobTitle>("OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle", "User_JobTitle").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<JobTitle>("OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle", "User_JobTitle").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<JobTitle> User_JobTitleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<JobTitle>("OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle", "User_JobTitle");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<JobTitle>("OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle", "User_JobTitle", value);
                 }
             }
         }
@@ -1840,28 +2154,6 @@ namespace OfficeBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DivisionSection>("OfficeModel.FK_User_Office_User_DivisionSection", "Office_DivisionSection", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OfficeModel", "OfficeOfficeSection", "OfficeSection")]
-        public EntityCollection<OfficeSection> OfficeSections
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<OfficeSection>("OfficeModel.OfficeOfficeSection", "OfficeSection");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<OfficeSection>("OfficeModel.OfficeOfficeSection", "OfficeSection", value);
                 }
             }
         }
@@ -2431,44 +2723,6 @@ namespace OfficeBusinessLayer
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("OfficeModel", "OfficeOfficeSection", "Office")]
-        public Office Office
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("OfficeModel.OfficeOfficeSection", "Office").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("OfficeModel.OfficeOfficeSection", "Office").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Office> OfficeReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("OfficeModel.OfficeOfficeSection", "Office");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Office>("OfficeModel.OfficeOfficeSection", "Office", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -3624,6 +3878,233 @@ namespace OfficeBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="OfficeModel", Name="WorkStatus")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class WorkStatus : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new WorkStatus object.
+        /// </summary>
+        /// <param name="workStatusID">Initial value of the WorkStatusID property.</param>
+        public static WorkStatus CreateWorkStatus(global::System.Int32 workStatusID)
+        {
+            WorkStatus workStatus = new WorkStatus();
+            workStatus.WorkStatusID = workStatusID;
+            return workStatus;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WorkStatusID
+        {
+            get
+            {
+                return _WorkStatusID;
+            }
+            set
+            {
+                if (_WorkStatusID != value)
+                {
+                    OnWorkStatusIDChanging(value);
+                    ReportPropertyChanging("WorkStatusID");
+                    _WorkStatusID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("WorkStatusID");
+                    OnWorkStatusIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _WorkStatusID;
+        partial void OnWorkStatusIDChanging(global::System.Int32 value);
+        partial void OnWorkStatusIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String NameCode
+        {
+            get
+            {
+                return _NameCode;
+            }
+            set
+            {
+                OnNameCodeChanging(value);
+                ReportPropertyChanging("NameCode");
+                _NameCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("NameCode");
+                OnNameCodeChanged();
+            }
+        }
+        private global::System.String _NameCode;
+        partial void OnNameCodeChanging(global::System.String value);
+        partial void OnNameCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Ranking
+        {
+            get
+            {
+                return _Ranking;
+            }
+            set
+            {
+                OnRankingChanging(value);
+                ReportPropertyChanging("Ranking");
+                _Ranking = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Ranking");
+                OnRankingChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Ranking;
+        partial void OnRankingChanging(Nullable<global::System.Int32> value);
+        partial void OnRankingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _VisibleFlag;
+        partial void OnVisibleFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnVisibleFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PAWorkStatusID
+        {
+            get
+            {
+                return _PAWorkStatusID;
+            }
+            set
+            {
+                OnPAWorkStatusIDChanging(value);
+                ReportPropertyChanging("PAWorkStatusID");
+                _PAWorkStatusID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PAWorkStatusID");
+                OnPAWorkStatusIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PAWorkStatusID;
+        partial void OnPAWorkStatusIDChanging(Nullable<global::System.Int32> value);
+        partial void OnPAWorkStatusIDChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OfficeModel", "FK_User_UserWorkStatusHistory_User_WorkStatus", "WorkStatusHistory")]
+        public EntityCollection<WorkStatusHistory> User_UserWorkStatusHistory
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WorkStatusHistory>("OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus", "WorkStatusHistory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkStatusHistory>("OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus", "WorkStatusHistory", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="OfficeModel", Name="WorkStatusHistory")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -3862,6 +4343,44 @@ namespace OfficeBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("OfficeModel.UserWorkStatusHistory", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("OfficeModel", "FK_User_UserWorkStatusHistory_User_WorkStatus", "User_WorkStatus")]
+        public WorkStatus User_WorkStatus
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkStatus>("OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus", "User_WorkStatus").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkStatus>("OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus", "User_WorkStatus").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<WorkStatus> User_WorkStatusReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkStatus>("OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus", "User_WorkStatus");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WorkStatus>("OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus", "User_WorkStatus", value);
                 }
             }
         }

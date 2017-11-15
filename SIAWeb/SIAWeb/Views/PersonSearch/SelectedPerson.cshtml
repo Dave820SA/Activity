@@ -92,26 +92,29 @@
     </div>
 
 @* _______________________________________Right Column____________________________________________________*@
-    <div class="col-md-8"> 
+    <div class="col-md-8">
         <div class="portlet light bordered">
             <div class="portlet-title tabbable-line">
                 <div class="caption caption-md">
-                    <i class="icon-globe theme-font hide"></i>
-                    <span class="caption-subject font-blue-madison bold uppercase">SAPD Activity info</span>
+                    <i class="icon-globe theme-font hide"></i><span class="caption-subject font-blue-madison bold uppercase">
+                        SAPD Activity info</span>
                 </div>
             </div>
             <div class="portlet-body">
                 <div>
-                
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#employeeInfo" aria-controls="employeeInfo" role="tab" data-toggle="tab">Profile</a></li>
-                        <li role="presentation"><a href="#badgeHist" aria-controls="badgeHist" role="tab" data-toggle="tab">Badge Hist</a></li>
-                        <li role="presentation"><a href="#RDs" aria-controls="RDs" role="tab" data-toggle="tab">RD Hist</a></li>
-                        <li role="presentation"><a href="#officeHist" aria-controls="officeHist" role="tab" data-toggle="tab">Office Hist</a></li>
-                        <li role="presentation"><a href="#awards" aria-controls="awards" role="tab" data-toggle="tab">Awards</a></li>
+                        <li role="presentation" class="active"><a href="#employeeInfo" aria-controls="employeeInfo"
+                            role="tab" data-toggle="tab">Profile</a></li>
+                        <li role="presentation"><a href="#badgeHist" aria-controls="badgeHist" role="tab"
+                            data-toggle="tab">Badge Hist</a></li>
+                        <li role="presentation"><a href="#RDs" aria-controls="RDs" role="tab" data-toggle="tab">
+                            RD Hist</a></li>
+                        <li role="presentation"><a href="#officeHist" aria-controls="officeHist" role="tab"
+                            data-toggle="tab">Office Hist</a></li>
+                        <li role="presentation"><a href="#awards" aria-controls="awards" role="tab" data-toggle="tab">
+                            Awards</a></li>
                     </ul>
-                
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="employeeInfo">
@@ -128,17 +131,16 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                           @*<a href="@Url.Action("Create", "Activity", new { id = pInfo.OfficeID }, null)" class="btn btn-default btn-sm"> Office: <span class="glyphicon glyphicon-plus-sign"></span></a>*@
-
+                                            @*<a href="@Url.Action("Create", "Activity", new { id = pInfo.OfficeID }, null)" class="btn btn-default btn-sm"> Office: <span class="glyphicon glyphicon-plus-sign"></span></a>*@
                                             Current Assignment:
                                         </td>
                                         <td style="color: #5b9bd1; font-size: 1.2em;">
                                             @{
-                                               string office = string.Format("{0} - {1}", pInfo.Office, pInfo.OfficeCode);
+                                                string office = string.Format("{0} - {1}", pInfo.Office, pInfo.OfficeCode);
                                                
-                                               <a href="@Url.Action("Index", "Office", new { id = pInfo.OfficeID }, null)" > @Html.Raw(office.ToUpper()) <span class="glyphicon glyphicon-plus-sign"></span></a>
+                                                <a href="@Url.Action("Index", "Office", new { id = pInfo.OfficeID }, null)" >@Html.Raw(office.ToUpper())
+                                                    <span class="glyphicon glyphicon-plus-sign"></span></a>
                         
-                                                @*@Html.Raw(office.ToUpper())*@
                                             }
                                         </td>
                                     </tr>
@@ -150,7 +152,6 @@
                                             @Html.DisplayFor(modelItem => pInfo.RD)
                                         </td>
                                     </tr>
-
                                     <tr>
                                         <td>
                                             Shift:
@@ -209,10 +210,9 @@
                                             }
                                         </td>
                                     </tr>
-                                     <tr>
+                                    <tr>
                                         <td>
                                             Phone:
-                                           
                                         </td>
                                         <td style="color: #5b9bd1; font-size: 1.2em;">
                                             @foreach (var phone in pInfo.PhoneNumbers)
@@ -232,7 +232,6 @@
                                 </tbody>
                             </table>
                         </div>
-
                         <div role="tabpanel" class="tab-pane" id="badgeHist">
                             <table class="table table-striped table-bordered table-condensed" style="border-top-style: solid;
                                 border-width: thin; border-color: #C0C0C0; margin-top: 1px">
@@ -275,13 +274,13 @@
                                         {
                                             System.Text.StringBuilder cBadge = new System.Text.StringBuilder();
                                             cBadge.Append("<span style=\"color: #FFFF00\">Current Badge</span>");
-                                                        @Html.Raw(cBadge)
+                                                    @Html.Raw(cBadge)
                                                     
                                         }
                                         else
                                         {
                                                         
-                                                        @Html.Raw(stEDate)
+                                                    @Html.Raw(stEDate)
                                                         
                                         }
                                                     
@@ -294,11 +293,9 @@
                                 </tbody>
                             </table>
                             <span style="font-size: xx-small; color: #FFFF00">*Badge History is may not be complete</span>
-                        
                         </div>
-
                         <div role="tabpanel" class="tab-pane" id="RDs">
-                             <table class="table table-striped table-bordered table-condensed" style="border-top-style: solid;
+                            <table class="table table-striped table-bordered table-condensed" style="border-top-style: solid;
                                 border-width: thin; border-color: #C0C0C0; margin-top: 1px">
                                 <thead>
                                     <tr>
@@ -339,19 +336,18 @@
                                         {
                                             System.Text.StringBuilder cRD = new System.Text.StringBuilder();
                                             cRD.Append("<span style=\"color: #FFFF00\">Current RD's</span>");
-                                                        @Html.Raw(cRD)
+                                                    @Html.Raw(cRD)
                                                     
                                         }
                                         else
                                         {
                                                         
-                                                        @Html.Raw(stEDate)
+                                                    @Html.Raw(stEDate)
                                                         
                                         }
                                                     
                                                      
                                                 }
-                                                
                                             </td>
                                         </tr>
                                     }
@@ -359,7 +355,6 @@
                             </table>
                             <span style="font-size: xx-small; color: #FFFF00">*RD History is may not be complete</span>
                         </div>
-
                         @* _______________________________________Office History tab____________________________________________________*@
                         <div role="tabpanel" class="tab-pane" id="officeHist">
                             <table class="table table-striped table-bordered table-condensed" style="border-top-style: solid;
@@ -385,17 +380,18 @@
                                             <td style="color: #5b9bd1; font-size: .9em;">
                                                 @{
                                                     
-                                                string officeHist = string.Format("{0} - {1}", oHist.Office, oHist.OfficeCode);
+                                        string officeHist = string.Format("{0} - {1}", oHist.Office, oHist.OfficeCode);
                                                
-                                               <a href="@Url.Action("Index", "Office", new { id = oHist.OfficeID }, null)" > @Html.Raw(officeHist.ToUpper()) </a>  
+                                                    <a href="@Url.Action("Index", "Office", new { id = oHist.OfficeID }, null)" >@Html.Raw(officeHist.ToUpper())
+                                                    </a>  
 
-                                                @*@Html.Raw(officeHist.ToUpper())*@
+
                                                 }
                                             </td>
                                             <td style="color: #5b9bd1; font-size: .9em;">
                                                 @{
-                                                  DateTime sDate = Convert.ToDateTime(oHist.StartDate);
-                                                  string stSDate = string.Format("{0:M/d/yyyy}", sDate);
+                                                DateTime sDate = Convert.ToDateTime(oHist.StartDate);
+                                                string stSDate = string.Format("{0:M/d/yyyy}", sDate);
                                                     @Html.Raw(stSDate)
                                                 }
                                             </td>
@@ -410,16 +406,15 @@
                                                   {
                                                       System.Text.StringBuilder sbOff = new System.Text.StringBuilder();
                                                       sbOff.Append("<span style=\"color: #FFFF00\">Current Office</span>");
-                                                         @Html.Raw(sbOff)
+                                                    @Html.Raw(sbOff)
                                                     
                                                   }
                                                   else
                                                   {            
-                                                         @Html.Raw(stEDate)            
+                                                    @Html.Raw(stEDate)            
                                                   }
   
                                                 }
-                                                
                                             </td>
                                         </tr>
                                     }
@@ -427,7 +422,6 @@
                             </table>
                             <span style="font-size: xx-small; color: #FFFF00">*Office History is may not be complete</span>
                         </div>
-
                         @* _______________________________________Awards History tab____________________________________________________*@
                         <div role="tabpanel" class="tab-pane" id="awards">
                             <table class="table table-striped table-bordered table-condensed" style="border-top-style: solid;
@@ -443,7 +437,6 @@
                                         <th>
                                             View
                                         </th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -454,7 +447,7 @@
                                             <td style="color: #5b9bd1; font-size: .9em;">
                                                 @{
                                                    
-                                                   @Html.DisplayFor(modelItem => uAwards.AwardName)
+                                                    @Html.DisplayFor(modelItem => uAwards.AwardName)
                                                 }
                                             </td>
                                             <td style="color: #5b9bd1; font-size: .9em;">
@@ -464,7 +457,6 @@
                                                     @Html.Raw(stSDate)
                                                 }
                                             </td>
-
                                             <td>
                                                 @{
                                         if (!String.IsNullOrEmpty(uAwards.DocPath))
@@ -477,23 +469,17 @@
                                                        
                                                 }
                                             </td>
-                                           
                                         </tr>
                                     }
                                 </tbody>
                             </table>
-
-
-
+                        </div>
                     </div>
-                
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-</div>
+     </div>
      
      
      

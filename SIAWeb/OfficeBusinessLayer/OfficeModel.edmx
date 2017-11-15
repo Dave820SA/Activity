@@ -12,12 +12,14 @@
           <EntitySet Name="Office_Office" EntityType="OfficeModel.Store.Office_Office" store:Type="Tables" Schema="dbo" Table="Office.Office" />
           <EntitySet Name="Office_OfficeSection" EntityType="OfficeModel.Store.Office_OfficeSection" store:Type="Tables" Schema="dbo" Table="Office.OfficeSection" />
           <EntitySet Name="Person_Person" EntityType="OfficeModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
+          <EntitySet Name="User_JobTitle" EntityType="OfficeModel.Store.User_JobTitle" store:Type="Tables" Schema="dbo" Table="User.JobTitle" />
           <EntitySet Name="User_User" EntityType="OfficeModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
           <EntitySet Name="User_UserBadgeHistory" EntityType="OfficeModel.Store.User_UserBadgeHistory" store:Type="Tables" Schema="dbo" Table="User.UserBadgeHistory" />
           <EntitySet Name="User_UserJobTitleHistory" EntityType="OfficeModel.Store.User_UserJobTitleHistory" store:Type="Tables" Schema="dbo" Table="User.UserJobTitleHistory" />
           <EntitySet Name="User_UserOfficeHistory" EntityType="OfficeModel.Store.User_UserOfficeHistory" store:Type="Tables" Schema="dbo" Table="User.UserOfficeHistory" />
           <EntitySet Name="User_UserSectionHistory" EntityType="OfficeModel.Store.User_UserSectionHistory" store:Type="Tables" Schema="dbo" Table="User.UserSectionHistory" />
           <EntitySet Name="User_UserWorkStatusHistory" EntityType="OfficeModel.Store.User_UserWorkStatusHistory" store:Type="Tables" Schema="dbo" Table="User.UserWorkStatusHistory" />
+          <EntitySet Name="User_WorkStatus" EntityType="OfficeModel.Store.User_WorkStatus" store:Type="Tables" Schema="dbo" Table="User.WorkStatus" />
           <AssociationSet Name="FK_User_Division_User_Bureau" Association="OfficeModel.Store.FK_User_Division_User_Bureau">
             <End Role="Office_Bureau" EntitySet="Office_Bureau" />
             <End Role="Office_Division" EntitySet="Office_Division" />
@@ -30,6 +32,10 @@
             <End Role="Person_Person" EntitySet="Person_Person" />
             <End Role="User_User" EntitySet="User_User" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_UserJobTitleHistory_User_JobTitle" Association="OfficeModel.Store.FK_User_UserJobTitleHistory_User_JobTitle">
+            <End Role="User_JobTitle" EntitySet="User_JobTitle" />
+            <End Role="User_UserJobTitleHistory" EntitySet="User_UserJobTitleHistory" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_UserOfficeHistory_User_Office" Association="OfficeModel.Store.FK_User_UserOfficeHistory_User_Office">
             <End Role="Office_Office" EntitySet="Office_Office" />
             <End Role="User_UserOfficeHistory" EntitySet="User_UserOfficeHistory" />
@@ -37,6 +43,10 @@
           <AssociationSet Name="FK_User_UserSectionHistory_Office_OfficeSection" Association="OfficeModel.Store.FK_User_UserSectionHistory_Office_OfficeSection">
             <End Role="Office_OfficeSection" EntitySet="Office_OfficeSection" />
             <End Role="User_UserSectionHistory" EntitySet="User_UserSectionHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserWorkStatusHistory_User_WorkStatus" Association="OfficeModel.Store.FK_User_UserWorkStatusHistory_User_WorkStatus">
+            <End Role="User_WorkStatus" EntitySet="User_WorkStatus" />
+            <End Role="User_UserWorkStatusHistory" EntitySet="User_UserWorkStatusHistory" />
           </AssociationSet>
           <AssociationSet Name="FK_User_DivisionSection_User-Division" Association="OfficeModel.Store.FK_User_DivisionSection_User-Division">
             <End Role="Office_Division" EntitySet="Office_Division" />
@@ -113,6 +123,18 @@
           <Property Name="Suffix" Type="varchar" MaxLength="10" />
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_JobTitle">
+          <Key>
+            <PropertyRef Name="JobTitleID" />
+          </Key>
+          <Property Name="JobTitleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="NameCode" Type="varchar" MaxLength="10" />
+          <Property Name="jtRanking" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="VisibleFlag" Type="bit" />
+          <Property Name="PAJobTitleID" Type="int" />
         </EntityType>
         <EntityType Name="User_User">
           <Key>
@@ -197,6 +219,18 @@
           <Property Name="EndDate" Type="date" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="User_WorkStatus">
+          <Key>
+            <PropertyRef Name="WorkStatusID" />
+          </Key>
+          <Property Name="WorkStatusID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="NameCode" Type="varchar" MaxLength="10" />
+          <Property Name="Ranking" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="VisibleFlag" Type="bit" />
+          <Property Name="PAWorkStatusID" Type="int" />
+        </EntityType>
         <Association Name="FK_User_Division_User_Bureau">
           <End Role="Office_Bureau" Type="OfficeModel.Store.Office_Bureau" Multiplicity="1" />
           <End Role="Office_Division" Type="OfficeModel.Store.Office_Division" Multiplicity="*" />
@@ -233,6 +267,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_UserJobTitleHistory_User_JobTitle">
+          <End Role="User_JobTitle" Type="OfficeModel.Store.User_JobTitle" Multiplicity="1" />
+          <End Role="User_UserJobTitleHistory" Type="OfficeModel.Store.User_UserJobTitleHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_JobTitle">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="User_UserJobTitleHistory">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserOfficeHistory_User_Office">
           <End Role="Office_Office" Type="OfficeModel.Store.Office_Office" Multiplicity="1" />
           <End Role="User_UserOfficeHistory" Type="OfficeModel.Store.User_UserOfficeHistory" Multiplicity="*" />
@@ -254,6 +300,18 @@
             </Principal>
             <Dependent Role="User_UserSectionHistory">
               <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserWorkStatusHistory_User_WorkStatus">
+          <End Role="User_WorkStatus" Type="OfficeModel.Store.User_WorkStatus" Multiplicity="1" />
+          <End Role="User_UserWorkStatusHistory" Type="OfficeModel.Store.User_UserWorkStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="User_UserWorkStatusHistory">
+              <PropertyRef Name="WorkstatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -290,10 +348,6 @@
           <AssociationSet Name="FK_User_Office_User_DivisionSection" Association="OfficeModel.FK_User_Office_User_DivisionSection">
             <End Role="Office_DivisionSection" EntitySet="DivisionSections" />
             <End Role="Office_Office" EntitySet="Offices" />
-          </AssociationSet>
-          <AssociationSet Name="OfficeOfficeSection" Association="OfficeModel.OfficeOfficeSection">
-            <End Role="Office" EntitySet="Offices" />
-            <End Role="OfficeSection" EntitySet="OfficeSections" />
           </AssociationSet>
           <EntitySet Name="People" EntityType="OfficeModel.Person" />
           <EntitySet Name="Users" EntityType="OfficeModel.User" />
@@ -333,6 +387,16 @@
           <AssociationSet Name="UserSectionHistory" Association="OfficeModel.UserSectionHistory">
             <End Role="User" EntitySet="Users" />
             <End Role="SectionHistory" EntitySet="SectionHistories" />
+          </AssociationSet>
+          <EntitySet Name="JobTitles" EntityType="OfficeModel.JobTitle" />
+          <AssociationSet Name="FK_User_UserJobTitleHistory_User_JobTitle" Association="OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle">
+            <End Role="User_JobTitle" EntitySet="JobTitles" />
+            <End Role="JobTitleHistory" EntitySet="JobTitleHistories" />
+          </AssociationSet>
+          <EntitySet Name="WorkStatus" EntityType="OfficeModel.WorkStatus" />
+          <AssociationSet Name="FK_User_UserWorkStatusHistory_User_WorkStatus" Association="OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus">
+            <End Role="User_WorkStatus" EntitySet="WorkStatus" />
+            <End Role="WorkStatusHistory" EntitySet="WorkStatusHistories" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Bureau">
@@ -386,7 +450,6 @@
           <Property Name="ModifiedDate" Type="DateTime" />
           <Property Name="PAOfficeID" Type="Int32" />
           <NavigationProperty Name="Office_DivisionSection" Relationship="OfficeModel.FK_User_Office_User_DivisionSection" FromRole="Office_Office" ToRole="Office_DivisionSection" />
-          <NavigationProperty Name="OfficeSections" Relationship="OfficeModel.OfficeOfficeSection" FromRole="Office" ToRole="OfficeSection" />
           <NavigationProperty Name="User_UserOfficeHistory" Relationship="OfficeModel.FK_User_UserOfficeHistory_User_Office" FromRole="Office" ToRole="User_UserOfficeHistory" />
         </EntityType>
         <EntityType Name="OfficeSection">
@@ -399,7 +462,6 @@
           <Property Name="VisibleFlag" Type="Boolean" />
           <Property Name="ModifiedDate" Type="DateTime" />
           <Property Name="PASectionID" Type="Int32" />
-          <NavigationProperty Name="Office" Relationship="OfficeModel.OfficeOfficeSection" FromRole="OfficeSection" ToRole="Office" />
           <NavigationProperty Name="User_UserSectionHistory" Relationship="OfficeModel.FK_User_UserSectionHistory_Office_OfficeSection" FromRole="OfficeSection" ToRole="User_UserSectionHistory" />
         </EntityType>
         <Association Name="FK_User_Division_User_Bureau">
@@ -435,18 +497,6 @@
             </Principal>
             <Dependent Role="Office_Office">
               <PropertyRef Name="DivisionSectionID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="OfficeOfficeSection">
-          <End Type="OfficeModel.Office" Role="Office" Multiplicity="1" />
-          <End Type="OfficeModel.OfficeSection" Role="OfficeSection" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Office">
-              <PropertyRef Name="OfficeID" />
-            </Principal>
-            <Dependent Role="OfficeSection">
-              <PropertyRef Name="OfficeID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -516,6 +566,7 @@
           <Property Type="DateTime" Name="ModifiedDate" />
           <Property Type="Int32" Name="EnteredBy" />
           <NavigationProperty Name="User" Relationship="OfficeModel.UserJobTitleHistory" FromRole="JobTitleHistory" ToRole="User" />
+          <NavigationProperty Name="User_JobTitle" Relationship="OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle" FromRole="JobTitleHistory" ToRole="User_JobTitle" />
         </EntityType>
         <EntityType Name="WorkStatusHistory">
           <Key>
@@ -529,6 +580,7 @@
           <Property Type="DateTime" Name="EndDate" />
           <Property Type="DateTime" Name="ModifiedDate" />
           <NavigationProperty Name="User" Relationship="OfficeModel.UserWorkStatusHistory" FromRole="WorkStatusHistory" ToRole="User" />
+          <NavigationProperty Name="User_WorkStatus" Relationship="OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus" FromRole="WorkStatusHistory" ToRole="User_WorkStatus" />
         </EntityType>
         <Association Name="FK_User_User_Person_Person">
           <End Type="OfficeModel.Person" Role="Person_Person" Multiplicity="1" />
@@ -654,6 +706,56 @@
             </Principal>
             <Dependent Role="SectionHistory">
               <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="JobTitle">
+          <Key>
+            <PropertyRef Name="JobTitleID" />
+          </Key>
+          <Property Type="Int32" Name="JobTitleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NameCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="jtRanking" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="Boolean" Name="VisibleFlag" />
+          <Property Type="Int32" Name="PAJobTitleID" />
+          <NavigationProperty Name="User_UserJobTitleHistory" Relationship="OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle" FromRole="User_JobTitle" ToRole="JobTitleHistory" />
+        </EntityType>
+        <Association Name="FK_User_UserJobTitleHistory_User_JobTitle">
+          <End Type="OfficeModel.JobTitle" Role="User_JobTitle" Multiplicity="1" />
+          <End Type="OfficeModel.JobTitleHistory" Role="JobTitleHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_JobTitle">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="JobTitleHistory">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WorkStatus">
+          <Key>
+            <PropertyRef Name="WorkStatusID" />
+          </Key>
+          <Property Type="Int32" Name="WorkStatusID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NameCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Ranking" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="Boolean" Name="VisibleFlag" />
+          <Property Type="Int32" Name="PAWorkStatusID" />
+          <NavigationProperty Name="User_UserWorkStatusHistory" Relationship="OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus" FromRole="User_WorkStatus" ToRole="WorkStatusHistory" />
+        </EntityType>
+        <Association Name="FK_User_UserWorkStatusHistory_User_WorkStatus">
+          <End Type="OfficeModel.WorkStatus" Role="User_WorkStatus" Multiplicity="1" />
+          <End Type="OfficeModel.WorkStatusHistory" Role="WorkStatusHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="WorkStatusHistory">
+              <PropertyRef Name="WorkstatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -829,6 +931,32 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="JobTitles">
+            <EntityTypeMapping TypeName="OfficeModel.JobTitle">
+              <MappingFragment StoreEntitySet="User_JobTitle">
+                <ScalarProperty Name="PAJobTitleID" ColumnName="PAJobTitleID" />
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="jtRanking" ColumnName="jtRanking" />
+                <ScalarProperty Name="NameCode" ColumnName="NameCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkStatus">
+            <EntityTypeMapping TypeName="OfficeModel.WorkStatus">
+              <MappingFragment StoreEntitySet="User_WorkStatus">
+                <ScalarProperty Name="PAWorkStatusID" ColumnName="PAWorkStatusID" />
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="NameCode" ColumnName="NameCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -854,7 +982,7 @@
         <EntityTypeShape EntityType="OfficeModel.Division" Width="1.5" PointX="3" PointY="1" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="OfficeModel.DivisionSection" Width="1.5" PointX="5.25" PointY="1" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="OfficeModel.Office" Width="2" PointX="7.875" PointY="0.75" Height="2.9417936197916656" IsExpanded="true" />
-        <EntityTypeShape EntityType="OfficeModel.OfficeSection" Width="2.25" PointX="11" PointY="0.625" Height="2.3648893229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="OfficeModel.OfficeSection" Width="2.25" PointX="15" PointY="8.25" Height="2.364889322916667" IsExpanded="true" />
         <AssociationConnector Association="OfficeModel.FK_User_Division_User_Bureau" ManuallyRouted="false">
           <ConnectorPoint PointX="2.25" PointY="2.3651432291666667" />
           <ConnectorPoint PointX="3" PointY="2.3651432291666667" />
@@ -867,27 +995,23 @@
           <ConnectorPoint PointX="6.75" PointY="2.37474609375" />
           <ConnectorPoint PointX="7.875" PointY="2.37474609375" />
         </AssociationConnector>
-        <AssociationConnector Association="OfficeModel.OfficeOfficeSection">
-          <ConnectorPoint PointX="9.875" PointY="1.9660953776041663" />
-          <ConnectorPoint PointX="11" PointY="1.9660953776041663" />
-        </AssociationConnector>
         <EntityTypeShape EntityType="OfficeModel.Person" Width="1.5" PointX="1.5" PointY="5" Height="2.9417936197916674" />
         <EntityTypeShape EntityType="OfficeModel.User" Width="1.5" PointX="3.875" PointY="4.5" Height="4.2879036458333335" />
         <EntityTypeShape EntityType="OfficeModel.BadgeHistory" Width="1.625" PointX="5.25" PointY="9.5" Height="2.3648893229166674" />
         <EntityTypeShape EntityType="OfficeModel.JobTitleHistory" Width="1.5" PointX="9.75" PointY="9.5" Height="2.5571907552083317" />
-        <EntityTypeShape EntityType="OfficeModel.WorkStatusHistory" Width="2" PointX="7.25" PointY="9.5" Height="2.5571907552083317" />
+        <EntityTypeShape EntityType="OfficeModel.WorkStatusHistory" Width="2" PointX="7.25" PointY="8.25" Height="2.7494921874999996" />
         <AssociationConnector Association="OfficeModel.FK_User_User_Person_Person" >
           <ConnectorPoint PointX="3" PointY="6.4708968098958337" />
           <ConnectorPoint PointX="3.875" PointY="6.4708968098958337" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="OfficeModel.OfficeHistory" Width="1.5" PointX="9.375" PointY="4.5" Height="3.1340950520833317" />
+        <EntityTypeShape EntityType="OfficeModel.OfficeHistory" Width="1.5" PointX="8.25" PointY="4.25" Height="3.3263964843749996" />
         <AssociationConnector Association="OfficeModel.FK_User_UserOfficeHistory_User_Office" >
-          <ConnectorPoint PointX="9.625" PointY="3.8840950520833331" />
-          <ConnectorPoint PointX="9.625" PointY="4.5" />
+          <ConnectorPoint PointX="9" PointY="3.6917936197916661" />
+          <ConnectorPoint PointX="9" PointY="4.25" />
         </AssociationConnector>
         <AssociationConnector Association="OfficeModel.OfficeHistoryUser">
-          <ConnectorPoint PointX="9.375" PointY="6.1631982421875" />
-          <ConnectorPoint PointX="5.375" PointY="6.1631982421875" />
+          <ConnectorPoint PointX="8.25" PointY="6.0381982421875" />
+          <ConnectorPoint PointX="5.375" PointY="6.0381982421875" />
         </AssociationConnector>
         <AssociationConnector Association="OfficeModel.UserBadgeHistory">
           <ConnectorPoint PointX="4.625" PointY="8.980205078125" />
@@ -896,28 +1020,35 @@
           <ConnectorPoint PointX="6.0625" PointY="9.5" />
         </AssociationConnector>
         <AssociationConnector Association="OfficeModel.UserWorkStatusHistory">
-          <ConnectorPoint PointX="5.375" PointY="7.0616513801066088" />
-          <ConnectorPoint PointX="8.25" PointY="7.0616513801066088" />
-          <ConnectorPoint PointX="8.25" PointY="9.5" />
+          <ConnectorPoint PointX="5.375" PointY="8.84375" />
+          <ConnectorPoint PointX="7.25" PointY="8.84375" />
         </AssociationConnector>
         <AssociationConnector Association="OfficeModel.UserJobTitleHistory">
-          <ConnectorPoint PointX="5.375" PointY="8.6268522135416674" />
-          <ConnectorPoint PointX="8.1666666666666661" PointY="8.6268522135416674" />
-          <ConnectorPoint PointX="8.3333333333333339" PointY="8.6268522135416674" />
-          <ConnectorPoint PointX="11.09375" PointY="8.6268522135416674" />
-          <ConnectorPoint PointX="11.09375" PointY="9.5" />
+          <ConnectorPoint PointX="5.375" PointY="7.9131982421875" />
+          <ConnectorPoint PointX="10.53125" PointY="7.9131982421875" />
+          <ConnectorPoint PointX="10.53125" PointY="9.5" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="OfficeModel.SectionHistory" Width="2.625" PointX="14" PointY="5.25" Height="2.7494921874999987" />
+        <EntityTypeShape EntityType="OfficeModel.SectionHistory" Width="2.625" PointX="12" PointY="5.5" Height="2.7494921874999987" />
         <AssociationConnector Association="OfficeModel.FK_User_UserSectionHistory_Office_OfficeSection" >
-          <ConnectorPoint PointX="12.125" PointY="3.1821907552083331" />
-          <ConnectorPoint PointX="12.125" PointY="6.5707946713090415" />
-          <ConnectorPoint PointX="14" PointY="6.5707946713090415" />
+          <ConnectorPoint PointX="16.125" PointY="8.25" />
+          <ConnectorPoint PointX="16.125" PointY="6.87474609375" />
+          <ConnectorPoint PointX="14.625" PointY="6.87474609375" />
         </AssociationConnector>
         <AssociationConnector Association="OfficeModel.UserSectionHistory">
-          <ConnectorPoint PointX="5.375" PointY="7.9441943359375" />
-          <ConnectorPoint PointX="8.1666666666666661" PointY="7.9441943359374987" />
-          <ConnectorPoint PointX="8.3333333333333339" PointY="7.9441943359375" />
-          <ConnectorPoint PointX="14" PointY="7.9441943359375" />
+          <ConnectorPoint PointX="5.375" PointY="8.14384521484375" />
+          <ConnectorPoint PointX="10.447916666666666" PointY="8.14384521484375" />
+          <ConnectorPoint PointX="10.614583333333334" PointY="8.14384521484375" />
+          <ConnectorPoint PointX="12" PointY="8.14384521484375" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="OfficeModel.JobTitle" Width="1.5" PointX="12" PointY="9.625" Height="2.5571907552083388" />
+        <AssociationConnector Association="OfficeModel.FK_User_UserJobTitleHistory_User_JobTitle" >
+          <ConnectorPoint PointX="12" PointY="10.903595377604169" />
+          <ConnectorPoint PointX="11.25" PointY="10.903595377604169" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="OfficeModel.WorkStatus" Width="1.5" PointX="7.625" PointY="11.375" Height="2.5571907552083388" />
+        <AssociationConnector Association="OfficeModel.FK_User_UserWorkStatusHistory_User_WorkStatus" >
+          <ConnectorPoint PointX="8.375" PointY="11.375" />
+          <ConnectorPoint PointX="8.375" PointY="10.9994921875" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>
