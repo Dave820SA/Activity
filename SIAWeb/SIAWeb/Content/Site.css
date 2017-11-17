@@ -117,6 +117,16 @@ body{
     padding: 30px 0 0!important
 }
 
+.profile-officepic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    /*-webkit-border-radius: 60%!important;
+    -moz-border-radius: 60%!important;
+    border-radius: 60%!important*/
+}
+
 .profile-userpic img {
     float: none;
     margin: 0 auto;
@@ -125,6 +135,17 @@ body{
     -webkit-border-radius: 50%!important;
     -moz-border-radius: 50%!important;
     border-radius: 50%!important
+}
+
+.profile-iconpic
+{
+	float: none;
+	margin: 0 auto;
+	width: 90%;
+	height: 90%; 
+	-webkit-border-radius: 60%!important;
+    -moz-border-radius: 60%!important;
+    border-radius: 60%!important
 }
 
 .profile-usertitle {
@@ -627,6 +648,16 @@ body{
     padding: 15px
 }
 
+.portlet.light_sm
+{
+	padding: 12px 7px 15px 10px;
+	background-color: #333333;
+}
+
+.portlet.light_sm.bordered {
+    border: 1px solid #e7ecf1!important
+}
+
 .portlet.light
 {
 	padding: 12px 20px 15px;
@@ -646,6 +677,10 @@ body{
 }
 
 .portlet.light>.portlet-title {
+    padding: 0;
+    min-height: 48px
+}
+.portlet.light_sm>.portlet-title {
     padding: 0;
     min-height: 48px
 }

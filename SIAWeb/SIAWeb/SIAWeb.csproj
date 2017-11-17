@@ -187,6 +187,7 @@
     <Content Include="Content\jquery.bootgrid.min.css" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\OfficerBadgeIcon.png" />
+    <Content Include="Images\SAPD-Patch-web-S4.png" />
     <Content Include="Images\SAPD-Patch.png" />
     <Content Include="Images\SupervisorBadgeIcon.png" />
     <Content Include="Scripts\bootstrap.js" />

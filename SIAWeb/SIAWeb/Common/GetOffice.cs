@@ -31,38 +31,40 @@ namespace SIAWeb.Common
                                  Code = o.Code,
                                  OfficeID = o.OfficeID,
 
-                                  PeopleAssigned = (from ohst in db.OfficeHistories
-                                                    join u in db.Users on ohst.AppEntityID equals u.AppEntityID
-                                                    join p in db.People on u.AppEntityID equals p.AppEntityID
-                                                    join bnbr in db.BadgeHistories on u.AppEntityID equals bnbr.AppEntityID into nob
-                                                    from nb in nob.DefaultIfEmpty()
+                                 PeopleAssigned = (from u in db.Users
+                                                   join p in db.People on u.AppEntityID equals p.AppEntityID
+                                                   join ohst in db.OfficeHistories on u.AppEntityID equals ohst.AppEntityID
 
-                                                    join j in db.JobTitleHistories on u.AppEntityID equals j.AppEntityID into job
-                                                    from jb in job.DefaultIfEmpty()
+                                                   join bnbr in db.BadgeHistories on u.AppEntityID equals bnbr.AppEntityID into nob
+                                                   from nb in nob.DefaultIfEmpty()
 
-                                                    join jth in db.JobTitles on jb.JobTitleID equals jth.JobTitleID
+                                                   join j in db.JobTitleHistories on u.AppEntityID equals j.AppEntityID into job
+                                                   from jb in job.DefaultIfEmpty()
 
-                                                    join w in db.WorkStatusHistories on u.AppEntityID equals w.AppEntityID into wsh
-                                                    from ws in wsh.DefaultIfEmpty()
+                                                   join jth in db.JobTitles on jb.JobTitleID equals jth.JobTitleID
 
-                                                    join wst in db.WorkStatus on ws.WorkstatusID equals wst.WorkStatusID
+                                                   join w in db.WorkStatusHistories on u.AppEntityID equals w.AppEntityID into wsh
+                                                   from ws in wsh.DefaultIfEmpty()
 
-                                                    where (ohst.EndDate == null && nb.EndDate == null && jb.EndDate == null && ws.EndDate == null) && wst.Ranking >= 9
-                                                    select new People
-                                                    {
-                                                        AppEntityID = u.AppEntityID,
-                                                        First = p.FirstName,
-                                                        Last = p.LastName,
-                                                        SAP = u.SAP,
-                                                        Badge = nb.Badge,
-                                                        JobTitle = jth.Name,
-                                                        jtRanking = (jth.jtRanking ?? 12),
-                                                        RankCode = jth.NameCode,
-                                                        Status = wst.Name
+                                                   join wst in db.WorkStatus on ws.WorkstatusID equals wst.WorkStatusID
+
+                                                   where ohst.OfficeID == officeID && (ohst.EndDate == null && nb.EndDate == null && jb.EndDate == null && ws.EndDate == null) && wst.Ranking <= 9
+                                                   select new People
+                                                   {
+                                                       AppEntityID = u.AppEntityID,
+                                                       First = p.FirstName,
+                                                       Last = p.LastName,
+                                                       SAP = u.SAP,
+                                                       Badge = nb.Badge,
+                                                       JobTitle = jth.Name,
+                                                       jtRanking = (jth.jtRanking ?? 12),
+                                                       RankCode = jth.NameCode,
+                                                       Status = wst.Name
 
 
-                                                    }),
-                                                   
+                                                   }),
+
+                      
 
                                  
                              });
