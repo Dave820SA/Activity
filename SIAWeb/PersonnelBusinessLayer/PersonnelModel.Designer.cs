@@ -6848,6 +6848,126 @@ namespace PersonnelBusinessLayer
         private Nullable<global::System.DateTime> _ModifiedDate;
         partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                OnOfficeIDChanging(value);
+                ReportPropertyChanging("OfficeID");
+                _OfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeID");
+                OnOfficeIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _OfficeID;
+        partial void OnOfficeIDChanging(Nullable<global::System.Int32> value);
+        partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SectionID
+        {
+            get
+            {
+                return _SectionID;
+            }
+            set
+            {
+                OnSectionIDChanging(value);
+                ReportPropertyChanging("SectionID");
+                _SectionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SectionID");
+                OnSectionIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SectionID;
+        partial void OnSectionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnSectionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RDID
+        {
+            get
+            {
+                return _RDID;
+            }
+            set
+            {
+                OnRDIDChanging(value);
+                ReportPropertyChanging("RDID");
+                _RDID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RDID");
+                OnRDIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RDID;
+        partial void OnRDIDChanging(Nullable<global::System.Int32> value);
+        partial void OnRDIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ShiftID
+        {
+            get
+            {
+                return _ShiftID;
+            }
+            set
+            {
+                OnShiftIDChanging(value);
+                ReportPropertyChanging("ShiftID");
+                _ShiftID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ShiftID");
+                OnShiftIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ShiftID;
+        partial void OnShiftIDChanging(Nullable<global::System.Int32> value);
+        partial void OnShiftIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> WorkStatusID
+        {
+            get
+            {
+                return _WorkStatusID;
+            }
+            set
+            {
+                OnWorkStatusIDChanging(value);
+                ReportPropertyChanging("WorkStatusID");
+                _WorkStatusID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WorkStatusID");
+                OnWorkStatusIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _WorkStatusID;
+        partial void OnWorkStatusIDChanging(Nullable<global::System.Int32> value);
+        partial void OnWorkStatusIDChanged();
 
         #endregion
 

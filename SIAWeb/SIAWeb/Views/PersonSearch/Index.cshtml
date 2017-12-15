@@ -110,7 +110,7 @@
                                 @Html.DisplayFor(modelItem => item.Status)
                             </td>
                             <td>
-                                <a href="@Url.Action("SelectedPerson", "PersonSearch", new { id = item.AppEntityID })" id="Search" class="btn btn-default btn-xs">
+                                <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = item.AppEntityID })" id="Search" class="btn btn-default btn-xs">
                                     Select&nbsp; <i class="fa fa-list" aria-hidden="true"></i></a>@*@Html.ActionLink("SelectedPerson", "View", new { appEntity = item.AppEntityID }) *@
                             </td>
                         </tr>

@@ -1,86 +1,6 @@
-﻿@model IEnumerable<SIAWeb.Models.PersonInfo>
-@{
-    ViewBag.Title = "SelectedPerson";
-    Layout = "~/Views/Shared/_Alternate2.cshtml";
-}
+﻿@model SIAWeb.Models.PersonWorkProfile
 
- @foreach (var pInfo in Model)
- {
-     @* _______________________________________Top of the page____________________________________________________*@
-     <div class="col-md-12">
-
-         @* _______________________________________User Profile picture____________________________________________________*@
-         <div class="col-md-4">
-             <div class="portlet light profile-sidebar-portlet bordered">
-                 <div class="profile-userpic">
-                     @{
-                         string sap = pInfo.SAP;
-
-                         string newSAP = sap.Substring(sap.Length - 6, 6);
-
-                         var url = "http://wppswebprod/FileShare/Images/" + newSAP + ".png";
-                         HttpWebResponse response = null;
-                         var request = (HttpWebRequest)WebRequest.Create(url);
-                         request.Method = "HEAD";
-
-                         try
-                         {
-                             response = (HttpWebResponse)request.GetResponse();
-                         }
-                         catch (WebException ex)
-                         {
-                             url = "~/Images/Male.png";
-                             
-                         }
-                         finally
-                         {
-                             // Don't forget to close your response.
-                             if (response != null)
-                             {
-                                 response.Close();
-                             }
-                         }
-                    
-                         <img src="@Url.Content(url)" class="img-responsive" alt="">
-                     }
-                 </div>
-                 <div class="profile-usertitle">
-                     @{
-                     if (!String.IsNullOrEmpty(pInfo.Badge))
-                       {
-                         string person = string.Format("{0} {1} #{2}", pInfo.First, pInfo.Last, pInfo.Badge);
-                         <div class="profile-usertitle-name">
-                             @Html.Raw(person.ToUpper())
-                         </div>
-                     }
-                     else
-                     {
-                         string person = string.Format("{0} {1}", pInfo.First, pInfo.Last);
-                         <div class="profile-usertitle-name">
-                             @Html.Raw(person.ToUpper())
-                         </div>
-                     }               
-                     }
-                     <div class="profile-usertitle-job">
-                         @Html.Raw(pInfo.JobTitle.ToUpper())
-                     </div>
-                 </div>
-
-              
-
-                 <div class="profile-usermenu">
-                     <ul class="nav">
-                         <li class="active"><a href="#"><i class="icon-home"></i>Profile Information </a>
-                         </li>
-                         <li><a href="#"><i class="icon-settings"></i>Personal Information</a> </li>
-                         
-                     </ul>
-                 </div>
-             </div>
-         </div>
-
-         @* _______________________________________Right Column____________________________________________________*@
-         <div class="col-md-8">
+<div class="col-md-8">
              <div class="portlet light bordered">
                  <div class="portlet-title tabbable-line">
                      <div class="caption caption-md">
@@ -114,7 +34,7 @@
                                                  Duty Status:
                                              </td>
                                              <td style="color: #5b9bd1; font-size: 1.2em;">
-                                                 @Html.DisplayFor(modelItem => pInfo.Status)
+                                                 @Html.DisplayFor(modelItem => Model.Status)
                                              </td>
                                          </tr>
                                          <tr>
@@ -124,9 +44,9 @@
                                              </td>
                                              <td style="color: #5b9bd1; font-size: 1.2em;">
                                                  @{
-                                                        string office = string.Format("{0} - {1}", pInfo.Office, pInfo.OfficeCode);
+                                                     string office = string.Format("{0} - {1}", Model.Office, Model.OfficeCode);
                                                
-                                                     <a href="@Url.Action("Index", "Office", new { id = pInfo.OfficeID }, null)" >@Html.Raw(office.ToUpper())
+                                                     <a href="@Url.Action("Index", "Office", new { id = Model.OfficeID }, null)" >@Html.Raw(office.ToUpper())
                                                          <span class="glyphicon glyphicon-plus-sign"></span></a>
                         
                                                  }
@@ -137,7 +57,7 @@
                                                  RD's:
                                              </td>
                                              <td style="color: #5b9bd1; font-size: 1.2em;">
-                                                 @Html.DisplayFor(modelItem => pInfo.RD)
+                                                 @Html.DisplayFor(modelItem => Model.RD)
                                              </td>
                                          </tr>
                                          <tr>
@@ -145,7 +65,7 @@
                                                  Shift:
                                              </td>
                                              <td style="color: #5b9bd1; font-size: 1.2em;">
-                                                 @Html.DisplayFor(modelItem => pInfo.Shift)
+                                                 @Html.DisplayFor(modelItem => Model.Shift)
                                              </td>
                                          </tr>
                                          <tr>
@@ -153,7 +73,7 @@
                                                  SAP:
                                              </td>
                                              <td style="color: #5b9bd1; font-size: 1.2em;">
-                                                 @Html.DisplayFor(modelItem => pInfo.SAP)
+                                                 @Html.DisplayFor(modelItem => Model.SAP)
                                              </td>
                                          </tr>
                                          <tr>
@@ -162,14 +82,14 @@
                                              </td>
                                              <td style="color: #5b9bd1; font-size: 1.2em;">
                                                  @{
-                                                DateTime sdate = pInfo.Employeed;
+                                                DateTime sdate = Model.Employeed;
                                                 DateTime edate = DateTime.Today;
                                                 var yrDiff = (((TimeSpan)(edate - sdate)).TotalDays / 365.2425);
                                                 double yrs = Math.Round(yrDiff, 1);
 
                                                 System.Text.StringBuilder sb = new System.Text.StringBuilder();
 
-                                                sb.Append(pInfo.Employeed.ToShortDateString());
+                                                sb.Append(Model.Employeed.ToShortDateString());
                                                 sb.Append("&nbsp;-- &nbsp;&nbsp;<span style=\"color: #FFFFFF\">Services Years:</span>&nbsp;&nbsp;");
                                                 sb.Append(yrs.ToString());
 
@@ -184,7 +104,7 @@
                                                  <span style="font-size: xx-small; color: #FFFF00">Click to email employee</span>
                                              </td>
                                              <td style="color: #5b9bd1; font-size: 1.2em;">
-                                                 @foreach (var email in pInfo.Emails)
+                                                 @foreach (var email in Model.Emails)
                                                  {
                                                      System.Text.StringBuilder eSb = new System.Text.StringBuilder();
                                                      eSb.Append("<span style=\"color: #FFFFFF\">");
@@ -203,7 +123,7 @@
                                                  Phone:
                                              </td>
                                              <td style="color: #5b9bd1; font-size: 1.2em;">
-                                                 @foreach (var phone in pInfo.PhoneNumbers)
+                                                 @foreach (var phone in Model.PhoneNumbers)
                                                  {
                                                      System.Text.StringBuilder eSb = new System.Text.StringBuilder();
                                                      eSb.Append("<span style=\"color: #FFFFFF\">");
@@ -237,7 +157,7 @@
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         @foreach (var badge in pInfo.Badges)
+                                         @foreach (var badge in Model.Badges)
                                          {
                                         
                                              <tr>
@@ -299,7 +219,7 @@
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         @foreach (var RD in pInfo.RDs)
+                                         @foreach (var RD in Model.RDs)
                                          {
                                         
                                              <tr>
@@ -361,7 +281,7 @@
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         @foreach (var oHist in pInfo.OfficeAssigments)
+                                         @foreach (var oHist in Model.OfficeAssigments)
                                          {
                                         
                                              <tr>
@@ -428,7 +348,7 @@
                                          </tr>
                                      </thead>
                                      <tbody>
-                                         @foreach (var uAwards in pInfo.myAwards)
+                                         @foreach (var uAwards in Model.myAwards)
                                          {
                                         
                                              <tr>
@@ -467,14 +387,3 @@
                  </div>
              </div>
          </div>
-     </div>
-     
-     
-     
-
- }
-
- 
-   
-    
-     

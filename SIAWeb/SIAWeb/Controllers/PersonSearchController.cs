@@ -43,7 +43,33 @@ namespace SIAWeb.Controllers
 
         }
 
+        public ActionResult SelectPerson(int id)
+        {
+            PersonBasicGet myPersonBasic = new PersonBasicGet();
 
+            PersonWorkProfileGet myWorkProfile = new PersonWorkProfileGet();
+
+            ViewData["WorkProfile"] = myWorkProfile.GetPersonInfo(id);
+
+
+            return View(myPersonBasic.GetPersonBasicInfo(id));
+
+        }
+
+        //public ActionResult SelectPerson(int id)
+        //{
+           
+        //    return View();
+
+        //}
+
+
+        public ActionResult GetPersonBasic(int id)
+        {
+            PersonBasicGet myPersonBasic = new PersonBasicGet();
+
+            return PartialView("_PersonBasic", myPersonBasic.GetPersonBasicInfo(id));
+        }
 
 
     }

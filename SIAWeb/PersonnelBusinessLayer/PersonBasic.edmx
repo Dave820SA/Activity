@@ -1,0 +1,271 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PersonBasicModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="PersonBasicModelStoreContainer">
+          <EntitySet Name="Person_Person" EntityType="PersonBasicModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
+          <EntitySet Name="User_JobTitle" EntityType="PersonBasicModel.Store.User_JobTitle" store:Type="Tables" Schema="dbo" Table="User.JobTitle" />
+          <EntitySet Name="User_User" EntityType="PersonBasicModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
+          <AssociationSet Name="FK_User_User_Person_Person" Association="PersonBasicModel.Store.FK_User_User_Person_Person">
+            <End Role="Person_Person" EntitySet="Person_Person" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person_Person">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="PersonTypeID" Type="int" />
+          <Property Name="Title" Type="varchar" MaxLength="8" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="Suffix" Type="varchar" MaxLength="10" />
+          <Property Name="rowguid" Type="uniqueidentifier" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User_JobTitle">
+          <Key>
+            <PropertyRef Name="JobTitleID" />
+          </Key>
+          <Property Name="JobTitleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="NameCode" Type="varchar" MaxLength="10" />
+          <Property Name="jtRanking" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="VisibleFlag" Type="bit" />
+          <Property Name="PAJobTitleID" Type="int" />
+        </EntityType>
+        <EntityType Name="User_User">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="PIN" Type="varchar" MaxLength="8" />
+          <Property Name="SAP" Type="varchar" MaxLength="8" />
+          <Property Name="CADID" Type="int" />
+          <Property Name="Badge" Type="varchar" MaxLength="6" />
+          <Property Name="JobTitleID" Type="int" />
+          <Property Name="OfficeID" Type="int" />
+          <Property Name="SectionID" Type="int" />
+          <Property Name="RDID" Type="int" />
+          <Property Name="ClassificationID" Type="int" />
+          <Property Name="ShiftID" Type="int" />
+          <Property Name="WorkStatusID" Type="int" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Gender" Type="nchar" MaxLength="1" />
+          <Property Name="Ethnicty" Type="nchar" MaxLength="1" />
+          <Property Name="MaritalStatus" Type="nchar" MaxLength="1" />
+          <Property Name="HireDate" Type="date" Nullable="false" />
+          <Property Name="rowguid" Type="uniqueidentifier" />
+          <Property Name="WorksheetVisibleFlag" Type="bit" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_User_User_Person_Person">
+          <End Role="Person_Person" Type="PersonBasicModel.Store.Person_Person" Multiplicity="1" />
+          <End Role="User_User" Type="PersonBasicModel.Store.User_User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person_Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PersonBasicModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="PersonBasicContex" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Person_Person" EntityType="PersonBasicModel.Person_Person" />
+          <EntitySet Name="User_User" EntityType="PersonBasicModel.User_User" />
+          <AssociationSet Name="FK_User_User_Person_Person" Association="PersonBasicModel.FK_User_User_Person_Person">
+            <End Role="Person_Person" EntitySet="Person_Person" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <EntitySet Name="User_JobTitle" EntityType="PersonBasicModel.User_JobTitle" />
+          <AssociationSet Name="User_JobTitleUser_User" Association="PersonBasicModel.User_JobTitleUser_User">
+            <End Role="User_JobTitle" EntitySet="User_JobTitle" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Person_Person">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="Int32" Nullable="false" />
+          <Property Name="PersonTypeID" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Suffix" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="rowguid" Type="Guid" />
+          <Property Name="ModifiedDate" Type="DateTime" />
+          <NavigationProperty Name="User_User" Relationship="PersonBasicModel.FK_User_User_Person_Person" FromRole="Person_Person" ToRole="User_User" />
+        </EntityType>
+        <EntityType Name="User_User">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="Int32" Nullable="false" />
+          <Property Name="PIN" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="SAP" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="CADID" Type="Int32" />
+          <Property Name="Badge" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
+          <Property Name="JobTitleID" Type="Int32" Nullable="false" />
+          <Property Name="OfficeID" Type="Int32" />
+          <Property Name="SectionID" Type="Int32" />
+          <Property Name="RDID" Type="Int32" />
+          <Property Name="ClassificationID" Type="Int32" />
+          <Property Name="ShiftID" Type="Int32" />
+          <Property Name="WorkStatusID" Type="Int32" />
+          <Property Name="DOB" Type="DateTime" />
+          <Property Name="Gender" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
+          <Property Name="Ethnicty" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
+          <Property Name="HireDate" Type="DateTime" Nullable="false" />
+          <Property Name="rowguid" Type="Guid" />
+          <Property Name="WorksheetVisibleFlag" Type="Boolean" />
+          <Property Name="ModifiedDate" Type="DateTime" />
+          <NavigationProperty Name="Person_Person" Relationship="PersonBasicModel.FK_User_User_Person_Person" FromRole="User_User" ToRole="Person_Person" />
+          <NavigationProperty Name="User_JobTitle" Relationship="PersonBasicModel.User_JobTitleUser_User" FromRole="User_User" ToRole="User_JobTitle" />
+        </EntityType>
+        <Association Name="FK_User_User_Person_Person">
+          <End Role="Person_Person" Type="PersonBasicModel.Person_Person" Multiplicity="1" />
+          <End Role="User_User" Type="PersonBasicModel.User_User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person_Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User_JobTitle">
+          <Key>
+            <PropertyRef Name="JobTitleID" />
+          </Key>
+          <Property Type="Int32" Name="JobTitleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NameCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="jtRanking" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="Boolean" Name="VisibleFlag" />
+          <Property Type="Int32" Name="PAJobTitleID" />
+          <NavigationProperty Name="User_User" Relationship="PersonBasicModel.User_JobTitleUser_User" FromRole="User_JobTitle" ToRole="User_User" />
+        </EntityType>
+        <Association Name="User_JobTitleUser_User">
+          <End Type="PersonBasicModel.User_JobTitle" Role="User_JobTitle" Multiplicity="1" />
+          <End Type="PersonBasicModel.User_User" Role="User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_JobTitle">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PersonBasicModelStoreContainer" CdmEntityContainer="PersonBasicContex">
+          <EntitySetMapping Name="Person_Person">
+            <EntityTypeMapping TypeName="PersonBasicModel.Person_Person">
+              <MappingFragment StoreEntitySet="Person_Person">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="PersonTypeID" ColumnName="PersonTypeID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Suffix" ColumnName="Suffix" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_User">
+            <EntityTypeMapping TypeName="PersonBasicModel.User_User">
+              <MappingFragment StoreEntitySet="User_User">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="CADID" ColumnName="CADID" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="RDID" ColumnName="RDID" />
+                <ScalarProperty Name="ClassificationID" ColumnName="ClassificationID" />
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Ethnicty" ColumnName="Ethnicty" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="WorksheetVisibleFlag" ColumnName="WorksheetVisibleFlag" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_JobTitle">
+            <EntityTypeMapping TypeName="PersonBasicModel.User_JobTitle">
+              <MappingFragment StoreEntitySet="User_JobTitle">
+                <ScalarProperty Name="PAJobTitleID" ColumnName="PAJobTitleID" />
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="jtRanking" ColumnName="jtRanking" />
+                <ScalarProperty Name="NameCode" ColumnName="NameCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="PersonBasic">
+        <EntityTypeShape EntityType="PersonBasicModel.Person_Person" Width="1.5" PointX="0.75" PointY="2.125" Height="2.941793619791667" IsExpanded="true" />
+        <EntityTypeShape EntityType="PersonBasicModel.User_User" Width="1.5" PointX="3" PointY="1.125" Height="5.057109375" IsExpanded="true" />
+        <AssociationConnector Association="PersonBasicModel.FK_User_User_Person_Person" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="3.5958968098958337" />
+          <ConnectorPoint PointX="3" PointY="3.5958968098958337" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="PersonBasicModel.User_JobTitle" Width="1.5" PointX="5.625" PointY="0.75" Height="2.5571907552083317" />
+        <AssociationConnector Association="PersonBasicModel.User_JobTitleUser_User">
+          <ConnectorPoint PointX="5.625" PointY="2.2160953776041659" />
+          <ConnectorPoint PointX="4.5" PointY="2.2160953776041659" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

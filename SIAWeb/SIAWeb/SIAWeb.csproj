@@ -142,6 +142,8 @@
     <Compile Include="Common\GetOffice.cs" />
     <Compile Include="Common\GetPeople.cs" />
     <Compile Include="Common\GetPerson.cs" />
+    <Compile Include="Common\PersonBasicGet.cs" />
+    <Compile Include="Common\PersonWorkProfileGet.cs" />
     <Compile Include="Common\RDHistory.cs" />
     <Compile Include="Common\ShiftHistory.cs" />
     <Compile Include="Common\SessionLogin.cs" />
@@ -159,6 +161,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\OfficeInfo.cs" />
+    <Compile Include="Models\PersonBasic.cs" />
+    <Compile Include="Models\PersonWorkProfile.cs" />
     <Compile Include="Models\UserAward.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CurrentUser.cs" />
@@ -335,6 +339,9 @@
     <Content Include="Views\PersonSearch\_ViewStart.cshtml" />
     <Content Include="Views\PersonSearch\SelectedPerson.cshtml" />
     <Content Include="Views\Office\Index.cshtml" />
+    <Content Include="Views\Shared\_PersonBasic.cshtml" />
+    <Content Include="Views\PersonSearch\SelectPerson.cshtml" />
+    <Content Include="Views\Shared\_PersonWorkProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OfficeBusinessLayer\OfficeBusinessLayer.csproj">

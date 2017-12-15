@@ -28,40 +28,6 @@ namespace SIAWeb.Common
 
                            };
                                  
-
-
-
-            //var myPeople = from p in db.People
-                           
-            //               join u in db.Users on p.AppEntityID equals u.AppEntityID
-
-            //               join w in db.WorkStatusHistories on u.AppEntityID equals w.AppEntityID into wsh
-            //               from ws in wsh.DefaultIfEmpty()
-
-            //               join wst in db.WorkStatus on ws.WorkstatusID equals wst.WorkStatusID
-
-            //               join o in db.OfficeHistories on u.AppEntityID equals o.AppEntityID into uof
-            //               from uf in uof.DefaultIfEmpty()
-
-            //               join of in db.Office_Office on uf.OfficeID equals of.OfficeID
-
-            //               join b in db.BadgeHistories on u.AppEntityID equals b.AppEntityID into nob
-            //               from nb in nob.DefaultIfEmpty()
-
-            //               join j in db.JobTitleHistories on u.AppEntityID equals j.AppEntityID into job
-            //               from jb in job.DefaultIfEmpty()
-
-            //               join jth in db.JobTitles on jb.JobTitleID equals jth.JobTitleID
-                    
-            //               orderby p.LastName, p.FirstName
-
-            //               where (ws.EndDate == null &&  uf.EndDate == null && nb.EndDate == null && jb.EndDate == null) && (p.LastName.Contains(searchString) || p.FirstName.Contains(searchString)
-            //               || u.SAP.Contains(searchString) || nb.Badge.Contains(searchString))
-
-            //               select new People {AppEntityID = p.AppEntityID, First = p.FirstName, Last = p.LastName, PIN = u.PIN, Badge = nb.Badge,
-            //               SAP = u.SAP, OfficeID = of.OfficeID, Office = of.Name, OfficeCode = of.Code, JobTitle = jth.Name, jtRanking = (jth.jtRanking ?? 12),
-            //               RankCode = jth.NameCode, Status = wst.Name};
-
             return myPeople.ToList();
 
         }
