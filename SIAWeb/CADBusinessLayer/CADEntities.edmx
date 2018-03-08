@@ -1,0 +1,769 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Reporting_SystemModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Reporting_SystemModelStoreContainer">
+          <EntitySet Name="Response_Master_Incident" EntityType="Reporting_SystemModel.Store.Response_Master_Incident" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Response_Vehicles_Assigned" EntityType="Reporting_SystemModel.Store.Response_Vehicles_Assigned" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Response_Master_Incident">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Master_Incident_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Response_Date" Type="datetime" />
+          <Property Name="Agency_Type" Type="varchar" MaxLength="30" />
+          <Property Name="Jurisdiction" Type="varchar" MaxLength="30" />
+          <Property Name="Division" Type="varchar" MaxLength="30" />
+          <Property Name="Battalion" Type="varchar" MaxLength="30" />
+          <Property Name="Station" Type="varchar" MaxLength="30" />
+          <Property Name="Response_Area" Type="varchar" MaxLength="30" />
+          <Property Name="Response_Time_Criteria" Type="varchar" MaxLength="8" />
+          <Property Name="Response_Plan" Type="varchar" MaxLength="30" />
+          <Property Name="Incident_Type" Type="varchar" MaxLength="30" />
+          <Property Name="Problem" Type="varchar" MaxLength="30" />
+          <Property Name="Priority_Number" Type="int" />
+          <Property Name="Priority_Description" Type="varchar" MaxLength="30" />
+          <Property Name="Location_Name" Type="varchar" MaxLength="400" />
+          <Property Name="Address" Type="varchar" MaxLength="400" />
+          <Property Name="Apartment" Type="varchar" MaxLength="10" />
+          <Property Name="City" Type="varchar" MaxLength="35" />
+          <Property Name="State" Type="varchar" MaxLength="5" />
+          <Property Name="Postal_Code" Type="varchar" MaxLength="10" />
+          <Property Name="County" Type="varchar" MaxLength="30" />
+          <Property Name="Location_Type" Type="varchar" MaxLength="30" />
+          <Property Name="Longitude" Type="varchar" MaxLength="10" />
+          <Property Name="Latitude" Type="varchar" MaxLength="10" />
+          <Property Name="Map_Info" Type="varchar" MaxLength="10" />
+          <Property Name="Cross_Street" Type="varchar" MaxLength="400" />
+          <Property Name="MethodOfCallRcvd" Type="varchar" MaxLength="30" />
+          <Property Name="Call_Back_Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Caller_Type" Type="varchar" MaxLength="30" />
+          <Property Name="Caller_Name" Type="varchar" MaxLength="80" />
+          <Property Name="Caller_Location_Name" Type="varchar" MaxLength="400" />
+          <Property Name="Caller_Address" Type="varchar" MaxLength="400" />
+          <Property Name="Caller_Apartment" Type="varchar" MaxLength="10" />
+          <Property Name="Caller_City" Type="varchar" MaxLength="35" />
+          <Property Name="Caller_State" Type="varchar" MaxLength="5" />
+          <Property Name="Caller_Postal_Code" Type="varchar" MaxLength="10" />
+          <Property Name="Caller_County" Type="varchar" MaxLength="30" />
+          <Property Name="Caller_Location_Phone" Type="varchar" MaxLength="20" />
+          <Property Name="Time_PhonePickUp" Type="datetime" />
+          <Property Name="Time_FirstCallTakingKeystroke" Type="datetime" />
+          <Property Name="Time_CallEnteredQueue" Type="datetime" />
+          <Property Name="Time_CallTakingComplete" Type="datetime" />
+          <Property Name="Time_Incident_Under_Control" Type="datetime" />
+          <Property Name="Time_CallClosed" Type="datetime" />
+          <Property Name="Time_SentToOtherCAD" Type="datetime" />
+          <Property Name="Time_First_Unit_Assigned" Type="datetime" />
+          <Property Name="Time_First_Unit_Enroute" Type="datetime" />
+          <Property Name="Time_First_Unit_Arrived" Type="datetime" />
+          <Property Name="Elapsed_CallRcvd2InQueue" Type="varchar" MaxLength="10" />
+          <Property Name="Elapsed_CallRcvd2CalTakDone" Type="varchar" MaxLength="10" />
+          <Property Name="Elapsed_InQueue_2_FirstAssign" Type="varchar" MaxLength="10" />
+          <Property Name="Elapsed_CallRcvd2FirstAssign" Type="varchar" MaxLength="10" />
+          <Property Name="Elapsed_Assigned2FirstEnroute" Type="varchar" MaxLength="10" />
+          <Property Name="Elapsed_Enroute2FirstAtScene" Type="varchar" MaxLength="10" />
+          <Property Name="Elapsed_CallRcvd2CallClosed" Type="varchar" MaxLength="10" />
+          <Property Name="CallTaking_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="CallClosing_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="CallDisposition_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="Fixed_Time_PhonePickUp" Type="datetime" />
+          <Property Name="Fixed_Time_CallEnteredQueue" Type="datetime" />
+          <Property Name="Fixed_Time_CallTakingComplete" Type="datetime" />
+          <Property Name="Fixed_Time_CallClosed" Type="datetime" />
+          <Property Name="Fixed_Time_SentToOtherCAD" Type="datetime" />
+          <Property Name="OnCall_ID" Type="int" />
+          <Property Name="Transfer_Return_Flag" Type="bit" Nullable="false" />
+          <Property Name="EMD_Used" Type="smallint" />
+          <Property Name="CIS_USed" Type="smallint" />
+          <Property Name="Determinant" Type="varchar" MaxLength="10" />
+          <Property Name="ProQa_CaseNumber" Type="varchar" MaxLength="10" />
+          <Property Name="SentToBilling_Flag" Type="bit" Nullable="false" />
+          <Property Name="ANI_Number" Type="varchar" MaxLength="20" />
+          <Property Name="ALI_Info" Type="varchar" MaxLength="50" />
+          <Property Name="Command_Channel" Type="varchar" MaxLength="30" />
+          <Property Name="Primary_TAC_Channel" Type="varchar" MaxLength="30" />
+          <Property Name="Alternate_TAC_Channel" Type="varchar" MaxLength="30" />
+          <Property Name="Call_Disposition" Type="varchar" MaxLength="30" />
+          <Property Name="Cancel_Reason" Type="varchar" MaxLength="30" />
+          <Property Name="Late_Flag" Type="char" MaxLength="1" />
+          <Property Name="WhichQueue" Type="varchar" MaxLength="1" />
+          <Property Name="Confirmation_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Incident_Name" Type="varchar" MaxLength="30" />
+          <Property Name="Building" Type="varchar" MaxLength="10" />
+          <Property Name="Caller_Building" Type="varchar" MaxLength="10" />
+          <Property Name="Certification_Level" Type="varchar" MaxLength="30" />
+          <Property Name="Base_Response_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Call_Is_Active" Type="int" />
+          <Property Name="Call_Source" Type="varchar" MaxLength="30" />
+          <Property Name="CreatedByPrescheduleModule" Type="varchar" MaxLength="1" />
+          <Property Name="Multi_Patients" Type="smallint" />
+          <Property Name="Call_Back_Phone_Ext" Type="varchar" MaxLength="9" />
+          <Property Name="Num_ANIALI_Calls" Type="int" />
+          <Property Name="Delay_Reason" Type="varchar" MaxLength="30" />
+          <Property Name="Street_ID" Type="int" />
+          <Property Name="PremiseID" Type="int" />
+          <Property Name="MultiAgency_Ptr" Type="int" />
+          <Property Name="MA911Problem_ID" Type="int" />
+          <Property Name="RespReconfigState" Type="tinyint" />
+          <Property Name="Call_Transfer_Receiving_Center" Type="varchar" MaxLength="30" />
+          <Property Name="ClockStartTime" Type="datetime" />
+          <Property Name="Call_Orig_OnHold" Type="datetime" />
+          <Property Name="Call_Final_OffHold" Type="datetime" />
+          <Property Name="House_Number" Type="varchar" MaxLength="10" />
+          <Property Name="Prefix_Directional" Type="varchar" MaxLength="22" />
+          <Property Name="Name_Component" Type="varchar" MaxLength="150" />
+          <Property Name="Street_Type" Type="varchar" MaxLength="15" />
+          <Property Name="Post_Directional" Type="varchar" MaxLength="22" />
+          <Property Name="House_Number_Suffix" Type="varchar" MaxLength="10" />
+          <Property Name="TimeFirstStaged" Type="datetime" />
+          <Property Name="TimeFirstPTContact" Type="datetime" />
+          <Property Name="TimeFirstDelayedAvail" Type="datetime" />
+          <Property Name="TimeFirstCallCleared" Type="datetime" />
+          <Property Name="StagedPerfBy" Type="varchar" MaxLength="80" />
+          <Property Name="PtContactPerfBy" Type="varchar" MaxLength="80" />
+          <Property Name="DelayedPerfBy" Type="varchar" MaxLength="80" />
+          <Property Name="CallClearedPerfBy" Type="varchar" MaxLength="80" />
+          <Property Name="ElapsedException" Type="int" />
+          <Property Name="UnreadIncident" Type="bit" Nullable="false" />
+          <Property Name="UnreadComment" Type="bit" Nullable="false" />
+          <Property Name="CautionNote" Type="bit" Nullable="false" />
+          <Property Name="HazmatNote" Type="bit" Nullable="false" />
+          <Property Name="PremiseHistory" Type="bit" Nullable="false" />
+          <Property Name="CurrentDivision" Type="varchar" MaxLength="30" />
+          <Property Name="HomeSectorID" Type="int" />
+          <Property Name="CurrentSectorID" Type="int" />
+          <Property Name="TimeCallViewed" Type="datetime" />
+          <Property Name="RequestToCancel" Type="bit" Nullable="false" />
+          <Property Name="ActionInProgressBy" Type="varchar" MaxLength="30" />
+          <Property Name="ActionType" Type="varchar" MaxLength="10" />
+          <Property Name="TimeActionInProgress" Type="datetime" />
+          <Property Name="AddressUpdateNeeded" Type="bit" Nullable="false" />
+          <Property Name="ResponsePlanType" Type="tinyint" />
+          <Property Name="ResponseTimeLate" Type="char" MaxLength="1" />
+          <Property Name="ProQa_CaseNumber_Fire" Type="varchar" MaxLength="10" />
+          <Property Name="ProQa_CaseNumber_Police" Type="varchar" MaxLength="10" />
+          <Property Name="IntersectionStreetID" Type="int" />
+          <Property Name="DispatchLevel" Type="varchar" MaxLength="30" />
+          <Property Name="Stacked" Type="tinyint" Nullable="false" />
+          <Property Name="TimeFirstStacked" Type="datetime" />
+          <Property Name="WillCallTransport" Type="bit" Nullable="false" />
+          <Property Name="Reopened" Type="bit" Nullable="false" />
+          <Property Name="DuplicatedFromID" Type="int" />
+          <Property Name="MachineName" Type="varchar" MaxLength="30" />
+          <Property Name="CallTakerPhoneExtension" Type="varchar" MaxLength="10" />
+          <Property Name="CallBackPhoneID" Type="int" />
+          <Property Name="CallerLocationPhoneID" Type="int" />
+        </EntityType>
+        <EntityType Name="Response_Vehicles_Assigned">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Master_Incident_ID" Type="int" Nullable="false" />
+          <Property Name="Agency_Type" Type="varchar" MaxLength="30" />
+          <Property Name="Jurisdiction" Type="varchar" MaxLength="30" />
+          <Property Name="Division" Type="varchar" MaxLength="30" />
+          <Property Name="Battalion" Type="varchar" MaxLength="30" />
+          <Property Name="Station" Type="varchar" MaxLength="30" />
+          <Property Name="Radio_Name" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Vehicle_ID" Type="int" Nullable="false" />
+          <Property Name="FR_MA_AA_Flag" Type="varchar" MaxLength="2" />
+          <Property Name="Time_PreAssigned" Type="datetime" />
+          <Property Name="Time_Assigned" Type="datetime" />
+          <Property Name="Time_Enroute" Type="datetime" />
+          <Property Name="Time_ArrivedAtScene" Type="datetime" />
+          <Property Name="Time_Staged" Type="datetime" />
+          <Property Name="Time_Contact" Type="datetime" />
+          <Property Name="Time_Delayed_Availability" Type="datetime" />
+          <Property Name="Time_Call_Cleared" Type="datetime" />
+          <Property Name="Time_BackInQtrs" Type="datetime" />
+          <Property Name="Elapsed_Assigned_2_Enroute" Type="varchar" MaxLength="10" />
+          <Property Name="Elapsed_Enroute_2_Arrival" Type="varchar" MaxLength="10" />
+          <Property Name="Elapsed_Assigned_2_Clear" Type="varchar" MaxLength="10" />
+          <Property Name="Fixed_Time_PreAssigned" Type="datetime" />
+          <Property Name="Fixed_Time_Assigned" Type="datetime" />
+          <Property Name="Fixed_Time_Enroute" Type="datetime" />
+          <Property Name="Fixed_Time_ArrivedAtScene" Type="datetime" />
+          <Property Name="Fixed_Time_Staged" Type="datetime" />
+          <Property Name="Fixed_Time_Contact" Type="datetime" />
+          <Property Name="Fixed_Time_DelayedAvailable" Type="datetime" />
+          <Property Name="Fixed_Time_Call_Cleared" Type="datetime" />
+          <Property Name="Fixed_Time_BackInQtrs" Type="datetime" />
+          <Property Name="PreAssign_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="Assign_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="EnrouteToScene_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="ArrivedAtScene_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="BackInQtrs_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="Staging_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="Contact_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="Delayed_Available_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="Call_Clear_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="Odometer_Enroute" Type="float" />
+          <Property Name="Odometer_AtScene" Type="float" />
+          <Property Name="Odometer_BackInQtrs" Type="float" />
+          <Property Name="Cancel_Reason" Type="varchar" MaxLength="30" />
+          <Property Name="Delay_Reason" Type="varchar" MaxLength="30" />
+          <Property Name="Location_At_Assign_Time" Type="varchar" MaxLength="400" />
+          <Property Name="Longitude_At_Assign_Time" Type="varchar" MaxLength="10" />
+          <Property Name="Latitude_At_Assign_Time" Type="varchar" MaxLength="10" />
+          <Property Name="Vehicle_Info_ID" Type="int" Nullable="false" />
+          <Property Name="Number_Of_Victims_Seen" Type="int" />
+          <Property Name="Refusal_Number" Type="varchar" MaxLength="15" />
+          <Property Name="Crew_Tckt_Nmbr" Type="varchar" MaxLength="15" />
+          <Property Name="Call_Disposition" Type="varchar" MaxLength="30" />
+          <Property Name="Time_Avail_AtScene" Type="datetime" />
+          <Property Name="Fixed_Time_Avail_AtScene" Type="datetime" />
+          <Property Name="Avail_AtScene_Performed_By" Type="varchar" MaxLength="80" />
+          <Property Name="Cancel_Type" Type="varchar" MaxLength="10" />
+          <Property Name="Response_Number" Type="varchar" MaxLength="20" />
+          <Property Name="Calculate_ETA" Type="datetime" />
+          <Property Name="Check_Assign_Flag" Type="tinyint" />
+          <Property Name="Status_ID" Type="int" />
+          <Property Name="TimeStatusChanged" Type="datetime" />
+          <Property Name="LateFlag" Type="bit" Nullable="false" />
+          <Property Name="PrimaryVehicleFlag" Type="bit" Nullable="false" />
+          <Property Name="AlarmLevel" Type="int" />
+          <Property Name="Current_UnitRespPriorityCode" Type="varchar" MaxLength="10" />
+          <Property Name="Current_UnitRespPriorityDesc" Type="varchar" MaxLength="30" />
+          <Property Name="ResponseVehiclesStackedID" Type="int" />
+          <Property Name="ResponseVehiclesAssignedTypeID" Type="int" />
+          <Property Name="StrikeTeamID" Type="int" />
+          <Property Name="StrikeTeamVehicleRoleID" Type="int" Nullable="false" />
+          <Property Name="TimeMoveAfterResponding" Type="datetime" />
+          <Property Name="LateTypeID" Type="int" />
+          <Property Name="MeetsCriteria" Type="varchar" MaxLength="512" />
+          <Property Name="UnitResponsibility" Type="varchar" MaxLength="100" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Reporting_SystemModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Reporting_SystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="RVAs" EntityType="Reporting_SystemModel.RVA" />
+          <EntitySet Name="RMIs" EntityType="Reporting_SystemModel.RMI" />
+          <AssociationSet Name="RMIRVA" Association="Reporting_SystemModel.RMIRVA">
+            <End Role="RMI" EntitySet="RMIs" />
+            <End Role="RVA" EntitySet="RVAs" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="RVA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Master_Incident_ID" Type="Int32" Nullable="false" />
+          <Property Name="Agency_Type" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Jurisdiction" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Division" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Battalion" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Station" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Radio_Name" Type="String" Nullable="false" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Vehicle_ID" Type="Int32" Nullable="false" />
+          <Property Name="FR_MA_AA_Flag" Type="String" MaxLength="2" Unicode="false" FixedLength="false" />
+          <Property Name="Time_PreAssigned" Type="DateTime" />
+          <Property Name="Time_Assigned" Type="DateTime" />
+          <Property Name="Time_Enroute" Type="DateTime" />
+          <Property Name="Time_ArrivedAtScene" Type="DateTime" />
+          <Property Name="Time_Staged" Type="DateTime" />
+          <Property Name="Time_Contact" Type="DateTime" />
+          <Property Name="Time_Delayed_Availability" Type="DateTime" />
+          <Property Name="Time_Call_Cleared" Type="DateTime" />
+          <Property Name="Time_BackInQtrs" Type="DateTime" />
+          <Property Name="Elapsed_Assigned_2_Enroute" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Elapsed_Enroute_2_Arrival" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Elapsed_Assigned_2_Clear" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Fixed_Time_PreAssigned" Type="DateTime" />
+          <Property Name="Fixed_Time_Assigned" Type="DateTime" />
+          <Property Name="Fixed_Time_Enroute" Type="DateTime" />
+          <Property Name="Fixed_Time_ArrivedAtScene" Type="DateTime" />
+          <Property Name="Fixed_Time_Staged" Type="DateTime" />
+          <Property Name="Fixed_Time_Contact" Type="DateTime" />
+          <Property Name="Fixed_Time_DelayedAvailable" Type="DateTime" />
+          <Property Name="Fixed_Time_Call_Cleared" Type="DateTime" />
+          <Property Name="Fixed_Time_BackInQtrs" Type="DateTime" />
+          <Property Name="PreAssign_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Assign_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="EnrouteToScene_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="ArrivedAtScene_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="BackInQtrs_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Staging_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Contact_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Delayed_Available_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Call_Clear_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Odometer_Enroute" Type="Double" />
+          <Property Name="Odometer_AtScene" Type="Double" />
+          <Property Name="Odometer_BackInQtrs" Type="Double" />
+          <Property Name="Cancel_Reason" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Delay_Reason" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Location_At_Assign_Time" Type="String" MaxLength="400" Unicode="false" FixedLength="false" />
+          <Property Name="Longitude_At_Assign_Time" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Latitude_At_Assign_Time" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Vehicle_Info_ID" Type="Int32" Nullable="false" />
+          <Property Name="Number_Of_Victims_Seen" Type="Int32" />
+          <Property Name="Refusal_Number" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="Crew_Tckt_Nmbr" Type="String" MaxLength="15" Unicode="false" FixedLength="false" />
+          <Property Name="Call_Disposition" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Time_Avail_AtScene" Type="DateTime" />
+          <Property Name="Fixed_Time_Avail_AtScene" Type="DateTime" />
+          <Property Name="Avail_AtScene_Performed_By" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="Cancel_Type" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Response_Number" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
+          <Property Name="Calculate_ETA" Type="DateTime" />
+          <Property Name="Check_Assign_Flag" Type="Byte" />
+          <Property Name="Status_ID" Type="Int32" />
+          <Property Name="TimeStatusChanged" Type="DateTime" />
+          <Property Name="LateFlag" Type="Boolean" Nullable="false" />
+          <Property Name="PrimaryVehicleFlag" Type="Boolean" Nullable="false" />
+          <Property Name="AlarmLevel" Type="Int32" />
+          <Property Name="Current_UnitRespPriorityCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Current_UnitRespPriorityDesc" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="ResponseVehiclesStackedID" Type="Int32" />
+          <Property Name="ResponseVehiclesAssignedTypeID" Type="Int32" />
+          <Property Name="StrikeTeamID" Type="Int32" />
+          <Property Name="StrikeTeamVehicleRoleID" Type="Int32" Nullable="false" />
+          <Property Name="TimeMoveAfterResponding" Type="DateTime" />
+          <Property Name="LateTypeID" Type="Int32" />
+          <Property Name="MeetsCriteria" Type="String" MaxLength="512" Unicode="false" FixedLength="false" />
+          <Property Name="UnitResponsibility" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="RMI" Relationship="Reporting_SystemModel.RMIRVA" FromRole="RVA" ToRole="RMI" />
+        </EntityType>
+        <EntityType Name="RMI">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Master_Incident_Number" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Response_Date" />
+          <Property Type="String" Name="Agency_Type" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Jurisdiction" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Division" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Battalion" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Station" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Response_Area" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Response_Time_Criteria" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Response_Plan" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Incident_Type" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Problem" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Priority_Number" />
+          <Property Type="String" Name="Priority_Description" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Location_Name" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Apartment" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Postal_Code" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="County" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Location_Type" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Longitude" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Latitude" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Map_Info" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Cross_Street" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MethodOfCallRcvd" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Call_Back_Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_Type" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_Name" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_Location_Name" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_Address" MaxLength="400" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_Apartment" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_City" MaxLength="35" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_State" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_Postal_Code" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_County" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_Location_Phone" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Time_PhonePickUp" />
+          <Property Type="DateTime" Name="Time_FirstCallTakingKeystroke" />
+          <Property Type="DateTime" Name="Time_CallEnteredQueue" />
+          <Property Type="DateTime" Name="Time_CallTakingComplete" />
+          <Property Type="DateTime" Name="Time_Incident_Under_Control" />
+          <Property Type="DateTime" Name="Time_CallClosed" />
+          <Property Type="DateTime" Name="Time_SentToOtherCAD" />
+          <Property Type="DateTime" Name="Time_First_Unit_Assigned" />
+          <Property Type="DateTime" Name="Time_First_Unit_Enroute" />
+          <Property Type="DateTime" Name="Time_First_Unit_Arrived" />
+          <Property Type="String" Name="Elapsed_CallRcvd2InQueue" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Elapsed_CallRcvd2CalTakDone" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Elapsed_InQueue_2_FirstAssign" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Elapsed_CallRcvd2FirstAssign" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Elapsed_Assigned2FirstEnroute" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Elapsed_Enroute2FirstAtScene" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Elapsed_CallRcvd2CallClosed" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CallTaking_Performed_By" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CallClosing_Performed_By" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CallDisposition_Performed_By" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="Fixed_Time_PhonePickUp" />
+          <Property Type="DateTime" Name="Fixed_Time_CallEnteredQueue" />
+          <Property Type="DateTime" Name="Fixed_Time_CallTakingComplete" />
+          <Property Type="DateTime" Name="Fixed_Time_CallClosed" />
+          <Property Type="DateTime" Name="Fixed_Time_SentToOtherCAD" />
+          <Property Type="Int32" Name="OnCall_ID" />
+          <Property Type="Boolean" Name="Transfer_Return_Flag" Nullable="false" />
+          <Property Type="Int16" Name="EMD_Used" />
+          <Property Type="Int16" Name="CIS_USed" />
+          <Property Type="String" Name="Determinant" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProQa_CaseNumber" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="SentToBilling_Flag" Nullable="false" />
+          <Property Type="String" Name="ANI_Number" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ALI_Info" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Command_Channel" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Primary_TAC_Channel" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Alternate_TAC_Channel" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Call_Disposition" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Cancel_Reason" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Late_Flag" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="WhichQueue" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Confirmation_Number" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Incident_Name" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Building" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Caller_Building" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Certification_Level" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Base_Response_Number" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Call_Is_Active" />
+          <Property Type="String" Name="Call_Source" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CreatedByPrescheduleModule" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Type="Int16" Name="Multi_Patients" />
+          <Property Type="String" Name="Call_Back_Phone_Ext" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Num_ANIALI_Calls" />
+          <Property Type="String" Name="Delay_Reason" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Street_ID" />
+          <Property Type="Int32" Name="PremiseID" />
+          <Property Type="Int32" Name="MultiAgency_Ptr" />
+          <Property Type="Int32" Name="MA911Problem_ID" />
+          <Property Type="Byte" Name="RespReconfigState" />
+          <Property Type="String" Name="Call_Transfer_Receiving_Center" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ClockStartTime" />
+          <Property Type="DateTime" Name="Call_Orig_OnHold" />
+          <Property Type="DateTime" Name="Call_Final_OffHold" />
+          <Property Type="String" Name="House_Number" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Prefix_Directional" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Name_Component" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Street_Type" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Post_Directional" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="House_Number_Suffix" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="TimeFirstStaged" />
+          <Property Type="DateTime" Name="TimeFirstPTContact" />
+          <Property Type="DateTime" Name="TimeFirstDelayedAvail" />
+          <Property Type="DateTime" Name="TimeFirstCallCleared" />
+          <Property Type="String" Name="StagedPerfBy" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PtContactPerfBy" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DelayedPerfBy" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CallClearedPerfBy" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="ElapsedException" />
+          <Property Type="Boolean" Name="UnreadIncident" Nullable="false" />
+          <Property Type="Boolean" Name="UnreadComment" Nullable="false" />
+          <Property Type="Boolean" Name="CautionNote" Nullable="false" />
+          <Property Type="Boolean" Name="HazmatNote" Nullable="false" />
+          <Property Type="Boolean" Name="PremiseHistory" Nullable="false" />
+          <Property Type="String" Name="CurrentDivision" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="HomeSectorID" />
+          <Property Type="Int32" Name="CurrentSectorID" />
+          <Property Type="DateTime" Name="TimeCallViewed" />
+          <Property Type="Boolean" Name="RequestToCancel" Nullable="false" />
+          <Property Type="String" Name="ActionInProgressBy" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ActionType" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="TimeActionInProgress" />
+          <Property Type="Boolean" Name="AddressUpdateNeeded" Nullable="false" />
+          <Property Type="Byte" Name="ResponsePlanType" />
+          <Property Type="String" Name="ResponseTimeLate" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Type="String" Name="ProQa_CaseNumber_Fire" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ProQa_CaseNumber_Police" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IntersectionStreetID" />
+          <Property Type="String" Name="DispatchLevel" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Byte" Name="Stacked" Nullable="false" />
+          <Property Type="DateTime" Name="TimeFirstStacked" />
+          <Property Type="Boolean" Name="WillCallTransport" Nullable="false" />
+          <Property Type="Boolean" Name="Reopened" Nullable="false" />
+          <Property Type="Int32" Name="DuplicatedFromID" />
+          <Property Type="String" Name="MachineName" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CallTakerPhoneExtension" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CallBackPhoneID" />
+          <Property Type="Int32" Name="CallerLocationPhoneID" />
+          <NavigationProperty Name="RVAs" Relationship="Reporting_SystemModel.RMIRVA" FromRole="RMI" ToRole="RVA" />
+        </EntityType>
+        <Association Name="RMIRVA">
+          <End Type="Reporting_SystemModel.RMI" Role="RMI" Multiplicity="1" />
+          <End Type="Reporting_SystemModel.RVA" Role="RVA" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RMI">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="RVA">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Reporting_SystemModelStoreContainer" CdmEntityContainer="Reporting_SystemEntities">
+          <EntitySetMapping Name="RVAs">
+            <EntityTypeMapping TypeName="Reporting_SystemModel.RVA">
+              <MappingFragment StoreEntitySet="Response_Vehicles_Assigned">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Master_Incident_ID" ColumnName="Master_Incident_ID" />
+                <ScalarProperty Name="Agency_Type" ColumnName="Agency_Type" />
+                <ScalarProperty Name="Jurisdiction" ColumnName="Jurisdiction" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Battalion" ColumnName="Battalion" />
+                <ScalarProperty Name="Station" ColumnName="Station" />
+                <ScalarProperty Name="Radio_Name" ColumnName="Radio_Name" />
+                <ScalarProperty Name="Vehicle_ID" ColumnName="Vehicle_ID" />
+                <ScalarProperty Name="FR_MA_AA_Flag" ColumnName="FR_MA_AA_Flag" />
+                <ScalarProperty Name="Time_PreAssigned" ColumnName="Time_PreAssigned" />
+                <ScalarProperty Name="Time_Assigned" ColumnName="Time_Assigned" />
+                <ScalarProperty Name="Time_Enroute" ColumnName="Time_Enroute" />
+                <ScalarProperty Name="Time_ArrivedAtScene" ColumnName="Time_ArrivedAtScene" />
+                <ScalarProperty Name="Time_Staged" ColumnName="Time_Staged" />
+                <ScalarProperty Name="Time_Contact" ColumnName="Time_Contact" />
+                <ScalarProperty Name="Time_Delayed_Availability" ColumnName="Time_Delayed_Availability" />
+                <ScalarProperty Name="Time_Call_Cleared" ColumnName="Time_Call_Cleared" />
+                <ScalarProperty Name="Time_BackInQtrs" ColumnName="Time_BackInQtrs" />
+                <ScalarProperty Name="Elapsed_Assigned_2_Enroute" ColumnName="Elapsed_Assigned_2_Enroute" />
+                <ScalarProperty Name="Elapsed_Enroute_2_Arrival" ColumnName="Elapsed_Enroute_2_Arrival" />
+                <ScalarProperty Name="Elapsed_Assigned_2_Clear" ColumnName="Elapsed_Assigned_2_Clear" />
+                <ScalarProperty Name="Fixed_Time_PreAssigned" ColumnName="Fixed_Time_PreAssigned" />
+                <ScalarProperty Name="Fixed_Time_Assigned" ColumnName="Fixed_Time_Assigned" />
+                <ScalarProperty Name="Fixed_Time_Enroute" ColumnName="Fixed_Time_Enroute" />
+                <ScalarProperty Name="Fixed_Time_ArrivedAtScene" ColumnName="Fixed_Time_ArrivedAtScene" />
+                <ScalarProperty Name="Fixed_Time_Staged" ColumnName="Fixed_Time_Staged" />
+                <ScalarProperty Name="Fixed_Time_Contact" ColumnName="Fixed_Time_Contact" />
+                <ScalarProperty Name="Fixed_Time_DelayedAvailable" ColumnName="Fixed_Time_DelayedAvailable" />
+                <ScalarProperty Name="Fixed_Time_Call_Cleared" ColumnName="Fixed_Time_Call_Cleared" />
+                <ScalarProperty Name="Fixed_Time_BackInQtrs" ColumnName="Fixed_Time_BackInQtrs" />
+                <ScalarProperty Name="PreAssign_Performed_By" ColumnName="PreAssign_Performed_By" />
+                <ScalarProperty Name="Assign_Performed_By" ColumnName="Assign_Performed_By" />
+                <ScalarProperty Name="EnrouteToScene_Performed_By" ColumnName="EnrouteToScene_Performed_By" />
+                <ScalarProperty Name="ArrivedAtScene_Performed_By" ColumnName="ArrivedAtScene_Performed_By" />
+                <ScalarProperty Name="BackInQtrs_Performed_By" ColumnName="BackInQtrs_Performed_By" />
+                <ScalarProperty Name="Staging_Performed_By" ColumnName="Staging_Performed_By" />
+                <ScalarProperty Name="Contact_Performed_By" ColumnName="Contact_Performed_By" />
+                <ScalarProperty Name="Delayed_Available_Performed_By" ColumnName="Delayed_Available_Performed_By" />
+                <ScalarProperty Name="Call_Clear_Performed_By" ColumnName="Call_Clear_Performed_By" />
+                <ScalarProperty Name="Odometer_Enroute" ColumnName="Odometer_Enroute" />
+                <ScalarProperty Name="Odometer_AtScene" ColumnName="Odometer_AtScene" />
+                <ScalarProperty Name="Odometer_BackInQtrs" ColumnName="Odometer_BackInQtrs" />
+                <ScalarProperty Name="Cancel_Reason" ColumnName="Cancel_Reason" />
+                <ScalarProperty Name="Delay_Reason" ColumnName="Delay_Reason" />
+                <ScalarProperty Name="Location_At_Assign_Time" ColumnName="Location_At_Assign_Time" />
+                <ScalarProperty Name="Longitude_At_Assign_Time" ColumnName="Longitude_At_Assign_Time" />
+                <ScalarProperty Name="Latitude_At_Assign_Time" ColumnName="Latitude_At_Assign_Time" />
+                <ScalarProperty Name="Vehicle_Info_ID" ColumnName="Vehicle_Info_ID" />
+                <ScalarProperty Name="Number_Of_Victims_Seen" ColumnName="Number_Of_Victims_Seen" />
+                <ScalarProperty Name="Refusal_Number" ColumnName="Refusal_Number" />
+                <ScalarProperty Name="Crew_Tckt_Nmbr" ColumnName="Crew_Tckt_Nmbr" />
+                <ScalarProperty Name="Call_Disposition" ColumnName="Call_Disposition" />
+                <ScalarProperty Name="Time_Avail_AtScene" ColumnName="Time_Avail_AtScene" />
+                <ScalarProperty Name="Fixed_Time_Avail_AtScene" ColumnName="Fixed_Time_Avail_AtScene" />
+                <ScalarProperty Name="Avail_AtScene_Performed_By" ColumnName="Avail_AtScene_Performed_By" />
+                <ScalarProperty Name="Cancel_Type" ColumnName="Cancel_Type" />
+                <ScalarProperty Name="Response_Number" ColumnName="Response_Number" />
+                <ScalarProperty Name="Calculate_ETA" ColumnName="Calculate_ETA" />
+                <ScalarProperty Name="Check_Assign_Flag" ColumnName="Check_Assign_Flag" />
+                <ScalarProperty Name="Status_ID" ColumnName="Status_ID" />
+                <ScalarProperty Name="TimeStatusChanged" ColumnName="TimeStatusChanged" />
+                <ScalarProperty Name="LateFlag" ColumnName="LateFlag" />
+                <ScalarProperty Name="PrimaryVehicleFlag" ColumnName="PrimaryVehicleFlag" />
+                <ScalarProperty Name="AlarmLevel" ColumnName="AlarmLevel" />
+                <ScalarProperty Name="Current_UnitRespPriorityCode" ColumnName="Current_UnitRespPriorityCode" />
+                <ScalarProperty Name="Current_UnitRespPriorityDesc" ColumnName="Current_UnitRespPriorityDesc" />
+                <ScalarProperty Name="ResponseVehiclesStackedID" ColumnName="ResponseVehiclesStackedID" />
+                <ScalarProperty Name="ResponseVehiclesAssignedTypeID" ColumnName="ResponseVehiclesAssignedTypeID" />
+                <ScalarProperty Name="StrikeTeamID" ColumnName="StrikeTeamID" />
+                <ScalarProperty Name="StrikeTeamVehicleRoleID" ColumnName="StrikeTeamVehicleRoleID" />
+                <ScalarProperty Name="TimeMoveAfterResponding" ColumnName="TimeMoveAfterResponding" />
+                <ScalarProperty Name="LateTypeID" ColumnName="LateTypeID" />
+                <ScalarProperty Name="MeetsCriteria" ColumnName="MeetsCriteria" />
+                <ScalarProperty Name="UnitResponsibility" ColumnName="UnitResponsibility" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RMIs">
+            <EntityTypeMapping TypeName="Reporting_SystemModel.RMI">
+              <MappingFragment StoreEntitySet="Response_Master_Incident">
+                <ScalarProperty Name="CallerLocationPhoneID" ColumnName="CallerLocationPhoneID" />
+                <ScalarProperty Name="CallBackPhoneID" ColumnName="CallBackPhoneID" />
+                <ScalarProperty Name="CallTakerPhoneExtension" ColumnName="CallTakerPhoneExtension" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="DuplicatedFromID" ColumnName="DuplicatedFromID" />
+                <ScalarProperty Name="Reopened" ColumnName="Reopened" />
+                <ScalarProperty Name="WillCallTransport" ColumnName="WillCallTransport" />
+                <ScalarProperty Name="TimeFirstStacked" ColumnName="TimeFirstStacked" />
+                <ScalarProperty Name="Stacked" ColumnName="Stacked" />
+                <ScalarProperty Name="DispatchLevel" ColumnName="DispatchLevel" />
+                <ScalarProperty Name="IntersectionStreetID" ColumnName="IntersectionStreetID" />
+                <ScalarProperty Name="ProQa_CaseNumber_Police" ColumnName="ProQa_CaseNumber_Police" />
+                <ScalarProperty Name="ProQa_CaseNumber_Fire" ColumnName="ProQa_CaseNumber_Fire" />
+                <ScalarProperty Name="ResponseTimeLate" ColumnName="ResponseTimeLate" />
+                <ScalarProperty Name="ResponsePlanType" ColumnName="ResponsePlanType" />
+                <ScalarProperty Name="AddressUpdateNeeded" ColumnName="AddressUpdateNeeded" />
+                <ScalarProperty Name="TimeActionInProgress" ColumnName="TimeActionInProgress" />
+                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="ActionInProgressBy" ColumnName="ActionInProgressBy" />
+                <ScalarProperty Name="RequestToCancel" ColumnName="RequestToCancel" />
+                <ScalarProperty Name="TimeCallViewed" ColumnName="TimeCallViewed" />
+                <ScalarProperty Name="CurrentSectorID" ColumnName="CurrentSectorID" />
+                <ScalarProperty Name="HomeSectorID" ColumnName="HomeSectorID" />
+                <ScalarProperty Name="CurrentDivision" ColumnName="CurrentDivision" />
+                <ScalarProperty Name="PremiseHistory" ColumnName="PremiseHistory" />
+                <ScalarProperty Name="HazmatNote" ColumnName="HazmatNote" />
+                <ScalarProperty Name="CautionNote" ColumnName="CautionNote" />
+                <ScalarProperty Name="UnreadComment" ColumnName="UnreadComment" />
+                <ScalarProperty Name="UnreadIncident" ColumnName="UnreadIncident" />
+                <ScalarProperty Name="ElapsedException" ColumnName="ElapsedException" />
+                <ScalarProperty Name="CallClearedPerfBy" ColumnName="CallClearedPerfBy" />
+                <ScalarProperty Name="DelayedPerfBy" ColumnName="DelayedPerfBy" />
+                <ScalarProperty Name="PtContactPerfBy" ColumnName="PtContactPerfBy" />
+                <ScalarProperty Name="StagedPerfBy" ColumnName="StagedPerfBy" />
+                <ScalarProperty Name="TimeFirstCallCleared" ColumnName="TimeFirstCallCleared" />
+                <ScalarProperty Name="TimeFirstDelayedAvail" ColumnName="TimeFirstDelayedAvail" />
+                <ScalarProperty Name="TimeFirstPTContact" ColumnName="TimeFirstPTContact" />
+                <ScalarProperty Name="TimeFirstStaged" ColumnName="TimeFirstStaged" />
+                <ScalarProperty Name="House_Number_Suffix" ColumnName="House_Number_Suffix" />
+                <ScalarProperty Name="Post_Directional" ColumnName="Post_Directional" />
+                <ScalarProperty Name="Street_Type" ColumnName="Street_Type" />
+                <ScalarProperty Name="Name_Component" ColumnName="Name_Component" />
+                <ScalarProperty Name="Prefix_Directional" ColumnName="Prefix_Directional" />
+                <ScalarProperty Name="House_Number" ColumnName="House_Number" />
+                <ScalarProperty Name="Call_Final_OffHold" ColumnName="Call_Final_OffHold" />
+                <ScalarProperty Name="Call_Orig_OnHold" ColumnName="Call_Orig_OnHold" />
+                <ScalarProperty Name="ClockStartTime" ColumnName="ClockStartTime" />
+                <ScalarProperty Name="Call_Transfer_Receiving_Center" ColumnName="Call_Transfer_Receiving_Center" />
+                <ScalarProperty Name="RespReconfigState" ColumnName="RespReconfigState" />
+                <ScalarProperty Name="MA911Problem_ID" ColumnName="MA911Problem_ID" />
+                <ScalarProperty Name="MultiAgency_Ptr" ColumnName="MultiAgency_Ptr" />
+                <ScalarProperty Name="PremiseID" ColumnName="PremiseID" />
+                <ScalarProperty Name="Street_ID" ColumnName="Street_ID" />
+                <ScalarProperty Name="Delay_Reason" ColumnName="Delay_Reason" />
+                <ScalarProperty Name="Num_ANIALI_Calls" ColumnName="Num_ANIALI_Calls" />
+                <ScalarProperty Name="Call_Back_Phone_Ext" ColumnName="Call_Back_Phone_Ext" />
+                <ScalarProperty Name="Multi_Patients" ColumnName="Multi_Patients" />
+                <ScalarProperty Name="CreatedByPrescheduleModule" ColumnName="CreatedByPrescheduleModule" />
+                <ScalarProperty Name="Call_Source" ColumnName="Call_Source" />
+                <ScalarProperty Name="Call_Is_Active" ColumnName="Call_Is_Active" />
+                <ScalarProperty Name="Base_Response_Number" ColumnName="Base_Response_Number" />
+                <ScalarProperty Name="Certification_Level" ColumnName="Certification_Level" />
+                <ScalarProperty Name="Caller_Building" ColumnName="Caller_Building" />
+                <ScalarProperty Name="Building" ColumnName="Building" />
+                <ScalarProperty Name="Incident_Name" ColumnName="Incident_Name" />
+                <ScalarProperty Name="Confirmation_Number" ColumnName="Confirmation_Number" />
+                <ScalarProperty Name="WhichQueue" ColumnName="WhichQueue" />
+                <ScalarProperty Name="Late_Flag" ColumnName="Late_Flag" />
+                <ScalarProperty Name="Cancel_Reason" ColumnName="Cancel_Reason" />
+                <ScalarProperty Name="Call_Disposition" ColumnName="Call_Disposition" />
+                <ScalarProperty Name="Alternate_TAC_Channel" ColumnName="Alternate_TAC_Channel" />
+                <ScalarProperty Name="Primary_TAC_Channel" ColumnName="Primary_TAC_Channel" />
+                <ScalarProperty Name="Command_Channel" ColumnName="Command_Channel" />
+                <ScalarProperty Name="ALI_Info" ColumnName="ALI_Info" />
+                <ScalarProperty Name="ANI_Number" ColumnName="ANI_Number" />
+                <ScalarProperty Name="SentToBilling_Flag" ColumnName="SentToBilling_Flag" />
+                <ScalarProperty Name="ProQa_CaseNumber" ColumnName="ProQa_CaseNumber" />
+                <ScalarProperty Name="Determinant" ColumnName="Determinant" />
+                <ScalarProperty Name="CIS_USed" ColumnName="CIS_USed" />
+                <ScalarProperty Name="EMD_Used" ColumnName="EMD_Used" />
+                <ScalarProperty Name="Transfer_Return_Flag" ColumnName="Transfer_Return_Flag" />
+                <ScalarProperty Name="OnCall_ID" ColumnName="OnCall_ID" />
+                <ScalarProperty Name="Fixed_Time_SentToOtherCAD" ColumnName="Fixed_Time_SentToOtherCAD" />
+                <ScalarProperty Name="Fixed_Time_CallClosed" ColumnName="Fixed_Time_CallClosed" />
+                <ScalarProperty Name="Fixed_Time_CallTakingComplete" ColumnName="Fixed_Time_CallTakingComplete" />
+                <ScalarProperty Name="Fixed_Time_CallEnteredQueue" ColumnName="Fixed_Time_CallEnteredQueue" />
+                <ScalarProperty Name="Fixed_Time_PhonePickUp" ColumnName="Fixed_Time_PhonePickUp" />
+                <ScalarProperty Name="CallDisposition_Performed_By" ColumnName="CallDisposition_Performed_By" />
+                <ScalarProperty Name="CallClosing_Performed_By" ColumnName="CallClosing_Performed_By" />
+                <ScalarProperty Name="CallTaking_Performed_By" ColumnName="CallTaking_Performed_By" />
+                <ScalarProperty Name="Elapsed_CallRcvd2CallClosed" ColumnName="Elapsed_CallRcvd2CallClosed" />
+                <ScalarProperty Name="Elapsed_Enroute2FirstAtScene" ColumnName="Elapsed_Enroute2FirstAtScene" />
+                <ScalarProperty Name="Elapsed_Assigned2FirstEnroute" ColumnName="Elapsed_Assigned2FirstEnroute" />
+                <ScalarProperty Name="Elapsed_CallRcvd2FirstAssign" ColumnName="Elapsed_CallRcvd2FirstAssign" />
+                <ScalarProperty Name="Elapsed_InQueue_2_FirstAssign" ColumnName="Elapsed_InQueue_2_FirstAssign" />
+                <ScalarProperty Name="Elapsed_CallRcvd2CalTakDone" ColumnName="Elapsed_CallRcvd2CalTakDone" />
+                <ScalarProperty Name="Elapsed_CallRcvd2InQueue" ColumnName="Elapsed_CallRcvd2InQueue" />
+                <ScalarProperty Name="Time_First_Unit_Arrived" ColumnName="Time_First_Unit_Arrived" />
+                <ScalarProperty Name="Time_First_Unit_Enroute" ColumnName="Time_First_Unit_Enroute" />
+                <ScalarProperty Name="Time_First_Unit_Assigned" ColumnName="Time_First_Unit_Assigned" />
+                <ScalarProperty Name="Time_SentToOtherCAD" ColumnName="Time_SentToOtherCAD" />
+                <ScalarProperty Name="Time_CallClosed" ColumnName="Time_CallClosed" />
+                <ScalarProperty Name="Time_Incident_Under_Control" ColumnName="Time_Incident_Under_Control" />
+                <ScalarProperty Name="Time_CallTakingComplete" ColumnName="Time_CallTakingComplete" />
+                <ScalarProperty Name="Time_CallEnteredQueue" ColumnName="Time_CallEnteredQueue" />
+                <ScalarProperty Name="Time_FirstCallTakingKeystroke" ColumnName="Time_FirstCallTakingKeystroke" />
+                <ScalarProperty Name="Time_PhonePickUp" ColumnName="Time_PhonePickUp" />
+                <ScalarProperty Name="Caller_Location_Phone" ColumnName="Caller_Location_Phone" />
+                <ScalarProperty Name="Caller_County" ColumnName="Caller_County" />
+                <ScalarProperty Name="Caller_Postal_Code" ColumnName="Caller_Postal_Code" />
+                <ScalarProperty Name="Caller_State" ColumnName="Caller_State" />
+                <ScalarProperty Name="Caller_City" ColumnName="Caller_City" />
+                <ScalarProperty Name="Caller_Apartment" ColumnName="Caller_Apartment" />
+                <ScalarProperty Name="Caller_Address" ColumnName="Caller_Address" />
+                <ScalarProperty Name="Caller_Location_Name" ColumnName="Caller_Location_Name" />
+                <ScalarProperty Name="Caller_Name" ColumnName="Caller_Name" />
+                <ScalarProperty Name="Caller_Type" ColumnName="Caller_Type" />
+                <ScalarProperty Name="Call_Back_Phone" ColumnName="Call_Back_Phone" />
+                <ScalarProperty Name="MethodOfCallRcvd" ColumnName="MethodOfCallRcvd" />
+                <ScalarProperty Name="Cross_Street" ColumnName="Cross_Street" />
+                <ScalarProperty Name="Map_Info" ColumnName="Map_Info" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Location_Type" ColumnName="Location_Type" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Postal_Code" ColumnName="Postal_Code" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Apartment" ColumnName="Apartment" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Location_Name" ColumnName="Location_Name" />
+                <ScalarProperty Name="Priority_Description" ColumnName="Priority_Description" />
+                <ScalarProperty Name="Priority_Number" ColumnName="Priority_Number" />
+                <ScalarProperty Name="Problem" ColumnName="Problem" />
+                <ScalarProperty Name="Incident_Type" ColumnName="Incident_Type" />
+                <ScalarProperty Name="Response_Plan" ColumnName="Response_Plan" />
+                <ScalarProperty Name="Response_Time_Criteria" ColumnName="Response_Time_Criteria" />
+                <ScalarProperty Name="Response_Area" ColumnName="Response_Area" />
+                <ScalarProperty Name="Station" ColumnName="Station" />
+                <ScalarProperty Name="Battalion" ColumnName="Battalion" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Jurisdiction" ColumnName="Jurisdiction" />
+                <ScalarProperty Name="Agency_Type" ColumnName="Agency_Type" />
+                <ScalarProperty Name="Response_Date" ColumnName="Response_Date" />
+                <ScalarProperty Name="Master_Incident_Number" ColumnName="Master_Incident_Number" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="CADEntities">
+        <EntityTypeShape EntityType="Reporting_SystemModel.RVA" Width="2.75" PointX="6.5" PointY="1" Height="15.633688151041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="Reporting_SystemModel.RMI" Width="2.875" PointX="2" PointY="0.875" Height="29.287089843750003" />
+        <AssociationConnector Association="Reporting_SystemModel.RMIRVA">
+          <ConnectorPoint PointX="4.875" PointY="8.8168440755208337" />
+          <ConnectorPoint PointX="6.5" PointY="8.8168440755208337" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
