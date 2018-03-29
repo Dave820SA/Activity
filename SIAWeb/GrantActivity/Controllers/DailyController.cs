@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using GrantBusinessLayer;
 using GrantActivity.Models;
+using GrantActivity.Common;
 
 namespace GrantActivity.Controllers
 {
@@ -131,6 +132,8 @@ namespace GrantActivity.Controllers
             {
                 db.Grant_Daily.AddObject(grant_daily);
                 db.SaveChanges();
+                Notifcation mail = new Notifcation();
+                mail.NewActivity();
                 return RedirectToAction("Details", new { id = grant_daily.AdminDailyID });
             }
 

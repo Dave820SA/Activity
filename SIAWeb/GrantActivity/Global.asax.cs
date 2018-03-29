@@ -25,8 +25,8 @@ namespace GrantActivity
         protected void Session_Start()
         {
             SessionLogin user = new SessionLogin();
-            string myUser = HttpContext.Current.User.Identity.Name.ToString();
-            //string myUser = "cosa/tb93703";
+            //string myUser = HttpContext.Current.User.Identity.Name.ToString();
+            string myUser = "cosa/bs93866";
             user.getUserPin(myUser);
 
         }

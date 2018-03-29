@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using GrantBusinessLayer;
 using System.Web.Routing;
+//using GrantActivity.Common;
 
 namespace GrantActivity.Controllers
 {
@@ -59,8 +60,12 @@ namespace GrantActivity.Controllers
             {
                 db.Grant_Activity.AddObject(grant_activity);
                 db.SaveChanges();
+                //Notifcation mail = new Notifcation();
+                //mail.NewActivity();
+
                 //return RedirectToAction("Index");
                 return RedirectToAction("Details", "Daily", new { id = id });
+               
             }
 
             ViewBag.CategoryID = new SelectList(db.Grant_Category, "CategoryID", "Name", grant_activity.CategoryID);

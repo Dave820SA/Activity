@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using GrantBusinessLayer;
 using GrantActivity.Models;
 using System.Data;
-
+using GrantActivity.Common;
 
 namespace GrantActivity.Controllers
 {
@@ -179,7 +179,8 @@ namespace GrantActivity.Controllers
             approv.MoreInformationFlag = true;
             approv.AdminNotes = info;
             db.SaveChanges();
-
+            Notifcation requestMore = new Notifcation();
+           requestMore.MoreInformation(id);
         }
 
 

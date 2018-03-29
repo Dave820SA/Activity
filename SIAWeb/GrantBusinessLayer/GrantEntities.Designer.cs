@@ -26,6 +26,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("GrantModel", "Grant_vActivityApproverGrant_Daily", "Grant_vActivityApprover", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GrantBusinessLayer.Grant_vActivityApprover), "Grant_Daily", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Grant_Daily), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "FK_User_User_Person_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Person), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(GrantBusinessLayer.User), true)]
 [assembly: EdmRelationshipAttribute("GrantModel", "ShiftUser", "Shift", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Shift), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.User), true)]
+[assembly: EdmRelationshipAttribute("GrantModel", "FK_Person_EmailAddress_Person_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(GrantBusinessLayer.Person), "Person_EmailAddress", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(GrantBusinessLayer.Email), true)]
 
 #endregion
 
@@ -204,6 +205,22 @@ namespace GrantBusinessLayer
             }
         }
         private ObjectSet<Shift> _Shifts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Email> Emails
+        {
+            get
+            {
+                if ((_Emails == null))
+                {
+                    _Emails = base.CreateObjectSet<Email>("Emails");
+                }
+                return _Emails;
+            }
+        }
+        private ObjectSet<Email> _Emails;
 
         #endregion
 
@@ -272,6 +289,14 @@ namespace GrantBusinessLayer
         {
             base.AddObject("Shifts", shift);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Emails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToEmails(Email email)
+        {
+            base.AddObject("Emails", email);
+        }
 
         #endregion
 
@@ -280,6 +305,235 @@ namespace GrantBusinessLayer
     #endregion
 
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GrantModel", Name="Email")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Email : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Email object.
+        /// </summary>
+        /// <param name="emailAddressID">Initial value of the EmailAddressID property.</param>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="emailAddressTypeID">Initial value of the EmailAddressTypeID property.</param>
+        /// <param name="emailAddress">Initial value of the EmailAddress property.</param>
+        /// <param name="rowguid">Initial value of the rowguid property.</param>
+        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
+        public static Email CreateEmail(global::System.Int32 emailAddressID, global::System.Int32 appEntityID, global::System.Int32 emailAddressTypeID, global::System.String emailAddress, global::System.Guid rowguid, global::System.DateTime modifiedDate)
+        {
+            Email email = new Email();
+            email.EmailAddressID = emailAddressID;
+            email.AppEntityID = appEntityID;
+            email.EmailAddressTypeID = emailAddressTypeID;
+            email.EmailAddress = emailAddress;
+            email.rowguid = rowguid;
+            email.ModifiedDate = modifiedDate;
+            return email;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EmailAddressID
+        {
+            get
+            {
+                return _EmailAddressID;
+            }
+            set
+            {
+                if (_EmailAddressID != value)
+                {
+                    OnEmailAddressIDChanging(value);
+                    ReportPropertyChanging("EmailAddressID");
+                    _EmailAddressID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("EmailAddressID");
+                    OnEmailAddressIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _EmailAddressID;
+        partial void OnEmailAddressIDChanging(global::System.Int32 value);
+        partial void OnEmailAddressIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EmailAddressTypeID
+        {
+            get
+            {
+                return _EmailAddressTypeID;
+            }
+            set
+            {
+                OnEmailAddressTypeIDChanging(value);
+                ReportPropertyChanging("EmailAddressTypeID");
+                _EmailAddressTypeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EmailAddressTypeID");
+                OnEmailAddressTypeIDChanged();
+            }
+        }
+        private global::System.Int32 _EmailAddressTypeID;
+        partial void OnEmailAddressTypeIDChanging(global::System.Int32 value);
+        partial void OnEmailAddressTypeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String EmailAddress
+        {
+            get
+            {
+                return _EmailAddress;
+            }
+            set
+            {
+                OnEmailAddressChanging(value);
+                ReportPropertyChanging("EmailAddress");
+                _EmailAddress = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("EmailAddress");
+                OnEmailAddressChanged();
+            }
+        }
+        private global::System.String _EmailAddress;
+        partial void OnEmailAddressChanging(global::System.String value);
+        partial void OnEmailAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Guid rowguid
+        {
+            get
+            {
+                return _rowguid;
+            }
+            set
+            {
+                OnrowguidChanging(value);
+                ReportPropertyChanging("rowguid");
+                _rowguid = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("rowguid");
+                OnrowguidChanged();
+            }
+        }
+        private global::System.Guid _rowguid;
+        partial void OnrowguidChanging(global::System.Guid value);
+        partial void OnrowguidChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private global::System.DateTime _ModifiedDate;
+        partial void OnModifiedDateChanging(global::System.DateTime value);
+        partial void OnModifiedDateChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "FK_Person_EmailAddress_Person_Person", "Person")]
+        public Person Person_Person
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("GrantModel.FK_Person_EmailAddress_Person_Person", "Person").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("GrantModel.FK_Person_EmailAddress_Person_Person", "Person").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Person> Person_PersonReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("GrantModel.FK_Person_EmailAddress_Person_Person", "Person");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("GrantModel.FK_Person_EmailAddress_Person_Person", "Person", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -1619,6 +1873,28 @@ namespace GrantBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("GrantModel.FK_User_User_Person_Person", "User_User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GrantModel", "FK_Person_EmailAddress_Person_Person", "Person_EmailAddress")]
+        public EntityCollection<Email> Person_EmailAddress
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Email>("GrantModel.FK_Person_EmailAddress_Person_Person", "Person_EmailAddress");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Email>("GrantModel.FK_Person_EmailAddress_Person_Person", "Person_EmailAddress", value);
                 }
             }
         }

@@ -10,6 +10,7 @@
           <EntitySet Name="Grant_Category" EntityType="GrantModel.Store.Grant_Category" store:Type="Tables" Schema="dbo" Table="Grant.Category" />
           <EntitySet Name="Grant_Daily" EntityType="GrantModel.Store.Grant_Daily" store:Type="Tables" Schema="dbo" Table="Grant.Daily" />
           <EntitySet Name="Grant_GrantType" EntityType="GrantModel.Store.Grant_GrantType" store:Type="Tables" Schema="dbo" Table="Grant.GrantType" />
+          <EntitySet Name="Person_EmailAddress" EntityType="GrantModel.Store.Person_EmailAddress" store:Type="Tables" Schema="dbo" Table="Person.EmailAddress" />
           <EntitySet Name="Person_Person" EntityType="GrantModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
           <EntitySet Name="User_Shift" EntityType="GrantModel.Store.User_Shift" store:Type="Tables" Schema="dbo" Table="User.Shift" />
           <EntitySet Name="User_User" EntityType="GrantModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
@@ -30,6 +31,10 @@
           <AssociationSet Name="FK_Grant_Daily_Grant_GrantType" Association="GrantModel.Store.FK_Grant_Daily_Grant_GrantType">
             <End Role="Grant_GrantType" EntitySet="Grant_GrantType" />
             <End Role="Grant_Daily" EntitySet="Grant_Daily" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_EmailAddress_Person_Person" Association="GrantModel.Store.FK_Person_EmailAddress_Person_Person">
+            <End Role="Person_Person" EntitySet="Person_Person" />
+            <End Role="Person_EmailAddress" EntitySet="Person_EmailAddress" />
           </AssociationSet>
           <AssociationSet Name="FK_User_User_Person_Person" Association="GrantModel.Store.FK_User_User_Person_Person">
             <End Role="Person_Person" EntitySet="Person_Person" />
@@ -77,6 +82,17 @@
           <Property Name="GrantType" Type="varchar" MaxLength="50" />
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Person_EmailAddress">
+          <Key>
+            <PropertyRef Name="EmailAddressID" />
+          </Key>
+          <Property Name="EmailAddressID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="EmailAddressTypeID" Type="int" Nullable="false" />
+          <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Person_Person">
           <Key>
             <PropertyRef Name="AppEntityID" />
@@ -123,13 +139,13 @@
           <Property Name="Gender" Type="nchar" MaxLength="1" />
           <Property Name="Ethnicty" Type="nchar" MaxLength="1" />
           <Property Name="MaritalStatus" Type="nchar" MaxLength="1" />
-          <Property Name="HireDate" Type="date" Nullable="false" />
+          <Property Name="HireDate" Type="date" />
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="WorksheetVisibleFlag" Type="bit" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDActivity.dbo.Grant.vActivityApprover' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'SAPDACTIVITY.dbo.Grant.vActivityApprover' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="Grant_vActivityApprover">
           <Key>
@@ -171,6 +187,18 @@
             </Principal>
             <Dependent Role="Grant_Daily">
               <PropertyRef Name="GrantTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_EmailAddress_Person_Person">
+          <End Role="Person_Person" Type="GrantModel.Store.Person_Person" Multiplicity="1" />
+          <End Role="Person_EmailAddress" Type="GrantModel.Store.Person_EmailAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person_Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="Person_EmailAddress">
+              <PropertyRef Name="AppEntityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -226,6 +254,11 @@
           <AssociationSet Name="ShiftUser" Association="GrantModel.ShiftUser">
             <End Role="Shift" EntitySet="Shifts" />
             <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Emails" EntityType="GrantModel.Email" />
+          <AssociationSet Name="FK_Person_EmailAddress_Person_Person" Association="GrantModel.FK_Person_EmailAddress_Person_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Person_EmailAddress" EntitySet="Emails" />
           </AssociationSet>
           <!-- <EntitySet Name="ApproveWorks" EntityType="GrantModel.ApproveWork" /> -->
         </EntityContainer>
@@ -329,6 +362,7 @@
           <Property Name="ModifiedDate" Type="DateTime" />
           <NavigationProperty Name="Grant_Daily" Relationship="GrantModel.Daily_Person" FromRole="Person" ToRole="Grant_Daily" />
           <NavigationProperty Name="User_User" Relationship="GrantModel.FK_User_User_Person_Person" FromRole="Person" ToRole="User_User" />
+          <NavigationProperty Name="Person_EmailAddress" Relationship="GrantModel.FK_Person_EmailAddress_Person_Person" FromRole="Person" ToRole="Person_EmailAddress" />
         </EntityType>
         <Association Name="Daily_Person">
           <End Type="GrantModel.Grant_Daily" Multiplicity="*" Role="Grant_Daily" />
@@ -422,6 +456,30 @@
             </Principal>
             <Dependent Role="User">
               <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Email">
+          <Key>
+            <PropertyRef Name="EmailAddressID" />
+          </Key>
+          <Property Type="Int32" Name="EmailAddressID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="EmailAddressTypeID" Nullable="false" />
+          <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Guid" Name="rowguid" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+          <NavigationProperty Name="Person_Person" Relationship="GrantModel.FK_Person_EmailAddress_Person_Person" FromRole="Person_EmailAddress" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Person_EmailAddress_Person_Person">
+          <End Type="GrantModel.Person" Role="Person" Multiplicity="1" />
+          <End Type="GrantModel.Email" Role="Person_EmailAddress" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="Person_EmailAddress">
+              <PropertyRef Name="AppEntityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -537,6 +595,18 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Emails">
+            <EntityTypeMapping TypeName="GrantModel.Email">
+              <MappingFragment StoreEntitySet="Person_EmailAddress">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="EmailAddressTypeID" ColumnName="EmailAddressTypeID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="EmailAddressID" ColumnName="EmailAddressID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -558,50 +628,53 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="GrantEntities">
-        <EntityTypeShape EntityType="GrantModel.Grant_Category" PointX="3" PointY="6" Width="1.5" Height="1.5956835937499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="GrantModel.Grant_Daily" PointX="3" PointY="1" Width="2" Height="3.9033007812499996" IsExpanded="true" />
-        <EntityTypeShape EntityType="GrantModel.Grant_GrantType" PointX="0.75" PointY="2" Width="1.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrantModel.Grant_Category" PointX="3.625" PointY="6.125" Width="1.75" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrantModel.Grant_Daily" PointX="1.5" PointY="1" Width="2.375" Height="3.9033007812499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="GrantModel.Grant_GrantType" PointX="0.75" PointY="5.75" Width="1.75" Height="1.787985026041667" IsExpanded="true" />
         <AssociationConnector ManuallyRouted="false" Association="GrantModel.FK_Grant_Daily_Grant_GrantType">
-          <ConnectorPoint PointX="2.25" PointY="2.8939925130208337" />
-          <ConnectorPoint PointX="3" PointY="2.8939925130208337" />
+          <ConnectorPoint PointX="2" PointY="5.75" />
+          <ConnectorPoint PointX="2" PointY="4.90330078125" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GrantModel.Grant_Activity" PointX="5.625" PointY="2.25" Width="1.5" Height="2.3648893229166656" />
         <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Category">
-          <ConnectorPoint PointX="4.5" PointY="6.797841796875" />
-          <ConnectorPoint PointX="5.75" PointY="6.797841796875" />
-          <ConnectorPoint PointX="5.75" PointY="5" />
-          <ConnectorPoint PointX="6.375" PointY="5" />
-          <ConnectorPoint PointX="6.375" PointY="4.6148893229166656" />
+          <ConnectorPoint PointX="4.656252" PointY="6.125" />
+          <ConnectorPoint PointX="4.656252" PointY="3.7280578268229165" />
+          <ConnectorPoint PointX="5.625" PointY="3.7280578268229165" />
         </AssociationConnector>
         <AssociationConnector Association="GrantModel.FK_Grant_Activity_Grant_Daily">
-          <ConnectorPoint PointX="5" PointY="3.4324446614583328" />
-          <ConnectorPoint PointX="5.625" PointY="3.4324446614583328" />
+          <ConnectorPoint PointX="3.875" PointY="2.7787223307291664" />
+          <ConnectorPoint PointX="5.625" PointY="2.7787223307291664" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GrantModel.Person" PointX="6" PointY="5.125" Width="1.5" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="GrantModel.Person" PointX="6" PointY="5.125" Width="2.375" Height="3.3263964843749996" />
         <AssociationConnector Association="GrantModel.Daily_Person">
-          <ConnectorPoint PointX="5" PointY="1.59375" />
-          <ConnectorPoint PointX="7.34375" PointY="1.59375" />
-          <ConnectorPoint PointX="7.34375" PointY="5.125" />
+          <ConnectorPoint PointX="3.875" PointY="1.59375" />
+          <ConnectorPoint PointX="7.75" PointY="1.59375" />
+          <ConnectorPoint PointX="7.75" PointY="5.125" />
         </AssociationConnector>
         <EntityTypeShape EntityType="GrantModel.Grant_vActivityApprover" Width="2" PointX="8.375" PointY="2.375" Height="1.59568359375" />
         <AssociationConnector Association="GrantModel.Grant_vActivityApproverGrant_Daily">
           <ConnectorPoint PointX="9.375" PointY="3.97068359375" />
           <ConnectorPoint PointX="9.375" PointY="4.7903450520833326" />
-          <ConnectorPoint PointX="7.427083333333333" PointY="4.7903450520833317" />
-          <ConnectorPoint PointX="7.260416666666667" PointY="4.7903450520833326" />
-          <ConnectorPoint PointX="6.458333333333333" PointY="4.7903450520833317" />
-          <ConnectorPoint PointX="6.291666666666667" PointY="4.7903450520833326" />
-          <ConnectorPoint PointX="5" PointY="4.7903450520833326" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="4.7903450520833317" />
+          <ConnectorPoint PointX="7.666666666666667" PointY="4.7903450520833326" />
+          <ConnectorPoint PointX="4.7395853333333333" PointY="4.7903450520833317" />
+          <ConnectorPoint PointX="4.5729186666666672" PointY="4.7903450520833326" />
+          <ConnectorPoint PointX="3.875" PointY="4.7903450520833326" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GrantModel.User" Width="1.5" PointX="8.25" PointY="5.625" Height="5.2494108072916656" />
+        <EntityTypeShape EntityType="GrantModel.User" Width="1.5" PointX="10.5" PointY="4.875" Height="5.2494108072916656" />
         <AssociationConnector Association="GrantModel.FK_User_User_Person_Person" >
-          <ConnectorPoint PointX="7.5" PointY="6.9420475260416667" />
-          <ConnectorPoint PointX="8.25" PointY="6.9420475260416667" />
+          <ConnectorPoint PointX="8.375" PointY="6.7881982421875" />
+          <ConnectorPoint PointX="10.5" PointY="6.7881982421875" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="GrantModel.Shift" Width="1.5" PointX="10.375" PointY="6.5" Height="2.3648893229166656" />
+        <EntityTypeShape EntityType="GrantModel.Shift" Width="1.5" PointX="12.75" PointY="4.625" Height="2.3648893229166656" />
         <AssociationConnector Association="GrantModel.ShiftUser">
-          <ConnectorPoint PointX="10.375" PointY="7.6824446614583328" />
-          <ConnectorPoint PointX="9.75" PointY="7.6824446614583328" />
+          <ConnectorPoint PointX="12.75" PointY="5.9324446614583328" />
+          <ConnectorPoint PointX="12" PointY="5.9324446614583328" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="GrantModel.Email" Width="1.875" PointX="7.375" PointY="8.875" Height="2.3648893229166674" />
+        <AssociationConnector Association="GrantModel.FK_Person_EmailAddress_Person_Person" >
+          <ConnectorPoint PointX="7.875" PointY="8.451396484375" />
+          <ConnectorPoint PointX="7.875" PointY="8.875" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
