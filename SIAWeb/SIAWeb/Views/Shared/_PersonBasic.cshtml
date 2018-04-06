@@ -5,10 +5,34 @@
                  <div class="profile-userpic">
                      @{
                          string sap = Model.SAP;
-
+                         
                          string newSAP = sap.Substring(sap.Length - 6, 6);
 
+
+                         var picURL = "";
+                         
+                         string str = Model.PicURL;
+                         if (str != null)
+                         {
+                             Char charRange1 = 'E';
+
+                             int stratIndex = str.IndexOf(charRange1);
+
+                             string substring = str.Substring(stratIndex);
+
+                             picURL = "http://wppswebprod/Booking/" + substring;
+                             
+                         }
+                         
                          var url = "http://wppswebprod/FileShare/Images/" + newSAP + ".png";
+                         
+                         if (picURL.Length > 10)
+                         {
+                             url = picURL;
+                         }
+                         
+                         
+                         
                          HttpWebResponse response = null;
                          var request = (HttpWebRequest)WebRequest.Create(url);
                          request.Method = "HEAD";
@@ -59,9 +83,9 @@
                
                  <div class="profile-usermenu">
                      <ul class="nav">
-                         <li class="active"><a href="#"><i class="icon-home"></i>Profile Information </a>
+                         <li class="active"><a href="#"><i class="icon-home"></i>Work Profile </a>
                          </li>
-                         <li><a href="#"><i class="icon-settings"></i>Personal Information</a> </li>
+                         <li><a href="#"><i class="icon-settings"></i>Personal Profile</a> </li>
                          
                      </ul>
                  </div>
