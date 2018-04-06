@@ -60,11 +60,14 @@
           <Property Name="Gender" Type="nchar" MaxLength="1" />
           <Property Name="Ethnicty" Type="nchar" MaxLength="1" />
           <Property Name="MaritalStatus" Type="nchar" MaxLength="1" />
-          <Property Name="HireDate" Type="date" Nullable="false" />
+          <Property Name="HireDate" Type="date" />
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="WorksheetVisibleFlag" Type="bit" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'SAPDACTIVITY.dbo.User.vPicture' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
         <Association Name="FK_User_User_Person_Person">
           <End Role="Person_Person" Type="PersonBasicModel.Store.Person_Person" Multiplicity="1" />
           <End Role="User_User" Type="PersonBasicModel.Store.User_User" Multiplicity="0..1" />
@@ -265,7 +268,7 @@
           <ConnectorPoint PointX="5.625" PointY="2.2160953776041659" />
           <ConnectorPoint PointX="4.5" PointY="2.2160953776041659" />
         </AssociationConnector>
-      </Diagram>
+        </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>

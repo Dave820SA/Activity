@@ -47,8 +47,6 @@ namespace GrantActivity.Common
             smtp.Send(mail);
         }
 
-
-
         public void MoreInformation(int dailyID)
         {
             MailMessage mail = new MailMessage();
@@ -58,28 +56,31 @@ namespace GrantActivity.Common
 
             string body = "<h1>Grant Administrative Activity </h1>";
             body += "<p>Auto Notification!</p>";
-            body += "<table>";
-            //body += "The Grant Administrator is requesting you provide more information on the item you entered: "
+
             foreach (var i in moreInfoitem)
             {
                 body += "<p>" + i.AdminNotes + "</p>";
-                body += "<tr><td><span style=\"color: #0066FF\">Start Date:</span> " + i.DailyStart + "&nbsp;&nbsp; </td><td>   <span style=\"color: #0066FF\">End Date:</span> " + i.DailyEnd + "</td></tr>";
 
+                body += "<table>";
+                body += "<tr><td colspan='2' text-align:left; >Activity Start & Stop</td></tr>";
+                body += "<tr><td><span style=\"color: #0066FF\">Start Date:</span> " + i.DailyStart + "&nbsp;&nbsp; </td><td> <span style=\"color: #0066FF\">End Date:</span> " + i.DailyEnd + "</td></tr>";
+                body += "</table>";
+
+                body += "<table>";
+                body += "<tr><td  text-align:left; >Items</td></tr>";
                  foreach (var c in i.Categories )
                     {
-                        body += "<p><span style=\"color: #0066FF\">" + c.EventCategory  + "</span></p>";
+                        body += "<tr><td><span style=\"color: #0066FF\">" + c.EventCategory  + "</span></td></tr>";
                     }
-
+                body += "</table>";
                 foreach (var e in i.Emails )
                     {        
                        //mail.To.Add(e.EmailAddress);
-                       mail.To.Add("douglas.davidson@sanantonio.gov");
+                       //mail.To.Add("douglas.davidson@sanantonio.gov");
+                        mail.To.Add("Brent.Smith@sanantonio.gov, douglas.davidson@sanantonio.gov");
                     }
+                
             }
-
-            body += "</table>";
-
-            
 
             mail.From = new MailAddress("SAPDtraffic.grantadministration@sanantonio.gov", "GrantActivity Admin");
             mail.Subject = "Need More Information";
@@ -96,15 +97,15 @@ namespace GrantActivity.Common
             switch (appEntity)
             {
                 case "752":
-                    return "Tonja.Brandt@sanantonio.gov";
+                    return "Tonja.Brandt@sanantonio.gov, douglas.davidson@sanantonio.gov";
+                    //return  "douglas.davidson@sanantonio.gov";
 
                 default:
-                    return "Brent.Smith@sanantonio.gov";
+                    return "Brent.Smith@sanantonio.gov, douglas.davidson@sanantonio.gov";
                     //return "douglas.davidson@sanantonio.gov";
             }
 
         }
-
 
         private List<OpenAdminItem> getOpenItems(string appEntity)
         {
@@ -139,7 +140,7 @@ namespace GrantActivity.Common
             
         }
 
-        //
+        //Return the daily that the admin requested more information on
         private List<Daily> getMoreInfoItem(int id)
         {
             var myNeededMoreInfo = (from d in db.Grant_Daily
@@ -187,7 +188,7 @@ namespace GrantActivity.Common
         
                                              Emails = (from w in db.Emails
                                             join ph in db.People on w.AppEntityID equals ph.AppEntityID
-                                            where w.EmailAddressTypeID == 1 && ph.AppEntityID == 1
+                                            where w.EmailAddressTypeID == 1 && ph.AppEntityID == d.AppEntityID
 
                                             select new EmployeeEmail
                                             {

@@ -45,6 +45,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "PersonAward", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_AwardType", "Award_AwardType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.AwardType), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.RecognitionType), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "UservPicture", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "vPicture", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.vPicture), true)]
 
 #endregion
 
@@ -527,6 +528,22 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<RecognitionType> _RecognitionTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<vPicture> vPictures
+        {
+            get
+            {
+                if ((_vPictures == null))
+                {
+                    _vPictures = base.CreateObjectSet<vPicture>("vPictures");
+                }
+                return _vPictures;
+            }
+        }
+        private ObjectSet<vPicture> _vPictures;
 
         #endregion
 
@@ -746,6 +763,14 @@ namespace PersonnelBusinessLayer
         public void AddToRecognitionTypes(RecognitionType recognitionType)
         {
             base.AddObject("RecognitionTypes", recognitionType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the vPictures EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTovPictures(vPicture vPicture)
+        {
+            base.AddObject("vPictures", vPicture);
         }
 
         #endregion
@@ -7200,6 +7225,225 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkStatusHistory>("SAPDActivityModel.UserWorkStatusHistory", "WorkStatusHistory", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "UservPicture", "vPicture")]
+        public EntityCollection<vPicture> vPictures
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<vPicture>("SAPDActivityModel.UservPicture", "vPicture");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<vPicture>("SAPDActivityModel.UservPicture", "vPicture", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="vPicture")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class vPicture : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new vPicture object.
+        /// </summary>
+        /// <param name="bookingID">Initial value of the BookingID property.</param>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        public static vPicture CreatevPicture(global::System.Int32 bookingID, global::System.Int32 appEntityID)
+        {
+            vPicture vPicture = new vPicture();
+            vPicture.BookingID = bookingID;
+            vPicture.AppEntityID = appEntityID;
+            return vPicture;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BookingID
+        {
+            get
+            {
+                return _BookingID;
+            }
+            set
+            {
+                if (_BookingID != value)
+                {
+                    OnBookingIDChanging(value);
+                    ReportPropertyChanging("BookingID");
+                    _BookingID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("BookingID");
+                    OnBookingIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _BookingID;
+        partial void OnBookingIDChanging(global::System.Int32 value);
+        partial void OnBookingIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SAP
+        {
+            get
+            {
+                return _SAP;
+            }
+            set
+            {
+                OnSAPChanging(value);
+                ReportPropertyChanging("SAP");
+                _SAP = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("SAP");
+                OnSAPChanged();
+            }
+        }
+        private global::System.String _SAP;
+        partial void OnSAPChanging(global::System.String value);
+        partial void OnSAPChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ImagePath
+        {
+            get
+            {
+                return _ImagePath;
+            }
+            set
+            {
+                OnImagePathChanging(value);
+                ReportPropertyChanging("ImagePath");
+                _ImagePath = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ImagePath");
+                OnImagePathChanged();
+            }
+        }
+        private global::System.String _ImagePath;
+        partial void OnImagePathChanging(global::System.String value);
+        partial void OnImagePathChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> DateTimeStamp
+        {
+            get
+            {
+                return _DateTimeStamp;
+            }
+            set
+            {
+                OnDateTimeStampChanging(value);
+                ReportPropertyChanging("DateTimeStamp");
+                _DateTimeStamp = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DateTimeStamp");
+                OnDateTimeStampChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _DateTimeStamp;
+        partial void OnDateTimeStampChanging(Nullable<global::System.DateTime> value);
+        partial void OnDateTimeStampChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "UservPicture", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UservPicture", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UservPicture", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UservPicture", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SAPDActivityModel.UservPicture", "User", value);
                 }
             }
         }

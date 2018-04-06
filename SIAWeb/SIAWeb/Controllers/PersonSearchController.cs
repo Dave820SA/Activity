@@ -34,7 +34,7 @@ namespace SIAWeb.Controllers
 
         }
 
-
+        //Not used
         public ActionResult SelectedPerson(int id)
         {
             GetPerson myperson = new GetPerson();

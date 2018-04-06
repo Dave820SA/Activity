@@ -237,6 +237,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Images\Check_Round.png" />
     <Content Include="Images\Male.png" />
+    <Content Include="Images\Question6.png" />
     <Content Include="Images\red-minus.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

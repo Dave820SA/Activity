@@ -134,7 +134,7 @@
                                         if (!String.IsNullOrEmpty(person.Badge))
                                         {
                                             string sup = string.Format("{0} {1} #{2}", person.First, person.Last, person.Badge);
-                                                <a href="@Url.Action("SelectedPerson", "PersonSearch", new { id = person.AppEntityID }, null)" style="color: #5b9bd1">@Html.Raw(sup.ToUpper())
+                                                <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = person.AppEntityID }, null)" style="color: #5b9bd1">@Html.Raw(sup.ToUpper())
                                                          </a>
                                         
                                                     @*@Html.Raw(sup.ToUpper())*@
@@ -144,7 +144,7 @@
                                         {
                                             string sup = string.Format("{0} {1}", person.First, person.Last);
                                             
-                                            <a href="@Url.Action("SelectedPerson", "PersonSearch", new { id = person.AppEntityID }, null)" >@Html.Raw(sup.ToUpper())
+                                            <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = person.AppEntityID }, null)" >@Html.Raw(sup.ToUpper())
                                                          <span class="glyphicon glyphicon-plus-sign"></span></a>
                                             
                                                     @*@Html.Raw(sup.ToUpper())*@
@@ -196,7 +196,7 @@
                                             {
                                                 string sup = string.Format("{0} {1} #{2}", person.First, person.Last, person.Badge);
                                             
-                                            <a href="@Url.Action("SelectedPerson", "PersonSearch", new { id = person.AppEntityID }, null)" >@Html.Raw(sup.ToUpper())
+                                            <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = person.AppEntityID }, null)" >@Html.Raw(sup.ToUpper())
                                                          <span class="glyphicon glyphicon-plus-sign"></span></a>
                                         
                                                     @*@Html.Raw(sup.ToUpper())*@
@@ -206,7 +206,7 @@
                                             {
                                                 string sup = string.Format("{0} {1}", person.First, person.Last);
                                                 
-                                                 <a href="@Url.Action("SelectedPerson", "PersonSearch", new { id = person.AppEntityID }, null)" >@Html.Raw(sup.ToUpper())
+                                                 <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = person.AppEntityID }, null)" >@Html.Raw(sup.ToUpper())
                                                          <span class="glyphicon glyphicon-plus-sign"></span></a>
                                             
                                                    @* @Html.Raw(sup.ToUpper())*@

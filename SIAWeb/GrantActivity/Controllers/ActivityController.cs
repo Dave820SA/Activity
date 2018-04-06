@@ -100,6 +100,7 @@ namespace GrantActivity.Controllers
                 db.Grant_Activity.Attach(grant_activity);
                 db.ObjectStateManager.ChangeObjectState(grant_activity, EntityState.Modified);
                 db.SaveChanges();
+
                 //return RedirectToAction("Index");
                 return RedirectToAction("Details", "Daily", new { id = grant_activity.DailyID });
             }

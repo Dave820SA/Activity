@@ -13,5 +13,6 @@ namespace SIAWeb.Models
         [DisplayName("Title")]
         public string JobTitle { get; set; }
         public string RankCode { get; set; }
+        public string PicURL { get; set; }
     }
 }
