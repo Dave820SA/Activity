@@ -24,6 +24,7 @@ namespace SIAWeb.Models
         public string RankCode { get; set; }
         [DisplayName("Work Status")]
         public string Status { get; set; }
+        public int WorkStatusCode { get; set; }
         public string AddressType { get; set; }
         public string AdressL1 { get; set; }
         public string AddressL2 { get; set; }
@@ -44,6 +45,7 @@ namespace SIAWeb.Models
         public IEnumerable<OfficeAssigment> OfficeAssigments { get; set; }
         public IEnumerable<PhoneNumber> PhoneNumbers { get; set; }
         public IEnumerable<UserAward> myAwards { get; set; }
+        
        
         
     }

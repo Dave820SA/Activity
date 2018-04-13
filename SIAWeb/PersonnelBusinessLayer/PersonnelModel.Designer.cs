@@ -46,6 +46,7 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_AwardType", "Award_AwardType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.AwardType), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.RecognitionType), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "UservPicture", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "vPicture", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.vPicture), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "UservEquipment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "vEquipment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.vEquipment), true)]
 
 #endregion
 
@@ -544,6 +545,22 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<vPicture> _vPictures;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<vEquipment> vEquipments
+        {
+            get
+            {
+                if ((_vEquipments == null))
+                {
+                    _vEquipments = base.CreateObjectSet<vEquipment>("vEquipments");
+                }
+                return _vEquipments;
+            }
+        }
+        private ObjectSet<vEquipment> _vEquipments;
 
         #endregion
 
@@ -772,6 +789,14 @@ namespace PersonnelBusinessLayer
         {
             base.AddObject("vPictures", vPicture);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the vEquipments EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddTovEquipments(vEquipment vEquipment)
+        {
+            base.AddObject("vEquipments", vEquipment);
+        }
 
         #endregion
 
@@ -781,7 +806,7 @@ namespace PersonnelBusinessLayer
         /// No Metadata Documentation available.
         /// </summary>
         /// <param name="searchString">No Metadata Documentation available.</param>
-        public ObjectResult<spPersonnelSearch_Result> spPersonnelSearch(global::System.String searchString)
+        public int spPersonnelSearch(global::System.String searchString)
         {
             ObjectParameter searchStringParameter;
             if (searchString != null)
@@ -793,7 +818,45 @@ namespace PersonnelBusinessLayer
                 searchStringParameter = new ObjectParameter("SearchString", typeof(global::System.String));
             }
     
-            return base.ExecuteFunction<spPersonnelSearch_Result>("spPersonnelSearch", searchStringParameter);
+            return base.ExecuteFunction("spPersonnelSearch", searchStringParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="searchString">No Metadata Documentation available.</param>
+        public ObjectResult<spPersonnelSearch_Result> spPersonnelSearch_Results(global::System.String searchString)
+        {
+            ObjectParameter searchStringParameter;
+            if (searchString != null)
+            {
+                searchStringParameter = new ObjectParameter("SearchString", searchString);
+            }
+            else
+            {
+                searchStringParameter = new ObjectParameter("SearchString", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<spPersonnelSearch_Result>("spPersonnelSearch_Results", searchStringParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="iD">No Metadata Documentation available.</param>
+        public ObjectResult<spIssuedEquipment_Result> spIssuedEquipment(Nullable<global::System.Int32> iD)
+        {
+            ObjectParameter iDParameter;
+            if (iD.HasValue)
+            {
+                iDParameter = new ObjectParameter("ID", iD);
+            }
+            else
+            {
+                iDParameter = new ObjectParameter("ID", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<spIssuedEquipment_Result>("spIssuedEquipment", iDParameter);
         }
 
         #endregion
@@ -6498,11 +6561,13 @@ namespace PersonnelBusinessLayer
         /// Create a new User object.
         /// </summary>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="sAP">Initial value of the SAP property.</param>
         /// <param name="hireDate">Initial value of the HireDate property.</param>
-        public static User CreateUser(global::System.Int32 appEntityID, global::System.DateTime hireDate)
+        public static User CreateUser(global::System.Int32 appEntityID, global::System.String sAP, global::System.DateTime hireDate)
         {
             User user = new User();
             user.AppEntityID = appEntityID;
+            user.SAP = sAP;
             user.HireDate = hireDate;
             return user;
         }
@@ -6565,7 +6630,7 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String SAP
         {
@@ -6577,7 +6642,7 @@ namespace PersonnelBusinessLayer
             {
                 OnSAPChanging(value);
                 ReportPropertyChanging("SAP");
-                _SAP = StructuralObject.SetValidValue(value, true);
+                _SAP = StructuralObject.SetValidValue(value, false);
                 ReportPropertyChanged("SAP");
                 OnSAPChanged();
             }
@@ -7247,6 +7312,379 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<vPicture>("SAPDActivityModel.UservPicture", "vPicture", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "UservEquipment", "vEquipment")]
+        public EntityCollection<vEquipment> vEquipments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<vEquipment>("SAPDActivityModel.UservEquipment", "vEquipment");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<vEquipment>("SAPDActivityModel.UservEquipment", "vEquipment", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="vEquipment")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class vEquipment : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new vEquipment object.
+        /// </summary>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="issuedTo">Initial value of the IssuedTo property.</param>
+        /// <param name="sAP">Initial value of the SAP property.</param>
+        /// <param name="categoryID">Initial value of the CategoryID property.</param>
+        /// <param name="category">Initial value of the Category property.</param>
+        /// <param name="itemType">Initial value of the ItemType property.</param>
+        public static vEquipment CreatevEquipment(global::System.Int32 appEntityID, global::System.Int32 id, global::System.String issuedTo, global::System.String sAP, global::System.Int32 categoryID, global::System.String category, global::System.String itemType)
+        {
+            vEquipment vEquipment = new vEquipment();
+            vEquipment.AppEntityID = appEntityID;
+            vEquipment.ID = id;
+            vEquipment.IssuedTo = issuedTo;
+            vEquipment.SAP = sAP;
+            vEquipment.CategoryID = categoryID;
+            vEquipment.Category = category;
+            vEquipment.ItemType = itemType;
+            return vEquipment;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ItemDescription
+        {
+            get
+            {
+                return _ItemDescription;
+            }
+            set
+            {
+                OnItemDescriptionChanging(value);
+                ReportPropertyChanging("ItemDescription");
+                _ItemDescription = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ItemDescription");
+                OnItemDescriptionChanged();
+            }
+        }
+        private global::System.String _ItemDescription;
+        partial void OnItemDescriptionChanging(global::System.String value);
+        partial void OnItemDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String IssuedTo
+        {
+            get
+            {
+                return _IssuedTo;
+            }
+            set
+            {
+                OnIssuedToChanging(value);
+                ReportPropertyChanging("IssuedTo");
+                _IssuedTo = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("IssuedTo");
+                OnIssuedToChanged();
+            }
+        }
+        private global::System.String _IssuedTo;
+        partial void OnIssuedToChanging(global::System.String value);
+        partial void OnIssuedToChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SAP
+        {
+            get
+            {
+                return _SAP;
+            }
+            set
+            {
+                OnSAPChanging(value);
+                ReportPropertyChanging("SAP");
+                _SAP = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("SAP");
+                OnSAPChanged();
+            }
+        }
+        private global::System.String _SAP;
+        partial void OnSAPChanging(global::System.String value);
+        partial void OnSAPChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Price;
+        partial void OnPriceChanging(Nullable<global::System.Decimal> value);
+        partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> PersonallyOwned
+        {
+            get
+            {
+                return _PersonallyOwned;
+            }
+            set
+            {
+                OnPersonallyOwnedChanging(value);
+                ReportPropertyChanging("PersonallyOwned");
+                _PersonallyOwned = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PersonallyOwned");
+                OnPersonallyOwnedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _PersonallyOwned;
+        partial void OnPersonallyOwnedChanging(Nullable<global::System.Boolean> value);
+        partial void OnPersonallyOwnedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CategoryID
+        {
+            get
+            {
+                return _CategoryID;
+            }
+            set
+            {
+                OnCategoryIDChanging(value);
+                ReportPropertyChanging("CategoryID");
+                _CategoryID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CategoryID");
+                OnCategoryIDChanged();
+            }
+        }
+        private global::System.Int32 _CategoryID;
+        partial void OnCategoryIDChanging(global::System.Int32 value);
+        partial void OnCategoryIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Category
+        {
+            get
+            {
+                return _Category;
+            }
+            set
+            {
+                OnCategoryChanging(value);
+                ReportPropertyChanging("Category");
+                _Category = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Category");
+                OnCategoryChanged();
+            }
+        }
+        private global::System.String _Category;
+        partial void OnCategoryChanging(global::System.String value);
+        partial void OnCategoryChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ItemType
+        {
+            get
+            {
+                return _ItemType;
+            }
+            set
+            {
+                OnItemTypeChanging(value);
+                ReportPropertyChanging("ItemType");
+                _ItemType = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ItemType");
+                OnItemTypeChanged();
+            }
+        }
+        private global::System.String _ItemType;
+        partial void OnItemTypeChanging(global::System.String value);
+        partial void OnItemTypeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "UservEquipment", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UservEquipment", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UservEquipment", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UservEquipment", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SAPDActivityModel.UservEquipment", "User", value);
                 }
             }
         }
@@ -8176,6 +8614,311 @@ namespace PersonnelBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="SAPDActivityModel", Name="spIssuedEquipment_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class spIssuedEquipment_Result : ComplexObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new spIssuedEquipment_Result object.
+        /// </summary>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="issuedTo">Initial value of the IssuedTo property.</param>
+        /// <param name="sAP">Initial value of the SAP property.</param>
+        /// <param name="categoryID">Initial value of the CategoryID property.</param>
+        /// <param name="category">Initial value of the Category property.</param>
+        /// <param name="itemType">Initial value of the ItemType property.</param>
+        public static spIssuedEquipment_Result CreatespIssuedEquipment_Result(global::System.Int32 appEntityID, global::System.Int32 id, global::System.String issuedTo, global::System.String sAP, global::System.Int32 categoryID, global::System.String category, global::System.String itemType)
+        {
+            spIssuedEquipment_Result spIssuedEquipment_Result = new spIssuedEquipment_Result();
+            spIssuedEquipment_Result.AppEntityID = appEntityID;
+            spIssuedEquipment_Result.ID = id;
+            spIssuedEquipment_Result.IssuedTo = issuedTo;
+            spIssuedEquipment_Result.SAP = sAP;
+            spIssuedEquipment_Result.CategoryID = categoryID;
+            spIssuedEquipment_Result.Category = category;
+            spIssuedEquipment_Result.ItemType = itemType;
+            return spIssuedEquipment_Result;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                OnIDChanging(value);
+                ReportPropertyChanging("ID");
+                _ID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ID");
+                OnIDChanged();
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ItemDescription
+        {
+            get
+            {
+                return _ItemDescription;
+            }
+            set
+            {
+                OnItemDescriptionChanging(value);
+                ReportPropertyChanging("ItemDescription");
+                _ItemDescription = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ItemDescription");
+                OnItemDescriptionChanged();
+            }
+        }
+        private global::System.String _ItemDescription;
+        partial void OnItemDescriptionChanging(global::System.String value);
+        partial void OnItemDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String IssuedTo
+        {
+            get
+            {
+                return _IssuedTo;
+            }
+            set
+            {
+                OnIssuedToChanging(value);
+                ReportPropertyChanging("IssuedTo");
+                _IssuedTo = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("IssuedTo");
+                OnIssuedToChanged();
+            }
+        }
+        private global::System.String _IssuedTo;
+        partial void OnIssuedToChanging(global::System.String value);
+        partial void OnIssuedToChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String SAP
+        {
+            get
+            {
+                return _SAP;
+            }
+            set
+            {
+                OnSAPChanging(value);
+                ReportPropertyChanging("SAP");
+                _SAP = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("SAP");
+                OnSAPChanged();
+            }
+        }
+        private global::System.String _SAP;
+        partial void OnSAPChanging(global::System.String value);
+        partial void OnSAPChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Price;
+        partial void OnPriceChanging(Nullable<global::System.Decimal> value);
+        partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> PersonallyOwned
+        {
+            get
+            {
+                return _PersonallyOwned;
+            }
+            set
+            {
+                OnPersonallyOwnedChanging(value);
+                ReportPropertyChanging("PersonallyOwned");
+                _PersonallyOwned = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PersonallyOwned");
+                OnPersonallyOwnedChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _PersonallyOwned;
+        partial void OnPersonallyOwnedChanging(Nullable<global::System.Boolean> value);
+        partial void OnPersonallyOwnedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Status
+        {
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                OnStatusChanging(value);
+                ReportPropertyChanging("Status");
+                _Status = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Status");
+                OnStatusChanged();
+            }
+        }
+        private global::System.String _Status;
+        partial void OnStatusChanging(global::System.String value);
+        partial void OnStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CategoryID
+        {
+            get
+            {
+                return _CategoryID;
+            }
+            set
+            {
+                OnCategoryIDChanging(value);
+                ReportPropertyChanging("CategoryID");
+                _CategoryID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CategoryID");
+                OnCategoryIDChanged();
+            }
+        }
+        private global::System.Int32 _CategoryID;
+        partial void OnCategoryIDChanging(global::System.Int32 value);
+        partial void OnCategoryIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Category
+        {
+            get
+            {
+                return _Category;
+            }
+            set
+            {
+                OnCategoryChanging(value);
+                ReportPropertyChanging("Category");
+                _Category = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Category");
+                OnCategoryChanged();
+            }
+        }
+        private global::System.String _Category;
+        partial void OnCategoryChanging(global::System.String value);
+        partial void OnCategoryChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ItemType
+        {
+            get
+            {
+                return _ItemType;
+            }
+            set
+            {
+                OnItemTypeChanging(value);
+                ReportPropertyChanging("ItemType");
+                _ItemType = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ItemType");
+                OnItemTypeChanged();
+            }
+        }
+        private global::System.String _ItemType;
+        partial void OnItemTypeChanging(global::System.String value);
+        partial void OnItemTypeChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmComplexTypeAttribute(NamespaceName="SAPDActivityModel", Name="spPersonnelSearch_Result")]
     [DataContractAttribute(IsReference=true)]
     [Serializable()]
@@ -8437,6 +9180,30 @@ namespace PersonnelBusinessLayer
         private global::System.String _WorkStatus;
         partial void OnWorkStatusChanging(global::System.String value);
         partial void OnWorkStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> WorkStatusCode
+        {
+            get
+            {
+                return _WorkStatusCode;
+            }
+            set
+            {
+                OnWorkStatusCodeChanging(value);
+                ReportPropertyChanging("WorkStatusCode");
+                _WorkStatusCode = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WorkStatusCode");
+                OnWorkStatusCodeChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _WorkStatusCode;
+        partial void OnWorkStatusCodeChanging(Nullable<global::System.Int32> value);
+        partial void OnWorkStatusCodeChanged();
 
         #endregion
 

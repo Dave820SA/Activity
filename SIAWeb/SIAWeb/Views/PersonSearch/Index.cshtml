@@ -69,15 +69,15 @@
                         {
                                            
                                     <img src="~/Images/SupervisorBadgeIcon.png" alt="" class="image_background" /> @Html.Raw(title.ToUpper())  
-                                        }
-                                    else if (rank >= 7 && rank <= 11)
-                                    {
+                        }
+                        else if (rank >= 7 && rank <= 10)
+                        {
                                     <img src="~/Images/OfficerBadgeIcon.png" alt="" class="image_background" /> @Html.Raw(title.ToUpper())  
-                                    }
-                                    else
-                                    {
+                        }
+                        else
+                        {
                                     <img src="~/Images/SAPD-Patch.png" alt="" class="image_background" /> @Html.Raw(title.ToUpper())
-                                    }
+                        }
                                 }
                             </td>
                             <td>
@@ -86,12 +86,12 @@
                         {
                             string person = string.Format("{0} {1} #{2}", item.First, item.Last, item.Badge);
                                     @Html.Raw(person.ToUpper())
-                                    }
-                                    else
-                                    {
-                                        string person = string.Format("{0} {1}", item.First, item.Last);
+                        }
+                        else
+                        {
+                            string person = string.Format("{0} {1}", item.First, item.Last);
                                     @Html.Raw(person.ToUpper())
-                                    }
+                        }
                                     
                                
                                 }
@@ -101,13 +101,44 @@
                             </td>
                             <td>
                                 @{
-                                        string office = string.Format("{0} - {1}", item.Office, item.OfficeCode);
+                        
+                            
+                                    
+                        string office = string.Format("{0} - {1}", item.Office, item.OfficeCode);
                                     @Html.Raw(office.ToUpper())
 
                                 }
                             </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Status)
+                            <td >
+                            @{
+                        System.Text.StringBuilder eSt = new System.Text.StringBuilder();
+                       
+
+                                int wsCode = (item.WorkStatusCode);
+                                if (wsCode == 1)
+                                {
+                                    eSt.Append("<span style=\"color: #00FF00\">");
+                                    eSt.Append(@Html.DisplayFor(modelItem => item.Status));
+                                    eSt.Append("</span>");
+                                }
+                                else if ((wsCode > 1) && (wsCode < 10))
+                                {
+                                    eSt.Append("<span style=\"color: #FFFF00\">");
+                                    eSt.Append(@Html.DisplayFor(modelItem => item.Status));
+                                    eSt.Append("</span>");
+                                }
+                                else
+                                {
+                                    eSt.Append("<span style=\"color: #FF0000\">");
+                                    eSt.Append(@Html.DisplayFor(modelItem => item.Status));
+                                    eSt.Append("</span>");
+                                }
+
+                                @Html.Raw(eSt)
+                                //@Html.DisplayFor(modelItem => item.Status)
+                                
+                    }
+
                             </td>
                             <td>
                                 <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = item.AppEntityID })" id="Search" class="btn btn-default btn-xs">
@@ -123,7 +154,7 @@
                 {
                 <p>
                     No employees match your serach</p>
-            }
+                }
              
             }
         </div>

@@ -22,6 +22,8 @@
                         data-toggle="tab">Office Hist</a></li>
                     <li role="presentation"><a href="#awards" aria-controls="awards" role="tab" data-toggle="tab">
                         Awards</a></li>
+                     <li role="presentation"><a href="#equip" aria-controls="awards" role="tab" data-toggle="tab">
+                        Equipment</a></li>
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content">
@@ -385,6 +387,57 @@
                             </tbody>
                         </table>
                     </div>
+
+                     @* _______________________________________Awards History tab____________________________________________________*@
+                    <div role="tabpanel" class="tab-pane" id="equip">
+                        <table class="table table-striped table-bordered table-condensed" style="border-top-style: solid;
+                            border-width: thin; border-color: #C0C0C0; margin-top: 1px">
+                            <thead>
+                                <tr>
+                                    <th width="450px">
+                                        <span style="font-size: xx-small; color: #FFFF00">*</span>&nbsp;Item
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Category
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var uEquip in Model.myEquipment)
+                                {
+                                    
+                                        
+                                    <tr>
+                                        <td style="color: #5b9bd1; font-size: .9em;">
+                                            @{
+                                                   
+                                                @Html.DisplayFor(modelItem => uEquip.ItemDescription)
+                                            }
+                                        </td>
+                                        <td style="color: #5b9bd1; font-size: .9em;">
+                                           @{
+                                                   
+                                                @Html.DisplayFor(modelItem => uEquip.Status)
+                                            }
+                                        </td>
+                                        <td style="color: #5b9bd1; font-size: .9em;">
+                                            @{
+                                                   
+                                                @Html.DisplayFor(modelItem => uEquip.Category)
+                                            }
+                                        </td>
+                                    </tr>
+                                         }
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
                 </div>
             </div>
         </div>

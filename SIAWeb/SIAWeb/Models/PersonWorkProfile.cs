@@ -28,5 +28,6 @@ namespace SIAWeb.Models
         public IEnumerable<RD> RDs { get; set; }
         public IEnumerable<OfficeAssigment> OfficeAssigments { get; set; }
         public IEnumerable<UserAward> myAwards { get; set; }
+        public IEnumerable<Equipment> myEquipment { get; set; }
     }
 }

@@ -62,7 +62,8 @@ namespace SIAWeb.Common
 
                            orderby p.LastName, p.FirstName
 
-                           where (ws.EndDate == null && uf.EndDate == null && nb.EndDate == null && jb.EndDate == null && ad.EndDate == null && curRd.EndDate == null && sh.EndDate == null) && (p.AppEntityID == appEntityID)
+                           where (ws.EndDate == null && uf.EndDate == null && nb.EndDate == null && jb.EndDate == null && ad.EndDate == null 
+                           && curRd.EndDate == null && sh.EndDate == null) && (p.AppEntityID == appEntityID)
 
                            select new PersonInfo
                            {
@@ -79,6 +80,7 @@ namespace SIAWeb.Common
                                jtRanking = (jth.jtRanking ?? 12),
                                RankCode = jth.NameCode,
                                Status = wst.Name,
+                               WorkStatusCode = (u.WorkStatusID ?? 11),
                                AdressL1 = ad.AddressLine1,
                                AddressL2 = ad.AddressLine2,
                                City = ad.City,
@@ -164,7 +166,8 @@ namespace SIAWeb.Common
                                                DocPath = aww.DocPath,
                                                AwardName = rt.Name,
                                                 IssuedDate = aww.IssuedDate
-                                         }),
+                                         })
+                               
 
                            });
 

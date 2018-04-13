@@ -21,6 +21,7 @@ namespace SIAWeb.Models
         public string RankCode { get; set; }
         [DisplayName("Work Status")]
         public string Status { get; set; }
+        public int WorkStatusCode { get; set; }
        
 
     }

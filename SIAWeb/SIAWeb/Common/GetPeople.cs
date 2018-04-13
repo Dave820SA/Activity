@@ -12,7 +12,7 @@ namespace SIAWeb.Common
 
         public List<People> GetSearched(string searchString)
         {
-            var myPeople = from p in db.spPersonnelSearch(searchString)
+            var myPeople = from p in db.spPersonnelSearch_Results(searchString)
                            select new People
                            {
                                AppEntityID = p.AppEntityID,
@@ -24,7 +24,8 @@ namespace SIAWeb.Common
                                OfficeCode = p.OfficeCode,
                                RankCode = p.RankCode,
                                jtRanking = (p.Ranking ?? 12),
-                               Status = p.WorkStatus
+                               Status = p.WorkStatus,
+                               WorkStatusCode = (p.WorkStatusCode ?? 11)
 
                            };
                                  

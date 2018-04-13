@@ -40,6 +40,21 @@
           <EntitySet Name="User_UserWorkStatusHistory" EntityType="SAPDActivityModel.Store.User_UserWorkStatusHistory" store:Type="Tables" Schema="dbo" Table="User.UserWorkStatusHistory" />
           <EntitySet Name="User_WorksheetClassification" EntityType="SAPDActivityModel.Store.User_WorksheetClassification" store:Type="Tables" Schema="dbo" Table="User.WorksheetClassification" />
           <EntitySet Name="User_WorkStatus" EntityType="SAPDActivityModel.Store.User_WorkStatus" store:Type="Tables" Schema="dbo" Table="User.WorkStatus" />
+          <EntitySet Name="User_vEquipment" EntityType="SAPDActivityModel.Store.User_vEquipment" store:Type="Views" store:Schema="dbo" store:Name="User.vEquipment">
+            <DefiningQuery>SELECT 
+      [User_vEquipment].[AppEntityID] AS [AppEntityID], 
+      [User_vEquipment].[ID] AS [ID], 
+      [User_vEquipment].[ItemDescription] AS [ItemDescription], 
+      [User_vEquipment].[IssuedTo] AS [IssuedTo], 
+      [User_vEquipment].[SAP] AS [SAP], 
+      [User_vEquipment].[Price] AS [Price], 
+      [User_vEquipment].[PersonallyOwned] AS [PersonallyOwned], 
+      [User_vEquipment].[Status] AS [Status], 
+      [User_vEquipment].[CategoryID] AS [CategoryID], 
+      [User_vEquipment].[Category] AS [Category], 
+      [User_vEquipment].[ItemType] AS [ItemType]
+      FROM [dbo].[User.vEquipment] AS [User_vEquipment]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="User_vPicture" EntityType="SAPDActivityModel.Store.User_vPicture" store:Type="Views" store:Schema="dbo" store:Name="User.vPicture">
             <DefiningQuery>SELECT 
       [User_vPicture].[BookingID] AS [BookingID], 
@@ -446,10 +461,30 @@
           <Property Name="PAWorkStatusID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
+      warning 6002: The table/view 'SAPDACTIVITY.dbo.User.vEquipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="User_vEquipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="ItemDescription" Type="varchar" MaxLength="250" />
+          <Property Name="IssuedTo" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="SAP" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="Price" Type="money" />
+          <Property Name="PersonallyOwned" Type="bit" />
+          <Property Name="Status" Type="nvarchar" MaxLength="64" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="Category" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="ItemType" Type="varchar" Nullable="false" MaxLength="64" />
+        </EntityType>
+        <!--Errors Found During Generation:
       warning 6002: The table/view 'SAPDACTIVITY.dbo.User.vPicture' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="User_vPicture">
           <Key>
+            
             <PropertyRef Name="BookingID" />
           </Key>
           <Property Name="BookingID" Type="int" Nullable="false" />
@@ -662,6 +697,9 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="spIssuedEquipment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="spPersonnelSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchString" Type="varchar" Mode="In" />
         </Function>
@@ -786,7 +824,7 @@
             <End Role="Person" EntitySet="People" />
             <End Role="Person_EmailAddress" EntitySet="P_EmailAddress" />
           </AssociationSet>
-          <FunctionImport Name="spPersonnelSearch" ReturnType="Collection(SAPDActivityModel.spPersonnelSearch_Result)">
+          <FunctionImport Name="spPersonnelSearch">
           <Parameter Name="SearchString" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Awards" EntityType="SAPDActivityModel.Award" />
@@ -808,6 +846,17 @@
           <AssociationSet Name="UservPicture" Association="SAPDActivityModel.UservPicture">
             <End Role="User" EntitySet="Users" />
             <End Role="vPicture" EntitySet="vPictures" />
+          </AssociationSet>
+          <FunctionImport Name="spPersonnelSearch_Results" ReturnType="Collection(SAPDActivityModel.spPersonnelSearch_Result)">
+          <Parameter Name="SearchString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spIssuedEquipment" ReturnType="Collection(SAPDActivityModel.spIssuedEquipment_Result)">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="vEquipments" EntityType="SAPDActivityModel.vEquipment" />
+          <AssociationSet Name="UservEquipment" Association="SAPDActivityModel.UservEquipment">
+            <End Role="User" EntitySet="Users" />
+            <End Role="vEquipment" EntitySet="vEquipments" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
@@ -910,7 +959,7 @@
           </Key>
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="PIN" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
-          <Property Name="SAP" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="SAP" Type="String" MaxLength="8" Unicode="false" FixedLength="false" Nullable="false" />
           <Property Name="CADID" Type="Int32" />
           <Property Name="JobTitleID" Type="Int32" />
           <Property Name="ClassificationID" Type="Int32" />
@@ -938,6 +987,7 @@
           <Property Type="Int32" Name="ShiftID" />
           <Property Type="Int32" Name="WorkStatusID" />
           <NavigationProperty Name="vPictures" Relationship="SAPDActivityModel.UservPicture" FromRole="User" ToRole="vPicture" />
+          <NavigationProperty Name="vEquipments" Relationship="SAPDActivityModel.UservEquipment" FromRole="User" ToRole="vEquipment" />
         </EntityType>
         <EntityType Name="BadgeHistory">
           <Key>
@@ -1428,18 +1478,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="spPersonnelSearch_Result">
-          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Badge" Nullable="true" MaxLength="6" />
-          <Property Type="String" Name="SAP" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="RankCode" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Office" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="OfficeCode" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="Ranking" Nullable="true" />
-          <Property Type="String" Name="WorkStatus" Nullable="true" MaxLength="50" />
-        </ComplexType>
         <EntityType Name="Award">
           <Key>
             <PropertyRef Name="RecognitionId" />
@@ -1530,6 +1568,61 @@
               <PropertyRef Name="AppEntityID" />
             </Principal>
             <Dependent Role="vPicture">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="spPersonnelSearch_Result">
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Badge" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SAP" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="RankCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Office" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficeCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Ranking" Nullable="true" />
+          <Property Type="String" Name="WorkStatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="WorkStatusCode" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spIssuedEquipment_Result">
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="ItemDescription" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="IssuedTo" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="SAP" Nullable="false" MaxLength="30" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" />
+          <Property Type="Boolean" Name="PersonallyOwned" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="ItemType" Nullable="false" MaxLength="64" />
+        </ComplexType>
+        <EntityType Name="vEquipment">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="ItemDescription" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="IssuedTo" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAP" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Price" Precision="19" Scale="4" />
+          <Property Type="Boolean" Name="PersonallyOwned" />
+          <Property Type="String" Name="Status" MaxLength="64" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ItemType" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="SAPDActivityModel.UservEquipment" FromRole="vEquipment" ToRole="User" />
+        </EntityType>
+        <Association Name="UservEquipment">
+          <End Type="SAPDActivityModel.User" Role="User" Multiplicity="1" />
+          <End Type="SAPDActivityModel.vEquipment" Role="vEquipment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="vEquipment">
               <PropertyRef Name="AppEntityID" />
             </Dependent>
           </ReferentialConstraint>
@@ -1855,22 +1948,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spPersonnelSearch" FunctionName="SAPDActivityModel.Store.spPersonnelSearch">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SAPDActivityModel.spPersonnelSearch_Result">
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Badge" ColumnName="Badge" />
-                <ScalarProperty Name="SAP" ColumnName="SAP" />
-                <ScalarProperty Name="RankCode" ColumnName="RankCode" />
-                <ScalarProperty Name="Office" ColumnName="Office" />
-                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
-                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
-                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Awards">
             <EntityTypeMapping TypeName="SAPDActivityModel.Award">
               <MappingFragment StoreEntitySet="Award_Recognize">
@@ -1912,6 +1989,57 @@
                 <ScalarProperty Name="SAP" ColumnName="SAP" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="BookingID" ColumnName="BookingID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="spPersonnelSearch_Results" FunctionName="SAPDActivityModel.Store.spPersonnelSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SAPDActivityModel.spPersonnelSearch_Result">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="RankCode" ColumnName="RankCode" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
+                <ScalarProperty Name="WorkStatusCode" ColumnName="WorkStatusCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spIssuedEquipment" FunctionName="SAPDActivityModel.Store.spIssuedEquipment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SAPDActivityModel.spIssuedEquipment_Result">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="IssuedTo" ColumnName="IssuedTo" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PersonallyOwned" ColumnName="PersonallyOwned" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="vEquipments">
+            <EntityTypeMapping TypeName="SAPDActivityModel.vEquipment">
+              <MappingFragment StoreEntitySet="User_vEquipment">
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PersonallyOwned" ColumnName="PersonallyOwned" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="IssuedTo" ColumnName="IssuedTo" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1984,8 +2112,10 @@
           <ConnectorPoint PointX="19.9375" PointY="12.749492187499998" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_Clasification_User_Classification" ManuallyRouted="false">
-          <ConnectorPoint PointX="12.125" PointY="6.7352604166666659" />
-          <ConnectorPoint PointX="12.5" PointY="6.7352604166666659" />
+          <ConnectorPoint PointX="12.125" PointY="6.9275618489583328" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="6.9275618489583319" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="6.9275618489583328" />
+          <ConnectorPoint PointX="12.5" PointY="6.9275618489583328" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus" ManuallyRouted="false">
           <ConnectorPoint PointX="19.375" PointY="1.8410953776041623" />
@@ -1999,14 +2129,16 @@
           <ConnectorPoint PointX="16.125" PointY="11.270532972017923" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserShiftHistory" ManuallyRouted="true">
-          <ConnectorPoint PointX="14.875" PointY="3.5372581421154332" />
-          <ConnectorPoint PointX="18.96875" PointY="3.5372581421154332" />
+          <ConnectorPoint PointX="14.875" PointY="3.6258135580905417" />
+          <ConnectorPoint PointX="18.96875" PointY="3.6258135580905417" />
           <ConnectorPoint PointX="18.96875" PointY="10" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserJobTitleHistory">
-          <ConnectorPoint PointX="12.62988390625" PointY="7.287822265625" />
-          <ConnectorPoint PointX="12.62988390625" PointY="11.355219167073567" />
-          <ConnectorPoint PointX="12.125" PointY="11.355219167073567" />
+          <ConnectorPoint PointX="12.587625841223435" PointY="7.4801236979166656" />
+          <ConnectorPoint PointX="12.587625841223435" PointY="11.353997414476083" />
+          <ConnectorPoint PointX="12.458333333333334" PointY="11.353997414476083" />
+          <ConnectorPoint PointX="12.291666666666666" PointY="11.353997414476083" />
+          <ConnectorPoint PointX="12.125" PointY="11.353997414476083" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserSectionHistory">
           <ConnectorPoint PointX="13.9375" PointY="7.287822265625" />
@@ -2017,14 +2149,14 @@
           <ConnectorPoint PointX="15.75" PointY="5.62474609375" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserOfficeHistory">
-          <ConnectorPoint PointX="12.5" PointY="5.436025390625" />
-          <ConnectorPoint PointX="10.665851985677085" PointY="5.4360253906249989" />
-          <ConnectorPoint PointX="10.499185319010417" PointY="5.436025390625" />
-          <ConnectorPoint PointX="10.248370638020836" PointY="5.4360253906249989" />
-          <ConnectorPoint PointX="10.081703971354168" PointY="5.436025390625" />
-          <ConnectorPoint PointX="10.040854485677086" PointY="5.4360253906249989" />
-          <ConnectorPoint PointX="9.8741878190104178" PointY="5.436025390625" />
-          <ConnectorPoint PointX="8.09375" PointY="5.436025390625" />
+          <ConnectorPoint PointX="12.5" PointY="5.1040454101562514" />
+          <ConnectorPoint PointX="12.333333333333334" PointY="5.1040454101562505" />
+          <ConnectorPoint PointX="12.166666666666666" PointY="5.1040454101562514" />
+          <ConnectorPoint PointX="10.606781110173392" PointY="5.1040454101562505" />
+          <ConnectorPoint PointX="10.440114443506724" PointY="5.1040454101562514" />
+          <ConnectorPoint PointX="10.048182221753363" PointY="5.1040454101562505" />
+          <ConnectorPoint PointX="9.7213594435067261" PointY="5.1040454101562514" />
+          <ConnectorPoint PointX="8.09375" PointY="5.1040454101562514" />
           <ConnectorPoint PointX="8.09375" PointY="7.125" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.Office_Office" Width="1.5" PointX="7.875" PointY="10.75" Height="2.749492187499996" />
@@ -2050,8 +2182,8 @@
           <ConnectorPoint PointX="3.53125" PointY="10.15330078125" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.PersonP_Address">
-          <ConnectorPoint PointX="9.9575211523437517" PointY="4.52830078125" />
-          <ConnectorPoint PointX="9.9575211523437517" PointY="6.2812500000000009" />
+          <ConnectorPoint PointX="9.80469277684006" PointY="4.52830078125" />
+          <ConnectorPoint PointX="9.80469277684006" PointY="6.2812500000000009" />
           <ConnectorPoint PointX="8.1770833333333339" PointY="6.28125" />
           <ConnectorPoint PointX="8.0104166666666661" PointY="6.2812500000000009" />
           <ConnectorPoint PointX="5.5" PointY="6.2812500000000009" />
@@ -2067,23 +2199,19 @@
           <ConnectorPoint PointX="2.75" PointY="5.3410953776041694" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" >
-          <ConnectorPoint PointX="10.582518652343751" PointY="4.52830078125" />
-          <ConnectorPoint PointX="10.582518652343751" PointY="5.6841080729166693" />
-          <ConnectorPoint PointX="10.248370638020836" PointY="5.6841080729166684" />
-          <ConnectorPoint PointX="10.081703971354168" PointY="5.6841080729166693" />
-          <ConnectorPoint PointX="10.040854485677086" PointY="5.6841080729166684" />
-          <ConnectorPoint PointX="9.8741878190104178" PointY="5.6841080729166693" />
-          <ConnectorPoint PointX="8.1770833333333339" PointY="5.6841080729166684" />
-          <ConnectorPoint PointX="8.0104166666666661" PointY="5.6841080729166693" />
-          <ConnectorPoint PointX="4.25" PointY="5.6841080729166693" />
+          <ConnectorPoint PointX="10.523447776840058" PointY="4.52830078125" />
+          <ConnectorPoint PointX="10.523447776840058" PointY="5.6172900390625031" />
+          <ConnectorPoint PointX="10.048182221753363" PointY="5.6172900390625022" />
+          <ConnectorPoint PointX="9.7213594435067261" PointY="5.6172900390625031" />
+          <ConnectorPoint PointX="8.1770833333333339" PointY="5.6172900390625022" />
+          <ConnectorPoint PointX="8.0104166666666661" PointY="5.6172900390625031" />
+          <ConnectorPoint PointX="4.25" PointY="5.6172900390625031" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.Award" Width="1.5" PointX="5.75" PointY="11.75" Height="3.3263964843749996" />
         <AssociationConnector Association="SAPDActivityModel.PersonAward">
-          <ConnectorPoint PointX="10.165037304687502" PointY="4.52830078125" />
-          <ConnectorPoint PointX="9.977437875246558" PointY="5.2904855983449846" />
-          <ConnectorPoint PointX="9.9376044294409436" PointY="5.4523221652049774" />
-          <ConnectorPoint PointX="7.625" PointY="14.848043619791667" />
-          <ConnectorPoint PointX="10.165037304687502" PointY="14.848043619791667" />
+          <ConnectorPoint PointX="9.964848888420029" PointY="4.52830078125" />
+          <ConnectorPoint PointX="9.964848888420029" PointY="14.848043619791667" />
+          <ConnectorPoint PointX="7.25" PointY="14.848043619791667" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.AwardType" Width="2" PointX="3.25" PointY="14.25" Height="1.7879850260416674" />
         <EntityTypeShape EntityType="SAPDActivityModel.RecognitionType" Width="2.125" PointX="3.25" PointY="12.25" Height="1.7879850260416674" />
@@ -2102,6 +2230,16 @@
           <ConnectorPoint PointX="13.854166666666666" PointY="7.8314136328124926" />
           <ConnectorPoint PointX="14.020833333333334" PointY="7.8314136328124935" />
           <ConnectorPoint PointX="16.625" PointY="7.8314136328124935" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SAPDActivityModel.vEquipment" Width="1.5" PointX="12.25" PointY="12.625" Height="3.3263964843749996" />
+        <AssociationConnector Association="SAPDActivityModel.UservEquipment">
+          <ConnectorPoint PointX="12.5" PointY="3.6371096801757821" />
+          <ConnectorPoint PointX="12.25" PointY="3.6371096801757821" />
+          <ConnectorPoint PointX="12.25" PointY="6.125" />
+          <ConnectorPoint PointX="12.375" PointY="6.125" />
+          <ConnectorPoint PointX="12.375" PointY="12.25" />
+          <ConnectorPoint PointX="13" PointY="12.25" />
+          <ConnectorPoint PointX="13" PointY="12.625" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

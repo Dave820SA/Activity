@@ -34,7 +34,7 @@ namespace SOPWeb
         {
             SessionLogin user = new SessionLogin();
             string myUser = HttpContext.Current.User.Identity.Name.ToString();
-            //string myUser = "dd94224";
+            //string myUser = "PR93079";
             user.getUserPin(myUser);
 
         }

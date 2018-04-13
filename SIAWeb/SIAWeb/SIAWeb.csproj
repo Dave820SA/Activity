@@ -151,6 +151,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\GateController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Images\LinkAddressController.cs" />
@@ -160,6 +161,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Equipment.cs" />
+    <Compile Include="Models\GateKey.cs" />
     <Compile Include="Models\OfficeInfo.cs" />
     <Compile Include="Models\PersonBasic.cs" />
     <Compile Include="Models\PersonWorkProfile.cs" />
@@ -343,6 +346,7 @@
     <Content Include="Views\PersonSearch\SelectPerson.cshtml" />
     <Content Include="Views\Shared\_PersonWorkProfile.cshtml" />
     <Content Include="Views\Shared\_PersonPersonnalInfo.cshtml" />
+    <Content Include="Views\Shared\_Alternate3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OfficeBusinessLayer\OfficeBusinessLayer.csproj">

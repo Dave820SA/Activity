@@ -104,7 +104,21 @@ namespace SIAWeb.Common
                                                      DocPath = aww.DocPath,
                                                      AwardName = rt.Name,
                                                      IssuedDate = aww.IssuedDate
-                                                 })
+                                                 }),
+
+                                     myEquipment = (from us in db.Users
+                                                    join ew in db.vEquipments on us.AppEntityID equals ew.AppEntityID into equ
+                                                    from eww in equ.DefaultIfEmpty()
+                                                    orderby eww.CategoryID
+                                                    where (us.AppEntityID == appEntityID) //&& (eww.CategoryID == 53)
+                                                    
+                                                    select new Equipment
+                                                    {
+                                                        ID = eww.ID,
+                                                        ItemDescription = eww.ItemDescription,
+                                                        Status = eww.Status,
+                                                        Category = eww.Category
+                                                    }),
 
                                  });
 

@@ -10,17 +10,9 @@ namespace SIAWeb.Controllers
 {
     public class PersonSearchController : Controller
     {
-        //
-        // GET: /PersonSearch/
-
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
 
         public ActionResult Index(string search_string)
         {
-            //Thread.Sleep(4000);
             if (!String.IsNullOrEmpty(search_string))
             {
                 GetPeople mySearch = new GetPeople();
@@ -45,23 +37,15 @@ namespace SIAWeb.Controllers
 
         public ActionResult SelectPerson(int id)
         {
-            PersonBasicGet myPersonBasic = new PersonBasicGet();
-
+            //Load all work history information into ViewData object to use on partial page
             PersonWorkProfileGet myWorkProfile = new PersonWorkProfileGet();
-
             ViewData["WorkProfile"] = myWorkProfile.GetPersonInfo(id);
 
-
+            //Load basic serached for Person info and return it to the view for 
+            //use in the PersonBasic partial view
+            PersonBasicGet myPersonBasic = new PersonBasicGet();
             return View(myPersonBasic.GetPersonBasicInfo(id));
-
         }
-
-        //public ActionResult SelectPerson(int id)
-        //{
-           
-        //    return View();
-
-        //}
 
 
         public ActionResult GetPersonBasic(int id)
