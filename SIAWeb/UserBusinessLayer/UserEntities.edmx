@@ -20,7 +20,7 @@
           </EntitySet>
         </EntityContainer>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDActivity.dbo.vWebUserInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'SAPDACTIVITY.dbo.vWebUserInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="vWebUserInfo">
           <Key>
@@ -31,7 +31,7 @@
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="PIN" Type="varchar" MaxLength="8" />
           <Property Name="SAP" Type="varchar" MaxLength="8" />
-          <Property Name="UserName" Type="varchar" MaxLength="111" />
+          <Property Name="UserName" Type="varchar" MaxLength="110" />
           <Property Name="DutyStatus" Type="varchar" MaxLength="50" />
           <Property Name="OfficeCode" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="OfficeID" Type="int" Nullable="false" />
@@ -70,10 +70,11 @@
         <ComplexType Name="spWebSiteUserInfo_Result">
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="String" Name="PIN" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="110" />
           <Property Type="String" Name="WebRole" Nullable="false" MaxLength="12" />
           <Property Type="Int32" Name="OfficeID" Nullable="false" />
           <Property Type="String" Name="OfficeCode" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="GateStatus" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -104,6 +105,7 @@
                 <ScalarProperty Name="WebRole" ColumnName="WebRole" />
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
+                <ScalarProperty Name="GateStatus" ColumnName="GateStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

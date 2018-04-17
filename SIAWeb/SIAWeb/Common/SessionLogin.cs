@@ -12,6 +12,7 @@ namespace SIAWeb.Common
 
             var myUser = from u in user.spWebSiteUserInfo(userPin, 1)
                          select u;
+            //myUser = myUser.ToList();
 
             var theUser = myUser.ToList();
 
@@ -23,6 +24,7 @@ namespace SIAWeb.Common
                     HttpContext.Current.Session.Add("userPin", u.PIN.ToString());
                     HttpContext.Current.Session.Add("userName", u.UserName.ToString());
                     HttpContext.Current.Session.Add("WebRole", u.WebRole.ToString());
+                    HttpContext.Current.Session.Add("GateStatus", u.GateStatus.ToString());
                 }
             //}
             //else

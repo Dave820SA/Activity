@@ -10,7 +10,7 @@ namespace SOPWeb.Common
         {
             UserLayerEntities user = new UserLayerEntities();
 
-            var myUser = from u in user.spWebSiteUserInfo(userPin, 1)
+            var myUser = from u in user.spWebSiteUserInfo(userPin, 13)
                          select u;
 
             var theUser = myUser.ToList();

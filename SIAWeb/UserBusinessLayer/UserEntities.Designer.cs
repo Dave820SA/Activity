@@ -391,13 +391,15 @@ namespace UserBusinessLayer
         /// <param name="webRole">Initial value of the WebRole property.</param>
         /// <param name="officeID">Initial value of the OfficeID property.</param>
         /// <param name="officeCode">Initial value of the OfficeCode property.</param>
-        public static spWebSiteUserInfo_Result CreatespWebSiteUserInfo_Result(global::System.Int32 appEntityID, global::System.String webRole, global::System.Int32 officeID, global::System.String officeCode)
+        /// <param name="gateStatus">Initial value of the GateStatus property.</param>
+        public static spWebSiteUserInfo_Result CreatespWebSiteUserInfo_Result(global::System.Int32 appEntityID, global::System.String webRole, global::System.Int32 officeID, global::System.String officeCode, global::System.Int32 gateStatus)
         {
             spWebSiteUserInfo_Result spWebSiteUserInfo_Result = new spWebSiteUserInfo_Result();
             spWebSiteUserInfo_Result.AppEntityID = appEntityID;
             spWebSiteUserInfo_Result.WebRole = webRole;
             spWebSiteUserInfo_Result.OfficeID = officeID;
             spWebSiteUserInfo_Result.OfficeCode = officeCode;
+            spWebSiteUserInfo_Result.GateStatus = gateStatus;
             return spWebSiteUserInfo_Result;
         }
 
@@ -548,6 +550,30 @@ namespace UserBusinessLayer
         private global::System.String _OfficeCode;
         partial void OnOfficeCodeChanging(global::System.String value);
         partial void OnOfficeCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GateStatus
+        {
+            get
+            {
+                return _GateStatus;
+            }
+            set
+            {
+                OnGateStatusChanging(value);
+                ReportPropertyChanging("GateStatus");
+                _GateStatus = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GateStatus");
+                OnGateStatusChanged();
+            }
+        }
+        private global::System.Int32 _GateStatus;
+        partial void OnGateStatusChanging(global::System.Int32 value);
+        partial void OnGateStatusChanged();
 
         #endregion
 

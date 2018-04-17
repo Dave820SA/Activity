@@ -347,6 +347,7 @@
     <Content Include="Views\Shared\_PersonWorkProfile.cshtml" />
     <Content Include="Views\Shared\_PersonPersonnalInfo.cshtml" />
     <Content Include="Views\Shared\_Alternate3.cshtml" />
+    <Content Include="Views\Gate\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OfficeBusinessLayer\OfficeBusinessLayer.csproj">

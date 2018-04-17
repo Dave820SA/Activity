@@ -29,16 +29,28 @@
                         <ul class="nav nav-pills">
                             <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
                             </a></li>
-                            @*<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
-                                class="fa fa-search"></span> Search Personnel <span class="caret"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="~/PersonSearch/Index">Name/Badge/SAP</a></li>
-                                    <li><a href="#">Office</a></li>
-                                    <li><a href="#">Worksheet</a></li>
-                                </ul>
-                            </li>*@
-                            <li><a href="~/PersonSearch/Index"><i class="fa fa-search"></i> Person Search
-                            </a></li>
+                            
+                            @{
+                                int v = Int32.Parse((string)System.Web.HttpContext.Current.Session["GateStatus"]);
+                                
+                                if (v == 1)
+                                {
+                                  <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span
+                                    class="fa fa-search"></span> Search Personnel <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="~/PersonSearch/Index">Name/Badge/SAP</a></li>
+                                        <li><a href="#">Office</a></li>
+                                        <li><a href="#">Worksheet</a></li>
+                                    </ul>
+                                </li>
+                                    
+                                    
+                                  @*  <li><a href="~/PersonSearch/Index"><i class="fa fa-search"></i> Person Search
+                                    </a></li>*@
+                                }
+                                
+                            }
+                         
                             <li><a href="http://pdapps-web-d02/sapdweb2/searchsapdweb.aspx" target="_blank"><i
                                 class="fa fa-search"></i> Search Site </a></li>
                             <li><a href="~/Contact/Index"><i class="fa fa-phone"></i> Contact </a></li>
