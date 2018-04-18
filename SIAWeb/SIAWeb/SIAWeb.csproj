@@ -163,6 +163,10 @@
     </Compile>
     <Compile Include="Models\Equipment.cs" />
     <Compile Include="Models\GateKey.cs" />
+    <Compile Include="Models\GateQModel.cs" />
+    <Compile Include="Models\GateQuestions.cs" />
+    <Compile Include="Models\GateSModel.cs" />
+    <Compile Include="Models\GateStatus.cs" />
     <Compile Include="Models\OfficeInfo.cs" />
     <Compile Include="Models\PersonBasic.cs" />
     <Compile Include="Models\PersonWorkProfile.cs" />
@@ -348,6 +352,7 @@
     <Content Include="Views\Shared\_PersonPersonnalInfo.cshtml" />
     <Content Include="Views\Shared\_Alternate3.cshtml" />
     <Content Include="Views\Gate\Index.cshtml" />
+    <Content Include="Views\Shared\_GateQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OfficeBusinessLayer\OfficeBusinessLayer.csproj">

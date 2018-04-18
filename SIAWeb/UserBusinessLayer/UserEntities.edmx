@@ -37,6 +37,9 @@
           <Property Name="OfficeID" Type="int" Nullable="false" />
           <Property Name="Badge" Type="varchar" MaxLength="6" />
         </EntityType>
+        <Function Name="spGateInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AppEntity" Type="int" Mode="In" />
+        </Function>
         <Function Name="spWebSiteUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Pin" Type="varchar" Mode="In" />
           <Parameter Name="WebSiteID" Type="int" Mode="In" />
@@ -50,6 +53,9 @@
           <FunctionImport Name="spWebSiteUserInfo" ReturnType="Collection(UserModel.spWebSiteUserInfo_Result)">
             <Parameter Name="Pin" Mode="In" Type="String" />
             <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spGateInfo" ReturnType="Collection(UserModel.spGateInfo_Result)">
+            <Parameter Name="AppEntity" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <EntityType Name="vWebUserInfo">
@@ -75,6 +81,11 @@
           <Property Type="Int32" Name="OfficeID" Nullable="false" />
           <Property Type="String" Name="OfficeCode" Nullable="false" MaxLength="10" />
           <Property Type="Int32" Name="GateStatus" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spGateInfo_Result">
+          <Property Type="Boolean" Name="GateStatus" Nullable="true" />
+          <Property Type="String" Name="GateQuestion" Nullable="true" MaxLength="6" />
+          <Property Type="DateTime" Name="GateAttemptDate" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -106,6 +117,15 @@
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
                 <ScalarProperty Name="GateStatus" ColumnName="GateStatus" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGateInfo" FunctionName="UserModel.Store.spGateInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.spGateInfo_Result">
+                <ScalarProperty Name="GateStatus" ColumnName="GateStatus" />
+                <ScalarProperty Name="GateQuestion" ColumnName="GateQuestion" />
+                <ScalarProperty Name="GateAttemptDate" ColumnName="GateAttemptDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

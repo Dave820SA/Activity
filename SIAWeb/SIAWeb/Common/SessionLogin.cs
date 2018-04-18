@@ -16,8 +16,8 @@ namespace SIAWeb.Common
 
             var theUser = myUser.ToList();
 
-            //if (theUser.Count > 0)
-            //{
+            if (theUser.Count > 0)
+            {
               foreach (var u in theUser)
                 {
                     HttpContext.Current.Session.Add("AppEntityID", u.AppEntityID.ToString());
@@ -26,14 +26,15 @@ namespace SIAWeb.Common
                     HttpContext.Current.Session.Add("WebRole", u.WebRole.ToString());
                     HttpContext.Current.Session.Add("GateStatus", u.GateStatus.ToString());
                 }
-            //}
-            //else
-            //    {
-            //        HttpContext.Current.Session.Add("AppEntityID", "0");
-            //        HttpContext.Current.Session.Add("userPin", "unkPin");
-            //        HttpContext.Current.Session.Add("userName", "Unknown User");
-            //        HttpContext.Current.Session.Add("WebRole", "unkRole");
-            //    }
+            }
+            else
+            {
+                HttpContext.Current.Session.Add("AppEntityID", "0");
+                HttpContext.Current.Session.Add("userPin", "unkPin");
+                HttpContext.Current.Session.Add("userName", "Unknown User");
+                HttpContext.Current.Session.Add("WebRole", "unkRole");
+                HttpContext.Current.Session.Add("GateStatus", "0");
+            }
             
         }
 

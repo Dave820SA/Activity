@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Collections;
 
 namespace SIAWeb.Models
 {
-    public class GateKey
+    public class GateKey 
+
     {
         public static List<GateQuestions> GetQuestions()
         {
@@ -19,10 +21,5 @@ namespace SIAWeb.Models
         }
     }
 
-    public class GateQuestions
-    {
-        public int QuestionNumber { get; set; }
-        public string Question { get; set; }
-        public string Answer { get; set; }
-    }
+    
 }

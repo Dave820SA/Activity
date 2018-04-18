@@ -1,6 +1,24 @@
-﻿@{
+﻿@model SIAWeb.Models.GateQuestions
+
+@{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Alternate2.cshtml";
 }
 
-<h2>Index</h2>
+
+@foreach (var qItem in ViewBag.InfoToUser as List<SIAWeb.Models.GateQuestions>)
+        @Html.Partial("_GateQ", qItem)
+    }
+
+
+
+@*<h3>Answer a question to access person search</h3>
+<br />
+<h5 style="color:#CCCCCC">@Html.Raw(ViewBag.InfoToUser)</h5>*@
+
+@*<h5 style="color:Yellow">@Model.QuestionNumber &nbsp;&nbsp; @Model.Question</h5>*@
+
+@*@foreach (var ques in Model)
+{
+    <h5 style="color:Yellow">@ques.QuestionNumber &nbsp;&nbsp; @ques.Question</h5>
+}*@

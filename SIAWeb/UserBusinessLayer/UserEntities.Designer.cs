@@ -126,6 +126,25 @@ namespace UserBusinessLayer
     
             return base.ExecuteFunction<spWebSiteUserInfo_Result>("spWebSiteUserInfo", pinParameter, webSiteIDParameter);
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="appEntity">No Metadata Documentation available.</param>
+        public ObjectResult<spGateInfo_Result> spGateInfo(Nullable<global::System.Int32> appEntity)
+        {
+            ObjectParameter appEntityParameter;
+            if (appEntity.HasValue)
+            {
+                appEntityParameter = new ObjectParameter("AppEntity", appEntity);
+            }
+            else
+            {
+                appEntityParameter = new ObjectParameter("AppEntity", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction<spGateInfo_Result>("spGateInfo", appEntityParameter);
+        }
 
         #endregion
 
@@ -373,6 +392,92 @@ namespace UserBusinessLayer
     #endregion
 
     #region ComplexTypes
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmComplexTypeAttribute(NamespaceName="UserModel", Name="spGateInfo_Result")]
+    [DataContractAttribute(IsReference=true)]
+    [Serializable()]
+    public partial class spGateInfo_Result : ComplexObject
+    {
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> GateStatus
+        {
+            get
+            {
+                return _GateStatus;
+            }
+            set
+            {
+                OnGateStatusChanging(value);
+                ReportPropertyChanging("GateStatus");
+                _GateStatus = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GateStatus");
+                OnGateStatusChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _GateStatus;
+        partial void OnGateStatusChanging(Nullable<global::System.Boolean> value);
+        partial void OnGateStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String GateQuestion
+        {
+            get
+            {
+                return _GateQuestion;
+            }
+            set
+            {
+                OnGateQuestionChanging(value);
+                ReportPropertyChanging("GateQuestion");
+                _GateQuestion = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("GateQuestion");
+                OnGateQuestionChanged();
+            }
+        }
+        private global::System.String _GateQuestion;
+        partial void OnGateQuestionChanging(global::System.String value);
+        partial void OnGateQuestionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> GateAttemptDate
+        {
+            get
+            {
+                return _GateAttemptDate;
+            }
+            set
+            {
+                OnGateAttemptDateChanging(value);
+                ReportPropertyChanging("GateAttemptDate");
+                _GateAttemptDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GateAttemptDate");
+                OnGateAttemptDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _GateAttemptDate;
+        partial void OnGateAttemptDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnGateAttemptDateChanged();
+
+        #endregion
+
+    }
     
     /// <summary>
     /// No Metadata Documentation available.

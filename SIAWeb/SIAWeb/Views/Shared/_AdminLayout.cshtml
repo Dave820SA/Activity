@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿@*<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8"/>
@@ -9,6 +9,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     @Styles.Render("~/bootstrap/css/cyborg.css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/Content/css")
+
+</head>*@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+     <title>SAPD WEB</title>
+     <meta http-equiv="X-UA-Compatible" content="IE=9" />
+    <link href="~/favicon.ico" rel="Shortcut Icon" type="image/x-icon" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ 
+    @Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Content/bootstrap")
     @Scripts.Render("~/bundles/modernizr")
     @Styles.Render("~/Content/css")
 
@@ -23,7 +39,7 @@
                     <ul class="nav nav-pills">
                         <li><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span> Home </a></li>
                         <li><a href="~/Contact/Index"><i class="fa fa-phone"></i> Contact </a></li>
-                        <li class="active"><a href="~/Admin/Index"><i class="fa fa-user-circle"></i> Admin </a>
+                        @*<li class="active"><a href="~/Admin/Index"><i class="fa fa-user-circle"></i> Admin </a>*@
                         </li>
                     </ul>
                     <hr />
@@ -42,10 +58,12 @@
             </div>
       </footer>
     </div>
-
-    
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-        @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
+        @Scripts.Render("~/bundles/googlejs")
+        @Scripts.Render("~/bundles/bootstrapjs")
         @RenderSection("scripts", required: false)
+    
+     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        @Scripts.Render("~/bootstrap/js/bootstrap.min.js")
+        @RenderSection("scripts", required: false)*@
 </body>
 </html>
