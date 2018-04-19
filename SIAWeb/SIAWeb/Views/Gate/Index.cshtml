@@ -3,12 +3,12 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Alternate2.cshtml";
+    
+    foreach (var qItem in ViewBag.InfoToUser as List<SIAWeb.Models.GateQuestions>)
+        @Html.Partial("_GateQ", qItem);
+    
 }
 
-
-@foreach (var qItem in ViewBag.InfoToUser as List<SIAWeb.Models.GateQuestions>)
-        @Html.Partial("_GateQ", qItem)
-    }
 
 
 

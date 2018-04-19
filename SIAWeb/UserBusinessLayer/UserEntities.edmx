@@ -6,6 +6,11 @@
     <edmx:StorageModels>
     <Schema Namespace="UserModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="UserModelStoreContainer">
+          <EntitySet Name="SIA_AppFeature" EntityType="UserModel.Store.SIA_AppFeature" store:Type="Tables" Schema="dbo" Table="SIA.AppFeature" />
+          <EntitySet Name="SIA_AppFeatureAccess" EntityType="UserModel.Store.SIA_AppFeatureAccess" store:Type="Tables" Schema="dbo" Table="SIA.AppFeatureAccess" />
+          <EntitySet Name="SIA_AppFeatureCategoty" EntityType="UserModel.Store.SIA_AppFeatureCategoty" store:Type="Tables" Schema="dbo" Table="SIA.AppFeatureCategoty" />
+          <EntitySet Name="SIA_WebLinks" EntityType="UserModel.Store.SIA_WebLinks" store:Type="Tables" Schema="dbo" Table="SIA.WebLinks" />
+          <EntitySet Name="User_User" EntityType="UserModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
           <EntitySet Name="vWebUserInfo" EntityType="UserModel.Store.vWebUserInfo" store:Type="Views" store:Schema="dbo" store:Name="vWebUserInfo">
             <DefiningQuery>SELECT 
       [vWebUserInfo].[AppEntityID] AS [AppEntityID], 
@@ -18,7 +23,89 @@
       [vWebUserInfo].[Badge] AS [Badge]
       FROM [dbo].[vWebUserInfo] AS [vWebUserInfo]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty" Association="UserModel.Store.FK_SIA_AppFeature_SIA_AppFeatureCategoty">
+            <End Role="SIA_AppFeatureCategoty" EntitySet="SIA_AppFeatureCategoty" />
+            <End Role="SIA_AppFeature" EntitySet="SIA_AppFeature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_AppFeature" Association="UserModel.Store.FK_SIA_AppFeatureAccess_SIA_AppFeature">
+            <End Role="SIA_AppFeature" EntitySet="SIA_AppFeature" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_WebLinks" Association="UserModel.Store.FK_SIA_AppFeatureAccess_SIA_WebLinks">
+            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_User_User" Association="UserModel.Store.FK_SIA_AppFeatureAccess_User_User">
+            <End Role="User_User" EntitySet="User_User" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="SIA_AppFeature">
+          <Key>
+            <PropertyRef Name="AppFeatureID" />
+          </Key>
+          <Property Name="AppFeatureID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="FeatureVisibleFlag" Type="bit" Nullable="false" />
+          <Property Name="FeatureCategoryID" Type="int" />
+        </EntityType>
+        <EntityType Name="SIA_AppFeatureAccess">
+          <Key>
+            <PropertyRef Name="AppFeatureAccessID" />
+          </Key>
+          <Property Name="AppFeatureAccessID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="WebLinkID" Type="int" Nullable="false" />
+          <Property Name="AppFeatureID" Type="int" Nullable="false" />
+          <Property Name="AllowFeatureFlag" Type="bit" Nullable="false" />
+          <Property Name="UnlockQ" Type="varchar" MaxLength="10" />
+          <Property Name="UnlockAttempt" Type="datetime" />
+          <Property Name="UnlockedBy" Type="int" />
+          <Property Name="UnlockedDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="SIA_AppFeatureCategoty">
+          <Key>
+            <PropertyRef Name="AppFeatureCategoryID" />
+          </Key>
+          <Property Name="AppFeatureCategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SIA_WebLinks">
+          <Key>
+            <PropertyRef Name="WebLinkID" />
+          </Key>
+          <Property Name="WebLinkID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebCategoryID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="WebLink" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="VisibleFlag" Type="bit" Nullable="false" />
+          <Property Name="NeedAuthorizationFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User_User">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="PIN" Type="varchar" MaxLength="8" />
+          <Property Name="SAP" Type="varchar" MaxLength="8" />
+          <Property Name="CADID" Type="int" />
+          <Property Name="Badge" Type="varchar" MaxLength="6" />
+          <Property Name="JobTitleID" Type="int" />
+          <Property Name="OfficeID" Type="int" />
+          <Property Name="SectionID" Type="int" />
+          <Property Name="RDID" Type="int" />
+          <Property Name="ClassificationID" Type="int" />
+          <Property Name="ShiftID" Type="int" />
+          <Property Name="WorkStatusID" Type="int" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="Gender" Type="nchar" MaxLength="1" />
+          <Property Name="Ethnicty" Type="nchar" MaxLength="1" />
+          <Property Name="MaritalStatus" Type="nchar" MaxLength="1" />
+          <Property Name="HireDate" Type="date" />
+          <Property Name="rowguid" Type="uniqueidentifier" />
+          <Property Name="WorksheetVisibleFlag" Type="bit" />
+          <Property Name="ModifiedDate" Type="datetime" />
+        </EntityType>
         <!--Errors Found During Generation:
       warning 6002: The table/view 'SAPDACTIVITY.dbo.vWebUserInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
@@ -37,6 +124,54 @@
           <Property Name="OfficeID" Type="int" Nullable="false" />
           <Property Name="Badge" Type="varchar" MaxLength="6" />
         </EntityType>
+        <Association Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty">
+          <End Role="SIA_AppFeatureCategoty" Type="UserModel.Store.SIA_AppFeatureCategoty" Multiplicity="0..1" />
+          <End Role="SIA_AppFeature" Type="UserModel.Store.SIA_AppFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_AppFeatureCategoty">
+              <PropertyRef Name="AppFeatureCategoryID" />
+            </Principal>
+            <Dependent Role="SIA_AppFeature">
+              <PropertyRef Name="FeatureCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIA_AppFeatureAccess_SIA_AppFeature">
+          <End Role="SIA_AppFeature" Type="UserModel.Store.SIA_AppFeature" Multiplicity="1" />
+          <End Role="SIA_AppFeatureAccess" Type="UserModel.Store.SIA_AppFeatureAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_AppFeature">
+              <PropertyRef Name="AppFeatureID" />
+            </Principal>
+            <Dependent Role="SIA_AppFeatureAccess">
+              <PropertyRef Name="AppFeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIA_AppFeatureAccess_SIA_WebLinks">
+          <End Role="SIA_WebLinks" Type="UserModel.Store.SIA_WebLinks" Multiplicity="1" />
+          <End Role="SIA_AppFeatureAccess" Type="UserModel.Store.SIA_AppFeatureAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_WebLinks">
+              <PropertyRef Name="WebLinkID" />
+            </Principal>
+            <Dependent Role="SIA_AppFeatureAccess">
+              <PropertyRef Name="WebLinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIA_AppFeatureAccess_User_User">
+          <End Role="User_User" Type="UserModel.Store.User_User" Multiplicity="1" />
+          <End Role="SIA_AppFeatureAccess" Type="UserModel.Store.SIA_AppFeatureAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_User">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="SIA_AppFeatureAccess">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="spGateInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AppEntity" Type="int" Mode="In" />
         </Function>
@@ -55,8 +190,29 @@
             <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="spGateInfo" ReturnType="Collection(UserModel.spGateInfo_Result)">
-            <Parameter Name="AppEntity" Mode="In" Type="Int32" />
+          <Parameter Name="AppEntity" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="Features" EntityType="UserModel.Feature" />
+          <EntitySet Name="FeatureAccesses" EntityType="UserModel.FeatureAccess" />
+          <EntitySet Name="FeatureCategoties" EntityType="UserModel.FeatureCategoty" />
+          <EntitySet Name="WebLinks" EntityType="UserModel.WebLinks" />
+          <EntitySet Name="Users" EntityType="UserModel.User" />
+          <AssociationSet Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty" Association="UserModel.FK_SIA_AppFeature_SIA_AppFeatureCategoty">
+            <End Role="SIA_AppFeatureCategoty" EntitySet="FeatureCategoties" />
+            <End Role="SIA_AppFeature" EntitySet="Features" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_AppFeature" Association="UserModel.FK_SIA_AppFeatureAccess_SIA_AppFeature">
+            <End Role="SIA_AppFeature" EntitySet="Features" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="FeatureAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_WebLinks" Association="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks">
+            <End Role="SIA_WebLinks" EntitySet="WebLinks" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="FeatureAccesses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_User_User" Association="UserModel.FK_SIA_AppFeatureAccess_User_User">
+            <End Role="User_User" EntitySet="Users" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="FeatureAccesses" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="vWebUserInfo">
           <Key>
@@ -87,6 +243,128 @@
           <Property Type="String" Name="GateQuestion" Nullable="true" MaxLength="6" />
           <Property Type="DateTime" Name="GateAttemptDate" Nullable="true" Precision="23" />
         </ComplexType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="AppFeatureID" />
+          </Key>
+          <Property Type="Int32" Name="AppFeatureID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="FeatureVisibleFlag" Nullable="false" />
+          <Property Type="Int32" Name="FeatureCategoryID" />
+          <NavigationProperty Name="SIA_AppFeatureCategoty" Relationship="UserModel.FK_SIA_AppFeature_SIA_AppFeatureCategoty" FromRole="SIA_AppFeature" ToRole="SIA_AppFeatureCategoty" />
+          <NavigationProperty Name="SIA_AppFeatureAccess" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_AppFeature" FromRole="SIA_AppFeature" ToRole="SIA_AppFeatureAccess" />
+        </EntityType>
+        <EntityType Name="FeatureAccess">
+          <Key>
+            <PropertyRef Name="AppFeatureAccessID" />
+          </Key>
+          <Property Type="Int32" Name="AppFeatureAccessID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="WebLinkID" Nullable="false" />
+          <Property Type="Int32" Name="AppFeatureID" Nullable="false" />
+          <Property Type="Boolean" Name="AllowFeatureFlag" Nullable="false" />
+          <Property Type="String" Name="UnlockQ" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="UnlockAttempt" />
+          <Property Type="Int32" Name="UnlockedBy" />
+          <Property Type="DateTime" Name="UnlockedDate" />
+          <NavigationProperty Name="SIA_AppFeature" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_AppFeature" FromRole="SIA_AppFeatureAccess" ToRole="SIA_AppFeature" />
+          <NavigationProperty Name="SIA_WebLinks" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" FromRole="SIA_AppFeatureAccess" ToRole="SIA_WebLinks" />
+          <NavigationProperty Name="User_User" Relationship="UserModel.FK_SIA_AppFeatureAccess_User_User" FromRole="SIA_AppFeatureAccess" ToRole="User_User" />
+        </EntityType>
+        <EntityType Name="FeatureCategoty">
+          <Key>
+            <PropertyRef Name="AppFeatureCategoryID" />
+          </Key>
+          <Property Type="Int32" Name="AppFeatureCategoryID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="SIA_AppFeature" Relationship="UserModel.FK_SIA_AppFeature_SIA_AppFeatureCategoty" FromRole="SIA_AppFeatureCategoty" ToRole="SIA_AppFeature" />
+        </EntityType>
+        <EntityType Name="WebLinks">
+          <Key>
+            <PropertyRef Name="WebLinkID" />
+          </Key>
+          <Property Type="Int32" Name="WebLinkID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="WebCategoryID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WebLink" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
+          <Property Type="Boolean" Name="NeedAuthorizationFlag" Nullable="false" />
+          <NavigationProperty Name="SIA_AppFeatureAccess" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" FromRole="SIA_WebLinks" ToRole="SIA_AppFeatureAccess" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="PIN" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAP" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="CADID" />
+          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="JobTitleID" />
+          <Property Type="Int32" Name="OfficeID" />
+          <Property Type="Int32" Name="SectionID" />
+          <Property Type="Int32" Name="RDID" />
+          <Property Type="Int32" Name="ClassificationID" />
+          <Property Type="Int32" Name="ShiftID" />
+          <Property Type="Int32" Name="WorkStatusID" />
+          <Property Type="DateTime" Name="DOB" />
+          <Property Type="String" Name="Gender" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="Ethnicty" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Type="String" Name="MaritalStatus" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Type="DateTime" Name="HireDate" />
+          <Property Type="Guid" Name="rowguid" />
+          <Property Type="Boolean" Name="WorksheetVisibleFlag" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <NavigationProperty Name="SIA_AppFeatureAccess" Relationship="UserModel.FK_SIA_AppFeatureAccess_User_User" FromRole="User_User" ToRole="SIA_AppFeatureAccess" />
+        </EntityType>
+        <Association Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty">
+          <End Type="UserModel.FeatureCategoty" Role="SIA_AppFeatureCategoty" Multiplicity="0..1" />
+          <End Type="UserModel.Feature" Role="SIA_AppFeature" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_AppFeatureCategoty">
+              <PropertyRef Name="AppFeatureCategoryID" />
+            </Principal>
+            <Dependent Role="SIA_AppFeature">
+              <PropertyRef Name="FeatureCategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIA_AppFeatureAccess_SIA_AppFeature">
+          <End Type="UserModel.Feature" Role="SIA_AppFeature" Multiplicity="1" />
+          <End Type="UserModel.FeatureAccess" Role="SIA_AppFeatureAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_AppFeature">
+              <PropertyRef Name="AppFeatureID" />
+            </Principal>
+            <Dependent Role="SIA_AppFeatureAccess">
+              <PropertyRef Name="AppFeatureID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIA_AppFeatureAccess_SIA_WebLinks">
+          <End Type="UserModel.WebLinks" Role="SIA_WebLinks" Multiplicity="1" />
+          <End Type="UserModel.FeatureAccess" Role="SIA_AppFeatureAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_WebLinks">
+              <PropertyRef Name="WebLinkID" />
+            </Principal>
+            <Dependent Role="SIA_AppFeatureAccess">
+              <PropertyRef Name="WebLinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIA_AppFeatureAccess_User_User">
+          <End Type="UserModel.User" Role="User_User" Multiplicity="1" />
+          <End Type="UserModel.FeatureAccess" Role="SIA_AppFeatureAccess" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_User">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="SIA_AppFeatureAccess">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -129,6 +407,77 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="UserModel.Feature">
+              <MappingFragment StoreEntitySet="SIA_AppFeature">
+                <ScalarProperty Name="FeatureCategoryID" ColumnName="FeatureCategoryID" />
+                <ScalarProperty Name="FeatureVisibleFlag" ColumnName="FeatureVisibleFlag" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AppFeatureID" ColumnName="AppFeatureID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeatureAccesses">
+            <EntityTypeMapping TypeName="UserModel.FeatureAccess">
+              <MappingFragment StoreEntitySet="SIA_AppFeatureAccess">
+                <ScalarProperty Name="UnlockedDate" ColumnName="UnlockedDate" />
+                <ScalarProperty Name="UnlockedBy" ColumnName="UnlockedBy" />
+                <ScalarProperty Name="UnlockAttempt" ColumnName="UnlockAttempt" />
+                <ScalarProperty Name="UnlockQ" ColumnName="UnlockQ" />
+                <ScalarProperty Name="AllowFeatureFlag" ColumnName="AllowFeatureFlag" />
+                <ScalarProperty Name="AppFeatureID" ColumnName="AppFeatureID" />
+                <ScalarProperty Name="WebLinkID" ColumnName="WebLinkID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="AppFeatureAccessID" ColumnName="AppFeatureAccessID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FeatureCategoties">
+            <EntityTypeMapping TypeName="UserModel.FeatureCategoty">
+              <MappingFragment StoreEntitySet="SIA_AppFeatureCategoty">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AppFeatureCategoryID" ColumnName="AppFeatureCategoryID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebLinks">
+            <EntityTypeMapping TypeName="UserModel.WebLinks">
+              <MappingFragment StoreEntitySet="SIA_WebLinks">
+                <ScalarProperty Name="NeedAuthorizationFlag" ColumnName="NeedAuthorizationFlag" />
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="WebLink" ColumnName="WebLink" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WebCategoryID" ColumnName="WebCategoryID" />
+                <ScalarProperty Name="WebLinkID" ColumnName="WebLinkID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="UserModel.User">
+              <MappingFragment StoreEntitySet="User_User">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorksheetVisibleFlag" ColumnName="WorksheetVisibleFlag" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="Ethnicty" ColumnName="Ethnicty" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="ClassificationID" ColumnName="ClassificationID" />
+                <ScalarProperty Name="RDID" ColumnName="RDID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="CADID" ColumnName="CADID" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="PIN" ColumnName="PIN" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -151,6 +500,28 @@
     <Diagrams>
       <Diagram Name="UserEntities">
         <EntityTypeShape EntityType="UserModel.vWebUserInfo" Width="1.75" PointX="0.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="UserModel.Feature" Width="1.875" PointX="7.5" PointY="5.875" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="UserModel.FeatureAccess" Width="2.375" PointX="6" PointY="1.75" Height="3.3263964843750102" />
+        <EntityTypeShape EntityType="UserModel.FeatureCategoty" Width="1.75" PointX="9.875" PointY="7.75" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="UserModel.WebLinks" Width="1.5" PointX="9.625" PointY="3" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="UserModel.User" Width="1.75" PointX="3.25" PointY="0.75" Height="5.057109374999996" />
+        <AssociationConnector Association="UserModel.FK_SIA_AppFeature_SIA_AppFeatureCategoty" >
+          <ConnectorPoint PointX="10.75" PointY="7.75" />
+          <ConnectorPoint PointX="10.75" PointY="6.9612939453125051" />
+          <ConnectorPoint PointX="9.375" PointY="6.9612939453125051" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_SIA_AppFeature" >
+          <ConnectorPoint PointX="7.9375" PointY="5.875" />
+          <ConnectorPoint PointX="7.9375" PointY="5.07639648437501" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" >
+          <ConnectorPoint PointX="9.625" PointY="4.0381982421875051" />
+          <ConnectorPoint PointX="8.375" PointY="4.0381982421875051" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_User_User" >
+          <ConnectorPoint PointX="5" PointY="3.4131982421875051" />
+          <ConnectorPoint PointX="6" PointY="3.4131982421875051" />
+        </AssociationConnector>
       </Diagram>
     </Diagrams>
   </Designer>
