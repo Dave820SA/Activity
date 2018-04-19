@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using SIAWeb.Models;
 using System.Text;
+using UserBusinessLayer;
 
 namespace SIAWeb.Controllers
 {
@@ -15,7 +16,7 @@ namespace SIAWeb.Controllers
         private string _questionNbr;
         private DateTime _attempt;
         private StringBuilder _sb;
-
+        
 
        public ActionResult Index()
         {
@@ -91,16 +92,24 @@ namespace SIAWeb.Controllers
            var result = questions.Where(p => p.QuestionNumber == qNbr);
            foreach (var item in result)
            {
-               _sb.Append("Q# ");
-               _sb.Append(item.QuestionNumber.ToString());
-               _sb.Append("&nbsp;&nbsp;");
+               _sb.Append("<table style=\"width:100%\">");
+               _sb.Append("<tr><td style=\"width:5%\">Q# " + item.QuestionNumber.ToString());
+               //_sb.Append(item.QuestionNumber.ToString());
+               _sb.Append("</td><td style=\"width:70%\">");
+               //_sb.Append("&nbsp;&nbsp;");
                _sb.Append(item.Question.ToString());
+               _sb.Append("</td></tr>");
+               _sb.Append("</table>");
 
            }
 
            return _sb;
        }
 
-
+       private void updateQAttempt(int appEntity, int qNbr)
+       {
+           UserLayerEntities db = new UserLayerEntities();
+           db.Users.
+       }
     }
 }

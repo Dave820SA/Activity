@@ -500,26 +500,26 @@
     <Diagrams>
       <Diagram Name="UserEntities">
         <EntityTypeShape EntityType="UserModel.vWebUserInfo" Width="1.75" PointX="0.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserModel.Feature" Width="1.875" PointX="7.5" PointY="5.875" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="UserModel.Feature" Width="2.25" PointX="7.125" PointY="5.875" Height="2.1725878906250102" />
         <EntityTypeShape EntityType="UserModel.FeatureAccess" Width="2.375" PointX="6" PointY="1.75" Height="3.3263964843750102" />
         <EntityTypeShape EntityType="UserModel.FeatureCategoty" Width="1.75" PointX="9.875" PointY="7.75" Height="1.595683593749996" />
-        <EntityTypeShape EntityType="UserModel.WebLinks" Width="1.5" PointX="9.625" PointY="3" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="UserModel.User" Width="1.75" PointX="3.25" PointY="0.75" Height="5.057109374999996" />
+        <EntityTypeShape EntityType="UserModel.WebLinks" Width="1.875" PointX="9.625" PointY="3" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="UserModel.User" Width="2.25" PointX="3.25" PointY="0.75" Height="5.057109374999996" />
         <AssociationConnector Association="UserModel.FK_SIA_AppFeature_SIA_AppFeatureCategoty" >
           <ConnectorPoint PointX="10.75" PointY="7.75" />
           <ConnectorPoint PointX="10.75" PointY="6.9612939453125051" />
           <ConnectorPoint PointX="9.375" PointY="6.9612939453125051" />
         </AssociationConnector>
         <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_SIA_AppFeature" >
-          <ConnectorPoint PointX="7.9375" PointY="5.875" />
-          <ConnectorPoint PointX="7.9375" PointY="5.07639648437501" />
+          <ConnectorPoint PointX="7.75" PointY="5.875" />
+          <ConnectorPoint PointX="7.75" PointY="5.07639648437501" />
         </AssociationConnector>
         <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" >
           <ConnectorPoint PointX="9.625" PointY="4.0381982421875051" />
           <ConnectorPoint PointX="8.375" PointY="4.0381982421875051" />
         </AssociationConnector>
         <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_User_User" >
-          <ConnectorPoint PointX="5" PointY="3.4131982421875051" />
+          <ConnectorPoint PointX="5.5" PointY="3.4131982421875051" />
           <ConnectorPoint PointX="6" PointY="3.4131982421875051" />
         </AssociationConnector>
       </Diagram>

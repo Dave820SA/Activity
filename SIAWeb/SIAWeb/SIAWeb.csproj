@@ -162,6 +162,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Equipment.cs" />
+    <Compile Include="Models\FeatureAccess.cs" />
     <Compile Include="Models\GateKey.cs" />
     <Compile Include="Models\GateQModel.cs" />
     <Compile Include="Models\GateQuestions.cs" />
