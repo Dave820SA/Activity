@@ -142,6 +142,7 @@
     <Compile Include="Common\GetOffice.cs" />
     <Compile Include="Common\GetPeople.cs" />
     <Compile Include="Common\GetPerson.cs" />
+    <Compile Include="Common\WebsiteAccess.cs" />
     <Compile Include="Common\PersonBasicGet.cs" />
     <Compile Include="Common\PersonWorkProfileGet.cs" />
     <Compile Include="Common\RDHistory.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Models\OfficeInfo.cs" />
     <Compile Include="Models\PersonBasic.cs" />
     <Compile Include="Models\PersonWorkProfile.cs" />
+    <Compile Include="Models\UserAccess.cs" />
     <Compile Include="Models\UserAward.cs" />
     <Compile Include="Models\Badge.cs" />
     <Compile Include="Models\CurrentUser.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="Models\RD.cs" />
     <Compile Include="Models\Shifts.cs" />
     <Compile Include="Models\topLink.cs" />
+    <Compile Include="Models\UserWebSite.cs" />
     <Compile Include="Models\WebLinkModel.cs" />
     <Compile Include="Models\WebLink.cs" />
     <Compile Include="Models\WorkStatuss.cs" />

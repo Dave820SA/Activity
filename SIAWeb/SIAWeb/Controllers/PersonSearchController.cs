@@ -37,6 +37,8 @@ namespace SIAWeb.Controllers
 
         public ActionResult SelectPerson(int id)
         {
+
+
             //Load all work history information into ViewData object to use on partial page
             PersonWorkProfileGet myWorkProfile = new PersonWorkProfileGet();
             ViewData["WorkProfile"] = myWorkProfile.GetPersonInfo(id);
@@ -53,6 +55,20 @@ namespace SIAWeb.Controllers
             PersonBasicGet myPersonBasic = new PersonBasicGet();
 
             return PartialView("_PersonBasic", myPersonBasic.GetPersonBasicInfo(id));
+        }
+
+
+        public string activeButton(string direct)
+        {
+            switch (direct)
+            {
+                case "Home":
+                    return "liPersonnalProfile";
+                case "Personnal":
+                    return "liWebsiteAccess";
+                default:
+                    return "liWorkProfile";
+            }
         }
 
 

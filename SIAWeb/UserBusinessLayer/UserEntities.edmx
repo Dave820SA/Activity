@@ -10,18 +10,19 @@
           <EntitySet Name="SIA_AppFeatureAccess" EntityType="UserModel.Store.SIA_AppFeatureAccess" store:Type="Tables" Schema="dbo" Table="SIA.AppFeatureAccess" />
           <EntitySet Name="SIA_AppFeatureCategoty" EntityType="UserModel.Store.SIA_AppFeatureCategoty" store:Type="Tables" Schema="dbo" Table="SIA.AppFeatureCategoty" />
           <EntitySet Name="SIA_WebLinks" EntityType="UserModel.Store.SIA_WebLinks" store:Type="Tables" Schema="dbo" Table="SIA.WebLinks" />
-          <EntitySet Name="User_User" EntityType="UserModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
-          <EntitySet Name="vWebUserInfo" EntityType="UserModel.Store.vWebUserInfo" store:Type="Views" store:Schema="dbo" store:Name="vWebUserInfo">
+          <EntitySet Name="SIA_WebRole" EntityType="UserModel.Store.SIA_WebRole" store:Type="Tables" Schema="dbo" Table="SIA.WebRole" />
+          <EntitySet Name="SIA_WebSiteUser" EntityType="UserModel.Store.SIA_WebSiteUser" store:Type="Tables" Schema="dbo" Table="SIA.WebSiteUser" />
+          <EntitySet Name="vWebsiteUser" EntityType="UserModel.Store.vWebsiteUser" store:Type="Views" store:Schema="dbo" store:Name="vWebsiteUser">
             <DefiningQuery>SELECT 
-      [vWebUserInfo].[AppEntityID] AS [AppEntityID], 
-      [vWebUserInfo].[PIN] AS [PIN], 
-      [vWebUserInfo].[SAP] AS [SAP], 
-      [vWebUserInfo].[UserName] AS [UserName], 
-      [vWebUserInfo].[DutyStatus] AS [DutyStatus], 
-      [vWebUserInfo].[OfficeCode] AS [OfficeCode], 
-      [vWebUserInfo].[OfficeID] AS [OfficeID], 
-      [vWebUserInfo].[Badge] AS [Badge]
-      FROM [dbo].[vWebUserInfo] AS [vWebUserInfo]</DefiningQuery>
+      [vWebsiteUser].[AppEntityID] AS [AppEntityID], 
+      [vWebsiteUser].[PIN] AS [PIN], 
+      [vWebsiteUser].[SAP] AS [SAP], 
+      [vWebsiteUser].[Badge] AS [Badge], 
+      [vWebsiteUser].[UserName] AS [UserName], 
+      [vWebsiteUser].[DutyStatus] AS [DutyStatus], 
+      [vWebsiteUser].[OfficeCode] AS [OfficeCode], 
+      [vWebsiteUser].[OfficeID] AS [OfficeID]
+      FROM [dbo].[vWebsiteUser] AS [vWebsiteUser]</DefiningQuery>
           </EntitySet>
           <AssociationSet Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty" Association="UserModel.Store.FK_SIA_AppFeature_SIA_AppFeatureCategoty">
             <End Role="SIA_AppFeatureCategoty" EntitySet="SIA_AppFeatureCategoty" />
@@ -35,9 +36,13 @@
             <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
             <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
           </AssociationSet>
-          <AssociationSet Name="FK_SIA_AppFeatureAccess_User_User" Association="UserModel.Store.FK_SIA_AppFeatureAccess_User_User">
-            <End Role="User_User" EntitySet="User_User" />
-            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
+          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebLinks" Association="UserModel.Store.FK_SIA_WebSiteUser_SIA_WebLinks">
+            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
+            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebRole" Association="UserModel.Store.FK_SIA_WebSiteUser_SIA_WebRole">
+            <End Role="SIA_WebRole" EntitySet="SIA_WebRole" />
+            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="SIA_AppFeature">
@@ -81,48 +86,44 @@
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
           <Property Name="NeedAuthorizationFlag" Type="bit" Nullable="false" />
         </EntityType>
-        <EntityType Name="User_User">
+        <EntityType Name="SIA_WebRole">
           <Key>
-            <PropertyRef Name="AppEntityID" />
+            <PropertyRef Name="WebRoleID" />
           </Key>
+          <Property Name="WebRoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebRole" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="WebRoleCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="VisibleFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SIA_WebSiteUser">
+          <Key>
+            <PropertyRef Name="WebSiteUserID" />
+          </Key>
+          <Property Name="WebSiteUserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebLinkID" Type="int" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
-          <Property Name="PIN" Type="varchar" MaxLength="8" />
-          <Property Name="SAP" Type="varchar" MaxLength="8" />
-          <Property Name="CADID" Type="int" />
-          <Property Name="Badge" Type="varchar" MaxLength="6" />
-          <Property Name="JobTitleID" Type="int" />
-          <Property Name="OfficeID" Type="int" />
-          <Property Name="SectionID" Type="int" />
-          <Property Name="RDID" Type="int" />
-          <Property Name="ClassificationID" Type="int" />
-          <Property Name="ShiftID" Type="int" />
-          <Property Name="WorkStatusID" Type="int" />
-          <Property Name="DOB" Type="date" />
-          <Property Name="Gender" Type="nchar" MaxLength="1" />
-          <Property Name="Ethnicty" Type="nchar" MaxLength="1" />
-          <Property Name="MaritalStatus" Type="nchar" MaxLength="1" />
-          <Property Name="HireDate" Type="date" />
-          <Property Name="rowguid" Type="uniqueidentifier" />
-          <Property Name="WorksheetVisibleFlag" Type="bit" />
-          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="WebSiteRoleID" Type="int" Nullable="false" />
+          <Property Name="EnteredByID" Type="int" Nullable="false" />
+          <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+          <Property Name="GateStatus" Type="bit" />
+          <Property Name="GateQuestion" Type="varchar" MaxLength="6" />
+          <Property Name="GateAttemptDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDACTIVITY.dbo.vWebUserInfo' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'SAPDACTIVITY.dbo.vWebsiteUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
-        <EntityType Name="vWebUserInfo">
+        <EntityType Name="vWebsiteUser">
           <Key>
             <PropertyRef Name="AppEntityID" />
-            <PropertyRef Name="OfficeCode" />
-            <PropertyRef Name="OfficeID" />
           </Key>
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="PIN" Type="varchar" MaxLength="8" />
           <Property Name="SAP" Type="varchar" MaxLength="8" />
+          <Property Name="Badge" Type="varchar" MaxLength="6" />
           <Property Name="UserName" Type="varchar" MaxLength="110" />
           <Property Name="DutyStatus" Type="varchar" MaxLength="50" />
-          <Property Name="OfficeCode" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="OfficeCode" Type="varchar" Nullable="false" MaxLength="10" />
           <Property Name="OfficeID" Type="int" Nullable="false" />
-          <Property Name="Badge" Type="varchar" MaxLength="6" />
         </EntityType>
         <Association Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty">
           <End Role="SIA_AppFeatureCategoty" Type="UserModel.Store.SIA_AppFeatureCategoty" Multiplicity="0..1" />
@@ -160,15 +161,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SIA_AppFeatureAccess_User_User">
-          <End Role="User_User" Type="UserModel.Store.User_User" Multiplicity="1" />
-          <End Role="SIA_AppFeatureAccess" Type="UserModel.Store.SIA_AppFeatureAccess" Multiplicity="*" />
+        <Association Name="FK_SIA_WebSiteUser_SIA_WebLinks">
+          <End Role="SIA_WebLinks" Type="UserModel.Store.SIA_WebLinks" Multiplicity="1" />
+          <End Role="SIA_WebSiteUser" Type="UserModel.Store.SIA_WebSiteUser" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_User">
-              <PropertyRef Name="AppEntityID" />
+            <Principal Role="SIA_WebLinks">
+              <PropertyRef Name="WebLinkID" />
             </Principal>
-            <Dependent Role="SIA_AppFeatureAccess">
-              <PropertyRef Name="AppEntityID" />
+            <Dependent Role="SIA_WebSiteUser">
+              <PropertyRef Name="WebLinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIA_WebSiteUser_SIA_WebRole">
+          <End Role="SIA_WebRole" Type="UserModel.Store.SIA_WebRole" Multiplicity="1" />
+          <End Role="SIA_WebSiteUser" Type="UserModel.Store.SIA_WebSiteUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_WebRole">
+              <PropertyRef Name="WebRoleID" />
+            </Principal>
+            <Dependent Role="SIA_WebSiteUser">
+              <PropertyRef Name="WebSiteRoleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -184,7 +197,6 @@
     <edmx:ConceptualModels>
       <Schema Namespace="UserModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="UserLayerEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="vWebUserInfoes" EntityType="UserModel.vWebUserInfo" />
           <FunctionImport Name="spWebSiteUserInfo" ReturnType="Collection(UserModel.spWebSiteUserInfo_Result)">
             <Parameter Name="Pin" Mode="In" Type="String" />
             <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
@@ -196,7 +208,6 @@
           <EntitySet Name="FeatureAccesses" EntityType="UserModel.FeatureAccess" />
           <EntitySet Name="FeatureCategoties" EntityType="UserModel.FeatureCategoty" />
           <EntitySet Name="WebLinks" EntityType="UserModel.WebLinks" />
-          <EntitySet Name="Users" EntityType="UserModel.User" />
           <AssociationSet Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty" Association="UserModel.FK_SIA_AppFeature_SIA_AppFeatureCategoty">
             <End Role="SIA_AppFeatureCategoty" EntitySet="FeatureCategoties" />
             <End Role="SIA_AppFeature" EntitySet="Features" />
@@ -209,26 +220,22 @@
             <End Role="SIA_WebLinks" EntitySet="WebLinks" />
             <End Role="SIA_AppFeatureAccess" EntitySet="FeatureAccesses" />
           </AssociationSet>
-          <AssociationSet Name="FK_SIA_AppFeatureAccess_User_User" Association="UserModel.FK_SIA_AppFeatureAccess_User_User">
-            <End Role="User_User" EntitySet="Users" />
-            <End Role="SIA_AppFeatureAccess" EntitySet="FeatureAccesses" />
+          <EntitySet Name="Users" EntityType="UserModel.Users" />
+          <EntitySet Name="UserRoles" EntityType="UserModel.UserRole" />
+          <EntitySet Name="WebSiteUsers" EntityType="UserModel.WebSiteUser" />
+          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebLinks" Association="UserModel.FK_SIA_WebSiteUser_SIA_WebLinks">
+            <End Role="WebLinks" EntitySet="WebLinks" />
+            <End Role="SIA_WebSiteUser" EntitySet="WebSiteUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebRole" Association="UserModel.FK_SIA_WebSiteUser_SIA_WebRole">
+            <End Role="SIA_WebRole" EntitySet="UserRoles" />
+            <End Role="SIA_WebSiteUser" EntitySet="WebSiteUsers" />
+          </AssociationSet>
+          <AssociationSet Name="UsersWebSiteUser" Association="UserModel.UsersWebSiteUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="WebSiteUser" EntitySet="WebSiteUsers" />
           </AssociationSet>
         </EntityContainer>
-        <EntityType Name="vWebUserInfo">
-          <Key>
-            <PropertyRef Name="AppEntityID" />
-            <PropertyRef Name="OfficeCode" />
-            <PropertyRef Name="OfficeID" />
-          </Key>
-          <Property Name="AppEntityID" Type="Int32" Nullable="false" />
-          <Property Name="PIN" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
-          <Property Name="SAP" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
-          <Property Name="UserName" Type="String" MaxLength="111" Unicode="false" FixedLength="false" />
-          <Property Name="DutyStatus" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="OfficeCode" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Type="Int32" Name="OfficeID" Nullable="false" />
-          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
-        </EntityType>
         <ComplexType Name="spWebSiteUserInfo_Result">
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="String" Name="PIN" Nullable="true" MaxLength="8" />
@@ -269,7 +276,6 @@
           <Property Type="DateTime" Name="UnlockedDate" />
           <NavigationProperty Name="SIA_AppFeature" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_AppFeature" FromRole="SIA_AppFeatureAccess" ToRole="SIA_AppFeature" />
           <NavigationProperty Name="SIA_WebLinks" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" FromRole="SIA_AppFeatureAccess" ToRole="SIA_WebLinks" />
-          <NavigationProperty Name="User_User" Relationship="UserModel.FK_SIA_AppFeatureAccess_User_User" FromRole="SIA_AppFeatureAccess" ToRole="User_User" />
         </EntityType>
         <EntityType Name="FeatureCategoty">
           <Key>
@@ -290,32 +296,7 @@
           <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
           <Property Type="Boolean" Name="NeedAuthorizationFlag" Nullable="false" />
           <NavigationProperty Name="SIA_AppFeatureAccess" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" FromRole="SIA_WebLinks" ToRole="SIA_AppFeatureAccess" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="AppEntityID" />
-          </Key>
-          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
-          <Property Type="String" Name="PIN" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="SAP" MaxLength="8" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="CADID" />
-          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="JobTitleID" />
-          <Property Type="Int32" Name="OfficeID" />
-          <Property Type="Int32" Name="SectionID" />
-          <Property Type="Int32" Name="RDID" />
-          <Property Type="Int32" Name="ClassificationID" />
-          <Property Type="Int32" Name="ShiftID" />
-          <Property Type="Int32" Name="WorkStatusID" />
-          <Property Type="DateTime" Name="DOB" />
-          <Property Type="String" Name="Gender" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Type="String" Name="Ethnicty" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Type="String" Name="MaritalStatus" MaxLength="1" FixedLength="true" Unicode="true" />
-          <Property Type="DateTime" Name="HireDate" />
-          <Property Type="Guid" Name="rowguid" />
-          <Property Type="Boolean" Name="WorksheetVisibleFlag" />
-          <Property Type="DateTime" Name="ModifiedDate" />
-          <NavigationProperty Name="SIA_AppFeatureAccess" Relationship="UserModel.FK_SIA_AppFeatureAccess_User_User" FromRole="User_User" ToRole="SIA_AppFeatureAccess" />
+          <NavigationProperty Name="SIA_WebSiteUser" Relationship="UserModel.FK_SIA_WebSiteUser_SIA_WebLinks" FromRole="WebLinks" ToRole="SIA_WebSiteUser" />
         </EntityType>
         <Association Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty">
           <End Type="UserModel.FeatureCategoty" Role="SIA_AppFeatureCategoty" Multiplicity="0..1" />
@@ -353,14 +334,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_SIA_AppFeatureAccess_User_User">
-          <End Type="UserModel.User" Role="User_User" Multiplicity="1" />
-          <End Type="UserModel.FeatureAccess" Role="SIA_AppFeatureAccess" Multiplicity="*" />
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="PIN" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="SAP" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Badge" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UserName" MaxLength="110" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="DutyStatus" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="OfficeCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="OfficeID" Nullable="false" />
+          <NavigationProperty Name="WebSiteUsers" Relationship="UserModel.UsersWebSiteUser" FromRole="Users" ToRole="WebSiteUser" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="WebRoleID" />
+          </Key>
+          <Property Type="Int32" Name="WebRoleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="WebRole" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="WebRoleCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
+          <NavigationProperty Name="SIA_WebSiteUser" Relationship="UserModel.FK_SIA_WebSiteUser_SIA_WebRole" FromRole="SIA_WebRole" ToRole="SIA_WebSiteUser" />
+        </EntityType>
+        <EntityType Name="WebSiteUser">
+          <Key>
+            <PropertyRef Name="WebSiteUserID" />
+          </Key>
+          <Property Type="Int32" Name="WebSiteUserID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="WebLinkID" Nullable="false" />
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="WebSiteRoleID" Nullable="false" />
+          <Property Type="Int32" Name="EnteredByID" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+          <Property Type="Boolean" Name="GateStatus" />
+          <Property Type="String" Name="GateQuestion" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="GateAttemptDate" />
+          <NavigationProperty Name="SIA_WebLinks" Relationship="UserModel.FK_SIA_WebSiteUser_SIA_WebLinks" FromRole="SIA_WebSiteUser" ToRole="WebLinks" />
+          <NavigationProperty Name="SIA_WebRole" Relationship="UserModel.FK_SIA_WebSiteUser_SIA_WebRole" FromRole="SIA_WebSiteUser" ToRole="SIA_WebRole" />
+          <NavigationProperty Name="User" Relationship="UserModel.UsersWebSiteUser" FromRole="WebSiteUser" ToRole="Users" />
+        </EntityType>
+        <Association Name="FK_SIA_WebSiteUser_SIA_WebLinks">
+          <End Type="UserModel.WebLinks" Role="WebLinks" Multiplicity="1" />
+          <End Type="UserModel.WebSiteUser" Role="SIA_WebSiteUser" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User_User">
+            <Principal Role="WebLinks">
+              <PropertyRef Name="WebLinkID" />
+            </Principal>
+            <Dependent Role="SIA_WebSiteUser">
+              <PropertyRef Name="WebLinkID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SIA_WebSiteUser_SIA_WebRole">
+          <End Type="UserModel.UserRole" Role="SIA_WebRole" Multiplicity="1" />
+          <End Type="UserModel.WebSiteUser" Role="SIA_WebSiteUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SIA_WebRole">
+              <PropertyRef Name="WebRoleID" />
+            </Principal>
+            <Dependent Role="SIA_WebSiteUser">
+              <PropertyRef Name="WebSiteRoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersWebSiteUser">
+          <End Type="UserModel.Users" Role="Users" Multiplicity="1" />
+          <End Type="UserModel.WebSiteUser" Role="WebSiteUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
               <PropertyRef Name="AppEntityID" />
             </Principal>
-            <Dependent Role="SIA_AppFeatureAccess">
+            <Dependent Role="WebSiteUser">
               <PropertyRef Name="AppEntityID" />
             </Dependent>
           </ReferentialConstraint>
@@ -371,20 +417,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="UserModelStoreContainer" CdmEntityContainer="UserLayerEntities">
-          <EntitySetMapping Name="vWebUserInfoes">
-            <EntityTypeMapping TypeName="UserModel.vWebUserInfo">
-              <MappingFragment StoreEntitySet="vWebUserInfo">
-                <ScalarProperty Name="Badge" ColumnName="Badge" />
-                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
-                <ScalarProperty Name="PIN" ColumnName="PIN" />
-                <ScalarProperty Name="SAP" ColumnName="SAP" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="DutyStatus" ColumnName="DutyStatus" />
-                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spWebSiteUserInfo" FunctionName="UserModel.Store.spWebSiteUserInfo">
             <ResultMapping>
               <ComplexTypeMapping TypeName="UserModel.spWebSiteUserInfo_Result">
@@ -453,28 +485,41 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="UserModel.User">
-              <MappingFragment StoreEntitySet="User_User">
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="WorksheetVisibleFlag" ColumnName="WorksheetVisibleFlag" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
-                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
-                <ScalarProperty Name="Ethnicty" ColumnName="Ethnicty" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
-                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
-                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
-                <ScalarProperty Name="ClassificationID" ColumnName="ClassificationID" />
-                <ScalarProperty Name="RDID" ColumnName="RDID" />
-                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+            <EntityTypeMapping TypeName="UserModel.Users">
+              <MappingFragment StoreEntitySet="vWebsiteUser">
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
-                <ScalarProperty Name="JobTitleID" ColumnName="JobTitleID" />
+                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
+                <ScalarProperty Name="DutyStatus" ColumnName="DutyStatus" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="Badge" ColumnName="Badge" />
-                <ScalarProperty Name="CADID" ColumnName="CADID" />
                 <ScalarProperty Name="SAP" ColumnName="SAP" />
                 <ScalarProperty Name="PIN" ColumnName="PIN" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="UserModel.UserRole">
+              <MappingFragment StoreEntitySet="SIA_WebRole">
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="WebRoleCode" ColumnName="WebRoleCode" />
+                <ScalarProperty Name="WebRole" ColumnName="WebRole" />
+                <ScalarProperty Name="WebRoleID" ColumnName="WebRoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebSiteUsers">
+            <EntityTypeMapping TypeName="UserModel.WebSiteUser">
+              <MappingFragment StoreEntitySet="SIA_WebSiteUser">
+                <ScalarProperty Name="GateAttemptDate" ColumnName="GateAttemptDate" />
+                <ScalarProperty Name="GateQuestion" ColumnName="GateQuestion" />
+                <ScalarProperty Name="GateStatus" ColumnName="GateStatus" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EnteredByID" ColumnName="EnteredByID" />
+                <ScalarProperty Name="WebSiteRoleID" ColumnName="WebSiteRoleID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="WebLinkID" ColumnName="WebLinkID" />
+                <ScalarProperty Name="WebSiteUserID" ColumnName="WebSiteUserID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -499,28 +544,36 @@
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
       <Diagram Name="UserEntities">
-        <EntityTypeShape EntityType="UserModel.vWebUserInfo" Width="1.75" PointX="0.75" PointY="0.75" Height="2.3648893229166665" IsExpanded="true" />
-        <EntityTypeShape EntityType="UserModel.Feature" Width="2.25" PointX="7.125" PointY="5.875" Height="2.1725878906250102" />
-        <EntityTypeShape EntityType="UserModel.FeatureAccess" Width="2.375" PointX="6" PointY="1.75" Height="3.3263964843750102" />
-        <EntityTypeShape EntityType="UserModel.FeatureCategoty" Width="1.75" PointX="9.875" PointY="7.75" Height="1.595683593749996" />
-        <EntityTypeShape EntityType="UserModel.WebLinks" Width="1.875" PointX="9.625" PointY="3" Height="2.3648893229166674" />
-        <EntityTypeShape EntityType="UserModel.User" Width="2.25" PointX="3.25" PointY="0.75" Height="5.057109374999996" />
+        <EntityTypeShape EntityType="UserModel.Feature" Width="2.25" PointX="8.5" PointY="4.75" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="UserModel.FeatureAccess" Width="2.375" PointX="8.25" PointY="0.875" Height="3.1340950520833326" />
+        <EntityTypeShape EntityType="UserModel.FeatureCategoty" Width="1.75" PointX="8.625" PointY="7.375" Height="1.595683593749996" />
+        <EntityTypeShape EntityType="UserModel.WebLinks" Width="1.875" PointX="5.875" PointY="0.875" Height="2.5571907552083331" />
         <AssociationConnector Association="UserModel.FK_SIA_AppFeature_SIA_AppFeatureCategoty" >
-          <ConnectorPoint PointX="10.75" PointY="7.75" />
-          <ConnectorPoint PointX="10.75" PointY="6.9612939453125051" />
-          <ConnectorPoint PointX="9.375" PointY="6.9612939453125051" />
+          <ConnectorPoint PointX="9.5" PointY="7.375" />
+          <ConnectorPoint PointX="9.5" PointY="6.92258789062501" />
         </AssociationConnector>
         <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_SIA_AppFeature" >
-          <ConnectorPoint PointX="7.75" PointY="5.875" />
-          <ConnectorPoint PointX="7.75" PointY="5.07639648437501" />
+          <ConnectorPoint PointX="9.5625" PointY="4.75" />
+          <ConnectorPoint PointX="9.5625" PointY="4.0090950520833326" />
         </AssociationConnector>
         <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" >
-          <ConnectorPoint PointX="9.625" PointY="4.0381982421875051" />
-          <ConnectorPoint PointX="8.375" PointY="4.0381982421875051" />
+          <ConnectorPoint PointX="7.75" PointY="2.1535953776041667" />
+          <ConnectorPoint PointX="8.25" PointY="2.1535953776041667" />
         </AssociationConnector>
-        <AssociationConnector Association="UserModel.FK_SIA_AppFeatureAccess_User_User" >
-          <ConnectorPoint PointX="5.5" PointY="3.4131982421875051" />
-          <ConnectorPoint PointX="6" PointY="3.4131982421875051" />
+        <EntityTypeShape EntityType="UserModel.Users" Width="2" PointX="0.5" PointY="0.5" Height="2.7494921874999996" />
+        <EntityTypeShape EntityType="UserModel.UserRole" Width="2.375" PointX="2.75" PointY="4.625" Height="1.9802864583333317" />
+        <EntityTypeShape EntityType="UserModel.WebSiteUser" Width="2.375" PointX="2.875" PointY="0.75" Height="3.3263964843749996" />
+        <AssociationConnector Association="UserModel.FK_SIA_WebSiteUser_SIA_WebLinks" >
+          <ConnectorPoint PointX="5.875" PointY="2.1535953776041667" />
+          <ConnectorPoint PointX="5.25" PointY="2.1535953776041667" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.FK_SIA_WebSiteUser_SIA_WebRole" >
+          <ConnectorPoint PointX="4" PointY="4.625" />
+          <ConnectorPoint PointX="4" PointY="4.076396484375" />
+        </AssociationConnector>
+        <AssociationConnector Association="UserModel.UsersWebSiteUser">
+          <ConnectorPoint PointX="2.5" PointY="1.9997460937499998" />
+          <ConnectorPoint PointX="2.875" PointY="1.9997460937499998" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

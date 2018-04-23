@@ -47,6 +47,10 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Award_Recognize_Award_RecognitionType", "Award_RecognitionType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.RecognitionType), "Award", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Award), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "UservPicture", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "vPicture", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.vPicture), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "UservEquipment", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "vEquipment", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.vEquipment), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_SIA_WebSiteUser_User_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "SIA_WebSiteUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.WebSiteUser), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_SIA_WebSiteUser_SIA_WebLinks", "SIA_WebLinks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.WebLinks), "WebSiteUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.WebSiteUser), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "UserAppFeatureAccess", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "AppFeatureAccess", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.AppFeatureAccess), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "WebLinksAppFeatureAccess", "WebLinks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.WebLinks), "AppFeatureAccess", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.AppFeatureAccess), true)]
 
 #endregion
 
@@ -561,6 +565,70 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<vEquipment> _vEquipments;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<WebSiteUser> WebSiteUsers
+        {
+            get
+            {
+                if ((_WebSiteUsers == null))
+                {
+                    _WebSiteUsers = base.CreateObjectSet<WebSiteUser>("WebSiteUsers");
+                }
+                return _WebSiteUsers;
+            }
+        }
+        private ObjectSet<WebSiteUser> _WebSiteUsers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AppFeatureAccess> AppFeatureAccesses
+        {
+            get
+            {
+                if ((_AppFeatureAccesses == null))
+                {
+                    _AppFeatureAccesses = base.CreateObjectSet<AppFeatureAccess>("AppFeatureAccesses");
+                }
+                return _AppFeatureAccesses;
+            }
+        }
+        private ObjectSet<AppFeatureAccess> _AppFeatureAccesses;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SIA_AppFeatureCategoty> SIA_AppFeatureCategoty
+        {
+            get
+            {
+                if ((_SIA_AppFeatureCategoty == null))
+                {
+                    _SIA_AppFeatureCategoty = base.CreateObjectSet<SIA_AppFeatureCategoty>("SIA_AppFeatureCategoty");
+                }
+                return _SIA_AppFeatureCategoty;
+            }
+        }
+        private ObjectSet<SIA_AppFeatureCategoty> _SIA_AppFeatureCategoty;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<WebLinks> WebLinks
+        {
+            get
+            {
+                if ((_WebLinks == null))
+                {
+                    _WebLinks = base.CreateObjectSet<WebLinks>("WebLinks");
+                }
+                return _WebLinks;
+            }
+        }
+        private ObjectSet<WebLinks> _WebLinks;
 
         #endregion
 
@@ -797,6 +865,38 @@ namespace PersonnelBusinessLayer
         {
             base.AddObject("vEquipments", vEquipment);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the WebSiteUsers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToWebSiteUsers(WebSiteUser webSiteUser)
+        {
+            base.AddObject("WebSiteUsers", webSiteUser);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AppFeatureAccesses EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAppFeatureAccesses(AppFeatureAccess appFeatureAccess)
+        {
+            base.AddObject("AppFeatureAccesses", appFeatureAccess);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SIA_AppFeatureCategoty EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSIA_AppFeatureCategoty(SIA_AppFeatureCategoty sIA_AppFeatureCategoty)
+        {
+            base.AddObject("SIA_AppFeatureCategoty", sIA_AppFeatureCategoty);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the WebLinks EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToWebLinks(WebLinks webLinks)
+        {
+            base.AddObject("WebLinks", webLinks);
+        }
 
         #endregion
 
@@ -1014,6 +1114,343 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<P_Address>("SAPDActivityModel.FK_Person_Address_Person_AddressType", "Person_Address", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="AppFeatureAccess")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AppFeatureAccess : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AppFeatureAccess object.
+        /// </summary>
+        /// <param name="appFeatureAccessID">Initial value of the AppFeatureAccessID property.</param>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="webLinkID">Initial value of the WebLinkID property.</param>
+        /// <param name="appFeatureID">Initial value of the AppFeatureID property.</param>
+        /// <param name="allowFeatureFlag">Initial value of the AllowFeatureFlag property.</param>
+        public static AppFeatureAccess CreateAppFeatureAccess(global::System.Int32 appFeatureAccessID, global::System.Int32 appEntityID, global::System.Int32 webLinkID, global::System.Int32 appFeatureID, global::System.Boolean allowFeatureFlag)
+        {
+            AppFeatureAccess appFeatureAccess = new AppFeatureAccess();
+            appFeatureAccess.AppFeatureAccessID = appFeatureAccessID;
+            appFeatureAccess.AppEntityID = appEntityID;
+            appFeatureAccess.WebLinkID = webLinkID;
+            appFeatureAccess.AppFeatureID = appFeatureID;
+            appFeatureAccess.AllowFeatureFlag = allowFeatureFlag;
+            return appFeatureAccess;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppFeatureAccessID
+        {
+            get
+            {
+                return _AppFeatureAccessID;
+            }
+            set
+            {
+                if (_AppFeatureAccessID != value)
+                {
+                    OnAppFeatureAccessIDChanging(value);
+                    ReportPropertyChanging("AppFeatureAccessID");
+                    _AppFeatureAccessID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AppFeatureAccessID");
+                    OnAppFeatureAccessIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AppFeatureAccessID;
+        partial void OnAppFeatureAccessIDChanging(global::System.Int32 value);
+        partial void OnAppFeatureAccessIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebLinkID
+        {
+            get
+            {
+                return _WebLinkID;
+            }
+            set
+            {
+                OnWebLinkIDChanging(value);
+                ReportPropertyChanging("WebLinkID");
+                _WebLinkID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WebLinkID");
+                OnWebLinkIDChanged();
+            }
+        }
+        private global::System.Int32 _WebLinkID;
+        partial void OnWebLinkIDChanging(global::System.Int32 value);
+        partial void OnWebLinkIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppFeatureID
+        {
+            get
+            {
+                return _AppFeatureID;
+            }
+            set
+            {
+                OnAppFeatureIDChanging(value);
+                ReportPropertyChanging("AppFeatureID");
+                _AppFeatureID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppFeatureID");
+                OnAppFeatureIDChanged();
+            }
+        }
+        private global::System.Int32 _AppFeatureID;
+        partial void OnAppFeatureIDChanging(global::System.Int32 value);
+        partial void OnAppFeatureIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean AllowFeatureFlag
+        {
+            get
+            {
+                return _AllowFeatureFlag;
+            }
+            set
+            {
+                OnAllowFeatureFlagChanging(value);
+                ReportPropertyChanging("AllowFeatureFlag");
+                _AllowFeatureFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AllowFeatureFlag");
+                OnAllowFeatureFlagChanged();
+            }
+        }
+        private global::System.Boolean _AllowFeatureFlag;
+        partial void OnAllowFeatureFlagChanging(global::System.Boolean value);
+        partial void OnAllowFeatureFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UnlockQ
+        {
+            get
+            {
+                return _UnlockQ;
+            }
+            set
+            {
+                OnUnlockQChanging(value);
+                ReportPropertyChanging("UnlockQ");
+                _UnlockQ = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("UnlockQ");
+                OnUnlockQChanged();
+            }
+        }
+        private global::System.String _UnlockQ;
+        partial void OnUnlockQChanging(global::System.String value);
+        partial void OnUnlockQChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> UnlockAttempt
+        {
+            get
+            {
+                return _UnlockAttempt;
+            }
+            set
+            {
+                OnUnlockAttemptChanging(value);
+                ReportPropertyChanging("UnlockAttempt");
+                _UnlockAttempt = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UnlockAttempt");
+                OnUnlockAttemptChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _UnlockAttempt;
+        partial void OnUnlockAttemptChanging(Nullable<global::System.DateTime> value);
+        partial void OnUnlockAttemptChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> UnlockedBy
+        {
+            get
+            {
+                return _UnlockedBy;
+            }
+            set
+            {
+                OnUnlockedByChanging(value);
+                ReportPropertyChanging("UnlockedBy");
+                _UnlockedBy = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UnlockedBy");
+                OnUnlockedByChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _UnlockedBy;
+        partial void OnUnlockedByChanging(Nullable<global::System.Int32> value);
+        partial void OnUnlockedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> UnlockedDate
+        {
+            get
+            {
+                return _UnlockedDate;
+            }
+            set
+            {
+                OnUnlockedDateChanging(value);
+                ReportPropertyChanging("UnlockedDate");
+                _UnlockedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UnlockedDate");
+                OnUnlockedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _UnlockedDate;
+        partial void OnUnlockedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnUnlockedDateChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "UserAppFeatureAccess", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UserAppFeatureAccess", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UserAppFeatureAccess", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.UserAppFeatureAccess", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SAPDActivityModel.UserAppFeatureAccess", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "WebLinksAppFeatureAccess", "WebLinks")]
+        public WebLinks WebLink
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WebLinks>("SAPDActivityModel.WebLinksAppFeatureAccess", "WebLinks").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WebLinks>("SAPDActivityModel.WebLinksAppFeatureAccess", "WebLinks").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<WebLinks> WebLinkReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WebLinks>("SAPDActivityModel.WebLinksAppFeatureAccess", "WebLinks");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WebLinks>("SAPDActivityModel.WebLinksAppFeatureAccess", "WebLinks", value);
                 }
             }
         }
@@ -6371,6 +6808,89 @@ namespace PersonnelBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="SIA_AppFeatureCategoty")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SIA_AppFeatureCategoty : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SIA_AppFeatureCategoty object.
+        /// </summary>
+        /// <param name="appFeatureCategoryID">Initial value of the AppFeatureCategoryID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        public static SIA_AppFeatureCategoty CreateSIA_AppFeatureCategoty(global::System.Int32 appFeatureCategoryID, global::System.String name)
+        {
+            SIA_AppFeatureCategoty sIA_AppFeatureCategoty = new SIA_AppFeatureCategoty();
+            sIA_AppFeatureCategoty.AppFeatureCategoryID = appFeatureCategoryID;
+            sIA_AppFeatureCategoty.Name = name;
+            return sIA_AppFeatureCategoty;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppFeatureCategoryID
+        {
+            get
+            {
+                return _AppFeatureCategoryID;
+            }
+            set
+            {
+                if (_AppFeatureCategoryID != value)
+                {
+                    OnAppFeatureCategoryIDChanging(value);
+                    ReportPropertyChanging("AppFeatureCategoryID");
+                    _AppFeatureCategoryID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AppFeatureCategoryID");
+                    OnAppFeatureCategoryIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AppFeatureCategoryID;
+        partial void OnAppFeatureCategoryIDChanging(global::System.Int32 value);
+        partial void OnAppFeatureCategoryIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="State")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -7337,6 +7857,50 @@ namespace PersonnelBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_SIA_WebSiteUser_User_User", "SIA_WebSiteUser")]
+        public EntityCollection<WebSiteUser> SIA_WebSiteUser
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WebSiteUser>("SAPDActivityModel.FK_SIA_WebSiteUser_User_User", "SIA_WebSiteUser");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WebSiteUser>("SAPDActivityModel.FK_SIA_WebSiteUser_User_User", "SIA_WebSiteUser", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "UserAppFeatureAccess", "AppFeatureAccess")]
+        public EntityCollection<AppFeatureAccess> AppFeatureAccesses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AppFeatureAccess>("SAPDActivityModel.UserAppFeatureAccess", "AppFeatureAccess");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AppFeatureAccess>("SAPDActivityModel.UserAppFeatureAccess", "AppFeatureAccess", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -7882,6 +8446,580 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SAPDActivityModel.UservPicture", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="WebLinks")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class WebLinks : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new WebLinks object.
+        /// </summary>
+        /// <param name="webLinkID">Initial value of the WebLinkID property.</param>
+        /// <param name="webCategoryID">Initial value of the WebCategoryID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="webLink">Initial value of the WebLink property.</param>
+        /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
+        /// <param name="needAuthorizationFlag">Initial value of the NeedAuthorizationFlag property.</param>
+        public static WebLinks CreateWebLinks(global::System.Int32 webLinkID, global::System.Int32 webCategoryID, global::System.String name, global::System.String webLink, global::System.Boolean visibleFlag, global::System.Boolean needAuthorizationFlag)
+        {
+            WebLinks webLinks = new WebLinks();
+            webLinks.WebLinkID = webLinkID;
+            webLinks.WebCategoryID = webCategoryID;
+            webLinks.Name = name;
+            webLinks.WebLink = webLink;
+            webLinks.VisibleFlag = visibleFlag;
+            webLinks.NeedAuthorizationFlag = needAuthorizationFlag;
+            return webLinks;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebLinkID
+        {
+            get
+            {
+                return _WebLinkID;
+            }
+            set
+            {
+                if (_WebLinkID != value)
+                {
+                    OnWebLinkIDChanging(value);
+                    ReportPropertyChanging("WebLinkID");
+                    _WebLinkID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("WebLinkID");
+                    OnWebLinkIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _WebLinkID;
+        partial void OnWebLinkIDChanging(global::System.Int32 value);
+        partial void OnWebLinkIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebCategoryID
+        {
+            get
+            {
+                return _WebCategoryID;
+            }
+            set
+            {
+                OnWebCategoryIDChanging(value);
+                ReportPropertyChanging("WebCategoryID");
+                _WebCategoryID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WebCategoryID");
+                OnWebCategoryIDChanged();
+            }
+        }
+        private global::System.Int32 _WebCategoryID;
+        partial void OnWebCategoryIDChanging(global::System.Int32 value);
+        partial void OnWebCategoryIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String WebLink
+        {
+            get
+            {
+                return _WebLink;
+            }
+            set
+            {
+                OnWebLinkChanging(value);
+                ReportPropertyChanging("WebLink");
+                _WebLink = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("WebLink");
+                OnWebLinkChanged();
+            }
+        }
+        private global::System.String _WebLink;
+        partial void OnWebLinkChanging(global::System.String value);
+        partial void OnWebLinkChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private global::System.Boolean _VisibleFlag;
+        partial void OnVisibleFlagChanging(global::System.Boolean value);
+        partial void OnVisibleFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean NeedAuthorizationFlag
+        {
+            get
+            {
+                return _NeedAuthorizationFlag;
+            }
+            set
+            {
+                OnNeedAuthorizationFlagChanging(value);
+                ReportPropertyChanging("NeedAuthorizationFlag");
+                _NeedAuthorizationFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NeedAuthorizationFlag");
+                OnNeedAuthorizationFlagChanged();
+            }
+        }
+        private global::System.Boolean _NeedAuthorizationFlag;
+        partial void OnNeedAuthorizationFlagChanging(global::System.Boolean value);
+        partial void OnNeedAuthorizationFlagChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_SIA_WebSiteUser_SIA_WebLinks", "WebSiteUser")]
+        public EntityCollection<WebSiteUser> SIA_WebSiteUser
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<WebSiteUser>("SAPDActivityModel.FK_SIA_WebSiteUser_SIA_WebLinks", "WebSiteUser");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WebSiteUser>("SAPDActivityModel.FK_SIA_WebSiteUser_SIA_WebLinks", "WebSiteUser", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "WebLinksAppFeatureAccess", "AppFeatureAccess")]
+        public EntityCollection<AppFeatureAccess> AppFeatureAccesses
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AppFeatureAccess>("SAPDActivityModel.WebLinksAppFeatureAccess", "AppFeatureAccess");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AppFeatureAccess>("SAPDActivityModel.WebLinksAppFeatureAccess", "AppFeatureAccess", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="WebSiteUser")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class WebSiteUser : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new WebSiteUser object.
+        /// </summary>
+        /// <param name="webSiteUserID">Initial value of the WebSiteUserID property.</param>
+        /// <param name="webLinkID">Initial value of the WebLinkID property.</param>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="webSiteRoleID">Initial value of the WebSiteRoleID property.</param>
+        /// <param name="enteredByID">Initial value of the EnteredByID property.</param>
+        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
+        public static WebSiteUser CreateWebSiteUser(global::System.Int32 webSiteUserID, global::System.Int32 webLinkID, global::System.Int32 appEntityID, global::System.Int32 webSiteRoleID, global::System.Int32 enteredByID, global::System.DateTime modifiedDate)
+        {
+            WebSiteUser webSiteUser = new WebSiteUser();
+            webSiteUser.WebSiteUserID = webSiteUserID;
+            webSiteUser.WebLinkID = webLinkID;
+            webSiteUser.AppEntityID = appEntityID;
+            webSiteUser.WebSiteRoleID = webSiteRoleID;
+            webSiteUser.EnteredByID = enteredByID;
+            webSiteUser.ModifiedDate = modifiedDate;
+            return webSiteUser;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebSiteUserID
+        {
+            get
+            {
+                return _WebSiteUserID;
+            }
+            set
+            {
+                if (_WebSiteUserID != value)
+                {
+                    OnWebSiteUserIDChanging(value);
+                    ReportPropertyChanging("WebSiteUserID");
+                    _WebSiteUserID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("WebSiteUserID");
+                    OnWebSiteUserIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _WebSiteUserID;
+        partial void OnWebSiteUserIDChanging(global::System.Int32 value);
+        partial void OnWebSiteUserIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebLinkID
+        {
+            get
+            {
+                return _WebLinkID;
+            }
+            set
+            {
+                OnWebLinkIDChanging(value);
+                ReportPropertyChanging("WebLinkID");
+                _WebLinkID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WebLinkID");
+                OnWebLinkIDChanged();
+            }
+        }
+        private global::System.Int32 _WebLinkID;
+        partial void OnWebLinkIDChanging(global::System.Int32 value);
+        partial void OnWebLinkIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WebSiteRoleID
+        {
+            get
+            {
+                return _WebSiteRoleID;
+            }
+            set
+            {
+                OnWebSiteRoleIDChanging(value);
+                ReportPropertyChanging("WebSiteRoleID");
+                _WebSiteRoleID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WebSiteRoleID");
+                OnWebSiteRoleIDChanged();
+            }
+        }
+        private global::System.Int32 _WebSiteRoleID;
+        partial void OnWebSiteRoleIDChanging(global::System.Int32 value);
+        partial void OnWebSiteRoleIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EnteredByID
+        {
+            get
+            {
+                return _EnteredByID;
+            }
+            set
+            {
+                OnEnteredByIDChanging(value);
+                ReportPropertyChanging("EnteredByID");
+                _EnteredByID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EnteredByID");
+                OnEnteredByIDChanged();
+            }
+        }
+        private global::System.Int32 _EnteredByID;
+        partial void OnEnteredByIDChanging(global::System.Int32 value);
+        partial void OnEnteredByIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private global::System.DateTime _ModifiedDate;
+        partial void OnModifiedDateChanging(global::System.DateTime value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> GateStatus
+        {
+            get
+            {
+                return _GateStatus;
+            }
+            set
+            {
+                OnGateStatusChanging(value);
+                ReportPropertyChanging("GateStatus");
+                _GateStatus = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GateStatus");
+                OnGateStatusChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _GateStatus;
+        partial void OnGateStatusChanging(Nullable<global::System.Boolean> value);
+        partial void OnGateStatusChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String GateQuestion
+        {
+            get
+            {
+                return _GateQuestion;
+            }
+            set
+            {
+                OnGateQuestionChanging(value);
+                ReportPropertyChanging("GateQuestion");
+                _GateQuestion = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("GateQuestion");
+                OnGateQuestionChanged();
+            }
+        }
+        private global::System.String _GateQuestion;
+        partial void OnGateQuestionChanging(global::System.String value);
+        partial void OnGateQuestionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> GateAttemptDate
+        {
+            get
+            {
+                return _GateAttemptDate;
+            }
+            set
+            {
+                OnGateAttemptDateChanging(value);
+                ReportPropertyChanging("GateAttemptDate");
+                _GateAttemptDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GateAttemptDate");
+                OnGateAttemptDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _GateAttemptDate;
+        partial void OnGateAttemptDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnGateAttemptDateChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_SIA_WebSiteUser_User_User", "User")]
+        public User User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.FK_SIA_WebSiteUser_User_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.FK_SIA_WebSiteUser_User_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> User_UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.FK_SIA_WebSiteUser_User_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SAPDActivityModel.FK_SIA_WebSiteUser_User_User", "User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_SIA_WebSiteUser_SIA_WebLinks", "SIA_WebLinks")]
+        public WebLinks SIA_WebLinks
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WebLinks>("SAPDActivityModel.FK_SIA_WebSiteUser_SIA_WebLinks", "SIA_WebLinks").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WebLinks>("SAPDActivityModel.FK_SIA_WebSiteUser_SIA_WebLinks", "SIA_WebLinks").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<WebLinks> SIA_WebLinksReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WebLinks>("SAPDActivityModel.FK_SIA_WebSiteUser_SIA_WebLinks", "SIA_WebLinks");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WebLinks>("SAPDActivityModel.FK_SIA_WebSiteUser_SIA_WebLinks", "SIA_WebLinks", value);
                 }
             }
         }

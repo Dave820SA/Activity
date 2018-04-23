@@ -79,15 +79,27 @@
                          @Html.Raw(Model.JobTitle.ToUpper())
                      </div>
                  </div>
-
-               
                  <div class="profile-usermenu">
                      <ul class="nav">
-                         <li class="active"><a href="#"><i class="icon-home"></i>Work Profile </a>
-                         </li>
-                         <li><a href="#"><i class="icon-settings"></i>Personal Profile</a> </li>
-                         
+                         <li ><a id="liWorkProfile" href="#"> <i class="icon-home"></i>Work Profile </a></li>
+                          <li id="liPersonnalProfile" ><a href="Personnal"><i class="icon-settings"></i>Personal Profile</a> </li>
+                          <li id="liWebsiteAccess"><a href="Website"><i class="icon-settings"></i>Websit Access </a></li>
                      </ul>
                  </div>
+                 
              </div>
          </div>
+
+@section scripts
+{
+    <script type="text/javascript">
+
+
+        $(function returnWorkProfile() {
+            $("#liWorkProfile").click(function () {
+                alert("You clicked work profile");
+        });
+
+
+    </script>
+}

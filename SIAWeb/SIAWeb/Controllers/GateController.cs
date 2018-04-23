@@ -106,10 +106,10 @@ namespace SIAWeb.Controllers
            return _sb;
        }
 
-       private void updateQAttempt(int appEntity, int qNbr)
-       {
-           UserLayerEntities db = new UserLayerEntities();
-           db.Users.
-       }
+       //private void updateQAttempt(int appEntity, int qNbr)
+       //{
+       //    UserLayerEntities db = new UserLayerEntities();
+       //    db.FeatureAccesses.AddObject
+       //}
     }
 }
