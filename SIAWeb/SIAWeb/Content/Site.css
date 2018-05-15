@@ -64,6 +64,7 @@ input[type='checkbox']:checked {
     background: #abd;
 }
 
+ /* Busy Spinner */
  #loading
     {
         display:none;
@@ -72,7 +73,7 @@ input[type='checkbox']:checked {
         top:0;
         width:100%;
         height:100%;
-        background:rgba(255,255,255,0.8);
+        background:rgba(255,255,255,0.9);
         z-index:1000;
     }
   
@@ -90,13 +91,14 @@ input[type='checkbox']:checked {
     {
         display: table-cell;
         vertical-align:middle;
-        width: 100%;
+        width: 200px;
+        height: 200px;
         text-align: center;
         font-size:larger;
         padding-top:80px;
     }
     
-    /*_______________________________
+   /*_______________________________
     
 body{
     background:#e9ecf3;    

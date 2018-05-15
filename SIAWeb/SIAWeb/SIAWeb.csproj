@@ -189,7 +189,6 @@
     <Compile Include="Models\WebLink.cs" />
     <Compile Include="Models\WorkStatuss.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\PersonelSearchController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -201,6 +200,7 @@
     <Content Include="Content\jquery.bootgrid.css" />
     <Content Include="Content\jquery.bootgrid.min.css" />
     <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\ajax-loading.gif" />
     <Content Include="Images\OfficerBadgeIcon.png" />
     <Content Include="Images\SAPD-Patch-web-S4.png" />
     <Content Include="Images\SAPD-Patch.png" />
@@ -290,6 +290,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\Spin.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Shared\_PersonPersonnalInfo.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -353,7 +354,6 @@
     <Content Include="Views\Shared\_PersonBasic.cshtml" />
     <Content Include="Views\PersonSearch\SelectPerson.cshtml" />
     <Content Include="Views\Shared\_PersonWorkProfile.cshtml" />
-    <Content Include="Views\Shared\_PersonPersonnalInfo.cshtml" />
     <Content Include="Views\Shared\_Alternate3.cshtml" />
     <Content Include="Views\Gate\Index.cshtml" />
     <Content Include="Views\Shared\_GateQ.cshtml" />

@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Info";
-    Layout = "~/Views/Shared/_Alternate2.cshtml";
+    Layout = "~/Views/Shared/_Alternate.cshtml";
 }
 
 @*<h2>SOP Web Information</h2>*@
@@ -32,16 +32,22 @@
                 <div class="well well-sm">
                     <div class="row">
                         <div class="col-sm-6 col-md-3">
-                            <img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />
+                            @{
+                                var url = "http://wppswebprod/FileShare/Images/109889.png";
+    
+                                <img src="@Url.Content(url)" class="img-responsive" alt=""/>
+                            }
+                            @*<img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />*@
                         </div>
                         <div class="col-sm-6 col-md-9">
                             <h4 class="media-heading">
                                 Ofc. Douglas Davidson #1341 <small>SAPD</small></h4>
                             <h5>
-                                <a href="#">Chief's Tech Team (CTT)</a></h5>
+                                <a href="@Url.Action("Index", "Office", new { id = 297 }, null)" >Chief's Tech Team (CTT)</a></h5>
                             <hr style="margin: 8px auto">
                             <p>
-                                <i class="fa fa-envelope-o"></i>douglas.davidson@sanantonio.gov
+                                <i class="fa fa-envelope-o"></i> <a href='mailto:douglas.davidson@sanantonio.gov'>douglas.davidson@sanantonio.gov</a>
+                                @*<i class="fa fa-envelope-o"></i>douglas.davidson@sanantonio.gov*@
                                 <br />
                                 <i class="fa fa-globe"></i><a href="http://pdapps-web-d02/sapdweb">SAPD Web</a>
                                 <br />
@@ -63,7 +69,12 @@
                 <div class="well well-sm">
                     <div class="row">
                         <div class="col-sm-6 col-md-3">
-                            <img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />
+                            @{
+                                var url1 = "http://wppswebprod/FileShare/Images/106919.png";
+                                
+                                <img src="@Url.Content(url1)" class="img-responsive" alt=""/>
+                            }
+                            @*<img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />*@
                         </div>
                         <div class="col-sm-6 col-md-9">
                             <h4 class="media-heading">
@@ -72,7 +83,9 @@
                                 <a href="#">Strategic Intelligence & Analytics (FIA)</a></h5>
                             <hr style="margin: 8px auto">
                             <p>
-                                <i class="fa fa-envelope-o"></i> John.Riojas@sanantonio.gov
+                            
+                                <i class="fa fa-envelope-o"></i> <a href='mailto:John.Riojas@sanantonio.gov'>John.Riojas@sanantonio.gov</a>
+                                @*<i class="fa fa-envelope-o"></i> John.Riojas@sanantonio.gov*@
                                 <br />
                                 <i class="fa fa-globe"></i><a href="http://pdapps-web-d02/sapdweb">SOP Web</a>
                                 <br />

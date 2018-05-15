@@ -52,7 +52,6 @@ namespace SIAWeb.Common
                                                      }),
                                      Badges = (from us in db.Users
                                                join bh in db.BadgeHistories on us.AppEntityID equals bh.AppEntityID
-                                               //join pr in db.People on bh.EnteredBy equals pr.AppEntityID
                                                orderby bh.StartDate
                                                where bh.AppEntityID == appEntityID
 
@@ -60,22 +59,17 @@ namespace SIAWeb.Common
                                                {
                                                    StartDate = bh.StartDate,
                                                    EndDate = (bh.EndDate ?? DateTime.Now),
-                                                   //FirstName = pr.FirstName,
-                                                   //LastName = pr.LastName,
                                                    BadgeNbr = bh.Badge
                                                }),
                                      RDs = (from us in db.Users
                                             join rdh in db.RDHistories on us.AppEntityID equals rdh.AppEntityID
                                             join dayoff in db.DayOffs on rdh.RDID equals dayoff.RDID
-                                            //join pr in db.People on rdh.EnteredBy equals p.AppEntityID
                                             orderby rdh.StartDate
                                             where rdh.AppEntityID == appEntityID
                                             select new RD
                                             {
                                                 StartDate = rdh.StartDate,
                                                 EndDate = (rdh.EndDate ?? DateTime.Now),
-                                                //FirstName = p.FirstName,
-                                                //LastName = p.LastName,
                                                 DayOff = dayoff.Name
                                             }),
                                      OfficeAssigments = (from us in db.Users
@@ -85,7 +79,7 @@ namespace SIAWeb.Common
                                                          where oh.AppEntityID == appEntityID
                                                          select new OfficeAssigment
                                                          {
-                                                             OfficeID = oh.OfficeID,
+                                                             OfficeID = ((int?)oh.OfficeID ?? 0),
                                                              StartDate = oh.StartDate,
                                                              EndDate = (oh.EndDate ?? DateTime.Now),
                                                              Office = of.Name,
@@ -94,10 +88,7 @@ namespace SIAWeb.Common
                                      myAwards = (from pawr in db.People
                                                  join aw in db.Awards on pawr.AppEntityID equals aw.AppEntityID into awar
                                                  from aww in awar.DefaultIfEmpty()
-
                                                  join rt in db.RecognitionTypes on aww.RecogTypeId equals rt.RecognitionTypeId
-
-
                                                  where pawr.AppEntityID == appEntityID
                                                  select new UserAward
                                                  {
@@ -111,10 +102,11 @@ namespace SIAWeb.Common
                                                     from eww in equ.DefaultIfEmpty()
                                                     orderby eww.CategoryID
                                                     where (us.AppEntityID == appEntityID) //&& (eww.CategoryID == 53)
-                                                    
+
                                                     select new Equipment
                                                     {
-                                                        ID = eww.ID,
+                                                        //If the serached person does not have an equipment profile
+                                                        ID = ((int?)eww.ID ?? 0),
                                                         ItemDescription = eww.ItemDescription,
                                                         Status = eww.Status,
                                                         Category = eww.Category

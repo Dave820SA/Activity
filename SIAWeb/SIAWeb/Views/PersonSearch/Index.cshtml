@@ -1,6 +1,6 @@
-﻿@{ 
+﻿@*@{ 
     Layout = "~/Views/Shared/_Alternate2.cshtml";
-}
+}*@
 @model IEnumerable<SIAWeb.Models.People>
 
 @{
@@ -19,7 +19,7 @@
             <div class="input-group">
                 @Html.TextBox("search_string", null, new { @class = "form-control" })
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="submit" id="process" value="process">
+                    <button class="btn btn-default" title="processing" type="submit" id="process" value="process">
                         @*<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span>*@
                         @*<i class="fa fa-spinner fa-spin" style="font-size:24px"></i>*@ <i class="fa fa-search">
                         </i>
@@ -36,7 +36,7 @@
             @{
                 if (Model != null)
                 {
-                <table class="table table-condensed table-hover">
+                <table id="myTable" class="table table-condensed table-hover">
                     <tr>
                         <th>
                             Title
@@ -70,7 +70,7 @@
                                            
                                     <img src="~/Images/SupervisorBadgeIcon.png" alt="" class="image_background" /> @Html.Raw(title.ToUpper())  
                         }
-                        else if (rank >= 7 && rank <= 10)
+                        else if (rank >= 7 && rank <= 11)
                         {
                                     <img src="~/Images/OfficerBadgeIcon.png" alt="" class="image_background" /> @Html.Raw(title.ToUpper())  
                         }
@@ -141,8 +141,13 @@
 
                             </td>
                             <td>
-                                <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = item.AppEntityID })" id="Search" class="btn btn-default btn-xs">
-                                    Select&nbsp; <i class="fa fa-list" aria-hidden="true"></i></a>@*@Html.ActionLink("SelectedPerson", "View", new { appEntity = item.AppEntityID }) *@
+                               @* <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = item.AppEntityID })" id="SearchFor" class="btn btn-default btn-xs">
+                                    Select&nbsp; <i class="fa fa-list" aria-hidden="true"></i></a>*@
+
+                                 <a href="@Url.Action("SelectPerson", "PersonSearch", new { id = item.AppEntityID })"  title="SearchFor" class="btn btn-default btn-xs">
+                                    Select&nbsp; <i class="fa fa-list" aria-hidden="true"></i></a>
+
+                                @*<a href=" @link.linkPath " target="_blank">@link.link </a>*@
                             </td>
                         </tr>
     
@@ -165,40 +170,38 @@
     <div id="loadingcontent">
         <p id="loadingspinner">
             Searching things...
-            <img id="myDiv" src="@Url.Content("~/Images/ajax-loader.gif")" alt="Please wait...">
+            <img id="myDiv" src="@Url.Content("/Images/ajax-loading.gif")"  alt="Please wait..."/>
         </p>
     </div>
 </div>
 
 @section Scripts {
     
-
     <script type="text/javascript">
 
-//        function showPage() {
-//            document.getElementById("loading").style.display = "none";
-//            document.getElementById("myDiv").style.display = "block";
-//        }
+        $(document).ready(function () {
+            $('[title="processing"]').click(function () {
+                $('#loading').fadeIn();
+            });
 
-
-        $(function () {
-            $("#process").click(function () {
-                $("#loading").fadeIn();
+            $('[title="SearchFor"]').click(function () {
+                $('#loading').fadeIn();
             });
         });
-
-        $(function () {
-            $("#process").click(function () {
-                $("#Search").fadeIn();
-            });
-        });
+        
+//  
+//        $(function () {
+//            $('[title="SearchFor"]').click(function () {
+//                $("#loading").fadeIn();
+//            });
+//        });
 
 
         $(function () {
             $("input[type=text]").first().focus();
         });
-       
-     </script>      
+    
+    </script>      
     
 }
  

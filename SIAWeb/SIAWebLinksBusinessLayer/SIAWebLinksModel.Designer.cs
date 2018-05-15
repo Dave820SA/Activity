@@ -120,6 +120,22 @@ namespace SIAWebLinksBusinessLayer
             }
         }
         private ObjectSet<ActivityLog> _ActivityLogs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SearchFor> SearchFors
+        {
+            get
+            {
+                if ((_SearchFors == null))
+                {
+                    _SearchFors = base.CreateObjectSet<SearchFor>("SearchFors");
+                }
+                return _SearchFors;
+            }
+        }
+        private ObjectSet<SearchFor> _SearchFors;
 
         #endregion
 
@@ -147,6 +163,14 @@ namespace SIAWebLinksBusinessLayer
         public void AddToActivityLogs(ActivityLog activityLog)
         {
             base.AddObject("ActivityLogs", activityLog);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SearchFors EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSearchFors(SearchFor searchFor)
+        {
+            base.AddObject("SearchFors", searchFor);
         }
 
         #endregion
@@ -493,6 +517,141 @@ namespace SIAWebLinksBusinessLayer
 
         #endregion
 
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SIAWebLinksModel", Name="SearchFor")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SearchFor : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SearchFor object.
+        /// </summary>
+        /// <param name="activitySearchID">Initial value of the ActivitySearchID property.</param>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="searchForID">Initial value of the SearchForID property.</param>
+        /// <param name="searchDateTime">Initial value of the SearchDateTime property.</param>
+        public static SearchFor CreateSearchFor(global::System.Int32 activitySearchID, global::System.Int32 appEntityID, global::System.Int32 searchForID, global::System.DateTime searchDateTime)
+        {
+            SearchFor searchFor = new SearchFor();
+            searchFor.ActivitySearchID = activitySearchID;
+            searchFor.AppEntityID = appEntityID;
+            searchFor.SearchForID = searchForID;
+            searchFor.SearchDateTime = searchDateTime;
+            return searchFor;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ActivitySearchID
+        {
+            get
+            {
+                return _ActivitySearchID;
+            }
+            set
+            {
+                if (_ActivitySearchID != value)
+                {
+                    OnActivitySearchIDChanging(value);
+                    ReportPropertyChanging("ActivitySearchID");
+                    _ActivitySearchID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ActivitySearchID");
+                    OnActivitySearchIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ActivitySearchID;
+        partial void OnActivitySearchIDChanging(global::System.Int32 value);
+        partial void OnActivitySearchIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SearchForID
+        {
+            get
+            {
+                return _SearchForID;
+            }
+            set
+            {
+                OnSearchForIDChanging(value);
+                ReportPropertyChanging("SearchForID");
+                _SearchForID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SearchForID");
+                OnSearchForIDChanged();
+            }
+        }
+        private global::System.Int32 _SearchForID;
+        partial void OnSearchForIDChanging(global::System.Int32 value);
+        partial void OnSearchForIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime SearchDateTime
+        {
+            get
+            {
+                return _SearchDateTime;
+            }
+            set
+            {
+                OnSearchDateTimeChanging(value);
+                ReportPropertyChanging("SearchDateTime");
+                _SearchDateTime = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SearchDateTime");
+                OnSearchDateTimeChanged();
+            }
+        }
+        private global::System.DateTime _SearchDateTime;
+        partial void OnSearchDateTimeChanging(global::System.DateTime value);
+        partial void OnSearchDateTimeChanged();
+
+        #endregion
+
+    
     }
     
     /// <summary>

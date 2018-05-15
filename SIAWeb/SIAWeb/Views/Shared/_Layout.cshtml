@@ -30,7 +30,7 @@
                             <li class="active"><a href="~/Home/Index"><span class="fa fa-home fa-fw"></span>Home
                             </a></li>
                             
-                            @{
+                           @* @{
                                 int v = Int32.Parse((string)System.Web.HttpContext.Current.Session["GateStatus"]);
                                 
                                 if (v == 1)
@@ -45,11 +45,11 @@
                                 </li>
                                     
                                     
-                                  @*  <li><a href="~/PersonSearch/Index"><i class="fa fa-search"></i> Person Search
-                                    </a></li>*@
+                                    <li><a href="~/PersonSearch/Index"><i class="fa fa-search"></i> Person Search
+                                    </a></li>
                                 }
                                 
-                            }
+                            }*@
                          
                             <li><a href="http://pdapps-web-d02/sapdweb2/searchsapdweb.aspx" target="_blank"><i
                                 class="fa fa-search"></i> Search Site </a></li>

@@ -7,6 +7,7 @@
     <Schema Namespace="SIAWebLinksModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="SIAWebLinksModelStoreContainer">
           <EntitySet Name="Activity_ActivityLog" EntityType="SIAWebLinksModel.Store.Activity_ActivityLog" store:Type="Tables" Schema="dbo" Table="Activity.ActivityLog" />
+          <EntitySet Name="Activity_SearchFor" EntityType="SIAWebLinksModel.Store.Activity_SearchFor" store:Type="Tables" Schema="dbo" Table="Activity.SearchFor" />
           <EntitySet Name="SIA_WebCategories" EntityType="SIAWebLinksModel.Store.SIA_WebCategories" store:Type="Tables" Schema="dbo" Table="SIA.WebCategories" />
           <EntitySet Name="SIA_WebLinks" EntityType="SIAWebLinksModel.Store.SIA_WebLinks" store:Type="Tables" Schema="dbo" Table="SIA.WebLinks" />
           <AssociationSet Name="FK_SIA_WebLinks_SIA_WebCategories" Association="SIAWebLinksModel.Store.FK_SIA_WebLinks_SIA_WebCategories">
@@ -26,6 +27,15 @@
           <Property Name="WebPage" Type="varchar" MaxLength="50" />
           <Property Name="ClickedDatetime" Type="datetime" />
           <Property Name="Flagged" Type="bit" />
+        </EntityType>
+        <EntityType Name="Activity_SearchFor">
+          <Key>
+            <PropertyRef Name="ActivitySearchID" />
+          </Key>
+          <Property Name="ActivitySearchID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppEntityID" Type="int" Nullable="false" />
+          <Property Name="SearchForID" Type="int" Nullable="false" />
+          <Property Name="SearchDateTime" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="SIA_WebCategories">
           <Key>
@@ -85,6 +95,7 @@
           <FunctionImport Name="Activity_spMyTopWebLinks" ReturnType="Collection(SIAWebLinksModel.MyTopWebLinks_Result)">
           <Parameter Name="Pin" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="SearchFors" EntityType="SIAWebLinksModel.SearchFor" />
         </EntityContainer>
         <EntityType Name="WebCategories">
           <Key>
@@ -168,6 +179,15 @@
           <Property Type="String" Name="TopLink" Nullable="true" MaxLength="100" />
           <Property Type="String" Name="TopLinkPath" Nullable="false" MaxLength="200" />
         </ComplexType>
+        <EntityType Name="SearchFor">
+          <Key>
+            <PropertyRef Name="ActivitySearchID" />
+          </Key>
+          <Property Type="Int32" Name="ActivitySearchID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="SearchForID" Nullable="false" />
+          <Property Type="DateTime" Name="SearchDateTime" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -225,6 +245,16 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="SearchFors">
+            <EntityTypeMapping TypeName="SIAWebLinksModel.SearchFor">
+              <MappingFragment StoreEntitySet="Activity_SearchFor">
+                <ScalarProperty Name="SearchDateTime" ColumnName="SearchDateTime" />
+                <ScalarProperty Name="SearchForID" ColumnName="SearchForID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="ActivitySearchID" ColumnName="ActivitySearchID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -261,6 +291,7 @@
           <ConnectorPoint PointX="4.5" PointY="1.8123413085937499" />
           <ConnectorPoint PointX="5.25" PointY="1.8123413085937499" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="SIAWebLinksModel.SearchFor" Width="2.375" PointX="0.75" PointY="4.75" Height="1.9172982118527102" />
       </Diagram>
     </Diagrams>
   </Designer>

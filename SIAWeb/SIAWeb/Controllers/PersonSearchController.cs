@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using SIAWeb.Common;
 using System.Threading;
+using SIAWebLinksBusinessLayer;
 
 namespace SIAWeb.Controllers
 {
     public class PersonSearchController : Controller
     {
+        WebLinksEntities db = new WebLinksEntities();
 
         public ActionResult Index(string search_string)
         {
@@ -37,7 +39,8 @@ namespace SIAWeb.Controllers
 
         public ActionResult SelectPerson(int id)
         {
-
+            //Update the searched for table
+            updateSearchFor(id);
 
             //Load all work history information into ViewData object to use on partial page
             PersonWorkProfileGet myWorkProfile = new PersonWorkProfileGet();
@@ -71,6 +74,26 @@ namespace SIAWeb.Controllers
             }
         }
 
+        private void updateSearchFor(int searchFor)
+        {
+            //Update the serachedFor table if the user selects a user from the table
+            //that is not him/herself
+            SearchFor track = new SearchFor();
+            string appID = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
+            
+            if (appID != null && Int32.Parse(appID) >= 3)
+            {
+                if (Int32.Parse(appID) != searchFor)
+                {
+                    track.AppEntityID = Int32.Parse(appID);
+                    track.SearchForID = searchFor;
+                    track.SearchDateTime = DateTime.Parse(DateTime.Now.ToString());
 
+                    db.SearchFors.AddObject(track);
+                    db.SaveChanges();
+                }
+            }
+
+        }
     }
 }

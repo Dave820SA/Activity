@@ -9,16 +9,22 @@
                 
                 <div class="row">
                     <div class="col-sm-6 col-md-3">
-                        <img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />
+                        @{
+                            var url = "http://wppswebprod/FileShare/Images/100726.png";
+                                
+                            <img src="@Url.Content(url)" class=" img-rounded img-responsive" alt=""/>
+                        }
+                        @*<img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />*@
                     </div>
                     <div class="col-sm-6 col-md-9">
                         <h4 class="media-heading">
                             Jim Glass <small>SAPD</small></h4>
                         <h5>
                             SIA<a href="#"><small> Manager</small></a></h5>
-                        <hr style="margin: 8px auto">
+                        <hr style="margin: 8px auto"/>
                         <p>
-                            <i class="fa fa-envelope-o"></i>&nbsp;&nbsp; james.glass@sanantonio.gov
+                            
+                            <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:james.glass@sanantonio.gov'>james.glass@sanantonio.gov</a>
                             <br />
                             <i class="fa fa-globe"></i><a href="@Url.Action("Index", "Home")">
                                 SAPD Web</a>
@@ -42,7 +48,12 @@
             <div class="well well-sm">
                 <div class="row">
                     <div class="col-sm-6 col-md-3">
-                        <img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />
+                        @{
+                            var url1 = "http://wppswebprod/FileShare/Images/106919.png";
+                                
+                            <img src="@Url.Content(url1)" class=" img-rounded img-responsive" alt=""/>
+                        }
+                        @*<img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />*@
                     </div>
                     <div class="col-sm-6 col-md-9">
                         <h4 class="media-heading">
@@ -51,7 +62,7 @@
                             SIA <a href="#"><small>Senior Crime Intelligence Analyst</small> </a></h5>
                         <hr style="margin: 8px auto">
                         <p>
-                            <i class="fa fa-envelope-o"></i>&nbsp;&nbsp; john.riojas@sanantonio.gov
+                            <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:John.Riojas@sanantonio.gov'>John.Riojas@sanantonio.gov</a>
                             <br />
                             <i class="fa fa-globe"></i><a href="@Url.Action("Index", "Home")">
                                 SAPD Web</a>
@@ -70,6 +81,48 @@
                 </div>
             </div>
         </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6">
+                <div class="well well-sm">
+                    <div class="row">
+                        <div class="col-sm-6 col-md-3">
+                            @{
+                                var url2 = "http://wppswebprod/FileShare/Images/109889.png";
+                                
+                                <img src="@Url.Content(url2)" class=" img-rounded img-responsive" alt=""/>
+                            }
+                            @*<img src="~/Images/Male.png" alt="" class="img-rounded img-responsive" />*@
+                        </div>
+                        <div class="col-sm-6 col-md-9">
+                            <h4 class="media-heading">
+                                Ofc. Douglas Davidson #1341 <small>SAPD</small></h4>
+                            <h5>
+                                @*<a href="http://localhost:54471/Office/Index/297">Chief's Tech Team (CTT)</a></h5>*@
+                                @*<a href="http://pdapps-web-d02/SIAWEB/Office/Index/297">Chief's Tech Team (CTT)</a>*@
+
+                                <a href="@Url.Action("Index", "Office", new { id = 297 }, null)" >Chief's Tech Team (CTT)</a>
+                                                @*<span class="glyphicon glyphicon-plus-sign"></span>*@
+                            </h5>
+                            <hr style="margin: 8px auto">
+                            <p>
+                                <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:douglas.davidson@sanantonio.gov'>douglas.davidson@sanantonio.gov</a>
+                                <br />
+                                <i class="fa fa-globe"></i><a href="http://pdapps-web-d02/sapdweb"> SAPD Web</a>
+                                <br />
+                                <abbr title="Office Phone">
+                                    <i class="fa fa-phone"></i>
+                                </abbr>
+                                &nbsp;210-207-8693
+                                <br />
+                                <abbr title="Mobile Phone">
+                                    <i class="fa fa-phone"></i>
+                                </abbr>
+                                &nbsp;210-422-7296
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
     </div>
     <div class="row">
