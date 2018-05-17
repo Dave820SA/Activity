@@ -39,17 +39,27 @@ namespace SIAWeb.Controllers
 
         public ActionResult SelectPerson(int id)
         {
+            int searchId;
+            if (id != 0)
+            {
+                searchId = id;
+                updateSearchFor(searchId);
+            }
+            else
+            {
+                searchId = Convert.ToInt32(System.Web.HttpContext.Current.Session["AppEntityID"]);
+            }
             //Update the searched for table
-            updateSearchFor(id);
+            
 
             //Load all work history information into ViewData object to use on partial page
             PersonWorkProfileGet myWorkProfile = new PersonWorkProfileGet();
-            ViewData["WorkProfile"] = myWorkProfile.GetPersonInfo(id);
+            ViewData["WorkProfile"] = myWorkProfile.GetPersonInfo(searchId);
 
             //Load basic serached for Person info and return it to the view for 
             //use in the PersonBasic partial view
             PersonBasicGet myPersonBasic = new PersonBasicGet();
-            return View(myPersonBasic.GetPersonBasicInfo(id));
+            return View(myPersonBasic.GetPersonBasicInfo(searchId));
         }
 
 

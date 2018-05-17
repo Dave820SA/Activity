@@ -20,9 +20,7 @@ using System.Xml.Serialization;
 #region EDM Relationship Metadata
 
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_Person_Person_PersonType", "Person_PersonType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.PersonType), "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.Person), true)]
-[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_User_Person_Person", "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.User), true)]
-[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_PhoneNumberType", "Person_PhoneNumberType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.PhoneNumberType), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_UserRDHistory_User_DayOff", "User_DayOff", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.DayOff), "User_UserRDHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.RDHistory), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_UserJobTitleHistory_User_JobTitle", "User_JobTitle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.JobTitle), "User_UserJobTitleHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.JobTitleHistory), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_UserShiftHistory_User_Shift", "User_Shift", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Shift), "User_UserShiftHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.ShiftHistory), true)]
@@ -51,6 +49,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_SIA_WebSiteUser_SIA_WebLinks", "SIA_WebLinks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.WebLinks), "WebSiteUser", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.WebSiteUser), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "UserAppFeatureAccess", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "AppFeatureAccess", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.AppFeatureAccess), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "WebLinksAppFeatureAccess", "WebLinks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.WebLinks), "AppFeatureAccess", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.AppFeatureAccess), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.PhoneNumberType), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
 
 #endregion
 
@@ -117,22 +117,6 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<Person> _People;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<PersonPhone> PersonPhones
-        {
-            get
-            {
-                if ((_PersonPhones == null))
-                {
-                    _PersonPhones = base.CreateObjectSet<PersonPhone>("PersonPhones");
-                }
-                return _PersonPhones;
-            }
-        }
-        private ObjectSet<PersonPhone> _PersonPhones;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -629,6 +613,22 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<WebLinks> _WebLinks;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PersonPhone> PersonPhones
+        {
+            get
+            {
+                if ((_PersonPhones == null))
+                {
+                    _PersonPhones = base.CreateObjectSet<PersonPhone>("PersonPhones");
+                }
+                return _PersonPhones;
+            }
+        }
+        private ObjectSet<PersonPhone> _PersonPhones;
 
         #endregion
 
@@ -640,14 +640,6 @@ namespace PersonnelBusinessLayer
         public void AddToPeople(Person person)
         {
             base.AddObject("People", person);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the PersonPhones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPersonPhones(PersonPhone personPhone)
-        {
-            base.AddObject("PersonPhones", personPhone);
         }
     
         /// <summary>
@@ -896,6 +888,14 @@ namespace PersonnelBusinessLayer
         public void AddToWebLinks(WebLinks webLinks)
         {
             base.AddObject("WebLinks", webLinks);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PersonPhones EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPersonPhones(PersonPhone personPhone)
+        {
+            base.AddObject("PersonPhones", personPhone);
         }
 
         #endregion
@@ -4900,28 +4900,6 @@ namespace PersonnelBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person_PersonPhone")]
-        public EntityCollection<PersonPhone> Person_PersonPhone
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonPhone>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person_PersonPhone");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonPhone>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person_PersonPhone", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_Person_Person", "User_User")]
         public User User_User
         {
@@ -5019,6 +4997,28 @@ namespace PersonnelBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person_PersonPhone")]
+        public EntityCollection<PersonPhone> Person_PersonPhone
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<PersonPhone>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person_PersonPhone");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<PersonPhone>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person_PersonPhone", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -5037,13 +5037,15 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// Create a new PersonPhone object.
         /// </summary>
+        /// <param name="phoneID">Initial value of the PhoneID property.</param>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
         /// <param name="phoneNumber">Initial value of the PhoneNumber property.</param>
         /// <param name="phoneNumberTypeID">Initial value of the PhoneNumberTypeID property.</param>
         /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static PersonPhone CreatePersonPhone(global::System.Int32 appEntityID, global::System.String phoneNumber, global::System.Int32 phoneNumberTypeID, global::System.DateTime modifiedDate)
+        public static PersonPhone CreatePersonPhone(global::System.Int32 phoneID, global::System.Int32 appEntityID, global::System.String phoneNumber, global::System.Int32 phoneNumberTypeID, global::System.DateTime modifiedDate)
         {
             PersonPhone personPhone = new PersonPhone();
+            personPhone.PhoneID = phoneID;
             personPhone.AppEntityID = appEntityID;
             personPhone.PhoneNumber = phoneNumber;
             personPhone.PhoneNumberTypeID = phoneNumberTypeID;
@@ -5060,6 +5062,33 @@ namespace PersonnelBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.Int32 PhoneID
+        {
+            get
+            {
+                return _PhoneID;
+            }
+            set
+            {
+                if (_PhoneID != value)
+                {
+                    OnPhoneIDChanging(value);
+                    ReportPropertyChanging("PhoneID");
+                    _PhoneID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("PhoneID");
+                    OnPhoneIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _PhoneID;
+        partial void OnPhoneIDChanging(global::System.Int32 value);
+        partial void OnPhoneIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 AppEntityID
         {
             get
@@ -5068,14 +5097,11 @@ namespace PersonnelBusinessLayer
             }
             set
             {
-                if (_AppEntityID != value)
-                {
-                    OnAppEntityIDChanging(value);
-                    ReportPropertyChanging("AppEntityID");
-                    _AppEntityID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("AppEntityID");
-                    OnAppEntityIDChanged();
-                }
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
             }
         }
         private global::System.Int32 _AppEntityID;
@@ -5085,7 +5111,7 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.String PhoneNumber
         {
@@ -5095,14 +5121,11 @@ namespace PersonnelBusinessLayer
             }
             set
             {
-                if (_PhoneNumber != value)
-                {
-                    OnPhoneNumberChanging(value);
-                    ReportPropertyChanging("PhoneNumber");
-                    _PhoneNumber = StructuralObject.SetValidValue(value, false);
-                    ReportPropertyChanged("PhoneNumber");
-                    OnPhoneNumberChanged();
-                }
+                OnPhoneNumberChanging(value);
+                ReportPropertyChanging("PhoneNumber");
+                _PhoneNumber = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("PhoneNumber");
+                OnPhoneNumberChanged();
             }
         }
         private global::System.String _PhoneNumber;
@@ -5112,7 +5135,7 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.Int32 PhoneNumberTypeID
         {
@@ -5122,14 +5145,11 @@ namespace PersonnelBusinessLayer
             }
             set
             {
-                if (_PhoneNumberTypeID != value)
-                {
-                    OnPhoneNumberTypeIDChanging(value);
-                    ReportPropertyChanging("PhoneNumberTypeID");
-                    _PhoneNumberTypeID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("PhoneNumberTypeID");
-                    OnPhoneNumberTypeIDChanged();
-                }
+                OnPhoneNumberTypeIDChanging(value);
+                ReportPropertyChanging("PhoneNumberTypeID");
+                _PhoneNumberTypeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PhoneNumberTypeID");
+                OnPhoneNumberTypeIDChanged();
             }
         }
         private global::System.Int32 _PhoneNumberTypeID;
@@ -5139,7 +5159,7 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
         public global::System.DateTime ModifiedDate
         {
@@ -5149,14 +5169,11 @@ namespace PersonnelBusinessLayer
             }
             set
             {
-                if (_ModifiedDate != value)
-                {
-                    OnModifiedDateChanging(value);
-                    ReportPropertyChanging("ModifiedDate");
-                    _ModifiedDate = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("ModifiedDate");
-                    OnModifiedDateChanged();
-                }
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
             }
         }
         private global::System.DateTime _ModifiedDate;
@@ -5174,16 +5191,16 @@ namespace PersonnelBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person_Person")]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person")]
         public Person Person_Person
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person_Person").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person_Person").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person").Value = value;
             }
         }
         /// <summary>
@@ -5195,13 +5212,13 @@ namespace PersonnelBusinessLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person_Person");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Person>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person_Person", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Person>("SAPDActivityModel.FK_Person_PersonPhone_Person_Person", "Person", value);
                 }
             }
         }
@@ -5212,16 +5229,16 @@ namespace PersonnelBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_PhoneNumberType", "Person_PhoneNumberType")]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType")]
         public PhoneNumberType Person_PhoneNumberType
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PhoneNumberType>("SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType", "Person_PhoneNumberType").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PhoneNumberType>("SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PhoneNumberType>("SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType", "Person_PhoneNumberType").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PhoneNumberType>("SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType").Value = value;
             }
         }
         /// <summary>
@@ -5233,13 +5250,13 @@ namespace PersonnelBusinessLayer
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PhoneNumberType>("SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType", "Person_PhoneNumberType");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<PhoneNumberType>("SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PhoneNumberType>("SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType", "Person_PhoneNumberType", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<PhoneNumberType>("SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType", value);
                 }
             }
         }

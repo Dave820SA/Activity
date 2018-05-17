@@ -201,6 +201,10 @@
     <Content Include="Content\jquery.bootgrid.min.css" />
     <Content Include="Images\ajax-loader.gif" />
     <Content Include="Images\ajax-loading.gif" />
+    <Content Include="Images\loading-bar-1.gif" />
+    <Content Include="Images\loading.gif" />
+    <Content Include="Images\loading2.gif" />
+    <Content Include="Images\loading_old.gif" />
     <Content Include="Images\OfficerBadgeIcon.png" />
     <Content Include="Images\SAPD-Patch-web-S4.png" />
     <Content Include="Images\SAPD-Patch.png" />

@@ -24,7 +24,7 @@
                         <hr style="margin: 8px auto"/>
                         <p>
                             
-                            <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:james.glass@sanantonio.gov'>james.glass@sanantonio.gov</a>
+                            <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:james.glass@sanantonio.gov' title="email">james.glass@sanantonio.gov</a>
                             <br />
                             <i class="fa fa-globe"></i><a href="@Url.Action("Index", "Home")">
                                 SAPD Web</a>
@@ -60,9 +60,9 @@
                             John Riojas <small>SAPD</small></h4>
                         <h5>
                             SIA <a href="#"><small>Senior Crime Intelligence Analyst</small> </a></h5>
-                        <hr style="margin: 8px auto">
+                        <hr style="margin: 8px auto"/>
                         <p>
-                            <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:John.Riojas@sanantonio.gov'>John.Riojas@sanantonio.gov</a>
+                            <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:John.Riojas@sanantonio.gov' title="email">John.Riojas@sanantonio.gov</a>
                             <br />
                             <i class="fa fa-globe"></i><a href="@Url.Action("Index", "Home")">
                                 SAPD Web</a>
@@ -103,9 +103,9 @@
                                 <a href="@Url.Action("Index", "Office", new { id = 297 }, null)" >Chief's Tech Team (CTT)</a>
                                                 @*<span class="glyphicon glyphicon-plus-sign"></span>*@
                             </h5>
-                            <hr style="margin: 8px auto">
+                            <hr style="margin: 8px auto"/>
                             <p>
-                                <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:douglas.davidson@sanantonio.gov'>douglas.davidson@sanantonio.gov</a>
+                                <i class="fa fa-envelope-o"></i>&nbsp;<a href='mailto:douglas.davidson@sanantonio.gov'title="email">douglas.davidson@sanantonio.gov</a>
                                 <br />
                                 <i class="fa fa-globe"></i><a href="http://pdapps-web-d02/sapdweb"> SAPD Web</a>
                                 <br />
@@ -128,3 +128,24 @@
     <div class="row">
     </div>
 </div>
+
+@*<div id="loading">
+    <div id="loadingcontent">
+        <p id="loadingspinner">
+            <img id="myDiv" src="@Url.Content("~/Images/loading_old.gif")"  alt="Please wait..."/>
+        </p>
+    </div>
+</div>
+@section Scripts {
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('a[title!="email"]').click(function () {
+                $('#loading').fadeIn();
+            });
+        });
+    
+    </script>      
+    
+}*@

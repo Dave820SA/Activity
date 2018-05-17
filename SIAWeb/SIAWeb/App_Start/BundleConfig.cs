@@ -8,8 +8,10 @@ namespace SIAWeb
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //            "~/Scripts/jquery-{version}.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/jquery", "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js").Include("~/Scripts/jquery-{version}.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/googlejs", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js").Include(
                      "~/Scripts/jquery-{version}.js"));
@@ -28,6 +30,9 @@ namespace SIAWeb
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
+
+            BundleTable.EnableOptimizations = true;
+            bundles.UseCdn = true;
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrapjs").Include(
                        "~/Scripts/bootstrap.js"));

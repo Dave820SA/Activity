@@ -33,23 +33,23 @@
                             border-width: thin; border-color: #C0C0C0; margin-top: 1px">
                             <tbody>
                                 <tr>
-                                    <td width="150px">
+                                    <td width="19%">
                                         Duty Status:
                                     </td>
-                                    <td style="color: #5b9bd1; font-size: 1.2em;">
+                                    <td style="color: #5b9bd1; font-size: 1.2em; width:80%">
                                         @Html.DisplayFor(modelItem => Model.Status)
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
                                         @*<a href="@Url.Action("Create", "Activity", new { id = pInfo.OfficeID }, null)" class="btn btn-default btn-sm"> Office: <span class="glyphicon glyphicon-plus-sign"></span></a>*@
-                                        Current Assignment:
+                                        Assignment:
                                     </td>
                                     <td style="color: #5b9bd1; font-size: 1.2em;">
                                         @{
                                             string office = string.Format("{0} - {1}", Model.Office, Model.OfficeCode);
                                                
-                                            <a href="@Url.Action("Index", "Office", new { id = Model.OfficeID }, null)" >@Html.Raw(office.ToUpper())
+                                            <a href="@Url.Action("Index", "Office", new { id = Model.OfficeID }, null)" title="office" >@Html.Raw(office.ToUpper())
                                                 @*<span class="glyphicon glyphicon-plus-sign"></span>*@</a>
                         
                                         }
@@ -295,10 +295,8 @@
                                                     
                                              string officeHist = string.Format("{0} - {1}", oHist.Office, oHist.OfficeCode);
                                                
-                                                <a href="@Url.Action("Index", "Office", new { id = oHist.OfficeID }, null)" >@Html.Raw(officeHist.ToUpper())
-                                                </a>  
-
-
+                                                <a href="@Url.Action("Index", "Office", new { id = oHist.OfficeID }, null)" title="office" >@Html.Raw(officeHist.ToUpper()) 
+                                                </a> 
                                             }
                                         </td>
                                         <td style="color: #5b9bd1; font-size: .9em;">
@@ -388,7 +386,7 @@
                         </table>
                     </div>
 
-                     @* _______________________________________Awards History tab____________________________________________________*@
+                     @* _______________________________________Equipment History tab____________________________________________________*@
                     <div role="tabpanel" class="tab-pane" id="equip">
                         <table class="table table-striped table-bordered table-condensed" style="border-top-style: solid;
                             border-width: thin; border-color: #C0C0C0; margin-top: 1px">
@@ -435,11 +433,29 @@
                         </table>
                     </div>
 
-
-
-
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div id="loading">
+    <div id="loadingcontent">
+        <p id="loadingspinner">
+            <img id="myDiv" src="@Url.Content("~/Images/loading_old.gif")"  alt="Please wait..."/>
+        </p>
+    </div>
+</div>
+@section Scripts {
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('[title="office"]').click(function () {
+                $('#loading').fadeIn();
+            });
+
+        });
+    
+    </script>      
+    
+}
