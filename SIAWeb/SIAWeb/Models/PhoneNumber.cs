@@ -7,6 +7,7 @@ namespace SIAWeb.Models
 {
     public class PhoneNumber
     {
+        public int PhoneTypeID { get; set; }
         public string PhoneType { get; set; }
         public string PhoneNbr { get; set; }
     }

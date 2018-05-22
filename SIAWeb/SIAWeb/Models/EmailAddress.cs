@@ -7,6 +7,7 @@ namespace SIAWeb.Models
 {
     public class EmailAddress
     {
+        public int EmailAddressTypeID { get; set; }
         public string AddressType { get; set; }
         public string userEmailAddress { get; set; }
     }
