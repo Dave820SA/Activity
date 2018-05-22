@@ -51,6 +51,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "WebLinksAppFeatureAccess", "WebLinks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.WebLinks), "AppFeatureAccess", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.AppFeatureAccess), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.PhoneNumberType), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupTitle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.GroupTitle), "User_GroupMember", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.GroupMember), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_GroupMember_User_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "User_GroupMember", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.GroupMember), true)]
 
 #endregion
 
@@ -629,6 +631,38 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<PersonPhone> _PersonPhones;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GroupMember> GroupMembers
+        {
+            get
+            {
+                if ((_GroupMembers == null))
+                {
+                    _GroupMembers = base.CreateObjectSet<GroupMember>("GroupMembers");
+                }
+                return _GroupMembers;
+            }
+        }
+        private ObjectSet<GroupMember> _GroupMembers;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<GroupTitle> GroupTitles
+        {
+            get
+            {
+                if ((_GroupTitles == null))
+                {
+                    _GroupTitles = base.CreateObjectSet<GroupTitle>("GroupTitles");
+                }
+                return _GroupTitles;
+            }
+        }
+        private ObjectSet<GroupTitle> _GroupTitles;
 
         #endregion
 
@@ -896,6 +930,22 @@ namespace PersonnelBusinessLayer
         public void AddToPersonPhones(PersonPhone personPhone)
         {
             base.AddObject("PersonPhones", personPhone);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GroupMembers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGroupMembers(GroupMember groupMember)
+        {
+            base.AddObject("GroupMembers", groupMember);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the GroupTitles EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGroupTitles(GroupTitle groupTitle)
+        {
+            base.AddObject("GroupTitles", groupTitle);
         }
 
         #endregion
@@ -2441,6 +2491,506 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RDHistory>("SAPDActivityModel.FK_User_UserRDHistory_User_DayOff", "User_UserRDHistory", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="GroupMember")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GroupMember : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GroupMember object.
+        /// </summary>
+        /// <param name="groupMemberID">Initial value of the GroupMemberID property.</param>
+        /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
+        /// <param name="groupTitleID">Initial value of the GroupTitleID property.</param>
+        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
+        /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
+        public static GroupMember CreateGroupMember(global::System.Int32 groupMemberID, global::System.Int32 appEntityID, global::System.Int32 groupTitleID, global::System.DateTime modifiedDate, global::System.Boolean visibleFlag)
+        {
+            GroupMember groupMember = new GroupMember();
+            groupMember.GroupMemberID = groupMemberID;
+            groupMember.AppEntityID = appEntityID;
+            groupMember.GroupTitleID = groupTitleID;
+            groupMember.ModifiedDate = modifiedDate;
+            groupMember.VisibleFlag = visibleFlag;
+            return groupMember;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GroupMemberID
+        {
+            get
+            {
+                return _GroupMemberID;
+            }
+            set
+            {
+                if (_GroupMemberID != value)
+                {
+                    OnGroupMemberIDChanging(value);
+                    ReportPropertyChanging("GroupMemberID");
+                    _GroupMemberID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("GroupMemberID");
+                    OnGroupMemberIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _GroupMemberID;
+        partial void OnGroupMemberIDChanging(global::System.Int32 value);
+        partial void OnGroupMemberIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AppEntityID
+        {
+            get
+            {
+                return _AppEntityID;
+            }
+            set
+            {
+                OnAppEntityIDChanging(value);
+                ReportPropertyChanging("AppEntityID");
+                _AppEntityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppEntityID");
+                OnAppEntityIDChanged();
+            }
+        }
+        private global::System.Int32 _AppEntityID;
+        partial void OnAppEntityIDChanging(global::System.Int32 value);
+        partial void OnAppEntityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GroupTitleID
+        {
+            get
+            {
+                return _GroupTitleID;
+            }
+            set
+            {
+                OnGroupTitleIDChanging(value);
+                ReportPropertyChanging("GroupTitleID");
+                _GroupTitleID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("GroupTitleID");
+                OnGroupTitleIDChanged();
+            }
+        }
+        private global::System.Int32 _GroupTitleID;
+        partial void OnGroupTitleIDChanging(global::System.Int32 value);
+        partial void OnGroupTitleIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Instructions
+        {
+            get
+            {
+                return _Instructions;
+            }
+            set
+            {
+                OnInstructionsChanging(value);
+                ReportPropertyChanging("Instructions");
+                _Instructions = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Instructions");
+                OnInstructionsChanged();
+            }
+        }
+        private global::System.String _Instructions;
+        partial void OnInstructionsChanging(global::System.String value);
+        partial void OnInstructionsChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private global::System.DateTime _ModifiedDate;
+        partial void OnModifiedDateChanging(global::System.DateTime value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String MemberInfo
+        {
+            get
+            {
+                return _MemberInfo;
+            }
+            set
+            {
+                OnMemberInfoChanging(value);
+                ReportPropertyChanging("MemberInfo");
+                _MemberInfo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("MemberInfo");
+                OnMemberInfoChanged();
+            }
+        }
+        private global::System.String _MemberInfo;
+        partial void OnMemberInfoChanging(global::System.String value);
+        partial void OnMemberInfoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private global::System.Boolean _VisibleFlag;
+        partial void OnVisibleFlagChanging(global::System.Boolean value);
+        partial void OnVisibleFlagChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupTitle")]
+        public GroupTitle User_GroupTitle
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GroupTitle> User_GroupTitleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_GroupMember_User_User", "User")]
+        public User User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.FK_User_GroupMember_User_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.FK_User_GroupMember_User_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> User_UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("SAPDActivityModel.FK_User_GroupMember_User_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("SAPDActivityModel.FK_User_GroupMember_User_User", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SAPDActivityModel", Name="GroupTitle")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class GroupTitle : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new GroupTitle object.
+        /// </summary>
+        /// <param name="groupTitleID">Initial value of the GroupTitleID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="nameCode">Initial value of the NameCode property.</param>
+        /// <param name="gtRanking">Initial value of the gtRanking property.</param>
+        /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
+        public static GroupTitle CreateGroupTitle(global::System.Int32 groupTitleID, global::System.String name, global::System.String nameCode, global::System.Int32 gtRanking, global::System.Boolean visibleFlag)
+        {
+            GroupTitle groupTitle = new GroupTitle();
+            groupTitle.GroupTitleID = groupTitleID;
+            groupTitle.Name = name;
+            groupTitle.NameCode = nameCode;
+            groupTitle.gtRanking = gtRanking;
+            groupTitle.VisibleFlag = visibleFlag;
+            return groupTitle;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 GroupTitleID
+        {
+            get
+            {
+                return _GroupTitleID;
+            }
+            set
+            {
+                if (_GroupTitleID != value)
+                {
+                    OnGroupTitleIDChanging(value);
+                    ReportPropertyChanging("GroupTitleID");
+                    _GroupTitleID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("GroupTitleID");
+                    OnGroupTitleIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _GroupTitleID;
+        partial void OnGroupTitleIDChanging(global::System.Int32 value);
+        partial void OnGroupTitleIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String NameCode
+        {
+            get
+            {
+                return _NameCode;
+            }
+            set
+            {
+                OnNameCodeChanging(value);
+                ReportPropertyChanging("NameCode");
+                _NameCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("NameCode");
+                OnNameCodeChanged();
+            }
+        }
+        private global::System.String _NameCode;
+        partial void OnNameCodeChanging(global::System.String value);
+        partial void OnNameCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 gtRanking
+        {
+            get
+            {
+                return _gtRanking;
+            }
+            set
+            {
+                OngtRankingChanging(value);
+                ReportPropertyChanging("gtRanking");
+                _gtRanking = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("gtRanking");
+                OngtRankingChanged();
+            }
+        }
+        private global::System.Int32 _gtRanking;
+        partial void OngtRankingChanging(global::System.Int32 value);
+        partial void OngtRankingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private global::System.Boolean _VisibleFlag;
+        partial void OnVisibleFlagChanging(global::System.Boolean value);
+        partial void OnVisibleFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String GroupInfo
+        {
+            get
+            {
+                return _GroupInfo;
+            }
+            set
+            {
+                OnGroupInfoChanging(value);
+                ReportPropertyChanging("GroupInfo");
+                _GroupInfo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("GroupInfo");
+                OnGroupInfoChanged();
+            }
+        }
+        private global::System.String _GroupInfo;
+        partial void OnGroupInfoChanging(global::System.String value);
+        partial void OnGroupInfoChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupMember")]
+        public EntityCollection<GroupMember> User_GroupMember
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupMember");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupMember", value);
                 }
             }
         }
@@ -7915,6 +8465,28 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AppFeatureAccess>("SAPDActivityModel.UserAppFeatureAccess", "AppFeatureAccess", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_GroupMember_User_User", "User_GroupMember")]
+        public EntityCollection<GroupMember> User_GroupMember
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_User", "User_GroupMember");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_User", "User_GroupMember", value);
                 }
             }
         }

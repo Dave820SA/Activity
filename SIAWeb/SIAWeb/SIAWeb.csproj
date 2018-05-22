@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\BadgeHistory.cs" />
+    <Compile Include="Common\GetGroupMembers.cs" />
     <Compile Include="Common\GetOffice.cs" />
     <Compile Include="Common\GetPeople.cs" />
     <Compile Include="Common\GetPerson.cs" />
@@ -169,6 +170,7 @@
     <Compile Include="Models\GateQuestions.cs" />
     <Compile Include="Models\GateSModel.cs" />
     <Compile Include="Models\GateStatus.cs" />
+    <Compile Include="Models\GroupMembers.cs" />
     <Compile Include="Models\OfficeInfo.cs" />
     <Compile Include="Models\PersonBasic.cs" />
     <Compile Include="Models\PersonWorkProfile.cs" />
@@ -325,7 +327,7 @@
     <None Include="bootstrap\css\fonts\glyphicons-halflings-regular.ttf" />
     <None Include="bootstrap\css\fonts\glyphicons-halflings-regular.woff" />
     <None Include="bootstrap\css\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Contact\Index1.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\SAPDWeb.pubxml" />
     <None Include="Properties\PublishProfiles\SIAWeb.pubxml" />
@@ -351,7 +353,6 @@
     <None Include="Scripts\jquery-1.11.1.min.map" />
     <Content Include="Views\PersonSearch\Index.cshtml" />
     <Content Include="Views\Shared\_Alternate2.cshtml" />
-    <Content Include="Views\Contact\_ViewStart.cshtml" />
     <Content Include="Views\PersonSearch\_ViewStart.cshtml" />
     <Content Include="Views\PersonSearch\SelectedPerson.cshtml" />
     <Content Include="Views\Office\Index.cshtml" />
@@ -361,6 +362,8 @@
     <Content Include="Views\Shared\_Alternate3.cshtml" />
     <Content Include="Views\Gate\Index.cshtml" />
     <Content Include="Views\Shared\_GateQ.cshtml" />
+    <Content Include="Views\Shared\_MemberContact.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OfficeBusinessLayer\OfficeBusinessLayer.csproj">

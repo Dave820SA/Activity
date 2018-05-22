@@ -1,16 +1,22 @@
 ﻿using System.Web.Mvc;
+using SIAWebLinksBusinessLayer;
+using SIAWeb.Common;
 
 namespace SIAWeb.Controllers
 {
     public class ContactController : Controller
     {
-        //
-        // GET: /Contact/
+       
 
         public ActionResult Index()
         {
-            return View();
+            GetGroupMembers myGroupMembers = new GetGroupMembers();
+
+            return View(myGroupMembers.GetGroupMemberInfo(1));
+
         }
+
+       
 
     }
 }

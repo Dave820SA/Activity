@@ -1,0 +1,146 @@
+﻿
+@model SIAWeb.Models.GroupMembers
+
+<div class="col-xs-12 col-sm-6 col-md-6">
+    <div class="well well-sm" style="min-height:180px; min-height:180px">
+        <div class="row">
+            <div class="col-sm-6 col-md-3">
+                @{
+                    string sap = Model.SAP;
+
+                    string newSAP = sap.Substring(sap.Length - 6, 6);
+
+
+                    var picURL = "";
+
+                    string str = Model.PicURL;
+                    if (str != null && newSAP != "107056" && newSAP != "109889")
+                    {
+                        Char charRange1 = 'E';
+
+                        int stratIndex = str.IndexOf(charRange1);
+
+                        string substring = str.Substring(stratIndex);
+
+                        picURL = "http://wppswebprod/Booking/" + substring;
+
+                    }
+
+                    var url = "http://wppswebprod/FileShare/Images/" + newSAP + ".png";
+
+                    if (picURL.Length > 10)
+                    {
+                        url = picURL;
+                    }
+
+                    HttpWebResponse response = null;
+                    var request = (HttpWebRequest)WebRequest.Create(url);
+                    request.Method = "HEAD";
+
+                    try
+                    {
+                        response = (HttpWebResponse)request.GetResponse();
+                    }
+                    catch (WebException ex)
+                    {
+                        url = "~/Images/Male.png";
+                        /* A WebException will be thrown if the status of the response is not `200 OK` */
+                    }
+                    finally
+                    {
+                        // Don't forget to close your response.
+                        if (response != null)
+                        {
+                            response.Close();
+                        }
+                    }
+                    
+                    <img src="@Url.Content(url)" class="img-responsive" alt=""/>
+                }
+                
+                
+            </div>
+            <div class="col-sm-6 col-md-9">
+                <h5 class="media-heading">
+                    @{
+                        if (!String.IsNullOrEmpty(Model.Badge) && (Model.RankCode != "CIV" && Model.RankCode != "CS"))
+                        
+                        {
+                            string person = string.Format("{0}. {1} {2} #{3}",Model.RankCode, Model.First, Model.Last, Model.Badge);
+                                
+                        @Html.Raw(person.ToUpper())
+                                
+                                }
+                                else
+                                {
+                                    string person = string.Format("{0} {1}", Model.First, Model.Last);
+                                
+                        @Html.Raw(person.ToUpper())
+                                }               
+                    }
+                </h5>
+                <h6>
+                    @{
+                        string office = string.Format("{0} ({1})",Model.Office, Model.OfficeCode);
+                        <a href="@Url.Action("Index", "Office", new { id = Model.OfficeID }, null)"> @Html.Raw(office)</a>
+                                  
+                    }
+                </h6>
+                    
+                <hr style="margin: 8px auto" />
+                <p>
+                    @foreach (var email in Model.Emails)
+                    {
+                        System.Text.StringBuilder eSb = new System.Text.StringBuilder();
+                        eSb.Append("<i class=\"fa fa-envelope-o\"></i>");
+
+                        eSb.Append("</span>");
+                        eSb.Append("&nbsp;");
+                        var newemail = string.Format("<a href='mailto:{0}'>{0}</a>", @Html.DisplayFor(modelItem => email.userEmailAddress));
+                        eSb.Append(newemail);
+                       
+                        @Html.Raw(eSb)
+                     }
+                    <br />
+                    @{
+                        string status = string.Format("{0}", Model.WorkStatus);
+                    }
+                    @*<i class="fa fa-info-circle"></i><span style="color: #2A9FD6"> @Html.Raw(status)</span>*@
+                    <span style="font-weight: bold; color: #C0C0C0">DS</span><span style="color: #2A9FD6"> @Html.Raw(status)</span>
+
+                    <br />
+                    @{
+                        foreach (var phone in Model.PhoneNumbers)
+                        {
+                            string pType = string.Format("{0}", phone.PhoneType);
+                            string fone = string.Format("{0}", phone.PhoneNbr);
+                        <abbr title="@Html.Raw(pType)">
+                            <i class="fa fa-phone"></i>
+                        </abbr>
+                        @Html.Raw(fone)
+                        <br />
+                            }
+                    }
+
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('[title="office"]').click(function () {
+                $('#loading').fadeIn();
+            });
+
+        });
+    
+    </script>      
+    
+}
+
