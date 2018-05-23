@@ -1,11 +1,13 @@
 ﻿@model IEnumerable<SIAWeb.Models.GroupMembers>
 @{
-    //ViewBag.Title = "SIA Contact";
     Layout = "~/Views/Shared/_Alternate2.cshtml";
 }
-<div class="well well-sm">Small Well</div>
+
+    <div class="well well-sm">
+       <h5>@ViewBag.GroupName</h5></div>
+
 
 @foreach (var item in Model)
-{
-    @Html.Partial("_MemberContact",item )
+{  
+    @Html.Partial("_MemberContact", item)
 }

@@ -23,12 +23,12 @@ namespace SIAWeb.Common
                                 join o in gpm.Office_Office on u.OfficeID equals o.OfficeID
                                 join ws in gpm.WorkStatus on u.WorkStatusID equals ws.WorkStatusID
 
-                                where gm.GroupTitleID == groupID && ws.Ranking <= 9
+                                where gm.GroupTitleID == groupID && ws.Ranking <= 9 && gm.VisibleFlag == true
                                 select new GroupMembers
                                 {
                                     GroupMemberID = gm.GroupMemberID,
-                                    GroupName = gt.Name,
-                                    GroupInfo = gt.GroupInfo,
+                                    //GroupName = gt.Name,
+                                    //GroupInfo = gt.GroupInfo,
                                     MemberInfo = gm.MemberInfo,
                                     AppEntityID = p.AppEntityID,
                                     First = p.FirstName,

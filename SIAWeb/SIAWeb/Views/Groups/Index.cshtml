@@ -1,0 +1,178 @@
+﻿
+@model IEnumerable<PersonnelBusinessLayer.GroupTitle>
+
+@{
+    ViewBag.Title = "Person Search";
+    
+}
+
+<div class="row">
+    <div class="col-md-7">
+        <strong style="font-size: 1.7em; padding-left: 2px">Group Search by Name
+            </strong>
+    </div>
+    <div class="col-md-5">
+        @using (Html.BeginForm("Index", "PersonSearch", FormMethod.Get, new { encType = "multipart/form-data", id = "myform", name = "myform" }))
+        {
+            <div class="input-group">
+                @Html.TextBox("search_string", null, new { @class = "form-control" })
+                <div class="input-group-btn">
+                    <button class="btn btn-default" title="processing" type="submit" id="process" value="process">
+                         <i class="fa fa-search"></i>
+                        
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @{
+                
+                <table id="myTable" class="table table-condensed table-hover">
+                    <tr style="color:#2A9FD6">
+                        <th >
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        
+                        <th>
+                            @Html.DisplayNameFor(model => model.GroupInfo)
+                        </th>
+                        
+                        <th>
+                            @Html.DisplayNameFor(model => model.VisibleFlag)
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            
+                            <td>
+                                @Html.DisplayFor(modelItem => item.GroupInfo)
+                            </td>
+                           
+                            <td>
+                                @Html.DisplayFor(modelItem => item.VisibleFlag)
+                            </td>
+                            <td>
+                            <a href="@Url.Action("Edit", "Groups", new { id = item.GroupTitleID })" class="btn btn-info btn-xs"> Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
+                            <a href="@Url.Action("Details", "Groups", new { id = item.GroupTitleID })" class="btn btn-success btn-xs"> Details <i class="fa fa-list" aria-hidden="true"></i></a> |
+                            <a href="@Url.Action("Delete", "Groups", new { id = item.GroupTitleID })" class="btn btn-danger btn-xs"> Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                               
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </div>
+    </div>
+</div>
+
+<div id="loading">
+    <div id="loadingcontent">
+        <p id="loadingspinner">
+            <img id="myDiv" src="@Url.Content("~/Images/loading_old.gif")"  alt="Please wait..."/>
+        </p>
+    </div>
+</div>
+
+@section Scripts {
+    
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('[title="processing"]').click(function () {
+                $('#loading').fadeIn();
+            });
+
+            $('[title="SearchFor"]').click(function () {
+                $('#loading').fadeIn();
+            });
+        });
+
+        //  
+        //        $(function () {
+        //            $('[title="SearchFor"]').click(function () {
+        //                $("#loading").fadeIn();
+        //            });
+        //        });
+
+
+        $(function () {
+            $("input[type=text]").first().focus();
+        });
+    
+    </script>      
+    
+}
+ 
+
+
+
+
+@*@model IEnumerable<PersonnelBusinessLayer.GroupTitle>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GroupInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.gtRanking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisibleFlag)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NameCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GroupInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.gtRanking)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisibleFlag)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GroupTitleID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GroupTitleID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GroupTitleID })
+        </td>
+    </tr>
+}
+
+</table>
+*@

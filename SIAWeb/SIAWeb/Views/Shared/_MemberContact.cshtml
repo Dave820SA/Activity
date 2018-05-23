@@ -1,8 +1,8 @@
 ﻿
 @model SIAWeb.Models.GroupMembers
 
-<div class="col-xs-12 col-sm-6 col-md-6">
-    <div class="well well-sm" style="min-height:180px; min-height:180px">
+<div class="col-xs-12 col-sm-6 col-md-6" >
+    <div class="well well-sm" style="min-height:220px; min-height:220px">
         <div class="row">
             <div class="col-sm-6 col-md-3">
                 @{
@@ -120,10 +120,16 @@
                         @Html.Raw(fone)
                         <br />
                             }
-                    }
 
-                    
+                        
+                    }
                 </p>
+
+                    @{
+                        string memberInfo = Model.MemberInfo;  
+                        <div style="font-size: x-small; color: #2A9FD6"><span style="font-weight: bold; color: #C0C0C0">Info:</span>
+                        @Html.Raw(memberInfo)</div>
+                    }
             </div>
         </div>
     </div>
@@ -133,12 +139,12 @@
     
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $('[title="office"]').click(function () {
-                $('#loading').fadeIn();
-            });
+//        $(document).ready(function () {
+//            $('[title="office"]').click(function () {
+//                $('#loading').fadeIn();
+//            });
 
-        });
+//        });
     
     </script>      
     

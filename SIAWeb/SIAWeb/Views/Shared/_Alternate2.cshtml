@@ -37,6 +37,7 @@
         <ul class="dropdown-menu">
           <li><a href="~/PersonSearch/Index" title="email">Name/Badge/SAP</a></li>
           <li><a a href="@Url.Action("SelectPerson", "PersonSearch", new { id = 0 })" title="email">My Info</a></li>
+          <li><a href="~/Groups/Index" title="email">Create/Edit Groups</a></li>
            @*@{
               string myId = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
               //if (myId != null)
@@ -72,7 +73,7 @@
         <footer>
             <div class="content-wrapper" style="margin-top: 20px">
                 <div class="float-left">
-                    <p class="text-center">&copy; @DateTime.Now.Year - Activity App - Created by: D.Davidson#1341</p>
+                    <p class="text-center">&copy; @DateTime.Now.Year - Activity App - Created by: D.Davidson#2561</p>
                     
                 </div>
             </div>

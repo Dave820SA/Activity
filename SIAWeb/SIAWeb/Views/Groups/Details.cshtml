@@ -1,0 +1,50 @@
+﻿@model PersonnelBusinessLayer.GroupTitle
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>GroupTitle</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.NameCode)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.NameCode)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.GroupInfo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.GroupInfo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.gtRanking)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.gtRanking)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VisibleFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VisibleFlag)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.GroupTitleID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

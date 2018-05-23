@@ -1,0 +1,69 @@
+﻿@model PersonnelBusinessLayer.GroupTitle
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>GroupTitle</legend>
+
+        @Html.HiddenFor(model => model.GroupTitleID)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.NameCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.NameCode)
+            @Html.ValidationMessageFor(model => model.NameCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.GroupInfo)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.GroupInfo)
+            @Html.ValidationMessageFor(model => model.GroupInfo)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.gtRanking)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.gtRanking)
+            @Html.ValidationMessageFor(model => model.gtRanking)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.VisibleFlag)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.VisibleFlag)
+            @Html.ValidationMessageFor(model => model.VisibleFlag)
+        </div>
+
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@*@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}*@

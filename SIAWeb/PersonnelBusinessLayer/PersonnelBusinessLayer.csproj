@@ -32,6 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
@@ -48,6 +49,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PersonBasic.edmx</DependentUpon>
     </Compile>
+    <Compile Include="PersonnelMetadata.cs" />
     <Compile Include="PersonnelModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

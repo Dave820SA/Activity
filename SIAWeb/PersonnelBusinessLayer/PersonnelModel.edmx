@@ -372,7 +372,7 @@
           <Property Name="GroupMemberID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="GroupTitleID" Type="int" Nullable="false" />
-          <Property Name="MemberInfo" Type="varchar(max)" />
+          <Property Name="MemberInfo" Type="varchar" MaxLength="150" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
         </EntityType>
@@ -382,7 +382,7 @@
           </Key>
           <Property Name="GroupTitleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="NameCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="NameCode" Type="varchar" MaxLength="10" />
           <Property Name="GroupInfo" Type="varchar(max)" />
           <Property Name="gtRanking" Type="int" Nullable="false" />
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
@@ -1043,14 +1043,14 @@
             <End Role="Person_PersonPhone" EntitySet="PersonPhones" />
           </AssociationSet>
           <EntitySet Name="GroupMembers" EntityType="SAPDActivityModel.GroupMember" />
-          <EntitySet Name="GroupTitles" EntityType="SAPDActivityModel.GroupTitle" />
-          <AssociationSet Name="FK_User_GroupMember_User_GroupTitle" Association="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle">
-            <End Role="User_GroupTitle" EntitySet="GroupTitles" />
-            <End Role="User_GroupMember" EntitySet="GroupMembers" />
-          </AssociationSet>
           <AssociationSet Name="FK_User_GroupMember_User_User" Association="SAPDActivityModel.FK_User_GroupMember_User_User">
             <End Role="User" EntitySet="Users" />
             <End Role="User_GroupMember" EntitySet="GroupMembers" />
+          </AssociationSet>
+          <EntitySet Name="GroupTitles" EntityType="SAPDActivityModel.GroupTitle" />
+          <AssociationSet Name="FK_User_GroupMember_User_GroupTitle" Association="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle">
+            <End Role="User_GroupTitle" EntitySet="GroupTitles" />
+            <End Role="GroupMember" EntitySet="GroupMembers" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
@@ -1929,37 +1929,12 @@
           <Property Type="Int32" Name="GroupMemberID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="Int32" Name="GroupTitleID" Nullable="false" />
-          <Property Type="String" Name="Instructions" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
-          <NavigationProperty Name="User_GroupTitle" Relationship="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle" FromRole="User_GroupMember" ToRole="User_GroupTitle" />
-          <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_GroupMember_User_User" FromRole="User_GroupMember" ToRole="User" />
           <Property Type="String" Name="MemberInfo" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
           <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
+          <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_GroupMember_User_User" FromRole="User_GroupMember" ToRole="User" />
+          <NavigationProperty Name="User_GroupTitle" Relationship="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle" FromRole="GroupMember" ToRole="User_GroupTitle" />
         </EntityType>
-        <EntityType Name="GroupTitle">
-          <Key>
-            <PropertyRef Name="GroupTitleID" />
-          </Key>
-          <Property Type="Int32" Name="GroupTitleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="String" Name="NameCode" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="Int32" Name="gtRanking" Nullable="false" />
-          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
-          <NavigationProperty Name="User_GroupMember" Relationship="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle" FromRole="User_GroupTitle" ToRole="User_GroupMember" />
-          <Property Type="String" Name="GroupInfo" MaxLength="Max" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_User_GroupMember_User_GroupTitle">
-          <End Type="SAPDActivityModel.GroupTitle" Role="User_GroupTitle" Multiplicity="1" />
-          <End Type="SAPDActivityModel.GroupMember" Role="User_GroupMember" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="User_GroupTitle">
-              <PropertyRef Name="GroupTitleID" />
-            </Principal>
-            <Dependent Role="User_GroupMember">
-              <PropertyRef Name="GroupTitleID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_User_GroupMember_User_User">
           <End Type="SAPDActivityModel.User" Role="User" Multiplicity="1" />
           <End Type="SAPDActivityModel.GroupMember" Role="User_GroupMember" Multiplicity="*" />
@@ -1969,6 +1944,30 @@
             </Principal>
             <Dependent Role="User_GroupMember">
               <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="GroupTitle">
+          <Key>
+            <PropertyRef Name="GroupTitleID" />
+          </Key>
+          <Property Type="Int32" Name="GroupTitleID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NameCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="GroupInfo" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="gtRanking" Nullable="false" />
+          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
+          <NavigationProperty Name="User_GroupMember" Relationship="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle" FromRole="User_GroupTitle" ToRole="GroupMember" />
+        </EntityType>
+        <Association Name="FK_User_GroupMember_User_GroupTitle">
+          <End Type="SAPDActivityModel.GroupTitle" Role="User_GroupTitle" Multiplicity="1" />
+          <End Type="SAPDActivityModel.GroupMember" Role="GroupMember" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_GroupTitle">
+              <PropertyRef Name="GroupTitleID" />
+            </Principal>
+            <Dependent Role="GroupMember">
+              <PropertyRef Name="GroupTitleID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2443,8 +2442,8 @@
             <EntityTypeMapping TypeName="SAPDActivityModel.GroupMember">
               <MappingFragment StoreEntitySet="User_GroupMember">
                 <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
-                <ScalarProperty Name="MemberInfo" ColumnName="MemberInfo" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="MemberInfo" ColumnName="MemberInfo" />
                 <ScalarProperty Name="GroupTitleID" ColumnName="GroupTitleID" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="GroupMemberID" ColumnName="GroupMemberID" />
@@ -2454,9 +2453,9 @@
           <EntitySetMapping Name="GroupTitles">
             <EntityTypeMapping TypeName="SAPDActivityModel.GroupTitle">
               <MappingFragment StoreEntitySet="User_GroupTitle">
-                <ScalarProperty Name="GroupInfo" ColumnName="GroupInfo" />
                 <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
                 <ScalarProperty Name="gtRanking" ColumnName="gtRanking" />
+                <ScalarProperty Name="GroupInfo" ColumnName="GroupInfo" />
                 <ScalarProperty Name="NameCode" ColumnName="NameCode" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="GroupTitleID" ColumnName="GroupTitleID" />
@@ -2489,14 +2488,14 @@
         <EntityTypeShape EntityType="SAPDActivityModel.PhoneNumberType" Width="2.375" PointX="1.5" PointY="0.875" Height="1.7879850260416674" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.DayOff" Width="1.5" PointX="20" PointY="5.5" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.JobTitle" Width="1.5" PointX="10.375" PointY="12" Height="2.5571907552083317" IsExpanded="true" />
-        <EntityTypeShape EntityType="SAPDActivityModel.Shift" Width="1.5" PointX="22.375" PointY="13.5" Height="2.7603971900542561" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAPDActivityModel.Shift" Width="1.5" PointX="25.875" PointY="13.375" Height="2.7603971900542561" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.User" Width="2.375" PointX="12.5" PointY="0.5" Height="6.5955208333333326" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.BadgeHistory" Width="2" PointX="16.125" PointY="9.75" Height="2.5571907552083317" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.JobTitleHistory" Width="1.875" PointX="10.25" PointY="9" Height="2.7494921874999978" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.OfficeHistory" Width="2.375" PointX="6.25" PointY="6.625" Height="3.3263964843749996" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.RDHistory" Width="2.125" PointX="15.75" PointY="4.25" Height="2.7494921874999987" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.SectionHistory" Width="2.125" PointX="13.125" PointY="9.125" Height="2.9711719346046443" IsExpanded="true" />
-        <EntityTypeShape EntityType="SAPDActivityModel.ShiftHistory" Width="2" PointX="22" PointY="9.5" Height="2.9711719346046443" IsExpanded="true" />
+        <EntityTypeShape EntityType="SAPDActivityModel.ShiftHistory" Width="2" PointX="24.375" PointY="9.375" Height="2.9711719346046443" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.WorkStatusHistory" Width="2.75" PointX="15.375" PointY="0.625" Height="2.7494921874999996" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.WorksheetClassification" Width="2" PointX="10.125" PointY="6.375" Height="2.3648893229166674" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.WorkStatus" Width="2" PointX="19.375" PointY="0.5" Height="2.5571907552083246" IsExpanded="true" />
@@ -2521,8 +2520,8 @@
           <ConnectorPoint PointX="11.125" PointY="11.749492187499998" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_UserShiftHistory_User_Shift" ManuallyRouted="false">
-          <ConnectorPoint PointX="23.125" PointY="13.5" />
-          <ConnectorPoint PointX="23.125" PointY="12.471171934604644" />
+          <ConnectorPoint PointX="26.125" PointY="13.375" />
+          <ConnectorPoint PointX="26.125" PointY="12.346171934604644" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.FK_User_Clasification_User_Classification" ManuallyRouted="false">
           <ConnectorPoint PointX="12.125" PointY="7.4738240880445694" />
@@ -2533,44 +2532,40 @@
           <ConnectorPoint PointX="18.125" PointY="1.9426985950271289" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserBadgeHistory">
-          <ConnectorPoint PointX="12.78125" PointY="8.74054054836432" />
-          <ConnectorPoint PointX="12.78125" PointY="12.235585967302322" />
-          <ConnectorPoint PointX="12.901041666666666" PointY="12.235585967302322" />
-          <ConnectorPoint PointX="13.067708333333334" PointY="12.235585967302322" />
+          <ConnectorPoint PointX="12.732421875" PointY="8.74054054836432" />
+          <ConnectorPoint PointX="12.732421875" PointY="12.235585967302322" />
+          <ConnectorPoint PointX="12.876627604166666" PointY="12.235585967302322" />
+          <ConnectorPoint PointX="13.043294270833334" PointY="12.235585967302322" />
           <ConnectorPoint PointX="14.541666666666666" PointY="12.235585967302322" />
           <ConnectorPoint PointX="14.708333333333334" PointY="12.235585967302322" />
           <ConnectorPoint PointX="16.125" PointY="12.235585967302322" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserShiftHistory" ManuallyRouted="false">
-          <ConnectorPoint PointX="13.859377" PointY="8.74054054836432" />
-          <ConnectorPoint PointX="13.859377" PointY="9.0625" />
-          <ConnectorPoint PointX="16.0625" PointY="9.0625" />
-          <ConnectorPoint PointX="16.0625" PointY="9.6875" />
-          <ConnectorPoint PointX="18.322916666666668" PointY="9.6875" />
-          <ConnectorPoint PointX="18.489583333333332" PointY="9.6875" />
-          <ConnectorPoint PointX="18.916666666666668" PointY="9.6875" />
-          <ConnectorPoint PointX="19.083333333333332" PointY="9.6875" />
-          <ConnectorPoint PointX="21.90625" PointY="9.6875" />
-          <ConnectorPoint PointX="21.90625" PointY="10.985585967302322" />
-          <ConnectorPoint PointX="22" PointY="10.985585967302322" />
+          <ConnectorPoint PointX="14.875" PointY="3.8077515381666678" />
+          <ConnectorPoint PointX="21.635416666666668" PointY="3.8077515381666673" />
+          <ConnectorPoint PointX="21.802083333333332" PointY="3.8077515381666678" />
+          <ConnectorPoint PointX="25.375" PointY="3.8077515381666678" />
+          <ConnectorPoint PointX="25.375" PointY="9.375" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserJobTitleHistory">
-          <ConnectorPoint PointX="12.5" PointY="8.74054054836432" />
+          <ConnectorPoint PointX="12.499999999999998" PointY="8.74054054836432" />
           <ConnectorPoint PointX="12.125" PointY="9" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserSectionHistory">
-          <ConnectorPoint PointX="14.429688500000001" PointY="8.74054054836432" />
-          <ConnectorPoint PointX="14.429688500000001" PointY="9.125" />
+          <ConnectorPoint PointX="14" PointY="8.74054054836432" />
+          <ConnectorPoint PointX="14" PointY="9.125" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserRDHistory">
-          <ConnectorPoint PointX="14.875" PointY="6.772282253173616" />
-          <ConnectorPoint PointX="15.75" PointY="6.772282253173616" />
+          <ConnectorPoint PointX="14.875" PointY="5.7355859673023222" />
+          <ConnectorPoint PointX="15.75" PointY="5.7355859673023222" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserOfficeHistory">
-          <ConnectorPoint PointX="12.5" PointY="6.1556299088895319" />
-          <ConnectorPoint PointX="9.4270808333333331" PointY="6.155629908889531" />
-          <ConnectorPoint PointX="9.2604141666666653" PointY="6.1556299088895319" />
-          <ConnectorPoint PointX="7.90625" PointY="6.1556299088895319" />
+          <ConnectorPoint PointX="12.5" PointY="6.1400049088895319" />
+          <ConnectorPoint PointX="9.8333333333333339" PointY="6.140004908889531" />
+          <ConnectorPoint PointX="9.6666666666666661" PointY="6.1400049088895319" />
+          <ConnectorPoint PointX="9.4270808333333331" PointY="6.140004908889531" />
+          <ConnectorPoint PointX="9.2604141666666653" PointY="6.1400049088895319" />
+          <ConnectorPoint PointX="7.90625" PointY="6.1400049088895319" />
           <ConnectorPoint PointX="7.90625" PointY="6.625" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.Office_Office" Width="1.5" PointX="7.875" PointY="10.75" Height="2.749492187499996" />
@@ -2597,8 +2592,10 @@
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.PersonP_Address">
           <ConnectorPoint PointX="9.3437475" PointY="4.8608204019069667" />
-          <ConnectorPoint PointX="5.5" PointY="9.6857909485697764" />
-          <ConnectorPoint PointX="9.3437475" PointY="9.6857909485697764" />
+          <ConnectorPoint PointX="9.3437475" PointY="6.28125" />
+          <ConnectorPoint PointX="7.989583333333333" PointY="6.2812499999999991" />
+          <ConnectorPoint PointX="7.822916666666667" PointY="6.28125" />
+          <ConnectorPoint PointX="5.5" PointY="6.28125" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserWorkStatusHistory">
           <ConnectorPoint PointX="14.875" PointY="2.1105859673023222" />
@@ -2621,7 +2618,7 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.Award" Width="1.5" PointX="5.75" PointY="11.75" Height="3.3263964843749996" />
         <AssociationConnector Association="SAPDActivityModel.PersonAward">
-          <ConnectorPoint PointX="9.75" PointY="8.2653613504767431" />
+          <ConnectorPoint PointX="9.75" PointY="4.8608204019069667" />
           <ConnectorPoint PointX="9.75" PointY="15.088196679155031" />
           <ConnectorPoint PointX="7.25" PointY="15.088196679155031" />
         </AssociationConnector>
@@ -2637,18 +2634,18 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.vPicture" Width="1.5" PointX="16.625" PointY="7.25" Height="2.1725878906249996" />
         <AssociationConnector Association="SAPDActivityModel.UservPicture">
-          <ConnectorPoint PointX="14.875" PointY="7.78125" />
-          <ConnectorPoint PointX="16.625" PointY="7.78125" />
+          <ConnectorPoint PointX="14.875" PointY="7.9952702741821593" />
+          <ConnectorPoint PointX="16.625" PointY="7.9952702741821593" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.vEquipment" Width="1.5" PointX="12.125" PointY="14.375" Height="3.6034961682558091" />
         <AssociationConnector Association="SAPDActivityModel.UservEquipment">
-          <ConnectorPoint PointX="12.984375" PointY="8.74054054836432" />
-          <ConnectorPoint PointX="12.984375" PointY="14.375" />
+          <ConnectorPoint PointX="12.9599609375" PointY="8.74054054836432" />
+          <ConnectorPoint PointX="12.9599609375" PointY="14.375" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.WebSiteUser" Width="1.875" PointX="16.75" PointY="12.875" Height="3.1340950520833353" />
         <AssociationConnector Association="SAPDActivityModel.FK_SIA_WebSiteUser_User_User" >
-          <ConnectorPoint PointX="14.875" PointY="3.9979053525203403" />
-          <ConnectorPoint PointX="18.40625" PointY="3.9979053525203403" />
+          <ConnectorPoint PointX="14.875" PointY="3.9868373045154977" />
+          <ConnectorPoint PointX="18.40625" PointY="3.9868373045154977" />
           <ConnectorPoint PointX="18.40625" PointY="12.875" />
         </AssociationConnector>
         <EntityTypeShape EntityType="SAPDActivityModel.AppFeatureAccess" Width="2.125" PointX="17.5" PointY="16.375" Height="3.1340950520833353" />
@@ -2660,10 +2657,10 @@
           <ConnectorPoint PointX="16.75" PointY="15.493560722751937" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.UserAppFeatureAccess">
-          <ConnectorPoint PointX="14.875" PointY="4.1239551762601643" />
-          <ConnectorPoint PointX="18.322916666666668" PointY="4.1239551762601634" />
-          <ConnectorPoint PointX="18.489583333333332" PointY="4.1239551762601643" />
-          <ConnectorPoint PointX="19" PointY="4.1239551762601643" />
+          <ConnectorPoint PointX="14.875" PointY="4.1184211522577421" />
+          <ConnectorPoint PointX="18.322916666666668" PointY="4.1184211522577412" />
+          <ConnectorPoint PointX="18.489583333333332" PointY="4.1184211522577421" />
+          <ConnectorPoint PointX="19" PointY="4.1184211522577421" />
           <ConnectorPoint PointX="19" PointY="16.375" />
         </AssociationConnector>
         <AssociationConnector Association="SAPDActivityModel.WebLinksAppFeatureAccess">
@@ -2679,15 +2676,16 @@
           <ConnectorPoint PointX="3.875" PointY="1.8336491059263549" />
           <ConnectorPoint PointX="5" PointY="1.8336491059263549" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="SAPDActivityModel.GroupMember" Width="2" PointX="22.125" PointY="2.625" Height="2.5496224455038714" />
-        <EntityTypeShape EntityType="SAPDActivityModel.GroupTitle" Width="1.875" PointX="23.25" PointY="6" Height="2.5496224455038696" IsExpanded="true" />
-        <AssociationConnector Association="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle" >
-          <ConnectorPoint PointX="23.6875" PointY="6" />
-          <ConnectorPoint PointX="23.6875" PointY="5.5961719346046443" />
-        </AssociationConnector>
+        <EntityTypeShape EntityType="SAPDActivityModel.GroupMember" Width="2.25" PointX="19.625" PointY="9.25" Height="2.7603971900542632" />
         <AssociationConnector Association="SAPDActivityModel.FK_User_GroupMember_User_User" >
-          <ConnectorPoint PointX="14.875" PointY="3.7283789509534833" />
-          <ConnectorPoint PointX="22.125" PointY="3.7283789509534833" />
+          <ConnectorPoint PointX="14.875" PointY="3.7019592363856626" />
+          <ConnectorPoint PointX="21.71875" PointY="3.7019592363856626" />
+          <ConnectorPoint PointX="21.71875" PointY="9.25" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="SAPDActivityModel.GroupTitle" Width="1.5" PointX="20.625" PointY="14" Height="2.5496224455038714" />
+        <AssociationConnector Association="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle" >
+          <ConnectorPoint PointX="21.25" PointY="14" />
+          <ConnectorPoint PointX="21.25" PointY="12.010397190054258" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

@@ -51,8 +51,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "WebLinksAppFeatureAccess", "WebLinks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.WebLinks), "AppFeatureAccess", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.AppFeatureAccess), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_Person", "Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.PhoneNumberType), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
-[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupTitle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.GroupTitle), "User_GroupMember", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.GroupMember), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_GroupMember_User_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "User_GroupMember", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.GroupMember), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupTitle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.GroupTitle), "GroupMember", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.GroupMember), true)]
 
 #endregion
 
@@ -2612,24 +2612,24 @@ namespace PersonnelBusinessLayer
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String Instructions
+        public global::System.String MemberInfo
         {
             get
             {
-                return _Instructions;
+                return _MemberInfo;
             }
             set
             {
-                OnInstructionsChanging(value);
-                ReportPropertyChanging("Instructions");
-                _Instructions = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("Instructions");
-                OnInstructionsChanged();
+                OnMemberInfoChanging(value);
+                ReportPropertyChanging("MemberInfo");
+                _MemberInfo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("MemberInfo");
+                OnMemberInfoChanged();
             }
         }
-        private global::System.String _Instructions;
-        partial void OnInstructionsChanging(global::System.String value);
-        partial void OnInstructionsChanged();
+        private global::System.String _MemberInfo;
+        partial void OnMemberInfoChanging(global::System.String value);
+        partial void OnMemberInfoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2654,30 +2654,6 @@ namespace PersonnelBusinessLayer
         private global::System.DateTime _ModifiedDate;
         partial void OnModifiedDateChanging(global::System.DateTime value);
         partial void OnModifiedDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String MemberInfo
-        {
-            get
-            {
-                return _MemberInfo;
-            }
-            set
-            {
-                OnMemberInfoChanging(value);
-                ReportPropertyChanging("MemberInfo");
-                _MemberInfo = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("MemberInfo");
-                OnMemberInfoChanged();
-            }
-        }
-        private global::System.String _MemberInfo;
-        partial void OnMemberInfoChanging(global::System.String value);
-        partial void OnMemberInfoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2707,44 +2683,6 @@ namespace PersonnelBusinessLayer
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupTitle")]
-        public GroupTitle User_GroupTitle
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<GroupTitle> User_GroupTitleReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2783,6 +2721,44 @@ namespace PersonnelBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupTitle")]
+        public GroupTitle User_GroupTitle
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<GroupTitle> User_GroupTitleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<GroupTitle>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupTitle", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2803,15 +2779,13 @@ namespace PersonnelBusinessLayer
         /// </summary>
         /// <param name="groupTitleID">Initial value of the GroupTitleID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="nameCode">Initial value of the NameCode property.</param>
         /// <param name="gtRanking">Initial value of the gtRanking property.</param>
         /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
-        public static GroupTitle CreateGroupTitle(global::System.Int32 groupTitleID, global::System.String name, global::System.String nameCode, global::System.Int32 gtRanking, global::System.Boolean visibleFlag)
+        public static GroupTitle CreateGroupTitle(global::System.Int32 groupTitleID, global::System.String name, global::System.Int32 gtRanking, global::System.Boolean visibleFlag)
         {
             GroupTitle groupTitle = new GroupTitle();
             groupTitle.GroupTitleID = groupTitleID;
             groupTitle.Name = name;
-            groupTitle.NameCode = nameCode;
             groupTitle.gtRanking = gtRanking;
             groupTitle.VisibleFlag = visibleFlag;
             return groupTitle;
@@ -2875,7 +2849,7 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String NameCode
         {
@@ -2887,7 +2861,7 @@ namespace PersonnelBusinessLayer
             {
                 OnNameCodeChanging(value);
                 ReportPropertyChanging("NameCode");
-                _NameCode = StructuralObject.SetValidValue(value, false);
+                _NameCode = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("NameCode");
                 OnNameCodeChanged();
             }
@@ -2895,6 +2869,30 @@ namespace PersonnelBusinessLayer
         private global::System.String _NameCode;
         partial void OnNameCodeChanging(global::System.String value);
         partial void OnNameCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String GroupInfo
+        {
+            get
+            {
+                return _GroupInfo;
+            }
+            set
+            {
+                OnGroupInfoChanging(value);
+                ReportPropertyChanging("GroupInfo");
+                _GroupInfo = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("GroupInfo");
+                OnGroupInfoChanged();
+            }
+        }
+        private global::System.String _GroupInfo;
+        partial void OnGroupInfoChanging(global::System.String value);
+        partial void OnGroupInfoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2943,30 +2941,6 @@ namespace PersonnelBusinessLayer
         private global::System.Boolean _VisibleFlag;
         partial void OnVisibleFlagChanging(global::System.Boolean value);
         partial void OnVisibleFlagChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String GroupInfo
-        {
-            get
-            {
-                return _GroupInfo;
-            }
-            set
-            {
-                OnGroupInfoChanging(value);
-                ReportPropertyChanging("GroupInfo");
-                _GroupInfo = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("GroupInfo");
-                OnGroupInfoChanged();
-            }
-        }
-        private global::System.String _GroupInfo;
-        partial void OnGroupInfoChanging(global::System.String value);
-        partial void OnGroupInfoChanged();
 
         #endregion
 
@@ -2979,18 +2953,18 @@ namespace PersonnelBusinessLayer
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupMember")]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "GroupMember")]
         public EntityCollection<GroupMember> User_GroupMember
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupMember");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "GroupMember");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "User_GroupMember", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_GroupTitle", "GroupMember", value);
                 }
             }
         }
