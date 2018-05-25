@@ -139,6 +139,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\BadgeHistory.cs" />
+    <Compile Include="Common\GroupMemberList.cs" />
     <Compile Include="Common\GetGroupMembers.cs" />
     <Compile Include="Common\GetOffice.cs" />
     <Compile Include="Common\GetPeople.cs" />

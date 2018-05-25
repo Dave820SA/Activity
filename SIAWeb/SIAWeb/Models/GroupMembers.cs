@@ -23,7 +23,9 @@ namespace SIAWeb.Models
         public string JobTitle { get; set; }
         public string RankCode { get; set; }
         public string PicURL { get; set; }
+        public bool Visible { get; set; }  
         public IEnumerable<EmailAddress> Emails { get; set; }
         public IEnumerable<PhoneNumber> PhoneNumbers { get; set; }
+        
     }
 }

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using PersonnelBusinessLayer;
+using SIAWeb.Common;
 
 namespace SIAWeb.Controllers
 {
@@ -31,6 +32,9 @@ namespace SIAWeb.Controllers
             {
                 return HttpNotFound();
             }
+            GroupMemberList gm = new GroupMemberList();
+
+            ViewData["GroupMembers"] = gm.GetGroupMemberList(id);
             return View(grouptitle);
         }
 

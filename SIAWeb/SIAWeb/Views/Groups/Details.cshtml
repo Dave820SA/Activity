@@ -1,50 +1,90 @@
 ﻿@model PersonnelBusinessLayer.GroupTitle
 
-@{
-    ViewBag.Title = "Details";
-}
+<div style="padding-left: 5px">
+    <h3>
+        <span style="color:#2A9FD6">Group</span> <small> Details</small></h3>
+</div>
+<hr />
+<form class="form-horizontal">
+<div class="Container">
+    <div class="row">
+        <div class="col-sm-5">
+            <fieldset class="scheduler-border" style="border-right-style: solid; border-right-width: thin; border-right-color: #C0C0C0;">
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em" style="color:#2A9FD6">@Html.DisplayNameFor(model => model.Name)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Name)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em" style="color:#2A9FD6">@Html.DisplayNameFor(model => model.GroupInfo)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.GroupInfo)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.VisibleFlag)</strong>
+                    </div>
+                    <div class="display-field">
+                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.VisibleFlag)</strong>
+                    </div>
+                </div>
+                <div class="form-group col-xs-12">
+                </div>
+                <div class="form-group col-xs-12">
+                    <strong style="font-size: 1.2em">@Html.ActionLink("Edit", "Edit", new { id = Model.GroupTitleID })
+                        |</strong> <strong style="font-size: 1.2em">@Html.ActionLink("Back to List", "Index")</strong>
+                </div>
+            </fieldset>
+        </div>
 
-<h2>Details</h2>
+        <div class="col-sm-7">
+            <fieldset class="scheduler-border">
+                <div class="form-group col-xs-12">
+                    <div class="display-label">
+                        <strong style="font-size: 1.2em">Group Members</strong>
+                        <table class="table table-condensed table-hover table-bordered">
+                            <tr>
+                                <th>
+                                    Visible
+                                </th>
+                                <th>
+                                    Member
+                                </th>
+                                <th>
+                                    Notes
+                                </th>
+                            </tr>
+                            @foreach (var item in ViewData["GroupMembers"] as IEnumerable<SIAWeb.Models.GroupMembers>)
+                            {
+                                <tr>
+                                    <td>
+                                        @*@item.Visible*@
+                                        @Html.DisplayFor(modelItem => item.Visible)
+                                    </td>
+                                    <td style="max-width: 280px; min-width: 280px; width: 280px; color:White">
+                                        @{
+                                            string member = string.Format("{0} {1} #{2}", item.First, item.Last, item.Badge);
+                                            @member
+                                        }
+                                    </td>
+                                    <td style="max-width: 400px; min-width: 400px; width: 400px;">
+                                        
+                                        @item.MemberInfo
+                                    </td>
+                                </tr>
+                        }
+                        </table>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</div>
+</form>
 
-<fieldset>
-    <legend>GroupTitle</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.Name)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.Name)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.NameCode)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.NameCode)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.GroupInfo)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.GroupInfo)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.gtRanking)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.gtRanking)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.VisibleFlag)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.VisibleFlag)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.GroupTitleID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
