@@ -155,6 +155,8 @@
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\GateController.cs" />
+    <Compile Include="Controllers\GroupMemberAddController.cs" />
+    <Compile Include="Controllers\GroupMemberController.cs" />
     <Compile Include="Controllers\GroupsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
@@ -372,6 +374,13 @@
     <Content Include="Views\Groups\Edit.cshtml" />
     <Content Include="Views\Groups\Delete.cshtml" />
     <Content Include="Views\Groups\_ViewStart.cshtml" />
+    <Content Include="Views\GroupMember\Index.cshtml" />
+    <Content Include="Views\GroupMember\Details.cshtml" />
+    <Content Include="Views\GroupMember\Create.cshtml" />
+    <Content Include="Views\GroupMember\Edit.cshtml" />
+    <Content Include="Views\GroupMember\Delete.cshtml" />
+    <Content Include="Views\GroupMember\_ViewStart.cshtml" />
+    <Content Include="Views\GroupMemberAdd\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OfficeBusinessLayer\OfficeBusinessLayer.csproj">

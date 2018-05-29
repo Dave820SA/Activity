@@ -1,0 +1,57 @@
+﻿@model IEnumerable<PersonnelBusinessLayer.GroupMember>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.User_User.PIN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User_GroupTitle.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MemberInfo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VisibleFlag)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_User.PIN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.User_GroupTitle.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MemberInfo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VisibleFlag)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.GroupMemberID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.GroupMemberID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.GroupMemberID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -17,14 +17,17 @@ namespace SIAWeb.Common
                                  join jt in db.JobTitles on u.JobTitleID equals jt.JobTitleID
                                  join gm in db.GroupMembers on u.AppEntityID equals gm.AppEntityID
                                  join ws in db.WorkStatus on u.WorkStatusID equals ws.WorkStatusID
-                                 where gm.GroupTitleID == id && ws.Ranking <= 9 && gm.VisibleFlag == true
+                                 where gm.GroupTitleID == id && ws.Ranking <= 9
                                  select new GroupMembers
                                  {
+                                     GroupTitleID = gm.GroupTitleID,
+                                     GroupMemberID = gm.GroupMemberID,
                                      AppEntityID = p.AppEntityID,
                                      First = p.FirstName,
                                      Last = p.LastName,
                                      Badge = u.Badge,
                                      JobTitle = jt.Name,
+                                     MemberInfo = gm.MemberInfo,
                                      Visible = gm.VisibleFlag
 
                                  });

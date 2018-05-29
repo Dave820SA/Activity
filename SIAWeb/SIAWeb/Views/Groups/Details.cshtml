@@ -5,14 +5,15 @@
         <span style="color:#2A9FD6">Group</span> <small> Details</small></h3>
 </div>
 <hr />
-<form class="form-horizontal">
+<form class="form-horizontal" action="Details">
 <div class="Container">
     <div class="row">
         <div class="col-sm-5">
+        @Html.HiddenFor(model => model.GroupTitleID)
             <fieldset class="scheduler-border" style="border-right-style: solid; border-right-width: thin; border-right-color: #C0C0C0;">
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em" style="color:#2A9FD6">@Html.DisplayNameFor(model => model.Name)</strong>
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.Name)</strong>
                     </div>
                     <div class="display-field">
                         <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.Name)</strong>
@@ -20,7 +21,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong style="font-size: 1.2em" style="color:#2A9FD6">@Html.DisplayNameFor(model => model.GroupInfo)</strong>
+                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.GroupInfo)</strong>
                     </div>
                     <div class="display-field">
                         <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.GroupInfo)</strong>
@@ -48,13 +49,15 @@
                 <div class="form-group col-xs-12">
                     <div class="display-label">
                         <strong style="font-size: 1.2em">Group Members</strong>
-                        <table class="table table-condensed table-hover table-bordered">
+                        <a href="@Url.Action("Create", "Daily")" class="btn btn-warning btn-xs" style="float:right"> Add New Member <i class="fa fa-user-plus" aria-hidden="true"></i></span></a>
+                        <table class="table table-condensed table-hover table-bordered" >
                             <tr>
                                 <th>
                                     Visible
                                 </th>
                                 <th>
-                                    Member
+                                    Member &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span style="color:#FFFF00; float:none; font-size: xx-small; font-style: italic;">*Click the members name to edit</span>
                                 </th>
                                 <th>
                                     Notes
@@ -64,13 +67,14 @@
                             {
                                 <tr>
                                     <td>
-                                        @*@item.Visible*@
                                         @Html.DisplayFor(modelItem => item.Visible)
                                     </td>
-                                    <td style="max-width: 280px; min-width: 280px; width: 280px; color:White">
+                                    <td style="max-width: 280px; min-width: 280px; width: 280px; color: #2A9FD6">
                                         @{
-                                            string member = string.Format("{0} {1} #{2}", item.First, item.Last, item.Badge);
-                                            @member
+                                string member = string.Format("{0} {1} #{2}", item.First, item.Last, item.Badge);
+                                int _groupMemberID = item.GroupMemberID;
+                                            <a href="@Url.Action("Edit", "GroupMember", new { id = _groupMemberID }, null)" title="office" >@Html.Raw(member.ToUpper())
+                                            </a> 
                                         }
                                     </td>
                                     <td style="max-width: 400px; min-width: 400px; width: 400px;">

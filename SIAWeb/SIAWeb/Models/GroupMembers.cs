@@ -5,6 +5,7 @@ namespace SIAWeb.Models
 {
     public class GroupMembers
     {
+        public int GroupTitleID { get; set; }
         public int GroupMemberID { get; set; }
         public string GroupName { get; set; }
         public int AppEntityID { get; set; }

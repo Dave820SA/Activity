@@ -2779,14 +2779,12 @@ namespace PersonnelBusinessLayer
         /// </summary>
         /// <param name="groupTitleID">Initial value of the GroupTitleID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="gtRanking">Initial value of the gtRanking property.</param>
         /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
-        public static GroupTitle CreateGroupTitle(global::System.Int32 groupTitleID, global::System.String name, global::System.Int32 gtRanking, global::System.Boolean visibleFlag)
+        public static GroupTitle CreateGroupTitle(global::System.Int32 groupTitleID, global::System.String name, global::System.Boolean visibleFlag)
         {
             GroupTitle groupTitle = new GroupTitle();
             groupTitle.GroupTitleID = groupTitleID;
             groupTitle.Name = name;
-            groupTitle.gtRanking = gtRanking;
             groupTitle.VisibleFlag = visibleFlag;
             return groupTitle;
         }
@@ -2897,9 +2895,9 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Int32 gtRanking
+        public Nullable<global::System.Int32> gtRanking
         {
             get
             {
@@ -2914,8 +2912,8 @@ namespace PersonnelBusinessLayer
                 OngtRankingChanged();
             }
         }
-        private global::System.Int32 _gtRanking;
-        partial void OngtRankingChanging(global::System.Int32 value);
+        private Nullable<global::System.Int32> _gtRanking;
+        partial void OngtRankingChanging(Nullable<global::System.Int32> value);
         partial void OngtRankingChanged();
     
         /// <summary>

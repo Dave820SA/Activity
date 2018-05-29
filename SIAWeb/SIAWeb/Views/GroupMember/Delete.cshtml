@@ -1,0 +1,53 @@
+﻿@model PersonnelBusinessLayer.GroupMember
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>GroupMember</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_User.PIN)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_User.PIN)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.User_GroupTitle.Name)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.User_GroupTitle.Name)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MemberInfo)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MemberInfo)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.ModifiedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ModifiedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.VisibleFlag)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VisibleFlag)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
