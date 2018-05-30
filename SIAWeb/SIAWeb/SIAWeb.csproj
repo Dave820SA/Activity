@@ -380,6 +380,7 @@
     <Content Include="Views\GroupMember\Edit.cshtml" />
     <Content Include="Views\GroupMember\Delete.cshtml" />
     <Content Include="Views\GroupMember\_ViewStart.cshtml" />
+    <Content Include="Views\GroupMemberAdd\_ViewStart.cshtml" />
     <Content Include="Views\GroupMemberAdd\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

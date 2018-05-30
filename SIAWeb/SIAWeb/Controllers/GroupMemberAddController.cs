@@ -2,6 +2,7 @@
 using System.Web.Mvc;
 using PersonnelBusinessLayer;
 using SIAWeb.Common;
+using System;
 
 namespace SIAWeb.Controllers
 {
@@ -10,12 +11,33 @@ namespace SIAWeb.Controllers
         //
         // GET: /GroupMemberAdd/
 
-        GetGroupMembers db = new GetGroupMembers();
+        //public ActionResult Index(int id = 0 )
+        //{
+        //    if (id > 0)
+        //    {
+        //        GroupMemberList gm = new GroupMemberList();
 
-        public ActionResult Index(int id)
+        //        return View(gm.GetGroupMemberList(id));
+        //    }
+        //    else
+        //    {
+        //        return View();
+        //    }
+
+        //}
+
+        public ActionResult Index(string search_string)
         {
-            ViewBag.GroupName = _getGroupName(id);
-            return View(db.GetGroupMemberInfo(id));
+            if (!String.IsNullOrEmpty(search_string))
+            {
+                GetPeople mySearch = new GetPeople();
+
+                return View(mySearch.GetSearchedEmployed(search_string));
+            }
+            else
+            {
+                return View();
+            }
 
         }
 

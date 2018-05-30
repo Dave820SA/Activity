@@ -30,7 +30,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12" style="padding-bottom: 5px">
-            <a href="@Url.Action("Create", "Groups")" class="btn btn-warning btn-sm"> Add New Group <i class="fa fa-user-plus" aria-hidden="true"></i></span></a>
+        @*<a href="@Url.Action("Index", "GroupMemberAdd", new { id = Model.GroupTitleID }, null)" class="btn btn-warning btn-sm"> Add New Entry <i class="fa fa-user-plus" aria-hidden="true"></i></a>*@
+            @*<a href="@Url.Action("Index", "GroupMemberAdd")" class="btn btn-warning btn-sm"> Add New Group <i class="fa fa-user-plus" aria-hidden="true"></i></span></a>*@
         </div>
         <div class="col-md-12">
             @{
@@ -55,7 +56,13 @@
                     {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
+                                @{
+                                    string gName = string.Format("{0}", item.Name);
+                                               
+                                    <a href="@Url.Action("Details", "Groups", new { id = item.GroupTitleID }, null)" title="office" >@Html.Raw(gName.ToUpper())
+                                    </a>                      
+                                }
+                                @*@Html.DisplayFor(modelItem => item.Name)*@
                             </td>
                             
                             <td style="max-width:450px">
@@ -66,9 +73,9 @@
                                 @Html.DisplayFor(modelItem => item.VisibleFlag)
                             </td>
                             <td>
-                            <a href="@Url.Action("Edit", "Groups", new { id = item.GroupTitleID })" class="btn btn-info btn-xs"> Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> |
-                            <a href="@Url.Action("Details", "Groups", new { id = item.GroupTitleID })" class="btn btn-success btn-xs"> Details <i class="fa fa-list" aria-hidden="true"></i></a> |
-                            <a href="@Url.Action("Delete", "Groups", new { id = item.GroupTitleID })" class="btn btn-danger btn-xs"> Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                            <a href="@Url.Action("Edit", "Groups", new { id = item.GroupTitleID })" class="btn btn-info btn-xs"> Edit <i class="fa fa-pencil-square-o"></i></a> |
+                            <a href="@Url.Action("Index", "GroupMemberAdd", new { id = item.GroupTitleID })" class="btn btn-warning btn-xs"> Add member <i class="fa fa-user-plus"></i></a> |
+                            <a href="@Url.Action("Delete", "Groups", new { id = item.GroupTitleID })" class="btn btn-danger btn-xs"> Delete <i class="fa fa-times-circle"></i></a>
                                
                             </td>
                         </tr>
