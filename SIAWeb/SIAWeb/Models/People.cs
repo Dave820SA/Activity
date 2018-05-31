@@ -22,6 +22,7 @@ namespace SIAWeb.Models
         [DisplayName("Work Status")]
         public string Status { get; set; }
         public int WorkStatusCode { get; set; }
+        public string WSNameCode { get; set; }
        
 
     }

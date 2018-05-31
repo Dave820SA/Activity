@@ -8,26 +8,17 @@ namespace SIAWeb.Controllers
 {
     public class GroupMemberAddController : Controller
     {
-        //
-        // GET: /GroupMemberAdd/
-
-        //public ActionResult Index(int id = 0 )
-        //{
-        //    if (id > 0)
-        //    {
-        //        GroupMemberList gm = new GroupMemberList();
-
-        //        return View(gm.GetGroupMemberList(id));
-        //    }
-        //    else
-        //    {
-        //        return View();
-        //    }
-
-        //}
-
-        public ActionResult Index(string search_string)
+        
+        public ActionResult Index(int id, string search_string)
         {
+            
+             //Load all Group members into Viewdata
+            GroupMemberList gm = new GroupMemberList();
+            ViewData["MyMembers"] = gm.GetGroupMemberList(id);
+
+            ViewBag.GroupName = _getGroupName(id);
+            ViewBag.GroupID = id;
+            
             if (!String.IsNullOrEmpty(search_string))
             {
                 GetPeople mySearch = new GetPeople();
@@ -37,7 +28,7 @@ namespace SIAWeb.Controllers
             else
             {
                 return View();
-            }
+            }  
 
         }
 
@@ -49,6 +40,19 @@ namespace SIAWeb.Controllers
                     where n.GroupTitleID == id
                     select n.Name).FirstOrDefault();
 
+        }
+
+        [HttpPost]
+        public void addmembers(int _appEntity, int _group)
+        {
+            GroupMemberList addMember = new GroupMemberList();
+            addMember.AddGroupMember(_appEntity, _group);
+
+             //RedirectToAction("Index", "GroupMemberAdd");
+
+            //Load all Group members into Viewdata
+            //GroupMemberList gm = new GroupMemberList();
+            //ViewData["MyMembers"] = gm.GetGroupMemberList(_group);
         }
 
     }

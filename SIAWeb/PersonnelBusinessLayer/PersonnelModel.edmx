@@ -870,6 +870,10 @@
         <Function Name="spPersonnelSearchEmployed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchString" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="User_spGroupMemberAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="User.spGroupMemberAdd" Schema="dbo">
+          <Parameter Name="AppEntity" Type="int" Mode="In" />
+          <Parameter Name="GroupTitleID" Type="int" Mode="In" />
+        </Function>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -982,9 +986,6 @@
             <End Role="Person" EntitySet="People" />
             <End Role="Person_EmailAddress" EntitySet="P_EmailAddress" />
           </AssociationSet>
-          <FunctionImport Name="spPersonnelSearch">
-          <Parameter Name="SearchString" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Awards" EntityType="SAPDActivityModel.Award" />
           <AssociationSet Name="PersonAward" Association="SAPDActivityModel.PersonAward">
             <End Role="Person" EntitySet="People" />
@@ -1005,9 +1006,6 @@
             <End Role="User" EntitySet="Users" />
             <End Role="vPicture" EntitySet="vPictures" />
           </AssociationSet>
-          <FunctionImport Name="spPersonnelSearch_Results" ReturnType="Collection(SAPDActivityModel.spPersonnelSearch_Result)">
-          <Parameter Name="SearchString" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="spIssuedEquipment" ReturnType="Collection(SAPDActivityModel.spIssuedEquipment_Result)">
           <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -1056,7 +1054,14 @@
             <End Role="GroupMember" EntitySet="GroupMembers" />
           </AssociationSet>
           <FunctionImport Name="spPersonnelSearchEmployed" ReturnType="Collection(SAPDActivityModel.spPersonnelSearchEmployed_Result)">
-            <Parameter Name="SearchString" Mode="In" Type="String" />
+          <Parameter Name="SearchString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spPersonnelSearch" ReturnType="Collection(SAPDActivityModel.spPersonnelSearch_Result)">
+          <Parameter Name="SearchString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="User_spGroupMemberAdd">
+            <Parameter Name="AppEntity" Mode="In" Type="Int32" />
+            <Parameter Name="GroupTitleID" Mode="In" Type="Int32" />
           </FunctionImport>
           </EntityContainer>
         <EntityType Name="Person">
@@ -1737,19 +1742,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="spPersonnelSearch_Result">
-          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
-          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="Badge" Nullable="true" MaxLength="6" />
-          <Property Type="String" Name="SAP" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="RankCode" Nullable="true" MaxLength="10" />
-          <Property Type="String" Name="Office" Nullable="true" MaxLength="50" />
-          <Property Type="String" Name="OfficeCode" Nullable="true" MaxLength="10" />
-          <Property Type="Int32" Name="Ranking" Nullable="true" />
-          <Property Type="String" Name="WorkStatus" Nullable="true" MaxLength="50" />
-          <Property Type="Int32" Name="WorkStatusCode" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="spIssuedEquipment_Result">
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -1978,6 +1970,20 @@
           </ReferentialConstraint>
         </Association>
         <ComplexType Name="spPersonnelSearchEmployed_Result">
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Badge" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SAP" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="RankCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Office" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficeCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Ranking" Nullable="true" />
+          <Property Type="String" Name="WorkStatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="WorkStatusCode" Nullable="true" />
+          <Property Type="String" Name="NameCode" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="spPersonnelSearch_Result">
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
@@ -2345,23 +2351,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="spPersonnelSearch_Results" FunctionName="SAPDActivityModel.Store.spPersonnelSearch">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="SAPDActivityModel.spPersonnelSearch_Result">
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Badge" ColumnName="Badge" />
-                <ScalarProperty Name="SAP" ColumnName="SAP" />
-                <ScalarProperty Name="RankCode" ColumnName="RankCode" />
-                <ScalarProperty Name="Office" ColumnName="Office" />
-                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
-                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
-                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
-                <ScalarProperty Name="WorkStatusCode" ColumnName="WorkStatusCode" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="spIssuedEquipment" FunctionName="SAPDActivityModel.Store.spIssuedEquipment">
             <ResultMapping>
               <ComplexTypeMapping TypeName="SAPDActivityModel.spIssuedEquipment_Result">
@@ -2495,9 +2484,28 @@
                 <ScalarProperty Name="Ranking" ColumnName="Ranking" />
                 <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
                 <ScalarProperty Name="WorkStatusCode" ColumnName="WorkStatusCode" />
+                <ScalarProperty Name="NameCode" ColumnName="NameCode" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spPersonnelSearch" FunctionName="SAPDActivityModel.Store.spPersonnelSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SAPDActivityModel.spPersonnelSearch_Result">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="RankCode" ColumnName="RankCode" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
+                <ScalarProperty Name="WorkStatusCode" ColumnName="WorkStatusCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="User_spGroupMemberAdd" FunctionName="SAPDActivityModel.Store.User_spGroupMemberAdd" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2518,7 +2526,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="PersonnelModel" ZoomLevel="55">
+      <Diagram Name="PersonnelModel" ZoomLevel="82">
         <EntityTypeShape EntityType="SAPDActivityModel.Person" Width="2" PointX="9" PointY="0.625" Height="3.7109993489583326" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.PersonType" Width="1.5" PointX="5" PointY="3.25" Height="2.5496224455038705" IsExpanded="true" />
         <EntityTypeShape EntityType="SAPDActivityModel.PhoneNumberType" Width="2.375" PointX="1.5" PointY="0.875" Height="1.7879850260416674" IsExpanded="true" />

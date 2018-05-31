@@ -34,5 +34,10 @@ namespace SIAWeb.Common
             return myGropMembers.ToList();
 
         }
+
+        public void AddGroupMember(int appEntity, int GroupID)
+        {
+            db.User_spGroupMemberAdd(appEntity, GroupID);
+        }
     }
 }

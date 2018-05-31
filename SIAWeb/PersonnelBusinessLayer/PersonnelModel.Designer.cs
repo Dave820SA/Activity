@@ -955,44 +955,6 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        /// <param name="searchString">No Metadata Documentation available.</param>
-        public int spPersonnelSearch(global::System.String searchString)
-        {
-            ObjectParameter searchStringParameter;
-            if (searchString != null)
-            {
-                searchStringParameter = new ObjectParameter("SearchString", searchString);
-            }
-            else
-            {
-                searchStringParameter = new ObjectParameter("SearchString", typeof(global::System.String));
-            }
-    
-            return base.ExecuteFunction("spPersonnelSearch", searchStringParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        /// <param name="searchString">No Metadata Documentation available.</param>
-        public ObjectResult<spPersonnelSearch_Result> spPersonnelSearch_Results(global::System.String searchString)
-        {
-            ObjectParameter searchStringParameter;
-            if (searchString != null)
-            {
-                searchStringParameter = new ObjectParameter("SearchString", searchString);
-            }
-            else
-            {
-                searchStringParameter = new ObjectParameter("SearchString", typeof(global::System.String));
-            }
-    
-            return base.ExecuteFunction<spPersonnelSearch_Result>("spPersonnelSearch_Results", searchStringParameter);
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         /// <param name="iD">No Metadata Documentation available.</param>
         public ObjectResult<spIssuedEquipment_Result> spIssuedEquipment(Nullable<global::System.Int32> iD)
         {
@@ -1026,6 +988,55 @@ namespace PersonnelBusinessLayer
             }
     
             return base.ExecuteFunction<spPersonnelSearchEmployed_Result>("spPersonnelSearchEmployed", searchStringParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="searchString">No Metadata Documentation available.</param>
+        public ObjectResult<spPersonnelSearch_Result> spPersonnelSearch(global::System.String searchString)
+        {
+            ObjectParameter searchStringParameter;
+            if (searchString != null)
+            {
+                searchStringParameter = new ObjectParameter("SearchString", searchString);
+            }
+            else
+            {
+                searchStringParameter = new ObjectParameter("SearchString", typeof(global::System.String));
+            }
+    
+            return base.ExecuteFunction<spPersonnelSearch_Result>("spPersonnelSearch", searchStringParameter);
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        /// <param name="appEntity">No Metadata Documentation available.</param>
+        /// <param name="groupTitleID">No Metadata Documentation available.</param>
+        public int User_spGroupMemberAdd(Nullable<global::System.Int32> appEntity, Nullable<global::System.Int32> groupTitleID)
+        {
+            ObjectParameter appEntityParameter;
+            if (appEntity.HasValue)
+            {
+                appEntityParameter = new ObjectParameter("AppEntity", appEntity);
+            }
+            else
+            {
+                appEntityParameter = new ObjectParameter("AppEntity", typeof(global::System.Int32));
+            }
+    
+            ObjectParameter groupTitleIDParameter;
+            if (groupTitleID.HasValue)
+            {
+                groupTitleIDParameter = new ObjectParameter("GroupTitleID", groupTitleID);
+            }
+            else
+            {
+                groupTitleIDParameter = new ObjectParameter("GroupTitleID", typeof(global::System.Int32));
+            }
+    
+            return base.ExecuteFunction("User_spGroupMemberAdd", appEntityParameter, groupTitleIDParameter);
         }
 
         #endregion
@@ -11215,6 +11226,30 @@ namespace PersonnelBusinessLayer
         private Nullable<global::System.Int32> _WorkStatusCode;
         partial void OnWorkStatusCodeChanging(Nullable<global::System.Int32> value);
         partial void OnWorkStatusCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String NameCode
+        {
+            get
+            {
+                return _NameCode;
+            }
+            set
+            {
+                OnNameCodeChanging(value);
+                ReportPropertyChanging("NameCode");
+                _NameCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("NameCode");
+                OnNameCodeChanged();
+            }
+        }
+        private global::System.String _NameCode;
+        partial void OnNameCodeChanging(global::System.String value);
+        partial void OnNameCodeChanged();
 
         #endregion
 

@@ -12,7 +12,7 @@ namespace SIAWeb.Common
 
         public List<People> GetSearched(string searchString)
         {
-            var myPeople = from p in db.spPersonnelSearch_Results(searchString)
+            var myPeople = from p in db.spPersonnelSearch(searchString)
                            select new People
                            {
                                AppEntityID = p.AppEntityID,
@@ -26,7 +26,6 @@ namespace SIAWeb.Common
                                jtRanking = (p.Ranking ?? 12),
                                Status = p.WorkStatus,
                                WorkStatusCode = (p.WorkStatusCode ?? 11)
-
                            };
                                  
             return myPeople.ToList();
@@ -48,8 +47,8 @@ namespace SIAWeb.Common
                                RankCode = p.RankCode,
                                jtRanking = (p.Ranking ?? 12),
                                Status = p.WorkStatus,
-                               WorkStatusCode = (p.WorkStatusCode ?? 11)
-
+                               WorkStatusCode = (p.WorkStatusCode ?? 11),
+                               WSNameCode = p.NameCode
                            };
 
             return myPeople.ToList();

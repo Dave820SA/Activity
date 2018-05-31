@@ -15,7 +15,7 @@
         @using (Html.BeginForm("Index", "PersonSearch", FormMethod.Get, new { encType = "multipart/form-data", id = "myform", name = "myform" }))
         {
             <div class="input-group">
-           dav     @Html.TextBox("search_string", null, new { @class = "form-control" })
+                @Html.TextBox("search_string", null, new { @class = "form-control" })
                 <div class="input-group-btn">
                     <button class="btn btn-default" title="processing" type="submit" id="process" value="process">
                          <i class="fa fa-search">
