@@ -129,11 +129,14 @@
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\AuditController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OfficeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetGroupMembers.cs" />
+    <Compile Include="Models\GroupMembers.cs" />
     <Compile Include="Models\IECAMetadata.cs" />
     <Compile Include="Models\IECAModel.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -147,7 +150,10 @@
       <DependentUpon>OfficeModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\IECAWeb.pubxml" />
     <None Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
+    <Content Include="Views\Shared\_MemberContact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -301,6 +307,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PersonnelBusinessLayer\PersonnelBusinessLayer.csproj">
+      <Project>{EE6894CC-58C5-4ADE-AF8A-19A08DCF9AA8}</Project>
+      <Name>PersonnelBusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\UserBusinessLayer\UserBusinessLayer.csproj">
       <Project>{A6CC0DB3-58C7-4711-BB18-3AF06472115F}</Project>
       <Name>UserBusinessLayer</Name>

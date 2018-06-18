@@ -1,0 +1,15 @@
+﻿@model IEnumerable<IECAWeb.Models.GroupMembers>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Alternate.cshtml";
+}
+
+<div class="well well-sm">
+  <h3>@ViewBag.GroupName</h3>
+</div>
+
+@foreach (var item in Model)
+{  
+    @Html.Partial("_MemberContact", item)
+}

@@ -82,11 +82,8 @@
                
                
             </fieldset>
-            	@*<a href="@Url.Action("Index", "Award")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>*@
 
-                @*<a href="@Url.Action("Search", "Home")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>*@
-                
-                @Html.ActionLink("Back to previous page", null, null, null, new { href = Request.UrlReferrer})
+                @Html.ActionLink("Back to previous page", null, null, null, new { @class = "btn btn-warning btn-sm", href = Request.UrlReferrer })
 
                
         </div>
@@ -110,62 +107,3 @@
 }
 
 
-
-
-@*@model IECAWeb.Models.AuditHistrory
-
-@{
-    ViewBag.Title = "Details";
-}
-
-<h2>Details</h2>
-
-<fieldset>
-    <legend>AuditHistrory</legend>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AppEntity.AppEntityID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AppEntity.AppEntityID)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.OfficeID)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.OfficeID)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.CaseAuditFlag)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.CaseAuditFlag)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AuditNotes)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AuditNotes)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.AuditDate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.AuditDate)
-    </div>
-
-    <div class="display-label">
-         @Html.DisplayNameFor(model => model.LastUpdate)
-    </div>
-    <div class="display-field">
-        @Html.DisplayFor(model => model.LastUpdate)
-    </div>
-</fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.IECAID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>*@

@@ -25,8 +25,8 @@ namespace IECAWeb
         protected void Session_Start()
         {
             SessionLogin user = new SessionLogin();
-            //string myUser = HttpContext.Current.User.Identity.Name.ToString();
-            string myUser = "COSA\\MM95755";
+            string myUser = HttpContext.Current.User.Identity.Name.ToString();
+            //string myUser = "COSA\\MM95755";
             user.getUserPin(myUser);
 
         }
