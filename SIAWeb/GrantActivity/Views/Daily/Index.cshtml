@@ -13,7 +13,7 @@
 
 <div class="row">
     <div class="col-md-7">
-        <h3>@ViewBag.User <small>Entered Activity Last 15 Days</small></h3>
+        <h3>@ViewBag.User <small>Entered Activity Last 60 Days</small></h3>
     </div>
     <div class="col-md-5">
         <div style="float: right">
@@ -98,7 +98,8 @@
                     if (moreinfo == "True")
                     {
                                 <span style="color: #CC4040;"> 
-                                @Html.DisplayFor(modelItem => item.AdminNotes)
+                                    See Details
+                                @*@Html.DisplayFor(modelItem => item.AdminNotes)*@
                                 </span>
                                 
                     }
@@ -110,8 +111,8 @@
                         <td>
                             <a href="@Url.Action("Edit", "Daily", new { id = item.AdminDailyID })" class="btn btn-info btn-xs">
                                 Edit <i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>| <a href="@Url.Action("Details", "Daily", new { id = item.AdminDailyID })" class="btn btn-success btn-xs">
-                                    Details <i class="fa fa-list" aria-hidden="true"></i></a>| <a href="@Url.Action("Delete", "Daily", new { id = item.AdminDailyID })" class="btn btn-danger btn-xs">
-                                        Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                                Details <i class="fa fa-list" aria-hidden="true"></i></a>| <a href="@Url.Action("Delete", "Daily", new { id = item.AdminDailyID })" class="btn btn-danger btn-xs">
+                                Delete <i class="fa fa-times-circle" aria-hidden="true"></i></a>
                         </td>
                     </tr>
                    

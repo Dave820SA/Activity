@@ -43,21 +43,23 @@ namespace GrantActivity.Controllers
         private void  sortByItems()
         {
             List<SelectListItem> sortBy = new List<SelectListItem>();
-            sortBy.Add(new SelectListItem { Text = "All", Value = "1" });
+            sortBy.Add(new SelectListItem { Text = "All Last 60 Days", Value = "1" });
             sortBy.Add(new SelectListItem { Text = "More Info", Value = "2" });
             sortBy.Add(new SelectListItem { Text = "Approved", Value = "3" });
             sortBy.Add(new SelectListItem { Text = "Not Approved", Value = "4" });
+            //sortBy.Add(new SelectListItem { Text = "All", Value = "5" });
             ViewBag.SortBy = new SelectList(sortBy, "Value", "Text", "1");
         }
 
 
         private IList<GrantBusinessLayer.Grant_Daily> activies(int userId, string selectedItem) 
         {
+            var baseline = DateTime.Now.AddDays(-60);
+
             var dailyactivities = from d in db.Grant_Daily.Where(d => d.AppEntityID == userId)
+                                      .OrderByDescending(date => date.EnteredDate)
                                   select d;
-
-            var baseline = DateTime.Now.AddDays(-15);
-
+            
             switch (selectedItem)
             {
                 case "2":
@@ -73,6 +75,10 @@ namespace GrantActivity.Controllers
                     dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.ApprovedFlag == false)
                         .OrderByDescending(date => date.EnteredDate);
                     break;
+                //case "5":
+                //    dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId)
+                //         .OrderByDescending(date => date.EnteredDate);
+                //    break;
                 default:
                     dailyactivities = dailyactivities.Where(d => d.AppEntityID == userId && d.EnteredDate >= baseline)
                        .OrderByDescending(date => date.EnteredDate);

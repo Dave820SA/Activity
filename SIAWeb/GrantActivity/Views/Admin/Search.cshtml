@@ -4,133 +4,136 @@
     ViewBag.Title = "View Activity";
 }
 
-<div class="row">
-    <div class="col-md-7">
-        <h3>Entered Activity <small> @ViewBag.SearchInfo</small></h3>
-    </div>
-    <div class="col-xs-12 col-md-12 ">
-        @using (Html.BeginForm("Search", "Admin", FormMethod.Get))
-        { 
+<div class="container">
+    <div class="row">
+        <div class="col-md-7">
+            <h3>
+                Entered Activity <small>@ViewBag.SearchInfo</small></h3>
+        </div>
+        <div class="col-xs-12 col-md-12 ">
+            @using (Html.BeginForm("Search", "Admin", FormMethod.Get))
+            { 
                 
-            <div class="container">
-                <div class='col-md-4'>
-                    <div class="form-group">
-                        <text>From Date</text>
-                        <div class='input-group date' id='datetimepicker6'>
-                            
-                            @Html.TextBox("searchFrom", null, new { @class = "form-control" })
-                            <span class="input-group-addon"><span class="fa fa-calendar" data-toggle="tooltip"
-                                title="Click to see calendar!"></span></span>
+                <div class="container">
+                    <div class='col-md-4'>
+                        <div class="form-group">
+                            <text>From Date</text>
+                            <div class='input-group date' id='datetimepicker6'>
+                                @Html.TextBox("searchFrom", null, new { @class = "form-control" })
+                                <span class="input-group-addon"><span class="fa fa-calendar" data-toggle="tooltip"
+                                    title="Click to see calendar!"></span></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class='col-md-4'>
-                    <div class="form-group">
-                        <text>To Date</text>
-                        <div class='input-group date' id='datetimepicker7'>
-                            @Html.TextBox("searchTo", null, new { @class = "form-control" })
-                            <span class="input-group-addon"><span class="fa fa-calendar" data-toggle="tooltip"
-                                title="Click to see calendar!"></span></span>
+                    <div class='col-md-4'>
+                        <div class="form-group">
+                            <text>To Date</text>
+                            <div class='input-group date' id='datetimepicker7'>
+                                @Html.TextBox("searchTo", null, new { @class = "form-control" })
+                                <span class="input-group-addon"><span class="fa fa-calendar" data-toggle="tooltip"
+                                    title="Click to see calendar!"></span></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class='col-md-3'>
-                    <text>&nbsp;</text>
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-info btn-md" style="margin-bottom: 5px" value="Search" />
+                    <div class='col-md-3'>
+                        <text>&nbsp;</text>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-info btn-md" style="margin-bottom: 5px" value="Search" />
+                        </div>
                     </div>
-                </div>
-            </div> 
+                </div> 
                 
-            }
+        }
+        </div>
     </div>
 </div>
-
 <br />
 
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-                  
             <table class="table table-condensed table-hover">
-                <tr>
-                   
-                    <th>
-                        @Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)
-                    </th>
-                    <th>
-                        Entered By
-                        @*@Html.DisplayNameFor(model => model.Person.FirstName & " " & model.Person.LastName)*@
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DailyStart)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DailyEnd)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.ApprovedFlag)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.MoreInformationFlag)
-                    </th>
-                   @* <th>
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Grant_GrantType.GrantType)
+                        </th>
+                        <th>
+                            Entered By @*@Html.DisplayNameFor(model => model.Person.FirstName & " " & model.Person.LastName)*@
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DailyStart)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DailyEnd)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ApprovedFlag)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MoreInformationFlag)
+                        </th>
+                        @* <th>
                         @Html.DisplayNameFor(model => model.Approvel.Approver)
                     </th>*@
-                    <th>
-                    </th>
-                </tr>
-                @foreach (var item in Model)
-                {
-                    @Html.HiddenFor(modelItem => item.AppEntityID)
-                                        <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Grant_GrantType.GrantType)
-                        </td>
-                        <td>
-                            @(String.Format("{0} {1}", item.Person.FirstName, item.Person.LastName))
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DailyStart)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DailyEnd)
-                        </td>
-                        <td style="max-height: 10px">
-                            @{
-                    string approve = (item.ApprovedFlag).ToString();
-                    if (approve == "True")
+                        <th>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
                     {
-                                            <img src="~/Images/Check_Round.png" alt="" class="image_background" />
-                    }
-                    else
-                    {
-                                            <img src="~/Images/red-minus.png" alt="" class="image_background" />
-                    } 
-                              }
-                        </td>
-                        <td>
-                            @{
-                    string moreinfo = (item.MoreInformationFlag).ToString();
+                        @Html.HiddenFor(modelItem => item.AppEntityID)
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Grant_GrantType.GrantType)
+                            </td>
+                            <td style="width: 220px">
+                                @(String.Format("{0} {1}", item.Person.FirstName, item.Person.LastName))
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DailyStart)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DailyEnd)
+                            </td>
+                            <td >
+                                @{
+                                    string approve = (item.ApprovedFlag).ToString();
+                                    if (approve == "True")
+                                    {
+                                    <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                                    }
+                                    else
+                                    {
+                                    <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                                    } 
+                                }
+                            </td>
+                            <td >
+                                @{
+                                    string moreinfo = (item.MoreInformationFlag).ToString();
 
-                    if (moreinfo == "True")
-                    {
-                                <img src="~/Images/Check_Round.png" alt="" class="image_background" />
-                    }
-                    else
-                    {
-                                <img src="~/Images/red-minus.png" alt="" class="image_background" />
-                    } }
-                        </td>
-                       @* <th>
+                                    if (moreinfo == "True")
+                                    {
+                                    <img src="~/Images/Check_Round.png" alt="" class="image_background" />
+                                    }
+                                else
+                                {
+                                    <img src="~/Images/red-minus.png" alt="" class="image_background" />
+                                    } 
+                                }
+                            </td>
+                            @* <th>
                             @Html.DisplayFor(modelItem => item.Approvel.Approver)
                         </th>*@
-                        <td>
-                            <a href="@Url.Action("SearchDetails", "Admin", new { id = item.AdminDailyID })" class="btn btn-success btn-xs">
-                                Details <i class="fa fa-list" aria-hidden="true"></i></a>
-                        </td>
-                    </tr>
+                            <td>
+                                <a href="@Url.Action("SearchDetails", "Admin", new { id = item.AdminDailyID })" class="btn btn-success btn-xs">
+                                    Details <i class="fa fa-list" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
                 }
+                </tbody>
             </table>
         </div>
     </div>
@@ -164,33 +167,7 @@
           });
       });
    </script>
-//      $(function () {
-//          $('#searchFrom').datepicker({
-//              dateFormat: "mm/dd/yy",
-//              changeMonth: true,
-//              changeYear: true
-//          });
-//      });
-
-//      $(function () {
-//          $('#searchTo').datepicker({
-//              dateFormat: "mm/dd/yy",
-//              changeMonth: true,
-//              changeYear: true
-//          });
-//      });
-
-
-//      $("#searchTo").change(function () {
-//          var startDate = document.getElementById("searchFrom").value;
-//          var endDate = document.getElementById("searchTo").value;
-
-//          if ((Date.parse(startDate) >= Date.parse(endDate))) {
-//              alert("End date should be greater than Start date");
-//              document.getElementById("searchTo").value = "";
-//          }
-//      });
-
-  
-
 }
+
+
+
