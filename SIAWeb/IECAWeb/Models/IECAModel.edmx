@@ -7,14 +7,12 @@
     <Schema Namespace="IECAModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="IECAModelStoreContainer">
           <EntitySet Name="IECA_AuditHistrory" EntityType="IECAModel.Store.IECA_AuditHistrory" store:Type="Tables" Schema="dbo" Table="IECA.AuditHistrory" />
-          <EntitySet Name="Person_AppEntity" EntityType="IECAModel.Store.Person_AppEntity" store:Type="Tables" store:Schema="dbo" store:Name="Person.AppEntity">
-            <DefiningQuery>SELECT 
-      [Person_AppEntity].[AppEntityID] AS [AppEntityID], 
-      [Person_AppEntity].[rowguid] AS [rowguid], 
-      [Person_AppEntity].[ModifiedDate] AS [ModifiedDate], 
-      [Person_AppEntity].[PAUserID] AS [PAUserID]
-      FROM [dbo].[Person.AppEntity] AS [Person_AppEntity]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="IECA_AuditNotes" EntityType="IECAModel.Store.IECA_AuditNotes" store:Type="Tables" Schema="dbo" Table="IECA.AuditNotes" />
+          <EntitySet Name="IECA_AuditNoteType" EntityType="IECAModel.Store.IECA_AuditNoteType" store:Type="Tables" Schema="dbo" Table="IECA.AuditNoteType" />
+          <EntitySet Name="IECA_AuditOffice" EntityType="IECAModel.Store.IECA_AuditOffice" store:Type="Tables" Schema="dbo" Table="IECA.AuditOffice" />
+          <EntitySet Name="IECA_Question" EntityType="IECAModel.Store.IECA_Question" store:Type="Tables" Schema="dbo" Table="IECA.Question" />
+          <EntitySet Name="Office_Office" EntityType="IECAModel.Store.Office_Office" store:Type="Tables" Schema="dbo" Table="Office.Office" />
+          <EntitySet Name="Person_AppEntity" EntityType="IECAModel.Store.Person_AppEntity" store:Type="Tables" Schema="dbo" Table="Person.AppEntity" />
           <EntitySet Name="Person_Person" EntityType="IECAModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
           <EntitySet Name="User_User" EntityType="IECAModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
           <EntitySet Name="Grant_vActivityApprover" EntityType="IECAModel.Store.Grant_vActivityApprover" store:Type="Views" store:Schema="dbo" store:Name="Grant.vActivityApprover">
@@ -23,6 +21,30 @@
       [Grant_vActivityApprover].[ApproveBy] AS [ApproveBy]
       FROM [dbo].[Grant.vActivityApprover] AS [Grant_vActivityApprover]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_IECA_AuditHistrory_Office_Office" Association="IECAModel.Store.FK_IECA_AuditHistrory_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="IECA_AuditHistrory" EntitySet="IECA_AuditHistrory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IECA_AuditNotes_IECA_AuditHistrory" Association="IECAModel.Store.FK_IECA_AuditNotes_IECA_AuditHistrory">
+            <End Role="IECA_AuditHistrory" EntitySet="IECA_AuditHistrory" />
+            <End Role="IECA_AuditNotes" EntitySet="IECA_AuditNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IECA_AuditNotes_IECA_AuditNoteType" Association="IECAModel.Store.FK_IECA_AuditNotes_IECA_AuditNoteType">
+            <End Role="IECA_AuditNoteType" EntitySet="IECA_AuditNoteType" />
+            <End Role="IECA_AuditNotes" EntitySet="IECA_AuditNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IECA_AuditNotes_IECA_Question" Association="IECAModel.Store.FK_IECA_AuditNotes_IECA_Question">
+            <End Role="IECA_Question" EntitySet="IECA_Question" />
+            <End Role="IECA_AuditNotes" EntitySet="IECA_AuditNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IECA_AuditOffice_Office_Office" Association="IECAModel.Store.FK_IECA_AuditOffice_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="IECA_AuditOffice" EntitySet="IECA_AuditOffice" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Office_Office" Association="IECAModel.Store.FK_User_User_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
           <AssociationSet Name="FK_User_User_Person_Person" Association="IECAModel.Store.FK_User_User_Person_Person">
             <End Role="Person_Person" EntitySet="Person_Person" />
             <End Role="User_User" EntitySet="User_User" />
@@ -36,18 +58,64 @@
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="OfficeID" Type="int" Nullable="false" />
           <Property Name="CaseAuditFlag" Type="bit" />
-          <Property Name="AuditNotes" Type="varchar(max)" />
           <Property Name="AuditDate" Type="datetime" />
           <Property Name="InsertDate" Type="datetime" />
-          <Property Name="AuditByID" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDActivity.dbo.Person.AppEntity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
+        <EntityType Name="IECA_AuditNotes">
+          <Key>
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Name="NoteID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="NoteTypeID" Type="int" Nullable="false" />
+          <Property Name="AuditHistID" Type="int" Nullable="false" />
+          <Property Name="AuditQuestionID" Type="int" />
+          <Property Name="AuditNotes" Type="varchar(max)" Nullable="false" />
+          <Property Name="NoteByID" Type="int" Nullable="false" />
+          <Property Name="NoteDate" Type="datetime" Nullable="false" />
+          <Property Name="FollowupFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IECA_AuditNoteType">
+          <Key>
+            <PropertyRef Name="AuditNoteTypeID" />
+          </Key>
+          <Property Name="AuditNoteTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AuditNoteType" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="IECA_AuditOffice">
+          <Key>
+            <PropertyRef Name="AuditOfficeID" />
+          </Key>
+          <Property Name="AuditOfficeID" Type="int" Nullable="false" />
+          <Property Name="VisibleFlag" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="IECA_Question">
+          <Key>
+            <PropertyRef Name="AuditQuestionID" />
+          </Key>
+          <Property Name="AuditQuestionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AllOfficesFlag" Type="bit" />
+          <Property Name="OfficeID" Type="int" />
+          <Property Name="QuestionNbr" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Question" Type="varchar" Nullable="false" MaxLength="500" />
+          <Property Name="VisibleFlag" Type="bit" Nullable="false" />
+          <Property Name="QuestionRank" Type="int" />
+        </EntityType>
+        <EntityType Name="Office_Office">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Name="OfficeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DivisionSectionID" Type="int" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Ranking" Type="int" />
+          <Property Name="Visible" Type="bit" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="PAOfficeID" Type="int" />
+        </EntityType>
         <EntityType Name="Person_AppEntity">
           <Key>
             <PropertyRef Name="AppEntityID" />
-            
           </Key>
           <Property Name="AppEntityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
@@ -76,9 +144,14 @@
           <Property Name="PIN" Type="varchar" MaxLength="8" />
           <Property Name="SAP" Type="varchar" MaxLength="8" />
           <Property Name="CADID" Type="int" />
-          <Property Name="JobTitleID" Type="int" />
-          <Property Name="ClassificationID" Type="int" />
           <Property Name="Badge" Type="varchar" MaxLength="6" />
+          <Property Name="JobTitleID" Type="int" />
+          <Property Name="OfficeID" Type="int" />
+          <Property Name="SectionID" Type="int" />
+          <Property Name="RDID" Type="int" />
+          <Property Name="ClassificationID" Type="int" />
+          <Property Name="ShiftID" Type="int" />
+          <Property Name="WorkStatusID" Type="int" />
           <Property Name="DOB" Type="date" />
           <Property Name="Gender" Type="nchar" MaxLength="1" />
           <Property Name="Ethnicty" Type="nchar" MaxLength="1" />
@@ -89,15 +162,87 @@
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDActivity.dbo.Grant.vActivityApprover' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      warning 6002: The table/view 'SAPDACTIVITY.dbo.Grant.vActivityApprover' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
       -->
         <EntityType Name="Grant_vActivityApprover">
           <Key>
             <PropertyRef Name="AppEntityID" />
           </Key>
           <Property Name="AppEntityID" Type="int" Nullable="false" />
-          <Property Name="ApproveBy" Type="varchar" MaxLength="111" />
+          <Property Name="ApproveBy" Type="varchar" MaxLength="110" />
         </EntityType>
+        <Association Name="FK_IECA_AuditHistrory_Office_Office">
+          <End Role="Office_Office" Type="IECAModel.Store.Office_Office" Multiplicity="1" />
+          <End Role="IECA_AuditHistrory" Type="IECAModel.Store.IECA_AuditHistrory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="IECA_AuditHistrory">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IECA_AuditNotes_IECA_AuditHistrory">
+          <End Role="IECA_AuditHistrory" Type="IECAModel.Store.IECA_AuditHistrory" Multiplicity="1" />
+          <End Role="IECA_AuditNotes" Type="IECAModel.Store.IECA_AuditNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IECA_AuditHistrory">
+              <PropertyRef Name="IECAID" />
+            </Principal>
+            <Dependent Role="IECA_AuditNotes">
+              <PropertyRef Name="AuditHistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IECA_AuditNotes_IECA_AuditNoteType">
+          <End Role="IECA_AuditNoteType" Type="IECAModel.Store.IECA_AuditNoteType" Multiplicity="1" />
+          <End Role="IECA_AuditNotes" Type="IECAModel.Store.IECA_AuditNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IECA_AuditNoteType">
+              <PropertyRef Name="AuditNoteTypeID" />
+            </Principal>
+            <Dependent Role="IECA_AuditNotes">
+              <PropertyRef Name="NoteTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IECA_AuditNotes_IECA_Question">
+          <End Role="IECA_Question" Type="IECAModel.Store.IECA_Question" Multiplicity="0..1" />
+          <End Role="IECA_AuditNotes" Type="IECAModel.Store.IECA_AuditNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IECA_Question">
+              <PropertyRef Name="AuditQuestionID" />
+            </Principal>
+            <Dependent Role="IECA_AuditNotes">
+              <PropertyRef Name="AuditQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IECA_AuditOffice_Office_Office">
+          <End Role="Office_Office" Type="IECAModel.Store.Office_Office" Multiplicity="1" />
+          <End Role="IECA_AuditOffice" Type="IECAModel.Store.IECA_AuditOffice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="IECA_AuditOffice">
+              <PropertyRef Name="AuditOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_Office_Office">
+          <End Role="Office_Office" Type="IECAModel.Store.Office_Office" Multiplicity="0..1" />
+          <End Role="User_User" Type="IECAModel.Store.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_User_Person_Person">
           <End Role="Person_Person" Type="IECAModel.Store.Person_Person" Multiplicity="1" />
           <End Role="User_User" Type="IECAModel.Store.User_User" Multiplicity="0..1" />
@@ -119,58 +264,61 @@
     <edmx:ConceptualModels>
       <Schema Namespace="IECAModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
         <EntityContainer Name="AuditEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="AuditHistrories" EntityType="IECAModel.AuditHistrory" />
-          <EntitySet Name="AppEntities" EntityType="IECAModel.AppEntity" />
           <EntitySet Name="Officers" EntityType="IECAModel.Officer" />
-          <AssociationSet Name="AppEntityAuditHistrory" Association="IECAModel.AppEntityAuditHistrory">
-            <End Role="AppEntity" EntitySet="AppEntities" />
-            <End Role="AuditHistrory" EntitySet="AuditHistrories" />
-          </AssociationSet>
-          <AssociationSet Name="OfficerAppEntity" Association="IECAModel.OfficerAppEntity">
-            <End Role="Officer" EntitySet="Officers" />
-            <End Role="AppEntity" EntitySet="AppEntities" />
-          </AssociationSet>
           <EntitySet Name="User_User" EntityType="IECAModel.User_User" />
           <AssociationSet Name="FK_User_User_Person_Person" Association="IECAModel.FK_User_User_Person_Person">
             <End Role="Officer" EntitySet="Officers" />
             <End Role="User_User" EntitySet="User_User" />
           </AssociationSet>
           <EntitySet Name="Auditors" EntityType="IECAModel.Auditor" />
-          <AssociationSet Name="Grant_vActivityApproverAuditHistrory" Association="IECAModel.Grant_vActivityApproverAuditHistrory">
-            <End Role="Grant_vActivityApprover" EntitySet="Auditors" />
-            <End Role="AuditHistrory" EntitySet="AuditHistrories" />
-          </AssociationSet>
           <FunctionImport Name="spEnterAuditOfficers">
             <Parameter Name="OfficeID" Mode="In" Type="Int32" />
             <Parameter Name="AuditDate" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Sup_AuditNotes" EntityType="IECAModel.Sup_AuditNotes" />
+          <EntitySet Name="NoteTypes" EntityType="IECAModel.NoteType" />
+          <EntitySet Name="AuditOffices" EntityType="IECAModel.AuditOffice" />
+          <EntitySet Name="Audit_Question" EntityType="IECAModel.Audit_Question" />
+          <AssociationSet Name="FK_IECA_AuditNotes_IECA_AuditNoteType" Association="IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType">
+            <End Role="IECA_AuditNoteType" EntitySet="NoteTypes" />
+            <End Role="IECA_AuditNotes" EntitySet="Sup_AuditNotes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IECA_AuditNotes_IECA_Question" Association="IECAModel.FK_IECA_AuditNotes_IECA_Question">
+            <End Role="IECA_Question" EntitySet="Audit_Question" />
+            <End Role="IECA_AuditNotes" EntitySet="Sup_AuditNotes" />
+          </AssociationSet>
+          <EntitySet Name="Offices" EntityType="IECAModel.Office" />
+          <AssociationSet Name="FK_IECA_AuditOffice_Office_Office" Association="IECAModel.FK_IECA_AuditOffice_Office_Office">
+            <End Role="Office_Office" EntitySet="Offices" />
+            <End Role="IECA_AuditOffice" EntitySet="AuditOffices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Office_Office" Association="IECAModel.FK_User_User_Office_Office">
+            <End Role="Office_Office" EntitySet="Offices" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="AuditorSup_AuditNotes" Association="IECAModel.AuditorSup_AuditNotes">
+            <End Role="Auditor" EntitySet="Auditors" />
+            <End Role="Sup_AuditNotes" EntitySet="Sup_AuditNotes" />
+          </AssociationSet>
+          <EntitySet Name="AuditHistrories" EntityType="IECAModel.AuditHistrory" />
+          <AssociationSet Name="FK_IECA_AuditHistrory_Office_Office" Association="IECAModel.FK_IECA_AuditHistrory_Office_Office">
+            <End Role="Office" EntitySet="Offices" />
+            <End Role="IECA_AuditHistrory" EntitySet="AuditHistrories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IECA_AuditNotes_IECA_AuditHistrory" Association="IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory">
+            <End Role="IECA_AuditHistrory" EntitySet="AuditHistrories" />
+            <End Role="Sup_AuditNotes" EntitySet="Sup_AuditNotes" />
+          </AssociationSet>
+          <EntitySet Name="AppEntities" EntityType="IECAModel.AppEntity" />
+          <AssociationSet Name="AppEntityOfficer" Association="IECAModel.AppEntityOfficer">
+            <End Role="AppEntity" EntitySet="AppEntities" />
+            <End Role="Officer" EntitySet="Officers" />
+          </AssociationSet>
+          <AssociationSet Name="AppEntityAuditHistrory" Association="IECAModel.AppEntityAuditHistrory">
+            <End Role="AppEntity" EntitySet="AppEntities" />
+            <End Role="AuditHistrory" EntitySet="AuditHistrories" />
+          </AssociationSet>
           </EntityContainer>
-        <EntityType Name="AuditHistrory">
-          <Key>
-            <PropertyRef Name="IECAID" />
-          </Key>
-          <Property Name="IECAID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="AppEntityID" Type="Int32" Nullable="false" />
-          <Property Name="OfficeID" Type="Int32" Nullable="false" />
-          <Property Name="CaseAuditFlag" Type="Boolean" />
-          <Property Name="AuditNotes" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
-          <Property Name="AuditDate" Type="DateTime" />
-          <NavigationProperty Name="AppEntity" Relationship="IECAModel.AppEntityAuditHistrory" FromRole="AuditHistrory" ToRole="AppEntity" />
-          <Property Type="Int32" Name="AuditByID" />
-          <NavigationProperty Name="Grant_vActivityApprover" Relationship="IECAModel.Grant_vActivityApproverAuditHistrory" FromRole="AuditHistrory" ToRole="Grant_vActivityApprover" />
-          <Property Type="DateTime" Name="InsertDate" />
-        </EntityType>
-        <EntityType Name="AppEntity">
-          <Key>
-            <PropertyRef Name="AppEntityID" />
-          </Key>
-          <Property Name="AppEntityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="rowguid" Type="Guid" Nullable="false" />
-          <Property Name="ModifiedDate" Type="DateTime" />
-          <Property Name="PAUserID" Type="Int32" />
-          <NavigationProperty Name="AuditHistrories" Relationship="IECAModel.AppEntityAuditHistrory" FromRole="AppEntity" ToRole="AuditHistrory" />
-          <NavigationProperty Name="Officer" Relationship="IECAModel.OfficerAppEntity" FromRole="AppEntity" ToRole="Officer" />
-        </EntityType>
         <EntityType Name="Officer">
           <Key>
             <PropertyRef Name="AppEntityID" />
@@ -184,33 +332,9 @@
           <Property Name="Suffix" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="rowguid" Type="Guid" />
           <Property Name="ModifiedDate" Type="DateTime" />
-          <NavigationProperty Name="AppEntity" Relationship="IECAModel.OfficerAppEntity" FromRole="Officer" ToRole="AppEntity" />
           <NavigationProperty Name="User_User" Relationship="IECAModel.FK_User_User_Person_Person" FromRole="Officer" ToRole="User_User" />
+          <NavigationProperty Name="AppEntity" Relationship="IECAModel.AppEntityOfficer" FromRole="Officer" ToRole="AppEntity" />
         </EntityType>
-        <Association Name="AppEntityAuditHistrory">
-          <End Type="IECAModel.AppEntity" Role="AppEntity" Multiplicity="1" />
-          <End Type="IECAModel.AuditHistrory" Role="AuditHistrory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AppEntity">
-              <PropertyRef Name="AppEntityID" />
-            </Principal>
-            <Dependent Role="AuditHistrory">
-              <PropertyRef Name="AppEntityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="OfficerAppEntity">
-          <End Type="IECAModel.Officer" Role="Officer" Multiplicity="1" />
-          <End Type="IECAModel.AppEntity" Role="AppEntity" Multiplicity="1" />
-          <ReferentialConstraint>
-            <Principal Role="AppEntity">
-              <PropertyRef Name="AppEntityID" />
-            </Principal>
-            <Dependent Role="Officer">
-              <PropertyRef Name="AppEntityID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="User_User">
           <Key>
             <PropertyRef Name="AppEntityID" />
@@ -231,6 +355,12 @@
           <Property Type="Boolean" Name="WorksheetVisibleFlag" />
           <Property Type="DateTime" Name="ModifiedDate" />
           <NavigationProperty Name="Person_Person" Relationship="IECAModel.FK_User_User_Person_Person" FromRole="User_User" ToRole="Officer" />
+          <Property Type="Int32" Name="OfficeID" />
+          <Property Type="Int32" Name="SectionID" />
+          <Property Type="Int32" Name="RDID" />
+          <Property Type="Int32" Name="ShiftID" />
+          <Property Type="Int32" Name="WorkStatusID" />
+          <NavigationProperty Name="Office_Office" Relationship="IECAModel.FK_User_User_Office_Office" FromRole="User_User" ToRole="Office_Office" />
         </EntityType>
         <Association Name="FK_User_User_Person_Person">
           <End Type="IECAModel.Officer" Role="Officer" Multiplicity="1" />
@@ -250,17 +380,200 @@
           </Key>
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="String" Name="ApproveBy" MaxLength="111" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AuditHistrories" Relationship="IECAModel.Grant_vActivityApproverAuditHistrory" FromRole="Grant_vActivityApprover" ToRole="AuditHistrory" />
+          <NavigationProperty Name="Sup_AuditNotes" Relationship="IECAModel.AuditorSup_AuditNotes" FromRole="Auditor" ToRole="Sup_AuditNotes" />
         </EntityType>
-        <Association Name="Grant_vActivityApproverAuditHistrory">
-          <End Type="IECAModel.Auditor" Role="Grant_vActivityApprover" Multiplicity="0..1" />
+        <EntityType Name="Sup_AuditNotes">
+          <Key>
+            <PropertyRef Name="NoteID" />
+          </Key>
+          <Property Type="Int32" Name="NoteID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="NoteTypeID" Nullable="false" />
+          <Property Type="Int32" Name="AuditHistID" Nullable="false" />
+          <Property Type="Int32" Name="AuditQuestionID" />
+          <Property Type="String" Name="AuditNotes" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="NoteByID" Nullable="false" />
+          <Property Type="DateTime" Name="NoteDate" Nullable="false" />
+          <Property Type="Boolean" Name="FollowupFlag" Nullable="false" />
+          <NavigationProperty Name="IECA_AuditNoteType" Relationship="IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType" FromRole="IECA_AuditNotes" ToRole="IECA_AuditNoteType" />
+          <NavigationProperty Name="IECA_Question" Relationship="IECAModel.FK_IECA_AuditNotes_IECA_Question" FromRole="IECA_AuditNotes" ToRole="IECA_Question" />
+          <NavigationProperty Name="Auditor" Relationship="IECAModel.AuditorSup_AuditNotes" FromRole="Sup_AuditNotes" ToRole="Auditor" />
+          <NavigationProperty Name="IECA_AuditHistrory" Relationship="IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory" FromRole="Sup_AuditNotes" ToRole="IECA_AuditHistrory" />
+        </EntityType>
+        <EntityType Name="NoteType">
+          <Key>
+            <PropertyRef Name="AuditNoteTypeID" />
+          </Key>
+          <Property Type="Int32" Name="AuditNoteTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AuditNoteType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="IECA_AuditNotes" Relationship="IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType" FromRole="IECA_AuditNoteType" ToRole="IECA_AuditNotes" />
+        </EntityType>
+        <EntityType Name="AuditOffice">
+          <Key>
+            <PropertyRef Name="AuditOfficeID" />
+          </Key>
+          <Property Type="Int32" Name="AuditOfficeID" Nullable="false" />
+          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
+          <NavigationProperty Name="Office_Office" Relationship="IECAModel.FK_IECA_AuditOffice_Office_Office" FromRole="IECA_AuditOffice" ToRole="Office_Office" />
+        </EntityType>
+        <EntityType Name="Audit_Question">
+          <Key>
+            <PropertyRef Name="AuditQuestionID" />
+          </Key>
+          <Property Type="Int32" Name="AuditQuestionID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="AllOfficesFlag" />
+          <Property Type="Int32" Name="OfficeID" />
+          <Property Type="String" Name="QuestionNbr" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Question" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
+          <Property Type="Int32" Name="QuestionRank" />
+          <NavigationProperty Name="IECA_AuditNotes" Relationship="IECAModel.FK_IECA_AuditNotes_IECA_Question" FromRole="IECA_Question" ToRole="IECA_AuditNotes" />
+        </EntityType>
+        <Association Name="FK_IECA_AuditNotes_IECA_AuditNoteType">
+          <End Type="IECAModel.NoteType" Role="IECA_AuditNoteType" Multiplicity="1" />
+          <End Type="IECAModel.Sup_AuditNotes" Role="IECA_AuditNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IECA_AuditNoteType">
+              <PropertyRef Name="AuditNoteTypeID" />
+            </Principal>
+            <Dependent Role="IECA_AuditNotes">
+              <PropertyRef Name="NoteTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IECA_AuditNotes_IECA_Question">
+          <End Type="IECAModel.Audit_Question" Role="IECA_Question" Multiplicity="0..1" />
+          <End Type="IECAModel.Sup_AuditNotes" Role="IECA_AuditNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IECA_Question">
+              <PropertyRef Name="AuditQuestionID" />
+            </Principal>
+            <Dependent Role="IECA_AuditNotes">
+              <PropertyRef Name="AuditQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Office">
+          <Key>
+            <PropertyRef Name="OfficeID" />
+          </Key>
+          <Property Type="Int32" Name="OfficeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DivisionSectionID" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Ranking" />
+          <Property Type="Boolean" Name="Visible" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="Int32" Name="PAOfficeID" />
+          <NavigationProperty Name="IECA_AuditOffice" Relationship="IECAModel.FK_IECA_AuditOffice_Office_Office" FromRole="Office_Office" ToRole="IECA_AuditOffice" />
+          <NavigationProperty Name="User_User" Relationship="IECAModel.FK_User_User_Office_Office" FromRole="Office_Office" ToRole="User_User" />
+          <NavigationProperty Name="IECA_AuditHistrory" Relationship="IECAModel.FK_IECA_AuditHistrory_Office_Office" FromRole="Office" ToRole="IECA_AuditHistrory" />
+        </EntityType>
+        <Association Name="FK_IECA_AuditOffice_Office_Office">
+          <End Type="IECAModel.Office" Role="Office_Office" Multiplicity="1" />
+          <End Type="IECAModel.AuditOffice" Role="IECA_AuditOffice" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="IECA_AuditOffice">
+              <PropertyRef Name="AuditOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_Office_Office">
+          <End Type="IECAModel.Office" Role="Office_Office" Multiplicity="0..1" />
+          <End Type="IECAModel.User_User" Role="User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AuditorSup_AuditNotes">
+          <End Type="IECAModel.Auditor" Role="Auditor" Multiplicity="1" />
+          <End Type="IECAModel.Sup_AuditNotes" Role="Sup_AuditNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Auditor">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="Sup_AuditNotes">
+              <PropertyRef Name="NoteByID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AuditHistrory">
+          <Key>
+            <PropertyRef Name="IECAID" />
+          </Key>
+          <Property Type="Int32" Name="IECAID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="OfficeID" Nullable="false" />
+          <Property Type="Boolean" Name="CaseAuditFlag" />
+          <Property Type="DateTime" Name="AuditDate" />
+          <Property Type="DateTime" Name="InsertDate" />
+          <NavigationProperty Name="Office_Office" Relationship="IECAModel.FK_IECA_AuditHistrory_Office_Office" FromRole="IECA_AuditHistrory" ToRole="Office" />
+          <NavigationProperty Name="IECA_AuditNotes" Relationship="IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory" FromRole="IECA_AuditHistrory" ToRole="Sup_AuditNotes" />
+          <NavigationProperty Name="AppEntity" Relationship="IECAModel.AppEntityAuditHistrory" FromRole="AuditHistrory" ToRole="AppEntity" />
+        </EntityType>
+        <Association Name="FK_IECA_AuditHistrory_Office_Office">
+          <End Type="IECAModel.Office" Role="Office" Multiplicity="1" />
+          <End Type="IECAModel.AuditHistrory" Role="IECA_AuditHistrory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="IECA_AuditHistrory">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IECA_AuditNotes_IECA_AuditHistrory">
+          <End Type="IECAModel.AuditHistrory" Role="IECA_AuditHistrory" Multiplicity="1" />
+          <End Type="IECAModel.Sup_AuditNotes" Role="Sup_AuditNotes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IECA_AuditHistrory">
+              <PropertyRef Name="IECAID" />
+            </Principal>
+            <Dependent Role="Sup_AuditNotes">
+              <PropertyRef Name="AuditHistID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AppEntity">
+          <Key>
+            <PropertyRef Name="AppEntityID" />
+          </Key>
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Guid" Name="rowguid" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="Int32" Name="PAUserID" />
+          <NavigationProperty Name="Officer" Relationship="IECAModel.AppEntityOfficer" FromRole="AppEntity" ToRole="Officer" />
+          <NavigationProperty Name="AuditHistrories" Relationship="IECAModel.AppEntityAuditHistrory" FromRole="AppEntity" ToRole="AuditHistrory" />
+        </EntityType>
+        <Association Name="AppEntityOfficer">
+          <End Type="IECAModel.AppEntity" Role="AppEntity" Multiplicity="1" />
+          <End Type="IECAModel.Officer" Role="Officer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="AppEntity">
+              <PropertyRef Name="AppEntityID" />
+            </Principal>
+            <Dependent Role="Officer">
+              <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AppEntityAuditHistrory">
+          <End Type="IECAModel.AppEntity" Role="AppEntity" Multiplicity="1" />
           <End Type="IECAModel.AuditHistrory" Role="AuditHistrory" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Grant_vActivityApprover">
+            <Principal Role="AppEntity">
               <PropertyRef Name="AppEntityID" />
             </Principal>
             <Dependent Role="AuditHistrory">
-              <PropertyRef Name="AuditByID" />
+              <PropertyRef Name="AppEntityID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -270,30 +583,6 @@
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="IECAModelStoreContainer" CdmEntityContainer="AuditEntities">
-          <EntitySetMapping Name="AuditHistrories">
-            <EntityTypeMapping TypeName="IECAModel.AuditHistrory">
-              <MappingFragment StoreEntitySet="IECA_AuditHistrory">
-                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
-                <ScalarProperty Name="AuditByID" ColumnName="AuditByID" />
-                <ScalarProperty Name="IECAID" ColumnName="IECAID" />
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
-                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
-                <ScalarProperty Name="CaseAuditFlag" ColumnName="CaseAuditFlag" />
-                <ScalarProperty Name="AuditNotes" ColumnName="AuditNotes" />
-                <ScalarProperty Name="AuditDate" ColumnName="AuditDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="AppEntities">
-            <EntityTypeMapping TypeName="IECAModel.AppEntity">
-              <MappingFragment StoreEntitySet="Person_AppEntity">
-                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
-                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
-                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-                <ScalarProperty Name="PAUserID" ColumnName="PAUserID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Officers">
             <EntityTypeMapping TypeName="IECAModel.Officer">
               <MappingFragment StoreEntitySet="Person_Person">
@@ -312,6 +601,11 @@
           <EntitySetMapping Name="User_User">
             <EntityTypeMapping TypeName="IECAModel.User_User">
               <MappingFragment StoreEntitySet="User_User">
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+                <ScalarProperty Name="ShiftID" ColumnName="ShiftID" />
+                <ScalarProperty Name="RDID" ColumnName="RDID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="WorksheetVisibleFlag" ColumnName="WorksheetVisibleFlag" />
                 <ScalarProperty Name="rowguid" ColumnName="rowguid" />
@@ -339,6 +633,85 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="spEnterAuditOfficers" FunctionName="IECAModel.Store.IECA_spEnterAuditOfficers" />
+          <EntitySetMapping Name="Sup_AuditNotes">
+            <EntityTypeMapping TypeName="IECAModel.Sup_AuditNotes">
+              <MappingFragment StoreEntitySet="IECA_AuditNotes">
+                <ScalarProperty Name="FollowupFlag" ColumnName="FollowupFlag" />
+                <ScalarProperty Name="NoteDate" ColumnName="NoteDate" />
+                <ScalarProperty Name="NoteByID" ColumnName="NoteByID" />
+                <ScalarProperty Name="AuditNotes" ColumnName="AuditNotes" />
+                <ScalarProperty Name="AuditQuestionID" ColumnName="AuditQuestionID" />
+                <ScalarProperty Name="AuditHistID" ColumnName="AuditHistID" />
+                <ScalarProperty Name="NoteTypeID" ColumnName="NoteTypeID" />
+                <ScalarProperty Name="NoteID" ColumnName="NoteID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NoteTypes">
+            <EntityTypeMapping TypeName="IECAModel.NoteType">
+              <MappingFragment StoreEntitySet="IECA_AuditNoteType">
+                <ScalarProperty Name="AuditNoteType" ColumnName="AuditNoteType" />
+                <ScalarProperty Name="AuditNoteTypeID" ColumnName="AuditNoteTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditOffices">
+            <EntityTypeMapping TypeName="IECAModel.AuditOffice">
+              <MappingFragment StoreEntitySet="IECA_AuditOffice">
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="AuditOfficeID" ColumnName="AuditOfficeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Audit_Question">
+            <EntityTypeMapping TypeName="IECAModel.Audit_Question">
+              <MappingFragment StoreEntitySet="IECA_Question">
+                <ScalarProperty Name="QuestionRank" ColumnName="QuestionRank" />
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="QuestionNbr" ColumnName="QuestionNbr" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="AllOfficesFlag" ColumnName="AllOfficesFlag" />
+                <ScalarProperty Name="AuditQuestionID" ColumnName="AuditQuestionID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Offices">
+            <EntityTypeMapping TypeName="IECAModel.Office">
+              <MappingFragment StoreEntitySet="Office_Office">
+                <ScalarProperty Name="PAOfficeID" ColumnName="PAOfficeID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Visible" ColumnName="Visible" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DivisionSectionID" ColumnName="DivisionSectionID" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AuditHistrories">
+            <EntityTypeMapping TypeName="IECAModel.AuditHistrory">
+              <MappingFragment StoreEntitySet="IECA_AuditHistrory">
+                <ScalarProperty Name="InsertDate" ColumnName="InsertDate" />
+                <ScalarProperty Name="AuditDate" ColumnName="AuditDate" />
+                <ScalarProperty Name="CaseAuditFlag" ColumnName="CaseAuditFlag" />
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="IECAID" ColumnName="IECAID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppEntities">
+            <EntityTypeMapping TypeName="IECAModel.AppEntity">
+              <MappingFragment StoreEntitySet="Person_AppEntity">
+                <ScalarProperty Name="PAUserID" ColumnName="PAUserID" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="rowguid" ColumnName="rowguid" />
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -359,27 +732,59 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="IECAModel">
-        <EntityTypeShape EntityType="IECAModel.AuditHistrory" Width="2" PointX="0.75" PointY="1" Height="2.9417936197916661" IsExpanded="true" />
-        <EntityTypeShape EntityType="IECAModel.AppEntity" Width="2.25" PointX="1" PointY="4.25" Height="2.1725878906249996" IsExpanded="true" />
-        <EntityTypeShape EntityType="IECAModel.Officer" Width="1.5" PointX="1.75" PointY="7" Height="3.1340950520833326" IsExpanded="true" />
-        <AssociationConnector Association="IECAModel.AppEntityAuditHistrory">
-          <ConnectorPoint PointX="1.875" PointY="4.25" />
-          <ConnectorPoint PointX="1.875" PointY="3.9417936197916661" />
-        </AssociationConnector>
-        <AssociationConnector Association="IECAModel.OfficerAppEntity">
-          <ConnectorPoint PointX="2.5" PointY="7" />
-          <ConnectorPoint PointX="2.5" PointY="6.422587890625" />
-        </AssociationConnector>
-        <EntityTypeShape EntityType="IECAModel.User_User" Width="1.5" PointX="3.875" PointY="7" Height="4.0956022135416674" />
+      <Diagram Name="IECAModel" ZoomLevel="74">
+        <EntityTypeShape EntityType="IECAModel.Officer" Width="1.5" PointX="0.75" PointY="4.625" Height="3.3927214237054191" IsExpanded="true" />
+        <EntityTypeShape EntityType="IECAModel.User_User" Width="1.5" PointX="3.375" PointY="5.125" Height="5.7112436137596756" />
         <AssociationConnector Association="IECAModel.FK_User_User_Person_Person" >
-          <ConnectorPoint PointX="3.25" PointY="8.5670475260416659" />
-          <ConnectorPoint PointX="3.875" PointY="8.5670475260416659" />
+          <ConnectorPoint PointX="2.25" PointY="6.4659733395775154" />
+          <ConnectorPoint PointX="3.375" PointY="6.4659733395775154" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="IECAModel.Auditor" Width="1.5" PointX="3.375" PointY="1.75" Height="1.59568359375" />
-        <AssociationConnector Association="IECAModel.Grant_vActivityApproverAuditHistrory">
-          <ConnectorPoint PointX="3.375" PointY="2.547841796875" />
-          <ConnectorPoint PointX="2.75" PointY="2.547841796875" />
+        <EntityTypeShape EntityType="IECAModel.Auditor" Width="1.5" PointX="11.5" PointY="6.875" Height="1.495748722751935" />
+        <EntityTypeShape EntityType="IECAModel.Sup_AuditNotes" Width="2.625" PointX="8" PointY="1.25" Height="3.6034961682558055" />
+        <EntityTypeShape EntityType="IECAModel.NoteType" Width="1.875" PointX="13.125" PointY="1.25" Height="1.7065234673023255" />
+        <EntityTypeShape EntityType="IECAModel.AuditOffice" Width="2" PointX="9.125" PointY="9" Height="1.706523467302322" />
+        <EntityTypeShape EntityType="IECAModel.Audit_Question" Width="2.5" PointX="13.375" PointY="3.375" Height="2.7603971900542561" />
+        <AssociationConnector Association="IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType" >
+          <ConnectorPoint PointX="13.125" PointY="2.1032617336511628" />
+          <ConnectorPoint PointX="10.625" PointY="2.1032617336511628" />
+        </AssociationConnector>
+        <AssociationConnector Association="IECAModel.FK_IECA_AuditNotes_IECA_Question" >
+          <ConnectorPoint PointX="13.375" PointY="4.1142480841279028" />
+          <ConnectorPoint PointX="12.333333333333334" PointY="4.1142480841279019" />
+          <ConnectorPoint PointX="12.166666666666666" PointY="4.1142480841279028" />
+          <ConnectorPoint PointX="10.625" PointY="4.1142480841279028" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="IECAModel.Office" Width="2.5" PointX="5.5" PointY="6.125" Height="3.1819466791550326" />
+        <AssociationConnector Association="IECAModel.FK_IECA_AuditOffice_Office_Office" >
+          <ConnectorPoint PointX="8" PointY="9.2588607118527086" />
+          <ConnectorPoint PointX="9.125" PointY="9.2588607118527086" />
+        </AssociationConnector>
+        <AssociationConnector Association="IECAModel.FK_User_User_Office_Office" >
+          <ConnectorPoint PointX="5.5" PointY="7.8213607118527095" />
+          <ConnectorPoint PointX="4.875" PointY="7.8213607118527095" />
+        </AssociationConnector>
+        <AssociationConnector Association="IECAModel.AuditorSup_AuditNotes">
+          <ConnectorPoint PointX="12.25" PointY="6.875" />
+          <ConnectorPoint PointX="12.25" PointY="3.1087549088895328" />
+          <ConnectorPoint PointX="10.625" PointY="3.1087549088895328" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="IECAModel.AuditHistrory" Width="1.875" PointX="4.125" PointY="0.75" Height="2.9711719346046448" />
+        <AssociationConnector Association="IECAModel.FK_IECA_AuditHistrory_Office_Office" >
+          <ConnectorPoint PointX="5.75" PointY="6.125" />
+          <ConnectorPoint PointX="5.75" PointY="3.7211719346046448" />
+        </AssociationConnector>
+        <AssociationConnector Association="IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory" >
+          <ConnectorPoint PointX="6" PointY="2.4855859673023222" />
+          <ConnectorPoint PointX="8" PointY="2.4855859673023222" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="IECAModel.AppEntity" Width="2.125" PointX="0.75" PointY="0.75" Height="1.9172982118527102" />
+        <AssociationConnector Association="IECAModel.AppEntityOfficer">
+          <ConnectorPoint PointX="1.5" PointY="2.8780729564030971" />
+          <ConnectorPoint PointX="1.5" PointY="4.625" />
+        </AssociationConnector>
+        <AssociationConnector Association="IECAModel.AppEntityAuditHistrory">
+          <ConnectorPoint PointX="2.875" PointY="1.9194238504767416" />
+          <ConnectorPoint PointX="4.125" PointY="1.9194238504767416" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

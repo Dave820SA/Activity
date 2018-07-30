@@ -24,6 +24,7 @@ namespace IECAWeb.Common
                     HttpContext.Current.Session.Add("userName", u.UserName.ToString());
                     HttpContext.Current.Session.Add("WebRole", u.WebRole.ToString());
                     HttpContext.Current.Session.Add("OfficeID", u.OfficeID.ToString());
+                    HttpContext.Current.Session.Add("OfficeCode", u.OfficeCode.ToString());
                 }
             }
             else

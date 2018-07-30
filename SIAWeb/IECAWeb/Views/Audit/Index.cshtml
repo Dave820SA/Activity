@@ -1,4 +1,4 @@
-﻿@*@model IEnumerable<IECAWeb.Models.AuditHistrory>*@
+﻿
 @model IEnumerable<IECAWeb.Models.AuditHistrory>
 
 @{
@@ -50,11 +50,11 @@
             <table class="table table-condensed table-hover" >
                 <tr>
                     <th>
-                       @*@Html.Hidden("OfficeID", ViewBag.OfficeID)*@
+                       
                         @Html.ActionLink("Officer", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
                     </th>
                     <th>
-                       Audit Complete
+                       Audit Status
                        @* @Html.ActionLink("Type", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })*@
                     </th>
                     @*<th>
@@ -76,7 +76,7 @@
                 {
                     <tr>
                         <td>
-                            @Html.Raw(String.Format("{0} {1} #{2}", item.AppEntity.Officer.FirstName, item.AppEntity.Officer.LastName, item.AppEntity.Officer.User_User.Badge))
+                           <a href="@Url.Action("", "",new{id = item.AppEntityID}, null)">@Html.Raw(String.Format("{0} {1} #{2}", item.AppEntity.Officer.FirstName, item.AppEntity.Officer.LastName, item.AppEntity.Officer.User_User.Badge))</a> 
                         </td>
                         <td>
                             @{
@@ -99,7 +99,7 @@
                             @Html.DisplayFor(modelItem => item.AuditDate)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Grant_vActivityApprover.ApproveBy)
+                            @*@Html.DisplayFor(modelItem => item.Grant_vActivityApprover.ApproveBy)*@
                         </td>
                         <td>
                             <a href="@Url.Action("Edit", "Audit", new { id = item.IECAID })" class="btn btn-info btn-xs">
@@ -126,85 +126,8 @@
 @section scripts
 {
     <script type="text/javascript">
-//        $(document).ready(function () {
-//            $('#moBack').click(function () {
-//                location.reload();
-//            });
-        //        });
-
-
-     
-
-
-//  
 
     </script>
 }
 
 
-
-
-@*@model IEnumerable<IECAWeb.Models.AuditHistrory>
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.AppEntity.AppEntityID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.OfficeID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CaseAuditFlag)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuditNotes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AuditDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.LastUpdate)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AppEntity.AppEntityID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.OfficeID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CaseAuditFlag)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuditNotes)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AuditDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.LastUpdate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IECAID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IECAID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IECAID })
-        </td>
-    </tr>
-}
-
-</table>
-*@

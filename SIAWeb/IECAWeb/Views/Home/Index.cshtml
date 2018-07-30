@@ -2,23 +2,58 @@
     ViewBag.Title = "Home Page";
 }
 
-@*<h1>@ViewBag.Title.</h1>*@
-
- <!-- Example row of columns -->
-      @*<div class="row">
-        <div class="col-lg-4">
-          <h2>Officers Assigned</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+<div class="container">
+    <div class="row">
+        <div class="columns">
+            <ul class="price">
+                <li class="header">Officers Assigned</li>
+                <li class="grey">Assigned: @ViewBag.AssignedCount</li>
+                <li>Supervisors: @ViewBag.SupAssigned</li>
+                <li>Detectives: @ViewBag.DetAssigned</li>
+                <li>Others: @ViewBag.OthAssigned</li>
+                <li class="grey"><a href="#" class="button">View Assigned</a></li>
+            </ul>
         </div>
-        <div class="col-lg-4">
-          <h2>Case Audits This Month</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-lg-4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
-          <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+        <div class="columns">
+            <ul class="price">
+                <li class="header">Case Audits</li>
+                <li class="gray" style="max-height:70px">
+                <div class="input-group">
+                @*@Html.Hidden("HideDate") = @ViewBag.AuditDate*@
+                <span class="input-group-btn">
+                @using (Html.BeginForm("Index", "Home", new { myMove = "Back", stDate = ViewBag.AuditDate }, FormMethod.Post))
+                {
+                    
+                        <button id="btnBack" type="submit" class="btn btn-default">
+                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                        </button>
+                    
+                 }
+                </span>
+                    <lable id="txtMonth" type="text" class="form-control">@ViewBag.MoName</lable>
+                
+                <span class="input-group-btn">
+                 @using (Html.BeginForm("Index", "Home", new { myMove = "Next", stDate = ViewBag.AuditDate }, FormMethod.Post))
+                 {
+                    
+                        <button id="btnForword" class="btn btn-default" type="submit">
+                            <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                        </button>
+                    
+                 }   
+                 </span>   
+                    
+                 </div>
+                </li>
+              
+                <li>Pending Audits: @ViewBag.Pending</li>
+                <li>Not Required: @ViewBag.NotRequired</li>
+                <li>Completed: @ViewBag.Completed</li>
+                <li class="grey">
+                	<a href="@Url.Action("Index", "Audit", new { id = (string)System.Web.HttpContext.Current.Session["OfficeID"] })" )" class="button"> Audit Cases</a>
+                </li>
+                @*<li class="grey"><a href="#" class="button">Audit Cases</a></li>*@
+            </ul>
         </div>
-      </div>*@
+    </div>
+</div>

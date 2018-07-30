@@ -27,12 +27,12 @@ namespace IECAWeb.Models
             public Nullable<bool> CaseAuditFlag { get; set; }
             //public bool CaseAuditFlag { get; set; }
 
-            [Display(Name = "Audit Notes")]
-            public string AuditNotes { get; set; }
+            //[Display(Name = "Audit Notes")]
+            //public string AuditNotes { get; set; }
 
-            [Display(Name = "Audit Date")]
-            [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm}")]
-            public DateTime AuditDate { get; set; }
+            //[Display(Name = "Audit Date")]
+            //[DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm}")]
+            //public DateTime AuditDate { get; set; }
 
             [Display(Name = "Insert Date")]
             [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy hh:mm}")]

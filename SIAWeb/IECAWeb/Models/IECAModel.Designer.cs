@@ -19,10 +19,16 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("IECAModel", "AppEntityAuditHistrory", "AppEntity", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.AppEntity), "AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.AuditHistrory), true)]
-[assembly: EdmRelationshipAttribute("IECAModel", "OfficerAppEntity", "Officer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Officer), "AppEntity", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.AppEntity), true)]
 [assembly: EdmRelationshipAttribute("IECAModel", "FK_User_User_Person_Person", "Officer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Officer), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IECAWeb.Models.User_User), true)]
-[assembly: EdmRelationshipAttribute("IECAModel", "Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IECAWeb.Models.Auditor), "AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.AuditHistrory), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNoteType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.NoteType), "IECA_AuditNotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.Sup_AuditNotes), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_Question", "IECA_Question", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IECAWeb.Models.Audit_Question), "IECA_AuditNotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.Sup_AuditNotes), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "FK_IECA_AuditOffice_Office_Office", "Office_Office", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Office), "IECA_AuditOffice", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IECAWeb.Models.AuditOffice), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "FK_User_User_Office_Office", "Office_Office", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IECAWeb.Models.Office), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.User_User), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "AuditorSup_AuditNotes", "Auditor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Auditor), "Sup_AuditNotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.Sup_AuditNotes), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "FK_IECA_AuditHistrory_Office_Office", "Office", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.Office), "IECA_AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.AuditHistrory), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_AuditHistrory", "IECA_AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.AuditHistrory), "Sup_AuditNotes", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.Sup_AuditNotes), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "AppEntityOfficer", "AppEntity", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.AppEntity), "Officer", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(IECAWeb.Models.Officer), true)]
+[assembly: EdmRelationshipAttribute("IECAModel", "AppEntityAuditHistrory", "AppEntity", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(IECAWeb.Models.AppEntity), "AuditHistrory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(IECAWeb.Models.AuditHistrory), true)]
 
 #endregion
 
@@ -77,38 +83,6 @@ namespace IECAWeb.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<AuditHistrory> AuditHistrories
-        {
-            get
-            {
-                if ((_AuditHistrories == null))
-                {
-                    _AuditHistrories = base.CreateObjectSet<AuditHistrory>("AuditHistrories");
-                }
-                return _AuditHistrories;
-            }
-        }
-        private ObjectSet<AuditHistrory> _AuditHistrories;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<AppEntity> AppEntities
-        {
-            get
-            {
-                if ((_AppEntities == null))
-                {
-                    _AppEntities = base.CreateObjectSet<AppEntity>("AppEntities");
-                }
-                return _AppEntities;
-            }
-        }
-        private ObjectSet<AppEntity> _AppEntities;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Officer> Officers
         {
             get
@@ -153,26 +127,122 @@ namespace IECAWeb.Models
             }
         }
         private ObjectSet<Auditor> _Auditors;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Sup_AuditNotes> Sup_AuditNotes
+        {
+            get
+            {
+                if ((_Sup_AuditNotes == null))
+                {
+                    _Sup_AuditNotes = base.CreateObjectSet<Sup_AuditNotes>("Sup_AuditNotes");
+                }
+                return _Sup_AuditNotes;
+            }
+        }
+        private ObjectSet<Sup_AuditNotes> _Sup_AuditNotes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<NoteType> NoteTypes
+        {
+            get
+            {
+                if ((_NoteTypes == null))
+                {
+                    _NoteTypes = base.CreateObjectSet<NoteType>("NoteTypes");
+                }
+                return _NoteTypes;
+            }
+        }
+        private ObjectSet<NoteType> _NoteTypes;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AuditOffice> AuditOffices
+        {
+            get
+            {
+                if ((_AuditOffices == null))
+                {
+                    _AuditOffices = base.CreateObjectSet<AuditOffice>("AuditOffices");
+                }
+                return _AuditOffices;
+            }
+        }
+        private ObjectSet<AuditOffice> _AuditOffices;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Audit_Question> Audit_Question
+        {
+            get
+            {
+                if ((_Audit_Question == null))
+                {
+                    _Audit_Question = base.CreateObjectSet<Audit_Question>("Audit_Question");
+                }
+                return _Audit_Question;
+            }
+        }
+        private ObjectSet<Audit_Question> _Audit_Question;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Office> Offices
+        {
+            get
+            {
+                if ((_Offices == null))
+                {
+                    _Offices = base.CreateObjectSet<Office>("Offices");
+                }
+                return _Offices;
+            }
+        }
+        private ObjectSet<Office> _Offices;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AuditHistrory> AuditHistrories
+        {
+            get
+            {
+                if ((_AuditHistrories == null))
+                {
+                    _AuditHistrories = base.CreateObjectSet<AuditHistrory>("AuditHistrories");
+                }
+                return _AuditHistrories;
+            }
+        }
+        private ObjectSet<AuditHistrory> _AuditHistrories;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<AppEntity> AppEntities
+        {
+            get
+            {
+                if ((_AppEntities == null))
+                {
+                    _AppEntities = base.CreateObjectSet<AppEntity>("AppEntities");
+                }
+                return _AppEntities;
+            }
+        }
+        private ObjectSet<AppEntity> _AppEntities;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the AuditHistrories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAuditHistrories(AuditHistrory auditHistrory)
-        {
-            base.AddObject("AuditHistrories", auditHistrory);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the AppEntities EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToAppEntities(AppEntity appEntity)
-        {
-            base.AddObject("AppEntities", appEntity);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the Officers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -196,6 +266,62 @@ namespace IECAWeb.Models
         public void AddToAuditors(Auditor auditor)
         {
             base.AddObject("Auditors", auditor);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Sup_AuditNotes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSup_AuditNotes(Sup_AuditNotes sup_AuditNotes)
+        {
+            base.AddObject("Sup_AuditNotes", sup_AuditNotes);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the NoteTypes EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToNoteTypes(NoteType noteType)
+        {
+            base.AddObject("NoteTypes", noteType);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AuditOffices EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAuditOffices(AuditOffice auditOffice)
+        {
+            base.AddObject("AuditOffices", auditOffice);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Audit_Question EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAudit_Question(Audit_Question audit_Question)
+        {
+            base.AddObject("Audit_Question", audit_Question);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Offices EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOffices(Office office)
+        {
+            base.AddObject("Offices", office);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AuditHistrories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAuditHistrories(AuditHistrory auditHistrory)
+        {
+            base.AddObject("AuditHistrories", auditHistrory);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the AppEntities EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToAppEntities(AppEntity appEntity)
+        {
+            base.AddObject("AppEntities", appEntity);
         }
 
         #endregion
@@ -377,6 +503,44 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "AppEntityOfficer", "Officer")]
+        public Officer Officer
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("IECAModel.AppEntityOfficer", "Officer").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("IECAModel.AppEntityOfficer", "Officer").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Officer> OfficerReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("IECAModel.AppEntityOfficer", "Officer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Officer>("IECAModel.AppEntityOfficer", "Officer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("IECAModel", "AppEntityAuditHistrory", "AuditHistrory")]
         public EntityCollection<AuditHistrory> AuditHistrories
         {
@@ -392,6 +556,217 @@ namespace IECAWeb.Models
                 }
             }
         }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="IECAModel", Name="Audit_Question")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Audit_Question : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Audit_Question object.
+        /// </summary>
+        /// <param name="auditQuestionID">Initial value of the AuditQuestionID property.</param>
+        /// <param name="questionNbr">Initial value of the QuestionNbr property.</param>
+        /// <param name="question">Initial value of the Question property.</param>
+        /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
+        public static Audit_Question CreateAudit_Question(global::System.Int32 auditQuestionID, global::System.String questionNbr, global::System.String question, global::System.Boolean visibleFlag)
+        {
+            Audit_Question audit_Question = new Audit_Question();
+            audit_Question.AuditQuestionID = auditQuestionID;
+            audit_Question.QuestionNbr = questionNbr;
+            audit_Question.Question = question;
+            audit_Question.VisibleFlag = visibleFlag;
+            return audit_Question;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AuditQuestionID
+        {
+            get
+            {
+                return _AuditQuestionID;
+            }
+            set
+            {
+                if (_AuditQuestionID != value)
+                {
+                    OnAuditQuestionIDChanging(value);
+                    ReportPropertyChanging("AuditQuestionID");
+                    _AuditQuestionID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AuditQuestionID");
+                    OnAuditQuestionIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AuditQuestionID;
+        partial void OnAuditQuestionIDChanging(global::System.Int32 value);
+        partial void OnAuditQuestionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> AllOfficesFlag
+        {
+            get
+            {
+                return _AllOfficesFlag;
+            }
+            set
+            {
+                OnAllOfficesFlagChanging(value);
+                ReportPropertyChanging("AllOfficesFlag");
+                _AllOfficesFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AllOfficesFlag");
+                OnAllOfficesFlagChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _AllOfficesFlag;
+        partial void OnAllOfficesFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnAllOfficesFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                OnOfficeIDChanging(value);
+                ReportPropertyChanging("OfficeID");
+                _OfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeID");
+                OnOfficeIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _OfficeID;
+        partial void OnOfficeIDChanging(Nullable<global::System.Int32> value);
+        partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String QuestionNbr
+        {
+            get
+            {
+                return _QuestionNbr;
+            }
+            set
+            {
+                OnQuestionNbrChanging(value);
+                ReportPropertyChanging("QuestionNbr");
+                _QuestionNbr = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("QuestionNbr");
+                OnQuestionNbrChanged();
+            }
+        }
+        private global::System.String _QuestionNbr;
+        partial void OnQuestionNbrChanging(global::System.String value);
+        partial void OnQuestionNbrChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Question
+        {
+            get
+            {
+                return _Question;
+            }
+            set
+            {
+                OnQuestionChanging(value);
+                ReportPropertyChanging("Question");
+                _Question = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Question");
+                OnQuestionChanged();
+            }
+        }
+        private global::System.String _Question;
+        partial void OnQuestionChanging(global::System.String value);
+        partial void OnQuestionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private global::System.Boolean _VisibleFlag;
+        partial void OnVisibleFlagChanging(global::System.Boolean value);
+        partial void OnVisibleFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> QuestionRank
+        {
+            get
+            {
+                return _QuestionRank;
+            }
+            set
+            {
+                OnQuestionRankChanging(value);
+                ReportPropertyChanging("QuestionRank");
+                _QuestionRank = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("QuestionRank");
+                OnQuestionRankChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _QuestionRank;
+        partial void OnQuestionRankChanging(Nullable<global::System.Int32> value);
+        partial void OnQuestionRankChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -399,34 +774,18 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "OfficerAppEntity", "Officer")]
-        public Officer Officer
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_Question", "IECA_AuditNotes")]
+        public EntityCollection<Sup_AuditNotes> IECA_AuditNotes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("IECAModel.OfficerAppEntity", "Officer").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("IECAModel.OfficerAppEntity", "Officer").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Officer> OfficerReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Officer>("IECAModel.OfficerAppEntity", "Officer");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Sup_AuditNotes>("IECAModel.FK_IECA_AuditNotes_IECA_Question", "IECA_AuditNotes");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Officer>("IECAModel.OfficerAppEntity", "Officer", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Sup_AuditNotes>("IECAModel.FK_IECA_AuditNotes_IECA_Question", "IECA_AuditNotes", value);
                 }
             }
         }
@@ -568,30 +927,6 @@ namespace IECAWeb.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String AuditNotes
-        {
-            get
-            {
-                return _AuditNotes;
-            }
-            set
-            {
-                OnAuditNotesChanging(value);
-                ReportPropertyChanging("AuditNotes");
-                _AuditNotes = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("AuditNotes");
-                OnAuditNotesChanged();
-            }
-        }
-        private global::System.String _AuditNotes;
-        partial void OnAuditNotesChanging(global::System.String value);
-        partial void OnAuditNotesChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
         public Nullable<global::System.DateTime> AuditDate
         {
             get
@@ -610,30 +945,6 @@ namespace IECAWeb.Models
         private Nullable<global::System.DateTime> _AuditDate;
         partial void OnAuditDateChanging(Nullable<global::System.DateTime> value);
         partial void OnAuditDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.Int32> AuditByID
-        {
-            get
-            {
-                return _AuditByID;
-            }
-            set
-            {
-                OnAuditByIDChanging(value);
-                ReportPropertyChanging("AuditByID");
-                _AuditByID = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("AuditByID");
-                OnAuditByIDChanged();
-            }
-        }
-        private Nullable<global::System.Int32> _AuditByID;
-        partial void OnAuditByIDChanging(Nullable<global::System.Int32> value);
-        partial void OnAuditByIDChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -663,6 +974,66 @@ namespace IECAWeb.Models
 
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditHistrory_Office_Office", "Office")]
+        public Office Office_Office
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_IECA_AuditHistrory_Office_Office", "Office").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_IECA_AuditHistrory_Office_Office", "Office").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Office> Office_OfficeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_IECA_AuditHistrory_Office_Office", "Office");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Office>("IECAModel.FK_IECA_AuditHistrory_Office_Office", "Office", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_AuditHistrory", "Sup_AuditNotes")]
+        public EntityCollection<Sup_AuditNotes> IECA_AuditNotes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Sup_AuditNotes>("IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory", "Sup_AuditNotes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Sup_AuditNotes>("IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory", "Sup_AuditNotes", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -701,6 +1072,93 @@ namespace IECAWeb.Models
                 }
             }
         }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="IECAModel", Name="AuditOffice")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class AuditOffice : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new AuditOffice object.
+        /// </summary>
+        /// <param name="auditOfficeID">Initial value of the AuditOfficeID property.</param>
+        /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
+        public static AuditOffice CreateAuditOffice(global::System.Int32 auditOfficeID, global::System.Boolean visibleFlag)
+        {
+            AuditOffice auditOffice = new AuditOffice();
+            auditOffice.AuditOfficeID = auditOfficeID;
+            auditOffice.VisibleFlag = visibleFlag;
+            return auditOffice;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AuditOfficeID
+        {
+            get
+            {
+                return _AuditOfficeID;
+            }
+            set
+            {
+                if (_AuditOfficeID != value)
+                {
+                    OnAuditOfficeIDChanging(value);
+                    ReportPropertyChanging("AuditOfficeID");
+                    _AuditOfficeID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AuditOfficeID");
+                    OnAuditOfficeIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AuditOfficeID;
+        partial void OnAuditOfficeIDChanging(global::System.Int32 value);
+        partial void OnAuditOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private global::System.Boolean _VisibleFlag;
+        partial void OnVisibleFlagChanging(global::System.Boolean value);
+        partial void OnVisibleFlagChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -708,16 +1166,16 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover")]
-        public Auditor Grant_vActivityApprover
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditOffice_Office_Office", "Office_Office")]
+        public Office Office_Office
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_IECA_AuditOffice_Office_Office", "Office_Office").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_IECA_AuditOffice_Office_Office", "Office_Office").Value = value;
             }
         }
         /// <summary>
@@ -725,17 +1183,17 @@ namespace IECAWeb.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Auditor> Grant_vActivityApproverReference
+        public EntityReference<Office> Office_OfficeReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_IECA_AuditOffice_Office_Office", "Office_Office");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Auditor>("IECAModel.Grant_vActivityApproverAuditHistrory", "Grant_vActivityApprover", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Office>("IECAModel.FK_IECA_AuditOffice_Office_Office", "Office_Office", value);
                 }
             }
         }
@@ -831,18 +1289,442 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "Grant_vActivityApproverAuditHistrory", "AuditHistrory")]
-        public EntityCollection<AuditHistrory> AuditHistrories
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "AuditorSup_AuditNotes", "Sup_AuditNotes")]
+        public EntityCollection<Sup_AuditNotes> Sup_AuditNotes
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AuditHistrory>("IECAModel.Grant_vActivityApproverAuditHistrory", "AuditHistrory");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Sup_AuditNotes>("IECAModel.AuditorSup_AuditNotes", "Sup_AuditNotes");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AuditHistrory>("IECAModel.Grant_vActivityApproverAuditHistrory", "AuditHistrory", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Sup_AuditNotes>("IECAModel.AuditorSup_AuditNotes", "Sup_AuditNotes", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="IECAModel", Name="NoteType")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class NoteType : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new NoteType object.
+        /// </summary>
+        /// <param name="auditNoteTypeID">Initial value of the AuditNoteTypeID property.</param>
+        /// <param name="auditNoteType">Initial value of the AuditNoteType property.</param>
+        public static NoteType CreateNoteType(global::System.Int32 auditNoteTypeID, global::System.String auditNoteType)
+        {
+            NoteType noteType = new NoteType();
+            noteType.AuditNoteTypeID = auditNoteTypeID;
+            noteType.AuditNoteType = auditNoteType;
+            return noteType;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AuditNoteTypeID
+        {
+            get
+            {
+                return _AuditNoteTypeID;
+            }
+            set
+            {
+                if (_AuditNoteTypeID != value)
+                {
+                    OnAuditNoteTypeIDChanging(value);
+                    ReportPropertyChanging("AuditNoteTypeID");
+                    _AuditNoteTypeID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("AuditNoteTypeID");
+                    OnAuditNoteTypeIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _AuditNoteTypeID;
+        partial void OnAuditNoteTypeIDChanging(global::System.Int32 value);
+        partial void OnAuditNoteTypeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String AuditNoteType
+        {
+            get
+            {
+                return _AuditNoteType;
+            }
+            set
+            {
+                OnAuditNoteTypeChanging(value);
+                ReportPropertyChanging("AuditNoteType");
+                _AuditNoteType = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("AuditNoteType");
+                OnAuditNoteTypeChanged();
+            }
+        }
+        private global::System.String _AuditNoteType;
+        partial void OnAuditNoteTypeChanging(global::System.String value);
+        partial void OnAuditNoteTypeChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNotes")]
+        public EntityCollection<Sup_AuditNotes> IECA_AuditNotes
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Sup_AuditNotes>("IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNotes");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Sup_AuditNotes>("IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNotes", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="IECAModel", Name="Office")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Office : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Office object.
+        /// </summary>
+        /// <param name="officeID">Initial value of the OfficeID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="code">Initial value of the Code property.</param>
+        public static Office CreateOffice(global::System.Int32 officeID, global::System.String name, global::System.String code)
+        {
+            Office office = new Office();
+            office.OfficeID = officeID;
+            office.Name = name;
+            office.Code = code;
+            return office;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                if (_OfficeID != value)
+                {
+                    OnOfficeIDChanging(value);
+                    ReportPropertyChanging("OfficeID");
+                    _OfficeID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("OfficeID");
+                    OnOfficeIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _OfficeID;
+        partial void OnOfficeIDChanging(global::System.Int32 value);
+        partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> DivisionSectionID
+        {
+            get
+            {
+                return _DivisionSectionID;
+            }
+            set
+            {
+                OnDivisionSectionIDChanging(value);
+                ReportPropertyChanging("DivisionSectionID");
+                _DivisionSectionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivisionSectionID");
+                OnDivisionSectionIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _DivisionSectionID;
+        partial void OnDivisionSectionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnDivisionSectionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Code
+        {
+            get
+            {
+                return _Code;
+            }
+            set
+            {
+                OnCodeChanging(value);
+                ReportPropertyChanging("Code");
+                _Code = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Code");
+                OnCodeChanged();
+            }
+        }
+        private global::System.String _Code;
+        partial void OnCodeChanging(global::System.String value);
+        partial void OnCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Ranking
+        {
+            get
+            {
+                return _Ranking;
+            }
+            set
+            {
+                OnRankingChanging(value);
+                ReportPropertyChanging("Ranking");
+                _Ranking = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Ranking");
+                OnRankingChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Ranking;
+        partial void OnRankingChanging(Nullable<global::System.Int32> value);
+        partial void OnRankingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Visible
+        {
+            get
+            {
+                return _Visible;
+            }
+            set
+            {
+                OnVisibleChanging(value);
+                ReportPropertyChanging("Visible");
+                _Visible = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Visible");
+                OnVisibleChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Visible;
+        partial void OnVisibleChanging(Nullable<global::System.Boolean> value);
+        partial void OnVisibleChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PAOfficeID
+        {
+            get
+            {
+                return _PAOfficeID;
+            }
+            set
+            {
+                OnPAOfficeIDChanging(value);
+                ReportPropertyChanging("PAOfficeID");
+                _PAOfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PAOfficeID");
+                OnPAOfficeIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PAOfficeID;
+        partial void OnPAOfficeIDChanging(Nullable<global::System.Int32> value);
+        partial void OnPAOfficeIDChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditOffice_Office_Office", "IECA_AuditOffice")]
+        public AuditOffice IECA_AuditOffice
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditOffice>("IECAModel.FK_IECA_AuditOffice_Office_Office", "IECA_AuditOffice").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditOffice>("IECAModel.FK_IECA_AuditOffice_Office_Office", "IECA_AuditOffice").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<AuditOffice> IECA_AuditOfficeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditOffice>("IECAModel.FK_IECA_AuditOffice_Office_Office", "IECA_AuditOffice");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AuditOffice>("IECAModel.FK_IECA_AuditOffice_Office_Office", "IECA_AuditOffice", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_User_User_Office_Office", "User_User")]
+        public EntityCollection<User_User> User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User_User>("IECAModel.FK_User_User_Office_Office", "User_User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User_User>("IECAModel.FK_User_User_Office_Office", "User_User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditHistrory_Office_Office", "IECA_AuditHistrory")]
+        public EntityCollection<AuditHistrory> IECA_AuditHistrory
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<AuditHistrory>("IECAModel.FK_IECA_AuditHistrory_Office_Office", "IECA_AuditHistrory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<AuditHistrory>("IECAModel.FK_IECA_AuditHistrory_Office_Office", "IECA_AuditHistrory", value);
                 }
             }
         }
@@ -1106,44 +1988,6 @@ namespace IECAWeb.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "OfficerAppEntity", "AppEntity")]
-        public AppEntity AppEntity
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AppEntity>("IECAModel.OfficerAppEntity", "AppEntity").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AppEntity>("IECAModel.OfficerAppEntity", "AppEntity").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<AppEntity> AppEntityReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AppEntity>("IECAModel.OfficerAppEntity", "AppEntity");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AppEntity>("IECAModel.OfficerAppEntity", "AppEntity", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_User_User_Person_Person", "User_User")]
         public User_User User_User
         {
@@ -1172,6 +2016,437 @@ namespace IECAWeb.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User_User>("IECAModel.FK_User_User_Person_Person", "User_User", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "AppEntityOfficer", "AppEntity")]
+        public AppEntity AppEntity
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AppEntity>("IECAModel.AppEntityOfficer", "AppEntity").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AppEntity>("IECAModel.AppEntityOfficer", "AppEntity").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<AppEntity> AppEntityReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AppEntity>("IECAModel.AppEntityOfficer", "AppEntity");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AppEntity>("IECAModel.AppEntityOfficer", "AppEntity", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="IECAModel", Name="Sup_AuditNotes")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Sup_AuditNotes : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Sup_AuditNotes object.
+        /// </summary>
+        /// <param name="noteID">Initial value of the NoteID property.</param>
+        /// <param name="noteTypeID">Initial value of the NoteTypeID property.</param>
+        /// <param name="auditHistID">Initial value of the AuditHistID property.</param>
+        /// <param name="auditNotes">Initial value of the AuditNotes property.</param>
+        /// <param name="noteByID">Initial value of the NoteByID property.</param>
+        /// <param name="noteDate">Initial value of the NoteDate property.</param>
+        /// <param name="followupFlag">Initial value of the FollowupFlag property.</param>
+        public static Sup_AuditNotes CreateSup_AuditNotes(global::System.Int32 noteID, global::System.Int32 noteTypeID, global::System.Int32 auditHistID, global::System.String auditNotes, global::System.Int32 noteByID, global::System.DateTime noteDate, global::System.Boolean followupFlag)
+        {
+            Sup_AuditNotes sup_AuditNotes = new Sup_AuditNotes();
+            sup_AuditNotes.NoteID = noteID;
+            sup_AuditNotes.NoteTypeID = noteTypeID;
+            sup_AuditNotes.AuditHistID = auditHistID;
+            sup_AuditNotes.AuditNotes = auditNotes;
+            sup_AuditNotes.NoteByID = noteByID;
+            sup_AuditNotes.NoteDate = noteDate;
+            sup_AuditNotes.FollowupFlag = followupFlag;
+            return sup_AuditNotes;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NoteID
+        {
+            get
+            {
+                return _NoteID;
+            }
+            set
+            {
+                if (_NoteID != value)
+                {
+                    OnNoteIDChanging(value);
+                    ReportPropertyChanging("NoteID");
+                    _NoteID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("NoteID");
+                    OnNoteIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _NoteID;
+        partial void OnNoteIDChanging(global::System.Int32 value);
+        partial void OnNoteIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NoteTypeID
+        {
+            get
+            {
+                return _NoteTypeID;
+            }
+            set
+            {
+                OnNoteTypeIDChanging(value);
+                ReportPropertyChanging("NoteTypeID");
+                _NoteTypeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoteTypeID");
+                OnNoteTypeIDChanged();
+            }
+        }
+        private global::System.Int32 _NoteTypeID;
+        partial void OnNoteTypeIDChanging(global::System.Int32 value);
+        partial void OnNoteTypeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 AuditHistID
+        {
+            get
+            {
+                return _AuditHistID;
+            }
+            set
+            {
+                OnAuditHistIDChanging(value);
+                ReportPropertyChanging("AuditHistID");
+                _AuditHistID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AuditHistID");
+                OnAuditHistIDChanged();
+            }
+        }
+        private global::System.Int32 _AuditHistID;
+        partial void OnAuditHistIDChanging(global::System.Int32 value);
+        partial void OnAuditHistIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> AuditQuestionID
+        {
+            get
+            {
+                return _AuditQuestionID;
+            }
+            set
+            {
+                OnAuditQuestionIDChanging(value);
+                ReportPropertyChanging("AuditQuestionID");
+                _AuditQuestionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AuditQuestionID");
+                OnAuditQuestionIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _AuditQuestionID;
+        partial void OnAuditQuestionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnAuditQuestionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String AuditNotes
+        {
+            get
+            {
+                return _AuditNotes;
+            }
+            set
+            {
+                OnAuditNotesChanging(value);
+                ReportPropertyChanging("AuditNotes");
+                _AuditNotes = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("AuditNotes");
+                OnAuditNotesChanged();
+            }
+        }
+        private global::System.String _AuditNotes;
+        partial void OnAuditNotesChanging(global::System.String value);
+        partial void OnAuditNotesChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 NoteByID
+        {
+            get
+            {
+                return _NoteByID;
+            }
+            set
+            {
+                OnNoteByIDChanging(value);
+                ReportPropertyChanging("NoteByID");
+                _NoteByID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoteByID");
+                OnNoteByIDChanged();
+            }
+        }
+        private global::System.Int32 _NoteByID;
+        partial void OnNoteByIDChanging(global::System.Int32 value);
+        partial void OnNoteByIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime NoteDate
+        {
+            get
+            {
+                return _NoteDate;
+            }
+            set
+            {
+                OnNoteDateChanging(value);
+                ReportPropertyChanging("NoteDate");
+                _NoteDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("NoteDate");
+                OnNoteDateChanged();
+            }
+        }
+        private global::System.DateTime _NoteDate;
+        partial void OnNoteDateChanging(global::System.DateTime value);
+        partial void OnNoteDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean FollowupFlag
+        {
+            get
+            {
+                return _FollowupFlag;
+            }
+            set
+            {
+                OnFollowupFlagChanging(value);
+                ReportPropertyChanging("FollowupFlag");
+                _FollowupFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FollowupFlag");
+                OnFollowupFlagChanged();
+            }
+        }
+        private global::System.Boolean _FollowupFlag;
+        partial void OnFollowupFlagChanging(global::System.Boolean value);
+        partial void OnFollowupFlagChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNoteType")]
+        public NoteType IECA_AuditNoteType
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<NoteType>("IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNoteType").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<NoteType>("IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNoteType").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<NoteType> IECA_AuditNoteTypeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<NoteType>("IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNoteType");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<NoteType>("IECAModel.FK_IECA_AuditNotes_IECA_AuditNoteType", "IECA_AuditNoteType", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_Question", "IECA_Question")]
+        public Audit_Question IECA_Question
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Audit_Question>("IECAModel.FK_IECA_AuditNotes_IECA_Question", "IECA_Question").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Audit_Question>("IECAModel.FK_IECA_AuditNotes_IECA_Question", "IECA_Question").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Audit_Question> IECA_QuestionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Audit_Question>("IECAModel.FK_IECA_AuditNotes_IECA_Question", "IECA_Question");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Audit_Question>("IECAModel.FK_IECA_AuditNotes_IECA_Question", "IECA_Question", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "AuditorSup_AuditNotes", "Auditor")]
+        public Auditor Auditor
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.AuditorSup_AuditNotes", "Auditor").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.AuditorSup_AuditNotes", "Auditor").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Auditor> AuditorReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Auditor>("IECAModel.AuditorSup_AuditNotes", "Auditor");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Auditor>("IECAModel.AuditorSup_AuditNotes", "Auditor", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_IECA_AuditNotes_IECA_AuditHistrory", "IECA_AuditHistrory")]
+        public AuditHistrory IECA_AuditHistrory
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditHistrory>("IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory", "IECA_AuditHistrory").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditHistrory>("IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory", "IECA_AuditHistrory").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<AuditHistrory> IECA_AuditHistroryReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<AuditHistrory>("IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory", "IECA_AuditHistrory");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<AuditHistrory>("IECAModel.FK_IECA_AuditNotes_IECA_AuditHistrory", "IECA_AuditHistrory", value);
                 }
             }
         }
@@ -1567,6 +2842,126 @@ namespace IECAWeb.Models
         private Nullable<global::System.DateTime> _ModifiedDate;
         partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                OnOfficeIDChanging(value);
+                ReportPropertyChanging("OfficeID");
+                _OfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeID");
+                OnOfficeIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _OfficeID;
+        partial void OnOfficeIDChanging(Nullable<global::System.Int32> value);
+        partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> SectionID
+        {
+            get
+            {
+                return _SectionID;
+            }
+            set
+            {
+                OnSectionIDChanging(value);
+                ReportPropertyChanging("SectionID");
+                _SectionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SectionID");
+                OnSectionIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _SectionID;
+        partial void OnSectionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnSectionIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> RDID
+        {
+            get
+            {
+                return _RDID;
+            }
+            set
+            {
+                OnRDIDChanging(value);
+                ReportPropertyChanging("RDID");
+                _RDID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RDID");
+                OnRDIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _RDID;
+        partial void OnRDIDChanging(Nullable<global::System.Int32> value);
+        partial void OnRDIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> ShiftID
+        {
+            get
+            {
+                return _ShiftID;
+            }
+            set
+            {
+                OnShiftIDChanging(value);
+                ReportPropertyChanging("ShiftID");
+                _ShiftID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ShiftID");
+                OnShiftIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _ShiftID;
+        partial void OnShiftIDChanging(Nullable<global::System.Int32> value);
+        partial void OnShiftIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> WorkStatusID
+        {
+            get
+            {
+                return _WorkStatusID;
+            }
+            set
+            {
+                OnWorkStatusIDChanging(value);
+                ReportPropertyChanging("WorkStatusID");
+                _WorkStatusID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("WorkStatusID");
+                OnWorkStatusIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _WorkStatusID;
+        partial void OnWorkStatusIDChanging(Nullable<global::System.Int32> value);
+        partial void OnWorkStatusIDChanged();
 
         #endregion
 
@@ -1607,6 +3002,44 @@ namespace IECAWeb.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Officer>("IECAModel.FK_User_User_Person_Person", "Officer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("IECAModel", "FK_User_User_Office_Office", "Office_Office")]
+        public Office Office_Office
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_User_User_Office_Office", "Office_Office").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_User_User_Office_Office", "Office_Office").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Office> Office_OfficeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office>("IECAModel.FK_User_User_Office_Office", "Office_Office");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Office>("IECAModel.FK_User_User_Office_Office", "Office_Office", value);
                 }
             }
         }

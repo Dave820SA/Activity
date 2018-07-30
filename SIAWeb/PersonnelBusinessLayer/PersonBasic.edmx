@@ -9,8 +9,17 @@
           <EntitySet Name="Person_Person" EntityType="PersonBasicModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
           <EntitySet Name="User_JobTitle" EntityType="PersonBasicModel.Store.User_JobTitle" store:Type="Tables" Schema="dbo" Table="User.JobTitle" />
           <EntitySet Name="User_User" EntityType="PersonBasicModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
+          <EntitySet Name="User_WorkStatus" EntityType="PersonBasicModel.Store.User_WorkStatus" store:Type="Tables" Schema="dbo" Table="User.WorkStatus" />
           <AssociationSet Name="FK_User_User_Person_Person" Association="PersonBasicModel.Store.FK_User_User_Person_Person">
             <End Role="Person_Person" EntitySet="Person_Person" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_JobTitle" Association="PersonBasicModel.Store.FK_User_User_User_JobTitle">
+            <End Role="User_JobTitle" EntitySet="User_JobTitle" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_WorkStatus" Association="PersonBasicModel.Store.FK_User_User_User_WorkStatus">
+            <End Role="User_WorkStatus" EntitySet="User_WorkStatus" />
             <End Role="User_User" EntitySet="User_User" />
           </AssociationSet>
         </EntityContainer>
@@ -65,6 +74,18 @@
           <Property Name="WorksheetVisibleFlag" Type="bit" />
           <Property Name="ModifiedDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="User_WorkStatus">
+          <Key>
+            <PropertyRef Name="WorkStatusID" />
+          </Key>
+          <Property Name="WorkStatusID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="NameCode" Type="varchar" MaxLength="10" />
+          <Property Name="Ranking" Type="int" />
+          <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="VisibleFlag" Type="bit" />
+          <Property Name="PAWorkStatusID" Type="int" />
+        </EntityType>
         <Association Name="FK_User_User_Person_Person">
           <End Role="Person_Person" Type="PersonBasicModel.Store.Person_Person" Multiplicity="1" />
           <End Role="User_User" Type="PersonBasicModel.Store.User_User" Multiplicity="0..1" />
@@ -74,6 +95,30 @@
             </Principal>
             <Dependent Role="User_User">
               <PropertyRef Name="AppEntityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_JobTitle">
+          <End Role="User_JobTitle" Type="PersonBasicModel.Store.User_JobTitle" Multiplicity="0..1" />
+          <End Role="User_User" Type="PersonBasicModel.Store.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_JobTitle">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_WorkStatus">
+          <End Role="User_WorkStatus" Type="PersonBasicModel.Store.User_WorkStatus" Multiplicity="0..1" />
+          <End Role="User_User" Type="PersonBasicModel.Store.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="WorkStatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -91,6 +136,11 @@
           <EntitySet Name="User_JobTitle" EntityType="PersonBasicModel.User_JobTitle" />
           <AssociationSet Name="User_JobTitleUser_User" Association="PersonBasicModel.User_JobTitleUser_User">
             <End Role="User_JobTitle" EntitySet="User_JobTitle" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <EntitySet Name="User_WorkStatus" EntityType="PersonBasicModel.User_WorkStatus" />
+          <AssociationSet Name="FK_User_User_User_WorkStatus" Association="PersonBasicModel.FK_User_User_User_WorkStatus">
+            <End Role="User_WorkStatus" EntitySet="User_WorkStatus" />
             <End Role="User_User" EntitySet="User_User" />
           </AssociationSet>
         </EntityContainer>
@@ -135,6 +185,7 @@
           <Property Name="ModifiedDate" Type="DateTime" />
           <NavigationProperty Name="Person_Person" Relationship="PersonBasicModel.FK_User_User_Person_Person" FromRole="User_User" ToRole="Person_Person" />
           <NavigationProperty Name="User_JobTitle" Relationship="PersonBasicModel.User_JobTitleUser_User" FromRole="User_User" ToRole="User_JobTitle" />
+          <NavigationProperty Name="User_WorkStatus" Relationship="PersonBasicModel.FK_User_User_User_WorkStatus" FromRole="User_User" ToRole="User_WorkStatus" />
         </EntityType>
         <Association Name="FK_User_User_Person_Person">
           <End Role="Person_Person" Type="PersonBasicModel.Person_Person" Multiplicity="1" />
@@ -170,6 +221,31 @@
             </Principal>
             <Dependent Role="User_User">
               <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User_WorkStatus">
+          <Key>
+            <PropertyRef Name="WorkStatusID" />
+          </Key>
+          <Property Type="Int32" Name="WorkStatusID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="NameCode" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="Ranking" />
+          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="Boolean" Name="VisibleFlag" />
+          <Property Type="Int32" Name="PAWorkStatusID" />
+          <NavigationProperty Name="User_User" Relationship="PersonBasicModel.FK_User_User_User_WorkStatus" FromRole="User_WorkStatus" ToRole="User_User" />
+        </EntityType>
+        <Association Name="FK_User_User_User_WorkStatus">
+          <End Type="PersonBasicModel.User_WorkStatus" Role="User_WorkStatus" Multiplicity="0..1" />
+          <End Type="PersonBasicModel.User_User" Role="User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="WorkStatusID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -233,6 +309,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="User_WorkStatus">
+            <EntityTypeMapping TypeName="PersonBasicModel.User_WorkStatus">
+              <MappingFragment StoreEntitySet="User_WorkStatus">
+                <ScalarProperty Name="PAWorkStatusID" ColumnName="PAWorkStatusID" />
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="NameCode" ColumnName="NameCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WorkStatusID" ColumnName="WorkStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -257,13 +346,18 @@
         <EntityTypeShape EntityType="PersonBasicModel.Person_Person" Width="1.5" PointX="0.75" PointY="2.125" Height="2.941793619791667" IsExpanded="true" />
         <EntityTypeShape EntityType="PersonBasicModel.User_User" Width="1.5" PointX="3" PointY="1.125" Height="5.057109375" IsExpanded="true" />
         <AssociationConnector Association="PersonBasicModel.FK_User_User_Person_Person" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.25" PointY="3.5958968098958337" />
-          <ConnectorPoint PointX="3" PointY="3.5958968098958337" />
+          <ConnectorPoint PointX="2.25" PointY="3.7159733395775154" />
+          <ConnectorPoint PointX="3" PointY="3.7159733395775154" />
         </AssociationConnector>
         <EntityTypeShape EntityType="PersonBasicModel.User_JobTitle" Width="1.5" PointX="5.625" PointY="0.75" Height="2.5571907552083317" />
         <AssociationConnector Association="PersonBasicModel.User_JobTitleUser_User">
-          <ConnectorPoint PointX="5.625" PointY="2.2160953776041659" />
-          <ConnectorPoint PointX="4.5" PointY="2.2160953776041659" />
+          <ConnectorPoint PointX="5.625" PointY="2.3176985950271285" />
+          <ConnectorPoint PointX="4.5" PointY="2.3176985950271285" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="PersonBasicModel.User_WorkStatus" Width="2.125" PointX="5.375" PointY="5" Height="2.7603971900542561" />
+        <AssociationConnector Association="PersonBasicModel.FK_User_User_User_WorkStatus" >
+          <ConnectorPoint PointX="5.375" PointY="6.023509179155031" />
+          <ConnectorPoint PointX="4.5" PointY="6.023509179155031" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>

@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
 <head>
    <meta charset="utf-8" />
     <title>@ViewBag.Title</title>
@@ -7,19 +7,16 @@
     <link href="~/favicon.ico" rel="Shortcut Icon" type="image/x-icon" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-
-
-    @Styles.Render("~/Content/bootstrap")
-    @Styles.Render("~/Content/customcss")
+    @Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Bootstrap/css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
   <div class="container">
 
       <div class="masthead">
-        @*<h3 class="text-muted">SAPD Activity Application</h3>*@
-          <nav class="navbar navbar-default">
+        <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -28,7 +25,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">IECA Web</a>
+            <a class="navbar-brand" href="#">ICA Web</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -36,24 +33,27 @@
                     </a></li>
                     <li><a href="~/Office/Index"><i class="fa fa-bars"></i>&nbsp;Office List </a></li>
                     <li><a href="~/Contact/Index"><i class="fa fa-phone"></i>&nbsp;Contact </a></li>
-
-             
+                    <li><a href="~/Contact/Index"><i class="fa fa-user-circle"></i>&nbsp;Admin </a></li>         
             </ul>
-            
-          </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+          </div>
+        </div>
       </nav>
+
       </div>
           
       <!-- Jumbotron -->
           <div class="jumbotron">
-              <h2>
-                  Investigative Electronic Case Audit Entry System</h2>
+
+              
+                @{ string officeCode = (string)HttpContext.Current.Session["OfficeCode"] + " Case Audit Entry System" ; 
+                  
+                }
+                <h2>@Html.Raw(officeCode)</h2>
               <p class="lead">
                   Investigative Supervisors portal to insure assigned cases are properly investigate
                   for the purpose of bringing them to a final disposition.</p>
               <p>
-                  <a class="btn btn-lg btn-success" href="~/Office/Index" role="button">Get started</a></p>
+                  @*<a class="btn btn-lg btn-success" href="~/Office/Index" role="button">Get started</a></p>*@
           </div>
           <div class="container">
               <div class="row">
@@ -66,20 +66,28 @@
      
 
       <!-- Site footer -->
-      <footer class="footer">
-        <p class="text-center">&copy; @DateTime.Now.Year - Activity App - Created by: D.Davidson #2561</p>
+      <div class="container container-fluid">
+        <footer>
+            <div class="content-wrapper" style="margin-top: 20px">
+                <div class="float-left">
+                    <p class="text-center">&copy; @DateTime.Now.Year - Activity App - Created by: D.Davidson # 2561</p>
+              
+                            
+                </div>
+            </div>
       </footer>
+    </div>
 
     </div> <!-- /container -->
-     
-
-      @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/bundles/googlejquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrapjs")
     @RenderSection("scripts", required: false)
-    @Scripts.Render("~/bundles/moment")
-    @Scripts.Render("~/bundles/datepick")
+
+    @*@Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/datepick")*@
 </body>
 </html>
+
 
 

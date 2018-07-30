@@ -136,7 +136,7 @@ namespace IECAWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.Auditor = (string)System.Web.HttpContext.Current.Session["AppEntityID"]; ;
+            ViewBag.Auditor = (string)System.Web.HttpContext.Current.Session["AppEntityID"]; 
             ViewBag.AppEntityID = new SelectList(db.AppEntities, "AppEntityID", "AppEntityID", audithistrory.AppEntityID);
             return View(audithistrory);
         }

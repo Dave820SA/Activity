@@ -127,6 +127,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
+    <Compile Include="Common\GetAssigned.cs" />
+    <Compile Include="Common\GetAuditStats.cs" />
+    <Compile Include="Common\PersonBasicGet.cs" />
     <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\AuditController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -135,6 +138,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AssignedOfficers.cs" />
+    <Compile Include="Models\Audit.cs" />
     <Compile Include="Models\GetGroupMembers.cs" />
     <Compile Include="Models\GroupMembers.cs" />
     <Compile Include="Models\IECAMetadata.cs" />
@@ -149,11 +154,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>OfficeModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\PersonBasic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Views\Contact\Index.cshtml" />
     <None Include="Properties\PublishProfiles\IECAWeb.pubxml" />
     <None Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\_MemberContact.cshtml" />
+    <Content Include="Views\Shared\_PersonBasicInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

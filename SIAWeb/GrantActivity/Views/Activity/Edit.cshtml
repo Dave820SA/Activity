@@ -34,7 +34,7 @@
                         @*@Html.ValidationMessageFor(model => model.ModifiedDate, "", new { @class = "text-danger" })*@
                     </div>
                     @Html.HiddenFor(model => model.EnteredDate, new { @Value = @DateTime.Now.ToString() })
-                    @Html.HiddenFor(model => model., new { @Value = @DateTime.Now.ToString() })
+                    @*@Html.HiddenFor(model => model. new { @Value = @DateTime.Now.ToString() })*@
                       <div class="form-group col-xs-12">
                         <input type="submit" class="btn btn-success" value="Submit" />
                         <br />

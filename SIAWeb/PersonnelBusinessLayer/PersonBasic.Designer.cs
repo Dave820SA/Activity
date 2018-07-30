@@ -21,6 +21,7 @@ using System.Xml.Serialization;
 
 [assembly: EdmRelationshipAttribute("PersonBasicModel", "FK_User_User_Person_Person", "Person_Person", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.Person_Person), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.User_User), true)]
 [assembly: EdmRelationshipAttribute("PersonBasicModel", "User_JobTitleUser_User", "User_JobTitle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User_JobTitle), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.User_User), true)]
+[assembly: EdmRelationshipAttribute("PersonBasicModel", "FK_User_User_User_WorkStatus", "User_WorkStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.User_WorkStatus), "User_User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.User_User), true)]
 
 #endregion
 
@@ -119,6 +120,22 @@ namespace PersonnelBusinessLayer
             }
         }
         private ObjectSet<User_JobTitle> _User_JobTitle;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<User_WorkStatus> User_WorkStatus
+        {
+            get
+            {
+                if ((_User_WorkStatus == null))
+                {
+                    _User_WorkStatus = base.CreateObjectSet<User_WorkStatus>("User_WorkStatus");
+                }
+                return _User_WorkStatus;
+            }
+        }
+        private ObjectSet<User_WorkStatus> _User_WorkStatus;
 
         #endregion
 
@@ -146,6 +163,14 @@ namespace PersonnelBusinessLayer
         public void AddToUser_JobTitle(User_JobTitle user_JobTitle)
         {
             base.AddObject("User_JobTitle", user_JobTitle);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the User_WorkStatus EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToUser_WorkStatus(User_WorkStatus user_WorkStatus)
+        {
+            base.AddObject("User_WorkStatus", user_WorkStatus);
         }
 
         #endregion
@@ -1263,6 +1288,271 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User_JobTitle>("PersonBasicModel.User_JobTitleUser_User", "User_JobTitle", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PersonBasicModel", "FK_User_User_User_WorkStatus", "User_WorkStatus")]
+        public User_WorkStatus User_WorkStatus
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User_WorkStatus>("PersonBasicModel.FK_User_User_User_WorkStatus", "User_WorkStatus").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User_WorkStatus>("PersonBasicModel.FK_User_User_User_WorkStatus", "User_WorkStatus").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User_WorkStatus> User_WorkStatusReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User_WorkStatus>("PersonBasicModel.FK_User_User_User_WorkStatus", "User_WorkStatus");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User_WorkStatus>("PersonBasicModel.FK_User_User_User_WorkStatus", "User_WorkStatus", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="PersonBasicModel", Name="User_WorkStatus")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class User_WorkStatus : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new User_WorkStatus object.
+        /// </summary>
+        /// <param name="workStatusID">Initial value of the WorkStatusID property.</param>
+        public static User_WorkStatus CreateUser_WorkStatus(global::System.Int32 workStatusID)
+        {
+            User_WorkStatus user_WorkStatus = new User_WorkStatus();
+            user_WorkStatus.WorkStatusID = workStatusID;
+            return user_WorkStatus;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 WorkStatusID
+        {
+            get
+            {
+                return _WorkStatusID;
+            }
+            set
+            {
+                if (_WorkStatusID != value)
+                {
+                    OnWorkStatusIDChanging(value);
+                    ReportPropertyChanging("WorkStatusID");
+                    _WorkStatusID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("WorkStatusID");
+                    OnWorkStatusIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _WorkStatusID;
+        partial void OnWorkStatusIDChanging(global::System.Int32 value);
+        partial void OnWorkStatusIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String NameCode
+        {
+            get
+            {
+                return _NameCode;
+            }
+            set
+            {
+                OnNameCodeChanging(value);
+                ReportPropertyChanging("NameCode");
+                _NameCode = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("NameCode");
+                OnNameCodeChanged();
+            }
+        }
+        private global::System.String _NameCode;
+        partial void OnNameCodeChanging(global::System.String value);
+        partial void OnNameCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Ranking
+        {
+            get
+            {
+                return _Ranking;
+            }
+            set
+            {
+                OnRankingChanging(value);
+                ReportPropertyChanging("Ranking");
+                _Ranking = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Ranking");
+                OnRankingChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Ranking;
+        partial void OnRankingChanging(Nullable<global::System.Int32> value);
+        partial void OnRankingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _VisibleFlag;
+        partial void OnVisibleFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnVisibleFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> PAWorkStatusID
+        {
+            get
+            {
+                return _PAWorkStatusID;
+            }
+            set
+            {
+                OnPAWorkStatusIDChanging(value);
+                ReportPropertyChanging("PAWorkStatusID");
+                _PAWorkStatusID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PAWorkStatusID");
+                OnPAWorkStatusIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _PAWorkStatusID;
+        partial void OnPAWorkStatusIDChanging(Nullable<global::System.Int32> value);
+        partial void OnPAWorkStatusIDChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("PersonBasicModel", "FK_User_User_User_WorkStatus", "User_User")]
+        public EntityCollection<User_User> User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User_User>("PersonBasicModel.FK_User_User_User_WorkStatus", "User_User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User_User>("PersonBasicModel.FK_User_User_User_WorkStatus", "User_User", value);
                 }
             }
         }

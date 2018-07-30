@@ -8,10 +8,9 @@ namespace IECAWeb
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-            //            "~/Scripts/jquery-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/googlejquery", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            "~/Scripts/jquery-1.9.1.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -34,18 +33,10 @@ namespace IECAWeb
             bundles.Add(new ScriptBundle("~/bundles/datepick").Include(
                         "~/Scripts/bootstrap-datetimepicker.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquerys").Include(
-                        "~/Scripts/jquery-1.9.1.min.js"));
+            bundles.Add(new StyleBundle("~/Content/font-awesome", "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"));
 
-
-            BundleTable.EnableOptimizations = true;
-            bundles.UseCdn = true;
-
-            //bundles.Add(new StyleBundle("~/Content/solar").Include("~/Content/Solar.css"));
-
-            bundles.Add(new StyleBundle("~/Content/bootstrap").Include("~/Content/Spacelab.min.css"));
-
-            bundles.Add(new StyleBundle("~/Content/customcss").Include("~/Content/Site.css"));
+            bundles.Add(new StyleBundle("~/Bootstrap/css").Include("~/Content/Spacelab.min.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
@@ -60,6 +51,10 @@ namespace IECAWeb
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            BundleTable.EnableOptimizations = true;
+            bundles.UseCdn = true;
+
         }
     }
 }
