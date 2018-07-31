@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Web.Mvc;
 using IECAWeb.Models;
+using IECAWeb.Common;
 using System.Globalization;
 
 namespace IECAWeb.Controllers
@@ -89,6 +90,14 @@ namespace IECAWeb.Controllers
             return getDatePart;   
 
         }
+
+        public ActionResult SelectedOfficer(int id)
+        {
+            PersonBasicGet pg = new PersonBasicGet();
+            //@ViewData["OfficerBasic"] = pg.GetPersonPasicInfo(id);
+            return View(pg.GetPersonPasicInfo(id));
+        }
+
 
         public ActionResult Details(int id = 0)
         {

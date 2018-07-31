@@ -1,0 +1,28 @@
+﻿@model IEnumerable<IECAWeb.Models.PersonBasic>
+
+@{
+    ViewBag.Title = "Officer Audit";
+    Layout = "~/Views/Shared/_Alternate.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <a href="@Url.Action("Index", "Audit", new { id = (string)System.Web.HttpContext.Current.Session["OfficeID"] })" class="btn btn-warning btn-sm">
+                Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+        </div>
+        <br />
+        <br />
+        <div class="col-xs-6 col-md-6 ">
+            @foreach (var item in Model)
+            {
+                @Html.Partial("_PersonBasicInfo", item)
+        }
+        </div>
+        <div class="col-xs-6 col-md-6 ">
+            <div class="well well-sm">
+            
+            </div>
+        </div>
+    </div>
+</div>

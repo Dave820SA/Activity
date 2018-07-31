@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace IECAWeb.Models
 {
@@ -14,5 +15,11 @@ namespace IECAWeb.Models
         public string JobTitle { get; set; }
         public string RankCode { get; set; }
         public string PicURL { get; set; }
+        public string RDs { get; set; }
+        public string OfficeName { get; set; }
+        public string SectionName { get; set; }
+        public IEnumerable<Email> Emails { get; set; }
     }
+
+    
 }

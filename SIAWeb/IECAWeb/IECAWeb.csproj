@@ -140,6 +140,7 @@
     </Compile>
     <Compile Include="Models\AssignedOfficers.cs" />
     <Compile Include="Models\Audit.cs" />
+    <Compile Include="Models\Email.cs" />
     <Compile Include="Models\GetGroupMembers.cs" />
     <Compile Include="Models\GroupMembers.cs" />
     <Compile Include="Models\IECAMetadata.cs" />
@@ -158,6 +159,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Views\Contact\Index.cshtml" />
     <None Include="Properties\PublishProfiles\IECAWeb.pubxml" />
+    <Content Include="Views\Audit\SelectedOfficer.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\_MemberContact.cshtml" />
     <Content Include="Views\Shared\_PersonBasicInfo.cshtml" />

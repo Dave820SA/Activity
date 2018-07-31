@@ -76,7 +76,7 @@
                 {
                     <tr>
                         <td>
-                           <a href="@Url.Action("", "",new{id = item.AppEntityID}, null)">@Html.Raw(String.Format("{0} {1} #{2}", item.AppEntity.Officer.FirstName, item.AppEntity.Officer.LastName, item.AppEntity.Officer.User_User.Badge))</a> 
+                           <a href="@Url.Action("SelectedOfficer", "Audit", new { id = item.AppEntityID }, null)">@Html.Raw(String.Format("{0} {1} #{2}", item.AppEntity.Officer.FirstName, item.AppEntity.Officer.LastName, item.AppEntity.Officer.User_User.Badge))</a> 
                         </td>
                         <td>
                             @{

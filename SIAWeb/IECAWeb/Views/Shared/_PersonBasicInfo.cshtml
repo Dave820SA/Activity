@@ -1,5 +1,181 @@
-﻿@model IECAWeb.Models.PersonBasic
+﻿
+@model IECAWeb.Models.PersonBasic
 
-<div class="col-md-12">
-    
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                  @{
+                      string sap = Model.SAP;
+                      string newSap = sap.Substring(sap.Length - 6, 6);
+                      var picURL = "";
+                      string str = Model.PicURL;
+                      if (str != null)
+                      {
+                          Char charRange1 = 'E';
+                          int startIndex = str.IndexOf(charRange1);
+                          string substring = str.Substring(startIndex);
+                          picURL = "http://wppswebprod/Booking/" + substring;
+                      }
+
+                      var url = "http://wppswebprod/FileShare/Images" + newSap + ".png";
+                      HttpWebResponse response = null;
+                      var request = (HttpWebRequest)WebRequest.Create(url);
+                      request.Method = "HEAD";
+
+                      try
+                      {
+                          response = (HttpWebResponse)request.GetResponse();
+                      }
+                      catch (Exception)
+                      {
+                          url = "";
+                          if (picURL.Length > 10)
+                          {
+                              url = picURL;
+                          }
+                          else
+                          {
+                              url = "~/Images/Male.png";
+                          }
+                      }
+                      finally
+                      {
+                          if (response != null)
+                          {
+                              response.Close();
+                          }
+                      }
+
+
+                        <img src="@Url.Content(url)" alt="" class="img-rounded img-responsive" />
+                  }
+
+
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        @{
+                            
+                          string person = string.Format("{0} {1} #{2}", Model.First, Model.Last, Model.Badge);
+                       
+                        <h4>
+                            @Html.Raw(person.ToUpper())</h4>
+                            
+                         <h4><cite title="SAPD Office">@Model.OfficeName</cite><small>&nbsp;&nbsp;@Model.JobTitle</small></h4>
+                         }
+                         <h4>SAP:<small>&nbsp;&nbsp;@Model.SAP</small></h4> 
+                           
+                           <h4>RD's:<small>&nbsp;&nbsp; @Model.RDs</small></h4>
+                        <p>
+                            @*<i class="glyphicon glyphicon-envelope"></i>*@
+                            @foreach (var email in Model.Emails)
+                            {
+                                System.Text.StringBuilder eSB = new System.Text.StringBuilder();
+                                eSB.Append("<h4>");
+                                eSB.Append("<i class=\"glyphicon glyphicon-envelope\"></i>&nbsp;&nbsp;");
+                                eSB.Append("<span style=\"color: #333333\">");
+                                eSB.Append(@Html.DisplayFor(modelItem => email.AddressType));
+                                eSB.Append(":");
+                                eSB.Append("</span>");
+                                eSB.Append("<small>");
+                                eSB.Append("&nbsp;&nbsp;");
+                                var newemail = string.Format("<a href='mailto:{0}'>{0}</a>", @Html.DisplayFor(modelItem => email.userEmailAddress));
+                                eSB.Append(newemail);
+                                eSB.Append("</small></h4>");
+                                eSB.Append("<br>");
+                                @Html.Raw(eSB)
+                            }
+                                             
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+
+
+@*<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="well" style="width: 500px; height: 165px">
+                @{
+                    string sap = Model.SAP;
+                    string newSap = sap.Substring(sap.Length - 6, 6);
+                    var picURL = "";
+                    string str = Model.PicURL;
+                    if (str != null)
+                    {
+                        Char charRange1 = 'E';
+                        int startIndex = str.IndexOf(charRange1);
+                        string substring = str.Substring(startIndex);
+                        picURL = "http://wppswebprod/Booking/" + substring;
+                    }
+
+                    var url = "http://wppswebprod/FileShare/Images" + newSap + ".png";
+                    HttpWebResponse response = null;
+                    var request = (HttpWebRequest)WebRequest.Create(url);
+                    request.Method = "HEAD";
+
+                    try
+                    {
+                        response = (HttpWebResponse)request.GetResponse();
+                    }
+                    catch (Exception)
+                    {
+                        url = "";
+                        if (picURL.Length > 10)
+                        {
+                            url = picURL;
+                        }
+                        else
+                        {
+                            url = "~/Images/Male.png";
+                        }
+                    }
+                    finally
+                    {
+                        if (response != null)
+                        {
+                            response.Close();
+                        }
+                    }
+                    <div class="col-lg-3" >
+                    <img src="@Url.Content(url)"  class="img-responsive" alt=""/>
+                    </div>
+                    
+                    <div class="col-lg-9">
+                        <div class="profile-usertitle-job" >
+                            @Html.Raw(Model.JobTitle.ToUpper())
+                        </div>
+                        @{
+                            string person = string.Format("{0} {1} #{2}", Model.First, Model.Last, Model.Badge);
+                         <div class="profile-usertitle-name">
+                             @Html.Raw(person.ToUpper())
+                         </div>
+                            }
+                         
+                    </div>                
+                }
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

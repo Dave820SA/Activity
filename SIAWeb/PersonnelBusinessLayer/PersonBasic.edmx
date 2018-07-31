@@ -351,13 +351,13 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="PersonBasicModel.User_JobTitle" Width="1.5" PointX="5.625" PointY="0.75" Height="2.5571907552083317" />
         <AssociationConnector Association="PersonBasicModel.User_JobTitleUser_User">
-          <ConnectorPoint PointX="5.625" PointY="2.3176985950271285" />
-          <ConnectorPoint PointX="4.5" PointY="2.3176985950271285" />
+          <ConnectorPoint PointX="5.625" PointY="2.3176985950271289" />
+          <ConnectorPoint PointX="4.5" PointY="2.3176985950271289" />
         </AssociationConnector>
         <EntityTypeShape EntityType="PersonBasicModel.User_WorkStatus" Width="2.125" PointX="5.375" PointY="5" Height="2.7603971900542561" />
         <AssociationConnector Association="PersonBasicModel.FK_User_User_User_WorkStatus" >
-          <ConnectorPoint PointX="5.375" PointY="6.023509179155031" />
-          <ConnectorPoint PointX="4.5" PointY="6.023509179155031" />
+          <ConnectorPoint PointX="5.375" PointY="6.2342839237054184" />
+          <ConnectorPoint PointX="4.5" PointY="6.2342839237054184" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
