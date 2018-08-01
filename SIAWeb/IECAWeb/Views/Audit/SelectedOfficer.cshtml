@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<IECAWeb.Models.PersonBasic>
+@*@model IEnumerable<IECAWeb.Models.Audit>*@
 
 @{
     ViewBag.Title = "Officer Audit";
@@ -20,9 +21,77 @@
         }
         </div>
         <div class="col-xs-6 col-md-6 ">
-            <div class="well well-sm">
+        <div class="panel panel-default" style="max-height:219px; min-height:219px">
+            <div class="panel-heading">
+                Officer Case Audits</div>
+            <div class="panel-body">
+                <table class="table table-condensed table-hover" >
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Status
+                    </th>
+                </tr>
+               
+                    @foreach (var mo in ViewData["OfficerAudits"] as IEnumerable<IECAWeb.Models.Audit>)
+                    {
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                        sb.Append("<tr><td>");
+                        DateTime dtDate = (DateTime)mo.InserDate;
+                        string dDate = string.Format("{0} - {1}",dtDate.ToString("MMMM"),dtDate.ToString("yyyy"));
+                        sb.Append(dDate);
+                        sb.Append("</td>");
+                        sb.Append("<td>");
+                        string approve = (mo.CaseAuditFlag).ToString();
+                        //string url = Server.MapPath("IECAWeb/Images/Check32x32.png");
+                        string url = "Images/Check32x32.png"; 
+                        //if (approve == "True")
+                        //{
+                        //    sb.Append("<img scr=\"/IECAWeb/Images/Check32x32.png\" class=\"image_background\" />");
+                        //    //image = "~/Images/Check32x32.png";
+                        //}
+                        //else if (approve == "False")
+                        //{
+                        //    sb.Append("<img scr=\"~/Images/Minus32x32.png\" class=\"image_background\" />");
+                        //    //image = "~/Images/Minus32x32.png";
+                        //}
+                        //else
+                        //{
+                        //    sb.Append("<img scr=\"Images/Question32x32.png\" class=\"image_background\" />");
+                        //    //image = "~/Images/Question32x32.png";
+                        //}
+                        //sb.Append("<img scr=");
+                        //sb.Append(url);
+                        //sb.Append("alt='No Image' class'image_background'>");
+
+                        //sb.Append("<img src=\"" + url + "\"");
+                        //sb.Append("alt=\"alternatetext\" />");
+                            
+                        //sb.Append("<img scr=\"" + image + "\" alt=\"\" class=\"image_background\" />");
+                        //sb.Append("<img src=\"~/Images/Check32x32.png\"  class=\"image_background\" />");
+                        //sb.Append(string.Format("<img src='{0}' class='image_background' />", ResolveURL(url)));
+                        sb.AppendFormat("<img src=\"{0}\" class=\"image_background\" />", url);
+                        
+                        sb.Append("</td></tr>");
+                        @Html.Raw(sb);
+
+                    }   
+                        @*<td>
+                            <img src="~/Images/Check32x32.png"  class="image_background" />
+                        </td>
+                        </tr>*@
+                
+                </table>
+                </div>
+        </div>
+        </div>
+        
+        @*<div class="col-xs-6 col-md-6 ">
+            <div class="well well-sm" style="width: auto; height: 219px">
             
             </div>
-        </div>
+        </div>*@
     </div>
 </div>

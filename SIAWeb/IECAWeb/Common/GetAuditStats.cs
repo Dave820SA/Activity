@@ -36,7 +36,8 @@ namespace IECAWeb.Common
             //int yr = partOfDate("Year", auditDate);
 
             var myStats = (from au in pc.AuditHistrories
-                           where au.AppEntityID == appEntityID 
+                           where au.AppEntityID == appEntityID
+                           orderby au.AuditDate descending
                            select new Audit
                            {
                                IECAID = au.IECAID,
