@@ -32,8 +32,6 @@ namespace IECAWeb.Common
 
         public List<Audit> OfficerAuditStats(int appEntityID)
         {
-            //int mo = partOfDate("Month", auditDate);
-            //int yr = partOfDate("Year", auditDate);
 
             var myStats = (from au in pc.AuditHistrories
                            where au.AppEntityID == appEntityID

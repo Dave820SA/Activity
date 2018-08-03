@@ -732,7 +732,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="IECAModel" ZoomLevel="74">
+      <Diagram Name="IECAModel" ZoomLevel="85">
         <EntityTypeShape EntityType="IECAModel.Officer" Width="1.5" PointX="0.75" PointY="4.625" Height="3.3927214237054191" IsExpanded="true" />
         <EntityTypeShape EntityType="IECAModel.User_User" Width="1.5" PointX="3.375" PointY="5.125" Height="5.7112436137596756" />
         <AssociationConnector Association="IECAModel.FK_User_User_Person_Person" >

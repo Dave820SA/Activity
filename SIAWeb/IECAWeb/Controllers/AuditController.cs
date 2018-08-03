@@ -94,11 +94,17 @@ namespace IECAWeb.Controllers
         public ActionResult SelectedOfficer(int id)
         {
             GetAuditStats gas = new GetAuditStats();
-            //var _audit = gas.OfficerAuditStats(id);
-            //@ViewData["OfficerAudits"] = gas.OfficerAuditStats(id);
             @ViewData["OfficerAudits"] = gas.OfficerAuditStats(id).OrderByDescending(d => d.IECAID);
             PersonBasicGet pg = new PersonBasicGet();
             return View(pg.GetPersonPasicInfo(id));
+        }
+
+        [HttpGet]
+        public ActionResult GeneralNotes(int auditId)
+        {
+            GetGeneralNotes ggn = new GetGeneralNotes();
+            var generalNotes = ggn.AuditNotes(auditId);
+            return PartialView("_GeneralNotes",generalNotes);
         }
 
 

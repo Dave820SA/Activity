@@ -1,0 +1,19 @@
+﻿@model IEnumerable<IECAWeb.Models.AuditNotes>
+
+<table class="table table-condensed table-hover">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.NoteType)</th>
+        <th>@Html.DisplayNameFor(model => model.AuditNote)</th>
+        <th>@Html.DisplayNameFor(model => model.Supervisor)</th>
+        <th>@Html.DisplayNameFor(model => model.NoteDate)</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.NoteType)</td>
+            <td>@Html.DisplayFor(modelItem => item.AuditNote)</td>
+            <td>@Html.DisplayFor(modelItem => item.Supervisor)</td>
+            <td>@Html.DisplayFor(modelItem => item.NoteDate)</td>
+        </tr>
+    }
+</table>

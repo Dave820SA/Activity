@@ -129,6 +129,7 @@
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
     <Compile Include="Common\GetAssigned.cs" />
     <Compile Include="Common\GetAuditStats.cs" />
+    <Compile Include="Common\GetGeneralNotes.cs" />
     <Compile Include="Common\PersonBasicGet.cs" />
     <Compile Include="Common\SessionLogin.cs" />
     <Compile Include="Controllers\AuditController.cs" />
@@ -140,6 +141,7 @@
     </Compile>
     <Compile Include="Models\AssignedOfficers.cs" />
     <Compile Include="Models\Audit.cs" />
+    <Compile Include="Models\AuditNotes.cs" />
     <Compile Include="Models\Email.cs" />
     <Compile Include="Models\GetGroupMembers.cs" />
     <Compile Include="Models\GroupMembers.cs" />
@@ -163,6 +165,7 @@
     <None Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\_MemberContact.cshtml" />
     <Content Include="Views\Shared\_PersonBasicInfo.cshtml" />
+    <Content Include="Views\Shared\_GeneralNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
