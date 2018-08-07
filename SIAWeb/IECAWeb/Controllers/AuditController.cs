@@ -144,6 +144,13 @@ namespace IECAWeb.Controllers
             return View(audithistrory);
         }
 
+        [HttpPost]
+        public ActionResult AddGenNotes(AuditNotes _notes)
+        {
+
+            return View();
+        }
+
         //
         // GET: /Audit/Edit/5
 

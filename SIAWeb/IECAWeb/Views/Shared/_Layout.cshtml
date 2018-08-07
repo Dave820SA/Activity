@@ -10,7 +10,14 @@
     @Styles.Render("~/Content/font-awesome")
     @Styles.Render("~/Bootstrap/css")
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/themes/base/css")
+
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @*@Styles.Render("~/Content/font-awesome")
+    @Styles.Render("~/Bootstrap/css")
+    @Styles.Render("~/Content/css")*@
+    @*@Scripts.Render("~/bundles/jquerys")*@
 </head>
 <body>
   <div class="container">
@@ -78,14 +85,18 @@
       </footer>
     </div>
 
-    </div> <!-- /container -->
-    
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrapjs")
+    </div><!-- /container -->
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+    @Scripts.Render("~/bundles/~/bundles/jqueryval")
     @RenderSection("scripts", required: false)
+    
+     
+    @*@Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/bootstrapjs")
+    @RenderSection("scripts", required: false)*@
 
-    @*@Scripts.Render("~/bundles/moment")
-    @Scripts.Render("~/bundles/datepick")*@
 </body>
 </html>
 

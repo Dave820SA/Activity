@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<IECAWeb.Models.PersonBasic>
-
 @{
     ViewBag.Title = "Officer Audit";
     Layout = "~/Views/Shared/_Alternate.cshtml";
 }
-
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <a href="@Url.Action("Index", "Audit", new { id = (string)System.Web.HttpContext.Current.Session["OfficeID"] })" class="btn btn-warning btn-sm">
-                Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+                Back To List <i class="fa fa-share" aria-hidden="true"></i></a>@*<button type="button" class="btn btn-info btn-sm" data-target="#myModalHorizontal" data-toggle="modal">Modal Button</button>*@
         </div>
         <br />
         <br />
@@ -17,76 +15,125 @@
             @foreach (var item in Model)
             {
                 @Html.Partial("_PersonBasicInfo", item)
-        }
+            }
         </div>
         <div class="col-xs-6 col-md-6 ">
-        <div class="panel panel-default" style="max-height:219px; min-height:219px">
-            <div class="panel-heading">
-                Officer Case Audits</div>
-            <div class="panel-body">
-                <table class="table table-condensed table-hover" >
-                <tr>
-                    <th>
-                        Date
-                    </th>
-                    <th>
-                        Status
-                    </th>
-                   
-                </tr>
-               
-                    @foreach (var mo in ViewData["OfficerAudits"] as IEnumerable<IECAWeb.Models.Audit>)
-                    {
-                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                        sb.Append("<tr><td>");
-                        DateTime dtDate = (DateTime)mo.InserDate;
-                        string dDate = string.Format("{0} - {1}",dtDate.ToString("MMMM"),dtDate.ToString("yyyy"));
-                        //sb.Append("@Html.ActionLink(\" " + dDate + ",null,null,null, new{id =\"supComments\"})");
-                        //var link = Html.ActionLink(dDate,null, new {id=mo.IECAID},new {@class="Supnotes"});
-                        var link = Html.ActionLink(dDate, "GeneralNotes", "Audit", new { id = mo.IECAID }, new { @class = "myLink", data_id = mo.IECAID });
-                        //var link = Html.ActionLink(dDate, null, null, new { id = mo.IECAID }, new { @class = "myLink"});
-                        //var link = Html.ActionLink(dDate, null, null, null, new { @class = "myLink", data_id = mo.IECAID });
-                        //var link = Html.ActionLink(dDate,null, new{id =mo.IECAID}, new{@class = "myLink, data_id = mo.IECAID"});
-                        
-                        //sb.Append(dDate);
-                        sb.Append(link);
-                        sb.Append("</td>");
-                        sb.Append("<td>");
-                        string approve = (mo.CaseAuditFlag).ToString();
-
-                        if (approve == "True")
+            <div class="panel panel-default" style="max-height: 219px; min-height: 219px">
+                <div class="panel-heading">
+                    Officer Case Audits</div>
+                <div class="panel-body">
+                    <table class="table table-condensed table-hover">
+                        <tr>
+                            <th>
+                                Date
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                        </tr>
+                        @foreach (var mo in ViewData["OfficerAudits"] as IEnumerable<IECAWeb.Models.Audit>)
                         {
-                            sb.Append("<img src=\"/Images/Check32x32.png\" class=\"image_background\"/>");
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                            sb.Append("<tr><td>");
+                            DateTime dtDate = (DateTime)mo.InserDate;
+                            string dDate = string.Format("{0} - {1}", dtDate.ToString("MMMM"), dtDate.ToString("yyyy"));
+                            var link = Html.ActionLink(dDate, "GeneralNotes", "Audit", new { id = mo.IECAID }, new { @class = "myLink", data_id = mo.IECAID });
+                            sb.Append(link);
+                            sb.Append("</td>");
+                            sb.Append("<td>");
+                            string approve = (mo.CaseAuditFlag).ToString();
 
-                        }
-                        else if (approve == "False")
-                        {
-                            sb.Append("<img src=\"/Images/Minus32x32.png\" class=\"image_background\"/>");
+                            if (approve == "True")
+                            {
+                                sb.Append("<img src=\"/Images/Check32x32.png\" class=\"image_background\"/>");
 
-                        }
-                        else
-                        {
-                            sb.Append("<img src=\"/Images/Question32x32.png\" class=\"image_background\"/>");
+                            }
+                            else if (approve == "False")
+                            {
+                                sb.Append("<img src=\"/Images/Minus32x32.png\" class=\"image_background\"/>");
 
-                        }
+                            }
+                            else
+                            {
+                                sb.Append("<img src=\"/Images/Question32x32.png\" class=\"image_background\"/>");
 
-                        sb.Append("</td></tr>");
+                            }
+
+                            sb.Append("</td><td>");
+                            var genNote = Html.ActionLink("Notes", "GeneralQuestion", new { id = mo.IECAID }, new { @class = "editCourseModal", @data_target = "#genQ" });
+                            sb.Append(genNote);
+                            //sb.Append("<button id= type=\"button\" class=\"btn btn-info btn-xs\" data-toggle=\"modal\" data-target=\"#genQ\">Notes</button>");
+                            sb.Append("</td></tr>");    
                         
                         
-                        @Html.Raw(sb);
-                    }
-                    
-                </table>
+                            @Html.Raw(sb);
+                        }
+                    </table>
                 </div>
+            </div>
         </div>
-        </div>
-        
         <div id="genNotes" class="col-xs-12 col-md-12 well well-lg">
-            
         </div>
     </div>
-</div>
 
+    <!-- Modal General Notes-->
+    @*<div class="modal fade" id="genQ" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Modal title
+                    </h4>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form id="frmGenQuestion" class="form-horizontal" role="form">
+                    <div class="form-group">
+                      
+                        <label class="col-sm-2 control-label" for="inputEmail3">
+                            Email</label>
+                        <div class="col-sm-10">
+                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="myNotes">
+                            General Notes</label>
+                        <div class="col-sm-10">
+                            <textarea id="myNotes"  style="resize: vertical;" class="form-control" placeholder="Message..."
+                                rows="6" cols="50" name="comment" required autofocus></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" />&nbsp;&nbsp; Follow-up Needed
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        Close
+                    </button>
+                    <button type="reset" value="Submit" class="btn btn-success" id="btnSubmit">
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+    
+</div>
 @section scripts
 {
     <script type="text/javascript">
@@ -107,20 +154,75 @@
             })
         });
 
-//        $(".myLink").click(function () {
-//            var id = $(this).data("id");
-//            $.ajax({
-//                type: "GET",
-//                url: "/Audit/GeneralNotes",
-//                data: {auditId: id},
-//                success: function (data) {
-//                    $("#genNotes").html(data);
-//                },
-//                error: function () {
-//                    alert("Something went wrong");
-//                }
-//            })
-//        });
+        $(function () {
+            $('.editCourseModal').on("click", function (e) {
+                e.preventDefault();
+                //perform the url load  then
+                $('#genQ').modal({
+                    keyboard: true
+                }, 'show');
+                return false;
+            })
+        })
+
+        $(document).ready(function () {
+            $("#btnSubmit").click(function () {
+                var myformdata = $("#frmGenQuestion").serialize();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Audit/AddGenNotes",
+                    data: myformdata,
+                    success: function () {
+
+                        $("#genQ").modal("hide");
+                    }
+                })
+
+            })
+
+        })
+
+
+
+        //        $(function () {
+        //            $("#modal-opener").click(function () {
+        //                $("#dialog-modal").dialog("open");
+        //            });
+        //        });
+
+
+        //        $(function () {
+        //            $("#dialog-modal").dialog({
+        //                autoOpen: false,
+
+        //                show: {
+        //                    effect: "blind",
+        //                    duration: 1000
+        //                },
+        //                hide: {
+        //                    effect: "explode",
+        //                    duration: 1000
+        //                }
+
+        //            });
+
+        //            $("#modal-opener").click(function () {
+        //                $("#dialog-modal").dialog("open");
+        //            });
+        //        });
+
+        //        $("#myBtn").click(function () {
+        //            $("#myModal").modal();
+        //        });
+
+
+        //            $(document).ready(function(){
+        //                $('.modal').modal('show');
+        //            });
+
+
+        
                         
     </script>
 }

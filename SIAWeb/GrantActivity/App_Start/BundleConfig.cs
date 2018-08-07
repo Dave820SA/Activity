@@ -8,18 +8,21 @@ namespace GrantActivity
         // For more information on Bundling, visit http://go.microsoft.com/fwlink/?LinkId=254725
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-            //            "~/Scripts/jquery-{version}.js"));
-            bundles.Add(new ScriptBundle("~/bundles/googlejquery", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js").Include(
-                       "~/Scripts/jquery-{version}.js"));
+            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+                        "~/Scripts/jquery-{version}.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/googlejquery", "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js").Include(
+            //           "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/moment","https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/moment","https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/fullcalendar", "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js").Include(
-                       "~/Scripts/jquery-{version}.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/fullcalendar", "https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.6.1/fullcalendar.min.js").Include(
+            //           "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/datetimepicker", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js").Include(
-                      "~/Scripts/jquery-{version}.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/datetimepicker", "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js").Include(
+            //          "~/Scripts/jquery-{version}.js"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/jquerys").Include(
+            //            "~/Scripts/jquery-1.9.1.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -44,12 +47,11 @@ namespace GrantActivity
             //bundles.Add(new ScriptBundle("~/bundles/datepick").Include(
             //            "~/Scripts/bootstrap-datetimepicker.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquerys").Include(
-                        "~/Scripts/jquery-1.9.1.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jquerymask").Include(
-                "~/Scripts/jquery.maskedinput*",
-                "~/Scripts/maskedinput-binder.js"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/jquerymask").Include(
+            //    "~/Scripts/jquery.maskedinput*",
+            //    "~/Scripts/maskedinput-binder.js"));
 
             bundles.Add(new StyleBundle("~/Content/font-awesome", "http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"));
 
