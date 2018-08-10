@@ -1,0 +1,48 @@
+﻿@model IECAWeb.Models.AuditNotes
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.16.0/jquery.validate.min.js"></script>
+
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.6/jquery.validate.unobtrusive.min.js"></script>
+
+<div class="modal-dialog" id="AddNotesModalPopUp">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title" id="myModalLabel">@ViewBag.Message</h4>
+        </div>
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", @id = "ModalForm" }))
+        {
+            <div class="form-horizontal" style="padding-bottom:5px">
+                @*@Html.Hidden("OfficerID", @ViewBag.OfficerID)*@
+                @*@Html.HiddenFor(m => m.NoteID)*@
+                @Html.HiddenFor(m => m.AuditHistID)
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NoteByID, htmlAttributes: new{@class="control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(model => model.NoteByID, new { @class = "form-control" })
+                    </div>
+                
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AuditNote, htmlAttributes: new {@class="control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.TextAreaFor(model => model.AuditNote, 10,55,null)
+                    </div>
+                </div>
+                <div class="form-group">
+
+                    <div class="col-md-offset-2 col-md-10">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                        <input type="submit" class="btn btn-primary" id="confirmok1" value="Save changes" />
+
+                    </div>
+
+                </div>
+            </div>
+
+        }
+    
+    </div>
+</div>

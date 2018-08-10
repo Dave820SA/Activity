@@ -15,7 +15,6 @@ namespace IECAWeb.Controllers
     {
         private AuditEntities db = new AuditEntities();
 
-
         public ActionResult Index(int id)
         {
             //automatically Enter officers into the table that belong to the office
@@ -53,11 +52,11 @@ namespace IECAWeb.Controllers
             var noReturn = db.spEnterAuditOfficers(officeID, auditDate);
         }
 
-
         private DateTime moBack(DateTime myDate)
         {
             return  myDate.AddMonths(-1);
         }
+
         private DateTime moForward(DateTime myDate)
         {
             return myDate.AddMonths(1);
@@ -107,7 +106,6 @@ namespace IECAWeb.Controllers
             return PartialView("_GeneralNotes",generalNotes);
         }
 
-
         public ActionResult Details(int id = 0)
         {
             AuditHistrory audithistrory = db.AuditHistrories.Single(a => a.IECAID == id);
@@ -118,17 +116,11 @@ namespace IECAWeb.Controllers
             return View(audithistrory);
         }
 
-        //
-        // GET: /Audit/Create
-
         public ActionResult Create()
         {
             ViewBag.AppEntityID = new SelectList(db.AppEntities, "AppEntityID", "AppEntityID");
             return View();
         }
-
-        //
-        // POST: /Audit/Create
 
         [HttpPost]
         public ActionResult Create(AuditHistrory audithistrory)
@@ -145,10 +137,27 @@ namespace IECAWeb.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddGenNotes(AuditNotes _notes)
+        public ActionResult AddGenNotes(AuditNotes _notes, int id)
         {
+            Sup_AuditNotes san = new Sup_AuditNotes();
+         
+            san.NoteTypeID = _notes.NoteTypeID;
+            san.AuditHistID = _notes.AuditHistID;
+            san.AuditNotes = _notes.AuditNote;
+            san.NoteByID = _notes.NoteByID;
+            san.NoteDate = _notes.NoteDate ?? DateTime.Now ;
+            san.FollowupFlag = _notes.Followup ?? false;
 
-            return View();
+            db.Sup_AuditNotes.AddObject(san);
+            db.SaveChanges();
+
+            return RedirectToAction("Audit", "index"); 
+        }
+
+        public ActionResultAllNotes()
+        {
+            List<AuditNotes> model = new List<AuditNotes>
+            return PartialView("_AddGenNotes", model);
         }
 
         //

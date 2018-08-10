@@ -7,7 +7,9 @@
     <div class="row">
         <div class="col-xs-12 col-md-12">
             <a href="@Url.Action("Index", "Audit", new { id = (string)System.Web.HttpContext.Current.Session["OfficeID"] })" class="btn btn-warning btn-sm">
-                Back To List <i class="fa fa-share" aria-hidden="true"></i></a>@*<button type="button" class="btn btn-info btn-sm" data-target="#myModalHorizontal" data-toggle="modal">Modal Button</button>*@
+                Back To List <i class="fa fa-share" aria-hidden="true"></i></a>
+                @*<button type="button" class="btn btn-info btn-sm" data-target="#myModalHorizontal" data-toggle="modal">Modal Button</button>*@
+                <a href = "javascript:void(0);" class = "getAllEMP" style = "font-size:20pt;" > Get All Employee Information </a> 
         </div>
         <br />
         <br />
@@ -74,66 +76,33 @@
         </div>
         <div id="genNotes" class="col-xs-12 col-md-12 well well-lg">
         </div>
-    </div>
 
-    <!-- Modal General Notes-->
-    @*<div class="modal fade" id="genQ" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <!-- Modal Header -->
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span aria-hidden="true">&times;</span> <span class="sr-only">Close</span>
-                    </button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        Modal title
-                    </h4>
-                </div>
-                <!-- Modal Body -->
-                <div class="modal-body">
-                    <form id="frmGenQuestion" class="form-horizontal" role="form">
-                    <div class="form-group">
-                      
-                        <label class="col-sm-2 control-label" for="inputEmail3">
-                            Email</label>
-                        <div class="col-sm-10">
-                            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" />
-                        </div>
+
+        <div id = 'myModal'class = 'modal' style = "text-align:right;"> 
+            <div class = "modal-dialog" style = "width:900px; height:400px; padding:10px;"> 
+                <div class = "modal-content" style = "overflow: auto; padding:10px; background-color:#d2f5f4;"> 
+                    <button type = "button" id = "closbtn"> x </button> 
+                    <div style = "height:10px;" > 
+                    </div> 
+                    <div id = 'myModalContent' style = "width:850px; height:400px; padding:10px;"> 
+                    </div> 
+                </div> 
+            </div>
+        </div> 
+
+        @*<div id='myModal' class='modal'>
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div id='myModalContent'>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label" for="myNotes">
-                            General Notes</label>
-                        <div class="col-sm-10">
-                            <textarea id="myNotes"  style="resize: vertical;" class="form-control" placeholder="Message..."
-                                rows="6" cols="50" name="comment" required autofocus></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" />&nbsp;&nbsp; Follow-up Needed
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    </form>
-                </div>
-                <!-- Modal Footer -->
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        Close
-                    </button>
-                    <button type="reset" value="Submit" class="btn btn-success" id="btnSubmit">
-                        Submit
-                    </button>
                 </div>
             </div>
-        </div>
-    </div>*@
+        </div>   *@
+
+    </div>
+    </div>
+
     
-</div>
 @section scripts
 {
     <script type="text/javascript">
@@ -163,25 +132,63 @@
                 }, 'show');
                 return false;
             })
-        })
+        });
 
-        $(document).ready(function () {
-            $("#btnSubmit").click(function () {
-                var myformdata = $("#frmGenQuestion").serialize();
 
+        var ajaxCallURL = '/Audit/EmployeePartial'; 
+        $(function () {
+            $(".getAllEMP").click(function () {
+                var $buttonClicked = $(this);
+                var options = {
+                    "backdrop": "static",
+                    keyboard: true
+                };
                 $.ajax({
-                    type: "POST",
-                    url: "/Audit/AddGenNotes",
-                    data: myformdata,
-                    success: function () {
-
-                        $("#genQ").modal("hide");
+                    type: "GET",
+                    url: ajaxCallURL,
+                    contentType: "application/json; charset=utf-8",
+                    datatype: "json",
+                    success: function (data) {
+                        debugger;
+                        $('#myModalContent').html(data);
+                        $('#myModal').modal(options);
+                        $('#myModal').modal('show');
+                    },
+                    error: function () {
+                        alert("Content load failed.");
                     }
-                })
+                });
+            });
+            $("#closbtn").click(function () {
+                debugger;
+                $('#myModal').modal('hide');
+            });
+        }); 
 
-            })
 
-        })
+
+
+
+
+
+
+//        $(document).ready(function () {
+//            $("#btnSubmit").click(function () {
+//                var myformdata = $("#frmGenQuestion").serialize();
+
+//                $.ajax({
+//                    type: "POST",
+//                    url: "/Audit/AddGenNotes",
+//                    data: myformdata,
+//                    success: function () {
+
+//                        $("#genQ").modal("hide");
+//                    }
+//                })
+
+//            })
+
+//        })
 
 
 

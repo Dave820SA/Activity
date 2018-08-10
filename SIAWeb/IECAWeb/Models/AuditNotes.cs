@@ -7,6 +7,7 @@ namespace IECAWeb.Models
 {
     public class AuditNotes
     {
+        //public int OfficerID { get; set; }
         public int NoteID { get; set; }
         public int NoteTypeID { get; set; }
         public string NoteType { get; set; }

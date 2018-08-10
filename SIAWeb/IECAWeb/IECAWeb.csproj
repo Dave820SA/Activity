@@ -162,11 +162,11 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <None Include="Properties\PublishProfiles\IECAWeb.pubxml" />
     <Content Include="Views\Audit\SelectedOfficer.cshtml" />
+    <Content Include="Views\Shared\_AddGenNotes.cshtml" />
     <None Include="Views\Shared\DisplayTemplates\Boolean.cshtml" />
     <Content Include="Views\Shared\_MemberContact.cshtml" />
     <Content Include="Views\Shared\_PersonBasicInfo.cshtml" />
     <Content Include="Views\Shared\_GeneralNotes.cshtml" />
-    <Content Include="Views\Shared\_addgeneralNotes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
