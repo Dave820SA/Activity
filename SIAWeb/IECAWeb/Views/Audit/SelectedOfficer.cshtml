@@ -143,21 +143,21 @@
                     "backdrop": "static",
                     keyboard: true
                 };
-                $.ajax({
-                    type: "GET",
-                    url: ajaxCallURL,
-                    contentType: "application/json; charset=utf-8",
-                    datatype: "json",
-                    success: function (data) {
-                        debugger;
-                        $('#myModalContent').html(data);
-                        $('#myModal').modal(options);
-                        $('#myModal').modal('show');
-                    },
-                    error: function () {
-                        alert("Content load failed.");
-                    }
-                });
+//                $.ajax({
+//                    type: "GET",
+//                    url: ajaxCallURL,
+//                    contentType: "application/json; charset=utf-8",
+//                    datatype: "json",
+//                    success: function (data) {
+//                        debugger;
+//                        $('#myModalContent').html(data);
+//                        $('#myModal').modal(options);
+//                        $('#myModal').modal('show');
+//                    },
+//                    error: function () {
+//                        alert("Content load failed.");
+//                    }
+//                });
             });
             $("#closbtn").click(function () {
                 debugger;

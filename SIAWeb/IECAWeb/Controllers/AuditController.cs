@@ -154,11 +154,11 @@ namespace IECAWeb.Controllers
             return RedirectToAction("Audit", "index"); 
         }
 
-        public ActionResultAllNotes()
-        {
-            List<AuditNotes> model = new List<AuditNotes>
-            return PartialView("_AddGenNotes", model);
-        }
+        //public ActionResultAllNotes()
+        //{
+        //    List<AuditNotes> model = new List<AuditNotes>
+        //    return PartialView("_AddGenNotes", model);
+        //}
 
         //
         // GET: /Audit/Edit/5
