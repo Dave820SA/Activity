@@ -261,14 +261,14 @@
     <Content Include="Scripts\moment.min.js" />
     <Content Include="Scripts\npm.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config">
+    <Content Include="Web_1.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="Web_1.Debug.config">
+      <DependentUpon>Web_1.config</DependentUpon>
     </Content>
-    <Content Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <Content Include="Web_1.Release.config">
+      <DependentUpon>Web_1.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -296,6 +296,15 @@
     <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Shared\_Alternate.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
     <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
     <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
     <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
