@@ -25,6 +25,7 @@ namespace Recognition.Controllers
 
         public ActionResult Index()
         {
+            //A new note
             var rec = from r in db.Recognizes
                       select r;
             rec = rec.OrderByDescending(r => r.IssuedDate).Take(10);
