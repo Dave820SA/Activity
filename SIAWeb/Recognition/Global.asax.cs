@@ -25,8 +25,9 @@ namespace Recognition
         protected void Session_Start()
         {
             SessionLogin user = new SessionLogin();
-            string myUser = HttpContext.Current.User.Identity.Name.ToString();
-            //string myUser = "COSA\\TB93703";
+            //string myUser = HttpContext.Current.User.Identity.Name.ToString();
+            string myUser = HttpContext.Current.Request.LogonUserIdentity.Name;
+            //string myUser = "COSA\\jg93671";
             user.getUserPin(myUser);
 
         }
