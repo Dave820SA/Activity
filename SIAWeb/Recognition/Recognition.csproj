@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -16,6 +17,13 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -131,6 +139,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
+    <Compile Include="Common\PDEmployeeManager.cs" />
+    <Compile Include="Controllers\AccessDeniedController.cs" />
     <Compile Include="Controllers\AwardController.cs" />
     <Compile Include="Controllers\AwardTypeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -138,23 +148,24 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmailAddress.cs" />
     <Compile Include="Models\MonthYearManager.cs" />
+    <Compile Include="Models\PDEmployee.cs" />
+    <Compile Include="Models\PhoneNumber.cs" />
+    <Compile Include="Models\ProfileCard.cs" />
+    <Compile Include="Models\Top10Employees.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\SessionLogin.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bootstrap\css\bootstrap-theme.css" />
-    <Content Include="bootstrap\css\bootstrap-theme.min.css" />
-    <Content Include="bootstrap\css\bootstrap.css" />
-    <Content Include="bootstrap\css\bootstrap.min.css" />
-    <Content Include="bootstrap\css\cyborg.css" />
-    <Content Include="bootstrap\css\sandstone.min.css" />
-    <Content Include="bootstrap\css\datepicker.css" />
-    <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="bootstrap\js\bootstrap.js" />
-    <Content Include="bootstrap\js\bootstrap.min.js" />
-    <Content Include="bootstrap\js\npm.js" />
+    <Content Include="Content\Slate.css" />
     <Content Include="Content\ajax-loader.gif" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
@@ -204,14 +215,36 @@
     <Content Include="Images\JumbotronPatch1024.png" />
     <Content Include="Images\JumbotronPatch1280.png" />
     <Content Include="Images\Male.png" />
+    <Content Include="Images\SAPD-Patch-web-S4.png" />
     <Content Include="Images\SAPD.png" />
-    <Content Include="bootstrap\js\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-1.9.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
+    <Content Include="Scripts\jquery-3.0.0.js" />
+    <Content Include="Scripts\jquery-3.0.0.min.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.js" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -227,8 +260,14 @@
     <Content Include="Scripts\moment-with-locales.js" />
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
-    <Content Include="bootstrap\js\moment.min.js" />
-    <Content Include="Scripts\npm.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -245,6 +284,23 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
+    <Content Include="Views\Shared\_Navbar.cshtml" />
+    <Content Include="Views\Shared\_LandingHeader.cshtml" />
+    <Content Include="Views\Shared\_LandingNavButtons.cshtml" />
+    <Content Include="Views\Shared\_Top10Officers.cshtml" />
+    <Content Include="Views\Shared\_LandingLastEntered.cshtml" />
+    <Content Include="Views\Shared\_MemberContact.cshtml" />
+    <Content Include="Views\AccessDenied\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -256,14 +312,6 @@
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="bootstrap\css\bootstrap-theme.css.map" />
-    <None Include="bootstrap\css\bootstrap-theme.min.css.map" />
-    <None Include="bootstrap\css\bootstrap.css.map" />
-    <None Include="bootstrap\css\bootstrap.min.css.map" />
-    <None Include="bootstrap\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="bootstrap\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Content\fonts\fontawesome-webfont.eot" />
     <None Include="Content\fonts\fontawesome-webfont.ttf" />
     <None Include="Content\fonts\fontawesome-webfont.woff" />
@@ -309,7 +357,6 @@
     <Content Include="Views\Award\Edit.cshtml" />
     <Content Include="Views\Award\Delete.cshtml" />
     <Content Include="Views\Award\_ViewStart.cshtml" />
-    <None Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Award\FileUpload.cshtml" />
     <Content Include="Views\Home\Search.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
@@ -327,8 +374,14 @@
     <Content Include="Views\AwardType\_ViewStart.cshtml" />
     <Content Include="Views\Home\Info.cshtml" />
     <Content Include="Views\Home\AwardView.cshtml" />
+    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.0.0.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PersonnelBusinessLayer\PersonnelBusinessLayer.csproj">
+      <Project>{ee6894cc-58c5-4ade-af8a-19a08dcf9aa8}</Project>
+      <Name>PersonnelBusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RecognitionBusinessLayer\RecognitionBusinessLayer.csproj">
       <Project>{ED6EF823-9F80-4B20-805C-5F7A7E5167EF}</Project>
       <Name>RecognitionBusinessLayer</Name>
@@ -338,11 +391,18 @@
       <Name>UserBusinessLayer</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">

@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PagedList;
+using RecognitionBusinessLayer;
+using System;
 using System.Data;
-using System.Data.Entity;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
-using PagedList;
-using RecognitionBusinessLayer;
-using System.IO;
-using System.Text.RegularExpressions;
-using System.Threading;
+using Recognition.Common;
 
 namespace Recognition.Controllers
 {
@@ -85,14 +83,6 @@ namespace Recognition.Controllers
             return View(rec.ToPagedList(pageNumber, pageSize));
         }
 
-        //public ActionResult Index()
-        //{
-        //    var recognizes = db.Recognizes.Include("Award_AwardType").Include("Award_RecognitionType").Include("Office_Office").Include("Person");
-        //    return View(recognizes.ToList());
-        //}
-
-        //
-        // GET: /Award/Details/5
 
         public ActionResult Details(int id = 0)
         {
@@ -128,13 +118,14 @@ namespace Recognition.Controllers
             ViewBag.AwardTypeId = new SelectList(db.AwardTypes, "AwardTypeId", "Name");
             ViewBag.RecogTypeId = new SelectList(db.RecognitionTypes, "RecognitionTypeId", "Name");
 
-            ViewBag.AppEntityID = db.People.OrderBy(p => p.LastName).AsEnumerable().Select(p => new SelectListItem()
+            PDEmployeeManager pdem = new PDEmployeeManager();
+            ViewBag.AppEntityID = pdem.ListOfEmployees().AsEnumerable().Select(p => new SelectListItem()
             {
 
                 Value = p.AppEntityID.ToString(),
-                Text = string.Format("{0} {1} {2} - {3}", p.LastName, p.FirstName,p.Badge, p.OfficeCode).ToUpper()
+                Text = string.Format("{0} {1} {2} - {3}", p.Last, p.First, p.Badge, p.OfficeCode).ToUpper()
             });
-
+            
             ViewBag.OfficeId = db.Offices.OrderBy(p => p.Code).AsEnumerable().Select(p => new SelectListItem()
             {
 

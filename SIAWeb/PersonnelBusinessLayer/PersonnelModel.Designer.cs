@@ -53,6 +53,12 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_Person_PersonPhone_Person_PhoneNumberType", "PhoneNumberType", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.PhoneNumberType), "Person_PersonPhone", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.PersonPhone), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_GroupMember_User_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.User), "User_GroupMember", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.GroupMember), true)]
 [assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_GroupMember_User_GroupTitle", "User_GroupTitle", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(PersonnelBusinessLayer.GroupTitle), "GroupMember", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.GroupMember), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_User_Office_Office", "Office_Office", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.Office_Office), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.User), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_User_Office_OfficeSection", "OfficeSection", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.OfficeSection), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.User), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_User_User_DayOff", "DayOff", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.DayOff), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.User), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_User_User_JobTitle", "JobTitle", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.JobTitle), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.User), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_User_User_Shift", "Shift", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.Shift), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.User), true)]
+[assembly: EdmRelationshipAttribute("SAPDActivityModel", "FK_User_User_User_WorkStatus", "WorkStatus", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(PersonnelBusinessLayer.WorkStatus), "User", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(PersonnelBusinessLayer.User), true)]
 
 #endregion
 
@@ -2524,6 +2530,28 @@ namespace PersonnelBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_User_DayOff", "User")]
+        public EntityCollection<User> User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SAPDActivityModel.FK_User_User_User_DayOff", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SAPDActivityModel.FK_User_User_User_DayOff", "User", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -2810,12 +2838,14 @@ namespace PersonnelBusinessLayer
         /// <param name="groupTitleID">Initial value of the GroupTitleID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
-        public static GroupTitle CreateGroupTitle(global::System.Int32 groupTitleID, global::System.String name, global::System.Boolean visibleFlag)
+        /// <param name="appVisibleFlag">Initial value of the AppVisibleFlag property.</param>
+        public static GroupTitle CreateGroupTitle(global::System.Int32 groupTitleID, global::System.String name, global::System.Boolean visibleFlag, global::System.Boolean appVisibleFlag)
         {
             GroupTitle groupTitle = new GroupTitle();
             groupTitle.GroupTitleID = groupTitleID;
             groupTitle.Name = name;
             groupTitle.VisibleFlag = visibleFlag;
+            groupTitle.AppVisibleFlag = appVisibleFlag;
             return groupTitle;
         }
 
@@ -2969,6 +2999,30 @@ namespace PersonnelBusinessLayer
         private global::System.Boolean _VisibleFlag;
         partial void OnVisibleFlagChanging(global::System.Boolean value);
         partial void OnVisibleFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean AppVisibleFlag
+        {
+            get
+            {
+                return _AppVisibleFlag;
+            }
+            set
+            {
+                OnAppVisibleFlagChanging(value);
+                ReportPropertyChanging("AppVisibleFlag");
+                _AppVisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppVisibleFlag");
+                OnAppVisibleFlagChanged();
+            }
+        }
+        private global::System.Boolean _AppVisibleFlag;
+        partial void OnAppVisibleFlagChanging(global::System.Boolean value);
+        partial void OnAppVisibleFlagChanged();
 
         #endregion
 
@@ -3220,6 +3274,28 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<JobTitleHistory>("SAPDActivityModel.FK_User_UserJobTitleHistory_User_JobTitle", "User_UserJobTitleHistory", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_User_JobTitle", "User")]
+        public EntityCollection<User> User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SAPDActivityModel.FK_User_User_User_JobTitle", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SAPDActivityModel.FK_User_User_User_JobTitle", "User", value);
                 }
             }
         }
@@ -3762,6 +3838,28 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<OfficeHistory>("SAPDActivityModel.FK_User_UserOfficeHistory_User_Office", "OfficeHistory", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_Office_Office", "User")]
+        public EntityCollection<User> User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SAPDActivityModel.FK_User_User_Office_Office", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SAPDActivityModel.FK_User_User_Office_Office", "User", value);
                 }
             }
         }
@@ -4328,6 +4426,28 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SectionHistory>("SAPDActivityModel.FK_User_UserSectionHistory_Office_OfficeSection", "SectionHistory", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_Office_OfficeSection", "User")]
+        public EntityCollection<User> User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SAPDActivityModel.FK_User_User_Office_OfficeSection", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SAPDActivityModel.FK_User_User_Office_OfficeSection", "User", value);
                 }
             }
         }
@@ -5402,6 +5522,30 @@ namespace PersonnelBusinessLayer
         private Nullable<global::System.DateTime> _ModifiedDate;
         partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String MaidenName
+        {
+            get
+            {
+                return _MaidenName;
+            }
+            set
+            {
+                OnMaidenNameChanging(value);
+                ReportPropertyChanging("MaidenName");
+                _MaidenName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("MaidenName");
+                OnMaidenNameChanged();
+            }
+        }
+        private global::System.String _MaidenName;
+        partial void OnMaidenNameChanging(global::System.String value);
+        partial void OnMaidenNameChanged();
 
         #endregion
 
@@ -6121,6 +6265,78 @@ namespace PersonnelBusinessLayer
         private Nullable<global::System.DateTime> _ModifiedDate;
         partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Type
+        {
+            get
+            {
+                return _Type;
+            }
+            set
+            {
+                OnTypeChanging(value);
+                ReportPropertyChanging("Type");
+                _Type = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Type");
+                OnTypeChanged();
+            }
+        }
+        private global::System.String _Type;
+        partial void OnTypeChanging(global::System.String value);
+        partial void OnTypeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> Ranking
+        {
+            get
+            {
+                return _Ranking;
+            }
+            set
+            {
+                OnRankingChanging(value);
+                ReportPropertyChanging("Ranking");
+                _Ranking = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Ranking");
+                OnRankingChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _Ranking;
+        partial void OnRankingChanging(Nullable<global::System.Int32> value);
+        partial void OnRankingChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _VisibleFlag;
+        partial void OnVisibleFlagChanging(Nullable<global::System.Boolean> value);
+        partial void OnVisibleFlagChanged();
 
         #endregion
 
@@ -7082,6 +7298,28 @@ namespace PersonnelBusinessLayer
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_User_Shift", "User")]
+        public EntityCollection<User> User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SAPDActivityModel.FK_User_User_User_Shift", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SAPDActivityModel.FK_User_User_User_Shift", "User", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -7650,14 +7888,10 @@ namespace PersonnelBusinessLayer
         /// Create a new User object.
         /// </summary>
         /// <param name="appEntityID">Initial value of the AppEntityID property.</param>
-        /// <param name="sAP">Initial value of the SAP property.</param>
-        /// <param name="hireDate">Initial value of the HireDate property.</param>
-        public static User CreateUser(global::System.Int32 appEntityID, global::System.String sAP, global::System.DateTime hireDate)
+        public static User CreateUser(global::System.Int32 appEntityID)
         {
             User user = new User();
             user.AppEntityID = appEntityID;
-            user.SAP = sAP;
-            user.HireDate = hireDate;
             return user;
         }
 
@@ -7719,7 +7953,7 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String SAP
         {
@@ -7731,7 +7965,7 @@ namespace PersonnelBusinessLayer
             {
                 OnSAPChanging(value);
                 ReportPropertyChanging("SAP");
-                _SAP = StructuralObject.SetValidValue(value, false);
+                _SAP = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("SAP");
                 OnSAPChanged();
             }
@@ -7935,9 +8169,9 @@ namespace PersonnelBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime HireDate
+        public Nullable<global::System.DateTime> HireDate
         {
             get
             {
@@ -7952,8 +8186,8 @@ namespace PersonnelBusinessLayer
                 OnHireDateChanged();
             }
         }
-        private global::System.DateTime _HireDate;
-        partial void OnHireDateChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _HireDate;
+        partial void OnHireDateChanging(Nullable<global::System.DateTime> value);
         partial void OnHireDateChanged();
     
         /// <summary>
@@ -8489,6 +8723,234 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<GroupMember>("SAPDActivityModel.FK_User_GroupMember_User_User", "User_GroupMember", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_Office_Office", "Office_Office")]
+        public Office_Office Office_Office
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Office>("SAPDActivityModel.FK_User_User_Office_Office", "Office_Office").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Office>("SAPDActivityModel.FK_User_User_Office_Office", "Office_Office").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Office_Office> Office_OfficeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Office>("SAPDActivityModel.FK_User_User_Office_Office", "Office_Office");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Office_Office>("SAPDActivityModel.FK_User_User_Office_Office", "Office_Office", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_Office_OfficeSection", "OfficeSection")]
+        public OfficeSection Office_OfficeSection
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OfficeSection>("SAPDActivityModel.FK_User_User_Office_OfficeSection", "OfficeSection").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OfficeSection>("SAPDActivityModel.FK_User_User_Office_OfficeSection", "OfficeSection").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<OfficeSection> Office_OfficeSectionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<OfficeSection>("SAPDActivityModel.FK_User_User_Office_OfficeSection", "OfficeSection");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<OfficeSection>("SAPDActivityModel.FK_User_User_Office_OfficeSection", "OfficeSection", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_User_DayOff", "DayOff")]
+        public DayOff User_DayOff
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DayOff>("SAPDActivityModel.FK_User_User_User_DayOff", "DayOff").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DayOff>("SAPDActivityModel.FK_User_User_User_DayOff", "DayOff").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DayOff> User_DayOffReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DayOff>("SAPDActivityModel.FK_User_User_User_DayOff", "DayOff");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DayOff>("SAPDActivityModel.FK_User_User_User_DayOff", "DayOff", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_User_JobTitle", "JobTitle")]
+        public JobTitle User_JobTitle
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<JobTitle>("SAPDActivityModel.FK_User_User_User_JobTitle", "JobTitle").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<JobTitle>("SAPDActivityModel.FK_User_User_User_JobTitle", "JobTitle").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<JobTitle> User_JobTitleReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<JobTitle>("SAPDActivityModel.FK_User_User_User_JobTitle", "JobTitle");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<JobTitle>("SAPDActivityModel.FK_User_User_User_JobTitle", "JobTitle", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_User_Shift", "Shift")]
+        public Shift User_Shift
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Shift>("SAPDActivityModel.FK_User_User_User_Shift", "Shift").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Shift>("SAPDActivityModel.FK_User_User_User_Shift", "Shift").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Shift> User_ShiftReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Shift>("SAPDActivityModel.FK_User_User_User_Shift", "Shift");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Shift>("SAPDActivityModel.FK_User_User_User_Shift", "Shift", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_User_WorkStatus", "WorkStatus")]
+        public WorkStatus User_WorkStatus
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkStatus>("SAPDActivityModel.FK_User_User_User_WorkStatus", "WorkStatus").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkStatus>("SAPDActivityModel.FK_User_User_User_WorkStatus", "WorkStatus").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<WorkStatus> User_WorkStatusReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<WorkStatus>("SAPDActivityModel.FK_User_User_User_WorkStatus", "WorkStatus");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<WorkStatus>("SAPDActivityModel.FK_User_User_User_WorkStatus", "WorkStatus", value);
                 }
             }
         }
@@ -9226,6 +9688,30 @@ namespace PersonnelBusinessLayer
         private global::System.Boolean _NeedAuthorizationFlag;
         partial void OnNeedAuthorizationFlagChanging(global::System.Boolean value);
         partial void OnNeedAuthorizationFlagChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LoginFrom
+        {
+            get
+            {
+                return _LoginFrom;
+            }
+            set
+            {
+                OnLoginFromChanging(value);
+                ReportPropertyChanging("LoginFrom");
+                _LoginFrom = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LoginFrom");
+                OnLoginFromChanged();
+            }
+        }
+        private global::System.String _LoginFrom;
+        partial void OnLoginFromChanging(global::System.String value);
+        partial void OnLoginFromChanged();
 
         #endregion
 
@@ -10041,6 +10527,28 @@ namespace PersonnelBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<WorkStatusHistory>("SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus", "User_UserWorkStatusHistory", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SAPDActivityModel", "FK_User_User_User_WorkStatus", "User")]
+        public EntityCollection<User> User_User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<User>("SAPDActivityModel.FK_User_User_User_WorkStatus", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<User>("SAPDActivityModel.FK_User_User_User_WorkStatus", "User", value);
                 }
             }
         }

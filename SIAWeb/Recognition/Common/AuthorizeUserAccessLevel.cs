@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
 
-namespace System.Web.Mvc
+namespace Recognition.Common
 {
     public class AuthorizeUserAccessLevel : AuthorizeAttribute
     {
@@ -12,12 +12,6 @@ namespace System.Web.Mvc
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
-            var isAuthorized = base.AuthorizeCore(httpContext);
-            if (!isAuthorized)
-            {
-                return false;
-            }
-
             string CurrentUserRole = (string)System.Web.HttpContext.Current.Session["WebRole"];
             //if (this.UserRole.Contains(CurrentUserRole))
             if (this.UserRole.Contains(CurrentUserRole))
@@ -32,24 +26,28 @@ namespace System.Web.Mvc
 
         protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
-            if (!filterContext.HttpContext.User.Identity.IsAuthenticated)
-            {
-                // The user is not authenticated
-                base.HandleUnauthorizedRequest(filterContext);
-            }
-            else if (!this.Roles.Split(',').Any(filterContext.HttpContext.User.IsInRole))
+
+            if (!this.Roles.Split(',').Any(filterContext.HttpContext.User.IsInRole))
             {
                 // The user is not in any of the listed roles => 
                 // show the unauthorized view
-                filterContext.Result = new ViewResult
-                {
-                    ViewName = "~/Views/Home/NonUser.cshtml"
-                };
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary
+                    {
+                        { "action", "Index" },
+                        { "controller", "AccessDenied" }
+
+                    });
+                //filterContext.Result = new ViewResult
+                //{
+                //    ViewName = "~/AccessDenied/Index.cshtml"
+                //};
             }
             else
             {
                 base.HandleUnauthorizedRequest(filterContext);
             }
         }
+
     }
 }

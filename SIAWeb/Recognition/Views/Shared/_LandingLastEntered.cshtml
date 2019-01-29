@@ -1,0 +1,40 @@
+﻿
+
+@using Recognition.Models;
+
+<div class="col-sm-5 col-md-5 col-lg-5">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span style="color:goldenrod">Last Recipients</span></h3>
+        </div>
+        <div class="panel-body">
+            <div style="padding-left:5px">
+                <table class="table table-condensed table-hover">
+                    <tr style="color:goldenrod">
+                        <th>Employee</th>
+                        <th style="text-align:center">Award Date</th>
+                    </tr>
+                    @foreach (var last in ViewData["Last15Entered"] as IList<PDEmployee>)
+                    {
+                        <tr>
+                            <td>
+                                @{
+                                    string empName = String.Format("{0} {1}", last.First, last.Last);
+                                    @*<a href="@top.AppEntityID" target="_blank"><span class="font-weight-bold">@empName</span> </a>*@
+                                    @Html.Raw(empName)
+                                }
+
+                            </td>
+                            <td style="text-align:center">
+                               
+                                @last.LastUpdate.ToString("MM/dd/yyyy")
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

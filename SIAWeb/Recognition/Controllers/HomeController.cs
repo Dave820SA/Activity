@@ -7,6 +7,7 @@ using PagedList;
 using RecognitionBusinessLayer;
 using Recognition.Models;
 using System.Globalization;
+using Recognition.Common;
 
 namespace Recognition.Controllers
 {
@@ -14,22 +15,19 @@ namespace Recognition.Controllers
     public class HomeController : Controller
     {
         private SAPDActivityEntities db = new SAPDActivityEntities();
-        //
-        // GET: /Home/
-
-        //public ActionResult Index()
-        //{
-        //    var recognizes = db.Recognizes.Include("Award_AwardType").Include("Award_RecognitionType").Include("Office_Office").Include("Person");
-        //    return View(recognizes.ToList());
-        //}
+        
 
         public ActionResult Index()
         {
-            var rec = from r in db.Recognizes
-                      select r;
-            rec = rec.OrderByDescending(r => r.IssuedDate).Take(10);
+            PDEmployeeManager em = new PDEmployeeManager();
+            //Get the top 10 PD employees that have recieved awards
+            //Loads into partial view _Top10Officers
+            ViewData["TopAwardEmployee"] = em.TopEmployees();
+            //Get the last 15 employees that recieved an award
+            //Loads int partial view _LandingLastEntered
+            ViewData["Last15Entered"] = em.Last15Entered();
 
-            return View(rec);
+            return View();
         }
 
         public ActionResult AwardView(int recType, int? MonthNbr, int? YearNbr)
@@ -101,8 +99,8 @@ namespace Recognition.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Recognition Contacts.";
-
-            return View();
+            PDEmployeeManager pdem = new PDEmployeeManager();
+            return View(pdem.GetAppAdmins());
         }
 
         public ActionResult Info()

@@ -4,179 +4,28 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="SAPDActivityModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="SAPDActivityModelStoreContainer">
-          <EntitySet Name="Award_AwardType" EntityType="SAPDActivityModel.Store.Award_AwardType" store:Type="Tables" Schema="dbo" Table="Award.AwardType" />
-          <EntitySet Name="Award_RecognitionType" EntityType="SAPDActivityModel.Store.Award_RecognitionType" store:Type="Tables" Schema="dbo" Table="Award.RecognitionType" />
-          <EntitySet Name="Award_Recognize" EntityType="SAPDActivityModel.Store.Award_Recognize" store:Type="Tables" Schema="dbo" Table="Award.Recognize" />
-          <EntitySet Name="Office_Office" EntityType="SAPDActivityModel.Store.Office_Office" store:Type="Tables" Schema="dbo" Table="Office.Office" />
-          <EntitySet Name="Office_OfficeSection" EntityType="SAPDActivityModel.Store.Office_OfficeSection" store:Type="Tables" Schema="dbo" Table="Office.OfficeSection" />
-          <EntitySet Name="Person_Address" EntityType="SAPDActivityModel.Store.Person_Address" store:Type="Tables" Schema="dbo" Table="Person.Address" />
-          <EntitySet Name="Person_AddressType" EntityType="SAPDActivityModel.Store.Person_AddressType" store:Type="Tables" Schema="dbo" Table="Person.AddressType" />
-          <EntitySet Name="Person_EmailAddress" EntityType="SAPDActivityModel.Store.Person_EmailAddress" store:Type="Tables" Schema="dbo" Table="Person.EmailAddress" />
-          <EntitySet Name="person_EmailAddressType" EntityType="SAPDActivityModel.Store.person_EmailAddressType" store:Type="Tables" Schema="dbo" Table="person.EmailAddressType" />
-          <EntitySet Name="Person_Person" EntityType="SAPDActivityModel.Store.Person_Person" store:Type="Tables" Schema="dbo" Table="Person.Person" />
-          <EntitySet Name="Person_PersonPhone" EntityType="SAPDActivityModel.Store.Person_PersonPhone" store:Type="Tables" Schema="dbo" Table="Person.PersonPhone" />
-          <EntitySet Name="Person_PersonType" EntityType="SAPDActivityModel.Store.Person_PersonType" store:Type="Tables" Schema="dbo" Table="Person.PersonType" />
-          <EntitySet Name="Person_PhoneNumberType" EntityType="SAPDActivityModel.Store.Person_PhoneNumberType" store:Type="Tables" Schema="dbo" Table="Person.PhoneNumberType" />
-          <EntitySet Name="Person_State" EntityType="SAPDActivityModel.Store.Person_State" store:Type="Tables" Schema="dbo" Table="Person.State" />
-          <EntitySet Name="SIA_AppFeatureAccess" EntityType="SAPDActivityModel.Store.SIA_AppFeatureAccess" store:Type="Tables" Schema="dbo" Table="SIA.AppFeatureAccess" />
-          <EntitySet Name="SIA_AppFeatureCategoty" EntityType="SAPDActivityModel.Store.SIA_AppFeatureCategoty" store:Type="Tables" Schema="dbo" Table="SIA.AppFeatureCategoty" />
-          <EntitySet Name="SIA_WebLinks" EntityType="SAPDActivityModel.Store.SIA_WebLinks" store:Type="Tables" Schema="dbo" Table="SIA.WebLinks" />
-          <EntitySet Name="SIA_WebSiteUser" EntityType="SAPDActivityModel.Store.SIA_WebSiteUser" store:Type="Tables" Schema="dbo" Table="SIA.WebSiteUser" />
-          <EntitySet Name="User_DayOff" EntityType="SAPDActivityModel.Store.User_DayOff" store:Type="Tables" Schema="dbo" Table="User.DayOff" />
-          <EntitySet Name="User_GroupMember" EntityType="SAPDActivityModel.Store.User_GroupMember" store:Type="Tables" Schema="dbo" Table="User.GroupMember" />
-          <EntitySet Name="User_GroupTitle" EntityType="SAPDActivityModel.Store.User_GroupTitle" store:Type="Tables" Schema="dbo" Table="User.GroupTitle" />
-          <EntitySet Name="User_JobTitle" EntityType="SAPDActivityModel.Store.User_JobTitle" store:Type="Tables" Schema="dbo" Table="User.JobTitle" />
-          <EntitySet Name="User_Shift" EntityType="SAPDActivityModel.Store.User_Shift" store:Type="Tables" Schema="dbo" Table="User.Shift" />
-          <EntitySet Name="User_User" EntityType="SAPDActivityModel.Store.User_User" store:Type="Tables" Schema="dbo" Table="User.User" />
-          <EntitySet Name="User_UserBadgeHistory" EntityType="SAPDActivityModel.Store.User_UserBadgeHistory" store:Type="Tables" Schema="dbo" Table="User.UserBadgeHistory" />
-          <EntitySet Name="User_UserJobTitleHistory" EntityType="SAPDActivityModel.Store.User_UserJobTitleHistory" store:Type="Tables" Schema="dbo" Table="User.UserJobTitleHistory" />
-          <EntitySet Name="User_UserOfficeHistory" EntityType="SAPDActivityModel.Store.User_UserOfficeHistory" store:Type="Tables" Schema="dbo" Table="User.UserOfficeHistory" />
-          <EntitySet Name="User_UserRDHistory" EntityType="SAPDActivityModel.Store.User_UserRDHistory" store:Type="Tables" Schema="dbo" Table="User.UserRDHistory" />
-          <EntitySet Name="User_UserSectionHistory" EntityType="SAPDActivityModel.Store.User_UserSectionHistory" store:Type="Tables" Schema="dbo" Table="User.UserSectionHistory" />
-          <EntitySet Name="User_UserShiftHistory" EntityType="SAPDActivityModel.Store.User_UserShiftHistory" store:Type="Tables" Schema="dbo" Table="User.UserShiftHistory" />
-          <EntitySet Name="User_UserWorkStatusHistory" EntityType="SAPDActivityModel.Store.User_UserWorkStatusHistory" store:Type="Tables" Schema="dbo" Table="User.UserWorkStatusHistory" />
-          <EntitySet Name="User_WorksheetClassification" EntityType="SAPDActivityModel.Store.User_WorksheetClassification" store:Type="Tables" Schema="dbo" Table="User.WorksheetClassification" />
-          <EntitySet Name="User_WorkStatus" EntityType="SAPDActivityModel.Store.User_WorkStatus" store:Type="Tables" Schema="dbo" Table="User.WorkStatus" />
-          <EntitySet Name="User_vEquipment" EntityType="SAPDActivityModel.Store.User_vEquipment" store:Type="Views" store:Schema="dbo" store:Name="User.vEquipment">
-            <DefiningQuery>SELECT 
-      [User_vEquipment].[AppEntityID] AS [AppEntityID], 
-      [User_vEquipment].[ID] AS [ID], 
-      [User_vEquipment].[ItemDescription] AS [ItemDescription], 
-      [User_vEquipment].[IssuedTo] AS [IssuedTo], 
-      [User_vEquipment].[SAP] AS [SAP], 
-      [User_vEquipment].[Price] AS [Price], 
-      [User_vEquipment].[PersonallyOwned] AS [PersonallyOwned], 
-      [User_vEquipment].[Status] AS [Status], 
-      [User_vEquipment].[CategoryID] AS [CategoryID], 
-      [User_vEquipment].[Category] AS [Category], 
-      [User_vEquipment].[ItemType] AS [ItemType]
-      FROM [dbo].[User.vEquipment] AS [User_vEquipment]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="User_vPicture" EntityType="SAPDActivityModel.Store.User_vPicture" store:Type="Views" store:Schema="dbo" store:Name="User.vPicture">
-            <DefiningQuery>SELECT 
-      [User_vPicture].[BookingID] AS [BookingID], 
-      [User_vPicture].[AppEntityID] AS [AppEntityID], 
-      [User_vPicture].[SAP] AS [SAP], 
-      [User_vPicture].[ImagePath] AS [ImagePath], 
-      [User_vPicture].[DateTimeStamp] AS [DateTimeStamp]
-      FROM [dbo].[User.vPicture] AS [User_vPicture]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_Award_Recognize_Award_AwardType" Association="SAPDActivityModel.Store.FK_Award_Recognize_Award_AwardType">
-            <End Role="Award_AwardType" EntitySet="Award_AwardType" />
-            <End Role="Award_Recognize" EntitySet="Award_Recognize" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Award_Recognize_Award_RecognitionType" Association="SAPDActivityModel.Store.FK_Award_Recognize_Award_RecognitionType">
-            <End Role="Award_RecognitionType" EntitySet="Award_RecognitionType" />
-            <End Role="Award_Recognize" EntitySet="Award_Recognize" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Person_Address_Person_AddressType" Association="SAPDActivityModel.Store.FK_Person_Address_Person_AddressType">
-            <End Role="Person_AddressType" EntitySet="Person_AddressType" />
-            <End Role="Person_Address" EntitySet="Person_Address" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Person_EmailAddress_person_EmailAddressType" Association="SAPDActivityModel.Store.FK_Person_EmailAddress_person_EmailAddressType">
-            <End Role="person_EmailAddressType" EntitySet="person_EmailAddressType" />
-            <End Role="Person_EmailAddress" EntitySet="Person_EmailAddress" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Person_Person_Person_PersonType" Association="SAPDActivityModel.Store.FK_Person_Person_Person_PersonType">
-            <End Role="Person_PersonType" EntitySet="Person_PersonType" />
-            <End Role="Person_Person" EntitySet="Person_Person" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Person_PersonPhone_Person_Person" Association="SAPDActivityModel.Store.FK_Person_PersonPhone_Person_Person">
-            <End Role="Person_Person" EntitySet="Person_Person" />
-            <End Role="Person_PersonPhone" EntitySet="Person_PersonPhone" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Person_PersonPhone_Person_PhoneNumberType" Association="SAPDActivityModel.Store.FK_Person_PersonPhone_Person_PhoneNumberType">
-            <End Role="Person_PhoneNumberType" EntitySet="Person_PhoneNumberType" />
-            <End Role="Person_PersonPhone" EntitySet="Person_PersonPhone" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Person_EmailAddress_Person_Person" Association="SAPDActivityModel.Store.FK_Person_EmailAddress_Person_Person">
-            <End Role="Person_Person" EntitySet="Person_Person" />
-            <End Role="Person_EmailAddress" EntitySet="Person_EmailAddress" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_WebLinks" Association="SAPDActivityModel.Store.FK_SIA_AppFeatureAccess_SIA_WebLinks">
-            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
-            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SIA_AppFeatureAccess_User_User" Association="SAPDActivityModel.Store.FK_SIA_AppFeatureAccess_User_User">
-            <End Role="User_User" EntitySet="User_User" />
-            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebLinks" Association="SAPDActivityModel.Store.FK_SIA_WebSiteUser_SIA_WebLinks">
-            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
-            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SIA_WebSiteUser_User_User" Association="SAPDActivityModel.Store.FK_SIA_WebSiteUser_User_User">
-            <End Role="User_User" EntitySet="User_User" />
-            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Clasification_User_Classification" Association="SAPDActivityModel.Store.FK_User_Clasification_User_Classification">
-            <End Role="User_WorksheetClassification" EntitySet="User_WorksheetClassification" />
-            <End Role="User_User" EntitySet="User_User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_GroupMember_User_GroupTitle" Association="SAPDActivityModel.Store.FK_User_GroupMember_User_GroupTitle">
-            <End Role="User_GroupTitle" EntitySet="User_GroupTitle" />
-            <End Role="User_GroupMember" EntitySet="User_GroupMember" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_GroupMember_User_User" Association="SAPDActivityModel.Store.FK_User_GroupMember_User_User">
-            <End Role="User_User" EntitySet="User_User" />
-            <End Role="User_GroupMember" EntitySet="User_GroupMember" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_User_Person_Person" Association="SAPDActivityModel.Store.FK_User_User_Person_Person">
-            <End Role="Person_Person" EntitySet="Person_Person" />
-            <End Role="User_User" EntitySet="User_User" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserJobTitleHistory_User_JobTitle" Association="SAPDActivityModel.Store.FK_User_UserJobTitleHistory_User_JobTitle">
-            <End Role="User_JobTitle" EntitySet="User_JobTitle" />
-            <End Role="User_UserJobTitleHistory" EntitySet="User_UserJobTitleHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserOfficeHistory_User_Office" Association="SAPDActivityModel.Store.FK_User_UserOfficeHistory_User_Office">
-            <End Role="Office_Office" EntitySet="Office_Office" />
-            <End Role="User_UserOfficeHistory" EntitySet="User_UserOfficeHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserRDHistory_User_DayOff" Association="SAPDActivityModel.Store.FK_User_UserRDHistory_User_DayOff">
-            <End Role="User_DayOff" EntitySet="User_DayOff" />
-            <End Role="User_UserRDHistory" EntitySet="User_UserRDHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserSectionHistory_Office_OfficeSection" Association="SAPDActivityModel.Store.FK_User_UserSectionHistory_Office_OfficeSection">
-            <End Role="Office_OfficeSection" EntitySet="Office_OfficeSection" />
-            <End Role="User_UserSectionHistory" EntitySet="User_UserSectionHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserShiftHistory_User_Shift" Association="SAPDActivityModel.Store.FK_User_UserShiftHistory_User_Shift">
-            <End Role="User_Shift" EntitySet="User_Shift" />
-            <End Role="User_UserShiftHistory" EntitySet="User_UserShiftHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_UserWorkStatusHistory_User_WorkStatus" Association="SAPDActivityModel.Store.FK_User_UserWorkStatusHistory_User_WorkStatus">
-            <End Role="User_WorkStatus" EntitySet="User_WorkStatus" />
-            <End Role="User_UserWorkStatusHistory" EntitySet="User_UserWorkStatusHistory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Address_User_State" Association="SAPDActivityModel.Store.FK_User_Address_User_State">
-            <End Role="Person_State" EntitySet="Person_State" />
-            <End Role="Person_Address" EntitySet="Person_Address" />
-          </AssociationSet>
-        </EntityContainer>
+    <Schema Namespace="SAPDActivityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="Award_AwardType">
           <Key>
             <PropertyRef Name="AwardTypeId" />
           </Key>
-          <Property Name="AwardTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="AwardTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Award_RecognitionType">
           <Key>
             <PropertyRef Name="RecognitionTypeId" />
           </Key>
-          <Property Name="RecognitionTypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="RecognitionTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Code" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="Award_Recognize">
           <Key>
             <PropertyRef Name="RecognitionId" />
           </Key>
-          <Property Name="RecognitionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="RecognitionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RecogTypeId" Type="int" Nullable="false" />
           <Property Name="AwardTypeId" Type="int" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
@@ -190,10 +39,10 @@
           <Key>
             <PropertyRef Name="OfficeID" />
           </Key>
-          <Property Name="OfficeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OfficeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DivisionSectionID" Type="int" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Code" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="Ranking" Type="int" />
           <Property Name="Visible" Type="bit" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -203,9 +52,9 @@
           <Key>
             <PropertyRef Name="SectionID" />
           </Key>
-          <Property Name="SectionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="OfficeID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="15" />
+          <Property Name="Name" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="VisibleFlag" Type="bit" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="PASectionID" Type="int" />
@@ -214,10 +63,10 @@
           <Key>
             <PropertyRef Name="AddressID" />
           </Key>
-          <Property Name="AddressID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="AddressTypeID" Type="int" Nullable="false" />
-          <Property Name="AddressLine1" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="60" Nullable="false" />
           <Property Name="AddressLine2" Type="varchar" MaxLength="60" />
           <Property Name="City" Type="varchar" MaxLength="30" />
           <Property Name="StateID" Type="int" />
@@ -231,7 +80,7 @@
           <Key>
             <PropertyRef Name="AddressTypeID" />
           </Key>
-          <Property Name="AddressTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AddressTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -240,10 +89,10 @@
           <Key>
             <PropertyRef Name="EmailAddressID" />
           </Key>
-          <Property Name="EmailAddressID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EmailAddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="EmailAddressTypeID" Type="int" Nullable="false" />
-          <Property Name="EmailAddress" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="rowguid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -251,8 +100,8 @@
           <Key>
             <PropertyRef Name="EmailAddressTypeID" />
           </Key>
-          <Property Name="EmailAddressTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="EmailAddressTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Person_Person">
           <Key>
@@ -267,14 +116,15 @@
           <Property Name="Suffix" Type="varchar" MaxLength="10" />
           <Property Name="rowguid" Type="uniqueidentifier" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="MaidenName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Person_PersonPhone">
           <Key>
             <PropertyRef Name="PhoneID" />
           </Key>
-          <Property Name="PhoneID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
-          <Property Name="PhoneNumber" Type="varchar" Nullable="false" MaxLength="25" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="25" Nullable="false" />
           <Property Name="PhoneNumberTypeID" Type="int" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
         </EntityType>
@@ -282,8 +132,8 @@
           <Key>
             <PropertyRef Name="PersonTypeID" />
           </Key>
-          <Property Name="PersonTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PersonTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NameCode" Type="varchar" MaxLength="10" />
           <Property Name="Ranking" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -293,15 +143,18 @@
           <Key>
             <PropertyRef Name="PhoneNumberTypeID" />
           </Key>
-          <Property Name="PhoneNumberTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PhoneNumberTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="ModifiedDate" Type="datetime" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="Ranking" Type="int" />
+          <Property Name="VisibleFlag" Type="bit" />
         </EntityType>
         <EntityType Name="Person_State">
           <Key>
             <PropertyRef Name="StateID" />
           </Key>
-          <Property Name="StateID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StateID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="StateCode" Type="varchar" MaxLength="2" />
           <Property Name="StateName" Type="varchar" MaxLength="15" />
           <Property Name="rowguid" Type="uniqueidentifier" />
@@ -311,7 +164,7 @@
           <Key>
             <PropertyRef Name="AppFeatureAccessID" />
           </Key>
-          <Property Name="AppFeatureAccessID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppFeatureAccessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="WebLinkID" Type="int" Nullable="false" />
           <Property Name="AppFeatureID" Type="int" Nullable="false" />
@@ -325,25 +178,26 @@
           <Key>
             <PropertyRef Name="AppFeatureCategoryID" />
           </Key>
-          <Property Name="AppFeatureCategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="AppFeatureCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="SIA_WebLinks">
           <Key>
             <PropertyRef Name="WebLinkID" />
           </Key>
-          <Property Name="WebLinkID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebLinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WebCategoryID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="WebLink" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WebLink" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
           <Property Name="NeedAuthorizationFlag" Type="bit" Nullable="false" />
+          <Property Name="LoginFrom" Type="varchar" MaxLength="10" />
         </EntityType>
         <EntityType Name="SIA_WebSiteUser">
           <Key>
             <PropertyRef Name="WebSiteUserID" />
           </Key>
-          <Property Name="WebSiteUserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebSiteUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WebLinkID" Type="int" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="WebSiteRoleID" Type="int" Nullable="false" />
@@ -357,10 +211,10 @@
           <Key>
             <PropertyRef Name="RDID" />
           </Key>
-          <Property Name="RDID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="DayOffID" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="RDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DayOffID" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="WorkDayID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Ranking" Type="int" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="VisibleFlag" Type="bit" />
@@ -369,7 +223,7 @@
           <Key>
             <PropertyRef Name="GroupMemberID" />
           </Key>
-          <Property Name="GroupMemberID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GroupMemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="GroupTitleID" Type="int" Nullable="false" />
           <Property Name="MemberInfo" Type="varchar" MaxLength="150" />
@@ -380,18 +234,19 @@
           <Key>
             <PropertyRef Name="GroupTitleID" />
           </Key>
-          <Property Name="GroupTitleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="GroupTitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="NameCode" Type="varchar" MaxLength="10" />
           <Property Name="GroupInfo" Type="varchar" MaxLength="200" />
           <Property Name="gtRanking" Type="int" />
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
+          <Property Name="AppVisibleFlag" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="User_JobTitle">
           <Key>
             <PropertyRef Name="JobTitleID" />
           </Key>
-          <Property Name="JobTitleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="JobTitleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="NameCode" Type="varchar" MaxLength="10" />
           <Property Name="jtRanking" Type="int" />
@@ -403,10 +258,10 @@
           <Key>
             <PropertyRef Name="ShiftID" />
           </Key>
-          <Property Name="ShiftID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ShiftID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="20" />
-          <Property Name="StartTime" Type="time" />
-          <Property Name="EndTime" Type="time" />
+          <Property Name="StartTime" Type="time" Precision="7" />
+          <Property Name="EndTime" Type="time" Precision="7" />
           <Property Name="ModifiedDate" Type="datetime" />
           <Property Name="MainframCode" Type="varchar" MaxLength="10" />
           <Property Name="PAShiftID" Type="int" />
@@ -440,9 +295,9 @@
           <Key>
             <PropertyRef Name="UBHID" />
           </Key>
-          <Property Name="UBHID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UBHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
-          <Property Name="Badge" Type="varchar" Nullable="false" MaxLength="6" />
+          <Property Name="Badge" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
           <Property Name="EndDate" Type="date" />
           <Property Name="ModifiedDate" Type="datetime" />
@@ -452,7 +307,7 @@
           <Key>
             <PropertyRef Name="UJTID" />
           </Key>
-          <Property Name="UJTID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UJTID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="JobTitleID" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
@@ -464,7 +319,7 @@
           <Key>
             <PropertyRef Name="UOHID" />
           </Key>
-          <Property Name="UOHID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UOHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="OfficeID" Type="int" Nullable="false" />
           <Property Name="SectionID" Type="int" />
@@ -479,7 +334,7 @@
           <Key>
             <PropertyRef Name="URDHID" />
           </Key>
-          <Property Name="URDHID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="URDHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="RDID" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
@@ -491,7 +346,7 @@
           <Key>
             <PropertyRef Name="USHID" />
           </Key>
-          <Property Name="USHID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="USHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="SectionID" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
@@ -503,7 +358,7 @@
           <Key>
             <PropertyRef Name="UShHID" />
           </Key>
-          <Property Name="UShHID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UShHID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="ShiftID" Type="int" Nullable="false" />
           <Property Name="StartDate" Type="date" Nullable="false" />
@@ -515,7 +370,7 @@
           <Key>
             <PropertyRef Name="WorkStatusHistoryID" />
           </Key>
-          <Property Name="WorkStatusHistoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WorkStatusHistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="WorkstatusID" Type="int" Nullable="false" />
           <Property Name="StatusInfo" Type="varchar" MaxLength="500" />
@@ -527,7 +382,7 @@
           <Key>
             <PropertyRef Name="ClassificationID" />
           </Key>
-          <Property Name="ClassificationID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="NameCode" Type="varchar" MaxLength="10" />
           <Property Name="Ranking" Type="int" />
@@ -538,7 +393,7 @@
           <Key>
             <PropertyRef Name="WorkStatusID" />
           </Key>
-          <Property Name="WorkStatusID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WorkStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="NameCode" Type="varchar" MaxLength="10" />
           <Property Name="Ranking" Type="int" />
@@ -547,8 +402,7 @@
           <Property Name="PAWorkStatusID" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDACTIVITY.dbo.User.vEquipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
+warning 6002: The table/view 'SAPDACTIVITY.dbo.User.vEquipment' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="User_vEquipment">
           <Key>
             
@@ -562,18 +416,17 @@
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="ID" Type="int" Nullable="false" />
           <Property Name="ItemDescription" Type="varchar" MaxLength="250" />
-          <Property Name="IssuedTo" Type="varchar" Nullable="false" MaxLength="64" />
-          <Property Name="SAP" Type="varchar" Nullable="false" MaxLength="30" />
+          <Property Name="IssuedTo" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="SAP" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="Price" Type="money" />
           <Property Name="PersonallyOwned" Type="bit" />
           <Property Name="Status" Type="nvarchar" MaxLength="64" />
           <Property Name="CategoryID" Type="int" Nullable="false" />
-          <Property Name="Category" Type="varchar" Nullable="false" MaxLength="64" />
-          <Property Name="ItemType" Type="varchar" Nullable="false" MaxLength="64" />
+          <Property Name="Category" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ItemType" Type="varchar" MaxLength="64" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDACTIVITY.dbo.User.vPicture' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
+warning 6002: The table/view 'SAPDACTIVITY.dbo.User.vPicture' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="User_vPicture">
           <Key>
             
@@ -586,8 +439,8 @@
           <Property Name="DateTimeStamp" Type="datetime" />
         </EntityType>
         <Association Name="FK_Award_Recognize_Award_AwardType">
-          <End Role="Award_AwardType" Type="SAPDActivityModel.Store.Award_AwardType" Multiplicity="0..1" />
-          <End Role="Award_Recognize" Type="SAPDActivityModel.Store.Award_Recognize" Multiplicity="*" />
+          <End Role="Award_AwardType" Type="Self.Award_AwardType" Multiplicity="0..1" />
+          <End Role="Award_Recognize" Type="Self.Award_Recognize" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Award_AwardType">
               <PropertyRef Name="AwardTypeId" />
@@ -598,8 +451,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Award_Recognize_Award_RecognitionType">
-          <End Role="Award_RecognitionType" Type="SAPDActivityModel.Store.Award_RecognitionType" Multiplicity="1" />
-          <End Role="Award_Recognize" Type="SAPDActivityModel.Store.Award_Recognize" Multiplicity="*" />
+          <End Role="Award_RecognitionType" Type="Self.Award_RecognitionType" Multiplicity="1" />
+          <End Role="Award_Recognize" Type="Self.Award_Recognize" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Award_RecognitionType">
               <PropertyRef Name="RecognitionTypeId" />
@@ -610,8 +463,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Person_Address_Person_AddressType">
-          <End Role="Person_AddressType" Type="SAPDActivityModel.Store.Person_AddressType" Multiplicity="1" />
-          <End Role="Person_Address" Type="SAPDActivityModel.Store.Person_Address" Multiplicity="*" />
+          <End Role="Person_AddressType" Type="Self.Person_AddressType" Multiplicity="1" />
+          <End Role="Person_Address" Type="Self.Person_Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person_AddressType">
               <PropertyRef Name="AddressTypeID" />
@@ -622,8 +475,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Person_EmailAddress_person_EmailAddressType">
-          <End Role="person_EmailAddressType" Type="SAPDActivityModel.Store.person_EmailAddressType" Multiplicity="1" />
-          <End Role="Person_EmailAddress" Type="SAPDActivityModel.Store.Person_EmailAddress" Multiplicity="*" />
+          <End Role="person_EmailAddressType" Type="Self.person_EmailAddressType" Multiplicity="1" />
+          <End Role="Person_EmailAddress" Type="Self.Person_EmailAddress" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="person_EmailAddressType">
               <PropertyRef Name="EmailAddressTypeID" />
@@ -634,8 +487,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Person_Person_Person_PersonType">
-          <End Role="Person_PersonType" Type="SAPDActivityModel.Store.Person_PersonType" Multiplicity="0..1" />
-          <End Role="Person_Person" Type="SAPDActivityModel.Store.Person_Person" Multiplicity="*" />
+          <End Role="Person_PersonType" Type="Self.Person_PersonType" Multiplicity="0..1" />
+          <End Role="Person_Person" Type="Self.Person_Person" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person_PersonType">
               <PropertyRef Name="PersonTypeID" />
@@ -646,8 +499,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Person_PersonPhone_Person_Person">
-          <End Role="Person_Person" Type="SAPDActivityModel.Store.Person_Person" Multiplicity="1" />
-          <End Role="Person_PersonPhone" Type="SAPDActivityModel.Store.Person_PersonPhone" Multiplicity="*" />
+          <End Role="Person_Person" Type="Self.Person_Person" Multiplicity="1" />
+          <End Role="Person_PersonPhone" Type="Self.Person_PersonPhone" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person_Person">
               <PropertyRef Name="AppEntityID" />
@@ -658,8 +511,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Person_PersonPhone_Person_PhoneNumberType">
-          <End Role="Person_PhoneNumberType" Type="SAPDActivityModel.Store.Person_PhoneNumberType" Multiplicity="1" />
-          <End Role="Person_PersonPhone" Type="SAPDActivityModel.Store.Person_PersonPhone" Multiplicity="*" />
+          <End Role="Person_PhoneNumberType" Type="Self.Person_PhoneNumberType" Multiplicity="1" />
+          <End Role="Person_PersonPhone" Type="Self.Person_PersonPhone" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person_PhoneNumberType">
               <PropertyRef Name="PhoneNumberTypeID" />
@@ -670,8 +523,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Person_EmailAddress_Person_Person">
-          <End Role="Person_Person" Type="SAPDActivityModel.Store.Person_Person" Multiplicity="1" />
-          <End Role="Person_EmailAddress" Type="SAPDActivityModel.Store.Person_EmailAddress" Multiplicity="*" />
+          <End Role="Person_Person" Type="Self.Person_Person" Multiplicity="1" />
+          <End Role="Person_EmailAddress" Type="Self.Person_EmailAddress" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person_Person">
               <PropertyRef Name="AppEntityID" />
@@ -682,8 +535,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIA_AppFeatureAccess_SIA_WebLinks">
-          <End Role="SIA_WebLinks" Type="SAPDActivityModel.Store.SIA_WebLinks" Multiplicity="1" />
-          <End Role="SIA_AppFeatureAccess" Type="SAPDActivityModel.Store.SIA_AppFeatureAccess" Multiplicity="*" />
+          <End Role="SIA_WebLinks" Type="Self.SIA_WebLinks" Multiplicity="1" />
+          <End Role="SIA_AppFeatureAccess" Type="Self.SIA_AppFeatureAccess" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SIA_WebLinks">
               <PropertyRef Name="WebLinkID" />
@@ -694,8 +547,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIA_AppFeatureAccess_User_User">
-          <End Role="User_User" Type="SAPDActivityModel.Store.User_User" Multiplicity="1" />
-          <End Role="SIA_AppFeatureAccess" Type="SAPDActivityModel.Store.SIA_AppFeatureAccess" Multiplicity="*" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="1" />
+          <End Role="SIA_AppFeatureAccess" Type="Self.SIA_AppFeatureAccess" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_User">
               <PropertyRef Name="AppEntityID" />
@@ -706,8 +559,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIA_WebSiteUser_SIA_WebLinks">
-          <End Role="SIA_WebLinks" Type="SAPDActivityModel.Store.SIA_WebLinks" Multiplicity="1" />
-          <End Role="SIA_WebSiteUser" Type="SAPDActivityModel.Store.SIA_WebSiteUser" Multiplicity="*" />
+          <End Role="SIA_WebLinks" Type="Self.SIA_WebLinks" Multiplicity="1" />
+          <End Role="SIA_WebSiteUser" Type="Self.SIA_WebSiteUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SIA_WebLinks">
               <PropertyRef Name="WebLinkID" />
@@ -718,8 +571,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIA_WebSiteUser_User_User">
-          <End Role="User_User" Type="SAPDActivityModel.Store.User_User" Multiplicity="1" />
-          <End Role="SIA_WebSiteUser" Type="SAPDActivityModel.Store.SIA_WebSiteUser" Multiplicity="*" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="1" />
+          <End Role="SIA_WebSiteUser" Type="Self.SIA_WebSiteUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_User">
               <PropertyRef Name="AppEntityID" />
@@ -730,8 +583,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Clasification_User_Classification">
-          <End Role="User_WorksheetClassification" Type="SAPDActivityModel.Store.User_WorksheetClassification" Multiplicity="0..1" />
-          <End Role="User_User" Type="SAPDActivityModel.Store.User_User" Multiplicity="*" />
+          <End Role="User_WorksheetClassification" Type="Self.User_WorksheetClassification" Multiplicity="0..1" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_WorksheetClassification">
               <PropertyRef Name="ClassificationID" />
@@ -742,8 +595,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_GroupMember_User_GroupTitle">
-          <End Role="User_GroupTitle" Type="SAPDActivityModel.Store.User_GroupTitle" Multiplicity="1" />
-          <End Role="User_GroupMember" Type="SAPDActivityModel.Store.User_GroupMember" Multiplicity="*" />
+          <End Role="User_GroupTitle" Type="Self.User_GroupTitle" Multiplicity="1" />
+          <End Role="User_GroupMember" Type="Self.User_GroupMember" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_GroupTitle">
               <PropertyRef Name="GroupTitleID" />
@@ -754,8 +607,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_GroupMember_User_User">
-          <End Role="User_User" Type="SAPDActivityModel.Store.User_User" Multiplicity="1" />
-          <End Role="User_GroupMember" Type="SAPDActivityModel.Store.User_GroupMember" Multiplicity="*" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="1" />
+          <End Role="User_GroupMember" Type="Self.User_GroupMember" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_User">
               <PropertyRef Name="AppEntityID" />
@@ -765,9 +618,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_User_Office_Office">
+          <End Role="Office_Office" Type="Self.Office_Office" Multiplicity="0..1" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_Office_OfficeSection">
+          <End Role="Office_OfficeSection" Type="Self.Office_OfficeSection" Multiplicity="0..1" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_OfficeSection">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_User_Person_Person">
-          <End Role="Person_Person" Type="SAPDActivityModel.Store.Person_Person" Multiplicity="1" />
-          <End Role="User_User" Type="SAPDActivityModel.Store.User_User" Multiplicity="0..1" />
+          <End Role="Person_Person" Type="Self.Person_Person" Multiplicity="1" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="0..1" />
           <ReferentialConstraint>
             <Principal Role="Person_Person">
               <PropertyRef Name="AppEntityID" />
@@ -777,9 +654,57 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_User_User_User_DayOff">
+          <End Role="User_DayOff" Type="Self.User_DayOff" Multiplicity="0..1" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_DayOff">
+              <PropertyRef Name="RDID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="RDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_JobTitle">
+          <End Role="User_JobTitle" Type="Self.User_JobTitle" Multiplicity="0..1" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_JobTitle">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_Shift">
+          <End Role="User_Shift" Type="Self.User_Shift" Multiplicity="0..1" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_Shift">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_WorkStatus">
+          <End Role="User_WorkStatus" Type="Self.User_WorkStatus" Multiplicity="0..1" />
+          <End Role="User_User" Type="Self.User_User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="User_User">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_User_UserJobTitleHistory_User_JobTitle">
-          <End Role="User_JobTitle" Type="SAPDActivityModel.Store.User_JobTitle" Multiplicity="1" />
-          <End Role="User_UserJobTitleHistory" Type="SAPDActivityModel.Store.User_UserJobTitleHistory" Multiplicity="*" />
+          <End Role="User_JobTitle" Type="Self.User_JobTitle" Multiplicity="1" />
+          <End Role="User_UserJobTitleHistory" Type="Self.User_UserJobTitleHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_JobTitle">
               <PropertyRef Name="JobTitleID" />
@@ -790,8 +715,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_UserOfficeHistory_User_Office">
-          <End Role="Office_Office" Type="SAPDActivityModel.Store.Office_Office" Multiplicity="1" />
-          <End Role="User_UserOfficeHistory" Type="SAPDActivityModel.Store.User_UserOfficeHistory" Multiplicity="*" />
+          <End Role="Office_Office" Type="Self.Office_Office" Multiplicity="1" />
+          <End Role="User_UserOfficeHistory" Type="Self.User_UserOfficeHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Office_Office">
               <PropertyRef Name="OfficeID" />
@@ -802,8 +727,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_UserRDHistory_User_DayOff">
-          <End Role="User_DayOff" Type="SAPDActivityModel.Store.User_DayOff" Multiplicity="1" />
-          <End Role="User_UserRDHistory" Type="SAPDActivityModel.Store.User_UserRDHistory" Multiplicity="*" />
+          <End Role="User_DayOff" Type="Self.User_DayOff" Multiplicity="1" />
+          <End Role="User_UserRDHistory" Type="Self.User_UserRDHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_DayOff">
               <PropertyRef Name="RDID" />
@@ -814,8 +739,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_UserSectionHistory_Office_OfficeSection">
-          <End Role="Office_OfficeSection" Type="SAPDActivityModel.Store.Office_OfficeSection" Multiplicity="1" />
-          <End Role="User_UserSectionHistory" Type="SAPDActivityModel.Store.User_UserSectionHistory" Multiplicity="*" />
+          <End Role="Office_OfficeSection" Type="Self.Office_OfficeSection" Multiplicity="1" />
+          <End Role="User_UserSectionHistory" Type="Self.User_UserSectionHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Office_OfficeSection">
               <PropertyRef Name="SectionID" />
@@ -826,8 +751,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_UserShiftHistory_User_Shift">
-          <End Role="User_Shift" Type="SAPDActivityModel.Store.User_Shift" Multiplicity="1" />
-          <End Role="User_UserShiftHistory" Type="SAPDActivityModel.Store.User_UserShiftHistory" Multiplicity="*" />
+          <End Role="User_Shift" Type="Self.User_Shift" Multiplicity="1" />
+          <End Role="User_UserShiftHistory" Type="Self.User_UserShiftHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_Shift">
               <PropertyRef Name="ShiftID" />
@@ -838,8 +763,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_UserWorkStatusHistory_User_WorkStatus">
-          <End Role="User_WorkStatus" Type="SAPDActivityModel.Store.User_WorkStatus" Multiplicity="1" />
-          <End Role="User_UserWorkStatusHistory" Type="SAPDActivityModel.Store.User_UserWorkStatusHistory" Multiplicity="*" />
+          <End Role="User_WorkStatus" Type="Self.User_WorkStatus" Multiplicity="1" />
+          <End Role="User_UserWorkStatusHistory" Type="Self.User_UserWorkStatusHistory" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="User_WorkStatus">
               <PropertyRef Name="WorkStatusID" />
@@ -850,8 +775,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_User_Address_User_State">
-          <End Role="Person_State" Type="SAPDActivityModel.Store.Person_State" Multiplicity="0..1" />
-          <End Role="Person_Address" Type="SAPDActivityModel.Store.Person_Address" Multiplicity="*" />
+          <End Role="Person_State" Type="Self.Person_State" Multiplicity="0..1" />
+          <End Role="Person_Address" Type="Self.Person_Address" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Person_State">
               <PropertyRef Name="StateID" />
@@ -870,10 +795,185 @@
         <Function Name="spPersonnelSearchEmployed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="SearchString" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="User_spGroupMemberAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" StoreFunctionName="User.spGroupMemberAdd" Schema="dbo">
+        <Function Name="User_spGroupMemberAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="User.spGroupMemberAdd">
           <Parameter Name="AppEntity" Type="int" Mode="In" />
           <Parameter Name="GroupTitleID" Type="int" Mode="In" />
         </Function>
+        <EntityContainer Name="SAPDActivityModelStoreContainer">
+          <EntitySet Name="Award_AwardType" EntityType="Self.Award_AwardType" Schema="dbo" Table="Award.AwardType" store:Type="Tables" />
+          <EntitySet Name="Award_RecognitionType" EntityType="Self.Award_RecognitionType" Schema="dbo" Table="Award.RecognitionType" store:Type="Tables" />
+          <EntitySet Name="Award_Recognize" EntityType="Self.Award_Recognize" Schema="dbo" Table="Award.Recognize" store:Type="Tables" />
+          <EntitySet Name="Office_Office" EntityType="Self.Office_Office" Schema="dbo" Table="Office.Office" store:Type="Tables" />
+          <EntitySet Name="Office_OfficeSection" EntityType="Self.Office_OfficeSection" Schema="dbo" Table="Office.OfficeSection" store:Type="Tables" />
+          <EntitySet Name="Person_Address" EntityType="Self.Person_Address" Schema="dbo" Table="Person.Address" store:Type="Tables" />
+          <EntitySet Name="Person_AddressType" EntityType="Self.Person_AddressType" Schema="dbo" Table="Person.AddressType" store:Type="Tables" />
+          <EntitySet Name="Person_EmailAddress" EntityType="Self.Person_EmailAddress" Schema="dbo" Table="Person.EmailAddress" store:Type="Tables" />
+          <EntitySet Name="person_EmailAddressType" EntityType="Self.person_EmailAddressType" Schema="dbo" Table="person.EmailAddressType" store:Type="Tables" />
+          <EntitySet Name="Person_Person" EntityType="Self.Person_Person" Schema="dbo" Table="Person.Person" store:Type="Tables" />
+          <EntitySet Name="Person_PersonPhone" EntityType="Self.Person_PersonPhone" Schema="dbo" Table="Person.PersonPhone" store:Type="Tables" />
+          <EntitySet Name="Person_PersonType" EntityType="Self.Person_PersonType" Schema="dbo" Table="Person.PersonType" store:Type="Tables" />
+          <EntitySet Name="Person_PhoneNumberType" EntityType="Self.Person_PhoneNumberType" Schema="dbo" Table="Person.PhoneNumberType" store:Type="Tables" />
+          <EntitySet Name="Person_State" EntityType="Self.Person_State" Schema="dbo" Table="Person.State" store:Type="Tables" />
+          <EntitySet Name="SIA_AppFeatureAccess" EntityType="Self.SIA_AppFeatureAccess" Schema="dbo" Table="SIA.AppFeatureAccess" store:Type="Tables" />
+          <EntitySet Name="SIA_AppFeatureCategoty" EntityType="Self.SIA_AppFeatureCategoty" Schema="dbo" Table="SIA.AppFeatureCategoty" store:Type="Tables" />
+          <EntitySet Name="SIA_WebLinks" EntityType="Self.SIA_WebLinks" Schema="dbo" Table="SIA.WebLinks" store:Type="Tables" />
+          <EntitySet Name="SIA_WebSiteUser" EntityType="Self.SIA_WebSiteUser" Schema="dbo" Table="SIA.WebSiteUser" store:Type="Tables" />
+          <EntitySet Name="User_DayOff" EntityType="Self.User_DayOff" Schema="dbo" Table="User.DayOff" store:Type="Tables" />
+          <EntitySet Name="User_GroupMember" EntityType="Self.User_GroupMember" Schema="dbo" Table="User.GroupMember" store:Type="Tables" />
+          <EntitySet Name="User_GroupTitle" EntityType="Self.User_GroupTitle" Schema="dbo" Table="User.GroupTitle" store:Type="Tables" />
+          <EntitySet Name="User_JobTitle" EntityType="Self.User_JobTitle" Schema="dbo" Table="User.JobTitle" store:Type="Tables" />
+          <EntitySet Name="User_Shift" EntityType="Self.User_Shift" Schema="dbo" Table="User.Shift" store:Type="Tables" />
+          <EntitySet Name="User_User" EntityType="Self.User_User" Schema="dbo" Table="User.User" store:Type="Tables" />
+          <EntitySet Name="User_UserBadgeHistory" EntityType="Self.User_UserBadgeHistory" Schema="dbo" Table="User.UserBadgeHistory" store:Type="Tables" />
+          <EntitySet Name="User_UserJobTitleHistory" EntityType="Self.User_UserJobTitleHistory" Schema="dbo" Table="User.UserJobTitleHistory" store:Type="Tables" />
+          <EntitySet Name="User_UserOfficeHistory" EntityType="Self.User_UserOfficeHistory" Schema="dbo" Table="User.UserOfficeHistory" store:Type="Tables" />
+          <EntitySet Name="User_UserRDHistory" EntityType="Self.User_UserRDHistory" Schema="dbo" Table="User.UserRDHistory" store:Type="Tables" />
+          <EntitySet Name="User_UserSectionHistory" EntityType="Self.User_UserSectionHistory" Schema="dbo" Table="User.UserSectionHistory" store:Type="Tables" />
+          <EntitySet Name="User_UserShiftHistory" EntityType="Self.User_UserShiftHistory" Schema="dbo" Table="User.UserShiftHistory" store:Type="Tables" />
+          <EntitySet Name="User_UserWorkStatusHistory" EntityType="Self.User_UserWorkStatusHistory" Schema="dbo" Table="User.UserWorkStatusHistory" store:Type="Tables" />
+          <EntitySet Name="User_WorksheetClassification" EntityType="Self.User_WorksheetClassification" Schema="dbo" Table="User.WorksheetClassification" store:Type="Tables" />
+          <EntitySet Name="User_WorkStatus" EntityType="Self.User_WorkStatus" Schema="dbo" Table="User.WorkStatus" store:Type="Tables" />
+          <EntitySet Name="User_vEquipment" EntityType="Self.User_vEquipment" store:Type="Views" store:Schema="dbo" store:Name="User.vEquipment">
+            <DefiningQuery>SELECT 
+[User_vEquipment].[AppEntityID] AS [AppEntityID], 
+[User_vEquipment].[ID] AS [ID], 
+[User_vEquipment].[ItemDescription] AS [ItemDescription], 
+[User_vEquipment].[IssuedTo] AS [IssuedTo], 
+[User_vEquipment].[SAP] AS [SAP], 
+[User_vEquipment].[Price] AS [Price], 
+[User_vEquipment].[PersonallyOwned] AS [PersonallyOwned], 
+[User_vEquipment].[Status] AS [Status], 
+[User_vEquipment].[CategoryID] AS [CategoryID], 
+[User_vEquipment].[Category] AS [Category], 
+[User_vEquipment].[ItemType] AS [ItemType]
+FROM [dbo].[User.vEquipment] AS [User_vEquipment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_vPicture" EntityType="Self.User_vPicture" store:Type="Views" store:Schema="dbo" store:Name="User.vPicture">
+            <DefiningQuery>SELECT 
+[User_vPicture].[BookingID] AS [BookingID], 
+[User_vPicture].[AppEntityID] AS [AppEntityID], 
+[User_vPicture].[SAP] AS [SAP], 
+[User_vPicture].[ImagePath] AS [ImagePath], 
+[User_vPicture].[DateTimeStamp] AS [DateTimeStamp]
+FROM [dbo].[User.vPicture] AS [User_vPicture]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Award_Recognize_Award_AwardType" Association="Self.FK_Award_Recognize_Award_AwardType">
+            <End Role="Award_AwardType" EntitySet="Award_AwardType" />
+            <End Role="Award_Recognize" EntitySet="Award_Recognize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Award_Recognize_Award_RecognitionType" Association="Self.FK_Award_Recognize_Award_RecognitionType">
+            <End Role="Award_RecognitionType" EntitySet="Award_RecognitionType" />
+            <End Role="Award_Recognize" EntitySet="Award_Recognize" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Address_Person_AddressType" Association="Self.FK_Person_Address_Person_AddressType">
+            <End Role="Person_AddressType" EntitySet="Person_AddressType" />
+            <End Role="Person_Address" EntitySet="Person_Address" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_EmailAddress_person_EmailAddressType" Association="Self.FK_Person_EmailAddress_person_EmailAddressType">
+            <End Role="person_EmailAddressType" EntitySet="person_EmailAddressType" />
+            <End Role="Person_EmailAddress" EntitySet="Person_EmailAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_Person_Person_PersonType" Association="Self.FK_Person_Person_Person_PersonType">
+            <End Role="Person_PersonType" EntitySet="Person_PersonType" />
+            <End Role="Person_Person" EntitySet="Person_Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_PersonPhone_Person_Person" Association="Self.FK_Person_PersonPhone_Person_Person">
+            <End Role="Person_Person" EntitySet="Person_Person" />
+            <End Role="Person_PersonPhone" EntitySet="Person_PersonPhone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_PersonPhone_Person_PhoneNumberType" Association="Self.FK_Person_PersonPhone_Person_PhoneNumberType">
+            <End Role="Person_PhoneNumberType" EntitySet="Person_PhoneNumberType" />
+            <End Role="Person_PersonPhone" EntitySet="Person_PersonPhone" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_EmailAddress_Person_Person" Association="Self.FK_Person_EmailAddress_Person_Person">
+            <End Role="Person_Person" EntitySet="Person_Person" />
+            <End Role="Person_EmailAddress" EntitySet="Person_EmailAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_WebLinks" Association="Self.FK_SIA_AppFeatureAccess_SIA_WebLinks">
+            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_User_User" Association="Self.FK_SIA_AppFeatureAccess_User_User">
+            <End Role="User_User" EntitySet="User_User" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebLinks" Association="Self.FK_SIA_WebSiteUser_SIA_WebLinks">
+            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
+            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_WebSiteUser_User_User" Association="Self.FK_SIA_WebSiteUser_User_User">
+            <End Role="User_User" EntitySet="User_User" />
+            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Clasification_User_Classification" Association="Self.FK_User_Clasification_User_Classification">
+            <End Role="User_WorksheetClassification" EntitySet="User_WorksheetClassification" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_GroupMember_User_GroupTitle" Association="Self.FK_User_GroupMember_User_GroupTitle">
+            <End Role="User_GroupTitle" EntitySet="User_GroupTitle" />
+            <End Role="User_GroupMember" EntitySet="User_GroupMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_GroupMember_User_User" Association="Self.FK_User_GroupMember_User_User">
+            <End Role="User_User" EntitySet="User_User" />
+            <End Role="User_GroupMember" EntitySet="User_GroupMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Office_Office" Association="Self.FK_User_User_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Office_OfficeSection" Association="Self.FK_User_User_Office_OfficeSection">
+            <End Role="Office_OfficeSection" EntitySet="Office_OfficeSection" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Person_Person" Association="Self.FK_User_User_Person_Person">
+            <End Role="Person_Person" EntitySet="Person_Person" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_DayOff" Association="Self.FK_User_User_User_DayOff">
+            <End Role="User_DayOff" EntitySet="User_DayOff" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_JobTitle" Association="Self.FK_User_User_User_JobTitle">
+            <End Role="User_JobTitle" EntitySet="User_JobTitle" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_Shift" Association="Self.FK_User_User_User_Shift">
+            <End Role="User_Shift" EntitySet="User_Shift" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_WorkStatus" Association="Self.FK_User_User_User_WorkStatus">
+            <End Role="User_WorkStatus" EntitySet="User_WorkStatus" />
+            <End Role="User_User" EntitySet="User_User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserJobTitleHistory_User_JobTitle" Association="Self.FK_User_UserJobTitleHistory_User_JobTitle">
+            <End Role="User_JobTitle" EntitySet="User_JobTitle" />
+            <End Role="User_UserJobTitleHistory" EntitySet="User_UserJobTitleHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserOfficeHistory_User_Office" Association="Self.FK_User_UserOfficeHistory_User_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="User_UserOfficeHistory" EntitySet="User_UserOfficeHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserRDHistory_User_DayOff" Association="Self.FK_User_UserRDHistory_User_DayOff">
+            <End Role="User_DayOff" EntitySet="User_DayOff" />
+            <End Role="User_UserRDHistory" EntitySet="User_UserRDHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserSectionHistory_Office_OfficeSection" Association="Self.FK_User_UserSectionHistory_Office_OfficeSection">
+            <End Role="Office_OfficeSection" EntitySet="Office_OfficeSection" />
+            <End Role="User_UserSectionHistory" EntitySet="User_UserSectionHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserShiftHistory_User_Shift" Association="Self.FK_User_UserShiftHistory_User_Shift">
+            <End Role="User_Shift" EntitySet="User_Shift" />
+            <End Role="User_UserShiftHistory" EntitySet="User_UserShiftHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserWorkStatusHistory_User_WorkStatus" Association="Self.FK_User_UserWorkStatusHistory_User_WorkStatus">
+            <End Role="User_WorkStatus" EntitySet="User_WorkStatus" />
+            <End Role="User_UserWorkStatusHistory" EntitySet="User_UserWorkStatusHistory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Address_User_State" Association="Self.FK_User_Address_User_State">
+            <End Role="Person_State" EntitySet="Person_State" />
+            <End Role="Person_Address" EntitySet="Person_Address" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -1063,6 +1163,30 @@
             <Parameter Name="AppEntity" Mode="In" Type="Int32" />
             <Parameter Name="GroupTitleID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_User_User_Office_Office" Association="SAPDActivityModel.FK_User_User_Office_Office">
+            <End Role="Office_Office" EntitySet="Office_Office" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_Office_OfficeSection" Association="SAPDActivityModel.FK_User_User_Office_OfficeSection">
+            <End Role="OfficeSection" EntitySet="OfficeSections" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_DayOff" Association="SAPDActivityModel.FK_User_User_User_DayOff">
+            <End Role="DayOff" EntitySet="DayOffs" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_JobTitle" Association="SAPDActivityModel.FK_User_User_User_JobTitle">
+            <End Role="JobTitle" EntitySet="JobTitles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_Shift" Association="SAPDActivityModel.FK_User_User_User_Shift">
+            <End Role="Shift" EntitySet="Shifts" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_User_User_WorkStatus" Association="SAPDActivityModel.FK_User_User_User_WorkStatus">
+            <End Role="WorkStatus" EntitySet="WorkStatus" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Person">
           <Key>
@@ -1076,13 +1200,14 @@
           <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Suffix" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="rowguid" Type="Guid" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Person_PersonType" Relationship="SAPDActivityModel.FK_Person_Person_Person_PersonType" FromRole="Person_Person" ToRole="Person_PersonType" />
           <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_User_Person_Person" FromRole="Person_Person" ToRole="User_User" />
           <NavigationProperty Name="P_Address" Relationship="SAPDActivityModel.PersonP_Address" FromRole="Person" ToRole="P_Address" />
           <NavigationProperty Name="Person_EmailAddress" Relationship="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" FromRole="Person" ToRole="Person_EmailAddress" />
           <NavigationProperty Name="Awards" Relationship="SAPDActivityModel.PersonAward" FromRole="Person" ToRole="Award" />
           <NavigationProperty Name="Person_PersonPhone" Relationship="SAPDActivityModel.FK_Person_PersonPhone_Person_Person" FromRole="Person" ToRole="Person_PersonPhone" />
+          <Property Name="MaidenName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="PersonType">
           <Key>
@@ -1092,7 +1217,7 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="NameCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="Ranking" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="VisibleFlag" Type="Boolean" />
           <NavigationProperty Name="Person_Person" Relationship="SAPDActivityModel.FK_Person_Person_Person_PersonType" FromRole="Person_PersonType" ToRole="Person_Person" />
         </EntityType>
@@ -1102,8 +1227,11 @@
           </Key>
           <Property Name="PhoneNumberTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Person_PersonPhone" Relationship="SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType" FromRole="PhoneNumberType" ToRole="Person_PersonPhone" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ranking" Type="Int32" />
+          <Property Name="VisibleFlag" Type="Boolean" />
         </EntityType>
         <EntityType Name="DayOff">
           <Key>
@@ -1114,9 +1242,10 @@
           <Property Name="WorkDayID" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="Ranking" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="VisibleFlag" Type="Boolean" />
           <NavigationProperty Name="User_UserRDHistory" Relationship="SAPDActivityModel.FK_User_UserRDHistory_User_DayOff" FromRole="User_DayOff" ToRole="User_UserRDHistory" />
+          <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_User_User_DayOff" FromRole="DayOff" ToRole="User" />
         </EntityType>
         <EntityType Name="JobTitle">
           <Key>
@@ -1125,11 +1254,12 @@
           <Property Name="JobTitleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="NameCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="VisibleFlag" Type="Boolean" />
           <Property Name="PAJobTitleID" Type="Int32" />
           <NavigationProperty Name="User_UserJobTitleHistory" Relationship="SAPDActivityModel.FK_User_UserJobTitleHistory_User_JobTitle" FromRole="User_JobTitle" ToRole="User_UserJobTitleHistory" />
           <Property Type="Int32" Name="jtRanking" />
+          <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_User_User_JobTitle" FromRole="JobTitle" ToRole="User" />
         </EntityType>
         <EntityType Name="Shift">
           <Key>
@@ -1137,12 +1267,13 @@
           </Key>
           <Property Name="ShiftID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="20" Unicode="false" FixedLength="false" />
-          <Property Name="StartTime" Type="Time" />
-          <Property Name="EndTime" Type="Time" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="StartTime" Type="Time" Precision="7" />
+          <Property Name="EndTime" Type="Time" Precision="7" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="MainframCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="PAShiftID" Type="Int32" />
           <NavigationProperty Name="User_UserShiftHistory" Relationship="SAPDActivityModel.FK_User_UserShiftHistory_User_Shift" FromRole="User_Shift" ToRole="User_UserShiftHistory" />
+          <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_User_User_Shift" FromRole="Shift" ToRole="User" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -1150,19 +1281,19 @@
           </Key>
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="PIN" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
-          <Property Name="SAP" Type="String" MaxLength="8" Unicode="false" FixedLength="false" Nullable="false" />
+          <Property Name="SAP" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
           <Property Name="CADID" Type="Int32" />
           <Property Name="JobTitleID" Type="Int32" />
           <Property Name="ClassificationID" Type="Int32" />
           <Property Name="Badge" Type="String" MaxLength="6" Unicode="false" FixedLength="false" />
-          <Property Name="DOB" Type="DateTime" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
           <Property Name="Gender" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
           <Property Name="Ethnicty" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
           <Property Name="MaritalStatus" Type="String" MaxLength="1" Unicode="true" FixedLength="true" />
-          <Property Name="HireDate" Type="DateTime" Nullable="false" />
+          <Property Name="HireDate" Type="DateTime" Precision="0" />
           <Property Name="rowguid" Type="Guid" />
           <Property Name="WorksheetVisibleFlag" Type="Boolean" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Person_Person" Relationship="SAPDActivityModel.FK_User_User_Person_Person" FromRole="User_User" ToRole="Person_Person" />
           <NavigationProperty Name="User_WorksheetClassification" Relationship="SAPDActivityModel.FK_User_Clasification_User_Classification" FromRole="User_User" ToRole="User_WorksheetClassification" />
           <NavigationProperty Name="BadgeHistories" Relationship="SAPDActivityModel.UserBadgeHistory" FromRole="User" ToRole="BadgeHistory" />
@@ -1182,6 +1313,12 @@
           <NavigationProperty Name="SIA_WebSiteUser" Relationship="SAPDActivityModel.FK_SIA_WebSiteUser_User_User" FromRole="User" ToRole="SIA_WebSiteUser" />
           <NavigationProperty Name="AppFeatureAccesses" Relationship="SAPDActivityModel.UserAppFeatureAccess" FromRole="User" ToRole="AppFeatureAccess" />
           <NavigationProperty Name="User_GroupMember" Relationship="SAPDActivityModel.FK_User_GroupMember_User_User" FromRole="User" ToRole="User_GroupMember" />
+          <NavigationProperty Name="Office_Office" Relationship="SAPDActivityModel.FK_User_User_Office_Office" FromRole="User" ToRole="Office_Office" />
+          <NavigationProperty Name="Office_OfficeSection" Relationship="SAPDActivityModel.FK_User_User_Office_OfficeSection" FromRole="User" ToRole="OfficeSection" />
+          <NavigationProperty Name="User_DayOff" Relationship="SAPDActivityModel.FK_User_User_User_DayOff" FromRole="User" ToRole="DayOff" />
+          <NavigationProperty Name="User_JobTitle" Relationship="SAPDActivityModel.FK_User_User_User_JobTitle" FromRole="User" ToRole="JobTitle" />
+          <NavigationProperty Name="User_Shift" Relationship="SAPDActivityModel.FK_User_User_User_Shift" FromRole="User" ToRole="Shift" />
+          <NavigationProperty Name="User_WorkStatus" Relationship="SAPDActivityModel.FK_User_User_User_WorkStatus" FromRole="User" ToRole="WorkStatus" />
         </EntityType>
         <EntityType Name="BadgeHistory">
           <Key>
@@ -1190,9 +1327,9 @@
           <Property Name="UBHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="Badge" Type="String" Nullable="false" MaxLength="6" Unicode="false" FixedLength="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="EnteredBy" Type="Int32" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserBadgeHistory" FromRole="BadgeHistory" ToRole="User" />
         </EntityType>
@@ -1203,9 +1340,9 @@
           <Property Name="UJTID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="JobTitleID" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="EnteredBy" Type="Int32" />
           <NavigationProperty Name="User_JobTitle" Relationship="SAPDActivityModel.FK_User_UserJobTitleHistory_User_JobTitle" FromRole="User_UserJobTitleHistory" ToRole="User_JobTitle" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserJobTitleHistory" FromRole="JobTitleHistory" ToRole="User" />
@@ -1220,9 +1357,9 @@
           <Property Name="SectionID" Type="Int32" />
           <Property Name="ShiftID" Type="Int32" />
           <Property Name="RDID" Type="Int32" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="EnteredBy" Type="Int32" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserOfficeHistory" FromRole="OfficeHistory" ToRole="User" />
           <NavigationProperty Name="Office_Office" Relationship="SAPDActivityModel.FK_User_UserOfficeHistory_User_Office" FromRole="OfficeHistory" ToRole="Office_Office" />
@@ -1234,9 +1371,9 @@
           <Property Name="URDHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="RDID" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="EnteredBy" Type="Int32" />
           <NavigationProperty Name="User_DayOff" Relationship="SAPDActivityModel.FK_User_UserRDHistory_User_DayOff" FromRole="User_UserRDHistory" ToRole="User_DayOff" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserRDHistory" FromRole="RDHistory" ToRole="User" />
@@ -1248,9 +1385,9 @@
           <Property Name="USHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="SectionID" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="EnteredBy" Type="Int32" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserSectionHistory" FromRole="SectionHistory" ToRole="User" />
           <NavigationProperty Name="Office_OfficeSection" Relationship="SAPDActivityModel.FK_User_UserSectionHistory_Office_OfficeSection" FromRole="SectionHistory" ToRole="Office_OfficeSection" />
@@ -1262,9 +1399,9 @@
           <Property Name="UShHID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="ShiftID" Type="Int32" Nullable="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="EnteredBy" Type="Int32" />
           <NavigationProperty Name="User_Shift" Relationship="SAPDActivityModel.FK_User_UserShiftHistory_User_Shift" FromRole="User_UserShiftHistory" ToRole="User_Shift" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserShiftHistory" FromRole="ShiftHistory" ToRole="User" />
@@ -1277,9 +1414,9 @@
           <Property Name="AppEntityID" Type="Int32" Nullable="false" />
           <Property Name="WorkstatusID" Type="Int32" Nullable="false" />
           <Property Name="StatusInfo" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" />
-          <Property Name="EndDate" Type="DateTime" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User_WorkStatus" Relationship="SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus" FromRole="User_UserWorkStatusHistory" ToRole="User_WorkStatus" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserWorkStatusHistory" FromRole="WorkStatusHistory" ToRole="User" />
         </EntityType>
@@ -1291,7 +1428,7 @@
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="NameCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="Ranking" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="VisibleFlag" Type="Boolean" />
           <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_Clasification_User_Classification" FromRole="User_WorksheetClassification" ToRole="User_User" />
         </EntityType>
@@ -1303,10 +1440,11 @@
           <Property Name="Name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="NameCode" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
           <Property Name="Ranking" Type="Int32" />
-          <Property Name="ModifiedDate" Type="DateTime" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="3" />
           <Property Name="VisibleFlag" Type="Boolean" />
           <Property Name="PAWorkStatusID" Type="Int32" />
           <NavigationProperty Name="User_UserWorkStatusHistory" Relationship="SAPDActivityModel.FK_User_UserWorkStatusHistory_User_WorkStatus" FromRole="User_WorkStatus" ToRole="User_UserWorkStatusHistory" />
+          <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_User_User_WorkStatus" FromRole="WorkStatus" ToRole="User" />
         </EntityType>
         <Association Name="FK_Person_Person_Person_PersonType">
           <End Role="Person_PersonType" Type="SAPDActivityModel.PersonType" Multiplicity="0..1" />
@@ -1474,9 +1612,10 @@
           <Property Type="String" Name="Code" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="Ranking" />
           <Property Type="Boolean" Name="Visible" />
-          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
           <Property Type="Int32" Name="PAOfficeID" />
           <NavigationProperty Name="User_UserOfficeHistory" Relationship="SAPDActivityModel.FK_User_UserOfficeHistory_User_Office" FromRole="Office_Office" ToRole="OfficeHistory" />
+          <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_User_Office_Office" FromRole="Office_Office" ToRole="User" />
         </EntityType>
         <EntityType Name="OfficeSection">
           <Key>
@@ -1486,9 +1625,10 @@
           <Property Type="Int32" Name="OfficeID" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="VisibleFlag" />
-          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
           <Property Type="Int32" Name="PASectionID" />
           <NavigationProperty Name="User_UserSectionHistory" Relationship="SAPDActivityModel.FK_User_UserSectionHistory_Office_OfficeSection" FromRole="Office_OfficeSection" ToRole="SectionHistory" />
+          <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_User_Office_OfficeSection" FromRole="OfficeSection" ToRole="User" />
         </EntityType>
         <EntityType Name="P_Address">
           <Key>
@@ -1502,10 +1642,10 @@
           <Property Type="String" Name="City" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="StateID" />
           <Property Type="String" Name="PostalCode" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="StartDate" Nullable="false" />
-          <Property Type="DateTime" Name="EndDate" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="EndDate" Precision="0" />
           <Property Type="Guid" Name="rowguid" />
-          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
           <NavigationProperty Name="Person_AddressType" Relationship="SAPDActivityModel.FK_Person_Address_Person_AddressType" FromRole="Person_Address" ToRole="Person_AddressType" />
           <NavigationProperty Name="Person_State" Relationship="SAPDActivityModel.FK_User_Address_User_State" FromRole="Person_Address" ToRole="Person_State" />
           <NavigationProperty Name="Person" Relationship="SAPDActivityModel.PersonP_Address" FromRole="P_Address" ToRole="Person" />
@@ -1517,7 +1657,7 @@
           <Property Type="Int32" Name="AddressTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Name" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Guid" Name="rowguid" />
-          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
           <NavigationProperty Name="Person_Address" Relationship="SAPDActivityModel.FK_Person_Address_Person_AddressType" FromRole="Person_AddressType" ToRole="Person_Address" />
         </EntityType>
         <EntityType Name="State">
@@ -1528,7 +1668,7 @@
           <Property Type="String" Name="StateCode" MaxLength="2" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="StateName" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Type="Guid" Name="rowguid" />
-          <Property Type="DateTime" Name="ModifiedDate" />
+          <Property Type="DateTime" Name="ModifiedDate" Precision="3" />
           <NavigationProperty Name="Person_Address" Relationship="SAPDActivityModel.FK_User_Address_User_State" FromRole="Person_State" ToRole="Person_Address" />
         </EntityType>
         <Association Name="FK_User_UserOfficeHistory_User_Office">
@@ -1612,7 +1752,7 @@
           <Property Type="Int32" Name="EmailAddressTypeID" Nullable="false" />
           <Property Type="String" Name="EmailAddress" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Type="Guid" Name="rowguid" Nullable="false" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
           <NavigationProperty Name="person_EmailAddressType" Relationship="SAPDActivityModel.FK_Person_EmailAddress_person_EmailAddressType" FromRole="Person_EmailAddress" ToRole="person_EmailAddressType" />
           <NavigationProperty Name="Person_Person" Relationship="SAPDActivityModel.FK_Person_EmailAddress_Person_Person" FromRole="Person_EmailAddress" ToRole="Person" />
         </EntityType>
@@ -1659,7 +1799,7 @@
           <Property Type="Int32" Name="OfficeId" />
           <Property Type="String" Name="Notes" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="DocPath" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="IssuedDate" Nullable="false" />
+          <Property Type="DateTime" Name="IssuedDate" Nullable="false" Precision="0" />
           <Property Type="Boolean" Name="AnnualAward" Nullable="false" />
           <NavigationProperty Name="Person" Relationship="SAPDActivityModel.PersonAward" FromRole="Award" ToRole="Person" />
           <NavigationProperty Name="Award_AwardType" Relationship="SAPDActivityModel.FK_Award_Recognize_Award_AwardType" FromRole="Award" ToRole="Award_AwardType" />
@@ -1727,7 +1867,7 @@
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="String" Name="SAP" MaxLength="8" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="ImagePath" MaxLength="511" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="DateTimeStamp" />
+          <Property Type="DateTime" Name="DateTimeStamp" Precision="3" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UservPicture" FromRole="vPicture" ToRole="User" />
         </EntityType>
         <Association Name="UservPicture">
@@ -1793,10 +1933,10 @@
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="Int32" Name="WebSiteRoleID" Nullable="false" />
           <Property Type="Int32" Name="EnteredByID" Nullable="false" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
           <Property Type="Boolean" Name="GateStatus" />
           <Property Type="String" Name="GateQuestion" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="GateAttemptDate" />
+          <Property Type="DateTime" Name="GateAttemptDate" Precision="3" />
           <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_SIA_WebSiteUser_User_User" FromRole="SIA_WebSiteUser" ToRole="User" />
           <NavigationProperty Name="SIA_WebLinks" Relationship="SAPDActivityModel.FK_SIA_WebSiteUser_SIA_WebLinks" FromRole="WebSiteUser" ToRole="SIA_WebLinks" />
         </EntityType>
@@ -1822,9 +1962,9 @@
           <Property Type="Int32" Name="AppFeatureID" Nullable="false" />
           <Property Type="Boolean" Name="AllowFeatureFlag" Nullable="false" />
           <Property Type="String" Name="UnlockQ" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="UnlockAttempt" />
+          <Property Type="DateTime" Name="UnlockAttempt" Precision="3" />
           <Property Type="Int32" Name="UnlockedBy" />
-          <Property Type="DateTime" Name="UnlockedDate" />
+          <Property Type="DateTime" Name="UnlockedDate" Precision="3" />
           <NavigationProperty Name="User" Relationship="SAPDActivityModel.UserAppFeatureAccess" FromRole="AppFeatureAccess" ToRole="User" />
           <NavigationProperty Name="WebLink" Relationship="SAPDActivityModel.WebLinksAppFeatureAccess" FromRole="AppFeatureAccess" ToRole="WebLinks" />
         </EntityType>
@@ -1847,6 +1987,7 @@
           <Property Type="Boolean" Name="NeedAuthorizationFlag" Nullable="false" />
           <NavigationProperty Name="SIA_WebSiteUser" Relationship="SAPDActivityModel.FK_SIA_WebSiteUser_SIA_WebLinks" FromRole="SIA_WebLinks" ToRole="WebSiteUser" />
           <NavigationProperty Name="AppFeatureAccesses" Relationship="SAPDActivityModel.WebLinksAppFeatureAccess" FromRole="WebLinks" ToRole="AppFeatureAccess" />
+          <Property Name="LoginFrom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_SIA_WebSiteUser_SIA_WebLinks">
           <End Type="SAPDActivityModel.WebLinks" Role="SIA_WebLinks" Multiplicity="1" />
@@ -1892,7 +2033,7 @@
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="String" Name="PhoneNumber" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Type="Int32" Name="PhoneNumberTypeID" Nullable="false" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
           <NavigationProperty Name="Person_Person" Relationship="SAPDActivityModel.FK_Person_PersonPhone_Person_Person" FromRole="Person_PersonPhone" ToRole="Person" />
           <NavigationProperty Name="Person_PhoneNumberType" Relationship="SAPDActivityModel.FK_Person_PersonPhone_Person_PhoneNumberType" FromRole="Person_PersonPhone" ToRole="PhoneNumberType" />
         </EntityType>
@@ -1927,8 +2068,8 @@
           <Property Type="Int32" Name="GroupMemberID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="Int32" Name="GroupTitleID" Nullable="false" />
-          <Property Type="String" Name="MemberInfo" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
+          <Property Type="String" Name="MemberInfo" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
           <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
           <NavigationProperty Name="User_User" Relationship="SAPDActivityModel.FK_User_GroupMember_User_User" FromRole="User_GroupMember" ToRole="User" />
           <NavigationProperty Name="User_GroupTitle" Relationship="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle" FromRole="GroupMember" ToRole="User_GroupTitle" />
@@ -1956,6 +2097,7 @@
           <Property Type="Int32" Name="gtRanking" />
           <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
           <NavigationProperty Name="User_GroupMember" Relationship="SAPDActivityModel.FK_User_GroupMember_User_GroupTitle" FromRole="User_GroupTitle" ToRole="GroupMember" />
+          <Property Name="AppVisibleFlag" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_User_GroupMember_User_GroupTitle">
           <End Type="SAPDActivityModel.GroupTitle" Role="User_GroupTitle" Multiplicity="1" />
@@ -1996,6 +2138,78 @@
           <Property Type="String" Name="WorkStatus" Nullable="true" MaxLength="50" />
           <Property Type="Int32" Name="WorkStatusCode" Nullable="true" />
         </ComplexType>
+        <Association Name="FK_User_User_Office_Office">
+          <End Type="SAPDActivityModel.Office_Office" Role="Office_Office" Multiplicity="0..1" />
+          <End Type="SAPDActivityModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Office_Office">
+              <PropertyRef Name="OfficeID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="OfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_Office_OfficeSection">
+          <End Type="SAPDActivityModel.OfficeSection" Role="OfficeSection" Multiplicity="0..1" />
+          <End Type="SAPDActivityModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OfficeSection">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_DayOff">
+          <End Type="SAPDActivityModel.DayOff" Role="DayOff" Multiplicity="0..1" />
+          <End Type="SAPDActivityModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DayOff">
+              <PropertyRef Name="RDID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RDID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_JobTitle">
+          <End Type="SAPDActivityModel.JobTitle" Role="JobTitle" Multiplicity="0..1" />
+          <End Type="SAPDActivityModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobTitle">
+              <PropertyRef Name="JobTitleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="JobTitleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_Shift">
+          <End Type="SAPDActivityModel.Shift" Role="Shift" Multiplicity="0..1" />
+          <End Type="SAPDActivityModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Shift">
+              <PropertyRef Name="ShiftID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ShiftID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_User_User_WorkStatus">
+          <End Type="SAPDActivityModel.WorkStatus" Role="WorkStatus" Multiplicity="0..1" />
+          <End Type="SAPDActivityModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkStatus">
+              <PropertyRef Name="WorkStatusID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="WorkStatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2005,6 +2219,7 @@
           <EntitySetMapping Name="People">
             <EntityTypeMapping TypeName="SAPDActivityModel.Person">
               <MappingFragment StoreEntitySet="Person_Person">
+                <ScalarProperty Name="MaidenName" ColumnName="MaidenName" />
                 <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
                 <ScalarProperty Name="PersonTypeID" ColumnName="PersonTypeID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -2032,6 +2247,9 @@
           <EntitySetMapping Name="PhoneNumberTypes">
             <EntityTypeMapping TypeName="SAPDActivityModel.PhoneNumberType">
               <MappingFragment StoreEntitySet="Person_PhoneNumberType">
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="PhoneNumberTypeID" ColumnName="PhoneNumberTypeID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
@@ -2426,6 +2644,7 @@
           <EntitySetMapping Name="WebLinks">
             <EntityTypeMapping TypeName="SAPDActivityModel.WebLinks">
               <MappingFragment StoreEntitySet="SIA_WebLinks">
+                <ScalarProperty Name="LoginFrom" ColumnName="LoginFrom" />
                 <ScalarProperty Name="NeedAuthorizationFlag" ColumnName="NeedAuthorizationFlag" />
                 <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
                 <ScalarProperty Name="WebLink" ColumnName="WebLink" />
@@ -2461,6 +2680,7 @@
           <EntitySetMapping Name="GroupTitles">
             <EntityTypeMapping TypeName="SAPDActivityModel.GroupTitle">
               <MappingFragment StoreEntitySet="User_GroupTitle">
+                <ScalarProperty Name="AppVisibleFlag" ColumnName="AppVisibleFlag" />
                 <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
                 <ScalarProperty Name="gtRanking" ColumnName="gtRanking" />
                 <ScalarProperty Name="GroupInfo" ColumnName="GroupInfo" />
@@ -2522,6 +2742,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
@@ -2731,6 +2952,12 @@
           <ConnectorPoint PointX="21.1875" PointY="13" />
           <ConnectorPoint PointX="21.1875" PointY="12.010397190054258" />
         </AssociationConnector>
+        <AssociationConnector Association="SAPDActivityModel.FK_User_User_Office_Office" />
+        <AssociationConnector Association="SAPDActivityModel.FK_User_User_Office_OfficeSection" />
+        <AssociationConnector Association="SAPDActivityModel.FK_User_User_User_DayOff" />
+        <AssociationConnector Association="SAPDActivityModel.FK_User_User_User_JobTitle" />
+        <AssociationConnector Association="SAPDActivityModel.FK_User_User_User_Shift" />
+        <AssociationConnector Association="SAPDActivityModel.FK_User_User_User_WorkStatus" />
         </Diagram>
     </Diagrams>
   </Designer>

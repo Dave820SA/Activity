@@ -1,0 +1,37 @@
+﻿
+@using Recognition.Models;
+
+<div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title"><span style="color:goldenrod">Top Ten Award Recipients</span></h3>
+        </div>
+        <div class="panel-body">
+            <div style="padding-left:5px">
+                <table class="table table-condensed table-hover">
+                    <tr style="color:goldenrod">
+                        <th>Employee</th>
+                        <th style="text-align:center">Count</th>
+                    </tr>
+                    @foreach (var top in ViewData["TopAwardEmployee"] as IList<Top10Employee>)
+                    {
+                    <tr>
+                        <td>
+                            @{
+                                string empName = String.Format("{0} {1}", top.FirstName, top.LastName);
+                                <a href="@top.AppEntityID" target="_blank"><span class="font-weight-bold">@empName</span> </a>
+                            }
+
+                        </td>
+                       <td style="text-align:center">
+                           @top.AwardCount
+                       </td>
+                    </tr>
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

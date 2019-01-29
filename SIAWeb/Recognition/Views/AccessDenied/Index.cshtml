@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Recognition.Models.ProfileCrad>
+
+<div class="well well-sm text-center">
+    <h3>
+
+        <span style="color:goldenrod" id="tooltip-ex">
+            <a style="color:goldenrod" data-toggle="tooltip"
+               data-original-title="Contact one of the people below for access.">Unauthorized Access, Contact one of the system administrators below</a>
+        </span>
+    </h3>
+</div>
+
+@foreach (var item in Model)
+{
+    @Html.Partial("_MemberContact", item)
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#tooltip-ex a").tooltip({
+                placement: 'right'
+            });
+        });
+    </script>
+}
