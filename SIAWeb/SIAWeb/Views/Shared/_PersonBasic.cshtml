@@ -5,12 +5,8 @@
                  <div class="profile-userpic">
                      @{
                          string sap = Model.SAP;
-                         
                          string newSAP = sap.Substring(sap.Length - 6, 6);
-
-
                          var picURL = "";
-                         
                          string str = Model.PicURL;
                          if (str != null && newSAP != "107056" && newSAP != "109889")
                          {
@@ -30,9 +26,7 @@
                          {
                              url = picURL;
                          }
-                         
-                         
-                         
+
                          HttpWebResponse response = null;
                          var request = (HttpWebRequest)WebRequest.Create(url);
                          request.Method = "HEAD";
