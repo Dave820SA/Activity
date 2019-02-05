@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Recognition.Common;
 using RecognitionBusinessLayer;
 
 namespace Recognition.Controllers
@@ -13,9 +14,8 @@ namespace Recognition.Controllers
     {
         private SAPDActivityEntities db = new SAPDActivityEntities();
 
-        //
-        // GET: /AwardType/
-
+   
+        [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
         public ActionResult Index()
         {
             return View(db.AwardTypes.ToList());

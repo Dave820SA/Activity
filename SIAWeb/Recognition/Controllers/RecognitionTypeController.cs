@@ -14,8 +14,8 @@ namespace Recognition.Controllers
         private SAPDActivityEntities db = new SAPDActivityEntities();
 
         //
-        // GET: /RecognitionType/
-
+ 
+        [Common.AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
         public ActionResult Index()
         {
             return View(db.RecognitionTypes.ToList());

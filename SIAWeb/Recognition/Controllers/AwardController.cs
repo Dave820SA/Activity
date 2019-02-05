@@ -15,7 +15,7 @@ namespace Recognition.Controllers
     {
         private SAPDActivityEntities db = new SAPDActivityEntities();
 
-        // GET: /Award/
+        [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
         public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
             ViewBag.CurrentSort = sortOrder;
@@ -163,7 +163,7 @@ namespace Recognition.Controllers
             return View(recognize);
         }
 
-
+        [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]
         public ActionResult FileUpload()
         {
             return View();

@@ -26,7 +26,7 @@ namespace Recognition
         {
             SessionLogin user = new SessionLogin();
             string myUser = HttpContext.Current.Request.LogonUserIdentity.Name;
-            //string myUser = "COSA\\ND98006";
+            //string myUser = "COSA\\ND98005";
             user.getUserPin(myUser);
 
         }
