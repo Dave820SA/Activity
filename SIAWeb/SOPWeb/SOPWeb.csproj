@@ -16,6 +16,12 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>false</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -133,8 +139,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Common\AuthorizeUserAccessLevel.cs" />
+    <Compile Include="Common\PersonManager.cs" />
     <Compile Include="Common\SessionLogin.cs" />
-    <Compile Include="Controllers\AuthorizeUserAccessLevel.cs" />
+    <Compile Include="Common\SOPManager.cs" />
     <Compile Include="Controllers\DocHistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NonUserController.cs" />
@@ -142,6 +149,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmailAddress.cs" />
+    <Compile Include="Models\PersonBasic.cs" />
+    <Compile Include="Models\PersonPicture.cs" />
+    <Compile Include="Models\PhoneNumber.cs" />
+    <Compile Include="Models\ProfileCard.cs" />
+    <Compile Include="Models\SOPCurrent.cs" />
     <Compile Include="Models\SOPDocUpload.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -151,10 +164,12 @@
     <Content Include="bootstrap\css\bootstrap.css" />
     <Content Include="bootstrap\css\bootstrap.min.css" />
     <Content Include="bootstrap\css\cyborg.css" />
+    <Content Include="bootstrap\css\slate.css" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\npm.js" />
+    <Content Include="bootstrap\css\slatev4.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -218,9 +233,12 @@
     <Content Include="font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Global.asax" />
     <Content Include="Images\Male.png" />
-    <Content Include="Scripts\jquery-1.7.1-vsdoc.js" />
-    <Content Include="Scripts\jquery-1.7.1.js" />
-    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Images\SAPD-Patch-web-S4.png" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
@@ -243,19 +261,6 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Scripts\_references.js" />
-    <Content Include="Images\accent.png" />
-    <Content Include="Images\bullet.png" />
-    <Content Include="Images\heroAccent.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -319,8 +324,6 @@
     <Content Include="Views\DocHist\Create.cshtml" />
     <Content Include="Views\DocHist\Edit.cshtml" />
     <Content Include="Views\DocHist\Delete.cshtml" />
-    <Content Include="Views\DocHist\_ViewStart.cshtml" />
-    <Content Include="Views\SOP\_ViewStart.cshtml" />
     <Content Include="Views\Home\Admin.cshtml" />
     <Content Include="Views\NonUser\Index.cshtml" />
     <Content Include="Views\DocHist\FileUpload.cshtml" />
@@ -328,11 +331,21 @@
     <Content Include="Views\DocHist\DetailsAll.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
     <Content Include="Views\Home\Info.cshtml" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Shared\_NavBarUser.cshtml" />
+    <Content Include="Views\Shared\_FooterUser.cshtml" />
+    <Content Include="Views\Shared\_GroupMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PersonnelBusinessLayer\PersonnelBusinessLayer.csproj">
+      <Project>{ee6894cc-58c5-4ade-af8a-19a08dcf9aa8}</Project>
+      <Name>PersonnelBusinessLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SOPBusinessLayer\SOPBusinessLayer.csproj">
       <Project>{D2A217D9-E4E4-40CE-805E-2F0F7ACFAFE9}</Project>
       <Name>SOPBusinessLayer</Name>

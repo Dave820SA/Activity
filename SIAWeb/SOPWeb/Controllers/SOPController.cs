@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web.Mvc;
 using SOPBusinessLayer;
 using PagedList;
+using SOPWeb.Common;
 
 namespace SOPWeb.Controllers
 {

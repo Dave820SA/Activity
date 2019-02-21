@@ -1,0 +1,149 @@
+﻿@model IEnumerable<SOPWeb.Models.ProfileCrad>
+
+@foreach (var item in Model)
+{
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        <div class="well well-sm" style="min-height: 240px">
+            <div class="row">
+                <div class="col-sm-3 col-md-4">
+                    <div class="profile-userpic">
+                        @{
+                            string sap = item.SAP;
+
+                            string newSAP = sap.Substring(sap.Length - 6, 6);
+
+                            var picURL = "";
+
+                            string str = item.PicURL;
+
+                            if (str != null)
+                            {
+                                Char charRange1 = 'E';
+
+                                int stratIndex = str.IndexOf(charRange1);
+
+                                string substring = str.Substring(stratIndex);
+
+                                picURL = "http://wppswebprod/Booking/" + substring;
+
+                            }
+
+                            var url = "http://wppswebprod/FileShare/Images/" + newSAP + ".png";
+                            HttpWebResponse response = null;
+                            var request = (HttpWebRequest)WebRequest.Create(url);
+                            request.Method = "HEAD";
+
+                            try
+                            {
+                                response = (HttpWebResponse)request.GetResponse();
+                            }
+                            catch (WebException ex)
+                            {
+                                url = "";
+
+                                if (picURL.Length > 10)
+                                {
+                                    url = picURL;
+                                }
+                                else
+                                {
+                                    url = "~/Images/Male.png";
+                                }
+
+                            }
+
+                            finally
+                            {
+                                // Don't forget to close your response.
+                                if (response != null)
+                                {
+                                    response.Close();
+                                }
+                            }
+
+                            <img src="@Url.Content(url)" style="max-height:255px;" class="img-responsive" alt="" />
+                        }
+                    </div>
+                    <div class="col-md-12" style="text-align:center; margin-top: 10px;">
+                        <span style="font-size: small; font-weight: bolder; color: #FFFFFF">@item.JobTitle</span>
+                    </div>
+                </div>
+                <div class="col-sm-9 col-md-8">
+                    @Html.HiddenFor(model => item.AppEntityID, new { id = "officerID", Value = item.AppEntityID })
+                    @{
+                        string person;
+                        if (string.IsNullOrEmpty(item.Badge))
+                        {
+                            person = string.Format("{0} {1}", @item.First, @item.Last);
+                        }
+                        else
+                        {
+                            person = string.Format("{0} {1} #{2}", @item.First, @item.Last, @item.Badge);
+                        }
+                        <h4>
+                            @Html.Raw(person.ToUpper())
+                        </h4>
+
+                        <p>
+                            <cite title="SAPD Office">@item.OfficeName</cite><br />
+                            <span style="font-size:small; color:#2A9FD6">RD's:</span> &nbsp;&nbsp; @item.RD<br />
+                            <span style="font-size:small; color:#2A9FD6">Duty Hrs:</span>&nbsp;&nbsp;@item.Shift <br />
+
+                            @foreach (var email in item.Email)
+                            {
+                                var newemail = "<i class=\"glyphicon glyphicon-envelope\"></i>&nbsp;&nbsp;";
+                                newemail += String.Format("<span style='font-size:small;color:#2A9FD6'>{0}</span>: <a href='mailto:{1}'>{1}</a>", email.AddressType, email.userEmailAddress);
+                                @Html.Raw(newemail)<br />
+                            }
+
+
+                            @foreach (var phone in item.PhoneNumbers)
+                            {
+                                var newPhone = "<i class=\"fa fa-phone\"></i>&nbsp;&nbsp;";
+                                newPhone += String.Format("<span style='font-size:small;color:#2A9FD6'>{0}</span>: {1}", phone.PhoneType, phone.PhoneNbr);
+                                @Html.Raw(newPhone)
+                                <br />
+                            }
+
+                        </p>
+                    }
+
+                    @{
+                        string userid = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
+                        string memberInfo = item.MemberInfo;
+                        System.Text.StringBuilder sbi = new System.Text.StringBuilder();
+
+                        if (userid == item.AppEntityID.ToString())
+                        {
+                            sbi.Append("<div style=\"font-size:x-small; color:#2A9FD6\">");
+                            sbi.Append("<span style=\"font-weight:bold; color:#C0C0C0\" id=\"tooltip-ex\">");
+                            sbi.Append("<a href=\"#\" class=\"text-danger\" onclick=\"editmyofficer(");
+                            sbi.Append(item.GroupMemberID);
+                            sbi.Append(");return false \"data-toggle=\"tooltip\" data-original-title=\"Click to edit the displayed info\">Info: &nbsp;</a>");
+                            sbi.Append("</span>");
+                            sbi.Append(@Html.Raw(memberInfo));
+                            sbi.Append("</div>");
+                        }
+                        else
+                        {
+                            sbi.Append("<div style=\"font-size:x-small; color:#2A9FD6\">");
+                            sbi.Append("<span style=\"font-weight:bold; color:#C0C0C0\" id=\"tooltip-ex\">");
+                            sbi.Append("Info: &nbsp;");
+                            sbi.Append("</span>");
+                            sbi.Append(@Html.Raw(memberInfo));
+                            sbi.Append("</div>");
+
+                        }
+
+                        @Html.Raw(sbi)
+
+                    }
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+}

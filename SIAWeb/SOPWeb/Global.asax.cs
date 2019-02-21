@@ -33,8 +33,8 @@ namespace SOPWeb
         protected void Session_Start()
         {
             SessionLogin user = new SessionLogin();
-            //string myUser = HttpContext.Current.Request.LogonUserIdentity.Name;
-            string myUser = "PR93079";
+            string myUser = HttpContext.Current.Request.LogonUserIdentity.Name;
+            //string myUser = "PR93079";
             user.getUserPin(myUser);
 
         }

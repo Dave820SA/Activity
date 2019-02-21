@@ -1,5 +1,9 @@
-﻿@model PagedList.IPagedList<SOPBusinessLayer.SOP>
+﻿@*@model PagedList.IPagedList<SOPBusinessLayer.SOP>
+    @using PagedList.Mvc;*@
+
+@model PagedList.IPagedList<SOPWeb.Models.SOPCurrent>
 @using PagedList.Mvc;
+
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
@@ -11,7 +15,7 @@
         <strong style="font-size:1.8em; padding-left:10px">SOP's</strong>
     </div>
     <div class="col-md-5">
-        
+
         @using (Html.BeginForm("Index", "SOP", FormMethod.Get))
         {
             <strong style="font-size:1.2em;">Find by SOP or Bureau:&nbsp; &nbsp;</strong>
@@ -25,21 +29,20 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            <span class="h6">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span
-                class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
+            <span class="h6">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
             <table class="table table-condensed table-hover">
                 <tr>
                     <th>
-                        @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter=ViewBag.CurrentFilter })
-                       
+                        @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+
                     </th>
                     <th>
                         @Html.ActionLink("Bureau", "Index", new { sortOrder = ViewBag.BureauSortParm, currentFilter = ViewBag.CurrentFilter })
-                       
+
                     </th>
                     <th>
                         @Html.ActionLink("Last Update", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-                        
+
                     </th>
                     <th>
                     </th>
@@ -48,10 +51,10 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Name)
+                            @Html.DisplayFor(modelItem => item.SOP_SOP.Name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Office_Bureau.Name)
+                            @Html.DisplayFor(modelItem => item.SOP_SOP.Office_Bureau.Name)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ModifiedDate)
@@ -65,10 +68,10 @@
                 }
             </table>
             <br />
-                Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-                    @Html.PagedListPager(Model, page => Url.Action("Index", 
-                    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+            @Html.PagedListPager(Model, page => Url.Action("Index",
+            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>
 </div>

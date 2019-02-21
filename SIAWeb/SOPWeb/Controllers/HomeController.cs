@@ -5,66 +5,39 @@ using System.Web.Mvc;
 using SOPBusinessLayer;
 using PagedList;
 using System.Text;
+using SOPWeb.Common;
 
 namespace SOPWeb.Controllers
 {
     public class HomeController : Controller
     {
-
         SAPDActivityEntities db = new SAPDActivityEntities();
 
         [OutputCache(Duration=10)]
         public ActionResult Index()
         {
-
             StringBuilder sb = new StringBuilder();
             string user = (string)System.Web.HttpContext.Current.Session["userName"];
 
             if (user != "Unknown User")
             {
-                sb.AppendLine("<h4>" + user + "<small>, Welcome Back! &nbsp;");
-                if (browserIssue())
-                {
-                    sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</small></h4>");
-                }
-                else
-                {
-                    sb.AppendLine("</small></h4>");
-                }
-
+                sb.AppendLine("<h4>" + user + "<small>, Welcome Back! &nbsp; </small></h4>");
+               
                 ViewBag.User = sb;
             }
             else
             {
-                sb.AppendLine("<h5>To see content expand one of the categories and click a link.&nbsp; ");
-                if (browserIssue())
-                {
-                    sb.AppendLine("If you <font color='#ff6666'>experience problems</font> see the <a href='" + @Url.Action("Info", "Home") + "'>site info</a> page.</h5>");
-                }
-                else
-                {
-                    sb.AppendLine("</h5>");
-                }
+                sb.AppendLine("<h5>To see content expand one of the categories and click a link.&nbsp;</h5> ");
+               
                 ViewBag.User = sb;
             }
 
-            List<SOP_vCurrentDoc> sopCurrentDoc = db.SOP_vCurrentDoc.ToList();
-            return View(sopCurrentDoc);
+            SOPManager sm = new SOPManager();
+            var model = sm.GetCurrentSOP().ToList();
+            return View(model);
         }
 
-        private Boolean browserIssue()
-        {
-            string browser = Request.Browser.Browser;
-            if (browser == "Chrome")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
+       
         //track the clicked links
         public ActionResult updateStats(string link, string page)
         {
@@ -151,13 +124,6 @@ namespace SOPWeb.Controllers
         }
 
 
-        //public ActionResult Search()
-        //{
-        //    ViewBag.Message = "Your Search Page.";
-
-        //    return View();
-        //}
-
         public ActionResult Details(int id = 0)
         {
             DocHistory dochistory = db.DocHistories.Single(d => d.DocHistoryID == id);
@@ -171,9 +137,11 @@ namespace SOPWeb.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "SOP Contacts.";
-
-            return View();
+            ViewBag.GroupName = "SOP Administrators";
+            ViewBag.GroupInfo = "Point of contact for SOP issues.";
+            PersonManager pm = new PersonManager();
+            var model = pm.GetAdminMember();
+            return View(model);
         }
 
         [AuthorizeUserAccessLevel(UserRole = "Superuser, Admin")]

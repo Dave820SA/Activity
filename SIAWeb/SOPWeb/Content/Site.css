@@ -1,29 +1,189 @@
-﻿body 
-{
-	padding-top:15px;
-	/*
-    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;*/
+﻿body {
+    padding-top: 15px;
+    height: 100%;
+    overflow: auto
 }
 
-.customDiv
-{
-    margin:10px;
-    min-height:50px;
-    background-color:silver;
-    text-align:center;
-    font-size:large;
-    padding:10px;
+.modal-backdrop {
+    z-index: -1;
 }
-.jumbotron
+
+.customDiv {
+    margin: 10px;
+    min-height: 50px;
+    background-color: silver;
+    text-align: center;
+    font-size: large;
+    padding: 10px;
+}
+/* Busy Spinner */
+#loading {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,.2);
+    z-index: 1000;
+}
+
+#loadingcontent {
+    display: table;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#loadingspinner {
+    display: table-cell;
+    vertical-align: middle;
+    width: 400px;
+    height: 400px;
+    text-align: center;
+    font-size: x-large;
+    padding-top: 80px;
+    color: #FF0000;
+}
+
+.jumbotron {
+    padding: 0.5em 0.6em;
+    h1
+
 {
-	margin-left: 15px;
+    font-size: 2em;
+}
+
+p {
+    font-size: 1.2em;
+    .btn
+
+{
+    padding: 0.5em;
+}
+
+}
 }
 
 .legend.scheduler-border {
-    width:inherit; /* Or auto */
-    padding:0 10px; /* To give a bit of padding on the left and right */
-    border-bottom:none;
+    width: inherit; /* Or auto */
+    padding: 0 10px; /* To give a bit of padding on the left and right */
+    border-bottom: none;
 }
+
 textarea {
     max-width: 600px;
+}
+
+.image_background {
+    text-align: center;
+    width: 25px;
+    height: 25px;
+    margin-left: 20px;
+    background-attachment: inherit;
+}
+
+input[type='checkbox'] {
+    /*-webkit-appearance: none;*/
+    -webkit-appearance: checkbox;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid #555;
+}
+
+    input[type='checkbox']:checked {
+        background: #abd;
+    }
+
+/*input[type=checkbox] {
+    -webkit-appearance: checkbox;
+}*/
+
+.scrollClass {
+    height: 260px;
+    overflow-y: scroll;
+}
+
+.scrollClassSm {
+    height: 155px;
+    overflow-y: scroll;
+}
+
+/*____________________________*/
+
+.well_card_c {
+    min-height: 20px;
+    padding: 0px;
+    margin-bottom: 20px;
+    background-color: #D9D9D9;
+    border: 1px solid #D9D9D9;
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+    padding-left: 15px;
+    border: 0px;
+}
+
+.thumbnail_c .caption {
+    padding: 9px;
+    color: silver;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.icon-style {
+    margin-right: 15px;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+p {
+    margin: 3px;
+}
+
+.well-add-card_c {
+    margin-bottom: 10px;
+}
+
+.btn-add-card_c {
+    margin-top: 20px;
+}
+
+.thumbnail_c {
+    display: block;
+    padding: 4px;
+    margin-bottom: 20px;
+    line-height: 1.42857143;
+    background-color: #363a3f;
+    border: 4px solid #000000;
+    border-radius: 15px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.btn {
+    border-radius: 0px;
+}
+
+.btn-update {
+    margin-left: 15px;
+}
+
+.badge {
+    padding: 4px 11px 2px;
+    font-size: 16.025px;
+    font-weight: bold;
+    white-space: nowrap;
+    color: #ffffff;
+    background-color: #999999;
+    -webkit-border-radius: 11px;
+    -moz-border-radius: 11px;
+    border-radius: 11px;
 }

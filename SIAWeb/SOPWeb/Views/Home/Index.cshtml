@@ -1,4 +1,5 @@
-﻿@model IEnumerable<SOPBusinessLayer.SOP_vCurrentDoc>
+﻿
+@model IEnumerable<SOPWeb.Models.SOPCurrent>
 @{
     ViewBag.Title = "SOP Web";
 }
@@ -16,7 +17,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <i class="fa fa-angle-double-down"></i><a href="#panelBodyOne" data-toggle="collapse"
-                                data-parent="#accordion">Chief Of Police </a>
+                                data-parent="#accordion"> Chief Of Police </a>
                         </h4>
                     </div>
                     <div id="panelBodyOne" class="panel-collapse collapse">
@@ -25,12 +26,13 @@
                                 @foreach (var item in Model)
                                 {
 
-                                    if (item.BureauID == 1)
+                                    if (item.BureauId == 1)
                                     {
-                                    <li><a href=" @item.DocPath " target="_blank" >@item.SOP </a></li>
-                                    
+                                        @*<li><a href=" @item.DocPath " target="_blank" >@item.SOP </a></li>*@
+                                    <li><a href="@Url.Action("Details","Home", new { id = item.ID })">@item.SOP </a></li>
+
                                     }
-                                }
+                                    }
                             </ul>
                         </div>
                     </div>
@@ -39,42 +41,26 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <i class="fa fa-angle-double-down"></i><a href="#panelBodyTwo" data-toggle="collapse"
-                                data-parent="#accordion">Operations </a>
+                                data-parent="#accordion"> Operations </a>
                         </h4>
                     </div>
                     <div id="panelBodyTwo" class="panel-collapse collapse">
                         <div class="panel-body">
                             <ul>
-                            @foreach (var item in Model)
-                            {
-
-                                if (item.BureauID == 2)
+                                @foreach (var item in Model)
                                 {
-                                <li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>
+
+                                    if (item.BureauId == 2)
+                                    {
+                                        @*<li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>*@
+                                        <li><a href="@Url.Action("Details","Home", new { id = item.ID })">@item.SOP </a></li>
                                     }
                                 }
-                        </ul>
-                        </div>
-                    </div>
-                </div>
-                @*<div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                        <span class="glyphicon glyphicon-menu-down"></span>
-                            <a href="#panelBodyThree" data-toggle="collapse" data-parent="#accordion">North America
-                            </a>
-                        </h4>
-                    </div>
-                    <div id="panelBodyThree" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul>
-                                <li>USA</li>
-                                <li>Canada</li>
-                                <li>Mexico</li>
                             </ul>
                         </div>
                     </div>
-                </div>*@
+                </div>
+               
             </div>
         </div>
         <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12">
@@ -83,7 +69,7 @@
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <i class="fa fa-angle-double-down"></i><a href="#panelBodyFour" data-toggle="collapse"
-                                data-parent="#accordion">Operations Support </a>
+                                data-parent="#accordion"> Operations Support </a>
                         </h4>
                     </div>
                     <div id="panelBodyFour" class="panel-collapse collapse">
@@ -92,52 +78,38 @@
                                 @foreach (var item in Model)
                                 {
 
-                                    if (item.BureauID == 3)
+                                    if (item.BureauId == 3)
                                     {
-                                    <li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>
-                                    
+                                        @*<li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>*@
+                                        <li><a href="@Url.Action("Details","Home", new { id = item.ID })">@item.SOP </a></li>
+
                                     }
                                 }
                             </ul>
                         </div>
                     </div>
                 </div>
-                @*<div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4 class="panel-title">
-                            <span class="glyphicon glyphicon-menu-down"></span>
-                            <a href="#panelBodyFive" data-toggle="collapse" data-parent="#accordion">Europe </a>
-                        </h4>
-                    </div>
-                    <div id="panelBodyFive" class="panel-collapse collapse">
-                        <div class="panel-body">
-                            <ul>
-                                <li>United Kingdom</li>
-                                <li>France</li>
-                                <li>Germany</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>*@
+              
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4 class="panel-title">
                             <i class="fa fa-angle-double-down"></i><a href="#panelBodySix" data-toggle="collapse"
-                                data-parent="#accordion">Administrative Services</a>
+                                data-parent="#accordion"> Administrative Services</a>
                         </h4>
                     </div>
                     <div id="panelBodySix" class="panel-collapse collapse">
                         <div class="panel-body">
-                           <ul>
-                            @foreach (var item in Model)
-                            {
-
-                                if (item.BureauID == 4)
+                            <ul>
+                                @foreach (var item in Model)
                                 {
-                                <li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>
+
+                                    if (item.BureauId == 4)
+                                    {
+                                        @*<li><a href=" @item.DocPath " target="_blank">@item.SOP </a></li>*@
+                                        <li><a href="@Url.Action("Details","Home", new { id = item.ID })">@item.SOP </a></li>
                                     }
                                 }
-                        </ul>
+                            </ul>
                         </div>
                     </div>
                 </div>
