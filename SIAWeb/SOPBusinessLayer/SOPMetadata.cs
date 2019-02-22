@@ -40,6 +40,8 @@ namespace SOPBusinessLayer
             [Required]
             [Display(Name = "Bureau")]
             public String Name { get; set; }
+            public string NameCode { get; set; }
+            public DateTime ModifiedDate { get; set; }
 
         }
     }

@@ -4,30 +4,13 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Search";
+    ViewBag.Title = "Search SOP";
 }
 
-@*<div class="row">
-        <div class="col-md-2">
-            <strong style="font-size:1.7em; padding-left:2px">Current SOP's</strong>
-        </div>
-        <div class="col-md-10">
-            <div style="float: right">
-                @using (Html.BeginForm("Search", "Home", FormMethod.Get))
-                {
-                    <strong style="font-size: 1.2em;">Find by Office or SOP Info:&nbsp; &nbsp;</strong>
-                    @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
-                    <input type="submit" class="btn btn-primary" value="Search" />
 
-            }
-            </div>
-
-        </div>
-
-    </div>*@
 <div class="col-md-4">
     <strong style="font-size: 2.1em; padding-left: 2px">
-        <span class="text-info">Serach </span><span style="font-size:.6em"> Current SOP's</span>
+        <span class="text-warning">Serach </span><span style="font-size:.6em"> Current SOP's</span>
     </strong>
 </div>
 
@@ -54,10 +37,11 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">           
-            <table class="table table-condensed table-hover">
+            <table class="table table-condensed table-hover" >
                 <tr class="text-warning">
-                    <th>
+                    <th >
                         @Html.ActionLink("Office", "Search", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+
                     </th>
                     <th>
                         SOP Info
@@ -97,6 +81,7 @@
                     </tr>
                 }
             </table>
+            <p><span style="font:100; color:goldenrod">** Click Office or Effective On to sort **</span></p>
             <br />
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
             of @Model.PageCount
@@ -105,20 +90,5 @@
         </div>
     </div>
 </div>
-
-@section scripts
-{
-    <script type="text/javascript">
-//        $(document).ready(function () {
-
-//
-
-//    });
-
-
-
-
-    </script>
-}
 
 

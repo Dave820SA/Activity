@@ -19,8 +19,8 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("SOPDocModel", "FK_SOP_SOP_Office_Bureau", "Office_Bureau", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SOPBusinessLayer.Bureau), "SOP_SOP", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SOPBusinessLayer.SOP), true)]
 [assembly: EdmRelationshipAttribute("SOPDocModel", "FK_SOP_DocHistory_SOP_SOP", "SOP_SOP", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SOPBusinessLayer.SOP), "SOP_DocHistory", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SOPBusinessLayer.DocHistory), true)]
+[assembly: EdmRelationshipAttribute("SOPDocModel", "FK_SOP_Office_Bureau", "Office_Bureau", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SOPBusinessLayer.Office_Bureau), "SOP", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SOPBusinessLayer.SOP), true)]
 
 #endregion
 
@@ -71,22 +71,6 @@ namespace SOPBusinessLayer
         #endregion
     
         #region ObjectSet Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        public ObjectSet<Bureau> Bureaux
-        {
-            get
-            {
-                if ((_Bureaux == null))
-                {
-                    _Bureaux = base.CreateObjectSet<Bureau>("Bureaux");
-                }
-                return _Bureaux;
-            }
-        }
-        private ObjectSet<Bureau> _Bureaux;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -151,18 +135,26 @@ namespace SOPBusinessLayer
             }
         }
         private ObjectSet<ActivityLog> _ActivityLogs;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Office_Bureau> Office_Bureau
+        {
+            get
+            {
+                if ((_Office_Bureau == null))
+                {
+                    _Office_Bureau = base.CreateObjectSet<Office_Bureau>("Office_Bureau");
+                }
+                return _Office_Bureau;
+            }
+        }
+        private ObjectSet<Office_Bureau> _Office_Bureau;
 
         #endregion
 
         #region AddTo Methods
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Bureaux EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToBureaux(Bureau bureau)
-        {
-            base.AddObject("Bureaux", bureau);
-        }
     
         /// <summary>
         /// Deprecated Method for adding a new object to the DocHistories EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
@@ -194,6 +186,14 @@ namespace SOPBusinessLayer
         public void AddToActivityLogs(ActivityLog activityLog)
         {
             base.AddObject("ActivityLogs", activityLog);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Office_Bureau EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToOffice_Bureau(Office_Bureau office_Bureau)
+        {
+            base.AddObject("Office_Bureau", office_Bureau);
         }
 
         #endregion
@@ -490,163 +490,6 @@ namespace SOPBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="SOPDocModel", Name="Bureau")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Bureau : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Bureau object.
-        /// </summary>
-        /// <param name="bureauID">Initial value of the BureauID property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        public static Bureau CreateBureau(global::System.Int32 bureauID, global::System.String name)
-        {
-            Bureau bureau = new Bureau();
-            bureau.BureauID = bureauID;
-            bureau.Name = name;
-            return bureau;
-        }
-
-        #endregion
-
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 BureauID
-        {
-            get
-            {
-                return _BureauID;
-            }
-            set
-            {
-                if (_BureauID != value)
-                {
-                    OnBureauIDChanging(value);
-                    ReportPropertyChanging("BureauID");
-                    _BureauID = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("BureauID");
-                    OnBureauIDChanged();
-                }
-            }
-        }
-        private global::System.Int32 _BureauID;
-        partial void OnBureauIDChanging(global::System.Int32 value);
-        partial void OnBureauIDChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String NameCode
-        {
-            get
-            {
-                return _NameCode;
-            }
-            set
-            {
-                OnNameCodeChanging(value);
-                ReportPropertyChanging("NameCode");
-                _NameCode = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("NameCode");
-                OnNameCodeChanged();
-            }
-        }
-        private global::System.String _NameCode;
-        partial void OnNameCodeChanging(global::System.String value);
-        partial void OnNameCodeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> ModifiedDate
-        {
-            get
-            {
-                return _ModifiedDate;
-            }
-            set
-            {
-                OnModifiedDateChanging(value);
-                ReportPropertyChanging("ModifiedDate");
-                _ModifiedDate = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("ModifiedDate");
-                OnModifiedDateChanged();
-            }
-        }
-        private Nullable<global::System.DateTime> _ModifiedDate;
-        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
-        partial void OnModifiedDateChanged();
-
-        #endregion
-
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SOPDocModel", "FK_SOP_SOP_Office_Bureau", "SOP_SOP")]
-        public EntityCollection<SOP> SOP_SOP
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SOP>("SOPDocModel.FK_SOP_SOP_Office_Bureau", "SOP_SOP");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SOP>("SOPDocModel.FK_SOP_SOP_Office_Bureau", "SOP_SOP", value);
-                }
-            }
-        }
-
-        #endregion
-
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="SOPDocModel", Name="DocHistory")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -896,6 +739,219 @@ namespace SOPBusinessLayer
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="SOPDocModel", Name="Office_Bureau")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Office_Bureau : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Office_Bureau object.
+        /// </summary>
+        /// <param name="bureauID">Initial value of the BureauID property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="officeID">Initial value of the OfficeID property.</param>
+        /// <param name="officeCode">Initial value of the OfficeCode property.</param>
+        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
+        /// <param name="visibleFlag">Initial value of the VisibleFlag property.</param>
+        public static Office_Bureau CreateOffice_Bureau(global::System.Int32 bureauID, global::System.String name, global::System.Int32 officeID, global::System.String officeCode, global::System.DateTime modifiedDate, global::System.Boolean visibleFlag)
+        {
+            Office_Bureau office_Bureau = new Office_Bureau();
+            office_Bureau.BureauID = bureauID;
+            office_Bureau.Name = name;
+            office_Bureau.OfficeID = officeID;
+            office_Bureau.OfficeCode = officeCode;
+            office_Bureau.ModifiedDate = modifiedDate;
+            office_Bureau.VisibleFlag = visibleFlag;
+            return office_Bureau;
+        }
+
+        #endregion
+
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 BureauID
+        {
+            get
+            {
+                return _BureauID;
+            }
+            set
+            {
+                if (_BureauID != value)
+                {
+                    OnBureauIDChanging(value);
+                    ReportPropertyChanging("BureauID");
+                    _BureauID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("BureauID");
+                    OnBureauIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _BureauID;
+        partial void OnBureauIDChanging(global::System.Int32 value);
+        partial void OnBureauIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 OfficeID
+        {
+            get
+            {
+                return _OfficeID;
+            }
+            set
+            {
+                OnOfficeIDChanging(value);
+                ReportPropertyChanging("OfficeID");
+                _OfficeID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("OfficeID");
+                OnOfficeIDChanged();
+            }
+        }
+        private global::System.Int32 _OfficeID;
+        partial void OnOfficeIDChanging(global::System.Int32 value);
+        partial void OnOfficeIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String OfficeCode
+        {
+            get
+            {
+                return _OfficeCode;
+            }
+            set
+            {
+                OnOfficeCodeChanging(value);
+                ReportPropertyChanging("OfficeCode");
+                _OfficeCode = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("OfficeCode");
+                OnOfficeCodeChanged();
+            }
+        }
+        private global::System.String _OfficeCode;
+        partial void OnOfficeCodeChanging(global::System.String value);
+        partial void OnOfficeCodeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime ModifiedDate
+        {
+            get
+            {
+                return _ModifiedDate;
+            }
+            set
+            {
+                OnModifiedDateChanging(value);
+                ReportPropertyChanging("ModifiedDate");
+                _ModifiedDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedDate");
+                OnModifiedDateChanged();
+            }
+        }
+        private global::System.DateTime _ModifiedDate;
+        partial void OnModifiedDateChanging(global::System.DateTime value);
+        partial void OnModifiedDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean VisibleFlag
+        {
+            get
+            {
+                return _VisibleFlag;
+            }
+            set
+            {
+                OnVisibleFlagChanging(value);
+                ReportPropertyChanging("VisibleFlag");
+                _VisibleFlag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("VisibleFlag");
+                OnVisibleFlagChanged();
+            }
+        }
+        private global::System.Boolean _VisibleFlag;
+        partial void OnVisibleFlagChanging(global::System.Boolean value);
+        partial void OnVisibleFlagChanged();
+
+        #endregion
+
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SOPDocModel", "FK_SOP_Office_Bureau", "SOP")]
+        public EntityCollection<SOP> SOP_SOP
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SOP>("SOPDocModel.FK_SOP_Office_Bureau", "SOP");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SOP>("SOPDocModel.FK_SOP_Office_Bureau", "SOP", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="SOPDocModel", Name="SOP")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -909,14 +965,12 @@ namespace SOPBusinessLayer
         /// <param name="sOPID">Initial value of the SOPID property.</param>
         /// <param name="name">Initial value of the Name property.</param>
         /// <param name="bureauID">Initial value of the BureauID property.</param>
-        /// <param name="modifiedDate">Initial value of the ModifiedDate property.</param>
-        public static SOP CreateSOP(global::System.Int32 sOPID, global::System.String name, global::System.Int32 bureauID, global::System.DateTime modifiedDate)
+        public static SOP CreateSOP(global::System.Int32 sOPID, global::System.String name, global::System.Int32 bureauID)
         {
             SOP sOP = new SOP();
             sOP.SOPID = sOPID;
             sOP.Name = name;
             sOP.BureauID = bureauID;
-            sOP.ModifiedDate = modifiedDate;
             return sOP;
         }
 
@@ -1002,9 +1056,9 @@ namespace SOPBusinessLayer
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime ModifiedDate
+        public Nullable<global::System.DateTime> ModifiedDate
         {
             get
             {
@@ -1019,52 +1073,14 @@ namespace SOPBusinessLayer
                 OnModifiedDateChanged();
             }
         }
-        private global::System.DateTime _ModifiedDate;
-        partial void OnModifiedDateChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _ModifiedDate;
+        partial void OnModifiedDateChanging(Nullable<global::System.DateTime> value);
         partial void OnModifiedDateChanged();
 
         #endregion
 
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("SOPDocModel", "FK_SOP_SOP_Office_Bureau", "Office_Bureau")]
-        public Bureau Office_Bureau
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Bureau>("SOPDocModel.FK_SOP_SOP_Office_Bureau", "Office_Bureau").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Bureau>("SOPDocModel.FK_SOP_SOP_Office_Bureau", "Office_Bureau").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Bureau> Office_BureauReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Bureau>("SOPDocModel.FK_SOP_SOP_Office_Bureau", "Office_Bureau");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Bureau>("SOPDocModel.FK_SOP_SOP_Office_Bureau", "Office_Bureau", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1084,6 +1100,44 @@ namespace SOPBusinessLayer
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<DocHistory>("SOPDocModel.FK_SOP_DocHistory_SOP_SOP", "SOP_DocHistory", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("SOPDocModel", "FK_SOP_Office_Bureau", "Office_Bureau")]
+        public Office_Bureau Office_Bureau
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Bureau>("SOPDocModel.FK_SOP_Office_Bureau", "Office_Bureau").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Bureau>("SOPDocModel.FK_SOP_Office_Bureau", "Office_Bureau").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Office_Bureau> Office_BureauReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Office_Bureau>("SOPDocModel.FK_SOP_Office_Bureau", "Office_Bureau");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Office_Bureau>("SOPDocModel.FK_SOP_Office_Bureau", "Office_Bureau", value);
                 }
             }
         }

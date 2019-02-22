@@ -74,11 +74,13 @@ namespace SOPWeb.Controllers
             ViewBag.CurrentSort = sortOrder;
             if (sortOrder == "sop_aesc" || sortOrder == "")
             {
-                ViewBag.NameSortParm = "sop_desc";
+                //ViewBag.NameSortParm = "sop_desc";
+                ViewBag.NameSortParm = "sop_aesc";
             }
             else
             {
-                ViewBag.NameSortParm = "sop_aesc";
+                //ViewBag.NameSortParm = "sop_aesc";
+                ViewBag.NameSortParm = "sop_desc";
             }
             //ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "sop_desc" : "";
             ViewBag.StartDateSortParm = sortOrder == "StartDate" ? "date_desc" : "StartDate";

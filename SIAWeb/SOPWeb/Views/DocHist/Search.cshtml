@@ -4,29 +4,41 @@
 
 
 @{
-    ViewBag.Title = "Search";
-    Layout = "~/Views/Shared/_Alternate.cshtml";
+    ViewBag.Title = "Search All Documents";
+
 }
-<div class="row">
-    <div class="col-md-2">
-        <strong style="font-size: 1.7em; padding-left: 2px">All Documents</strong>
-    </div>
-    <div class="col-md-10">
-        <div style="float: right">
-            @using (Html.BeginForm("Search", "DocHist", FormMethod.Get))
-            {
-                <strong style="font-size: 1.2em;">Find by Office or SOP Info:&nbsp; &nbsp;</strong>
-                @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
-                <input type="submit" class="btn btn-primary" value="Search" />
-        }
+<div class="col-md-4">
+    <strong style="font-size: 2.1em; padding-left: 2px">
+        <span class="text-warning">Serach </span><span style="font-size:.6em">All SOP's</span>
+    </strong>
+</div>
+
+
+@using (Html.BeginForm("Search", "DocHist", FormMethod.Get))
+{
+    <div class="col-xs-4" style="padding-top: 20px"></div>
+    <div class="col-md-4" style="padding-top: 5px">
+        <div class="input-group">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Search For..." })
+            <div class="input-group-btn">
+                <button class="btn btn-default" title="processing" type="submit" id="process" value="process">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
     </div>
-</div>
+    <div class="col-xs-12" style="padding-top: 5px">
+        <br />
+
+    </div>
+}
 
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            &nbsp;&nbsp;<span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
+            &nbsp;<a href="javascript:history.back()" class="btn btn-sm btn-primary">
+                <span style="color:white">Back  <i class="fa fa-reply" aria-hidden="true"></i></span>
+            </a>
             <table class="table table-condensed table-hover">
                 <tr>
                     <th>
@@ -44,7 +56,7 @@
                     <th>
                         Modified Date
                     </th>
-                    <th>
+                    <th >
                     </th>
                 </tr>
                 @foreach (var item in Model)
@@ -55,31 +67,44 @@
                         </td>
                         <td style="max-width:400px; min-width:400px; max-height:50px; min-height:50px; width:400px; height:50px;">
                             @Html.DisplayFor(modelItem => item.DocInfo)
-                        </td>
-                        @*<td>
-                            @Html.DisplayFor(modelItem => item.DocPath)
-                        </td>*@
+                        </td>                     
                         <td>
                             @Html.DisplayFor(modelItem => item.StartDate)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.EndDate)
+                            @{
+                                System.Text.StringBuilder eSb = new System.Text.StringBuilder();
+                                string enddate = "";
+                                enddate = item.EndDate.ToString();
+                                if (String.IsNullOrEmpty(enddate))
+                                {
+                                    eSb.Append("<span style=\"color:lawngreen\">Current Doc</span>");
+
+                                }
+                                else
+                                {
+                                    eSb.Append(@Html.DisplayFor(modelItem => item.EndDate));
+                                }
+                            }
+
+                                @Html.Raw(eSb)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ModifiedDate)
                         </td>
                         <td>
-                             @*@Html.ActionLink("Edit", "Edit", new { id = item.DocHistoryID }) |*@
-                            @Html.ActionLink("Details", "DetailsAll", new { id = item.DocHistoryID }) 
-                           @* @Html.ActionLink("Delete", "Delete", new { id = item.DocHistoryID })*@
+                            @*@Html.ActionLink("Edit", "Edit", new { id = item.DocHistoryID }) |*@
+                            @Html.ActionLink("Details", "DetailsAll", new { id = item.DocHistoryID })
+                            @* @Html.ActionLink("Delete", "Delete", new { id = item.DocHistoryID })*@
                         </td>
                     </tr>
                 }
             </table>
+            <p><span style="font:100; color:goldenrod">** Click Office,Effective On or End Date to sort **</span></p>
             <br />
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
             of @Model.PageCount
-            @Html.PagedListPager(Model, page => Url.Action("Index",
+            @Html.PagedListPager(Model, page => Url.Action("Search", "DocHist",
                     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>

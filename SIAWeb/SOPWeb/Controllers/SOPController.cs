@@ -86,7 +86,7 @@ namespace SOPWeb.Controllers
 
         public ActionResult Create()
         {
-            ViewBag.BureauID = new SelectList(db.Bureaux, "BureauID", "Name");
+            ViewBag.BureauID = new SelectList(db.Office_Bureau, "BureauID", "Name");
             return View();
         }
 
@@ -103,7 +103,7 @@ namespace SOPWeb.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BureauID = new SelectList(db.Bureaux, "BureauID", "Name", sop.BureauID);
+            ViewBag.BureauID = new SelectList(db.Office_Bureau, "BureauID", "Name", sop.BureauID);
             return View(sop);
         }
 
@@ -117,7 +117,7 @@ namespace SOPWeb.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BureauID = new SelectList(db.Bureaux, "BureauID", "Name", sop.BureauID);
+            ViewBag.BureauID = new SelectList(db.Office_Bureau, "BureauID", "Name", sop.BureauID);
             return View(sop);
         }
 
@@ -134,7 +134,7 @@ namespace SOPWeb.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.BureauID = new SelectList(db.Bureaux, "BureauID", "Name", sop.BureauID);
+            ViewBag.BureauID = new SelectList(db.Office_Bureau, "BureauID", "Name", sop.BureauID);
             return View(sop);
         }
 

@@ -3,31 +3,46 @@
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Admin Search SOP";
 }
 
-<div class="row">
-    <div class="col-md-6">
-        <strong style="font-size:1.8em; padding-left:10px">Current Documents</strong>
-    </div>
-    <div class="col-md-6">
-        
-        @using (Html.BeginForm("Index", "DocHist", FormMethod.Get))
-        {
-            <strong style="font-size:1.2em;">Find by SOP or SOP Info:&nbsp; &nbsp;</strong>
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
-            <input type="submit" class="btn btn-primary" value="Search" />
-        }
-    </div>
+<div class="col-md-4">
+    <strong style="font-size: 2.1em; padding-left: 2px">
+        <span class="text-warning">Current  </span><span style="font-size:.6em">Documents</span>
+    </strong>
 </div>
+
+
+@using (Html.BeginForm("Index", "DocHist", FormMethod.Get))
+{
+    <div class="col-xs-4" style="padding-top: 20px"></div>
+    <div class="col-md-4" style="padding-top: 5px">
+        <div class="input-group">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Search For..." })
+            <div class="input-group-btn">
+                <button class="btn btn-default" title="processing" type="submit" id="process" value="process">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12" style="padding-top: 5px">
+        <br />
+
+    </div>
+}
 
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            <span class="h6">@Html.ActionLink("Upload New", "FileUpload")&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-            @*<a href="@Url.Action("FileUpload", "DocHist")" class="btn btn-warning btn-xs"> Upload New <span class="glyphicon glyphicon-plus-sign"></span></a>*@
-                <span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
-            <table class="table table-condensed table-hover" >
+            <span class="h6">
+                @Html.ActionLink("Upload New", "FileUpload", null, new { @class = "btn btn-sm btn-success" })&nbsp;&nbsp;|&nbsp;&nbsp;
+            </span><a href="javascript:history.back()" class="btn btn-sm btn-primary">
+                <span style="color:white">Back  <i class="fa fa-reply" aria-hidden="true"></i></span>
+            </a>
+            @*<span class="h6">@Html.ActionLink("Upload New", "FileUpload")&nbsp;&nbsp;|&nbsp;&nbsp;</span>
+        <span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>*@
+            <table class="table table-condensed table-hover">
                 <tr>
                     <th>
                         @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
@@ -60,11 +75,11 @@
                             @Html.DisplayFor(modelItem => item.StartDate)
                         </td>
                         @*<td>
-                            @Html.DisplayFor(modelItem => item.EndDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </td>*@
+                        @Html.DisplayFor(modelItem => item.EndDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedDate)
+                    </td>*@
                         <td>
                             @Html.ActionLink("Edit", "Edit", new { id = item.DocHistoryID }) | <strong>@Html.ActionLink("Details", "Details", new { id = item.DocHistoryID })</strong>
                             |
@@ -73,10 +88,11 @@
                     </tr>
                 }
             </table>
+            <p><span style="font:100; color:goldenrod">** Click SOP or Effective On to sort **</span></p>
             <br />
             Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
             of @Model.PageCount
-            @Html.PagedListPager(Model, page => Url.Action("Index",
+            @Html.PagedListPager(Model, page => Url.Action("Index", "DocHist",
                     new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>

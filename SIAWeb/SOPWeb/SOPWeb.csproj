@@ -233,6 +233,7 @@
     <Content Include="font-awesome-4.7.0\HELP-US-OUT.txt" />
     <Content Include="Global.asax" />
     <Content Include="Images\Male.png" />
+    <None Include="Properties\PublishProfiles\SOPPublish.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Images\SAPD-Patch-web-S4.png" />
     <Content Include="Scripts\jquery-3.3.1.js" />

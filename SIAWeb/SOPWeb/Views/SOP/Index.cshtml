@@ -1,7 +1,4 @@
-﻿@*@model PagedList.IPagedList<SOPBusinessLayer.SOP>
-    @using PagedList.Mvc;*@
-
-@model PagedList.IPagedList<SOPWeb.Models.SOPCurrent>
+﻿@model PagedList.IPagedList<SOPBusinessLayer.SOP>
 @using PagedList.Mvc;
 
 <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
@@ -10,68 +7,83 @@
     ViewBag.Title = "SOP";
 }
 
-<div class="row">
-    <div class="col-md-7">
-        <strong style="font-size:1.8em; padding-left:10px">SOP's</strong>
-    </div>
-    <div class="col-md-5">
-
-        @using (Html.BeginForm("Index", "SOP", FormMethod.Get))
-        {
-            <strong style="font-size:1.2em;">Find by SOP or Bureau:&nbsp; &nbsp;</strong>
-            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { style = " padding-bottom:8px; " })
-            <input type="submit" class="btn btn-primary" value="Search" />
-        }
-    </div>
+<div class="col-md-4">
+    <strong style="font-size: 2.1em; padding-left: 2px">
+        <span class="text-warning">Serach </span><span style="font-size:.6em"> SOP Shell</span>
+    </strong>
 </div>
 
+
+@using (Html.BeginForm("Index", "SOP", FormMethod.Get))
+{
+    <div class="col-xs-4" style="padding-top: 20px"></div>
+    <div class="col-md-4" style="padding-top: 5px">
+        <div class="input-group">
+            @Html.TextBox("SearchString", ViewBag.CurrentFilter as string, new { @class = "form-control", placeholder = "Search For..." })
+            <div class="input-group-btn">
+                <button class="btn btn-default" title="processing" type="submit" id="process" value="process">
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-12" style="padding-top: 5px">
+        <br />
+
+    </div>
+}
 
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-md-12 ">
-            <span class="h6">@Html.ActionLink("Create New", "Create")&nbsp;&nbsp;|&nbsp;&nbsp;</span><span class="h6">@Html.ActionLink("Admin", "Admin", "Home")</span>
-            <table class="table table-condensed table-hover">
+            <span class="h6">
+                @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-sm btn-success" })&nbsp;&nbsp;|&nbsp;&nbsp;
+        </span><a href="javascript:history.back()" class="btn btn-sm btn-primary">
+            <span style="color:white">Back  <i class="fa fa-reply" aria-hidden="true"></i></span>
+        </a>
+        <table class="table table-condensed table-hover">
+            <tr>
+                <th>
+                    @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+
+                </th>
+                <th>
+                    @Html.ActionLink("Bureau", "Index", new { sortOrder = ViewBag.BureauSortParm, currentFilter = ViewBag.CurrentFilter })
+
+                </th>
+                <th>
+                    @Html.ActionLink("Last Update", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+
+                </th>
+                <th>
+                </th>
+            </tr>
+            @foreach (var item in Model)
+            {
                 <tr>
-                    <th>
-                        @Html.ActionLink("SOP", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-
-                    </th>
-                    <th>
-                        @Html.ActionLink("Bureau", "Index", new { sortOrder = ViewBag.BureauSortParm, currentFilter = ViewBag.CurrentFilter })
-
-                    </th>
-                    <th>
-                        @Html.ActionLink("Last Update", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-
-                    </th>
-                    <th>
-                    </th>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Office_Bureau.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedDate)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.SOPID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.SOPID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.SOPID })
+                    </td>
                 </tr>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SOP_SOP.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.SOP_SOP.Office_Bureau.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ModifiedDate)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.SOPID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.SOPID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.SOPID })
-                        </td>
-                    </tr>
-                }
-            </table>
-            <br />
-            Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+            }
+        </table>
+        <p><span style="font:100; color:goldenrod">** Click SOP, Bureau or Last Update to sort **</span></p>
+        <br />
+        Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
 
-            @Html.PagedListPager(Model, page => Url.Action("Index",
-            new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+        @Html.PagedListPager(Model, page => Url.Action("Index", "SOP",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
         </div>
     </div>
 </div>

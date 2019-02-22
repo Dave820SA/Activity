@@ -4,73 +4,92 @@
     ViewBag.Title = "Details";
 }
 
-
 <form class="form-horizontal">
-<div class="Container">
-    <div class="row">
-        <div class="col-sm-6">
-            <fieldset class="scheduler-border">
-                <h5 class="text-warning">
-                    SOP Details</h5>
-                <br />
-                <div class="form-group col-xs-12">
-                    <div class="display-label">
-                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.SOP_SOP.Name)</strong>
+    <div class="Container">
+        <div class="row">
+            <div class="col-sm-6">
+                <fieldset class="scheduler-border">
+                    <h3 class="text-warning">
+                        SOP Details
+                    </h3>
+                    <br />
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong class="text-warning" style="font-size: 1.2em">@Html.DisplayNameFor(model => model.SOP_SOP.Name)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.SOP_SOP.Name)</strong>
+                        </div>
                     </div>
-                    <div class="display-field">
-                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.SOP_SOP.Name)</strong>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong class="text-warning" style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DocInfo)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DocInfo)</strong>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-xs-12">
-                    <div class="display-label">
-                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DocInfo)</strong>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong class="text-warning" style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DocPath)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DocPath)</strong>
+                        </div>
                     </div>
-                    <div class="display-field">
-                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DocInfo)</strong>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong class="text-warning" style="font-size: 1.2em">@Html.DisplayNameFor(model => model.StartDate)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.StartDate)</strong>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group col-xs-12">
-                    <div class="display-label">
-                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.DocPath)</strong>
-                    </div>
-                    <div class="display-field">
-                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.DocPath)</strong>
-                    </div>
-                </div>
-                <div class="form-group col-xs-12">
-                    <div class="display-label">
-                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.StartDate)</strong>
-                    </div>
-                    <div class="display-field">
-                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.StartDate)</strong>
-                    </div>
-                </div>
-                <div class="form-group col-xs-12">
-                    <div class="display-label">
-                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.EndDate)</strong>
-                    </div>
-                    <div class="display-field">
-                   
-                       <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.EndDate)</strong>
-                        
-                    </div>
-                </div>
-                <div class="form-group col-xs-12">
-                    <div class="display-label">
-                        <strong style="font-size: 1.2em">@Html.DisplayNameFor(model => model.ModifiedDate)</strong>
-                    </div>
-                    <div class="display-field">
-                        <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.ModifiedDate)</strong>
-                    </div>
-                </div>
-            </fieldset>
-            <strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Search")</strong>
-        </div>
-        <div class="col-sm-6">
-            <iframe src= @Html.DisplayFor(model => model.DocPath) width="500" height="625">
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong class="text-warning" style="font-size: 1.2em">@Html.DisplayNameFor(model => model.EndDate)</strong>
+                        </div>
+                        <div class="display-field">
 
-            </iframe>
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.EndDate)</strong>
+
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-12">
+                        <div class="display-label">
+                            <strong class="text-warning" style="font-size: 1.2em">@Html.DisplayNameFor(model => model.ModifiedDate)</strong>
+                        </div>
+                        <div class="display-field">
+                            <strong style="font-size: 1.5em; color: White">@Html.DisplayFor(model => model.ModifiedDate)</strong>
+                        </div>
+                    </div>
+                </fieldset>
+                @*<strong style="font-size: 1.5em">| @Html.ActionLink("Back to List", "Search")</strong>*@
+                <a href="javascript:history.back()" class="btn btn-md btn-primary"
+                   data-toggle="tooltip" data-placement="top" title="View employees issued equipment">
+                    <span style="color:goldenrod">Back to list <i class="fa fa-reply" aria-hidden="true"></i></span>
+                </a>
+            </div>
+            <div class="col-sm-6">
+                @{
+                    string path = Model.DocPath;
+
+                    string newPath = path.Substring(23, (path.Length - 23));
+
+                    var url = "http://wppswebprod/FileShare/Activity/SOP/" + @newPath;
+
+                    string info = "View Full Screen";
+                }
+
+                <iframe src=@url width="500" height="625"></iframe>
+                <div style="text-align: center">
+                    <br />
+                    <a href="@url" target="_blank" class="btn btn-success btn-sm">@info</a>
+
+
+                </div>
+
+            </div>
         </div>
     </div>
-</div>
 </form>

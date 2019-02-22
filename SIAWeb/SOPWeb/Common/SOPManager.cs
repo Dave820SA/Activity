@@ -15,7 +15,7 @@ namespace SOPWeb.Common
         {
             return (from dh in db.DocHistories
                     join s in db.SOPs on dh.SOPID equals s.SOPID
-                    join b in db.Bureaux on s.BureauID equals b.BureauID
+                    join b in db.Office_Bureau on s.BureauID equals b.BureauID
                     where dh.EndDate == null
                     select new SOPCurrent
                     {

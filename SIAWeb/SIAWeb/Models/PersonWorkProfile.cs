@@ -20,7 +20,7 @@ namespace SIAWeb.Models
         public string RD { get; set; }
         public string Shift { get; set; }
         [DisplayFormat(DataFormatString = "{0:d}")]
-        public DateTime Employeed { get; set; }
+        public DateTime? Employeed { get; set; }
 
         public IEnumerable<EmailAddress> Emails { get; set; }
         public IEnumerable<PhoneNumber> PhoneNumbers { get; set; }
