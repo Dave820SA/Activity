@@ -1,52 +1,47 @@
 ﻿
 @model RecognitionBusinessLayer.Recognize
 
-
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 <form class="form-horizontal">
 <div class="Container">
     <div class="row">
         <div class="col-sm-6">
             <fieldset class="scheduler-border">
-                <h3 >
-                    Recognition Details</h3>
+                <h2 style="color:goldenrod">
+                    Recognition Details
+                </h2>
                 <br />
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        @*<strong style="font-size: 1.2em; color: #FFCC00">@Html.DisplayNameFor(model => model.Person.FullName)</strong>*@
-                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.Person.FullName)</strong>
+                        <strong style="font-size: 1.2em; color:goldenrod">@Html.DisplayNameFor(model => model.Person.FullName)</strong>
                     </div>
                     <div class="display-field">
                         <strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.Person.FullName)</strong>
-                        	@*@Html.HiddenFor(model => model.Person.FirstName, new { id = "txtHidden" })*@
                     </div>
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.Award_RecognitionType.Name)</strong>
+                        <strong style="font-size: 1.2em; color:goldenrod">@Html.DisplayNameFor(model => model.Award_RecognitionType.Name)</strong>
                     </div>
                     <div class="display-field">
                         <strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.Award_RecognitionType.Name)</strong>
-                        	@*@Html.HiddenFor(model => model.Award_RecognitionType.Name, new { id = "txtHidden" })*@
                     </div>
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.Award_AwardType.Name)</strong>
+                        <strong style="font-size: 1.2em; color:goldenrod">@Html.DisplayNameFor(model => model.Award_AwardType.Name)</strong>
                     </div>
                     <div class="display-field">
                         <strong class="sop" style="font-size: 1.5em">@Html.DisplayFor(model => model.Award_AwardType.Name)</strong>
-                        	@*@Html.HiddenFor(model => model.Award_RecognitionType.Name, new { id = "txtHidden" })*@
                     </div>
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.Notes)</strong>
+                        <strong style="font-size: 1.2em; color:goldenrod">@Html.DisplayNameFor(model => model.Notes)</strong>
                     </div>
                     <div class="display-field">
                         <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.Notes)</strong>
@@ -54,7 +49,7 @@
                 </div>
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.IssuedDate)</strong>
+                        <strong style="font-size: 1.2em; color:goldenrod">@Html.DisplayNameFor(model => model.IssuedDate)</strong>
                     </div>
                     <div class="display-field">
                         <strong style="font-size: 1.5em">@Html.DisplayFor(model => model.IssuedDate)</strong>
@@ -63,32 +58,29 @@
 
                 <div class="form-group col-xs-12">
                     <div class="display-label">
-                        <strong class="lable_gold">@Html.DisplayNameFor(model => model.DocPath)</strong>
+                        <strong style="font-size: 1.2em; color:goldenrod">@Html.DisplayNameFor(model => model.DocPath)</strong>
                     </div>
                     <div class="display-field">
-                        @*<strong style="font-size: 1.5em; color: Orange">@Html.DisplayFor(model => model.DocPath)</strong>*@
                         <strong style="font-size: 1.2em">@Html.Raw(ViewBag.DocPaths)</strong>
                     </div>
-                </div>
-               
-               
-            </fieldset>
-            	@*<a href="@Url.Action("Search", "Home")" class="btn btn-warning btn-sm"> Back To List <i class="fa fa-share" aria-hidden="true"></i></a>*@
-                
+                </div>             
+            </fieldset>               
                 @Html.ActionLink("Back to previous page", null, null, null, new { href = Request.UrlReferrer})
         </div>
         <div class="col-sm-6">
-            @*<iframe src=@Html.DisplayFor(model => model.DocPath,new { htmlAttributes = new { @class = "form-control", @Value = ViewBag.DocPaths } }) width="500" height="625" ></iframe>*@
-            <iframe src=@Html.Raw(ViewBag.DocPaths) width="500" height="625" ></iframe>
-            <div style="text-align: center">
-                <br />
-                @*<a href=@Html.DisplayFor(model => model.DocPaths) target="_blank" class="btn btn-success btn-sm"> View Full Screen <i class="fa fa-list" aria-hidden="true"></i></a>*@
-                <a href=@Html.Raw(ViewBag.DocPaths) target="_blank" class="btn btn-success btn-sm"> View Full Screen <i class="fa fa-list" aria-hidden="true"></i></a>
-                
-            </div>
+            @{
+                if (!String.IsNullOrEmpty(ViewBag.DocPaths))
+                {
+                    string award = ViewBag.DocPaths.Substring(31);
+                    var url = "http://wppswebprod/FileShare/Activity/Recognition/" + @award;
+                    <iframe src=@url width="500" height="625"></iframe>
+                    <div style="text-align: center">
+                        <br />
+                        <a href=@url target="_blank" class="btn btn-success btn-sm"> View Full Screen <i class="fa fa-list" aria-hidden="true"></i></a>
+                    </div>
+                }           
+            }         
         </div>
-
-
     </div>
 </div>
 </form>

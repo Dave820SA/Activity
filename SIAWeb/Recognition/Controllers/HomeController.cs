@@ -15,7 +15,12 @@ namespace Recognition.Controllers
     public class HomeController : Controller
     {
         private SAPDActivityEntities db = new SAPDActivityEntities();
+        private MonthYearManager mm;
         
+        public HomeController()
+        {
+            mm = new MonthYearManager();
+        }
 
         public ActionResult Index()
         {
@@ -33,9 +38,10 @@ namespace Recognition.Controllers
         public ActionResult AwardView(int recType, int? MonthNbr, int? YearNbr)
         { 
             ViewBag.Message = recogType(recType);
-
-            var months = MonthYearManager.GetMonthNames();
-            var myYears = MonthYearManager.GetYearNames();
+            
+            var months = mm.GetMonthNames();
+            //var myYears = MonthYearManager.GetYearNames();
+            var myYears = mm.GetYearsByRecType(recType);
 
           ViewBag.MonthList = new SelectList(months.ToList(), "MonthNbr", "MoName");
           ViewBag.YearList = new SelectList(myYears.ToList(),"YearNbr","YearName");
