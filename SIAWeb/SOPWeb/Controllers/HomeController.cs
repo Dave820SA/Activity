@@ -33,7 +33,7 @@ namespace SOPWeb.Controllers
             }
 
             SOPManager sm = new SOPManager();
-            var model = sm.GetCurrentSOP().ToList();
+            var model = sm.GetCurrentSOP().OrderBy(x => x.SOP).ToList();
             return View(model);
         }
 
