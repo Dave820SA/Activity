@@ -56,8 +56,8 @@
         <div class="col-sm-6">
             @{
                 string path = Model.DocPath;
-
-                string newPath = path.Substring(23, (path.Length - 23));
+          
+                string newPath = path.Substring(path.LastIndexOf("\\") + 1);    
 
                 var url = "http://wppswebprod/FileShare/Activity/SOP/" + @newPath;
 

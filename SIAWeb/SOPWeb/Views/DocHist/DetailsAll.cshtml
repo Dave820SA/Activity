@@ -72,13 +72,16 @@
             </div>
             <div class="col-sm-6">
                 @{
-                    string path = Model.DocPath;
 
-                    string newPath = path.Substring(23, (path.Length - 23));
+                    
+                        string path = Model.DocPath;
 
-                    var url = "http://wppswebprod/FileShare/Activity/SOP/" + @newPath;
+                        string newPath = path.Substring(path.LastIndexOf("\\") + 1);
 
-                    string info = "View Full Screen";
+                        var url = "http://wppswebprod/FileShare/Activity/SOP/" + @newPath;
+
+                        string info = "View Full Screen";
+                   
                 }
 
                 <iframe src=@url width="500" height="625"></iframe>
