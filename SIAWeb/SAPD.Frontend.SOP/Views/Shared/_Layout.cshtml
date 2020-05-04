@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/cyborg/css")*@
+    @*<link href="~/Content/bootstrap.cyborg.css" rel="stylesheet" />*@
+    <link href="~/Content/cyborg_v4.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/modernizr")
+    @*<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+    <link href="~/Content/jquery-ui.theme.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery-ui.min.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-ui.min.js"></script>*@
+
+    @*<link href="~/Content/DataTable/css/jquery.dataTables.css" rel="stylesheet" />
+    <script src="~/Scripts/DataTable/jquery.dataTables.js"></script>*@
+
+</head>
+<body>
+
+    @{Html.RenderPartial("_NavBar"); }
+
+
+
+    <div class="panel-body" style="min-height:450px">
+
+        @RenderBody()
+
+        <hr />
+        <footer>
+            <p class="text-center">&copy; @DateTime.Now.Year - Activity App - Created by: D.Davidson #2561</p>
+        </footer>
+    </div>
+
+
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    @*<script src="~/Scripts/jquery.validate.js"></script>
+        <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>*@
+
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>
+
+
+
+

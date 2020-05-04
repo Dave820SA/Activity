@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3" style="padding-bottom: 1px">
+
+            <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">Popular SOP's</div>
+                <div class="card-body">
+                    <h4 class="card-title">Dark card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+
+            <div class="card border-dark mb-3" style="max-width: 20rem;">
+                <div class="card-header">Last 10 Updated</div>
+                <div class="card-body">
+                    <h4 class="card-title">Dark card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9" style="padding-bottom: 1px">
+            <h2>@ViewBag.SOPName</h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Bur ID</th>
+                        <th>Modified Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewBag.SOPList != null)
+                    {
+                        foreach (var item in ViewBag.SOPList)
+                        {
+
+                            <tr>
+                                <td>
+                                    @item.SOPId
+                                </td>
+                                <td>
+                                    @item.Name
+                                </td>
+                                <td>
+                                    @item.BureauId
+                                </td>
+                                <td>
+                                    @item.ModifiedDate
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+
+               
+
+
+                @*<tr>
+                    <td></td>
+                </tr>*@
+            </table>
+
+
+           
+        </div>
+    </div>
+</div>
+
+           

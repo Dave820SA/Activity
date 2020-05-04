@@ -1,0 +1,38 @@
+﻿
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="@Url.Action("Index","Home")" data-toggle="tooltip" data-placement="left" title="" style="padding-top:9px"
+           data-original-title="This is an application for Grant Administrators to manage Grant Activity"><span style="color:goldenrod; font-size:large">SOP Web</span></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor03">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="@Url.Action("Index","Home")">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("About","Home")">About</a>
+                </li>
+                @*<li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Index","PIMS")">PEMS</a>
+                </li>*@
+                @*<li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Admin</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item navbar-light" href="@Url.Action("Index","MenuItem")">Menu Items</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="@Url.Action("Index","AdminDaily")">Admin Daily</a>
+                        <a class="dropdown-item" href="@Url.Action("Index","AdminApprove")">Admin Daily Approve</a>
+
+                    </div>
+                </li>*@
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Contact","Home")">Contact</a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</nav>
