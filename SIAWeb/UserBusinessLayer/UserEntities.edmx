@@ -4,53 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="UserModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
-        <EntityContainer Name="UserModelStoreContainer">
-          <EntitySet Name="SIA_AppFeature" EntityType="UserModel.Store.SIA_AppFeature" store:Type="Tables" Schema="dbo" Table="SIA.AppFeature" />
-          <EntitySet Name="SIA_AppFeatureAccess" EntityType="UserModel.Store.SIA_AppFeatureAccess" store:Type="Tables" Schema="dbo" Table="SIA.AppFeatureAccess" />
-          <EntitySet Name="SIA_AppFeatureCategoty" EntityType="UserModel.Store.SIA_AppFeatureCategoty" store:Type="Tables" Schema="dbo" Table="SIA.AppFeatureCategoty" />
-          <EntitySet Name="SIA_WebLinks" EntityType="UserModel.Store.SIA_WebLinks" store:Type="Tables" Schema="dbo" Table="SIA.WebLinks" />
-          <EntitySet Name="SIA_WebRole" EntityType="UserModel.Store.SIA_WebRole" store:Type="Tables" Schema="dbo" Table="SIA.WebRole" />
-          <EntitySet Name="SIA_WebSiteUser" EntityType="UserModel.Store.SIA_WebSiteUser" store:Type="Tables" Schema="dbo" Table="SIA.WebSiteUser" />
-          <EntitySet Name="vWebsiteUser" EntityType="UserModel.Store.vWebsiteUser" store:Type="Views" store:Schema="dbo" store:Name="vWebsiteUser">
-            <DefiningQuery>SELECT 
-      [vWebsiteUser].[AppEntityID] AS [AppEntityID], 
-      [vWebsiteUser].[PIN] AS [PIN], 
-      [vWebsiteUser].[SAP] AS [SAP], 
-      [vWebsiteUser].[Badge] AS [Badge], 
-      [vWebsiteUser].[UserName] AS [UserName], 
-      [vWebsiteUser].[DutyStatus] AS [DutyStatus], 
-      [vWebsiteUser].[OfficeCode] AS [OfficeCode], 
-      [vWebsiteUser].[OfficeID] AS [OfficeID]
-      FROM [dbo].[vWebsiteUser] AS [vWebsiteUser]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty" Association="UserModel.Store.FK_SIA_AppFeature_SIA_AppFeatureCategoty">
-            <End Role="SIA_AppFeatureCategoty" EntitySet="SIA_AppFeatureCategoty" />
-            <End Role="SIA_AppFeature" EntitySet="SIA_AppFeature" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_AppFeature" Association="UserModel.Store.FK_SIA_AppFeatureAccess_SIA_AppFeature">
-            <End Role="SIA_AppFeature" EntitySet="SIA_AppFeature" />
-            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_WebLinks" Association="UserModel.Store.FK_SIA_AppFeatureAccess_SIA_WebLinks">
-            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
-            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebLinks" Association="UserModel.Store.FK_SIA_WebSiteUser_SIA_WebLinks">
-            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
-            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
-          </AssociationSet>
-          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebRole" Association="UserModel.Store.FK_SIA_WebSiteUser_SIA_WebRole">
-            <End Role="SIA_WebRole" EntitySet="SIA_WebRole" />
-            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
-          </AssociationSet>
-        </EntityContainer>
+    <Schema Namespace="UserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityType Name="SIA_AppFeature">
           <Key>
             <PropertyRef Name="AppFeatureID" />
           </Key>
-          <Property Name="AppFeatureID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="AppFeatureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="FeatureVisibleFlag" Type="bit" Nullable="false" />
           <Property Name="FeatureCategoryID" Type="int" />
         </EntityType>
@@ -58,7 +18,7 @@
           <Key>
             <PropertyRef Name="AppFeatureAccessID" />
           </Key>
-          <Property Name="AppFeatureAccessID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AppFeatureAccessID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="WebLinkID" Type="int" Nullable="false" />
           <Property Name="AppFeatureID" Type="int" Nullable="false" />
@@ -72,49 +32,50 @@
           <Key>
             <PropertyRef Name="AppFeatureCategoryID" />
           </Key>
-          <Property Name="AppFeatureCategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="AppFeatureCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="SIA_WebLinks">
           <Key>
             <PropertyRef Name="WebLinkID" />
           </Key>
-          <Property Name="WebLinkID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebLinkID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WebCategoryID" Type="int" Nullable="false" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="WebLink" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WebLink" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
           <Property Name="NeedAuthorizationFlag" Type="bit" Nullable="false" />
+          <Property Name="LoginFrom" Type="varchar" MaxLength="10" />
+          <Property Name="GuestAccessFlag" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SIA_WebRole">
           <Key>
             <PropertyRef Name="WebRoleID" />
           </Key>
-          <Property Name="WebRoleID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="WebRole" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="WebRoleCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="WebRoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WebRole" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="WebRoleCode" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="VisibleFlag" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="SIA_WebSiteUser">
           <Key>
             <PropertyRef Name="WebSiteUserID" />
           </Key>
-          <Property Name="WebSiteUserID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="WebSiteUserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="WebLinkID" Type="int" Nullable="false" />
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="WebSiteRoleID" Type="int" Nullable="false" />
           <Property Name="EnteredByID" Type="int" Nullable="false" />
           <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
-          <Property Name="GateStatus" Type="bit" />
-          <Property Name="GateQuestion" Type="varchar" MaxLength="6" />
-          <Property Name="GateAttemptDate" Type="datetime" />
+          <Property Name="UserInfo" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-      warning 6002: The table/view 'SAPDACTIVITY.dbo.vWebsiteUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
-      -->
+warning 6002: The table/view 'SAPDACTIVITY.dbo.vWebsiteUser' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="vWebsiteUser">
           <Key>
             <PropertyRef Name="AppEntityID" />
+            
+            
           </Key>
           <Property Name="AppEntityID" Type="int" Nullable="false" />
           <Property Name="PIN" Type="varchar" MaxLength="8" />
@@ -122,12 +83,12 @@
           <Property Name="Badge" Type="varchar" MaxLength="6" />
           <Property Name="UserName" Type="varchar" MaxLength="110" />
           <Property Name="DutyStatus" Type="varchar" MaxLength="50" />
-          <Property Name="OfficeCode" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="OfficeCode" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="OfficeID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty">
-          <End Role="SIA_AppFeatureCategoty" Type="UserModel.Store.SIA_AppFeatureCategoty" Multiplicity="0..1" />
-          <End Role="SIA_AppFeature" Type="UserModel.Store.SIA_AppFeature" Multiplicity="*" />
+          <End Role="SIA_AppFeatureCategoty" Type="Self.SIA_AppFeatureCategoty" Multiplicity="0..1" />
+          <End Role="SIA_AppFeature" Type="Self.SIA_AppFeature" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SIA_AppFeatureCategoty">
               <PropertyRef Name="AppFeatureCategoryID" />
@@ -138,8 +99,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIA_AppFeatureAccess_SIA_AppFeature">
-          <End Role="SIA_AppFeature" Type="UserModel.Store.SIA_AppFeature" Multiplicity="1" />
-          <End Role="SIA_AppFeatureAccess" Type="UserModel.Store.SIA_AppFeatureAccess" Multiplicity="*" />
+          <End Role="SIA_AppFeature" Type="Self.SIA_AppFeature" Multiplicity="1" />
+          <End Role="SIA_AppFeatureAccess" Type="Self.SIA_AppFeatureAccess" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SIA_AppFeature">
               <PropertyRef Name="AppFeatureID" />
@@ -150,8 +111,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIA_AppFeatureAccess_SIA_WebLinks">
-          <End Role="SIA_WebLinks" Type="UserModel.Store.SIA_WebLinks" Multiplicity="1" />
-          <End Role="SIA_AppFeatureAccess" Type="UserModel.Store.SIA_AppFeatureAccess" Multiplicity="*" />
+          <End Role="SIA_WebLinks" Type="Self.SIA_WebLinks" Multiplicity="1" />
+          <End Role="SIA_AppFeatureAccess" Type="Self.SIA_AppFeatureAccess" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SIA_WebLinks">
               <PropertyRef Name="WebLinkID" />
@@ -162,8 +123,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIA_WebSiteUser_SIA_WebLinks">
-          <End Role="SIA_WebLinks" Type="UserModel.Store.SIA_WebLinks" Multiplicity="1" />
-          <End Role="SIA_WebSiteUser" Type="UserModel.Store.SIA_WebSiteUser" Multiplicity="*" />
+          <End Role="SIA_WebLinks" Type="Self.SIA_WebLinks" Multiplicity="1" />
+          <End Role="SIA_WebSiteUser" Type="Self.SIA_WebSiteUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SIA_WebLinks">
               <PropertyRef Name="WebLinkID" />
@@ -174,8 +135,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_SIA_WebSiteUser_SIA_WebRole">
-          <End Role="SIA_WebRole" Type="UserModel.Store.SIA_WebRole" Multiplicity="1" />
-          <End Role="SIA_WebSiteUser" Type="UserModel.Store.SIA_WebSiteUser" Multiplicity="*" />
+          <End Role="SIA_WebRole" Type="Self.SIA_WebRole" Multiplicity="1" />
+          <End Role="SIA_WebSiteUser" Type="Self.SIA_WebSiteUser" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="SIA_WebRole">
               <PropertyRef Name="WebRoleID" />
@@ -185,13 +146,332 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="Activity_spMyTopWebLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Activity.spMyTopWebLinks">
+          <Parameter Name="Pin" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="Award_spRecTypeMonthYear" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Award.spRecTypeMonthYear">
+          <Parameter Name="RecType" Type="int" Mode="In" />
+          <Parameter Name="MonthNbr" Type="int" Mode="In" />
+          <Parameter Name="YearNbr" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="Grant_spActivityReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="Grant.spActivityReport">
+          <Parameter Name="ActivityID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="IECA_spEnterAuditOfficers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="IECA.spEnterAuditOfficers">
+          <Parameter Name="OfficeID" Type="int" Mode="In" />
+          <Parameter Name="AuditDate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SOP_spDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="SOP.spDelete">
+          <Parameter Name="DocHistoryID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SOP_spInsertNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="SOP.spInsertNew">
+          <Parameter Name="SOPID" Type="int" Mode="In" />
+          <Parameter Name="DocInfo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="DocPath" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="SOP_spUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="SOP.spUpdate">
+          <Parameter Name="SOPID" Type="int" Mode="In" />
+          <Parameter Name="DocInfo" Type="varchar(max)" Mode="In" />
+          <Parameter Name="DocPath" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spEquipmentSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Search" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="spGateInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AppEntity" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spGetAllSIAWebLinks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spGetUserTypeCount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="spIssuedEquipment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="spPersonnelSearch" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchString" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="spPersonnelSearchEmployed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchString" Type="varchar" Mode="In" />
         </Function>
         <Function Name="spWebSiteUserInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Pin" Type="varchar" Mode="In" />
           <Parameter Name="WebSiteID" Type="int" Mode="In" />
         </Function>
+        <Function Name="Test" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="varchar">
+          <Parameter Name="p1" Type="varchar" Mode="In" />
+          <Parameter Name="p2" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="User_EquipmentHistInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="User.EquipmentHistInsert">
+          <Parameter Name="PA_UserID" Type="int" Mode="In" />
+          <Parameter Name="PA_EquipID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="User_EquipSkillHistUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="User.EquipSkillHistUpdate">
+          <Parameter Name="PA_UserID" Type="int" Mode="In" />
+          <Parameter Name="PA_EquipSkillID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="User_SkillHistInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="User.SkillHistInsert">
+          <Parameter Name="PA_UserID" Type="int" Mode="In" />
+          <Parameter Name="PA_SkillID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="User_spGroupMemberAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" StoreFunctionName="User.spGroupMemberAdd">
+          <Parameter Name="AppEntity" Type="int" Mode="In" />
+          <Parameter Name="GroupTitleID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspAddDOCBulletinDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BulletinDate" Type="date" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="FileName" Type="varchar" Mode="In" />
+          <Parameter Name="EntryPerson" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspAddDOCDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="int" Mode="In" />
+          <Parameter Name="DisplayName" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="varchar" Mode="In" />
+          <Parameter Name="EndDate" Type="varchar" Mode="In" />
+          <Parameter Name="FileName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspAddDOCGeneralManualCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+          <Parameter Name="CategoryDescription" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspAddDOCGeneralManualDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="GenManCategoryID" Type="varchar" Mode="In" />
+          <Parameter Name="EffectiveDate" Type="date" Mode="In" />
+          <Parameter Name="ExpirationDate" Type="date" Mode="In" />
+          <Parameter Name="FileName" Type="varchar" Mode="In" />
+          <Parameter Name="EntryPerson" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspAddDOCGeneralManualSubCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+          <Parameter Name="Procedure" Type="varchar" Mode="In" />
+          <Parameter Name="ProcedureDescription" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspAddDOCSWTFCBulletinDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="int" Mode="In" />
+          <Parameter Name="BulletinDate" Type="date" Mode="In" />
+          <Parameter Name="District" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="FileName" Type="varchar" Mode="In" />
+          <Parameter Name="EntryPerson" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspDeleteDOCBulletinDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documentFileName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspDeleteDOCDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documentFileName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspDeleteDOCSWTFCBulletinDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documentFileName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspDeleteGeneralManualDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documentFileName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFillDropDOCCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFillDropDOCGeneralManualCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFillDropDOCGeneralManualCategoryAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFillDropDOCGeneralManualSubCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFillDropDOCSWTXFCBulletinCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFillDropOfficeOutsideAgencies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFillGridviewDOCGeneralManualCategoty" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFillListBoxDOCGeneralManualCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Active" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCBulletinDocument_BulletinDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BulletinDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCBulletinDocument_BulletinDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCBulletinDocumentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DocumentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCBulletinForCalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFindDOCBulletinNextDocumentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFindDOCDocumentFileName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FileName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCDocumentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DocumentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCDocumentsForAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCDocumentsForWebsite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCGeneralManualCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+          <Parameter Name="CategoryDescription" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCGeneralManualCategoryID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCGeneralManualDocumentFileName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FileName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCGeneralManualDocumentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DocumentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCGeneralManualDocuments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+          <Parameter Name="Procedure" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCGeneralManualDocumentsForAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCGeneralManualNextDocumentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFindDOCGeneralManualSubCategorySection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCNextDocumentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFindDOCSWTFCBulletinDocument_BulletinDate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BulletinDate" Type="date" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCSWTFCBulletinDocument_BulletinDateRange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+          <Parameter Name="District" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCSWTFCBulletinDocumentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DocumentID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspFindDOCSWTFCBulletinForCalendar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFindDOCSWTFCBulletinNextDocumentID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFindDOCSWTFCBulletins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="uspFindGeneralManualSubCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+          <Parameter Name="Procedure" Type="varchar" Mode="In" />
+          <Parameter Name="ProcedureName" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindGeneralManualSubCatetoryID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspFindMCCodesForWebsite" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Category" Type="char" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspFindWebItem_SearchID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SearchID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="uspFindWebItems" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspUpdateDOCBulletinDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DocumentID" Type="int" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="EntryPerson" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspUpdateDOCDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FileName" Type="varchar" Mode="In" />
+          <Parameter Name="Category" Type="int" Mode="In" />
+          <Parameter Name="DisplayName" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="varchar" Mode="In" />
+          <Parameter Name="EndDate" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspUpdateDOCGeneralManualCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryID" Type="int" Mode="In" />
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+          <Parameter Name="CategoryDescription" Type="varchar" Mode="In" />
+          <Parameter Name="Active" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspUpdateDOCGeneralManualDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="documentFileName" Type="varchar" Mode="In" />
+          <Parameter Name="EffectiveDate" Type="date" Mode="In" />
+          <Parameter Name="ExpirationDate" Type="date" Mode="In" />
+          <Parameter Name="EntryPerson" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspUpdateDOCGeneralManualSubCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CategoryID" Type="int" Mode="In" />
+          <Parameter Name="Section" Type="varchar" Mode="In" />
+          <Parameter Name="Procedure" Type="varchar" Mode="In" />
+          <Parameter Name="ProcedureName" Type="varchar" Mode="In" />
+          <Parameter Name="Active" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="uspUpdateDOCSWTFCBulletinDocument" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DocumentID" Type="int" Mode="In" />
+          <Parameter Name="Category" Type="int" Mode="In" />
+          <Parameter Name="BulletinDate" Type="date" Mode="In" />
+          <Parameter Name="Description" Type="varchar" Mode="In" />
+          <Parameter Name="EntryPerson" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="UserModelStoreContainer">
+          <EntitySet Name="SIA_AppFeature" EntityType="Self.SIA_AppFeature" Schema="dbo" Table="SIA.AppFeature" store:Type="Tables" />
+          <EntitySet Name="SIA_AppFeatureAccess" EntityType="Self.SIA_AppFeatureAccess" Schema="dbo" Table="SIA.AppFeatureAccess" store:Type="Tables" />
+          <EntitySet Name="SIA_AppFeatureCategoty" EntityType="Self.SIA_AppFeatureCategoty" Schema="dbo" Table="SIA.AppFeatureCategoty" store:Type="Tables" />
+          <EntitySet Name="SIA_WebLinks" EntityType="Self.SIA_WebLinks" Schema="dbo" Table="SIA.WebLinks" store:Type="Tables" />
+          <EntitySet Name="SIA_WebRole" EntityType="Self.SIA_WebRole" Schema="dbo" Table="SIA.WebRole" store:Type="Tables" />
+          <EntitySet Name="SIA_WebSiteUser" EntityType="Self.SIA_WebSiteUser" Schema="dbo" Table="SIA.WebSiteUser" store:Type="Tables" />
+          <EntitySet Name="vWebsiteUser" EntityType="Self.vWebsiteUser" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[vWebsiteUser].[AppEntityID] AS [AppEntityID], 
+[vWebsiteUser].[PIN] AS [PIN], 
+[vWebsiteUser].[SAP] AS [SAP], 
+[vWebsiteUser].[Badge] AS [Badge], 
+[vWebsiteUser].[UserName] AS [UserName], 
+[vWebsiteUser].[DutyStatus] AS [DutyStatus], 
+[vWebsiteUser].[OfficeCode] AS [OfficeCode], 
+[vWebsiteUser].[OfficeID] AS [OfficeID]
+FROM [dbo].[vWebsiteUser] AS [vWebsiteUser]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty" Association="Self.FK_SIA_AppFeature_SIA_AppFeatureCategoty">
+            <End Role="SIA_AppFeatureCategoty" EntitySet="SIA_AppFeatureCategoty" />
+            <End Role="SIA_AppFeature" EntitySet="SIA_AppFeature" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_AppFeature" Association="Self.FK_SIA_AppFeatureAccess_SIA_AppFeature">
+            <End Role="SIA_AppFeature" EntitySet="SIA_AppFeature" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_AppFeatureAccess_SIA_WebLinks" Association="Self.FK_SIA_AppFeatureAccess_SIA_WebLinks">
+            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
+            <End Role="SIA_AppFeatureAccess" EntitySet="SIA_AppFeatureAccess" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebLinks" Association="Self.FK_SIA_WebSiteUser_SIA_WebLinks">
+            <End Role="SIA_WebLinks" EntitySet="SIA_WebLinks" />
+            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SIA_WebSiteUser_SIA_WebRole" Association="Self.FK_SIA_WebSiteUser_SIA_WebRole">
+            <End Role="SIA_WebRole" EntitySet="SIA_WebRole" />
+            <End Role="SIA_WebSiteUser" EntitySet="SIA_WebSiteUser" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -235,16 +515,285 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="WebSiteUser" EntitySet="WebSiteUsers" />
           </AssociationSet>
+          <FunctionImport Name="Activity_spMyTopWebLinks" ReturnType="Collection(UserModel.Activity_spMyTopWebLinks_Result)">
+          <Parameter Name="Pin" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Award_spRecTypeMonthYear" ReturnType="Collection(UserModel.Award_spRecTypeMonthYear_Result)">
+            <Parameter Name="RecType" Mode="In" Type="Int32" />
+            <Parameter Name="MonthNbr" Mode="In" Type="Int32" />
+            <Parameter Name="YearNbr" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Grant_spActivityReport">
+          <Parameter Name="ActivityID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="IECA_spEnterAuditOfficers">
+            <Parameter Name="OfficeID" Mode="In" Type="Int32" />
+            <Parameter Name="AuditDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SOP_spDelete">
+          <Parameter Name="DocHistoryID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SOP_spInsertNew" ReturnType="Collection(Int32)">
+            <Parameter Name="SOPID" Mode="In" Type="Int32" />
+            <Parameter Name="DocInfo" Mode="In" Type="String" />
+            <Parameter Name="DocPath" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="SOP_spUpdate">
+            <Parameter Name="SOPID" Mode="In" Type="Int32" />
+            <Parameter Name="DocInfo" Mode="In" Type="String" />
+            <Parameter Name="DocPath" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(UserModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(UserModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="spEquipmentSearch" ReturnType="Collection(UserModel.spEquipmentSearch_Result)">
+          <Parameter Name="Search" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spGetAllSIAWebLinks" ReturnType="Collection(UserModel.spGetAllSIAWebLinks_Result)" />
+          <FunctionImport Name="spGetUserTypeCount" ReturnType="Collection(UserModel.spGetUserTypeCount_Result)" />
+          <FunctionImport Name="spIssuedEquipment" ReturnType="Collection(UserModel.spIssuedEquipment_Result)">
+          <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="spPersonnelSearch" ReturnType="Collection(UserModel.spPersonnelSearch_Result)">
+          <Parameter Name="SearchString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spPersonnelSearchEmployed" ReturnType="Collection(UserModel.spPersonnelSearchEmployed_Result)">
+          <Parameter Name="SearchString" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="User_EquipmentHistInsert">
+            <Parameter Name="PA_UserID" Mode="In" Type="Int32" />
+            <Parameter Name="PA_EquipID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="User_EquipSkillHistUpdate">
+            <Parameter Name="PA_UserID" Mode="In" Type="Int32" />
+            <Parameter Name="PA_EquipSkillID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="User_SkillHistInsert">
+            <Parameter Name="PA_UserID" Mode="In" Type="Int32" />
+            <Parameter Name="PA_SkillID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="User_spGroupMemberAdd">
+            <Parameter Name="AppEntity" Mode="In" Type="Int32" />
+            <Parameter Name="GroupTitleID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspAddDOCBulletinDocument">
+            <Parameter Name="BulletinDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="FileName" Mode="In" Type="String" />
+            <Parameter Name="EntryPerson" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspAddDOCDocument">
+            <Parameter Name="Category" Mode="In" Type="Int32" />
+            <Parameter Name="DisplayName" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="String" />
+            <Parameter Name="EndDate" Mode="In" Type="String" />
+            <Parameter Name="FileName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspAddDOCGeneralManualCategory">
+            <Parameter Name="Section" Mode="In" Type="String" />
+            <Parameter Name="CategoryDescription" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspAddDOCGeneralManualDocument">
+            <Parameter Name="GenManCategoryID" Mode="In" Type="String" />
+            <Parameter Name="EffectiveDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ExpirationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FileName" Mode="In" Type="String" />
+            <Parameter Name="EntryPerson" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspAddDOCGeneralManualSubCategory">
+            <Parameter Name="Section" Mode="In" Type="String" />
+            <Parameter Name="Procedure" Mode="In" Type="String" />
+            <Parameter Name="ProcedureDescription" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspAddDOCSWTFCBulletinDocument">
+            <Parameter Name="Category" Mode="In" Type="Int32" />
+            <Parameter Name="BulletinDate" Mode="In" Type="DateTime" />
+            <Parameter Name="District" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="FileName" Mode="In" Type="String" />
+            <Parameter Name="EntryPerson" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspDeleteDOCBulletinDocument">
+          <Parameter Name="documentFileName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspDeleteDOCDocument">
+          <Parameter Name="documentFileName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspDeleteDOCSWTFCBulletinDocument">
+          <Parameter Name="documentFileName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspDeleteGeneralManualDocument">
+          <Parameter Name="documentFileName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFillDropDOCCategory" ReturnType="Collection(UserModel.uspFillDropDOCCategory_Result)" />
+          <FunctionImport Name="uspFillDropDOCGeneralManualCategory" ReturnType="Collection(UserModel.uspFillDropDOCGeneralManualCategory_Result)" />
+          <FunctionImport Name="uspFillDropDOCGeneralManualCategoryAll" ReturnType="Collection(UserModel.uspFillDropDOCGeneralManualCategoryAll_Result)" />
+          <FunctionImport Name="uspFillDropDOCGeneralManualSubCategory" ReturnType="Collection(UserModel.uspFillDropDOCGeneralManualSubCategory_Result)">
+          <Parameter Name="Section" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFillDropDOCSWTXFCBulletinCategory" ReturnType="Collection(UserModel.uspFillDropDOCSWTXFCBulletinCategory_Result)" />
+          <FunctionImport Name="uspFillDropOfficeOutsideAgencies" ReturnType="Collection(UserModel.uspFillDropOfficeOutsideAgencies_Result)" />
+          <FunctionImport Name="uspFillGridviewDOCGeneralManualCategoty" ReturnType="Collection(UserModel.uspFillGridviewDOCGeneralManualCategoty_Result)" />
+          <FunctionImport Name="uspFillListBoxDOCGeneralManualCategory" ReturnType="Collection(UserModel.uspFillListBoxDOCGeneralManualCategory_Result)">
+          <Parameter Name="Active" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCBulletinDocument_BulletinDate" ReturnType="Collection(UserModel.uspFindDOCBulletinDocument_BulletinDate_Result)">
+          <Parameter Name="BulletinDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCBulletinDocument_BulletinDateRange" ReturnType="Collection(UserModel.uspFindDOCBulletinDocument_BulletinDateRange_Result)">
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCBulletinDocumentID" ReturnType="Collection(UserModel.uspFindDOCBulletinDocumentID_Result)">
+          <Parameter Name="DocumentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCBulletinForCalendar" ReturnType="Collection(DateTime)" />
+          <FunctionImport Name="uspFindDOCBulletinNextDocumentID" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="uspFindDOCDocumentFileName" ReturnType="Collection(UserModel.uspFindDOCDocumentFileName_Result)">
+          <Parameter Name="FileName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCDocumentID" ReturnType="Collection(UserModel.uspFindDOCDocumentID_Result)">
+          <Parameter Name="DocumentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCDocumentsForAdmin" ReturnType="Collection(UserModel.uspFindDOCDocumentsForAdmin_Result)">
+          <Parameter Name="Category" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCDocumentsForWebsite" ReturnType="Collection(UserModel.uspFindDOCDocumentsForWebsite_Result)">
+            <Parameter Name="Category" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCGeneralManualCategory" ReturnType="Collection(UserModel.uspFindDOCGeneralManualCategory_Result)">
+            <Parameter Name="Section" Mode="In" Type="String" />
+            <Parameter Name="CategoryDescription" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCGeneralManualCategoryID" ReturnType="Collection(UserModel.uspFindDOCGeneralManualCategoryID_Result)">
+          <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCGeneralManualDocumentFileName" ReturnType="Collection(UserModel.uspFindDOCGeneralManualDocumentFileName_Result)">
+          <Parameter Name="FileName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCGeneralManualDocumentID" ReturnType="Collection(UserModel.uspFindDOCGeneralManualDocumentID_Result)">
+          <Parameter Name="DocumentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCGeneralManualDocuments" ReturnType="Collection(UserModel.uspFindDOCGeneralManualDocuments_Result)">
+            <Parameter Name="Section" Mode="In" Type="String" />
+            <Parameter Name="Procedure" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCGeneralManualDocumentsForAdmin" ReturnType="Collection(UserModel.uspFindDOCGeneralManualDocumentsForAdmin_Result)">
+          <Parameter Name="Section" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCGeneralManualNextDocumentID" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="uspFindDOCGeneralManualSubCategorySection" ReturnType="Collection(UserModel.uspFindDOCGeneralManualSubCategorySection_Result)">
+          <Parameter Name="Section" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCNextDocumentID" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="uspFindDOCSWTFCBulletinDocument_BulletinDate" ReturnType="Collection(UserModel.uspFindDOCSWTFCBulletinDocument_BulletinDate_Result)">
+          <Parameter Name="BulletinDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCSWTFCBulletinDocument_BulletinDateRange" ReturnType="Collection(UserModel.uspFindDOCSWTFCBulletinDocument_BulletinDateRange_Result)">
+            <Parameter Name="Category" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="District" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCSWTFCBulletinDocumentID" ReturnType="Collection(UserModel.uspFindDOCSWTFCBulletinDocumentID_Result)">
+          <Parameter Name="DocumentID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindDOCSWTFCBulletinForCalendar" ReturnType="Collection(DateTime)" />
+          <FunctionImport Name="uspFindDOCSWTFCBulletinNextDocumentID" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="uspFindDOCSWTFCBulletins" ReturnType="Collection(UserModel.uspFindDOCSWTFCBulletins_Result)" />
+          <FunctionImport Name="uspFindGeneralManualSubCategory" ReturnType="Collection(UserModel.uspFindGeneralManualSubCategory_Result)">
+            <Parameter Name="Section" Mode="In" Type="String" />
+            <Parameter Name="Procedure" Mode="In" Type="String" />
+            <Parameter Name="ProcedureName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindGeneralManualSubCatetoryID" ReturnType="Collection(UserModel.uspFindGeneralManualSubCatetoryID_Result)">
+          <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindMCCodesForWebsite" ReturnType="Collection(UserModel.uspFindMCCodesForWebsite_Result)">
+            <Parameter Name="Category" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindWebItem_SearchID">
+          <Parameter Name="SearchID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="uspFindWebItems" ReturnType="Collection(UserModel.uspFindWebItems_Result)">
+          <Parameter Name="Description" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdateDOCBulletinDocument">
+            <Parameter Name="DocumentID" Mode="In" Type="Int32" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="EntryPerson" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdateDOCDocument">
+            <Parameter Name="FileName" Mode="In" Type="String" />
+            <Parameter Name="Category" Mode="In" Type="Int32" />
+            <Parameter Name="DisplayName" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="String" />
+            <Parameter Name="EndDate" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdateDOCGeneralManualCategory">
+            <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="Section" Mode="In" Type="String" />
+            <Parameter Name="CategoryDescription" Mode="In" Type="String" />
+            <Parameter Name="Active" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdateDOCGeneralManualDocument">
+            <Parameter Name="documentFileName" Mode="In" Type="String" />
+            <Parameter Name="EffectiveDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ExpirationDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EntryPerson" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdateDOCGeneralManualSubCategory">
+            <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+            <Parameter Name="Section" Mode="In" Type="String" />
+            <Parameter Name="Procedure" Mode="In" Type="String" />
+            <Parameter Name="ProcedureName" Mode="In" Type="String" />
+            <Parameter Name="Active" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="uspUpdateDOCSWTFCBulletinDocument">
+            <Parameter Name="DocumentID" Mode="In" Type="Int32" />
+            <Parameter Name="Category" Mode="In" Type="Int32" />
+            <Parameter Name="BulletinDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="EntryPerson" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="spWebUserInfo">
+            <Parameter Name="Pin" Mode="In" Type="String" />
+            <Parameter Name="WebSiteID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="spWebSiteUserInfo_Result">
-          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
-          <Property Type="String" Name="PIN" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="UserName" Nullable="true" MaxLength="110" />
-          <Property Type="String" Name="WebRole" Nullable="false" MaxLength="12" />
-          <Property Type="Int32" Name="OfficeID" Nullable="false" />
-          <Property Type="String" Name="OfficeCode" Nullable="false" MaxLength="10" />
-          <Property Type="Int32" Name="GateStatus" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="spGateInfo_Result">
           <Property Type="Boolean" Name="GateStatus" Nullable="true" />
           <Property Type="String" Name="GateQuestion" Nullable="true" MaxLength="6" />
@@ -271,9 +820,9 @@
           <Property Type="Int32" Name="AppFeatureID" Nullable="false" />
           <Property Type="Boolean" Name="AllowFeatureFlag" Nullable="false" />
           <Property Type="String" Name="UnlockQ" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="UnlockAttempt" />
+          <Property Type="DateTime" Name="UnlockAttempt" Precision="3" />
           <Property Type="Int32" Name="UnlockedBy" />
-          <Property Type="DateTime" Name="UnlockedDate" />
+          <Property Type="DateTime" Name="UnlockedDate" Precision="3" />
           <NavigationProperty Name="SIA_AppFeature" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_AppFeature" FromRole="SIA_AppFeatureAccess" ToRole="SIA_AppFeature" />
           <NavigationProperty Name="SIA_WebLinks" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" FromRole="SIA_AppFeatureAccess" ToRole="SIA_WebLinks" />
         </EntityType>
@@ -297,6 +846,8 @@
           <Property Type="Boolean" Name="NeedAuthorizationFlag" Nullable="false" />
           <NavigationProperty Name="SIA_AppFeatureAccess" Relationship="UserModel.FK_SIA_AppFeatureAccess_SIA_WebLinks" FromRole="SIA_WebLinks" ToRole="SIA_AppFeatureAccess" />
           <NavigationProperty Name="SIA_WebSiteUser" Relationship="UserModel.FK_SIA_WebSiteUser_SIA_WebLinks" FromRole="WebLinks" ToRole="SIA_WebSiteUser" />
+          <Property Name="LoginFrom" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GuestAccessFlag" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_SIA_AppFeature_SIA_AppFeatureCategoty">
           <End Type="UserModel.FeatureCategoty" Role="SIA_AppFeatureCategoty" Multiplicity="0..1" />
@@ -367,13 +918,11 @@
           <Property Type="Int32" Name="AppEntityID" Nullable="false" />
           <Property Type="Int32" Name="WebSiteRoleID" Nullable="false" />
           <Property Type="Int32" Name="EnteredByID" Nullable="false" />
-          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" />
-          <Property Type="Boolean" Name="GateStatus" />
-          <Property Type="String" Name="GateQuestion" MaxLength="6" FixedLength="false" Unicode="false" />
-          <Property Type="DateTime" Name="GateAttemptDate" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="false" Precision="3" />
           <NavigationProperty Name="SIA_WebLinks" Relationship="UserModel.FK_SIA_WebSiteUser_SIA_WebLinks" FromRole="SIA_WebSiteUser" ToRole="WebLinks" />
           <NavigationProperty Name="SIA_WebRole" Relationship="UserModel.FK_SIA_WebSiteUser_SIA_WebRole" FromRole="SIA_WebSiteUser" ToRole="SIA_WebRole" />
           <NavigationProperty Name="User" Relationship="UserModel.UsersWebSiteUser" FromRole="WebSiteUser" ToRole="Users" />
+          <Property Name="UserInfo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_SIA_WebSiteUser_SIA_WebLinks">
           <End Type="UserModel.WebLinks" Role="WebLinks" Multiplicity="1" />
@@ -411,6 +960,380 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="Activity_spMyTopWebLinks_Result">
+          <Property Type="String" Name="TopLink" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TopLinkPath" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="Award_spRecTypeMonthYear_Result">
+          <Property Type="Int32" Name="RecognitionId" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="Type" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Award" Nullable="true" MaxLength="100" />
+          <Property Type="DateTime" Name="IssuedDate" Nullable="false" />
+          <Property Type="String" Name="DocPath" Nullable="true" MaxLength="500" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="spEquipmentSearch_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Officer" Nullable="true" MaxLength="109" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="ItemDescription" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Badge" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SAP" Nullable="false" MaxLength="30" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" />
+          <Property Type="Boolean" Name="PersonallyOwned" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="ItemType" Nullable="false" MaxLength="64" />
+        </ComplexType>
+        <ComplexType Name="spGetAllSIAWebLinks_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="WebLink" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="spGetUserTypeCount_Result">
+          <Property Type="String" Name="WebRole" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="CountOfUserType" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spIssuedEquipment_Result">
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="ItemDescription" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="IssuedTo" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="SAP" Nullable="false" MaxLength="30" />
+          <Property Type="Decimal" Name="Price" Nullable="true" Precision="19" />
+          <Property Type="Boolean" Name="PersonallyOwned" Nullable="true" />
+          <Property Type="String" Name="Status" Nullable="true" MaxLength="64" />
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Category" Nullable="false" MaxLength="64" />
+          <Property Type="String" Name="ItemType" Nullable="false" MaxLength="64" />
+        </ComplexType>
+        <ComplexType Name="spPersonnelSearch_Result">
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Badge" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SAP" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="RankCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Office" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficeCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Ranking" Nullable="true" />
+          <Property Type="String" Name="WorkStatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="WorkStatusCode" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="spPersonnelSearchEmployed_Result">
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Badge" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SAP" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="RankCode" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Office" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OfficeCode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="Ranking" Nullable="true" />
+          <Property Type="String" Name="WorkStatus" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="WorkStatusCode" Nullable="true" />
+          <Property Type="String" Name="NameCode" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="uspFillDropDOCCategory_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="uspFillDropDOCGeneralManualCategory_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="57" />
+        </ComplexType>
+        <ComplexType Name="uspFillDropDOCGeneralManualCategoryAll_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="57" />
+        </ComplexType>
+        <ComplexType Name="uspFillDropDOCGeneralManualSubCategory_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SubSection" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="ProcedureDescription" Nullable="true" MaxLength="107" />
+        </ComplexType>
+        <ComplexType Name="uspFillDropDOCSWTXFCBulletinCategory_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspFillDropOfficeOutsideAgencies_Result">
+          <Property Type="Int32" Name="OfficeID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Code" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="uspFillGridviewDOCGeneralManualCategoty_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="57" />
+        </ComplexType>
+        <ComplexType Name="uspFillListBoxDOCGeneralManualCategory_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SectionDescripton" Nullable="true" MaxLength="57" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCBulletinDocument_BulletinDate_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="DateTime" Name="BulletinDate" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="2000" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCBulletinDocument_BulletinDateRange_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="DateTime" Name="BulletinDate" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="2000" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCBulletinDocumentID_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="DateTime" Name="BulletinDate" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="2000" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCDocumentFileName_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="Int32" Name="Category" Nullable="true" />
+          <Property Type="String" Name="DisplayName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCDocumentID_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="Int32" Name="Category" Nullable="true" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DisplayName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCDocumentsForAdmin_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="Int32" Name="Category" Nullable="true" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DisplayName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCDocumentsForWebsite_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="Int32" Name="Category" Nullable="true" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="DisplayName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCGeneralManualCategory_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCGeneralManualCategoryID_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCGeneralManualDocumentFileName_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SectionCategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SectionActive" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="ProcedureCategoryID" Nullable="false" />
+          <Property Type="String" Name="SubSection" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="ProcedureDesctiption" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CategoryActive" Nullable="true" MaxLength="1" />
+          <Property Type="DateTime" Name="EffectiveDate" Nullable="true" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCGeneralManualDocumentID_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SectionCategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SectionActive" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="ProcedureCategoryID" Nullable="false" />
+          <Property Type="String" Name="SubSection" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="ProcedureDesctiption" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CategoryActive" Nullable="true" MaxLength="1" />
+          <Property Type="DateTime" Name="EffectiveDate" Nullable="true" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCGeneralManualDocuments_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SectionCategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SectionActive" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="ProcedureCategoryID" Nullable="false" />
+          <Property Type="String" Name="SubSection" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="ProcedureDesctiption" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CategoryActive" Nullable="true" MaxLength="1" />
+          <Property Type="DateTime" Name="EffectiveDate" Nullable="true" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCGeneralManualDocumentsForAdmin_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="SectionCategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="SectionActive" Nullable="true" MaxLength="1" />
+          <Property Type="Int32" Name="ProcedureCategoryID" Nullable="false" />
+          <Property Type="String" Name="SubSection" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="ProcedureDesctiption" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CategoryActive" Nullable="true" MaxLength="1" />
+          <Property Type="DateTime" Name="EffectiveDate" Nullable="true" />
+          <Property Type="DateTime" Name="ExpirationDate" Nullable="true" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCGeneralManualSubCategorySection_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Procedure" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="ProcedureDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+          <Property Type="String" Name="SectionDescription2" Nullable="true" MaxLength="57" />
+          <Property Type="String" Name="ProcedureDescription2" Nullable="true" MaxLength="107" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCSWTFCBulletinDocument_BulletinDate_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="Int32" Name="BulletinCategory" Nullable="true" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="BulletinDate" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="officerName" Nullable="true" MaxLength="107" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="75" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCSWTFCBulletinDocument_BulletinDateRange_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="DateTime" Name="BulletinDate" Nullable="true" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="District" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCSWTFCBulletinDocumentID_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="Int32" Name="BulletinCategory" Nullable="true" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="BulletinDate" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="officerName" Nullable="true" MaxLength="107" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="75" />
+        </ComplexType>
+        <ComplexType Name="uspFindDOCSWTFCBulletins_Result">
+          <Property Type="Int32" Name="DocumentID" Nullable="false" />
+          <Property Type="Int32" Name="BulletinCategory" Nullable="true" />
+          <Property Type="String" Name="CategoryDescription" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="BulletinDate" Nullable="true" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="FileName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="EntryDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EntryPerson" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="officerName" Nullable="true" MaxLength="107" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="75" />
+        </ComplexType>
+        <ComplexType Name="uspFindGeneralManualSubCategory_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Procedure" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="ProcedureDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="uspFindGeneralManualSubCatetoryID_Result">
+          <Property Type="Int32" Name="CategoryID" Nullable="false" />
+          <Property Type="String" Name="Section" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="SectionDescription" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Procedure" Nullable="true" MaxLength="6" />
+          <Property Type="String" Name="ProcedureDescription" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Active" Nullable="true" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="uspFindMCCodesForWebsite_Result">
+          <Property Type="Int32" Name="CodeID" Nullable="false" />
+          <Property Type="String" Name="CaseType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OffenseType" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OffenseCode" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="OffenseDescription" Nullable="true" MaxLength="200" />
+          <Property Type="Decimal" Name="FineAmt" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="FineMax" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="String" Name="Statute" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="FineCode" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="LoadDateTime" Nullable="true" Precision="23" />
+          <Property Type="String" Name="SearchDescription" Nullable="true" MaxLength="302" />
+        </ComplexType>
+        <ComplexType Name="uspFindWebItems_Result">
+          <Property Type="Int32" Name="WebLinkID" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="WebLink" Nullable="false" MaxLength="200" />
+          <Property Type="Boolean" Name="VisibleFlag" Nullable="false" />
+          <Property Type="Boolean" Name="NeedAuthorizationFlag" Nullable="false" />
+          <Property Type="String" Name="SearchDescription" Nullable="true" MaxLength="2000" />
+        </ComplexType>
+        <ComplexType Name="spWebSiteUserInfo_Result">
+          <Property Type="Int32" Name="AppEntityID" Nullable="false" />
+          <Property Type="String" Name="PIN" Nullable="true" MaxLength="8" />
+          <Property Type="String" Name="UserName" Nullable="true" MaxLength="110" />
+          <Property Type="String" Name="WebRole" Nullable="false" MaxLength="12" />
+          <Property Type="Int32" Name="OfficeID" Nullable="true" />
+          <Property Type="String" Name="OfficeCode" Nullable="false" MaxLength="10" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -426,7 +1349,6 @@
                 <ScalarProperty Name="WebRole" ColumnName="WebRole" />
                 <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
                 <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
-                <ScalarProperty Name="GateStatus" ColumnName="GateStatus" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -475,6 +1397,8 @@
           <EntitySetMapping Name="WebLinks">
             <EntityTypeMapping TypeName="UserModel.WebLinks">
               <MappingFragment StoreEntitySet="SIA_WebLinks">
+                <ScalarProperty Name="GuestAccessFlag" ColumnName="GuestAccessFlag" />
+                <ScalarProperty Name="LoginFrom" ColumnName="LoginFrom" />
                 <ScalarProperty Name="NeedAuthorizationFlag" ColumnName="NeedAuthorizationFlag" />
                 <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
                 <ScalarProperty Name="WebLink" ColumnName="WebLink" />
@@ -511,9 +1435,7 @@
           <EntitySetMapping Name="WebSiteUsers">
             <EntityTypeMapping TypeName="UserModel.WebSiteUser">
               <MappingFragment StoreEntitySet="SIA_WebSiteUser">
-                <ScalarProperty Name="GateAttemptDate" ColumnName="GateAttemptDate" />
-                <ScalarProperty Name="GateQuestion" ColumnName="GateQuestion" />
-                <ScalarProperty Name="GateStatus" ColumnName="GateStatus" />
+                <ScalarProperty Name="UserInfo" ColumnName="UserInfo" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="EnteredByID" ColumnName="EnteredByID" />
                 <ScalarProperty Name="WebSiteRoleID" ColumnName="WebSiteRoleID" />
@@ -523,6 +1445,570 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Activity_spMyTopWebLinks" FunctionName="UserModel.Store.Activity_spMyTopWebLinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.Activity_spMyTopWebLinks_Result">
+                <ScalarProperty Name="TopLink" ColumnName="TopLink" />
+                <ScalarProperty Name="TopLinkPath" ColumnName="TopLinkPath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Award_spRecTypeMonthYear" FunctionName="UserModel.Store.Award_spRecTypeMonthYear">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.Award_spRecTypeMonthYear_Result">
+                <ScalarProperty Name="RecognitionId" ColumnName="RecognitionId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Award" ColumnName="Award" />
+                <ScalarProperty Name="IssuedDate" ColumnName="IssuedDate" />
+                <ScalarProperty Name="DocPath" ColumnName="DocPath" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="Grant_spActivityReport" FunctionName="UserModel.Store.Grant_spActivityReport" />
+          <FunctionImportMapping FunctionImportName="IECA_spEnterAuditOfficers" FunctionName="UserModel.Store.IECA_spEnterAuditOfficers" />
+          <FunctionImportMapping FunctionImportName="SOP_spDelete" FunctionName="UserModel.Store.SOP_spDelete" />
+          <FunctionImportMapping FunctionImportName="SOP_spInsertNew" FunctionName="UserModel.Store.SOP_spInsertNew" />
+          <FunctionImportMapping FunctionImportName="SOP_spUpdate" FunctionName="UserModel.Store.SOP_spUpdate" />
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="UserModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="UserModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="UserModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="UserModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="UserModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="UserModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="UserModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="spEquipmentSearch" FunctionName="UserModel.Store.spEquipmentSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.spEquipmentSearch_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Officer" ColumnName="Officer" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PersonallyOwned" ColumnName="PersonallyOwned" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetAllSIAWebLinks" FunctionName="UserModel.Store.spGetAllSIAWebLinks">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.spGetAllSIAWebLinks_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WebLink" ColumnName="WebLink" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spGetUserTypeCount" FunctionName="UserModel.Store.spGetUserTypeCount">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.spGetUserTypeCount_Result">
+                <ScalarProperty Name="WebRole" ColumnName="WebRole" />
+                <ScalarProperty Name="CountOfUserType" ColumnName="CountOfUserType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spIssuedEquipment" FunctionName="UserModel.Store.spIssuedEquipment">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.spIssuedEquipment_Result">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="IssuedTo" ColumnName="IssuedTo" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PersonallyOwned" ColumnName="PersonallyOwned" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spPersonnelSearch" FunctionName="UserModel.Store.spPersonnelSearch">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.spPersonnelSearch_Result">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="RankCode" ColumnName="RankCode" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
+                <ScalarProperty Name="WorkStatusCode" ColumnName="WorkStatusCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="spPersonnelSearchEmployed" FunctionName="UserModel.Store.spPersonnelSearchEmployed">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.spPersonnelSearchEmployed_Result">
+                <ScalarProperty Name="AppEntityID" ColumnName="AppEntityID" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Badge" ColumnName="Badge" />
+                <ScalarProperty Name="SAP" ColumnName="SAP" />
+                <ScalarProperty Name="RankCode" ColumnName="RankCode" />
+                <ScalarProperty Name="Office" ColumnName="Office" />
+                <ScalarProperty Name="OfficeCode" ColumnName="OfficeCode" />
+                <ScalarProperty Name="Ranking" ColumnName="Ranking" />
+                <ScalarProperty Name="WorkStatus" ColumnName="WorkStatus" />
+                <ScalarProperty Name="WorkStatusCode" ColumnName="WorkStatusCode" />
+                <ScalarProperty Name="NameCode" ColumnName="NameCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="User_EquipmentHistInsert" FunctionName="UserModel.Store.User_EquipmentHistInsert" />
+          <FunctionImportMapping FunctionImportName="User_EquipSkillHistUpdate" FunctionName="UserModel.Store.User_EquipSkillHistUpdate" />
+          <FunctionImportMapping FunctionImportName="User_SkillHistInsert" FunctionName="UserModel.Store.User_SkillHistInsert" />
+          <FunctionImportMapping FunctionImportName="User_spGroupMemberAdd" FunctionName="UserModel.Store.User_spGroupMemberAdd" />
+          <FunctionImportMapping FunctionImportName="uspAddDOCBulletinDocument" FunctionName="UserModel.Store.uspAddDOCBulletinDocument" />
+          <FunctionImportMapping FunctionImportName="uspAddDOCDocument" FunctionName="UserModel.Store.uspAddDOCDocument" />
+          <FunctionImportMapping FunctionImportName="uspAddDOCGeneralManualCategory" FunctionName="UserModel.Store.uspAddDOCGeneralManualCategory" />
+          <FunctionImportMapping FunctionImportName="uspAddDOCGeneralManualDocument" FunctionName="UserModel.Store.uspAddDOCGeneralManualDocument" />
+          <FunctionImportMapping FunctionImportName="uspAddDOCGeneralManualSubCategory" FunctionName="UserModel.Store.uspAddDOCGeneralManualSubCategory" />
+          <FunctionImportMapping FunctionImportName="uspAddDOCSWTFCBulletinDocument" FunctionName="UserModel.Store.uspAddDOCSWTFCBulletinDocument" />
+          <FunctionImportMapping FunctionImportName="uspDeleteDOCBulletinDocument" FunctionName="UserModel.Store.uspDeleteDOCBulletinDocument" />
+          <FunctionImportMapping FunctionImportName="uspDeleteDOCDocument" FunctionName="UserModel.Store.uspDeleteDOCDocument" />
+          <FunctionImportMapping FunctionImportName="uspDeleteDOCSWTFCBulletinDocument" FunctionName="UserModel.Store.uspDeleteDOCSWTFCBulletinDocument" />
+          <FunctionImportMapping FunctionImportName="uspDeleteGeneralManualDocument" FunctionName="UserModel.Store.uspDeleteGeneralManualDocument" />
+          <FunctionImportMapping FunctionImportName="uspFillDropDOCCategory" FunctionName="UserModel.Store.uspFillDropDOCCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFillDropDOCCategory_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFillDropDOCGeneralManualCategory" FunctionName="UserModel.Store.uspFillDropDOCGeneralManualCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFillDropDOCGeneralManualCategory_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFillDropDOCGeneralManualCategoryAll" FunctionName="UserModel.Store.uspFillDropDOCGeneralManualCategoryAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFillDropDOCGeneralManualCategoryAll_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFillDropDOCGeneralManualSubCategory" FunctionName="UserModel.Store.uspFillDropDOCGeneralManualSubCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFillDropDOCGeneralManualSubCategory_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ProcedureDescription" ColumnName="ProcedureDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFillDropDOCSWTXFCBulletinCategory" FunctionName="UserModel.Store.uspFillDropDOCSWTXFCBulletinCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFillDropDOCSWTXFCBulletinCategory_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFillDropOfficeOutsideAgencies" FunctionName="UserModel.Store.uspFillDropOfficeOutsideAgencies">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFillDropOfficeOutsideAgencies_Result">
+                <ScalarProperty Name="OfficeID" ColumnName="OfficeID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFillGridviewDOCGeneralManualCategoty" FunctionName="UserModel.Store.uspFillGridviewDOCGeneralManualCategoty">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFillGridviewDOCGeneralManualCategoty_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFillListBoxDOCGeneralManualCategory" FunctionName="UserModel.Store.uspFillListBoxDOCGeneralManualCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFillListBoxDOCGeneralManualCategory_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="SectionDescripton" ColumnName="SectionDescripton" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCBulletinDocument_BulletinDate" FunctionName="UserModel.Store.uspFindDOCBulletinDocument_BulletinDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCBulletinDocument_BulletinDate_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="BulletinDate" ColumnName="BulletinDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCBulletinDocument_BulletinDateRange" FunctionName="UserModel.Store.uspFindDOCBulletinDocument_BulletinDateRange">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCBulletinDocument_BulletinDateRange_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="BulletinDate" ColumnName="BulletinDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCBulletinDocumentID" FunctionName="UserModel.Store.uspFindDOCBulletinDocumentID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCBulletinDocumentID_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="BulletinDate" ColumnName="BulletinDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCBulletinForCalendar" FunctionName="UserModel.Store.uspFindDOCBulletinForCalendar" />
+          <FunctionImportMapping FunctionImportName="uspFindDOCBulletinNextDocumentID" FunctionName="UserModel.Store.uspFindDOCBulletinNextDocumentID" />
+          <FunctionImportMapping FunctionImportName="uspFindDOCDocumentFileName" FunctionName="UserModel.Store.uspFindDOCDocumentFileName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCDocumentFileName_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCDocumentID" FunctionName="UserModel.Store.uspFindDOCDocumentID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCDocumentID_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCDocumentsForAdmin" FunctionName="UserModel.Store.uspFindDOCDocumentsForAdmin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCDocumentsForAdmin_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCDocumentsForWebsite" FunctionName="UserModel.Store.uspFindDOCDocumentsForWebsite">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCDocumentsForWebsite_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCGeneralManualCategory" FunctionName="UserModel.Store.uspFindDOCGeneralManualCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCGeneralManualCategory_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCGeneralManualCategoryID" FunctionName="UserModel.Store.uspFindDOCGeneralManualCategoryID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCGeneralManualCategoryID_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCGeneralManualDocumentFileName" FunctionName="UserModel.Store.uspFindDOCGeneralManualDocumentFileName">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCGeneralManualDocumentFileName_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="SectionCategoryID" ColumnName="SectionCategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+                <ScalarProperty Name="SectionActive" ColumnName="SectionActive" />
+                <ScalarProperty Name="ProcedureCategoryID" ColumnName="ProcedureCategoryID" />
+                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
+                <ScalarProperty Name="ProcedureDesctiption" ColumnName="ProcedureDesctiption" />
+                <ScalarProperty Name="CategoryActive" ColumnName="CategoryActive" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCGeneralManualDocumentID" FunctionName="UserModel.Store.uspFindDOCGeneralManualDocumentID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCGeneralManualDocumentID_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="SectionCategoryID" ColumnName="SectionCategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+                <ScalarProperty Name="SectionActive" ColumnName="SectionActive" />
+                <ScalarProperty Name="ProcedureCategoryID" ColumnName="ProcedureCategoryID" />
+                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
+                <ScalarProperty Name="ProcedureDesctiption" ColumnName="ProcedureDesctiption" />
+                <ScalarProperty Name="CategoryActive" ColumnName="CategoryActive" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCGeneralManualDocuments" FunctionName="UserModel.Store.uspFindDOCGeneralManualDocuments">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCGeneralManualDocuments_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="SectionCategoryID" ColumnName="SectionCategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+                <ScalarProperty Name="SectionActive" ColumnName="SectionActive" />
+                <ScalarProperty Name="ProcedureCategoryID" ColumnName="ProcedureCategoryID" />
+                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
+                <ScalarProperty Name="ProcedureDesctiption" ColumnName="ProcedureDesctiption" />
+                <ScalarProperty Name="CategoryActive" ColumnName="CategoryActive" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCGeneralManualDocumentsForAdmin" FunctionName="UserModel.Store.uspFindDOCGeneralManualDocumentsForAdmin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCGeneralManualDocumentsForAdmin_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="SectionCategoryID" ColumnName="SectionCategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+                <ScalarProperty Name="SectionActive" ColumnName="SectionActive" />
+                <ScalarProperty Name="ProcedureCategoryID" ColumnName="ProcedureCategoryID" />
+                <ScalarProperty Name="SubSection" ColumnName="SubSection" />
+                <ScalarProperty Name="ProcedureDesctiption" ColumnName="ProcedureDesctiption" />
+                <ScalarProperty Name="CategoryActive" ColumnName="CategoryActive" />
+                <ScalarProperty Name="EffectiveDate" ColumnName="EffectiveDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCGeneralManualNextDocumentID" FunctionName="UserModel.Store.uspFindDOCGeneralManualNextDocumentID" />
+          <FunctionImportMapping FunctionImportName="uspFindDOCGeneralManualSubCategorySection" FunctionName="UserModel.Store.uspFindDOCGeneralManualSubCategorySection">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCGeneralManualSubCategorySection_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+                <ScalarProperty Name="Procedure" ColumnName="Procedure" />
+                <ScalarProperty Name="ProcedureDescription" ColumnName="ProcedureDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SectionDescription2" ColumnName="SectionDescription2" />
+                <ScalarProperty Name="ProcedureDescription2" ColumnName="ProcedureDescription2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCNextDocumentID" FunctionName="UserModel.Store.uspFindDOCNextDocumentID" />
+          <FunctionImportMapping FunctionImportName="uspFindDOCSWTFCBulletinDocument_BulletinDate" FunctionName="UserModel.Store.uspFindDOCSWTFCBulletinDocument_BulletinDate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCSWTFCBulletinDocument_BulletinDate_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="BulletinCategory" ColumnName="BulletinCategory" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="BulletinDate" ColumnName="BulletinDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+                <ScalarProperty Name="officerName" ColumnName="officerName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCSWTFCBulletinDocument_BulletinDateRange" FunctionName="UserModel.Store.uspFindDOCSWTFCBulletinDocument_BulletinDateRange">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCSWTFCBulletinDocument_BulletinDateRange_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="BulletinDate" ColumnName="BulletinDate" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCSWTFCBulletinDocumentID" FunctionName="UserModel.Store.uspFindDOCSWTFCBulletinDocumentID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCSWTFCBulletinDocumentID_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="BulletinCategory" ColumnName="BulletinCategory" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="BulletinDate" ColumnName="BulletinDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+                <ScalarProperty Name="officerName" ColumnName="officerName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindDOCSWTFCBulletinForCalendar" FunctionName="UserModel.Store.uspFindDOCSWTFCBulletinForCalendar" />
+          <FunctionImportMapping FunctionImportName="uspFindDOCSWTFCBulletinNextDocumentID" FunctionName="UserModel.Store.uspFindDOCSWTFCBulletinNextDocumentID" />
+          <FunctionImportMapping FunctionImportName="uspFindDOCSWTFCBulletins" FunctionName="UserModel.Store.uspFindDOCSWTFCBulletins">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindDOCSWTFCBulletins_Result">
+                <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+                <ScalarProperty Name="BulletinCategory" ColumnName="BulletinCategory" />
+                <ScalarProperty Name="CategoryDescription" ColumnName="CategoryDescription" />
+                <ScalarProperty Name="BulletinDate" ColumnName="BulletinDate" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="EntryDateTime" ColumnName="EntryDateTime" />
+                <ScalarProperty Name="EntryPerson" ColumnName="EntryPerson" />
+                <ScalarProperty Name="officerName" ColumnName="officerName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindGeneralManualSubCategory" FunctionName="UserModel.Store.uspFindGeneralManualSubCategory">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindGeneralManualSubCategory_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+                <ScalarProperty Name="Procedure" ColumnName="Procedure" />
+                <ScalarProperty Name="ProcedureDescription" ColumnName="ProcedureDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindGeneralManualSubCatetoryID" FunctionName="UserModel.Store.uspFindGeneralManualSubCatetoryID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindGeneralManualSubCatetoryID_Result">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="Section" ColumnName="Section" />
+                <ScalarProperty Name="SectionDescription" ColumnName="SectionDescription" />
+                <ScalarProperty Name="Procedure" ColumnName="Procedure" />
+                <ScalarProperty Name="ProcedureDescription" ColumnName="ProcedureDescription" />
+                <ScalarProperty Name="Active" ColumnName="Active" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindMCCodesForWebsite" FunctionName="UserModel.Store.uspFindMCCodesForWebsite">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindMCCodesForWebsite_Result">
+                <ScalarProperty Name="CodeID" ColumnName="CodeID" />
+                <ScalarProperty Name="CaseType" ColumnName="CaseType" />
+                <ScalarProperty Name="OffenseType" ColumnName="OffenseType" />
+                <ScalarProperty Name="OffenseCode" ColumnName="OffenseCode" />
+                <ScalarProperty Name="OffenseDescription" ColumnName="OffenseDescription" />
+                <ScalarProperty Name="FineAmt" ColumnName="FineAmt" />
+                <ScalarProperty Name="FineMax" ColumnName="FineMax" />
+                <ScalarProperty Name="Statute" ColumnName="Statute" />
+                <ScalarProperty Name="FineCode" ColumnName="FineCode" />
+                <ScalarProperty Name="LoadDateTime" ColumnName="LoadDateTime" />
+                <ScalarProperty Name="SearchDescription" ColumnName="SearchDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspFindWebItem_SearchID" FunctionName="UserModel.Store.uspFindWebItem_SearchID" />
+          <FunctionImportMapping FunctionImportName="uspFindWebItems" FunctionName="UserModel.Store.uspFindWebItems">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="UserModel.uspFindWebItems_Result">
+                <ScalarProperty Name="WebLinkID" ColumnName="WebLinkID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="WebLink" ColumnName="WebLink" />
+                <ScalarProperty Name="VisibleFlag" ColumnName="VisibleFlag" />
+                <ScalarProperty Name="NeedAuthorizationFlag" ColumnName="NeedAuthorizationFlag" />
+                <ScalarProperty Name="SearchDescription" ColumnName="SearchDescription" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="uspUpdateDOCBulletinDocument" FunctionName="UserModel.Store.uspUpdateDOCBulletinDocument" />
+          <FunctionImportMapping FunctionImportName="uspUpdateDOCDocument" FunctionName="UserModel.Store.uspUpdateDOCDocument" />
+          <FunctionImportMapping FunctionImportName="uspUpdateDOCGeneralManualCategory" FunctionName="UserModel.Store.uspUpdateDOCGeneralManualCategory" />
+          <FunctionImportMapping FunctionImportName="uspUpdateDOCGeneralManualDocument" FunctionName="UserModel.Store.uspUpdateDOCGeneralManualDocument" />
+          <FunctionImportMapping FunctionImportName="uspUpdateDOCGeneralManualSubCategory" FunctionName="UserModel.Store.uspUpdateDOCGeneralManualSubCategory" />
+          <FunctionImportMapping FunctionImportName="uspUpdateDOCSWTFCBulletinDocument" FunctionName="UserModel.Store.uspUpdateDOCSWTFCBulletinDocument" />
+          <FunctionImportMapping FunctionImportName="spWebUserInfo" FunctionName="UserModel.Store.spWebSiteUserInfo" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -539,6 +2025,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="True" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->

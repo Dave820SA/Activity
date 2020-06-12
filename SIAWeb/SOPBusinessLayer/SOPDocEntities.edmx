@@ -378,7 +378,7 @@ FROM [dbo].[SOP.vCurrentDoc] AS [SOP_vCurrentDoc]</DefiningQuery>
           <ConnectorPoint PointX="4.5" PointY="2.2112939453125" />
           <ConnectorPoint PointX="5.25" PointY="2.2112939453125" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="SOPDocModel.SOP_vCurrentDoc" Width="1.5" PointX="0.75" PointY="4.75" Height="1.9802864583333335" />
+        <EntityTypeShape EntityType="SOPDocModel.SOP_vCurrentDoc" Width="2" PointX="0.75" PointY="4.75" Height="1.9802864583333335" />
         <EntityTypeShape EntityType="SOPDocModel.ActivityLog" Width="1.75" PointX="3.375" PointY="4.75" Height="2.5571907552083317" />
         <EntityTypeShape EntityType="SOPDocModel.Office_Bureau" Width="1.5" PointX="2.125" PointY="1" />
         <AssociationConnector Association="SOPDocModel.FK_SOP_Office_Bureau" />

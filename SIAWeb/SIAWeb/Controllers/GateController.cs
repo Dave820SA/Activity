@@ -18,55 +18,55 @@ namespace SIAWeb.Controllers
         private StringBuilder _sb;
         
 
-       public ActionResult Index()
-        {
-           //get the app users ID
-           string appID = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
-           if (string.IsNullOrEmpty(appID) || appID == "0")
-           {
-               return RedirectToAction("index", "NonUser");
-           }
-           //Load the gate information
-           loadGateInfo(appID);
-           _sb = new StringBuilder();
+       //public ActionResult Index()
+       // {
+       //    //get the app users ID
+       //    string appID = (string)System.Web.HttpContext.Current.Session["AppEntityID"];
+       //    if (string.IsNullOrEmpty(appID) || appID == "0")
+       //    {
+       //        return RedirectToAction("index", "NonUser");
+       //    }
+       //    //Load the gate information
+       //    loadGateInfo(appID);
+       //    _sb = new StringBuilder();
            
-           if (_gatestatus == false )
-           {
-               int nbr;
-               if (_questionNbr == null)
-               {
-                   nbr = questionNbr(0);
-               }
-               else
-               {
-                    nbr = questionNbr(_questionNbr.Length);
-               }
+       //    if (_gatestatus == false )
+       //    {
+       //        int nbr;
+       //        if (_questionNbr == null)
+       //        {
+       //            nbr = questionNbr(0);
+       //        }
+       //        else
+       //        {
+       //             nbr = questionNbr(_questionNbr.Length);
+       //        }
 
-               _sb.Append("Last attempt was ");
-               _sb.Append(_attempt);
-               _sb.Append("<br/><br/>");
-               _sb.Append(getQuestion(nbr));
+       //        _sb.Append("Last attempt was ");
+       //        _sb.Append(_attempt);
+       //        _sb.Append("<br/><br/>");
+       //        _sb.Append(getQuestion(nbr));
 
 
-               ViewBag.InfoToUser = _sb.ToString();
-           }
+       //        ViewBag.InfoToUser = _sb.ToString();
+       //    }
 
-           return PartialView("_GateQ", ViewBag.InfoToUser);
-           //return View();
-        }
+       //    return PartialView("_GateQ", ViewBag.InfoToUser);
+       //    //return View();
+       // }
 
-       private void loadGateInfo(string appID)
-       {
-           GateStatus gStatus = new GateStatus();
-           _status = gStatus.GetGateStatus(Int32.Parse(appID));
+       //private void loadGateInfo(string appID)
+       //{
+       //    GateStatus gStatus = new GateStatus();
+       //    _status = gStatus.GetGateStatus(Int32.Parse(appID));
 
-           foreach (var item in _status)
-           {
-               _gatestatus = item.Status;
-               _questionNbr = item.QuestionNbrs;
-               _attempt = item.Attempt;
-           }       
-       }
+       //    foreach (var item in _status)
+       //    {
+       //        _gatestatus = item.Status;
+       //        _questionNbr = item.QuestionNbrs;
+       //        _attempt = item.Attempt;
+       //    }       
+       //}
 
        private int questionNbr(int nbr)
        {
