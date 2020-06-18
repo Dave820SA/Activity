@@ -12,10 +12,11 @@ namespace SAPDWeb.Business
     //My Concreate Class
     public class SOPBusiness : ISOPBusiness
     {
-        public SOPBusiness()
+        public SOPBusiness(int i)
         {
 
         }
+
 
         public List<SOPDomainModel> GetAllSOP()
         {
@@ -52,5 +53,10 @@ namespace SAPDWeb.Business
         {
             return "Big Daddy " + " " + sopId;
         }
+
+        //public List<SOPDTO> GetCurrentSOPs()
+        //{
+
+        //}
     }
 }

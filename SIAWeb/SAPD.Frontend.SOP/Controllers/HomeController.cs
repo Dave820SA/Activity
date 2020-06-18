@@ -29,7 +29,7 @@ namespace SAPD.Frontend.SOP.Controllers
             //Create a Domain model and use business layer method to fill it
             List<SOPDomainModel> listDomain = _isopbusiness.GetAllSOP();
             //Create an instance of a model in the curren project
-            List<SOPModel> listSOPLocal = new List<SOPModel>();
+            List<SOPs> listSOPLocal = new List<SOPs>();
             //Use AutoMapper to fill the local model from the Domain Model
             AutoMapper.Mapper.Map(listDomain, listSOPLocal);
 

@@ -2,6 +2,7 @@ using SAPDWeb.Business;
 using SAPDWeb.Business.Interface;
 using System.Web.Mvc;
 using Unity;
+using Unity.Injection;
 using Unity.Mvc5;
 
 namespace SAPD.Frontend.SOP
@@ -17,6 +18,7 @@ namespace SAPD.Frontend.SOP
 
             // e.g. container.RegisterType<ITestService, TestService>();
 
+            container.RegisterType<SOPBusiness>(new InjectionConstructor(0));
             container.RegisterType<ISOPBusiness, SOPBusiness>();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));

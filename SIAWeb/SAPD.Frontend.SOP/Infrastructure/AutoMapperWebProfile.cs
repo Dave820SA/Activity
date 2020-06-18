@@ -31,8 +31,8 @@ namespace SAPD.Frontend.SOP.Infrastructure
             //CreateMap<SOPModel, DomainSOP>();
 
 
-            CreateMap<SOPDomainModel, SOPModel>();
-            CreateMap<SOPModel, SOPDomainModel>();
+            CreateMap<SOPDomainModel, SOPs>();
+            CreateMap<SOPs, SOPDomainModel>();
 
 
         }
